@@ -13,7 +13,8 @@ class BladePermissionsTest extends TestCase
     use RefreshDatabase;
 
 
-
+    private $permission_blade;
+    private $permission_db;
 
     public function setUp() : void
     {

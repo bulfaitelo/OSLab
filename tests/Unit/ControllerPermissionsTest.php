@@ -8,6 +8,7 @@ use File;
 
 class ControllerPermissionsTest extends TestCase
 {
+    private $arrayControllers;
 
     public function setUp() : void
     {
