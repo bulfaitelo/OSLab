@@ -8,7 +8,6 @@ use File;
 
 class ControllerPermissionsTest extends TestCase
 {
-    private $arrayControllers;
 
     public function setUp() : void
     {
@@ -18,6 +17,7 @@ class ControllerPermissionsTest extends TestCase
         // Exceções esses Controllers serão ignorado nos teste;
         $arrayControllersExceptions = [
             '\App\Http\Controllers\Controller',
+            '\App\Http\Controllers\Configuracao\PermissionsGroupController',
             '\App\Http\Controllers\Auth\VerificationController',
         ];
         foreach ($files as $file) {
@@ -35,9 +35,13 @@ class ControllerPermissionsTest extends TestCase
         // verificando as funções que existem
         $methods = get_class_methods($class);
         // dd($methods);
-        $methodsAvailable = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy' ];
+        $ignoredMethods = ['__construct', 'middleware', 'getMiddleware', 'callAction', '__call', 
+            'authorize', 'authorizeForUser', 'authorizeResource', 
+            'dispatchNow','dispatchSync',
+            'validateWith','validate','validateWithBag'];
+        
         foreach ($methods as $value) {
-            if(in_array($value, $methodsAvailable)) {
+            if(!in_array($value, $ignoredMethods)) {
                 $arrayMethods[] = $value;
             }
         }
@@ -102,7 +106,7 @@ class ControllerPermissionsTest extends TestCase
                 $diffPermissionsFunctions = array_diff($controllerInfo['arrayPermissions'], $controllerInfo['arrayMethods']);
                 if ($diffPermissionsFunctions) {
                     // dump('diffPermissionsFunctions', $diffPermissionsFunctions);
-                    $outputError.= "Permissões criadas sem funções relacionadas: \n";
+                    $outputError.= "\nPermissões criadas sem funções relacionadas: \n";
                     foreach ($diffPermissionsFunctions as $key => $value) {
                         $outputError.= "Permissão: \033[01;34m{$controllerInfo['arrayNamePermissions'][$value]}\033[0m [\033[01;32m{$value}\033[0m];\n";
                         $erroCount+=1;
