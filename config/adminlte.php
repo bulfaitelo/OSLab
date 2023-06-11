@@ -431,13 +431,6 @@ return [
             'can'     => 'config_url',
         ],
         [
-            'text'       => 'Unifi Api Client',
-            'icon'       => 'fas fa-external-link-square-alt',
-            'url'        => 'https://github.com/Art-of-WiFi/UniFi-API-client',
-            'target' => '_blank',
-            'can'     => 'config_url',
-        ],
-        [
             'text'       => 'Laravel Auditing',
             'icon'       => 'fas fa-external-link-square-alt',
             'url'        => 'http://www.laravel-auditing.com/',
