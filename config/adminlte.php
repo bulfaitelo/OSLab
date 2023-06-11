@@ -107,7 +107,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -383,6 +383,89 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+        [
+            'header' => 'LINKS',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'Menu Config',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration',
+            'target'     => '_blank',
+            'can'     => 'config_url',
+
+        ],
+        [
+            'text'       => 'Laravel-permission',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://spatie.be/docs/laravel-permission/v4/introduction',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'Laravel Documentation',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://laravel.com/docs/8.x',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'AdminLte 3v',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://adminlte.io/themes/v3/',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'Laravel Collective',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://laravelcollective.com/docs/6.x/html',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'Font Awesome',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://fontawesome.com/v5/search',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'Unifi Api Client',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://github.com/Art-of-WiFi/UniFi-API-client',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'Laravel Auditing',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'http://www.laravel-auditing.com/',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'MCharts',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://www.amcharts.com/demos/',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'GDrive Rotas',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://github.com/ivanvermeyen/laravel-google-drive-demo/blob/master/routes/web.php',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+        [
+            'text'       => 'GDrive Demo',
+            'icon'       => 'fas fa-external-link-square-alt',
+            'url'        => 'https://github.com/ivanvermeyen/laravel-google-drive-demo',
+            'target' => '_blank',
+            'can'     => 'config_url',
+        ],
+
     ],
 
     /*
