@@ -384,6 +384,47 @@ return [
             'url'        => '#',
         ],
         [
+            'text'    => 'Configurações',
+            'icon'    => 'fas fa-cogs',
+            'can'     => [
+                'config_users',
+                'config_roles',
+                'config_financeiro_projeto', 'config_financeiro_import', 'config_financeiro_plano_contas',
+                'config_almoxarifado_categoria','config_almoxarifado_unidade',
+            ],
+            'submenu' => [
+                [
+                    'text'    => 'Usuários',
+                    'icon'    => 'fas fa-users',
+                    'route'   => 'configuracoes.users.index',
+                    'can'     => [
+                        'config_roles',
+                        'config_users',
+                        'config_user_setor',
+                        'config_user_departamento',
+                    ],
+                    'submenu'=> [
+                        [
+                            'text'    => 'Usuários',
+                            'icon'    => 'fas fa-users',
+                            'route'   => 'configuracoes.users.index',
+                            'active'  => ['configuracoes/users*'],
+                            'can'     => 'config_users',
+                        ],
+                        [
+                            'text'    => 'Perfis',
+                            'icon'    => 'fas fa-user-tag',
+                            'route'   => 'configuracoes.roles.index',
+                            'active'  => ['configuracoes/roles*', 'configuracoes/permissions*'],
+                            'can'     => 'config_roles',
+                        ],
+                    ],
+                ],
+
+            ],
+        ],
+
+        [
             'header' => 'LINKS',
             'can'     => 'config_url',
         ],
