@@ -12,11 +12,11 @@
     <div class="col-md-10 ">
         <!-- general form elements -->
         <div class="card">
-          
+
           <!-- /.card-header -->
           <!-- form start -->
-          
-          <div class="card-body">          
+
+          <div class="card-body">
           @if(count($errors) > 0)
           <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -27,26 +27,22 @@
               @endforeach
             </ul>
           </div>
-        @endif        
+        @endif
           {!! Form::open(['route' => ['configuracoes.user.setor.store']]) !!}
             <div class="form-group">
               <label for="setor">Setor</label>
-              {!! Form::text('setor', '', ['class' => 'form-control', 'placeholder' => 'Setor']) !!}                            
+              {!! Form::text('setor', '', ['class' => 'form-control', 'placeholder' => 'Setor']) !!}
             </div>
-            <div class="form-group">
-              <label for="departamento_id">Departamento</label>        
-              {!! Form::select('departamento_id', \App\Models\Configuracao\User\Departamento::orderBy('departamento')->pluck('departamento', 'id'), '', ['id' => 'group','class' => 'form-control' ]) !!}                   
-            </div>            
-          </div>          
+          </div>
           {{-- Minimal with icon only --}}
-          <!-- /.card-body -->          
+          <!-- /.card-body -->
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>       
+          </div>
         </div>
       <!-- /.card -->
       {!! Form::close() !!}
-    
+
       </div>
 
 </div>
@@ -86,5 +82,5 @@
             $('.code').mask('000000');
         });
       </script>
-    
+
 @stop

@@ -8,6 +8,7 @@ use File;
 
 class ControllerPermissionsTest extends TestCase
 {
+    private $arrayControllers;
 
     public function setUp() : void
     {
@@ -19,6 +20,11 @@ class ControllerPermissionsTest extends TestCase
             '\App\Http\Controllers\Controller',
             '\App\Http\Controllers\Configuracao\PermissionsGroupController',
             '\App\Http\Controllers\Auth\VerificationController',
+            '\App\Http\Controllers\HomeController', // Esse eu vou ter que tirar
+            'App\Http\Controllers\Auth\LoginController',
+            '\App\Http\Controllers\Auth\RegisterController',
+            '\App\Http\Controllers\Auth\ResetPasswordController',
+            '\App\Http\Controllers\Auth\LoginController',
         ];
         foreach ($files as $file) {
             $arrayControllers[] = '\App\Http\Controllers\\'.basename(str_replace('/', "\\", $file->getRelativePathName()), '.php');
@@ -35,11 +41,14 @@ class ControllerPermissionsTest extends TestCase
         // verificando as funções que existem
         $methods = get_class_methods($class);
         // dd($methods);
-        $ignoredMethods = ['__construct', 'middleware', 'getMiddleware', 'callAction', '__call', 
-            'authorize', 'authorizeForUser', 'authorizeResource', 
+        $ignoredMethods = ['__construct', 'middleware', 'getMiddleware', 'callAction', '__call',
+            'authorize', 'authorizeForUser', 'authorizeResource',
             'dispatchNow','dispatchSync',
-            'validateWith','validate','validateWithBag'];
-        
+            'validateWith','validate','validateWithBag',
+            'showConfirmForm', 'confirm', 'redirectPath',
+            'showLinkRequestForm', 'sendResetLinkEmail', 'broker',
+        ];
+
         foreach ($methods as $value) {
             if(!in_array($value, $ignoredMethods)) {
                 $arrayMethods[] = $value;

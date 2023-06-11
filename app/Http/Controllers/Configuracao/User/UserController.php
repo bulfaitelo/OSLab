@@ -14,6 +14,20 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:config_user', ['only'=> 'index']);
+        $this->middleware('permission:config_user_create', ['only'=> ['create', 'store']]);
+        $this->middleware('permission:config_user_show', ['only'=> 'show']);
+        $this->middleware('permission:config_user_edit', ['only'=> ['edit', 'update']]);
+        $this->middleware('permission:config_user_destroy', ['only'=> 'destroy']);
+
+        $this->middleware('permission:config_user_permissions_edit', ['only'=> ['permissions_edit', 'permissions_update']]);
+
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -122,7 +136,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function permissions($id)
+    public function permissions_edit($id)
     {
         // $role = Role::findOrFail($id);
         $user = User::findOrFail($id);

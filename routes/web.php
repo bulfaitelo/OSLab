@@ -3,6 +3,7 @@
 use App\Http\Controllers\Configuracao\User\PerfilController;
 use App\Http\Controllers\Configuracao\User\PermissionsController;
 use App\Http\Controllers\Configuracao\User\RoleController;
+use App\Http\Controllers\Configuracao\User\SetorController;
 use App\Http\Controllers\Configuracao\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,7 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::get('/roles/assign/{id}', [RoleController::class, 'assign'])->name('roles.assign');
         Route::put('/roles/assign/{id}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
         Route::resource('/users', UserController::class);
-        Route::get('/users/permissions/{id}', [UserController::class, 'permissions'])->name('users.permissions');
+        Route::get('/users/permissions/{id}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{id}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
         Route::resource('/permissions', PermissionsController::class);
         // Configurações de usuario
@@ -38,7 +39,7 @@ Route::group(['middleware'=> 'auth'], function() {
             Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
             Route::get('/perfil/edit', [PerfilController::class, 'edit'])->name('perfil.edit');
             Route::put('/perfil/update', [PerfilController::class, 'update'])->name('perfil.update');
-
+            Route::resource('/setor', SetorController::class);
 
         });
 

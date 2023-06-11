@@ -24,7 +24,6 @@
           <tr>
             <th style="width: 10px">#</th>
             <th>Setor</th>
-            <th>Departamento</th>
             <th>Usuários</th>
             <th style="width: 40px"></th>
           </tr>
@@ -34,7 +33,6 @@
             <tr>
               <td>{{ $item->id }}</td>
               <td>{{ $item->name }}</td>
-              <td>{{ $item->departamento->departamento ?? ''}}</td>
               <td>{{$item->users->count()}}</td>
               <td>
                 <div class="btn-group">

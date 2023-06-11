@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Almoxarifado\Produto;
-use App\Models\Configuracao\Almoxarifado\ProdutoCategoria;
 use Illuminate\Database\Seeder;
 
 class DatabaseDefaultPermissionsUpdate extends Seeder
@@ -15,7 +13,7 @@ class DatabaseDefaultPermissionsUpdate extends Seeder
      */
     public function run()
     {
-
-
+        $this->call(DefaultsConfigGroupPermissions::class);
+        $this->call(DefaultsConfigUsersPermissions::class);
     }
 }

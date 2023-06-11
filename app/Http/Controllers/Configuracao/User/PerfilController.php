@@ -90,10 +90,6 @@ class PerfilController extends Controller
         if($user->save()){
             return redirect()->route('configuracoes.user.perfil.index')->with('success', 'Dados atualizados'); ;
         }
-
-
-
-
     }
 
     /**

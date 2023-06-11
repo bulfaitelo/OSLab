@@ -389,8 +389,8 @@ return [
             'can'     => [
                 'config_users',
                 'config_roles',
-                'config_financeiro_projeto', 'config_financeiro_import', 'config_financeiro_plano_contas',
-                'config_almoxarifado_categoria','config_almoxarifado_unidade',
+                'config_user_setor',
+
             ],
             'submenu' => [
                 [
@@ -400,8 +400,6 @@ return [
                     'can'     => [
                         'config_roles',
                         'config_users',
-                        'config_user_setor',
-                        'config_user_departamento',
                     ],
                     'submenu'=> [
                         [
@@ -417,6 +415,13 @@ return [
                             'route'   => 'configuracoes.roles.index',
                             'active'  => ['configuracoes/roles*', 'configuracoes/permissions*'],
                             'can'     => 'config_roles',
+                        ],
+                        [
+                            'text'    => 'Setores',
+                            'icon'    => 'fas fa-industry',
+                            'route'   => 'configuracoes.user.setor.index',
+                            'active'  => ['configuracoes/users/setor*', ],
+                            'can'     => 'config_user_setor',
                         ],
                     ],
                 ],

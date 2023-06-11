@@ -10,6 +10,18 @@ use App\Models\Configuracao\User\PermissionsGroup;
 
 class RoleController extends Controller
 {
+
+    function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:config_roles', ['only'=> 'index']);
+        $this->middleware('permission:config_roles_create', ['only'=> ['create', 'store']]);
+        $this->middleware('permission:config_roles_show', ['only'=> 'show']);
+        $this->middleware('permission:config_roles_edit', ['only'=> ['edit', 'update', 'assign', 'assign_update']]);
+        $this->middleware('permission:config_roles_destroy', ['only'=> 'destroy']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +29,6 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
-
-
         $roles = Role::orderBy('name', 'ASC')
         ->get();
         return view('configuracoes.roles.index', compact('roles'));
@@ -145,7 +154,7 @@ class RoleController extends Controller
 
 
 
-        /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
