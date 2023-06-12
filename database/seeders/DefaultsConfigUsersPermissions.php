@@ -120,13 +120,13 @@ class DefaultsConfigUsersPermissions extends Seeder
                 'group_id' => 1,
                 'description' => 'Editar Permissões e atribuir permissões ',
             ],
-            [
-                // Visualizar Permissões
-                'name' => 'config_permissions_show',
-                'guard_name' => 'web',
-                'group_id' => 1,
-                'description' => 'Visualizar Permissões',
-            ],
+            // [
+            //     // Visualizar Permissões
+            //     'name' => 'config_permissions_show',
+            //     'guard_name' => 'web',
+            //     'group_id' => 1,
+            //     'description' => 'Visualizar Permissões',
+            // ],
             [
                 // Excluir Permissões
                 'name' => 'config_permissions_destroy',
