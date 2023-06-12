@@ -79,6 +79,13 @@ class DefaultsConfigUsersPermissions extends Seeder
                 'description' => 'Editar Perfil e atribuir permissões ',
             ],
             [
+                // Editar perfis e atribuir Permissões
+                'name' => 'config_roles_assign',
+                'guard_name' => 'web',
+                'group_id' => 1,
+                'description' => 'Editar perfis e atribuir Permissões',
+            ],
+            [
                 // Visualizar Perfil
                 'name' => 'config_roles_show',
                 'guard_name' => 'web',
