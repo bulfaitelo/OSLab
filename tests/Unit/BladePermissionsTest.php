@@ -15,6 +15,7 @@ class BladePermissionsTest extends TestCase
 
     private $permission_blade;
     private $permission_db;
+    private $permission_blade_path;
 
     public function setUp() : void
     {
@@ -28,10 +29,9 @@ class BladePermissionsTest extends TestCase
         $files = File::allFiles($path);
         foreach ($files as $file) {
 
-            $file_path = $file->getPathname();
+            $file_path = $file->getPathname();            
 
             $file_string = file_get_contents($file_path);
-
             preg_match_all('/@can( )?\(\'[\w\s]+\'\)/', $file_string, $itens);
 
             if(!isset($permission_blade)){
@@ -40,6 +40,7 @@ class BladePermissionsTest extends TestCase
             // dump($file_path, $itens);
             foreach ($itens[0] as  $permission_temp) {
                     $permission_blade[] = explode("'",$permission_temp)[1];
+                    $permission_blade_path[explode("'",$permission_temp)[1]] = $file_path;
             }
 
             // /@canany( )?\(\[([\'\w\s,]+)\]\)/
@@ -55,12 +56,12 @@ class BladePermissionsTest extends TestCase
                     $canany = array_map('trim', $canany);
                     foreach ($canany as $permission_temp) {
                         $permission_blade[] = $permission_temp;
+                        $permission_blade_path[explode("'",$permission_temp)[1]] = $file_path;
                     }
                 }
-            }
-
-        }
-
+            }            
+        }        
+        
         // BLADES -
 
         // MENU AdminLTe
@@ -70,6 +71,8 @@ class BladePermissionsTest extends TestCase
         preg_match_all('/\'can\'( )+=>( )+([\'])+[\s\w]+\'\,/', $file_string, $itens);
         foreach ($itens[0] as $permission_temp) {
             $permission_blade[] = explode("'", $permission_temp)[3];
+            $permission_blade_path[explode("'", $permission_temp)[3]] = $file;
+
         }
 
         preg_match_all('/\'can\'( )+=>( )+([\[])()+[\s\w\',]+\],/', $file_string, $itens);
@@ -77,17 +80,19 @@ class BladePermissionsTest extends TestCase
             foreach (explode("'", explode("'can'", $permission_temp)[1]) as $permission_temp_sub) {
                 if(preg_match('/[\w]+/', $permission_temp_sub)){
                     $permission_blade[] = $permission_temp_sub;
+                    $permission_blade_path[$permission_temp_sub] = $file;
                 }
             }
-        }
-
+        }        
         // @canany( )?\((\[[\'\w\s,]+\])\)
 
         // MENU AdminLTe -
         $permission_blade = array_unique($permission_blade);
-
         $this->permission_blade = $permission_blade;
-
+        
+        $permission_blade_path = array_unique($permission_blade_path);
+        $this->permission_blade_path = $permission_blade_path;
+        
         $permission_db = Permission::pluck('name')->toArray();
         $this->permission_db = $permission_db;
 
@@ -107,11 +112,9 @@ class BladePermissionsTest extends TestCase
         $test = array_diff($this->permission_blade, $this->permission_db);
         if(count($test) > 0){
             $erro = true;
-            $output_erro = 'Permissions divergentes da blade com o banco de dados:
-            ';
+            $output_erro = "\nPermissions divergentes da blade com o banco de dados:\n";
             foreach ($test as $key => $value) {
-                $output_erro.=$value.'
-                ';
+                $output_erro.=$value."\n";
             }
         }
         $this->assertNotTrue($erro, $output_erro );
@@ -124,11 +127,9 @@ class BladePermissionsTest extends TestCase
         $test = array_diff($this->permission_db, $this->permission_blade);
         if(count($test) > 0){
             $erro = true;
-            $output_erro = 'Permissions criadas e não usadas em nenhuma blade:
-            ';
+            $output_erro = "\nPermissions criadas e não usadas em nenhuma blade:\n";
             foreach ($test as $key => $value) {
-                $output_erro.=$value.'
-                ';
+                $output_erro.=$value."\n";
             }
         }
         $this->assertNotTrue($erro, $output_erro);
