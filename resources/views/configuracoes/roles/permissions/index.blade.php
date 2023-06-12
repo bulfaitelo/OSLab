@@ -14,9 +14,11 @@
           <a href="{{ route('configuracoes.roles.index') }}">
               <button type="button"  class="btn  btn-info"><i class="fas fa-chevron-left"></i> Voltar</button>
           </a>
-          <a href="{{ route('configuracoes.permissions.create') }}">
-            <button type="button"  class="btn  btn-primary">Criar Permissão</button>
-        </a>
+          @can('config_permissions_create')
+            <a href="{{ route('configuracoes.permissions.create') }}">
+                <button type="button"  class="btn  btn-primary">Criar Permissão</button>
+            </a>
+          @endcan
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -39,41 +41,45 @@
                 <td>{{ @$group::find($permission->group_id)->name}}</td>
                 <td>
                   <div class="btn-group">
-                    <a href="{{ route('configuracoes.permissions.edit', $permission->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $permission->id }}"><i class="fas fa-trash"></i></button>
-                  </div>
-                  <div class="modal fade" id="modal-excluir_{{ $permission->id }}">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                    @can('config_permissions_edit')
+                        <a href="{{ route('configuracoes.permissions.edit', $permission->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                    @endcan
+                    @can('config_permissions_destroy')
+                        <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $permission->id }}"><i class="fas fa-trash"></i></button>
                         </div>
-                        <div class="modal-body">
-                          <p><b>Nome:</b> {{ $permission->name}}</p>
-                          @if ($permission->description)
-                          <p><b>Descrição:</b> {{ $permission->description}}</p>
-                          @endif
+                        <div class="modal fade" id="modal-excluir_{{ $permission->id }}">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                <p><b>Nome:</b> {{ $permission->name}}</p>
+                                @if ($permission->description)
+                                <p><b>Descrição:</b> {{ $permission->description}}</p>
+                                @endif
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                {{-- <button type="submit" class="btn btn-danger">Excluir</button> --}}
+
+                                {{-- <form method="POST" action="/admin/users/{{$permission->id}}"> --}}
+                                    {!! Form::open(['route' => ['configuracoes.permissions.destroy', $permission->id], 'method' => 'delete']) !!}
+
+                                    <input type="submit" class="btn btn-danger delete-permission" value="Delete permission">
+                                </form>
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
                         </div>
-                        <div class="modal-footer justify-content-between">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          {{-- <button type="submit" class="btn btn-danger">Excluir</button> --}}
-
-                          {{-- <form method="POST" action="/admin/users/{{$permission->id}}"> --}}
-                            {!! Form::open(['route' => ['configuracoes.permissions.destroy', $permission->id], 'method' => 'delete']) !!}
-
-                            <input type="submit" class="btn btn-danger delete-permission" value="Delete permission">
-                          </form>
-
-                        </div>
-                      </div>
-                      <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                  </div>
-                  <!-- /.modal -->
+                        <!-- /.modal -->
+                    @endcan
                 </td>
               </tr>
 
