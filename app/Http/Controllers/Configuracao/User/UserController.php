@@ -48,7 +48,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('configuracoes.users.create');
     }
 
     /**
@@ -101,13 +101,12 @@ class UserController extends Controller
         $request->validate ([
             'name' => 'required|',
             'setor' => 'required|integer',
-            'departamento' => 'required|integer',
             'password' => 'nullable|confirmed|min:8'
 
         ]);
         $user->name = $request->name;
         $user->setor_id = $request->setor;
-        $user->departamento_id = $request->departamento;
+
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
@@ -166,7 +165,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $user->syncPermissions($request->assign_id);
-        return redirect()->route('configuracoes.users.permissions', [$id])->with('success', 'Permissões Atualizadas!'); ;
+        return redirect()->route('configuracoes.users.permissions_edit', [$id])->with('success', 'Permissões Atualizadas!'); ;
 
 
     }

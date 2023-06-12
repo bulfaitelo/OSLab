@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <label for="departamento">Personalização de permissões</label>
                     <br>
-                    <a href="{{ route('configuracoes.users.permissions', $user->id) }}">
+                    <a href="{{ route('configuracoes.users.permissions_edit', $user->id) }}">
                     <button type="button"  class="btn  btn-success">Configurar Permissões</button>
                     </a>
                 </div>

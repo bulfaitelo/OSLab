@@ -7,24 +7,24 @@
 @stop
 
 @section('content')
-<div class="col-md-12">  
+<div class="col-md-12">
     <div class="card">
       <div class="card-header">
         <div class="row"></div>
-          {{-- <a href="{{ route('configuracoes.roles.index') }}">
+          <a href="{{ route('configuracoes.roles.index') }}">
               <button type="button"  class="btn  btn-default"> Voltar</button>
           </a>
           <a href="{{ route('configuracoes.users.create') }}">
-            <button type="button"  class="btn  btn-primary">Criar Permissão</button>
-          </a> --}}
+            <button type="button"  class="btn  btn-primary">Criar Usuário</button>
+          </a>
       </div>
-      <!-- /.card-header -->      
+      <!-- /.card-header -->
       <div class="card-body">
         <table class="table table-bordered">
           <thead>
             <tr>
               <th style="width: 10px">#</th>
-              <th>Usuário</th>         
+              <th>Usuário</th>
               <th>Setor</th>
               <th>Departamento</th>
               <th style="width: 40px"></th>
@@ -35,12 +35,12 @@
               <tr>
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name}}</td>
-                <td>{{ $user->setor->name ?? ''}}</td>      
-                <td>{{ $user->departamento->departamento ?? '' }}</td>                                               
+                <td>{{ $user->setor->name ?? ''}}</td>
+                <td>{{ $user->departamento->departamento ?? '' }}</td>
                 <td>
-                  <div class="btn-group">                                        
+                  <div class="btn-group">
                     <a href="{{ route('configuracoes.users.edit', $user->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $user->id }}"><i class="fas fa-trash"></i></button>                                    
+                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $user->id }}"><i class="fas fa-trash"></i></button>
                   </div>
                   <div class="modal fade" id="modal-excluir_{{ $user->id }}">
                     <div class="modal-dialog">
@@ -52,12 +52,12 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <p><b>Nome:</b> {{ $user->name}}</p>                                                   
+                          <p><b>Nome:</b> {{ $user->name}}</p>
                         </div>
                         <div class="modal-footer justify-content-between">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>                          
-                            {!! Form::open(['route' => ['configuracoes.users.destroy', $user->id], 'method' => 'delete']) !!}                            
-                            <input type="submit" class="btn btn-danger delete-permission" value="Excluir Usuário">                           
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            {!! Form::open(['route' => ['configuracoes.users.destroy', $user->id], 'method' => 'delete']) !!}
+                            <input type="submit" class="btn btn-danger delete-permission" value="Excluir Usuário">
                           </form>
 
                         </div>
@@ -66,24 +66,24 @@
                     </div>
                     <!-- /.modal-dialog -->
                   </div>
-                  <!-- /.modal -->  
+                  <!-- /.modal -->
                 </td>
               </tr>
-                
-            @endforeach      
+
+            @endforeach
           </tbody>
         </table>
       </div>
-      
+
       <!-- /.card-body -->
       <div class="card-footer clearfix">
-       
+
           {{-- {{$pacientes->appends(['busca' => $busca])->links() }}	 --}}
           {{-- {{$users->links() }}	 --}}
 
       </div>
     </div>
-</div> 
+</div>
 @stop
 
 @section('css')
