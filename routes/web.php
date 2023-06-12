@@ -27,14 +27,14 @@ Auth::routes();
 Route::group(['middleware'=> 'auth'], function() {
     // Agrupamento de rotas de Configuração
     Route::name('configuracoes.')->prefix('configuracoes')->group(function (){
+        Route::resource('/users', UserController::class);
         Route::resource('/roles', RoleController::class);
         Route::get('/roles/assign/{id}', [RoleController::class, 'assign'])->name('roles.assign');
         Route::put('/roles/assign/{id}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
-        Route::resource('/users', UserController::class);
         Route::get('/users/permissions/{id}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{id}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
         Route::resource('/permissions', PermissionsController::class);
-        // Configurações de usuario
+        // Configurações de usuário
         Route::name('user.')->prefix('user')->group(function (){
             Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
             Route::get('/perfil/edit', [PerfilController::class, 'edit'])->name('perfil.edit');
