@@ -46,13 +46,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="email">Senha </label>
-                        {!! Form::text('password', '', ['id' => 'password','class' => 'form-control', 'placeholder' => 'Nova Senha', ]) !!}
+                        {!! Form::text('password', '', ['id' => 'password','class' => 'form-control', 'placeholder' => 'Senha', ]) !!}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="email">Repita a Senha</label>
-                        {!! Form::text('password_confirmation', '', ['id' => 'password','class' => 'form-control', 'placeholder' => 'Repita a Nova Senha', ]) !!}
+                        {!! Form::text('password_confirmation', '', ['id' => 'password','class' => 'form-control', 'placeholder' => 'Repita a Senha', ]) !!}
                     </div>
                 </div>
             </div>
