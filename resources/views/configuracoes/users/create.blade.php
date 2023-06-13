@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editando Usários')
+@section('title', 'Criando Usários')
 
 @section('content_header')
-    <h1>Editando Usários</h1>
+    <h1>Criando Usários</h1>
 @stop
 
 @section('content')
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              {!! Form::email('email', '', ['id' => 'description','class' => 'form-control', 'placeholder' => 'nome_permissao', ]) !!}
+              {!! Form::email('email', '', ['id' => 'description','class' => 'form-control', 'placeholder' => 'Email', ]) !!}
             </div>
             <div class="form-group">
               <label for="setor">Setor</label>

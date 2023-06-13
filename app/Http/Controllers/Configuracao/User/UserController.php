@@ -25,7 +25,6 @@ class UserController extends Controller
 
         $this->middleware('permission:config_user_permissions_edit', ['only'=> ['permissions_edit', 'permissions_update']]);
 
-
     }
 
     /**
@@ -59,7 +58,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate ([
+            'name' => 'required|',
+            'email' => 'required|email',
+            'setor' => 'required|integer',
+            'password' => 'nullable|confirmed|min:8'
+
+        ]);
+        dd($request->input());
     }
 
     /**
