@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
               <label for="setor">Setor</label>
-              {!! Form::select('setor', \App\Models\Configuracao\User\Setor::orderBy('name')->pluck('name', 'id'), '', ['id' => 'group','class' => 'form-control' ]) !!}
+              {!! Form::select('setor', \App\Models\Configuracao\User\Setor::orderBy('name')->pluck('name', 'id'), '', ['id' => 'group','class' => 'form-control', 'placeholder'=> 'Selecione' ]) !!}
             </div>
             <div class="row">
                 <div class="col-md-6">
