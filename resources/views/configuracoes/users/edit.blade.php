@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Usários')
+@section('title', 'Editando Usários')
 
 @section('content_header')
-    <h1>Criando Usários</h1>
+    <h1>Editando Usários</h1>
 @stop
 
 @section('content')
@@ -146,26 +146,30 @@
                     </div>
                 </div>
             </div>
-            <h4>Configurações de permissões e acesso:</h4>
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="form-group">
-                        <label for="departamento">Perfis: </label>
-                        @foreach (\Spatie\Permission\Models\Role::orderBy('name')->get() as $id => $item)
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="item_{{$item->id}}" name="role[]" value="{{$item->id}}">
-                                <label for="item_{{$item->id}}" class="custom-control-label">{{$item->name}}</label> <i> ({{ $item->description }})</i>
-                            </div>
-                        @endforeach
+            @can('config_users_permissions_edit')
+                <h4>Configurações de permissões e acesso:</h4>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label for="departamento">Perfis: </label>
+                            @foreach (\Spatie\Permission\Models\Role::orderBy('name')->get() as $id => $item)
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="item_{{$item->id}}" name="role[]" value="{{$item->id}}">
+                                    <label for="item_{{$item->id}}" class="custom-control-label">{{$item->name}}</label> <i> ({{ $item->description }})</i>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="expire_at">Validade do acesso</label>
+                            {!! Form::date('expire_at', '', ['id' => 'estado','class' => 'form-control', 'placeholder' => 'Validade do acesso, define a data limite de uso do sistema', 'title' =>  'Validade do acesso, define a data limite de uso do sistema'  ]) !!}
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="expire_at">Validade do acesso</label>
-                        {!! Form::date('expire_at', '', ['id' => 'estado','class' => 'form-control', 'placeholder' => 'Validade do acesso, define a data limite de uso do sistema', 'title' =>  'Validade do acesso, define a data limite de uso do sistema'  ]) !!}
-                    </div>
-                </div>
-            </div>
+
+            @endcan
+
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->

@@ -14,9 +14,11 @@
           <a href="{{ route('configuracoes.roles.index') }}">
               <button type="button"  class="btn  btn-default"> Voltar</button>
           </a>
-          <a href="{{ route('configuracoes.users.create') }}">
-            <button type="button"  class="btn  btn-primary">Criar Usuário</button>
-          </a>
+          @can('config_users_create')
+            <a href="{{ route('configuracoes.users.create') }}">
+                <button type="button"  class="btn  btn-primary">Criar Usuário</button>
+            </a>
+          @endcan
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -26,7 +28,6 @@
               <th style="width: 10px">#</th>
               <th>Usuário</th>
               <th>Setor</th>
-              <th>Departamento</th>
               <th style="width: 40px"></th>
             </tr>
           </thead>
@@ -36,35 +37,42 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name}}</td>
                 <td>{{ $user->setor->name ?? ''}}</td>
-                <td>{{ $user->departamento->departamento ?? '' }}</td>
                 <td>
                   <div class="btn-group">
-                    <a href="{{ route('configuracoes.users.edit', $user->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                    @can('config_users_edit')
+                        <a href="{{ route('configuracoes.users.edit', $user->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                    @endcan
+                    @can('config_users_show')
+                        <a href="{{ route('configuracoes.users.show', $user->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                    @endcan
+                    @can('config_users_destroy')
                     <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $user->id }}"><i class="fas fa-trash"></i></button>
-                  </div>
-                  <div class="modal fade" id="modal-excluir_{{ $user->id }}">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <p><b>Nome:</b> {{ $user->name}}</p>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                            {!! Form::open(['route' => ['configuracoes.users.destroy', $user->id], 'method' => 'delete']) !!}
-                            <input type="submit" class="btn btn-danger delete-permission" value="Excluir Usuário">
-                          </form>
+                    <div class="modal fade" id="modal-excluir_{{ $user->id }}">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                            <p><b>Nome:</b> {{ $user->name}}</p>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                {!! Form::open(['route' => ['configuracoes.users.destroy', $user->id], 'method' => 'delete']) !!}
+                                <input type="submit" class="btn btn-danger delete-permission" value="Excluir Usuário">
+                            </form>
 
+                            </div>
                         </div>
-                      </div>
-                      <!-- /.modal-content -->
+                        <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
                     </div>
-                    <!-- /.modal-dialog -->
+
+                    @endcan
                   </div>
                   <!-- /.modal -->
                 </td>
