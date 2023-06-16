@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(DatabaseDefaultPermissionsUpdate::class);
         $this->call(DefaultsUsers::class);
-        $this->call(DefaultsConfigRoles::class);
 
     }
 }
