@@ -170,6 +170,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Laravel Permissions
         Spatie\Permission\PermissionServiceProvider::class,
+        // Image Intervention.io
+        Intervention\Image\ImageServiceProvider::class
     ])->toArray(),
 
     /*
@@ -185,6 +187,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
 
 ];
