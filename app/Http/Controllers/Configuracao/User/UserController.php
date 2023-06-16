@@ -11,6 +11,9 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Configuracao\User\PermissionsGroup;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
+
 
 class UserController extends Controller
 {
@@ -60,12 +63,49 @@ class UserController extends Controller
     {
         $request->validate ([
             'name' => 'required|',
-            'email' => 'required|email',
-            'setor' => 'required|integer',
-            'password' => 'nullable|confirmed|min:8'
-
+            'email' => 'required|email|unique:users',
+            'setor_id' => 'required|integer',
+            'password' => 'nullable|confirmed|min:8',
+            'expire_at'=> 'date|nullable',
+            'img_perfil' => 'nullable|image|max:2048',
         ]);
-        dd($request->input());
+        if ($request->ativo) {
+            $ativo = true;
+        } else {
+            $ativo = false;
+        }
+
+        $user = new User;
+        $user->ativo = $ativo;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->celular = $request->celular;
+        $user->telefone = $request->telefone;
+        $user->setor_id = $request->setor_id;
+        $user->password = $request->password;
+        $user->cep = $request->cep;
+        $user->logradouro = $request->logradouro;
+        $user->numero = $request->numero;
+        $user->bairro = $request->bairro;
+        $user->cidade = $request->cidade;
+        $user->estado = $request->estado;
+        $user->complemento = $request->complemento;
+        $user->expire_at = $request->expire_at;
+        if ($request->img_perfil) {
+            $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            // Gerar um nome único para a imagem
+            $imageName = Str::uuid() . '.' . $request->img_perfil->getClientOriginalExtension();
+            // Salvar a imagem no diretório destinado a imagens de perfil
+            $resizedImage->save(storage_path('app/public/img_perfil/' . $imageName));
+            $user->img_url = $imageName;
+        }
+        if ($user->save()) {
+            return redirect()->route('configuracoes.users.index')->with('success', 'Usuário cadastrado com sucesso!'); ;
+        }
+
+
     }
 
     /**
@@ -85,9 +125,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
         $user->hasRole = $user->hasAnyRole(Role::all());
         // dd($user->roles);
         return view('configuracoes.users.edit', compact('user'));

@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('password');
             $table->string('rg',14)->nullable();
             $table->string('cpf',14)->nullable();
-            $table->string('cep',8)->nullable();
-            $table->string('rua')->nullable();
+            $table->string('cep',10)->nullable();
+            $table->string('logradouro')->nullable();
             $table->string('numero')->nullable();
+            $table->string('complemento')->nullable();
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
             $table->string('estado')->nullable();
