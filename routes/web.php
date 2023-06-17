@@ -19,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(!Auth::guest()){
+		return redirect('/home');
+	} else {
+		return redirect()->route('login');
+	}
 });
 
 Auth::routes();
