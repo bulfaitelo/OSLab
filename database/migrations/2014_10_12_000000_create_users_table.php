@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('complemento')->nullable();
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
-            $table->string('estado')->nullable();
+            $table->string('estado', 2)->nullable();
             $table->string('telefone')->nullable();
             $table->string('celular')->nullable();
             $table->boolean('ativo')->default(0);

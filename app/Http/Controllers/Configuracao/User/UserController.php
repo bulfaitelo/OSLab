@@ -68,6 +68,7 @@ class UserController extends Controller
             'password' => 'nullable|confirmed|min:8',
             'expire_at'=> 'date|nullable',
             'img_perfil' => 'nullable|image|max:2048',
+            'estado'=> 'nullable|max_digits:2',
         ]);
         if ($request->ativo) {
             $ativo = true;
@@ -139,26 +140,55 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         // dd($request->input());
-        $user = User::findOrFail($id);
+
         $request->validate ([
             'name' => 'required|',
-            'setor' => 'required|integer',
-            'password' => 'nullable|confirmed|min:8'
-
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'setor_id' => 'required|integer',
+            'password' => 'nullable|confirmed|min:8',
+            'expire_at'=> 'date|nullable',
+            'img_perfil' => 'nullable|image|max:2048',
+            'estado'=> 'nullable|max:2',
         ]);
+        if ($request->ativo) {
+            $ativo = true;
+        } else {
+            $ativo = false;
+        }
+        $user->ativo = $ativo;
         $user->name = $request->name;
-        $user->setor_id = $request->setor;
-
+        $user->email = $request->email;
+        $user->celular = $request->celular;
+        $user->telefone = $request->telefone;
+        $user->setor_id = $request->setor_id;
         if ($request->password) {
-            $user->password = Hash::make($request->password);
+            $user->password = $request->password;
+        }
+        $user->cep = $request->cep;
+        $user->logradouro = $request->logradouro;
+        $user->numero = $request->numero;
+        $user->bairro = $request->bairro;
+        $user->cidade = $request->cidade;
+        $user->estado = $request->estado;
+        $user->complemento = $request->complemento;
+        $user->expire_at = $request->expire_at;
+        if ($request->img_perfil) {
+            $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            // Gerar um nome único para a imagem
+            $imageName = Str::uuid() . '.' . $request->img_perfil->getClientOriginalExtension();
+            // Salvar a imagem no diretório destinado a imagens de perfil
+            $resizedImage->save(storage_path('app/public/img_perfil/' . $imageName));
+            $user->img_url = $imageName;
         }
         $user->syncRoles($request->role);
 
         if($user->save()){
-            return redirect()->route('configuracoes.users.index', [$id])->with('success', 'Permissão atualizada!'); ;
+            return redirect()->route('configuracoes.users.index', [$user->id])->with('success', 'Permissão atualizada!'); ;
         }
     }
 
