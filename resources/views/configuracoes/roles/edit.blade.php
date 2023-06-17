@@ -12,11 +12,11 @@
     <div class="col-md-10 ">
         <!-- general form elements -->
         <div class="card">
-          
+
           <!-- /.card-header -->
           <!-- form start -->
-          
-          <div class="card-body">          
+
+          <div class="card-body">
           @if(count($errors) > 0)
           <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -27,27 +27,27 @@
               @endforeach
             </ul>
           </div>
-        @endif        
+        @endif
           {!! Form::open(['route' => ['configuracoes.roles.update', $role->id],'method' => 'put']) !!}
             <div class="form-group">
               <label for="name">Nome da Permissão</label>
-              {!! Form::text('name', $role->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}              
+              {!! Form::text('name', $role->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}
               <i>Os nomes não podem conter espaços e obrigatoriamente tem que ser em caixa baixa. <b>Exemplo:</b> nome_teste, criar_usuario</i>
             </div>
             <div class="form-group">
-              <label for="description">Descrição da permissão</label>              
-              {!! Form::text('description', $role->description, ['id' => 'description','class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}              
+              <label for="description">Descrição da permissão</label>
+              {!! Form::text('description', $role->description, ['id' => 'description','class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}
             </div>
-          </div>          
+          </div>
           {{-- Minimal with icon only --}}
-          <!-- /.card-body -->          
+          <!-- /.card-body -->
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>       
+          </div>
         </div>
       <!-- /.card -->
       {!! Form::close() !!}
-    
+
       </div>
 
 </div>
@@ -71,15 +71,16 @@
           })
         @endif
         @if(count($errors) > 0)
+
           $(document).Toasts('create', {
                   class: 'bg-danger',
                   title: 'Ocorreu um erro',
                   subtitle: '',
                   autohide: true,
                   delay: 2000,
-                  body: 'Por favor verifique o formulário'
+                  body: '{{Session::get("mensagem")}}'
           })
         @endif
     </script>
-    
+
 @stop

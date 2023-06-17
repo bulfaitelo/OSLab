@@ -78,8 +78,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="setor">Setor</label>
-                        {!! Form::select('setor_id', \App\Models\Configuracao\User\Setor::orderBy('name')->pluck('name', 'id'), '', ['id' => 'setor','class' => 'form-control', 'placeholder'=> 'Selecione' ]) !!}
+                        <label for="setor_id">Setor</label>
+                        {!! Form::select('setor_id', \App\Models\Configuracao\User\Setor::orderBy('name')->pluck('name', 'id'), '', ['id' => 'setor_id','class' => 'form-control', 'placeholder'=> 'Selecione' ]) !!}
                     </div>
                 </div>
             </div>
@@ -168,6 +168,7 @@
                     </div>
                 </div>
 
+
             @endcan
 
           </div>
@@ -181,7 +182,6 @@
       {!! Form::close() !!}
 
       </div>
-
 </div>
 @stop
 
@@ -210,6 +210,15 @@
                         delay: 2000,
                         body: '{{Session::get("warning")}}'
               })
+        @endif
+        @if(count($errors) > 0) {
+            $(document).ready(function(){
+                @foreach ($errors->getMessages() as $item => $messages)
+                    $('#{{$item}}').addClass('is-invalid');
+                @endforeach
+            });
+
+        }
         @endif
     </script>
     {{-- MASCARA  --}}
