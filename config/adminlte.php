@@ -404,7 +404,7 @@ return [
                             'text'    => 'Setores',
                             'icon'    => 'fas fa-industry',
                             'route'   => 'configuracoes.user.setor.index',
-                            'active'  => ['configuracoes/users/setor*', ],
+                            'active'  => ['configuracoes/user/setor*', ],
                             'can'     => 'config_user_setor',
                         ],
                     ],
