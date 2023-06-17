@@ -5,7 +5,7 @@
 @section('title', 'Home')
 
 @section('content_header')
-    <h1>PLC - Home</h1>
+    <h1>OSLAB - Home</h1>
 @stop
 
 @section('content')
