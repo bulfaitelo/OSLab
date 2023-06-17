@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Configuracao\User\PermissionsGroup;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 
@@ -176,6 +177,11 @@ class UserController extends Controller
         $user->complemento = $request->complemento;
         $user->expire_at = $request->expire_at;
         if ($request->img_perfil) {
+            // Apagando a imagem antiga antes de definir nova
+            $tempImage = $user->img_url;
+            if ((file_exists(storage_path('app/public/img_perfil/').$tempImage)) && $tempImage != null ) {
+                unlink(storage_path('app/public/img_perfil/').$tempImage);
+            }
             $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             });

@@ -44,7 +44,15 @@
                         {!! Form::text('name', $user->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Nome do usuário', 'required']) !!}
                     </div>
                 </div>
-                <div class="col-md-4">
+                @if (file_exists(storage_path('app/public/img_perfil/' . $user->img_url)))
+                    <div class="col-md-1">
+                        <img class="profile-user-img img-fluid img-circle" src="/storage/img_perfil/{{$user->img_url }}" alt="User profile picture">
+                    </div>
+                @else
+                    <img class="profile-user-img img-fluid img-circle" src="/storage/img_perfil/img_default.png" alt="User profile picture">
+
+                @endif
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="img_perfil">Foto do perfil</label>
                         <div class="input-group">
@@ -142,7 +150,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="complemento">Complemento</label>
-                        {!! Form::text('complemento', '', ['id' => 'complemento','class' => 'form-control', 'placeholder' => 'Complemento' ]) !!}
+                        {!! Form::text('complemento', $user->complemento, ['id' => 'complemento','class' => 'form-control', 'placeholder' => 'Complemento' ]) !!}
                     </div>
                 </div>
             </div>
