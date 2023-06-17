@@ -68,7 +68,7 @@ class UserController extends Controller
             'password' => 'nullable|confirmed|min:8',
             'expire_at'=> 'date|nullable',
             'img_perfil' => 'nullable|image|max:2048',
-            'estado'=> 'nullable|max_digits:2',
+            'estado'=> 'nullable|max:2',
         ]);
         if ($request->ativo) {
             $ativo = true;
