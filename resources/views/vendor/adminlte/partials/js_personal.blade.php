@@ -30,15 +30,11 @@
             delay: 2000,
             body: 'Por favor verifique o formulário'
         })
-    </script>
-@endif
-@if(count($errors) > 0) {
-    <script>
         $(document).ready(function(){
         @foreach ($errors->getMessages() as $item => $messages)
             $('#{{$item}}').addClass('is-invalid');
         @endforeach
         });
     </script>
-}
 @endif
+
