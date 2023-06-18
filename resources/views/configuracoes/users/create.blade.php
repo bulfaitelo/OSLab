@@ -17,18 +17,7 @@
           <!-- form start -->
 
           <div class="card-body">
-          @if(count($errors) > 0)
-          <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            <ul>
-              @foreach($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
-
+            @include('adminlte::partials.alert')
           {!! Form::open(['route' => ['configuracoes.users.store'],'files' => true]) !!}
             <div class="row">
                 <div class="col-md-1">
@@ -167,10 +156,7 @@
                         </div>
                     </div>
                 </div>
-
-
             @endcan
-
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
@@ -180,7 +166,6 @@
         </div>
       <!-- /.card -->
       {!! Form::close() !!}
-
       </div>
 </div>
 @stop
@@ -190,37 +175,6 @@
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
-    <script>
-        @if(session('success'))
-              $(document).Toasts('create', {
-                        class: 'bg-success',
-                        title: 'Cadastro realizado com Sucesso!',
-                        subtitle: '',
-                        autohide: true,
-                        delay: 2000,
-                        body: '{{Session::get("success")}}'
-              })
-        @elseif(session('warning'))
-              $(document).Toasts('create', {
-                        class: 'bg-warning',
-                        title: 'Ocorreu um erro!',
-                        subtitle: '',
-                        autohide: true,
-                        delay: 2000,
-                        body: '{{Session::get("warning")}}'
-              })
-        @endif
-        @if(count($errors) > 0) {
-            $(document).ready(function(){
-                @foreach ($errors->getMessages() as $item => $messages)
-                    $('#{{$item}}').addClass('is-invalid');
-                @endforeach
-            });
-
-        }
-        @endif
-    </script>
     {{-- MASCARA  --}}
     <script src="/src/js/jquery.mask.js"></script>
     <script>

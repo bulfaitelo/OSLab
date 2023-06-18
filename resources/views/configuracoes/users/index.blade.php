@@ -99,17 +99,4 @@
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
-    <script>
-      @if(session('success'))
-            $(document).Toasts('create', {
-                      class: 'bg-success',
-                      title: 'Cadastro realizado com Sucesso!',
-                      subtitle: '',
-                      autohide: true,
-                      delay: 2000,
-                      body: '{{Session::get("mensagem")}}'
-            })
-      @endif
-    </script>
 @stop
