@@ -12,47 +12,37 @@
     <div class="col-md-10 ">
         <!-- general form elements -->
         <div class="card">
-          
+
           <!-- /.card-header -->
           <!-- form start -->
-          
-          <div class="card-body">          
-          @if(count($errors) > 0)
-          <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            <ul>
-              @foreach($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif        
+
+          <div class="card-body">
+          @include('adminlte::partials.alert')
           {!! Form::open(['route' => ['configuracoes.permissions.update', $permission->id],'method' => 'put']) !!}
             <div class="form-group">
               <label for="name">Nome da Permissão</label>
-              {!! Form::text('name', $permission->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}              
+              {!! Form::text('name', $permission->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}
               <i>Os nomes não podem conter espaços e obrigatoriamente tem que ser em caixa baixa. <b>Exemplo:</b> nome_teste, criar_usuario</i>
             </div>
             <div class="form-group">
-              <label for="description">Descrição da permissão</label>              
-              {!! Form::text('description', $permission->description, ['id' => 'description','class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}              
+              <label for="description">Descrição da permissão</label>
+              {!! Form::text('description', $permission->description, ['id' => 'description','class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}
             </div>
             <div class="form-group">
-              <label for="description">Grupo</label>              
-              {!! Form::select('group', \App\Models\Configuracao\PermissionsGroup::orderBy('name')->pluck('name', 'id'), $permission->group_id, ['id' => 'group','class' => 'form-control' ]) !!}     
-              <i>Grupo padrão (facilita na hora de organizar).</i>         
+              <label for="description">Grupo</label>
+              {!! Form::select('group', \App\Models\Configuracao\User\PermissionsGroup::orderBy('name')->pluck('name', 'id'), $permission->group_id, ['id' => 'group','class' => 'form-control' ]) !!}
+              <i>Grupo padrão (facilita na hora de organizar).</i>
             </div>
-          </div>          
+          </div>
           {{-- Minimal with icon only --}}
-          <!-- /.card-body -->          
+          <!-- /.card-body -->
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>       
+          </div>
         </div>
       <!-- /.card -->
       {!! Form::close() !!}
-    
+
       </div>
 
 </div>
@@ -63,28 +53,4 @@
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
-    <script>
-        @if(session('success'))
-          $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Cadastro realizado com Sucesso!',
-                    subtitle: '',
-                    autohide: true,
-                    delay: 2000,
-                    body: '{{Session::get("mensagem")}}'
-          })
-        @endif
-        @if(count($errors) > 0)
-          $(document).Toasts('create', {
-                  class: 'bg-danger',
-                  title: 'Ocorreu um erro',
-                  subtitle: '',
-                  autohide: true,
-                  delay: 2000,
-                  body: 'Por favor verifique o formulário'
-          })
-        @endif
-    </script>
-    
 @stop
