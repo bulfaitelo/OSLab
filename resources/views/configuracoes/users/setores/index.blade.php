@@ -102,25 +102,4 @@
 @stop
 
 @section('js')
-<script>
-  @if(session('success'))
-        $(document).Toasts('create', {
-                  class: 'bg-success',
-                  title: 'Cadastro realizado com Sucesso!',
-                  subtitle: '',
-                  autohide: true,
-                  delay: 2000,
-                  body: '{{Session::get("success")}}'
-        })
-  @elseif(session('warning'))
-        $(document).Toasts('create', {
-                  class: 'bg-warning',
-                  title: 'Ocorreu um erro!',
-                  subtitle: '',
-                  autohide: true,
-                  delay: 2000,
-                  body: '{{Session::get("warning")}}'
-        })
-  @endif
-</script>
 @stop

@@ -31,7 +31,7 @@
           {!! Form::open(['route' => ['configuracoes.user.setor.update', $setor->id],'method' => 'put']) !!}
             <div class="form-group">
               <label for="setor">Setor</label>
-              {!! Form::text('setor', $setor->name ?? '', ['class' => 'form-control', 'placeholder' => 'Setor']) !!}
+              {!! Form::text('setor', $setor->name ?? '', ['id' => 'setor', 'class' => 'form-control', 'placeholder' => 'Setor']) !!}
             </div>
           </div>
           {{-- Minimal with icon only --}}
