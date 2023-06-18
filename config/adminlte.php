@@ -290,6 +290,14 @@ return [
     */
 
     'menu' => [
+
+        [
+            'text'          => 'Perfil',
+            'icon'          => 'far fa-user',
+            'route'         => 'configuracoes.user.perfil.index',
+            'can'           => 'config_perfil',
+            'topnav_user'  => true,
+        ],
         // Navbar items:
         [
             'type'         => 'navbar-search',
@@ -304,11 +312,6 @@ return [
         [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
         ],
         [
             'text'        => 'pages',
@@ -326,7 +329,6 @@ return [
                 'config_users',
                 'config_roles',
                 'config_user_setor',
-
             ],
             'submenu' => [
                 [

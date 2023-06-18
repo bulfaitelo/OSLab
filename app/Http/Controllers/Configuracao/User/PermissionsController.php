@@ -16,7 +16,6 @@ class PermissionsController extends Controller
         // ACL DE PERMISSÕES
         $this->middleware('permission:config_permissions', ['only'=> 'index']);
         $this->middleware('permission:config_permissions_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_permissions_show', ['only'=> 'show']);
         $this->middleware('permission:config_permissions_edit', ['only'=> ['edit', 'update']]);
         $this->middleware('permission:config_permissions_destroy', ['only'=> 'destroy']);
 
