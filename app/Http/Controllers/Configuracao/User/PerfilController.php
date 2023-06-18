@@ -12,7 +12,7 @@ class PerfilController extends Controller
     {
         // ACL DE PERMISSÕES
         $this->middleware('permission:config_perfil', ['only'=> 'index']);
-        $this->middleware('permission:config_perfil_edit', ['only'=> ['update']]);
+        $this->middleware('permission:config_perfil_edit', ['only'=> ['edit', 'update']]);
 
     }
     /**
@@ -57,16 +57,16 @@ class PerfilController extends Controller
     //     //
     // }
 
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit()
-    // {
-    //     return view ('configuracoes.perfil.edit');
-    // }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit()
+    {
+        return view ('configuracoes.perfil.edit');
+    }
 
     /**
      * Update the specified resource in storage.
