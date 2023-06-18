@@ -15,19 +15,8 @@
         <h3 class="card-title">Selecione as permissões </h3>
 
       </div>
-      <!-- /.card-header -->
-      @if(count($errors) > 0)
-          <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            <ul>
-              @foreach($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
       <div class="card-body">
+        @include('adminlte::partials.alert')
         {!! Form::open(['route' => ['configuracoes.users.permissions.update', $user->id],'method' => 'put']) !!}
               <div class="card card-primary card-outline card-outline-tabs">
                 <div class="card-header p-0 border-bottom-0">
@@ -100,28 +89,4 @@
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
-    <script>
-        @if(session('success'))
-          $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Cadastro realizado com Sucesso!',
-                    subtitle: '',
-                    autohide: true,
-                    delay: 2000,
-                    body: '{{Session::get("success")}}'
-          })
-        @endif
-        @if(count($errors) > 0)
-          $(document).Toasts('create', {
-                  class: 'bg-danger',
-                  title: 'Ocorreu um erro',
-                  subtitle: '',
-                  autohide: true,
-                  delay: 2000,
-                  body: 'Por favor verifique o formulário'
-          })
-        @endif
-    </script>
-
 @stop
