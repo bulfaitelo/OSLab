@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('permissions', function (Blueprint $table) {
-            $table->foreign('group_id','fk_permissions_permissions_group')
-            ->references('id')->on('permissions_group');
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('setor_id', 'fk_users_setor')
+            ->references('id')->on('setor');
         });
     }
 
@@ -22,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('permissions', function (Blueprint $table) {
-            $table->dropForeign('fk_permissions_permissions_group');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('fk_users_setor');
         });
     }
 };
