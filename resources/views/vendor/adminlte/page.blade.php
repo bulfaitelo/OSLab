@@ -53,5 +53,6 @@
 
 @section('adminlte_js')
     @stack('js')
+        @include('adminlte::partials.js_personal')
     @yield('js')
 @stop
