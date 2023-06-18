@@ -6,10 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
 class PerfilController extends Controller
 {
+    function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:config_perfil', ['only'=> 'index']);
+        $this->middleware('permission:config_perfil_edit', ['only'=> ['update']]);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,48 +25,48 @@ class PerfilController extends Controller
         return view ('configuracoes.perfil.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show($id)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-        return view ('configuracoes.perfil.edit');
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit()
+    // {
+    //     return view ('configuracoes.perfil.edit');
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -72,34 +77,26 @@ class PerfilController extends Controller
      */
     public function update(Request $request)
     {
-        $request->validate([
-            'matricula' => 'required|integer'
+        $request->validate ([
+            'name' => 'required|',
+            'password' => 'nullable|confirmed|min:8',
         ]);
-
-        $funcionario = DB::connection('folha')->table('funcionarios')
-                                        ->select('id')
-                                        ->where('n_folha', $request->matricula)
-                                        ->first();
-        if(!$funcionario){
-            return redirect()->route('configuracoes.user.perfil.edit')->with('warning', 'Matricula não encontrada'); ;
-        }
-
         $user = User::findOrFail(Auth::id());
-        $user->matricula = $request->matricula;
-        $user->funcionario_id = $funcionario->id;
+        $user->name = $request->name;
+        $user->password = $request->password;
         if($user->save()){
             return redirect()->route('configuracoes.user.perfil.index')->with('success', 'Dados atualizados'); ;
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy($id)
+    // {
+    //     //
+    // }
 }
