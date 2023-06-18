@@ -129,7 +129,7 @@ class ControllerPermissionsTest extends TestCase
                 $controllerErroCount+=1;
             }
         }
-        if($totalErroCount > 1) {
+        if($totalErroCount > 0) {
             $output.="\nControllers Com erro: \033[01;31m{$controllerErroCount}\033[0m de um total de \033[01;34m".count($this->arrayControllers)."\033[0m; ";
             $output.="\nHouveram um total de: \033[01;31m{$totalErroCount} \033[0m erros.\n";
             $erro = true;
@@ -170,7 +170,7 @@ class ControllerPermissionsTest extends TestCase
                 $controllerErroCount+=1;
             }
         }
-        if($totalErroCount > 1) {
+        if($totalErroCount > 0) {
             $output.="\nControllers Com erro: \033[01;31m{$controllerErroCount}\033[0m de um total de \033[01;34m".count($this->arrayControllers)."\033[0m; ";
             $output.="\nHouveram um total de: \033[01;31m{$totalErroCount} \033[0m erros.\n";
             $erro = true;
@@ -185,7 +185,7 @@ class ControllerPermissionsTest extends TestCase
      */
 
      public function test_check_controller_without_methods() {
-        $output = "\n\033[1;39mErro de Controller que não tem permissões definidos:\033[0m\n";
+        $output = "\n\033[1;39mErro de Controller que não tem metodos definidos:\033[0m\n";
         $outputError="";
         $erroCount = 0;
         $totalErroCount = 0;
@@ -211,7 +211,7 @@ class ControllerPermissionsTest extends TestCase
                 $controllerErroCount+=1;
             }
         }
-        if($totalErroCount > 1) {
+        if($totalErroCount > 0) {
             $output.="\nControllers Com erro: \033[01;31m{$controllerErroCount}\033[0m de um total de \033[01;34m".count($this->arrayControllers)."\033[0m; ";
             $output.="\nHouveram um total de: \033[01;31m{$totalErroCount} \033[0m erros.\n";
             $erro = true;
