@@ -176,6 +176,21 @@ class DefaultsConfigUsersPermissions extends Seeder
                 'group_id' => 1,
                 'description' => 'Acesso as URL`s de Desenvolvimento',
             ],
+            [
+                // Acesso ao seu perfil pessoal
+                'name' => 'config_perfil',
+                'guard_name' => 'web',
+                'group_id' => 4,
+                'description' => 'Acesso ao seu perfil pessoal',
+            ],
+            [
+                // Editar o seu perfil pessoal
+                'name' => 'config_perfil_edit',
+                'guard_name' => 'web',
+                'group_id' => 4,
+                'description' => 'Editar o seu perfil pessoal',
+            ],
+
         ];
 
         foreach ($insert as $key => $value) {

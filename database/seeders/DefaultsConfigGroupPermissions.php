@@ -19,13 +19,14 @@ class DefaultsConfigGroupPermissions extends Seeder
             [   'id' => 1,
                 'name' => 'Configuração',
             ],
-
             [   'id' => 2,
                 'name' => 'Relatórios',
             ],
-
             [   'id' => 3,
                 'name' => 'Ordem Serviço',
+            ],
+            [   'id' => 4,
+                'name' => 'Perfil',
             ],
 
         ];
