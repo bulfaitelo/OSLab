@@ -18,22 +18,14 @@
 
           <div class="card-body">
           @if(count($errors) > 0)
-          <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            <ul>
-              @foreach($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
+          @include('adminlte::partials.alert')
         @endif
           {!! Form::open(['route' => ['configuracoes.user.setor.update', $setor->id],'method' => 'put']) !!}
             <div class="form-group">
               <label for="setor">Setor</label>
               {!! Form::text('setor', $setor->name ?? '', ['id' => 'setor', 'class' => 'form-control', 'placeholder' => 'Setor']) !!}
             </div>
-          </div>
+          </>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
           <div class="card-footer">
