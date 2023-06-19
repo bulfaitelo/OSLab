@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\User\PerfilController;
 use App\Http\Controllers\Configuracao\User\PermissionsController;
 use App\Http\Controllers\Configuracao\User\RoleController;
@@ -44,9 +45,10 @@ Route::group(['middleware'=> 'auth'], function() {
             Route::get('/perfil/edit', [PerfilController::class, 'edit'])->name('perfil.edit');
             Route::put('/perfil/update', [PerfilController::class, 'update'])->name('perfil.update');
             Route::resource('/setor', SetorController::class);
-
         });
-
+        Route::name('financeiro.')->prefix('financeiro')->group(function (){
+            Route::resource('/centro_custo', CentroCustoController::class);
+        });
 
     });
 });

@@ -320,24 +320,23 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        // ['header' => 'account_settings'],
         [
-            'topnav' => true,
+            // 'topnav' => true,
             'text'    => '',
             'icon'    => 'fas fa-cogs',
             'can'     => [
-                'config_users',
-                'config_roles',
-                'config_user_setor',
+                'config_users', 'config_roles', 'config_user_setor',
+
             ],
             'submenu' => [
                 [
                     'text'    => 'Usuários',
                     'icon'    => 'fas fa-users',
-                    'route'   => 'configuracoes.users.index',
                     'can'     => [
                         'config_roles',
                         'config_users',
+                        'config_user_setor',
                     ],
                     'submenu'=> [
                         [
@@ -363,8 +362,25 @@ return [
                         ],
                     ],
                 ],
+                [
+                    'text'    => 'Financeiro',
+                    'icon'    => 'fas fa-users',
+                    'can'     => [
+                        'config_financeiro_centro_custo',
+                    ],
+                    'submenu'=> [
+                        [
+                            'text'    => 'Centro de Custo',
+                            'icon'    => 'fas fa-cubes',
+                            'route'   => 'configuracoes.financeiro.centro_custo.index',
+                            'active'  => ['configuracoes/financeiro/centro_custo*'],
+                            'can'     => 'config_financeiro_centro_custo',
+                        ],
+                    ],
+                ],
 
             ],
+
         ],
 
         [
