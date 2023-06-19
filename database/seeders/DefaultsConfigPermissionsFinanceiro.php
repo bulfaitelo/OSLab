@@ -37,7 +37,7 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
             ],
             [
                 'description' => 'Editar permissões de Centro de custo',
-                'name' => 'config_financeiro_centro_custo_permissions_edit',
+                'name' => 'config_financeiro_centro_custo_edit',
                 'guard_name' => 'web',
                 'group_id' => 5,
             ],
