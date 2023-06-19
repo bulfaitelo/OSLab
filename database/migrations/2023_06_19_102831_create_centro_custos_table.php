@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('centro_custos', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('descricao')->nullable();
+            $table->boolean('receita')->nullable();
+            $table->boolean('despesa')->nullable();
             $table->timestamps();
         });
     }

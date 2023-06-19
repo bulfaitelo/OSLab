@@ -23,7 +23,10 @@ class CentroCustoController extends Controller
      */
     public function index()
     {
-        //
+        $centroCusto = CentroCusto::paginate(100);
+
+        return view('configuracoes.financeiro.centro_custo.index',compact('centroCusto'));
+
     }
 
     /**
@@ -31,7 +34,8 @@ class CentroCustoController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('configuracoes.financeiro.centro_custo.create');
     }
 
     /**
@@ -39,7 +43,23 @@ class CentroCustoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=> 'required',
+            'receita' => 'required_without:despesa|in:1,null',
+            'despesa' => 'required_without:receita|in:1,null'
+        ]);
+
+        $centroCusto = new CentroCusto();
+        $centroCusto->name = $request->name;
+        $centroCusto->descricao = $request->descricao;
+        $centroCusto->receita = $request->receita;
+        $centroCusto->despesa = $request->despesa;
+        if($centroCusto->save()){
+            toastr()->error('Oops! Something went wrong!');
+            return redirect()->route('configuracoes.financeiro.centro_custo.index');
+            // ->with('success', 'Centro de custo atualizado');
+        }
+
     }
 
     /**
