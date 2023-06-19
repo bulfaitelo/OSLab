@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-class DefaultsConfigUsersPermissions extends Seeder
+class DefaultsConfigPermissionsUsers extends Seeder
 {
     /**
      * Run the database seeds.

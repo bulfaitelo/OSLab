@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Configuracao\User\PermissionsGroup;
 
 
-class DefaultsConfigGroupPermissions extends Seeder
+class DefaultsConfigPermissionsGroup extends Seeder
 {
     /**
      * Run the database seeds.
@@ -27,6 +27,9 @@ class DefaultsConfigGroupPermissions extends Seeder
             ],
             [   'id' => 4,
                 'name' => 'Perfil',
+            ],
+            [   'id' => 5,
+                'name' => 'Financeiro',
             ],
 
         ];
