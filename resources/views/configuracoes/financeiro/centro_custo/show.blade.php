@@ -17,22 +17,20 @@
           <!-- form start -->
 
           <div class="card-body">
-            @include('adminlte::partials.form-alert')
-            {!! Form::open(['route' => ['configuracoes.financeiro.centro_custo.update', $centroCusto->id], 'method'=>'put']) !!}
             <div class="form-group">
               <label for="name">Centro de Custo</label>
-              {!! Form::text('name', $centroCusto->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Centro de Custo']) !!}
+              {!! Form::text('name', $centroCusto->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Centro de Custo', 'disabled']) !!}
             </div>
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                {!! Form::text('descricao', $centroCusto->descricao, ['id' => 'descricao', 'class' => 'form-control', 'placeholder' => 'Descrição do centro de custo']) !!}
+                {!! Form::text('descricao', $centroCusto->descricao, ['id' => 'descricao', 'class' => 'form-control', 'placeholder' => 'Descrição do centro de custo', 'disabled']) !!}
             </div>
             <h4>Tipo de Centro de Custo:</h4>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
                         <div class="custom-control custom-switch custom-switch-on-success">
-                            {!! Form::checkbox('receita', true, $centroCusto->receita, ['id'=> 'receita', 'class'=>'custom-control-input ']) !!}
+                            {!! Form::checkbox('receita', true, $centroCusto->receita, ['id'=> 'receita', 'class'=>'custom-control-input ', 'disabled']) !!}
                             <label class="custom-control-label" for="receita">Receita</label>
                         </div>
                     </div>
@@ -40,7 +38,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <div class="custom-control custom-switch custom-switch-on-danger">
-                            {!! Form::checkbox('despesa', true, $centroCusto->despesa, ['id'=> 'despesa', 'class'=>'custom-control-input ']) !!}
+                            {!! Form::checkbox('despesa', true, $centroCusto->despesa, ['id'=> 'despesa', 'class'=>'custom-control-input ', 'disabled']) !!}
                             <label class="custom-control-label" for="despesa">Despesa</label>
                         </div>
                     </div>
@@ -49,12 +47,8 @@
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>
         </div>
       <!-- /.card -->
-      {!! Form::close() !!}
       </div>
 
 </div>

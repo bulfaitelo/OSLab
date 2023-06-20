@@ -67,7 +67,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <p><b>Setor:</b> {{ $item->name}}</p>
+                          <p><b>Centro de Custo:</b> {{ $item->name}}</p>
                           @if ($item->descricao)
                           <p><b>Descrição:</b> {{ $item->descricao}}</p>
                           @endif
@@ -75,7 +75,7 @@
                         <div class="modal-footer justify-content-between">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                           {!! Form::open(['route' => ['configuracoes.financeiro.centro_custo.destroy', $item->id], 'method' => 'delete']) !!}
-                            <input type="submit" class="btn btn-danger delete-setor" value="Delete setor">
+                            <input type="submit" class="btn btn-danger delete-setor" value="Excluir Centro de Custo">
                           {!! Form::close() !!}
 
                         </div>

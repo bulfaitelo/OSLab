@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Configuracao\Financeiro;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Configuracao\Financeiro\StoreUpdateCentroCustoRequest;
 use App\Models\Configuracao\Financeiro\CentroCusto;
 use Illuminate\Http\Request;
 
@@ -41,13 +42,9 @@ class CentroCustoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUpdateCentroCustoRequest $request)
     {
-        $request->validate([
-            'name'=> 'required',
-            'receita' => 'required_without:despesa|in:1,null',
-            'despesa' => 'required_without:receita|in:1,null'
-        ]);
+
 
         $centroCusto = new CentroCusto();
         $centroCusto->name = $request->name;
@@ -55,8 +52,8 @@ class CentroCustoController extends Controller
         $centroCusto->receita = $request->receita;
         $centroCusto->despesa = $request->despesa;
         if($centroCusto->save()){
-            return redirect()->route('configuracoes.financeiro.centro_custo.index');
-            // ->with('success', 'Centro de custo atualizado');
+            return redirect()->route('configuracoes.financeiro.centro_custo.index')
+            ->with('success', 'Centro de criado com sucesso.');
         }
 
     }
@@ -66,7 +63,7 @@ class CentroCustoController extends Controller
      */
     public function show(CentroCusto $centroCusto)
     {
-        //
+        return view('configuracoes.financeiro.centro_custo.show', compact('centroCusto'));
     }
 
     /**
@@ -74,15 +71,22 @@ class CentroCustoController extends Controller
      */
     public function edit(CentroCusto $centroCusto)
     {
-        //
+        return view('configuracoes.financeiro.centro_custo.edit', compact('centroCusto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CentroCusto $centroCusto)
+    public function update(StoreUpdateCentroCustoRequest $request, CentroCusto $centroCusto)
     {
-        //
+        $centroCusto->name = $request->name;
+        $centroCusto->descricao = $request->descricao;
+        $centroCusto->receita = $request->receita;
+        $centroCusto->despesa = $request->despesa;
+        if($centroCusto->save()){
+            return redirect()->route('configuracoes.financeiro.centro_custo.index')
+            ->with('success', 'Centro de atualizado com sucesso.');
+        }
     }
 
     /**
@@ -90,6 +94,18 @@ class CentroCustoController extends Controller
      */
     public function destroy(CentroCusto $centroCusto)
     {
-        //
+        // Solicitar confirmação de exclusão
+
+        // Tentar excluir o recurso
+        try {
+            $centroCusto->delete();
+            return redirect()->route('configuracoes.financeiro.centro_custo.index')
+                ->with('success', 'Centro de custo excluído com sucesso.');
+        } catch (\Exception $e) {
+            // Tratar erros de exclusão
+            return redirect()->back()
+                ->with('error', 'Erro ao excluir o centro de custo. Por favor, tente novamente.')
+                ->withErrors($e->getMessage());
+        }
     }
 }
