@@ -18,7 +18,7 @@
 
           <div class="card-body">
           @if(count($errors) > 0)
-          @include('adminlte::partials.alert')
+          @include('adminlte::partials.form-alert')
         @endif
           {!! Form::open(['route' => ['configuracoes.user.setor.update', $setor->id],'method' => 'put']) !!}
             <div class="form-group">

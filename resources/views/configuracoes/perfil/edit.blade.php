@@ -17,7 +17,7 @@
             {!! Form::open(['route' => ['configuracoes.user.perfil.update'],'method' => 'put']) !!}
 
             <div class="card-body">
-                @include('adminlte::partials.alert')
+                @include('adminlte::partials.form-alert')
                 <div class="form-group">
                     <label for="nome">Nome</label>
                     {!! Form::text('name', \Auth::user()->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Nome do usuário', 'required']) !!}

@@ -17,7 +17,7 @@
           <!-- form start -->
 
           <div class="card-body">
-            @include('adminlte::partials.alert')
+            @include('adminlte::partials.form-alert')
           {!! Form::open(['route' => ['configuracoes.users.store'],'files' => true]) !!}
             <div class="row">
                 <div class="col-md-1">

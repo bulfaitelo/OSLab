@@ -17,7 +17,8 @@
           <!-- form start -->
 
           <div class="card-body">
-        @include('adminlte::partials.alert')
+        @include('adminlte::partials.form-alert')
+
           {!! Form::open(['route' => ['configuracoes.user.setor.store']]) !!}
             <div class="form-group">
               <label for="setor">Setor</label>
@@ -33,7 +34,6 @@
       <!-- /.card -->
       {!! Form::close() !!}
       </div>
-
 </div>
 @stop
 

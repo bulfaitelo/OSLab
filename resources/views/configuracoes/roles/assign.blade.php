@@ -14,7 +14,7 @@
         <h3 class="card-title">Selecione as permissões</h3>
       </div>
       <div class="card-body">
-        @include('adminlte::partials.alert')
+        @include('adminlte::partials.form-alert')
         {!! Form::open(['route' => ['configuracoes.roles.assign.update', $role->id],'method' => 'put']) !!}
           <div class="row">
             <div class="col-sm-12">
