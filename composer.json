@@ -14,8 +14,8 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.4",
-        "spatie/laravel-permission": "^5.10",
-        "yoeunes/toastr": "^2.3"
+        "php-flasher/flasher-laravel": "^1.15",
+        "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
