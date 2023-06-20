@@ -55,7 +55,6 @@ class CentroCustoController extends Controller
         $centroCusto->receita = $request->receita;
         $centroCusto->despesa = $request->despesa;
         if($centroCusto->save()){
-            toastr()->error('Oops! Something went wrong!');
             return redirect()->route('configuracoes.financeiro.centro_custo.index');
             // ->with('success', 'Centro de custo atualizado');
         }

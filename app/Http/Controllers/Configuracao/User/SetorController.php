@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Configuracao\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSetorRequest;
 use App\Models\Configuracao\User\Setor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SetorController extends Controller
 {
@@ -47,18 +49,24 @@ class SetorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSetorRequest $request)
     {
-        $request->validate([
-            'setor' => 'required',
-        ]);
 
-        $setor = new Setor;
-        $setor->name = $request->setor;
-        if($setor->save()){
-            return redirect()->route('configuracoes.user.setor.index')->with('success', 'Setor cadastrado com sucesso!'); ;
+        DB::beginTransaction();
+
+        try {
+            $setor = new Setor;
+            $setor->name = $request->setor;
+            $setor->save();
+
+            DB::commit();
+
+            return redirect()->route('configuracoes.user.setor.index')->with('success', 'Setor cadastrado com sucesso!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->back()->with('error', 'Erro ao cadastrar o setor. Por favor, tente novamente.');
         }
-
     }
 
     // /**
