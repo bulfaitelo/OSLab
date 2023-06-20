@@ -16,8 +16,6 @@
           <button type="button"  class="btn  btn-primary">Criar Centro de Custo</button>
         </a>
       @endcan
-
-      <button type="button" class="btn btn-success toastrDefaultSuccess"> homa mole  </button>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -114,19 +112,5 @@
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
-
 @section('js')
-<script>
-    $(function() {
-      var Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000
-      });
-      $('.toastrDefaultSuccess').click(function() {
-      toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-    });
-    });
-</script>
 @stop
