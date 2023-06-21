@@ -382,9 +382,16 @@ return [
                     'text'    => 'OS',
                     'icon'    => 'fas fa-list-alt',
                     'can'     => [
-                        'config_financeiro_centro_custo',
+                        'config_os_garantia',
                     ],
                     'submenu'=> [
+                        [
+                            'text'    => 'Categoria Serviço',
+                            'icon'    => 'fas fa-clipboard-list',
+                            'route'   => 'configuracao.os.categoria_servico.index',
+                            'active'  => ['configuracoes/os/categoria_servico*'],
+                            'can'     => 'config_os_garantia',
+                        ],
                         [
                             'text'    => 'Termos de Garantia',
                             'icon'    => 'fas fa-shield-alt',
@@ -393,6 +400,7 @@ return [
                             'can'     => 'config_os_garantia',
                         ],
                     ],
+
                 ],
 
             ],
