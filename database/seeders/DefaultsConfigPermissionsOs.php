@@ -6,8 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-
-class DefaultsConfigPermissionsFinanceiro extends Seeder
+class DefaultsConfigPermissionsOs extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,34 +17,34 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
         // permissões
         $insert = [
             [
-                'description' => 'Acesso a configuração Centro de custo Financeiro ',
-                'name' => 'config_financeiro_centro_custo',
+                'description' => 'Acesso a configuração de Garantias',
+                'name' => 'permission:config_os_garantia',
                 'guard_name' => 'web',
-                'group_id' => 5,
+                'group_id' => 3,
             ],
             [
-                'description' => 'Criar Centro de custo',
-                'name' => 'config_financeiro_centro_custo_create',
+                'description' => 'Criar Garantia',
+                'name' => 'permission:config_os_garantia_create',
                 'guard_name' => 'web',
-                'group_id' => 5,
+                'group_id' => 3,
             ],
             [
-                'description' => 'Editar Centro de custo',
-                'name' => 'config_financeiro_centro_custo_edit',
+                'description' => 'Editar Garantia',
+                'name' => 'permission:config_os_garantia_edit',
                 'guard_name' => 'web',
-                'group_id' => 5,
+                'group_id' => 3,
             ],
             [
-                'description' => 'Visualizar Centro de custo',
-                'name' => 'config_financeiro_centro_custo_show',
+                'description' => 'Visualizar Garantia',
+                'name' => 'permission:config_os_garantia_show',
                 'guard_name' => 'web',
-                'group_id' => 5,
+                'group_id' => 3,
             ],
             [
-                'description' => 'Excluir Centro de custo',
-                'name' => 'config_financeiro_centro_custo_destroy',
+                'description' => 'Excluir Garantia',
+                'name' => 'permission:config_os_garantia_destroy',
                 'guard_name' => 'web',
-                'group_id' => 5,
+                'group_id' => 3,
             ],
         ];
 

@@ -54,7 +54,7 @@ Route::group(['middleware'=> 'auth'], function() {
         // OS
         Route::name('os.')->prefix('os')->group(function (){
             Route::resource('/garantia', GarantiaController::class)
-                 ->parameters(['garantia' => 'garantia']);
+                ->parameters(['garantia' => 'garantia']);
         });
 
 

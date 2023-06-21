@@ -2,6 +2,7 @@
 
 namespace App\Models\Configuracao\Os;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,6 @@ class Garantia extends Model
      * @var array
      */
     public function user() {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

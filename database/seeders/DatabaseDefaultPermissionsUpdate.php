@@ -18,5 +18,6 @@ class DatabaseDefaultPermissionsUpdate extends Seeder
         $this->call(DefaultsConfigPermissionsUsers::class);
         $this->call(DefaultsConfigPermissionsFinanceiro::class);
         $this->call(DefaultsConfigSetores::class);
+        $this->call(DefaultsConfigPermissionsOs::class);
     }
 }

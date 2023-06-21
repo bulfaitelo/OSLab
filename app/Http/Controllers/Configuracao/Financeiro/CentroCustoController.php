@@ -94,7 +94,6 @@ class CentroCustoController extends Controller
      */
     public function destroy(CentroCusto $centroCusto)
     {
-        // Solicitar confirmação de exclusão
 
         // Tentar excluir o recurso
         try {

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('garantias', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('descricao');
+            $table->text('garantia');
             $table->unsignedBigInteger('user_id');
-            $table->integer('prazo_garantia_padrao');
+            $table->integer('prazo_garantia')->nullable();
             $table->timestamps();
         });
     }
