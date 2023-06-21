@@ -18,31 +18,31 @@ class DefaultsConfigPermissionsOs extends Seeder
         $insert = [
             [
                 'description' => 'Acesso a configuração de Garantias',
-                'name' => 'permission:config_os_garantia',
+                'name' => 'config_os_garantia',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
             [
                 'description' => 'Criar Garantia',
-                'name' => 'permission:config_os_garantia_create',
+                'name' => 'config_os_garantia_create',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
             [
                 'description' => 'Editar Garantia',
-                'name' => 'permission:config_os_garantia_edit',
+                'name' => 'config_os_garantia_edit',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
             [
                 'description' => 'Visualizar Garantia',
-                'name' => 'permission:config_os_garantia_show',
+                'name' => 'config_os_garantia_show',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
             [
                 'description' => 'Excluir Garantia',
-                'name' => 'permission:config_os_garantia_destroy',
+                'name' => 'config_os_garantia_destroy',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
