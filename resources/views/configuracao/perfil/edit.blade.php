@@ -14,7 +14,7 @@
             <div class="card-header">
               <h3 class="card-title">Seus Dados</h3>
             </div>
-            {!! Form::open(['route' => ['configuracoes.user.perfil.update'],'method' => 'put']) !!}
+            {!! Form::open(['route' => ['configuracao.user.perfil.update'],'method' => 'put']) !!}
 
             <div class="card-body">
                 @include('adminlte::partials.form-alert')

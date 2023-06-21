@@ -294,7 +294,7 @@ return [
         [
             'text'          => 'Perfil',
             'icon'          => 'far fa-user',
-            'route'         => 'configuracoes.user.perfil.index',
+            'route'         => 'configuracao.user.perfil.index',
             'can'           => 'config_perfil',
             'topnav_user'  => true,
         ],
@@ -342,21 +342,21 @@ return [
                         [
                             'text'    => 'Usuários',
                             'icon'    => 'fas fa-users',
-                            'route'   => 'configuracoes.users.index',
+                            'route'   => 'configuracao.users.index',
                             'active'  => ['configuracoes/users*'],
                             'can'     => 'config_users',
                         ],
                         [
                             'text'    => 'Perfis',
                             'icon'    => 'fas fa-user-tag',
-                            'route'   => 'configuracoes.roles.index',
+                            'route'   => 'configuracao.roles.index',
                             'active'  => ['configuracoes/roles*', 'configuracoes/permissions*'],
                             'can'     => 'config_roles',
                         ],
                         [
                             'text'    => 'Setores',
                             'icon'    => 'fas fa-industry',
-                            'route'   => 'configuracoes.user.setor.index',
+                            'route'   => 'configuracao.user.setor.index',
                             'active'  => ['configuracoes/user/setor*', ],
                             'can'     => 'config_user_setor',
                         ],
@@ -364,7 +364,7 @@ return [
                 ],
                 [
                     'text'    => 'Financeiro',
-                    'icon'    => 'fas fa-users',
+                    'icon'    => 'fas fa-landmark',
                     'can'     => [
                         'config_financeiro_centro_custo',
                     ],
@@ -372,9 +372,25 @@ return [
                         [
                             'text'    => 'Centro de Custo',
                             'icon'    => 'fas fa-cubes',
-                            'route'   => 'configuracoes.financeiro.centro_custo.index',
+                            'route'   => 'configuracao.financeiro.centro_custo.index',
                             'active'  => ['configuracoes/financeiro/centro_custo*'],
                             'can'     => 'config_financeiro_centro_custo',
+                        ],
+                    ],
+                ],
+                [
+                    'text'    => 'OS',
+                    'icon'    => 'fas fa-list-alt',
+                    'can'     => [
+                        'config_financeiro_centro_custo',
+                    ],
+                    'submenu'=> [
+                        [
+                            'text'    => 'Termos de Garantia',
+                            'icon'    => 'fas fa-shield-alt',
+                            'route'   => 'configuracao.os.garantia.index',
+                            'active'  => ['configuracoes/os/garantia*'],
+                            'can'     => 'config_os_garantia',
                         ],
                     ],
                 ],

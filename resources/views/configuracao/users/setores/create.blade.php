@@ -19,7 +19,7 @@
           <div class="card-body">
         @include('adminlte::partials.form-alert')
 
-          {!! Form::open(['route' => ['configuracoes.user.setor.store']]) !!}
+          {!! Form::open(['route' => ['configuracao.user.setor.store']]) !!}
             <div class="form-group">
               <label for="setor">Setor</label>
               {!! Form::text('setor', '', ['id' => 'setor', 'class' => 'form-control', 'placeholder' => 'Setor']) !!}

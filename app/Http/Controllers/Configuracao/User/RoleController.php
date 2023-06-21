@@ -32,7 +32,7 @@ class RoleController extends Controller
     {
         $roles = Role::orderBy('name', 'ASC')
         ->get();
-        return view('configuracoes.roles.index', compact('roles'));
+        return view('configuracao.roles.index', compact('roles'));
     }
 
     /**
@@ -43,7 +43,7 @@ class RoleController extends Controller
     public function create()
     {
         //
-        return view('configuracoes.roles.create');
+        return view('configuracao.roles.create');
 
     }
 
@@ -63,7 +63,7 @@ class RoleController extends Controller
             'description' => $request->description
             ]);
         if($role) {
-            return redirect()->route('configuracoes.roles.index')->with('success', 'Perfil cadastrado com Sucesso!'); ;
+            return redirect()->route('configuracao.roles.index')->with('success', 'Perfil cadastrado com Sucesso!'); ;
         }
 
     }
@@ -88,7 +88,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::findOrFail($id);
-        return view('configuracoes.roles.edit', compact('role'));
+        return view('configuracao.roles.edit', compact('role'));
     }
 
     /**
@@ -107,7 +107,7 @@ class RoleController extends Controller
         $role->name = $request->name;
         $role->description = $request->description;
         if($role->save()){
-            return redirect()->route('configuracoes.roles.edit', [$id])->with('success', 'Perfil atualizada!'); ;
+            return redirect()->route('configuracao.roles.edit', [$id])->with('success', 'Perfil atualizada!'); ;
         }
     }
 
@@ -122,7 +122,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         $role->delete();
         if($role) {
-            return redirect()->route('configuracoes.roles.index')->with('success', 'Perfil Excluida com Sucesso!'); ;
+            return redirect()->route('configuracao.roles.index')->with('success', 'Perfil Excluida com Sucesso!'); ;
         }
     }
 
@@ -150,7 +150,7 @@ class RoleController extends Controller
             ->join('permissions_group', 'permissions_group.id', '=', 'permissions.group_id')
             ->distinct()
             ->get();
-        return view('configuracoes.roles.assign', compact('role', 'array_permissions', 'permissions', 'group', 'groups'));
+        return view('configuracao.roles.assign', compact('role', 'array_permissions', 'permissions', 'group', 'groups'));
     }
 
 
@@ -171,7 +171,7 @@ class RoleController extends Controller
             ]);
 
         $role->syncPermissions($request->assign_id);
-        return redirect()->route('configuracoes.roles.assign', [$id])->with('success', 'Permissões Atualizadas!');
+        return redirect()->route('configuracao.roles.assign', [$id])->with('success', 'Permissões Atualizadas!');
 
     }
 

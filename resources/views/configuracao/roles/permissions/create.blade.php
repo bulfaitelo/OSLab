@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Perfil')
+@section('title', 'Criando permissões')
 
 @section('content_header')
-    <h1>Criando Perfil</h1>
+    <h1>Criando Permissões</h1>
 @stop
 
 @section('content')
@@ -18,15 +18,20 @@
 
           <div class="card-body">
             @include('adminlte::partials.form-alert')
-          {!! Form::open(['route' => ['configuracoes.roles.store']]) !!}
+          {!! Form::open(['route' => ['configuracao.permissions.store']]) !!}
             <div class="form-group">
-              <label for="name">Nome da Perfil</label>
-              {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_perfil']) !!}
+              <label for="name">Nome da Permissão</label>
+              {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}
               <i>Os nomes não podem conter espaços e obrigatoriamente tem que ser em caixa baixa. <b>Exemplo:</b> nome_teste, criar_usuario</i>
             </div>
             <div class="form-group">
-              <label for="description">Descrição da Perfil</label>
-              {!! Form::text('description', '', ['id' => 'description','class' => 'form-control', 'placeholder' => 'nome perfil']) !!}
+              <label for="description">Descrição da permissão</label>
+              {!! Form::text('description', '', ['id' => 'description','class' => 'form-control', 'placeholder' => 'Nome Permissão']) !!}
+            </div>
+            <div class="form-group">
+              <label for="description">Grupo</label>
+              {!! Form::select('group', \App\Models\Configuracao\User\PermissionsGroup::orderBy('name')->pluck('name', 'id'), '', ['id' => 'group','class' => 'form-control' ]) !!}
+              <i>Grupo padrão (facilita na hora de organizar).</i>
             </div>
           </div>
           {{-- Minimal with icon only --}}
@@ -41,7 +46,6 @@
       </div>
 
 </div>
-
 @stop
 
 @section('css')

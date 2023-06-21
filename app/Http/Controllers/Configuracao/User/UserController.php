@@ -41,7 +41,7 @@ class UserController extends Controller
         //
         $users = User::orderBy('name', 'ASC')
         ->get();
-        return view('configuracoes.users.index', compact('users'));
+        return view('configuracao.users.index', compact('users'));
     }
 
     /**
@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('configuracoes.users.create');
+        return view('configuracao.users.create');
     }
 
     /**
@@ -104,7 +104,7 @@ class UserController extends Controller
             $user->img_url = $imageName;
         }
         if ($user->save()) {
-            return redirect()->route('configuracoes.users.index')->with('success', 'Usuário cadastrado com sucesso!'); ;
+            return redirect()->route('configuracao.users.index')->with('success', 'Usuário cadastrado com sucesso!'); ;
         }
 
 
@@ -131,7 +131,7 @@ class UserController extends Controller
     {
         $user->hasRole = $user->hasAnyRole(Role::all());
         // dd($user->roles);
-        return view('configuracoes.users.edit', compact('user'));
+        return view('configuracao.users.edit', compact('user'));
     }
 
     /**
@@ -194,7 +194,7 @@ class UserController extends Controller
         $user->syncRoles($request->role);
 
         if($user->save()){
-            return redirect()->route('configuracoes.users.index', [$user->id])->with('success', 'Permissão atualizada!'); ;
+            return redirect()->route('configuracao.users.index', [$user->id])->with('success', 'Permissão atualizada!'); ;
         }
     }
 
@@ -230,7 +230,7 @@ class UserController extends Controller
             ->distinct()
             ->get();
         // dd($permissions);
-        return view('configuracoes.users.permissions', compact('permissions', 'user', 'roles', 'group', 'groups'));
+        return view('configuracao.users.permissions', compact('permissions', 'user', 'roles', 'group', 'groups'));
     }
 
 
@@ -246,7 +246,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $user->syncPermissions($request->assign_id);
-        return redirect()->route('configuracoes.users.permissions_edit', [$id])->with('success', 'Permissões Atualizadas!'); ;
+        return redirect()->route('configuracao.users.permissions_edit', [$id])->with('success', 'Permissões Atualizadas!'); ;
 
 
     }

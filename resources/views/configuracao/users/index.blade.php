@@ -11,11 +11,11 @@
     <div class="card">
       <div class="card-header">
         <div class="row"></div>
-          <a href="{{ route('configuracoes.roles.index') }}">
+          <a href="{{ route('configuracao.roles.index') }}">
               <button type="button"  class="btn  btn-default"> Voltar</button>
           </a>
           @can('config_users_create')
-            <a href="{{ route('configuracoes.users.create') }}">
+            <a href="{{ route('configuracao.users.create') }}">
                 <button type="button"  class="btn  btn-primary">Criar Usuário</button>
             </a>
           @endcan
@@ -40,10 +40,10 @@
                 <td>
                   <div class="btn-group">
                     @can('config_users_edit')
-                        <a href="{{ route('configuracoes.users.edit', $user->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                        <a href="{{ route('configuracao.users.edit', $user->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                     @endcan
                     @can('config_users_show')
-                        <a href="{{ route('configuracoes.users.show', $user->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                        <a href="{{ route('configuracao.users.show', $user->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                     @endcan
                     @can('config_users_destroy')
                     <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $user->id }}"><i class="fas fa-trash"></i></button>
@@ -61,7 +61,7 @@
                             </div>
                             <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                {!! Form::open(['route' => ['configuracoes.users.destroy', $user->id], 'method' => 'delete']) !!}
+                                {!! Form::open(['route' => ['configuracao.users.destroy', $user->id], 'method' => 'delete']) !!}
                                 <input type="submit" class="btn btn-danger delete-permission" value="Excluir Usuário">
                             </form>
 

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editando Perfis')
+@section('title', 'Criando Perfil')
 
 @section('content_header')
-    <h1>Editando Perfis</h1>
+    <h1>Criando Perfil</h1>
 @stop
 
 @section('content')
@@ -17,16 +17,16 @@
           <!-- form start -->
 
           <div class="card-body">
-          @include('adminlte::partials.form-alert')
-          {!! Form::open(['route' => ['configuracoes.roles.update', $role->id],'method' => 'put']) !!}
+            @include('adminlte::partials.form-alert')
+          {!! Form::open(['route' => ['configuracao.roles.store']]) !!}
             <div class="form-group">
-              <label for="name">Nome da Permissão</label>
-              {!! Form::text('name', $role->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_perfil']) !!}
+              <label for="name">Nome da Perfil</label>
+              {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_perfil']) !!}
               <i>Os nomes não podem conter espaços e obrigatoriamente tem que ser em caixa baixa. <b>Exemplo:</b> nome_teste, criar_usuario</i>
             </div>
             <div class="form-group">
-              <label for="description">Descrição da permissão</label>
-              {!! Form::text('description', $role->description, ['id' => 'description','class' => 'form-control', 'placeholder' => 'Nome do Perfil']) !!}
+              <label for="description">Descrição da Perfil</label>
+              {!! Form::text('description', '', ['id' => 'description','class' => 'form-control', 'placeholder' => 'nome perfil']) !!}
             </div>
           </div>
           {{-- Minimal with icon only --}}
@@ -41,6 +41,7 @@
       </div>
 
 </div>
+
 @stop
 
 @section('css')

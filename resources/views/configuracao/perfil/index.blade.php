@@ -34,7 +34,7 @@
 
               <div class="card-footer">
                 @can('config_perfil_edit')
-                    <a href="{{ route('configuracoes.user.perfil.edit') }}">
+                    <a href="{{ route('configuracao.user.perfil.edit') }}">
                         <button type="submit" class="btn btn-primary">Editar</button>
                     </a>
                 @endcan

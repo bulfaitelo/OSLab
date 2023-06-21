@@ -11,11 +11,11 @@
     <div class="card">
       <div class="card-header">
         <div class="row"></div>
-          <a href="{{ route('configuracoes.roles.index') }}">
+          <a href="{{ route('configuracao.roles.index') }}">
               <button type="button"  class="btn  btn-info"><i class="fas fa-chevron-left"></i> Voltar</button>
           </a>
           @can('config_permissions_create')
-            <a href="{{ route('configuracoes.permissions.create') }}">
+            <a href="{{ route('configuracao.permissions.create') }}">
                 <button type="button"  class="btn  btn-primary">Criar Permissão</button>
             </a>
           @endcan
@@ -42,7 +42,7 @@
                 <td>
                   <div class="btn-group">
                     @can('config_permissions_edit')
-                        <a href="{{ route('configuracoes.permissions.edit', $permission->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                        <a href="{{ route('configuracao.permissions.edit', $permission->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                     @endcan
                     @can('config_permissions_destroy')
                         <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $permission->id }}"><i class="fas fa-trash"></i></button>
@@ -67,7 +67,7 @@
                                 {{-- <button type="submit" class="btn btn-danger">Excluir</button> --}}
 
                                 {{-- <form method="POST" action="/admin/users/{{$permission->id}}"> --}}
-                                    {!! Form::open(['route' => ['configuracoes.permissions.destroy', $permission->id], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['configuracao.permissions.destroy', $permission->id], 'method' => 'delete']) !!}
 
                                     <input type="submit" class="btn btn-danger delete-permission" value="Delete permission">
                                 </form>

@@ -18,7 +18,7 @@
 
           <div class="card-body">
             @include('adminlte::partials.form-alert')
-          {!! Form::open(['route' => ['configuracoes.users.update', $user->id],'method'=>'put','files' => true]) !!}
+          {!! Form::open(['route' => ['configuracao.users.update', $user->id],'method'=>'put','files' => true]) !!}
             <div class="row">
                 <div class="col-md-1">
                     <label for="chek_ativo">Ativo</label>
@@ -166,7 +166,7 @@
                         <div class="form-group">
                             <label for="departamento">Personalização de permissões</label>
                             <br>
-                            <a href="{{ route('configuracoes.users.permissions_edit', $user->id) }}">
+                            <a href="{{ route('configuracao.users.permissions_edit', $user->id) }}">
                             <button type="button"  class="btn  btn-success">Configurar Permissões</button>
                             </a>
                         </div>

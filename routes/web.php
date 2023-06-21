@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
+use App\Http\Controllers\Configuracao\Os\GarantiaController;
 use App\Http\Controllers\Configuracao\User\PerfilController;
 use App\Http\Controllers\Configuracao\User\PermissionsController;
 use App\Http\Controllers\Configuracao\User\RoleController;
@@ -31,7 +32,7 @@ Auth::routes();
 
 Route::group(['middleware'=> 'auth'], function() {
     // Agrupamento de rotas de Configuração
-    Route::name('configuracoes.')->prefix('configuracoes')->group(function (){
+    Route::name('configuracao.')->prefix('configuracoes')->group(function (){
         Route::resource('/users', UserController::class);
         Route::resource('/roles', RoleController::class);
         Route::get('/roles/assign/{id}', [RoleController::class, 'assign'])->name('roles.assign');
@@ -46,9 +47,16 @@ Route::group(['middleware'=> 'auth'], function() {
             Route::put('/perfil/update', [PerfilController::class, 'update'])->name('perfil.update');
             Route::resource('/setor', SetorController::class);
         });
+        // Financeiro
         Route::name('financeiro.')->prefix('financeiro')->group(function (){
             Route::resource('/centro_custo', CentroCustoController::class);
         });
+        // OS
+        Route::name('os.')->prefix('os')->group(function (){
+            Route::resource('/garantia', GarantiaController::class)
+                 ->parameters(['garantia' => 'garantia']);
+        });
+
 
     });
 });

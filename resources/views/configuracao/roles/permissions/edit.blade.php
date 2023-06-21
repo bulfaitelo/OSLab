@@ -18,7 +18,7 @@
 
           <div class="card-body">
           @include('adminlte::partials.form-alert')
-          {!! Form::open(['route' => ['configuracoes.permissions.update', $permission->id],'method' => 'put']) !!}
+          {!! Form::open(['route' => ['configuracao.permissions.update', $permission->id],'method' => 'put']) !!}
             <div class="form-group">
               <label for="name">Nome da Permissão</label>
               {!! Form::text('name', $permission->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'nome_permissao']) !!}

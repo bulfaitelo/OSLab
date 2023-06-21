@@ -22,7 +22,7 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        return view ('configuracoes.perfil.index');
+        return view ('configuracao.perfil.index');
     }
 
     // /**
@@ -65,7 +65,7 @@ class PerfilController extends Controller
      */
     public function edit()
     {
-        return view ('configuracoes.perfil.edit');
+        return view ('configuracao.perfil.edit');
     }
 
     /**
@@ -85,7 +85,7 @@ class PerfilController extends Controller
         $user->name = $request->name;
         $user->password = $request->password;
         if($user->save()){
-            return redirect()->route('configuracoes.user.perfil.index')->with('success', 'Dados atualizados');
+            return redirect()->route('configuracao.user.perfil.index')->with('success', 'Dados atualizados');
         }
     }
 

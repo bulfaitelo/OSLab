@@ -18,7 +18,7 @@
 
           <div class="card-body">
             @include('adminlte::partials.form-alert')
-            {!! Form::open(['route' => ['configuracoes.financeiro.centro_custo.update', $centroCusto->id], 'method'=>'put']) !!}
+            {!! Form::open(['route' => ['configuracao.financeiro.centro_custo.update', $centroCusto->id], 'method'=>'put']) !!}
             <div class="form-group">
               <label for="name">Centro de Custo</label>
               {!! Form::text('name', $centroCusto->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Centro de Custo']) !!}

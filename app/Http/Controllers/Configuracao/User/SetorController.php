@@ -29,7 +29,7 @@ class SetorController extends Controller
     public function index()
     {
         $setores = Setor::paginate(50);
-        return view ('configuracoes.users.setores.index', compact('setores'));
+        return view ('configuracao.users.setores.index', compact('setores'));
 
     }
 
@@ -40,7 +40,7 @@ class SetorController extends Controller
      */
     public function create()
     {
-        return view ('configuracoes.users.setores.create');
+        return view ('configuracao.users.setores.create');
     }
 
     /**
@@ -61,10 +61,9 @@ class SetorController extends Controller
 
             DB::commit();
 
-            return redirect()->route('configuracoes.user.setor.index')->with('success', 'Setor cadastrado com sucesso!');
+            return redirect()->route('configuracao.user.setor.index')->with('success', 'Setor cadastrado com sucesso!');
         } catch (\Exception $e) {
             DB::rollBack();
-
             return redirect()->back()->with('error', 'Erro ao cadastrar o setor. Por favor, tente novamente.');
         }
     }
@@ -88,7 +87,7 @@ class SetorController extends Controller
      */
     public function edit(Setor $setor)
     {
-        return view ('configuracoes.users.setores.edit', compact('setor'));
+        return view ('configuracao.users.setores.edit', compact('setor'));
     }
 
     /**
@@ -105,7 +104,7 @@ class SetorController extends Controller
         ]);
         $setor->name = $request->setor;
         if($setor->save()){
-            return redirect()->route('configuracoes.user.setor.index')->with('success', 'Setor atualizado com sucesso!'); ;
+            return redirect()->route('configuracao.user.setor.index')->with('success', 'Setor atualizado com sucesso!'); ;
         }
     }
 
@@ -118,11 +117,11 @@ class SetorController extends Controller
     public function destroy(Setor $setor)
     {
         if($setor->users->count() > 0){
-            return redirect()->route('configuracoes.user.setor.index')->with('warning', 'Não é possivel excluir um setor que existam usuarios cadastrados nele!'); ;
+            return redirect()->route('configuracao.user.setor.index')->with('warning', 'Não é possivel excluir um setor que existam usuarios cadastrados nele!'); ;
         }
         else{
             if($setor->delete()) {
-                return redirect()->route('configuracoes.user.setor.index')->with('success', 'Setor Excluido com Sucesso!'); ;
+                return redirect()->route('configuracao.user.setor.index')->with('success', 'Setor Excluido com Sucesso!'); ;
             }
         }
 

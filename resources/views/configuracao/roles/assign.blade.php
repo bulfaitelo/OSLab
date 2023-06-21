@@ -3,21 +3,22 @@
 @section('title', 'Atribuindo Permissões')
 
 @section('content_header')
-    <h1>Personalizando Permissões - <b>{{ $user->name }}</b></h1>
+    <h1>Atribuindo Permissões</h1>
 @stop
 
 @section('content')
 <div class="row justify-content-md-center">
   <div class="col-md-10">
-
     <div class="card card-default">
       <div class="card-header">
-        <h3 class="card-title">Selecione as permissões </h3>
-
+        <h3 class="card-title">Selecione as permissões</h3>
       </div>
       <div class="card-body">
         @include('adminlte::partials.form-alert')
-        {!! Form::open(['route' => ['configuracoes.users.permissions.update', $user->id],'method' => 'put']) !!}
+        {!! Form::open(['route' => ['configuracao.roles.assign.update', $role->id],'method' => 'put']) !!}
+          <div class="row">
+            <div class="col-sm-12">
+              <!-- checkbox -->
               <div class="card card-primary card-outline card-outline-tabs">
                 <div class="card-header p-0 border-bottom-0">
                   <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -43,9 +44,8 @@
                         @foreach ($permissions::where('group_id', $group_singular->group_id)->orderBy('name')->get() as $permission)
                         <div class="form-group">
                           <div class="custom-control custom-checkbox">
-                            @if (($user->hasPermissionTo($permission->id) == true) and ($roles->hasPermissionTo($permission->id)  == true))
-                              <input disabled checked class="custom-control-input" name="assign_id[]" type="checkbox" id="{{ $permission->id }}" value="{{ $permission->id }}">
-                            @elseif ($user->hasPermissionTo($permission->id))
+
+                            @if ($role->hasPermissionTo($permission->id))
                               <input checked class="custom-control-input" name="assign_id[]" type="checkbox" id="{{ $permission->id }}" value="{{ $permission->id }}">
                             @else
                               <input  class="custom-control-input" name="assign_id[]" type="checkbox" id="{{ $permission->id }}" value="{{ $permission->id }}">
@@ -63,21 +63,17 @@
                 </div>
                 <!-- /.card -->
               </div>
-
-
+            </div>
           </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>
+
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
         {!! Form::close() !!}
       <!-- /.card-body -->
+
     </div>
-  </div>
-</div>
-
-<div class="row justify-content-md-center">
-  <div class="col-md-10">
-
   </div>
 </div>
 
@@ -86,6 +82,11 @@
 
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <style>
+    .red{
+    color: red;
+    }
+    </style>
 @stop
 
 @section('js')
