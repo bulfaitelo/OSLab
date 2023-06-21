@@ -19,11 +19,11 @@ class Setor extends Model
 
 
     /**
-     * Retorna o Setor atribuído pra o funcionário
+     * Retorna o nome do usuário
      *
      * @var array
      */
-    public function users() {
+    public function user() {
         return $this->hasMany(User::class);
     }
 
