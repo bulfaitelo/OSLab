@@ -327,6 +327,9 @@ return [
             'icon'    => 'fas fa-cogs',
             'can'     => [
                 'config_users', 'config_roles', 'config_user_setor',
+                'config_financeiro_centro_custo',
+                'config_os_garantia', 'config_os_categoria',
+
 
             ],
             'submenu' => [
@@ -386,11 +389,11 @@ return [
                     ],
                     'submenu'=> [
                         [
-                            'text'    => 'Categoria Serviço',
+                            'text'    => 'Categoria de OS',
                             'icon'    => 'fas fa-clipboard-list',
-                            'route'   => 'configuracao.os.categoria_servico.index',
-                            'active'  => ['configuracoes/os/categoria_servico*'],
-                            'can'     => 'config_os_garantia',
+                            'route'   => 'configuracao.os.categoria.index',
+                            'active'  => ['configuracoes/os/categoria*'],
+                            'can'     => 'config_os_categoria',
                         ],
                         [
                             'text'    => 'Termos de Garantia',

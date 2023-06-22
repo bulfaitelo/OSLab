@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categoria_servicos', function (Blueprint $table) {
+        Schema::create('categoria_os', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('garantia_id')->nullable();
+            $table->string('name');
+            $table->string('descricao');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categoria_servicos');
+        Schema::dropIfExists('categoria_os');
     }
 };

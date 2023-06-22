@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Configuracao\Os;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateCategoriaServicoRequest extends FormRequest
+class StoreUpdateCategoriaOsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreUpdateCategoriaServicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'garantia_id' => 'nullable|exists:garantias,id'
         ];
     }
 }
