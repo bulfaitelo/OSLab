@@ -36,15 +36,15 @@
               <td>{{ $item->garantia->name }}</td>
               <td>
                 <div class="btn-group">
-                  @can('config_os_categoria_show')
+                @can('config_os_categoria_edit')
+                <a href="{{ route('configuracao.os.categoria.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                @endcan
+                @can('config_os_categoria_show')
                     <a href="{{ route('configuracao.os.categoria.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
-                  @endcan
-                  @can('config_os_categoria_edit')
-                    <a href="{{ route('configuracao.os.categoria.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                  @endcan
-                  @can('config_os_categoria_destroy')
+                @endcan
+                @can('config_os_categoria_destroy')
                     <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                  @endcan
+                @endcan
                 </div>
                 @can('config_os_categoria_destroy')
                   <div class="modal fade" id="modal-excluir_{{ $item->id }}">
