@@ -101,7 +101,7 @@ class GarantiaController extends Controller
         try {
             $garantia->delete();
             return redirect()->route('configuracao.os.garantia.index')
-                ->with('success', 'Centro de custo excluído com sucesso.');
+                ->with('success', 'Garantia excluida com sucesso.');
 
         } catch (\Throwable $th) {
             throw $th;
