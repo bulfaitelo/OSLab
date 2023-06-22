@@ -33,7 +33,7 @@
             <tr>
               <td>{{ $item->id }}</td>
               <td>{{ $item->name }}</td>
-              <td>{{$item->users->count()}}</td>
+              <td>{{$item->user->count()}}</td>
               <td>
                 <div class="btn-group">
                   @can('config_user_setor_edit')
