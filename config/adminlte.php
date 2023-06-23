@@ -447,9 +447,9 @@ return [
             'can'     => 'config_url',
         ],
         [
-            'text'       => 'Laravel Collective',
+            'text'       => 'Laravel HTML (Spatie)',
             'icon'       => 'fas fa-external-link-square-alt',
-            'url'        => 'https://laravelcollective.com/docs/6.x/html',
+            'url'        => 'https://spatie.be/docs/laravel-html/v3/general-usage/element-classes',
             'target' => '_blank',
             'can'     => 'config_url',
         ],
