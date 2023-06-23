@@ -18,16 +18,16 @@
 
           <div class="card-body">
             <div class="form-group">
-              <label for="name">Categoria</label>
-              {!! Form::text('name', $categoria->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Categoria', 'required']) !!}
+                <label for="name">Categoria</label>
+                {!! html()->text('name', $categoria->name)->class('form-control')->placeholder('Categoria')->disabled() !!}
             </div>
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                {!! Form::text('descricao', $categoria->descricao, ['id' => 'descricao', 'class' => 'form-control', 'placeholder' => 'Descrição']) !!}
+                {!! html()->text('descricao', $categoria->descricao)->class('form-control')->placeholder('Descrição')->disabled() !!}
             </div>
             <div class="form-group">
                 <label for="garantia_id">Garantia</label>
-                {!! Form::select('garantia_id', \App\Models\Configuracao\Os\Garantia::orderBy('name')->pluck('name', 'id'), $categoria->garantia_id, ['id' => 'garantia_id','class' => 'form-control', 'placeholder'=> 'Selecione' ]) !!}
+                {!! html()->select('garantia_id', \App\Models\Configuracao\Os\Garantia::orderBy('name')->pluck('name', 'id'), $categoria->garantia_id)->class('form-control')->placeholder('Selecione')->disabled() !!}
             </div>
           </div>
           {{-- Minimal with icon only --}}

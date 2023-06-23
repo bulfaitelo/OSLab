@@ -18,18 +18,18 @@
 
           <div class="card-body">
           @include('adminlte::partials.form-alert')
-          {!! Form::open(['route' => ['configuracao.os.categoria.store']]) !!}
+          {!! html()->form('post', route('configuracao.os.categoria.store'))->open() !!}
             <div class="form-group">
               <label for="name">Categoria</label>
-              {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Categoria', 'required']) !!}
+              {!! html()->text('name')->class('form-control')->placeholder('Categoria')->required() !!}
             </div>
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                {!! Form::text('descricao', '', ['id' => 'descricao', 'class' => 'form-control', 'placeholder' => 'Descrição']) !!}
+                {!! html()->text('descricao')->class('form-control')->placeholder('Descrição') !!}
             </div>
             <div class="form-group">
                 <label for="garantia_id">Garantia</label>
-                {!! Form::select('garantia_id', \App\Models\Configuracao\Os\Garantia::orderBy('name')->pluck('name', 'id'), '', ['id' => 'garantia_id','class' => 'form-control', 'placeholder'=> 'Selecione' ]) !!}
+                {!! html()->select('garantia_id', \App\Models\Configuracao\Os\Garantia::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
             </div>
           </div>
           {{-- Minimal with icon only --}}
