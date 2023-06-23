@@ -32,7 +32,7 @@
           </div>
         </div>
       <!-- /.card -->
-      {!! Form::close() !!}
+      {!! html()->form()->close() !!}
       </div>
 </div>
 @stop

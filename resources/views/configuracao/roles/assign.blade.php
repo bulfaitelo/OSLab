@@ -70,7 +70,7 @@
         <div class="card-footer">
           <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
-        {!! Form::close() !!}
+        {!! html()->form()->close() !!}
       <!-- /.card-body -->
 
     </div>

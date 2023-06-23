@@ -64,7 +64,7 @@
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                           {!! Form::open(['route' => ['configuracao.user.setor.destroy', $item->id], 'method' => 'delete']) !!}
                             <input type="submit" class="btn btn-danger delete-setor" value="Delete setor">
-                          {!! Form::close() !!}
+                          {!! html()->form()->close() !!}
 
                         </div>
                       </div>

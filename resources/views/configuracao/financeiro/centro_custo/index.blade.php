@@ -76,7 +76,7 @@
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                           {!! Form::open(['route' => ['configuracao.financeiro.centro_custo.destroy', $item->id], 'method' => 'delete']) !!}
                             <input type="submit" class="btn btn-danger delete-setor" value="Excluir Centro de Custo">
-                          {!! Form::close() !!}
+                          {!! html()->form()->close() !!}
 
                         </div>
                       </div>

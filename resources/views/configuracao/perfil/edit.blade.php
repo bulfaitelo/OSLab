@@ -50,7 +50,7 @@
               <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Atualizar</button>
                 </div>
-            {!! Form::close() !!}
+            {!! html()->form()->close() !!}
         </div>
 
     </div>

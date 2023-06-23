@@ -72,7 +72,7 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             {!! Form::open(['route' => ['configuracao.roles.destroy', $role->id], 'method' => 'delete']) !!}
                                 <input type="submit" class="btn btn-danger delete-role" value="Delete Perfil">
-                            {!! Form::close() !!}
+                            {!! html()->form()->close() !!}
 
                             </div>
                         </div>
