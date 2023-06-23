@@ -330,7 +330,6 @@ return [
                 'config_financeiro_centro_custo',
                 'config_os_garantia', 'config_os_categoria',
 
-
             ],
             'submenu' => [
                 [
@@ -385,7 +384,7 @@ return [
                     'text'    => 'OS',
                     'icon'    => 'fas fa-list-alt',
                     'can'     => [
-                        'config_os_garantia',
+                        'config_os_garantia', 'config_os_categoria', 'config_os_status'
                     ],
                     'submenu'=> [
                         [
@@ -402,12 +401,16 @@ return [
                             'active'  => ['configuracoes/os/garantia*'],
                             'can'     => 'config_os_garantia',
                         ],
+                        [
+                            'text'    => 'Status de Os',
+                            'icon'    => 'fas fa-wave-square',
+                            'route'   => 'configuracao.os.status.index',
+                            'active'  => ['configuracoes/os/status*'],
+                            'can'     => 'config_os_status',
+                        ],
                     ],
-
                 ],
-
             ],
-
         ],
 
         [

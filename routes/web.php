@@ -3,6 +3,7 @@
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Os\GarantiaController;
 use App\Http\Controllers\Configuracao\Os\CategoriaOsController;
+use App\Http\Controllers\Configuracao\Os\StatusOsController;
 use App\Http\Controllers\Configuracao\User\PerfilController;
 use App\Http\Controllers\Configuracao\User\PermissionsController;
 use App\Http\Controllers\Configuracao\User\RoleController;
@@ -58,6 +59,7 @@ Route::group(['middleware'=> 'auth'], function() {
                 ->parameters(['garantia' => 'garantia']);
             Route::resource('/categoria', CategoriaOsController::class)
                 ->parameters(['categoria' => 'categoria']);
+            Route::resource('/status', StatusOsController::class);
         });
 
 

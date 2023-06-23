@@ -76,6 +76,36 @@ class DefaultsConfigPermissionsOs extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
+            [
+                'description' => 'Acesso a configuração de Status de Os',
+                'name' => 'config_os_status',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
+                'description' => 'Criar Status de Os',
+                'name' => 'config_os_status_create',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
+                'description' => 'Editar Status de Os',
+                'name' => 'config_os_status_edit',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
+                'description' => 'Visualizar Status de Os',
+                'name' => 'config_os_status_show',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
+                'description' => 'Excluir Status de Os',
+                'name' => 'config_os_status_destroy',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
         ];
 
 
