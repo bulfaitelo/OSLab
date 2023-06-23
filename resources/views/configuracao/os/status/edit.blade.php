@@ -18,14 +18,14 @@
 
           <div class="card-body">
           @include('adminlte::partials.form-alert')
-          {!! Form::open(['route' => ['configuracao.os.status.update', $status->id], 'method'=> 'put']) !!}
+          {!! html()->form('PUT', route('configuracao.os.status.update', $status->id))->open() !!}
             <div class="form-group">
               <label for="name">Status</label>
-              {!! Form::text('name', $status->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Status', 'required']) !!}
+              {!! html()->text('name', $status->name)->class('form-control')->placeholder('Status')->required() !!}
             </div>
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                {!! Form::text('descricao', $status->descricao, ['id' => 'descricao', 'class' => 'form-control', 'placeholder' => 'Descrição']) !!}
+                {!! html()->text('descricao', $status->descricao)->class('form-control')->placeholder('Descrição') !!}
             </div>
             <div class="form-group">
                 <label>Cor</label>
@@ -51,14 +51,14 @@
                 <div class="col-md-2">
                     <label for="chek_ativo">Enviar email?</label>
                     <div class="custom-control custom-switch">
-                        {!! Form::checkbox('ativar_email', true, $status->ativar_email, ['id'=> 'ativar_email', 'class' => 'custom-control-input']) !!}
+                        {!! html()->checkbox('ativar_email', $status->ativar_email)->class('custom-control-input') !!}
                         <label class="custom-control-label" for="ativar_email"> </label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label for="prazo_email">Prazo para envio</label>
                     <div class="input-group">
-                        {!! Form::text('prazo_email', $status->prazo_email, ['id' => 'prazo_email', 'class' => 'form-control', 'placeholder' => 'Prazo D + X']) !!}
+                        {!! html()->text('prazo_email', $status->prazo_email)->class('form-control')->placeholder('Prazo D + X') !!}
                         <div id="data_info" class="input-group-append" data-container="body" data-toggle="popover" data-placement="right" data-content="Define a data de envio, por exemplo: Caso seja o valor 10, após 10 dias da alteração do status será enviado um email.">
                             <span class="input-group-text"><i class="fas fa-exclamation-circle"></i></span>
                         </div>
@@ -71,13 +71,11 @@
                 <div class="col-md-2">
                     <label for="chek_ativo">Rastreio de Objetos</label>
                     <div class="custom-control custom-switch">
-                        {!! Form::checkbox('ativar_rastreio', true, $status->ativar_rastreio, ['id'=> 'ativar_rastreio', 'class' => 'custom-control-input']) !!}
+                        {!! html()->checkbox('ativar_rastreio', $status->ativar_rastreio)->class('custom-control-input') !!}
                         <label class="custom-control-label" for="ativar_rastreio"> </label>
                     </div>
                 </div>
-
             </div>
-
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
@@ -86,7 +84,7 @@
           </div>
         </div>
       <!-- /.card -->
-      {!! Form::close() !!}
+      {!! html()->form()->close() !!}
       </div>
 </div>
 @stop
