@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Centro de custo')
+@section('title', 'Criando Garantia')
 
 @section('content_header')
-    <h1>Criando Centro de custo</h1>
+    <h1>Criando Garantia</h1>
 @stop
 
 @section('content')
@@ -40,7 +40,7 @@
           </div>
             <div class="form-group">
                 <label for="garantia">Termo de Garantia</label>
-                {!! html()->textarea('garantia', $garantia->garantia)->class('form-control')->placeholder('Descrição do centro de custo') !!}
+                {!! html()->textarea('garantia', $garantia->garantia)->class('form-control')->placeholder('Descrição do Garantia') !!}
             </div>
           </div>
           {{-- Minimal with icon only --}}
