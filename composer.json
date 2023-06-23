@@ -15,6 +15,7 @@
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.4",
         "php-flasher/flasher-laravel": "^1.15",
+        "spatie/laravel-html": "^3.2",
         "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {

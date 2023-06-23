@@ -168,10 +168,14 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        // Laravel Permissions
+        // Spatie Laravel Permissions
         Spatie\Permission\PermissionServiceProvider::class,
+        // Spatie Laravel Html
+        Spatie\Html\HtmlServiceProvider::class,
+
         // Image Intervention.io
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
     ])->toArray(),
 
     /*
