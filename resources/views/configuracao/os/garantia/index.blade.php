@@ -66,7 +66,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          {!! Form::open(['route' => ['configuracao.os.garantia.destroy', $item->id], 'method' => 'delete']) !!}
+                          {!! html()->form('delete', route('configuracao.os.garantia.destroy', $item->id))->open() !!}
                             <input type="submit" class="btn btn-danger delete-setor" value="Excluir Garantia">
                           {!! html()->form()->close() !!}
 
