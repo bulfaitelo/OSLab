@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Status')
+@section('title', 'Visualizando Status')
 
 @section('content_header')
-    <h1>Criando Status</h1>
+    <h1>Visualizando Status</h1>
 @stop
 
 @section('content')
@@ -28,17 +28,8 @@
             <div class="form-group">
                 <label>Cor</label>
                 <br>
-                @foreach ($cor_array as $cor)
-                <div class="form-check  form-check-inline">
-                    <label for="{{$cor}}">
-                        <span class="right badge {{$cor}}">
-                            <input @if ($cor == $status->color)
-                                checked
-                            @endif type="radio" name="color" style='margin:4px' value="{{$cor}}" id="{{$cor}}">
-                        </span>
-                    </label>
-                </div>
-            @endforeach
+                <div class="{{$status->color}}" style="width: 70px;height: 32px;border-radius: 3px;" >
+
             </div>
             <div class="form-group">
                 <label for="garantia_id">Modelo de Email</label>
