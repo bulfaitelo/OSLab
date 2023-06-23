@@ -18,21 +18,21 @@
 
           <div class="card-body">
             @include('adminlte::partials.form-alert')
-          {!! Form::open(['route' => ['configuracao.financeiro.centro_custo.store']]) !!}
+            {!! html()->form('post', route('configuracao.financeiro.centro_custo.store'))->open() !!}
             <div class="form-group">
               <label for="name">Centro de Custo</label>
-              {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Centro de Custo']) !!}
+              {!! html()->text('name')->class('form-control')->placeholder('Centro de Custo') !!}
             </div>
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                {!! Form::text('descricao', '', ['id' => 'descricao', 'class' => 'form-control', 'placeholder' => 'Descrição do centro de custo']) !!}
+                {!! html()->text('descricao')->class('form-control')->placeholder('Descrição do centro de custo') !!}
             </div>
             <h4>Tipo de Centro de Custo:</h4>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
                         <div class="custom-control custom-switch custom-switch-on-success">
-                            {!! Form::checkbox('receita', true, '', ['id'=> 'receita', 'class'=>'custom-control-input ']) !!}
+                            {!! html()->checkbox('receita')->class('custom-control-input ') !!}
                             <label class="custom-control-label" for="receita">Receita</label>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <div class="custom-control custom-switch custom-switch-on-danger">
-                            {!! Form::checkbox('despesa', true, '0', ['id'=> 'despesa', 'class'=>'custom-control-input ']) !!}
+                            {!! html()->checkbox('despesa')->class('custom-control-input ') !!}
                             <label class="custom-control-label" for="despesa">Despesa</label>
                         </div>
                     </div>
