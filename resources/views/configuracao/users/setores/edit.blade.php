@@ -20,10 +20,10 @@
           @if(count($errors) > 0)
           @include('adminlte::partials.form-alert')
         @endif
-          {!! Form::open(['route' => ['configuracao.user.setor.update', $setor->id],'method' => 'put']) !!}
+        {!! html()->form('put', route('configuracao.user.setor.update', $setor->id))->open() !!}
             <div class="form-group">
               <label for="setor">Setor</label>
-              {!! Form::text('setor', $setor->name ?? '', ['id' => 'setor', 'class' => 'form-control', 'placeholder' => 'Setor']) !!}
+              {!! html()->text('setor', $setor->name)->class('form-control')->placeholder('Setor') !!}
             </div>
           </>
           {{-- Minimal with icon only --}}

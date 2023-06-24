@@ -33,7 +33,7 @@
             <tr>
               <td>{{ $item->id }}</td>
               <td>{{ $item->name }}</td>
-              <td>{{$item->user->count()}}</td>
+              <td>{{$item->users->count()}}</td>
               <td>
                 <div class="btn-group">
                   @can('config_user_setor_edit')
@@ -62,7 +62,7 @@
                         </div>
                         <div class="modal-footer justify-content-between">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          {!! Form::open(['route' => ['configuracao.user.setor.destroy', $item->id], 'method' => 'delete']) !!}
+                          {!! html()->form('delete', route('configuracao.user.setor.destroy', $item->id))->open() !!}
                             <input type="submit" class="btn btn-danger delete-setor" value="Delete setor">
                           {!! html()->form()->close() !!}
 

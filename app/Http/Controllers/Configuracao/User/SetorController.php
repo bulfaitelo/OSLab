@@ -117,11 +117,13 @@ class SetorController extends Controller
     public function destroy(Setor $setor)
     {
         if($setor->users->count() > 0){
-            return redirect()->route('configuracao.user.setor.index')->with('warning', 'Não é possivel excluir um setor que existam usuarios cadastrados nele!'); ;
+            return redirect()->route('configuracao.user.setor.index')
+            ->with('warning', 'Não é possível excluir um setor que existam usuários cadastrados nele!'); ;
         }
         else{
             if($setor->delete()) {
-                return redirect()->route('configuracao.user.setor.index')->with('success', 'Setor Excluido com Sucesso!'); ;
+                return redirect()->route('configuracao.user.setor.index')
+                ->with('success', 'Setor Excluído com Sucesso!'); ;
             }
         }
 
