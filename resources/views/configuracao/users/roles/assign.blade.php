@@ -15,7 +15,7 @@
       </div>
       <div class="card-body">
         @include('adminlte::partials.form-alert')
-        {!! Form::open(['route' => ['configuracao.roles.assign.update', $role->id],'method' => 'put']) !!}
+        {!! html()->form('put', route('configuracao.roles.assign.update', $role->id))->open() !!}
           <div class="row">
             <div class="col-sm-12">
               <!-- checkbox -->
@@ -25,7 +25,6 @@
                     <?php $active = "active"?>
                     <?php $selected = "true"?>
                     @foreach ($groups as $group_singular)
-
                       <li class="nav-item">
                         <a class="nav-link {{$active}}" id="xablau_{{@$group_singular->group_id}}-tab" data-toggle="pill" href="#xablau_{{@$group_singular->group_id}}" role="tab" aria-controls="xablau_{{@$group_singular->group_id}}-ref" aria-selected="{{$selected}}">{{$group_singular->name}}</a>
                       </li>
