@@ -64,13 +64,10 @@
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                {{-- <button type="submit" class="btn btn-danger">Excluir</button> --}}
+                                    {!! html()->form('delete', route('configuracao.permissions.destroy', $permission->id))->open() !!}
+                                        <input type="submit" class="btn btn-danger delete-permission" value="Delete permission">
+                                    {!! html()->form()->close() !!}
 
-                                {{-- <form method="POST" action="/admin/users/{{$permission->id}}"> --}}
-                                    {!! Form::open(['route' => ['configuracao.permissions.destroy', $permission->id], 'method' => 'delete']) !!}
-
-                                    <input type="submit" class="btn btn-danger delete-permission" value="Delete permission">
-                                </form>
 
                                 </div>
                             </div>

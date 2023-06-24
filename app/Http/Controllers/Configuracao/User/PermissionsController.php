@@ -31,7 +31,7 @@ class PermissionsController extends Controller
         $permissions = Permission::orderBy('name', 'ASC')
         ->paginate('30');
         $group = PermissionsGroup::class;
-        return view('configuracao.roles.permissions.index', compact('permissions', 'group'));
+        return view('configuracao.users.roles.permissions.index', compact('permissions', 'group'));
     }
 
     /**
@@ -42,7 +42,7 @@ class PermissionsController extends Controller
     public function create()
     {
         //
-        return view('configuracao.roles.permissions.create');
+        return view('configuracao.users.roles.permissions.create');
 
     }
 
@@ -64,7 +64,8 @@ class PermissionsController extends Controller
             'group_id' => $request->group
             ]);
         if($permission) {
-            return redirect()->route('configuracao.permissions.index')->with('success', 'Permissão cadastrada com Sucesso!'); ;
+            return redirect()->route('configuracao.permissions.index')
+            ->with('success', 'Permissão cadastrada com Sucesso!'); ;
         }
     }
 
@@ -88,7 +89,7 @@ class PermissionsController extends Controller
     public function edit($id)
     {
         $permission = Permission::findOrFail($id);
-        return view('configuracao.roles.permissions.edit', compact('permission'));
+        return view('configuracao.users.roles.permissions.edit', compact('permission'));
     }
 
     /**
@@ -109,7 +110,8 @@ class PermissionsController extends Controller
         $permission->description = $request->description;
         $permission->group_id = $request->group;
         if($permission->save()){
-            return redirect()->route('configuracao.permissions.edit', [$id])->with('success', 'Permissão atualizada!'); ;
+            return redirect()->route('configuracao.permissions.edit', [$id])
+            ->with('success', 'Permissão atualizada!'); ;
         }
 
     }
@@ -125,7 +127,8 @@ class PermissionsController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->delete();
         if($permission) {
-            return redirect()->route('configuracao.permissions.index')->with('success', 'Permissão Excluida com Sucesso!'); ;
+            return redirect()->route('configuracao.permissions.index')
+            ->with('success', 'Permissão Excluida com Sucesso!'); ;
         }
 
     }
