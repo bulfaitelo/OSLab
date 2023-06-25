@@ -83,7 +83,9 @@ class PerfilController extends Controller
         ]);
         $user = User::findOrFail(Auth::id());
         $user->name = $request->name;
-        $user->password = $request->password;
+        if ($request->password) {
+            $user->password = $request->password;
+        }
         if($user->save()){
             return redirect()->route('configuracao.user.perfil.index')->with('success', 'Dados atualizados');
         }

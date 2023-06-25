@@ -18,7 +18,6 @@
 
           <div class="card-body">
           @include('adminlte::partials.form-alert')
-          {{-- {!! Form::open(['route' => ['configuracao.os.status.store']]) !!} --}}
           {!! html()->form('POST', route('configuracao.os.status.store'))->open() !!}
             <div class="form-group">
               <label for="name">Status</label>
@@ -51,7 +50,6 @@
                     <label for="chek_ativo">Enviar email?</label>
                     <div class="custom-control custom-switch">
                         {!! html()->checkbox('ativar_email')->class('custom-control-input') !!}
-                        {{-- {!! Form::checkbox('ativar_email', true, '', ['id'=> 'ativar_email', 'class' => 'custom-control-input']) !!} --}}
                         <label class="custom-control-label" for="ativar_email"> </label>
                     </div>
                 </div>

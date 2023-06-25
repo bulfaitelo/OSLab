@@ -14,13 +14,12 @@
             <div class="card-header">
               <h3 class="card-title">Seus Dados</h3>
             </div>
-            {!! Form::open(['route' => ['configuracao.user.perfil.update'],'method' => 'put']) !!}
-
+            {!! html()->form('put', route('configuracao.user.perfil.update'))->open() !!}
             <div class="card-body">
                 @include('adminlte::partials.form-alert')
                 <div class="form-group">
                     <label for="nome">Nome</label>
-                    {!! Form::text('name', \Auth::user()->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Nome do usuário', 'required']) !!}
+                    {!! html()->text('name', \Auth::user()->name)->class('form-control')->placeholder('Nome do usuário')->required() !!}
                 </div>
                 <div class="form-group">
                     <label for="email">Setor</label>
@@ -34,13 +33,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="password">Senha </label>
-                            {!! Form::password('password', ['id' => 'password','class' => 'form-control', 'placeholder' => 'Senha',  ]) !!}
+                            {!! html()->password('password')->class('form-control')->placeholder('Senha') !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="password_confirmation">Repita a Senha</label>
-                            {!! Form::password('password_confirmation', ['id' => 'password_confirmation','class' => 'form-control', 'placeholder' => 'Repita a Senha',  ]) !!}
+                            {!! html()->password('password_confirmation')->class('form-control')->placeholder('Repita a Senha') !!}
                         </div>
                     </div>
                 </div>
