@@ -317,10 +317,17 @@ return [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
+            'label'       => 5,
             'label_color' => 'success',
         ],
         // ['header' => 'account_settings'],
+        [
+            'text'    => 'Clientes',
+            'icon'    => 'fa-solid fa-users',
+            'route'   => 'configuracao.users.index',
+            'active'  => ['configuracoes/users*'],
+            'can'     => 'config_users',
+        ],
         [
             // 'topnav' => true,
             'text'    => '',
