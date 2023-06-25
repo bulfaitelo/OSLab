@@ -17,7 +17,7 @@
       </div>
       <div class="card-body">
         @include('adminlte::partials.form-alert')
-        {!! Form::open(['route' => ['configuracao.users.permissions.update', $user->id],'method' => 'put']) !!}
+        {!! html()->form('put', route('configuracao.users.permissions.update', $user->id))->open() !!}
               <div class="card card-primary card-outline card-outline-tabs">
                 <div class="card-header p-0 border-bottom-0">
                   <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">

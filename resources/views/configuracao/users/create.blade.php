@@ -18,19 +18,19 @@
 
           <div class="card-body">
             @include('adminlte::partials.form-alert')
-          {!! Form::open(['route' => ['configuracao.users.store'],'files' => true]) !!}
+            {!! html()->form('post', route('configuracao.users.store'))->acceptsFiles()->open() !!}
             <div class="row">
                 <div class="col-md-1">
                     <label for="chek_ativo">Ativo</label>
                     <div class="custom-control custom-switch">
-                        {!! Form::checkbox('ativo', 'ativo', true, ['id'=> 'chek_ativo', 'class' => 'custom-control-input']) !!}
-                        <label class="custom-control-label" for="chek_ativo"></label>
+                        {!! html()->checkbox('ativo', true)->class('custom-control-input') !!}
+                        <label class="custom-control-label" for="ativo"></label>
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="form-group">
                         <label for="name">Usuário</label>
-                        {!! Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Nome do usuário', 'required']) !!}
+                        {!! html()->text('name')->class('form-control')->placeholder('Nome do usuário')->required() !!}
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -38,7 +38,7 @@
                         <label for="img_perfil">Foto do perfil</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                {!! Form::file('img_perfil', ['id' => 'img_perfil', 'class' => 'custom-file-input', 'placeholder' => 'Imagem de perfil', 'accept'=> '.jpg, .jpeg, .png' ]) !!}
+                                {!! html()->file('img_perfil')->class('custom-file-input')->accept('.jpg, .jpeg, .png') !!}
                             </div>
                             <div class="input-group-append">
                                 <label class="custom-file-label" for="img_perfil">Selecione uma foto</label>
@@ -50,25 +50,25 @@
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              {!! Form::email('email', '', ['id' => 'email','class' => 'form-control', 'placeholder' => 'Email', 'required' ]) !!}
+              {!! html()->email('email')->class('form-control')->placeholder('Email')->required() !!}
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="celular">Celular </label>
-                        {!! Form::text('celular', '', ['id' => 'celular','class' => 'form-control cel', 'placeholder' => 'Celular', ]) !!}
+                        {!! html()->text('celular')->class('form-control cel')->placeholder('Celular') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="telefone">Telefone </label>
-                        {!! Form::text('telefone', '', ['id' => 'telefone','class' => 'form-control tel', 'placeholder' => 'Telefone',  ]) !!}
+                        {!! html()->text('telefone')->class('form-control tel')->placeholder('Telefone') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="setor_id">Setor</label>
-                        {!! Form::select('setor_id', \App\Models\Configuracao\User\Setor::orderBy('name')->pluck('name', 'id'), '', ['id' => 'setor_id','class' => 'form-control', 'placeholder'=> 'Selecione' ]) !!}
+                        {!! html()->select('setor_id', \App\Models\Configuracao\User\Setor::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
                     </div>
                 </div>
             </div>
@@ -76,13 +76,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="password">Senha </label>
-                        {!! Form::password('password', ['id' => 'password','class' => 'form-control', 'placeholder' => 'Senha', 'required' ]) !!}
+                        {!! html()->password('password')->class('form-control')->placeholder('Senha')->required()  !!}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="password_confirmation">Repita a Senha</label>
-                        {!! Form::password('password_confirmation', ['id' => 'password_confirmation','class' => 'form-control', 'placeholder' => 'Repita a Senha', 'required' ]) !!}
+                        {!! html()->password('password_confirmation')->class('form-control')->placeholder('Repita a Senha')->required()  !!}
                     </div>
                 </div>
             </div>
@@ -91,19 +91,19 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="cep">Cep</label>
-                        {!! Form::text('cep', '', ['id' => 'cep','class' => 'form-control cep', 'placeholder' => 'CEP' ]) !!}
+                        {!! html()->text('cep')->class('form-control cep')->placeholder('CEP') !!}
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="Logradouro">logradouro</label>
-                        {!! Form::text('logradouro', '', ['id' => 'logradouro','class' => 'form-control', 'placeholder' => 'Logradouro' ]) !!}
+                        <label for="Logradouro">Logradouro</label>
+                        {!! html()->text('logradouro')->class('form-control')->placeholder('Logradouro') !!}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="numero">Número</label>
-                        {!! Form::text('numero', '', ['id' => 'numero','class' => 'form-control', 'placeholder' => 'Número' ]) !!}
+                        {!! html()->text('numero')->class('form-control')->placeholder('Número') !!}
                     </div>
                 </div>
             </div>
@@ -111,19 +111,19 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="bairro">Bairro</label>
-                        {!! Form::text('bairro', '', ['id' => 'bairro','class' => 'form-control', 'placeholder' => 'Bairro' ]) !!}
+                        {!! html()->text('bairro')->class('form-control')->placeholder('Bairro') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cidade">Cidade</label>
-                        {!! Form::text('cidade', '', ['id' => 'cidade','class' => 'form-control', 'placeholder' => 'Cidade' ]) !!}
+                        {!! html()->text('cidade')->class('form-control')->placeholder('Cidade') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado">Estado</label>
-                        {!! Form::text('estado', '', ['id' => 'estado','class' => 'form-control', 'placeholder' => 'Estado' ]) !!}
+                        {!! html()->text('estado')->class('form-control')->placeholder('Estado') !!}
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="complemento">Complemento</label>
-                        {!! Form::text('complemento', '', ['id' => 'complemento','class' => 'form-control', 'placeholder' => 'Complemento' ]) !!}
+                        {!! html()->text('complemento')->class('form-control')->placeholder('Complemento') !!}
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="expire_at">Validade do acesso</label>
-                            {!! Form::date('expire_at', '', ['id' => 'estado','class' => 'form-control', 'placeholder' => 'Validade do acesso, define a data limite de uso do sistema', 'title' =>  'Validade do acesso, define a data limite de uso do sistema'  ]) !!}
+                            {!! html()->date('expire_at')->class('form-control')->placeholder('Validade do acesso, define a data limite de uso do sistema') !!}
                         </div>
                     </div>
                 </div>

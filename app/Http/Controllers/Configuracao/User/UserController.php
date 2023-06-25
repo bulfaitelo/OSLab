@@ -93,6 +93,8 @@ class UserController extends Controller
         $user->estado = $request->estado;
         $user->complemento = $request->complemento;
         $user->expire_at = $request->expire_at;
+        $user->syncRoles($request->role);
+
         if ($request->img_perfil) {
             $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
                 $constraint->aspectRatio();
@@ -116,9 +118,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $user->hasRole = $user->hasAnyRole(Role::all());
+        // dd($user->roles);
+        return view('configuracao.users.show', compact('user'));
     }
 
     /**
@@ -204,9 +208,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+            return redirect()->route('configuracao.users.index')
+                ->with('success', 'Usuário excluído com sucesso.');
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
 
