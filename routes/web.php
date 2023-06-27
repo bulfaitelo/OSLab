@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Os\GarantiaController;
 use App\Http\Controllers\Configuracao\Os\CategoriaOsController;
@@ -33,6 +34,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware'=> 'auth'], function() {
+    Route::resource('/cliente', ClienteController::class);
+
     // Agrupamento de rotas de Configuração
     Route::name('configuracao.')->prefix('configuracoes')->group(function (){
         Route::resource('/users', UserController::class);
@@ -67,3 +70,4 @@ Route::group(['middleware'=> 'auth'], function() {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
