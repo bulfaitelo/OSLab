@@ -324,8 +324,8 @@ return [
         [
             'text'    => 'Clientes',
             'icon'    => 'fa-solid fa-users',
-            'route'   => 'configuracao.users.index',
-            'active'  => ['configuracoes/users*'],
+            'route'   => 'cliente.index',
+            'active'  => ['cliente*'],
             'can'     => 'config_users',
         ],
         [
