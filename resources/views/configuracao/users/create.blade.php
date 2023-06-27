@@ -176,7 +176,6 @@
 
 @section('js')
     {{-- MASCARA  --}}
-    <script src="/src/js/jquery.mask.js"></script>
     <script>
         $(document).ready(function(){
             $('.cep').mask('00000-000');

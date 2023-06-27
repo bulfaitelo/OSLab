@@ -45,34 +45,4 @@
 @stop
 
 @section('js')
-    {{-- <script> console.log('Hi!'); </script> --}}
-    <script>
-        @if(session('success'))
-          $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Cadastro realizado com Sucesso!',
-                    subtitle: '',
-                    autohide: true,
-                    delay: 2000,
-                    body: '{{Session::get("success")}}'
-          })
-        @endif
-        @if(count($errors) > 0)
-          $(document).Toasts('create', {
-                  class: 'bg-danger',
-                  title: 'Ocorreu um erro',
-                  subtitle: '',
-                  autohide: true,
-                  delay: 2000,
-                  body: 'Por favor verifique o formulário'
-          })
-        @endif
-    </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-      <script>
-        $(document).ready(function(){
-            $('.code').mask('000000');
-        });
-      </script>
-
 @stop
