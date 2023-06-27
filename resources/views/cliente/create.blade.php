@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Usários')
+@section('title', 'Criando Clientes')
 
 @section('content_header')
-    <h1>Criando Usários</h1>
+    <h1>Criando Clientes</h1>
 @stop
 
 @section('content')
@@ -18,41 +18,29 @@
                       <button type="button"  class="btn  btn-default"> Voltar</button>
                   </a>
             </div>
-
           <!-- /.card-header -->
           <!-- form start -->
 
           <div class="card-body">
             @include('adminlte::partials.form-alert')
-            {!! html()->form('post', route('configuracao.users.store'))->acceptsFiles()->open() !!}
+            {!! html()->form('post', route('cliente.store'))->acceptsFiles()->open() !!}
+
             <div class="row">
-                <div class="col-md-1">
-                    <label for="chek_ativo">Ativo</label>
-                    <div class="custom-control custom-switch">
-                        {!! html()->checkbox('ativo', true)->class('custom-control-input') !!}
-                        <label class="custom-control-label" for="ativo"></label>
+                <div class="col-md-4">
+                    <label for="name">CPF / CNPJ</label>
+                    <div class="input-group ">
+                        {!! html()->text('registro')->class('form-control cpf_cnpj')->placeholder('Nome do usuário') !!}
+                        <span class="input-group-append">
+                            <button type="button" id="busca_cnpj" class="btn btn-info">Buscar CNPJ</button>
+                        </span>
                     </div>
                 </div>
                 <div class="col-md-7">
                     <div class="form-group">
-                        <label for="name">Usuário</label>
+                        <label for="name">Cliente</label>
                         {!! html()->text('name')->class('form-control')->placeholder('Nome do usuário')->required() !!}
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="img_perfil">Foto do perfil</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                {!! html()->file('img_perfil')->class('custom-file-input')->accept('.jpg, .jpeg, .png') !!}
-                            </div>
-                            <div class="input-group-append">
-                                <label class="custom-file-label" for="img_perfil">Selecione uma foto</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
             <div class="form-group">
               <label for="email">Email</label>
@@ -184,9 +172,39 @@
     {{-- MASCARA  --}}
     <script>
         $(document).ready(function(){
+            var options = {
+                onKeyPress: function (cpf, ev, el, op) {
+                    var masks = ['000.000.000-000', '00.000.000/0000-00'];
+                    $('.cpf_cnpj').mask((cpf.length > 14) ? masks[1] : masks[0], op);
+                }
+            }
             $('.cep').mask('00000-000');
             $('.cel').mask('(00) 0000#-0000');
             $('.tel').mask('(00) 0000-0000');
+            $('.cpf_cnpj').length > 11 ? $('').mask('00.000.000/0000-00', options) : $('.cpf_cnpj').mask('000.000.000-00#', options);
+        });
+    </script>
+    {{-- Busca CNPJ --}}
+    <script>
+        // https://www.receitaws.com.br/v1/cnpj/
+        $(document).ready(function() {
+          $('#busca_cnpj').click(function() {
+            var cnpj = $(this).val().replace(/\D/g, '');
+            if (cep.length == 8) {
+              $.getJSON('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
+                if (!("erro" in data)) {
+                  $('#logradouro').val(data.logradouro);
+                  $('#bairro').val(data.bairro);
+                  $('#cidade').val(data.localidade);
+                  $('#estado').val(data.uf);
+                  $('#cep').removeClass('is-valid').removeClass('is-invalid').addClass('is-valid');
+                  $('#numero').focus();
+                } else {
+                    $('#cep').removeClass('is-valid').removeClass('is-invalid').addClass('is-invalid');
+                }
+              });
+            }
+          });
         });
     </script>
     {{-- BUSCA CEP --}}
