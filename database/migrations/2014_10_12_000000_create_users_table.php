@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->boolean('ativo')->default(0);
             $table->string('name');
             $table->string('email')->unique();
             $table->unsignedBigInteger('setor_id')->nullable();
@@ -29,7 +30,6 @@ return new class extends Migration
             $table->string('estado', 2)->nullable();
             $table->string('telefone')->nullable();
             $table->string('celular')->nullable();
-            $table->boolean('ativo')->default(0);
             $table->string('img_url')->nullable();
             $table->date('expire_at')->nullable();
             $table->rememberToken();
