@@ -10,19 +10,24 @@
 <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <div class="row"></div>
           <a href="{{ url()->previous() }}">
-              <button type="button"  class="btn  btn-default"> Voltar</button>
+                <button type="button"  class="btn  btn-default">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    Voltar
+                </button>
           </a>
-          @can('config_users_create')
+          @can('cliente_create')
             <a href="{{ route('cliente.create') }}">
-                <button type="button"  class="btn  btn-primary">Criar Cliente</button>
+                <button type="button"  class="btn  btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    Criar Cliente
+                </button>
             </a>
           @endcan
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        <table class="table table-bordered">
+        <table class="table table-sm">
           <thead>
             <tr>
               <th style="width: 10px">#</th>
@@ -42,14 +47,14 @@
                 <td>{{ $item->setor->name ?? ''}}</td>
                 <td>{{ $item->expire_at }}</td>
                 <td>
-                    <div class="btn-group">
-                        @can('config_users_edit')
+                    <div class="btn-group btn-group-sm">
+                        @can('cliente_edit')
                             <a href="{{ route('cliente.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                         @endcan
-                        @can('config_users_show')
+                        @can('cliente_show')
                             <a href="{{ route('cliente.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                         @endcan
-                        @can('config_users_destroy')
+                        @can('cliente_destroy')
                         <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
                     </div>
                         <div class="modal fade" id="modal-excluir_{{ $item->id }}">
@@ -89,10 +94,8 @@
 
       <!-- /.card-body -->
       <div class="card-footer clearfix">
-
           {{-- {{$clientes->appends(['busca' => $busca])->links() }} --}}
-          {{-- {{$items->links() }}	 --}}
-
+          {{ $clientes->links() }}
       </div>
     </div>
 </div>

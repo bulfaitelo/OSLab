@@ -31,6 +31,9 @@ class DefaultsConfigPermissionsGroup extends Seeder
             [   'id' => 5,
                 'name' => 'Financeiro',
             ],
+            [   'id' => 6,
+                'name' => 'Clientes',
+            ],
 
         ];
         foreach ($insert as $key => $value) {

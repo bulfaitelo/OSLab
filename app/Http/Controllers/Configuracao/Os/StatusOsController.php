@@ -123,7 +123,6 @@ class StatusOsController extends Controller
      */
     public function destroy(StatusOs $status)
     {
-
         try {
             $status->delete();
             return redirect()->route('configuracao.os.status.index')

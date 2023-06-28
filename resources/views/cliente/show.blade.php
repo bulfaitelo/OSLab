@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Clientes')
+@section('title', 'Editando Clientes')
 
 @section('content_header')
-    <h1>Criando Clientes</h1>
+    <h1>Editando Clientes</h1>
 @stop
 
 @section('content')
@@ -24,24 +24,18 @@
           <!-- form start -->
 
           <div class="card-body">
-            @include('adminlte::partials.form-alert')
-            {!! html()->form('post', route('cliente.store'))->acceptsFiles()->open() !!}
-
             <div class="row">
                 <div class="col-md-4">
                     <label for="name">CPF / CNPJ</label>
                     <div class="input-group ">
-                        {!! html()->text('registro')->class('form-control cpf_cnpj')->placeholder('Nome do usuário') !!}
-                        <span class="input-group-append">
-                            <button disabled type="button" id="busca_cnpj" class="btn btn-info">Buscar CNPJ</button>
-                        </span>
+                        {!! html()->text('registro', $cliente->registro)->class('form-control cpf_cnpj')->placeholder('Nome do usuário')->disabled() !!}
                     </div>
                     <i class="text-danger" id="msg_cpnj_error"></i>
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="name">Cliente</label>
-                        {!! html()->text('name')->class('form-control')->placeholder('Nome do Cliente')->required() !!}
+                        {!! html()->text('name', $cliente->name)->class('form-control')->placeholder('Nome do Cliente')->disabled() !!}
                     </div>
                 </div>
             </div>
@@ -49,33 +43,19 @@
                 <div class="col-md-6">
                     <div class="form-group">
                       <label for="email">Email</label>
-                      {!! html()->email('email')->class('form-control')->placeholder('Email') !!}
+                      {!! html()->email('email', $cliente->email)->class('form-control')->placeholder('Email')->disabled() !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="celular">Celular </label>
-                        {!! html()->text('celular')->class('form-control cel')->placeholder('Celular') !!}
+                        {!! html()->text('celular', $cliente->celular)->class('form-control cel')->placeholder('Celular')->disabled() !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="telefone">Telefone </label>
-                        {!! html()->text('telefone')->class('form-control tel')->placeholder('Telefone') !!}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="password">Senha </label>
-                        {!! html()->password('password')->class('form-control')->placeholder('Senha')  !!}
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="password_confirmation">Repita a Senha</label>
-                        {!! html()->password('password_confirmation')->class('form-control')->placeholder('Repita a Senha')  !!}
+                        {!! html()->text('telefone', $cliente->telefone)->class('form-control tel')->placeholder('Telefone')->disabled() !!}
                     </div>
                 </div>
             </div>
@@ -84,19 +64,19 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="cep">Cep</label>
-                        {!! html()->text('cep')->class('form-control cep')->placeholder('CEP') !!}
+                        {!! html()->text('cep', $cliente->cep)->class('form-control cep')->placeholder('CEP')->disabled() !!}
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="Logradouro">Logradouro</label>
-                        {!! html()->text('logradouro')->class('form-control')->placeholder('Logradouro') !!}
+                        {!! html()->text('logradouro', $cliente->logradouro)->class('form-control')->placeholder('Logradouro')->disabled() !!}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="numero">Número</label>
-                        {!! html()->text('numero')->class('form-control')->placeholder('Número') !!}
+                        {!! html()->text('numero', $cliente->numero)->class('form-control')->placeholder('Número')->disabled() !!}
                     </div>
                 </div>
             </div>
@@ -104,19 +84,19 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="bairro">Bairro</label>
-                        {!! html()->text('bairro')->class('form-control')->placeholder('Bairro') !!}
+                        {!! html()->text('bairro', $cliente->bairro)->class('form-control')->placeholder('Bairro')->disabled() !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cidade">Cidade</label>
-                        {!! html()->text('cidade')->class('form-control')->placeholder('Cidade') !!}
+                        {!! html()->text('cidade', $cliente->cidade)->class('form-control')->placeholder('Cidade')->disabled() !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="estado">Estado</label>
-                        {!! html()->text('estado')->class('form-control')->placeholder('Estado') !!}
+                        {!! html()->text('estado', $cliente->estado)->class('form-control')->placeholder('Estado')->disabled() !!}
                     </div>
                 </div>
             </div>
@@ -124,19 +104,16 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="complemento">Complemento</label>
-                        {!! html()->text('complemento')->class('form-control')->placeholder('Complemento') !!}
+                        {!! html()->text('complemento', $cliente->complemento)->class('form-control')->placeholder('Complemento')->disabled() !!}
                     </div>
                 </div>
             </div>
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>
         </div>
       <!-- /.card -->
-      {!! html()->form()->close() !!}
+
       </div>
 </div>
 @stop
@@ -147,31 +124,24 @@
 
 @section('js')
     {{-- MASCARA  --}}
-    <script>
+    {{-- <script>
         $(document).ready(function(){
-            // var options = {
-            //     onKeyPress: function (cpf, ev, el, op) {
-            //         var masks = ['000.000.000-000', '00.000.000/0000-00'];
-            //         $('.cpf_cnpj').mask((cpf.length > 14) ? masks[1] : masks[0], op);
-            //     }
-            // }
             $('.cep').mask('00000-000');
             $('.cel').mask('(00) 0000#-0000');
             $('.tel').mask('(00) 0000-0000');
-            // $('.cpf_cnpj').length > 11 ? $('').mask('00.000.000/0000-00', options) : $('.cpf_cnpj').mask('000.000.000-00#', options);
             var CpfCnpjMaskBehavior = function (val) {
 			return val.replace(/\D/g, '').length <= 11 ? '000.000.000-009' : '00.000.000/0000-00';
                     },
                 cpfCnpjpOptions = {
                     onKeyPress: function(val, e, field, options) {
-                    field.mask(CpfCnpjMaskBehavior.apply({}, arguments), options);
-                }
+                        field.mask(CpfCnpjMaskBehavior.apply({}, arguments), options);
+                    }
                 };
-
             $(function() {
                 $(':input[name=registro]').mask(CpfCnpjMaskBehavior, cpfCnpjpOptions);
             })
+
+
         });
-    </script>
-    <script src="{{ asset('src/js/cnpj.js') }}"></script>
+    </script>     --}}
 @stop

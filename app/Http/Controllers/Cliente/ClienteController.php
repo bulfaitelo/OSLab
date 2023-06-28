@@ -3,11 +3,22 @@
 namespace App\Http\Controllers\Cliente;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Cliente\StoreUpdateClienteRequest;
+use App\Http\Requests\Cliente\StoreClienteRequest;
+use App\Http\Requests\Cliente\UpdateClienteRequest;
 use App\Models\Cliente\Cliente;
 
 class ClienteController extends Controller
 {
+    function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:cliente', ['only'=> 'index']);
+        $this->middleware('permission:cliente_create', ['only'=> ['create', 'store']]);
+        $this->middleware('permission:cliente_show', ['only'=> 'show']);
+        $this->middleware('permission:cliente_edit', ['only'=> ['edit', 'update']]);
+        $this->middleware('permission:cliente_destroy', ['only'=> 'destroy']);
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -28,9 +39,32 @@ class ClienteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUpdateClienteRequest $request)
+    public function store(StoreClienteRequest $request)
     {
-        //
+        try {
+            $cliente = new Cliente();
+            $cliente->registro = $request->registro;
+            if(strlen($request->registro) > 14 ){ // definido que é um CNPJ
+                $cliente->pessoa_juridica = 1;
+            }
+            $cliente->name = $request->name;
+            $cliente->email = $request->email;
+            $cliente->celular = $request->celular;
+            $cliente->telefone = $request->telefone;
+            $cliente->password = $request->password;
+            $cliente->cep = $request->cep;
+            $cliente->logradouro = $request->logradouro;
+            $cliente->numero = $request->numero;
+            $cliente->bairro = $request->bairro;
+            $cliente->cidade = $request->cidade;
+            $cliente->estado = $request->estado;
+            $cliente->complemento = $request->complemento;
+            $cliente->save();
+            return redirect()->route('cliente.index')
+            ->with('success', 'Cliente cadastrado com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -38,7 +72,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return view('cliente.show', compact('cliente'));
     }
 
     /**
@@ -46,15 +80,37 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view('cliente.edit', compact('cliente'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreUpdateClienteRequest $request, Cliente $cliente)
+    public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
-        //
+        try {
+            $cliente->registro = $request->registro;
+            if(strlen($request->registro) > 14 ){ // definido que é um CNPJ
+                $cliente->pessoa_juridica = 1;
+            }
+            $cliente->name = $request->name;
+            $cliente->email = $request->email;
+            $cliente->celular = $request->celular;
+            $cliente->telefone = $request->telefone;
+            $cliente->password = $request->password;
+            $cliente->cep = $request->cep;
+            $cliente->logradouro = $request->logradouro;
+            $cliente->numero = $request->numero;
+            $cliente->bairro = $request->bairro;
+            $cliente->cidade = $request->cidade;
+            $cliente->estado = $request->estado;
+            $cliente->complemento = $request->complemento;
+            $cliente->save();
+            return redirect()->route('cliente.index')
+            ->with('success', 'Cliente atualizado com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -62,6 +118,13 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        try {
+            $cliente->delete();
+            return redirect()->route('cliente.index')
+                ->with('success', 'Cliente excluído com sucesso.');
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
