@@ -326,7 +326,7 @@ return [
             'icon'    => 'fa-solid fa-users',
             'route'   => 'cliente.index',
             'active'  => ['cliente*'],
-            'can'     => 'config_users',
+            'can'     => 'cliente',
         ],
         [
             // 'topnav' => true,
