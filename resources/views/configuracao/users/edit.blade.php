@@ -174,7 +174,10 @@
                             <label for="departamento">Personalização de permissões</label>
                             <br>
                             <a href="{{ route('configuracao.users.permissions_edit', $user->id) }}">
-                            <button type="button"  class="btn  btn-success">Configurar Permissões</button>
+                            <button type="button"  class="btn  btn-success">
+                                <i class="fas fa-layer-group"></i>
+                                Configurar Permissões
+                            </button>
                             </a>
                         </div>
                     </div>
@@ -194,7 +197,10 @@
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i>
+                Salvar
+            </button>
           </div>
         </div>
       <!-- /.card -->

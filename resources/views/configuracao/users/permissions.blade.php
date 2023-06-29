@@ -79,7 +79,10 @@
 
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i>
+                Salvar
+            </button>
           </div>
         {!! html()->form()->close() !!}
       <!-- /.card-body -->
