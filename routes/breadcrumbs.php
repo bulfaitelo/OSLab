@@ -129,7 +129,7 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Categoria', route('configuracao.os.categoria.edit', $item));
     });
 
-// Fim Condiguração OS
+// Fim Configuração OS
 
 // Configuração FINANCEIRO
     // Centro de Custo
@@ -250,3 +250,18 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->parent('configuracao.roles.index');
         $trail->push('Permissões: '. $item->name, route('configuracao.users.permissions_edit', $item));
     });
+
+    // Perfil
+    Breadcrumbs::for('configuracao.user.perfil.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Perfil', route('configuracao.user.perfil.index'));
+    });
+
+    // Perfil > [Usuário Name] > Editar perfil
+    Breadcrumbs::for('configuracao.user.perfil.edit', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Editar: '.Auth::user()->name , route('configuracao.user.perfil.edit'));
+    });
+
+// FIM Configuração Usuários
+
