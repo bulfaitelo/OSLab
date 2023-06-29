@@ -14,10 +14,10 @@
         <div class="content-header">
             <div class="{{ config('adminlte.classes_content_header') ?: $def_container_class }}">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         @yield('content_header')
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         {{ Breadcrumbs::render() }}
                     </div>
                 </div>
