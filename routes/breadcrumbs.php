@@ -10,8 +10,7 @@ use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
-
-
+use App\Models\User;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
@@ -214,8 +213,40 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Perfis', route('configuracao.roles.edit', $item));
     });
 
-    // Perfis > [Perfis Name] > Editar Perfis
+    // Perfis > [Perfis Name] > Permissões
     Breadcrumbs::for('configuracao.roles.assign', function (BreadcrumbTrail $trail, Role $item) {
         $trail->parent('configuracao.roles.index');
         $trail->push('Permissões: '. $item->name, route('configuracao.roles.assign', $item));
+    });
+
+    // Usuários
+    Breadcrumbs::for('configuracao.users.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Usuários');
+        $trail->push('Usuário', route('configuracao.users.index'));
+    });
+
+    // Usuário > Novo Usuário
+    Breadcrumbs::for('configuracao.users.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.users.index');
+        $trail->push('Novo Usuário', route('configuracao.users.create'));
+    });
+
+    // Usuário > [Visualização de Usuário]
+    Breadcrumbs::for('configuracao.users.show', function (BreadcrumbTrail $trail, User $item) {
+        $trail->parent('configuracao.users.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.users.show', $item));
+    });
+
+    // Usuário > [Usuário Name] > Editar Usuário
+    Breadcrumbs::for('configuracao.users.edit', function (BreadcrumbTrail $trail, User $item) {
+        $trail->parent('configuracao.users.index');
+        $trail->push('Editar Usuário', route('configuracao.users.edit', $item));
+    });
+
+    // Perfis > [Perfis Name] > Permissões
+    Breadcrumbs::for('configuracao.users.permissions_edit', function (BreadcrumbTrail $trail, User $item) {
+        $trail->parent('configuracao.roles.index');
+        $trail->push('Permissões: '. $item->name, route('configuracao.users.permissions_edit', $item));
     });

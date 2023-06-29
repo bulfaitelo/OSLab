@@ -11,12 +11,12 @@
   <div class="col-md-10">
     <div class="card card-default">
       <div class="card-header">
-          <a href="{{ url()->previous() }}">
-            <button type="button"  class="btn  btn-default">
-                <i class="fa-solid fa-chevron-left"></i>
-                Voltar
-            </button>
-        </a>
+            <a href="{{ url()->previous() }}">
+                <button type="button"  class="btn  btn-default">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    Voltar
+                </button>
+            </a>
     </div>
 
     <div class="card-body">

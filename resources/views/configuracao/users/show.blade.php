@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editando Usários')
+@section('title', 'Visualizando Usuário')
 
 @section('content_header')
-    <h1>Editando Usários</h1>
+    <h1>Visualizando Usuário</h1>
 @stop
 
 @section('content')
@@ -12,6 +12,14 @@
     <div class="col-md-11 ">
         <!-- general form elements -->
         <div class="card">
+            <div class="card-header">
+                <a href="{{ url()->previous() }}">
+                    <button type="button"  class="btn  btn-default">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        Voltar
+                    </button>
+                </a>
+            </div>
 
           <!-- /.card-header -->
           <!-- form start -->
@@ -169,33 +177,4 @@
 @stop
 
 @section('js')
-    <script>
-        $(document).ready(function(){
-            $('.cep').mask('00000-000');
-            $('.cel').mask('(00) 0000#-0000');
-            $('.tel').mask('(00) 0000-0000');
-        });
-    </script>
-    {{-- BUSCA CEP --}}
-    <script>
-        $(document).ready(function() {
-          $('#cep').blur(function() {
-            var cep = $(this).val().replace(/\D/g, '');
-            if (cep.length == 8) {
-              $.getJSON('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
-                if (!("erro" in data)) {
-                  $('#logradouro').val(data.logradouro);
-                  $('#bairro').val(data.bairro);
-                  $('#cidade').val(data.localidade);
-                  $('#estado').val(data.uf);
-                  $('#cep').removeClass('is-valid').removeClass('is-invalid').addClass('is-valid');
-                  $('#numero').focus();
-                } else {
-                    $('#cep').removeClass('is-valid').removeClass('is-invalid').addClass('is-invalid');
-                }
-              });
-            }
-          });
-        });
-      </script>
 @stop

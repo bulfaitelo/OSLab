@@ -12,11 +12,17 @@
       <div class="card-header">
         <div class="row"></div>
           <a href="{{ route('configuracao.roles.index') }}">
-              <button type="button"  class="btn  btn-default"> Voltar</button>
+                <button type="button"  class="btn  btn-default">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    Voltar
+                </button>
           </a>
           @can('config_users_create')
             <a href="{{ route('configuracao.users.create') }}">
-                <button type="button"  class="btn  btn-primary">Criar Usuário</button>
+                <button type="button"  class="btn  btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    Criar Usuário
+                </button>
             </a>
           @endcan
       </div>

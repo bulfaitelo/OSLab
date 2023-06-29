@@ -12,13 +12,25 @@
 
     <div class="card card-default">
       <div class="card-header">
-        <h3 class="card-title">Selecione as permissões </h3>
-
+        <div class="row">
+            <div class="col-sm-2">
+                <a href="{{ url()->previous() }}">
+                    <button type="button"  class="btn  btn-default">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        Voltar
+                    </button>
+                </a>
+            </div>
+            <div class="col-sm-9">
+                <h3 class="card-title">Selecione as permissões </h3>
+            </div>
+        </div>
       </div>
       <div class="card-body">
-        @include('adminlte::partials.form-alert')
-        {!! html()->form('put', route('configuracao.users.permissions.update', $user->id))->open() !!}
-              <div class="card card-primary card-outline card-outline-tabs">
+          @include('adminlte::partials.form-alert')
+          {!! html()->form('put', route('configuracao.users.permissions.update', $user->id))->open() !!}
+          <div class="card card-primary card-outline card-outline-tabs">
+
                 <div class="card-header p-0 border-bottom-0">
                   <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                     <?php $active = "active"?>

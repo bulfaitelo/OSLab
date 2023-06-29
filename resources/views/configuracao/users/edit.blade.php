@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editando Usários')
+@section('title', 'Editando Usuário')
 
 @section('content_header')
-    <h1>Editando Usários</h1>
+    <h1>Editando Usuário</h1>
 @stop
 
 @section('content')
@@ -12,6 +12,14 @@
     <div class="col-md-11 ">
         <!-- general form elements -->
         <div class="card">
+            <div class="card-header">
+                <a href="{{ url()->previous() }}">
+                    <button type="button"  class="btn  btn-default">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        Voltar
+                    </button>
+                </a>
+            </div>
 
           <!-- /.card-header -->
           <!-- form start -->

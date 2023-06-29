@@ -227,10 +227,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function permissions_edit($id)
+    public function permissions_edit(User $user)
     {
         // $role = Role::findOrFail($id);
-        $user = User::findOrFail($id);
         $group = PermissionsGroup::class;
         // Perfil padrão do usuário.
         $roles = Role::find($user->roles->first()->id);
@@ -251,13 +250,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function permissions_update(Request $request, $id)
+    public function permissions_update(Request $request, User $user)
     {
 
-        $user = User::findOrFail($id);
-
         $user->syncPermissions($request->assign_id);
-        return redirect()->route('configuracao.users.permissions_edit', [$id])->with('success', 'Permissões Atualizadas!'); ;
+        return redirect()->route('configuracao.users.permissions_edit', [$user->id])->with('success', 'Permissões Atualizadas!'); ;
 
 
     }
