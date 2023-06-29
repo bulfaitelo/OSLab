@@ -5,6 +5,7 @@
 // this import. This is nice for IDE syntax and refactoring.
 
 use App\Models\Cliente\Cliente;
+use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
@@ -73,5 +74,31 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->parent('configuracao.os.status.index');
         $trail->push('Editar Status de OS', route('configuracao.os.status.edit', $item));
     });
+
+        // Termo de Garantia
+        Breadcrumbs::for('configuracao.os.garantia.index', function (BreadcrumbTrail $trail) {
+            $trail->parent('home');
+            $trail->push('Configurações');
+            $trail->push('OS');
+            $trail->push('Termo de Garantia', route('configuracao.os.garantia.index'));
+        });
+
+        // Termo de Garantia > Novo Termo de Garantia
+        Breadcrumbs::for('configuracao.os.garantia.create', function (BreadcrumbTrail $trail) {
+            $trail->parent('configuracao.os.garantia.index');
+            $trail->push('Novo Termo de Garantia', route('configuracao.os.garantia.create'));
+        });
+
+        // Termo de Garantia > [Visualização de Termo de Garantia]
+        Breadcrumbs::for('configuracao.os.garantia.show', function (BreadcrumbTrail $trail, Garantia $item) {
+            $trail->parent('configuracao.os.garantia.index');
+            $trail->push($item->name, route('configuracao.os.garantia.show', $item));
+        });
+
+        // Termo de Garantia > [Termo de Garantia Name] > Editar Termo de Garantia
+        Breadcrumbs::for('configuracao.os.garantia.edit', function (BreadcrumbTrail $trail, Garantia $item) {
+            $trail->parent('configuracao.os.garantia.index');
+            $trail->push('Editar Termo de Garantia', route('configuracao.os.garantia.edit', $item));
+        });
 
 // Fim OS
