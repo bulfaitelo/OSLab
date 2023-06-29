@@ -9,6 +9,7 @@ use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
+use App\Models\Configuracao\User\Setor;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
@@ -158,3 +159,31 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Centro de Custo', route('configuracao.financeiro.centro_custo.edit', $item));
     });
 // Fim Configuração FINANCEIRO
+
+
+// Configuração Usuários
+    // Setor
+    Breadcrumbs::for('configuracao.user.setor.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Usuários');
+        $trail->push('Setor', route('configuracao.user.setor.index'));
+    });
+
+    // Setor > Novo Setor
+    Breadcrumbs::for('configuracao.user.setor.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.user.setor.index');
+        $trail->push('Novo Setor', route('configuracao.user.setor.create'));
+    });
+
+    // Setor > [Visualização de Setor]
+    Breadcrumbs::for('configuracao.user.setor.show', function (BreadcrumbTrail $trail, Setor $item) {
+        $trail->parent('configuracao.user.setor.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.user.setor.show', $item));
+    });
+
+    // Setor > [Setor Name] > Editar Setor
+    Breadcrumbs::for('configuracao.user.setor.edit', function (BreadcrumbTrail $trail, Setor $item) {
+        $trail->parent('configuracao.user.setor.index');
+        $trail->push('Editar Setor', route('configuracao.user.setor.edit', $item));
+    });
