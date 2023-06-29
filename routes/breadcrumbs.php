@@ -5,6 +5,7 @@
 // this import. This is nice for IDE syntax and refactoring.
 
 use App\Models\Cliente\Cliente;
+use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
@@ -128,4 +129,32 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Categoria', route('configuracao.os.categoria.edit', $item));
     });
 
-// Fim OS
+// Fim Condiguração OS
+
+// Configuração FINANCEIRO
+    // Centro de Custo
+    Breadcrumbs::for('configuracao.financeiro.centro_custo.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Financeiro');
+        $trail->push('Centro de Custo', route('configuracao.financeiro.centro_custo.index'));
+    });
+
+    // Centro de Custo > Novo Centro de Custo
+    Breadcrumbs::for('configuracao.financeiro.centro_custo.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.financeiro.centro_custo.index');
+        $trail->push('Novo Centro de Custo', route('configuracao.financeiro.centro_custo.create'));
+    });
+
+    // Centro de Custo > [Visualização de Centro de Custo]
+    Breadcrumbs::for('configuracao.financeiro.centro_custo.show', function (BreadcrumbTrail $trail, CentroCusto $item) {
+        $trail->parent('configuracao.financeiro.centro_custo.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.financeiro.centro_custo.show', $item));
+    });
+
+    // Centro de Custo > [Centro de Custo Name] > Editar Centro de Custo
+    Breadcrumbs::for('configuracao.financeiro.centro_custo.edit', function (BreadcrumbTrail $trail, CentroCusto $item) {
+        $trail->parent('configuracao.financeiro.centro_custo.index');
+        $trail->push('Editar Centro de Custo', route('configuracao.financeiro.centro_custo.edit', $item));
+    });
+// Fim Configuração FINANCEIRO

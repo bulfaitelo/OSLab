@@ -10,12 +10,20 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <div class="row"></div>
-      @can('config_financeiro_centro_custo_create')
-        <a href="{{ route('configuracao.financeiro.centro_custo.create') }}">
-          <button type="button"  class="btn  btn-primary">Criar Centro de Custo</button>
+        <a href="{{ url()->previous() }}">
+            <button type="button"  class="btn  btn-default">
+                <i class="fa-solid fa-chevron-left"></i>
+                Voltar
+            </button>
         </a>
-      @endcan
+        @can('config_financeiro_centro_custo_create')
+        <a href="{{ route('configuracao.financeiro.centro_custo.create') }}">
+            <button type="button"  class="btn  btn-primary">
+                <i class="fa-solid fa-plus"></i>
+                Criar Centro de Custo
+            </button>
+        </a>
+        @endcan
     </div>
     <!-- /.card-header -->
     <div class="card-body">
