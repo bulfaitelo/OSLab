@@ -11,12 +11,19 @@
   <div class="col-md-10">
     <div class="card card-default">
       <div class="card-header">
-        <h3 class="card-title">Selecione as permissões</h3>
-      </div>
-      <div class="card-body">
+          <a href="{{ url()->previous() }}">
+            <button type="button"  class="btn  btn-default">
+                <i class="fa-solid fa-chevron-left"></i>
+                Voltar
+            </button>
+        </a>
+    </div>
+
+    <div class="card-body">
         @include('adminlte::partials.form-alert')
         {!! html()->form('put', route('configuracao.roles.assign.update', $role->id))->open() !!}
           <div class="row">
+            <h4>Selecione as Permissões:</h4>
             <div class="col-sm-12">
               <!-- checkbox -->
               <div class="card card-primary card-outline card-outline-tabs">

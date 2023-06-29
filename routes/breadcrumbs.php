@@ -10,14 +10,14 @@ use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
+
+
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
 //  with `$trail`. This is nice for IDE type checking and completion.
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
-
-
-
+use Spatie\Permission\Models\Role;
 
 // Home
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
@@ -186,4 +186,36 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     Breadcrumbs::for('configuracao.user.setor.edit', function (BreadcrumbTrail $trail, Setor $item) {
         $trail->parent('configuracao.user.setor.index');
         $trail->push('Editar Setor', route('configuracao.user.setor.edit', $item));
+    });
+
+    // Perfis
+    Breadcrumbs::for('configuracao.roles.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Usuários');
+        $trail->push('Perfis', route('configuracao.roles.index'));
+    });
+
+    // Perfis > Novo Perfis
+    Breadcrumbs::for('configuracao.roles.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.roles.index');
+        $trail->push('Novo Perfis', route('configuracao.roles.create'));
+    });
+
+    // Perfis > [Visualização de Perfis]
+    Breadcrumbs::for('configuracao.roles.show', function (BreadcrumbTrail $trail, Role $item) {
+        $trail->parent('configuracao.roles.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.roles.show', $item));
+    });
+
+    // Perfis > [Perfis Name] > Editar Perfis
+    Breadcrumbs::for('configuracao.roles.edit', function (BreadcrumbTrail $trail, Role $item) {
+        $trail->parent('configuracao.roles.index');
+        $trail->push('Editar Perfis', route('configuracao.roles.edit', $item));
+    });
+
+    // Perfis > [Perfis Name] > Editar Perfis
+    Breadcrumbs::for('configuracao.roles.assign', function (BreadcrumbTrail $trail, Role $item) {
+        $trail->parent('configuracao.roles.index');
+        $trail->push('Permissões: '. $item->name, route('configuracao.roles.assign', $item));
     });

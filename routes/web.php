@@ -40,8 +40,8 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::name('configuracao.')->prefix('configuracoes')->group(function (){
         Route::resource('/users', UserController::class);
         Route::resource('/roles', RoleController::class);
-        Route::get('/roles/assign/{id}', [RoleController::class, 'assign'])->name('roles.assign');
-        Route::put('/roles/assign/{id}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
+        Route::get('/roles/assign/{role}', [RoleController::class, 'assign'])->name('roles.assign');
+        Route::put('/roles/assign/{role}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
         Route::get('/users/permissions/{id}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{id}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
         Route::resource('/permissions', PermissionsController::class);

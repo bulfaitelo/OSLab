@@ -10,20 +10,20 @@
 <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-          <a href="{{ url()->previous() }}">
+            <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn  btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
                     Voltar
                 </button>
-          </a>
-          @can('cliente_create')
+            </a>
+            @can('cliente_create')
             <a href="{{ route('cliente.create') }}">
                 <button type="button"  class="btn  btn-primary">
                     <i class="fa-solid fa-plus"></i>
                     Criar Cliente
                 </button>
             </a>
-          @endcan
+            @endcan
       </div>
       <!-- /.card-header -->
       <div class="card-body">

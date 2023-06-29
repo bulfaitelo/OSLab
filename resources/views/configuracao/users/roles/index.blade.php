@@ -10,17 +10,28 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <div class="row"></div>
-      @can('config_roles_create')
-        <a href="{{ route('configuracao.roles.create') }}">
-            <button type="button"  class="btn  btn-primary">Criar Perfil</button>
+        <a href="{{ url()->previous() }}">
+            <button type="button"  class="btn  btn-default">
+                <i class="fa-solid fa-chevron-left"></i>
+                Voltar
+            </button>
         </a>
-      @endcan
-      @can('config_permissions')
-        <a href="{{ route('configuracao.permissions.index') }}">
-            <button type="button"  class="btn btn-success ">Listar Permissões</button>
-        </a>
-      @endcan
+        @can('config_roles_create')
+            <a href="{{ route('configuracao.roles.create') }}">
+                <button type="button"  class="btn  btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    Criar Perfil
+                </button>
+            </a>
+        @endcan
+        @can('config_permissions')
+            <a href="{{ route('configuracao.permissions.index') }}">
+                <button type="button"  class="btn btn-success ">
+                    <i class="fas fa-stream"></i>
+                    Listar Permissões
+                </button>
+            </a>
+        @endcan
     </div>
     <!-- /.card-header -->
     <div class="card-body">

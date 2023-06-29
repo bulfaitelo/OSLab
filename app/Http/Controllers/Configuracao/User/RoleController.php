@@ -74,9 +74,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        return view('configuracao.users.roles.show', compact('role'));
     }
 
     /**
@@ -85,9 +85,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        $role = Role::findOrFail($id);
         return view('configuracao.users.roles.edit', compact('role'));
     }
 
@@ -117,9 +116,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        $role = Role::findOrFail($id);
         $role->delete();
         if($role) {
             return redirect()->route('configuracao.roles.index')->with('success', 'Perfil Excluído com Sucesso!'); ;
@@ -132,9 +130,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function assign($id) {
+    public function assign(Role $role) {
 
-        $role = Role::findOrFail($id);
         $group = PermissionsGroup::class;
         $permissions = Permission::class;
         $array_temp = $role->permissions;
