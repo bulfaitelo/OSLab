@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call(DatabaseDefaultPermissionsUpdate::class);
         $this->call(DefaultsUsers::class);
         $this->call(DefaultsConfigRoles::class);
+        $this->call(DatabaseDefaultPermissionsUpdate::class);
 
     }
 }
