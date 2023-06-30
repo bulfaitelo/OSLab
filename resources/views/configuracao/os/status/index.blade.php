@@ -27,7 +27,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table class="table table-bordered">
+      <table class="table table-sm">
         <thead>
           <tr>
             <th style="width: 10px">#</th>
@@ -41,13 +41,15 @@
           @forelse ($status as $item)
             <tr>
               <td>{{ $item->id }}</td>
-              <td>{{ $item->name }}</td>
               <td>
-                <div class="{{$item->color}}" style="width: 70px;height: 32px;border-radius: 3px;" >
+                <span class="badge {{ $item->color }}">{{ $item->name }}</span>
+              </td>
+              <td>
+                <div class="{{$item->color}}" style="width: 70px; height: 25px; border-radius: 3px;" >
               </div>
               <td>{{ $item->descricao }}</td>
               <td>
-                <div class="btn-group">
+                <div class="btn-group btn-group-sm">
                 @can('config_os_status_edit')
                 <a href="{{ route('configuracao.os.status.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                 @endcan
