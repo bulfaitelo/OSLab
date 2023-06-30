@@ -13,7 +13,6 @@ class DatabaseDefaultPermissionsUpdate extends Seeder
      */
     public function run()
     {
-        $this->call(DefaultsConfigRoles::class);
         $this->call(DefaultsConfigPermissionsGroup::class);
         $this->call(DefaultsConfigPermissionsUsers::class);
         $this->call(DefaultsConfigPermissionsFinanceiro::class);
@@ -21,6 +20,7 @@ class DatabaseDefaultPermissionsUpdate extends Seeder
         $this->call(DefaultsConfigPermissionsOs::class);
         $this->call(DefaultsConfigPermissionsCliente::class);
         $this->call(DefaultsConfigCentroCusto::class);
+        $this->call(DefaultsConfigStatusOs::class);
 
     }
 }
