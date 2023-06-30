@@ -21,6 +21,7 @@ class DatabaseDefaultPermissionsUpdate extends Seeder
         $this->call(DefaultsConfigPermissionsCliente::class);
         $this->call(DefaultsConfigCentroCusto::class);
         $this->call(DefaultsConfigStatusOs::class);
+        $this->call(DefaultsConfigGarantiaOs::class);
 
     }
 }
