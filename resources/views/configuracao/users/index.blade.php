@@ -28,7 +28,7 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        <table class="table table-bordered">
+        <table class="table table-sm">
           <thead>
             <tr>
               <th style="width: 10px">#</th>
@@ -48,7 +48,7 @@
                 <td>{{ $user->setor->name ?? ''}}</td>
                 <td>{{ $user->expire_at }}</td>
                 <td>
-                    <div class="btn-group">
+                    <div class="btn-group btn-group-sm ">
                         @can('config_users_edit')
                             <a href="{{ route('configuracao.users.edit', $user->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                         @endcan

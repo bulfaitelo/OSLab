@@ -27,7 +27,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table class="table table-bordered">
+      <table class="table table-sm">
         <thead>
           <tr>
             <th style="width: 10px">#</th>
@@ -45,7 +45,7 @@
               <td>{{ $item->prazo_garantia }} Dias </td>
               <td>{{ $item->user->name }}</td>
               <td>
-                <div class="btn-group ">
+                <div class="btn-group btn-group-sm ">
                   @can('config_os_garantia_edit')
                   <a href="{{ route('configuracao.os.garantia.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                   @endcan

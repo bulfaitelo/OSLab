@@ -27,7 +27,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table class="table table-bordered">
+      <table class="table table-sm">
         <thead>
           <tr>
             <th style="width: 10px">#</th>
@@ -42,7 +42,7 @@
               <td>{{ $item->id }}</td>
               <td>{{ $item->name }}</td>
               <td>
-                <h4>
+                <h5>
                     @if ($item->receita)
                         <span class="badge bg-success">Receita</span>
                     @endif
@@ -50,10 +50,10 @@
                         <span class="badge bg-danger">Despesa</span>
                     @endif
 
-                </h4>
+                </h5>
                 </td>
               <td>
-                <div class="btn-group ">
+                <div class="btn-group btn-group-sm ">
                   @can('config_financeiro_centro_custo_edit')
                   <a href="{{ route('configuracao.financeiro.centro_custo.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                   @endcan

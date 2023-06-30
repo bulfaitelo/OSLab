@@ -35,7 +35,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table class="table table-bordered">
+      <table class="table table-sm">
         <thead>
           <tr>
             <th style="width: 10px">#</th>
@@ -51,7 +51,7 @@
               <td>{{ $role->name}}</td>
               <td>{{ $role->description}}</td>
               <td>
-                <div class="btn-group">
+                <div class="btn-group btn-group-sm ">
                 @can('config_roles_edit')
                     <a href="{{ route('configuracao.roles.edit', $role->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                 @endcan
