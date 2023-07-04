@@ -329,6 +329,13 @@ return [
             'can'     => 'cliente',
         ],
         [
+            'text'    => 'Serviços',
+            'icon'    => 'fas fa-hand-holding-usd',
+            'route'   => 'servico.index',
+            'active'  => ['servico*'],
+            'can'     => 'servico',
+        ],
+        [
             // 'topnav' => true,
             'text'    => '',
             'icon'    => 'fas fa-cogs',

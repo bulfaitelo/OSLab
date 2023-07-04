@@ -10,6 +10,7 @@ use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
+use App\Models\Servico\Servico;
 use App\Models\User;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
@@ -48,6 +49,32 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Cliente', route('cliente.edit', $item));
     });
 // FIM Clientes
+
+// Serviços
+Breadcrumbs::for('servico.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Serviços', route('servico.index'));
+});
+
+// Serviços > Novo Servico
+Breadcrumbs::for('servico.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('servico.index');
+    $trail->push('Novo Serviço', route('servico.create'));
+});
+
+// Serviços > [Visualização de Servico]
+Breadcrumbs::for('servico.show', function (BreadcrumbTrail $trail, Servico $item) {
+    $trail->parent('servico.index');
+    $trail->push($item->name, route('servico.show', $item));
+});
+
+// Serviços > [Servico Name] > Editar Servico
+Breadcrumbs::for('servico.edit', function (BreadcrumbTrail $trail, Servico $item) {
+    $trail->parent('servico.index');
+    $trail->push('Editar Serviço', route('servico.edit', $item));
+});
+// FIM Serviços
+
 
 
 // Configuração OS

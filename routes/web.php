@@ -10,6 +10,7 @@ use App\Http\Controllers\Configuracao\User\PermissionsController;
 use App\Http\Controllers\Configuracao\User\RoleController;
 use App\Http\Controllers\Configuracao\User\SetorController;
 use App\Http\Controllers\Configuracao\User\UserController;
+use App\Http\Controllers\Servico\ServicoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,7 @@ Auth::routes();
 
 Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/cliente', ClienteController::class);
+    Route::resource('/servico', ServicoController::class);
 
     // Agrupamento de rotas de Configuração
     Route::name('configuracao.')->prefix('configuracoes')->group(function (){
