@@ -86,9 +86,8 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        $permission = Permission::findOrFail($id);
         return view('configuracao.users.roles.permissions.edit', compact('permission'));
     }
 
@@ -99,9 +98,8 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission)
     {
-        $permission = Permission::findOrFail($id);
         $request->validate ([
             'name' => 'required|alpha_dash|unique:permissions,name,'.$permission->id,
             'group' => 'required|integer',
@@ -110,7 +108,7 @@ class PermissionsController extends Controller
         $permission->description = $request->description;
         $permission->group_id = $request->group;
         if($permission->save()){
-            return redirect()->route('configuracao.permissions.edit', [$id])
+            return redirect()->route('configuracao.permissions.edit', $permission->id)
             ->with('success', 'Permissão atualizada!'); ;
         }
 
@@ -122,9 +120,8 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        $permission = Permission::findOrFail($id);
         $permission->delete();
         if($permission) {
             return redirect()->route('configuracao.permissions.index')

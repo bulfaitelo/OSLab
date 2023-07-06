@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Produto')
+@section('title', 'Vizualizando Produto')
 
 @section('content_header')
-    <h1>Criando Produto</h1>
+    <h1>Vizualizando Produto</h1>
 @stop
 
 @section('content')
@@ -22,17 +22,14 @@
             </div>
           <!-- /.card-header -->
           <!-- form start -->
-
           <div class="card-body">
-            @include('adminlte::partials.form-alert')
-            {!! html()->form('post', route('produto.store'))->acceptsFiles()->open() !!}
                 <div class="form-group">
                     <label for="name">Produto</label>
-                    {!! html()->text('name')->class('form-control')->placeholder('Nome do Produto')->required() !!}
+                    {!! html()->text('name', $produto->name)->class('form-control')->placeholder('Nome do Produto')->required()->disabled() !!}
                 </div>
                 <div class="form-group">
                     <label for="descricao">Descrição do produto</label>
-                    {!! html()->text('descricao')->class('form-control')->placeholder('descrição do Produto (opcional)') !!}
+                    {!! html()->text('descricao', $produto->descricao)->class('form-control')->placeholder('descrição do Produto (opcional)')->disabled() !!}
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -41,7 +38,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_custo')->class('form-control decimal')->placeholder('Valor de custo do Produto') !!}
+                            {!! html()->text('valor_custo', $produto->valor_custo)->class('form-control decimal')->placeholder('Valor de custo do Produto')->disabled() !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -50,7 +47,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_venda')->class('form-control decimal')->placeholder('Valor de venda do Produto') !!}
+                            {!! html()->text('valor_venda', $produto->valor_venda)->class('form-control decimal')->placeholder('Valor de venda do Produto')->disabled() !!}
                         </div>
                     </div>
                 </div>
@@ -58,13 +55,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="estoque">Estoque Inicial</label>
-                            {!! html()->text('estoque')->class('form-control numero')->placeholder('Estoque inicial do produto') !!}
+                            {!! html()->text('estoque', $produto->estoque)->class('form-control numero')->placeholder('Estoque inicial do produto')->disabled() !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="estoque_minimo">Estoque Minimo</label>
-                            {!! html()->text('estoque_minimo')->class('form-control numero')->placeholder('Estoque minimo do protuto') !!}
+                            {!! html()->text('estoque_minimo', $produto->estoque_minimo)->class('form-control numero')->placeholder('Estoque minimo do protuto')->disabled() !!}
                         </div>
                     </div>
                 </div>
@@ -72,7 +69,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="centro_custo_id">Centro de Custo</label>
-                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'), $produto->centro_custo_id)->class('form-control')->placeholder('Selecione')->required()->disabled() !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -85,15 +82,8 @@
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i>
-                Salvar
-            </button>
-          </div>
         </div>
       <!-- /.card -->
-      {!! html()->form()->close() !!}
       </div>
 </div>
 @stop

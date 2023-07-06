@@ -34,6 +34,7 @@
               <th>Produto</th>
               <th>Estoque</th>
               <th>Valor</th>
+              <th>Ultima atualização</th>
               <th style="width: 40px"></th>
             </tr>
           </thead>
@@ -44,6 +45,7 @@
                 <td>{{ $item->name}}</td>
                 <td>{{ $item->estoque}}</td>
                 <td class="decimal">{{ $item->valor_produto}}</td>
+                <td>{{ $item->updated_at }}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
                         @can('produto_edit')
@@ -70,7 +72,7 @@
                                 <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                                     {!! html()->form('delete', route('produto.destroy', $item->id))->open() !!}
-                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Cliente">
+                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Produto">
                                     {!! html()->form()->close() !!}
 
                                 </div>

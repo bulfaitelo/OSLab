@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('codigo')->nullable();
             $table->string('name')->unique();
             $table->string('descricao')->nullable();
-            $table->decimal('valor_custo', 9, 2);
-            $table->decimal('valor_venda', 9, 2)->nullable();
+            $table->decimal('valor_custo', 9, 2)->nullable();
+            $table->decimal('valor_venda', 9, 2);
             $table->integer('estoque')->nullable();
+            $table->integer('estoque_minimo')->nullable();
             $table->unsignedBigInteger('centro_custo_id');
             $table->unsignedBigInteger('modelo_id')->nullable();
             $table->timestamps();
