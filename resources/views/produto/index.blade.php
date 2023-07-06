@@ -49,10 +49,13 @@
                 <td>
                     <div class="btn-group btn-group-sm">
                         @can('produto_edit')
+                            <a href="{{ route('produto.edit', $item->id) }}" title="Movimentações" class="btn btn-left bg-purple"><i class="fas fa-people-carry"></i></a>
+                        @endcan
+                        @can('produto_edit')
                             <a href="{{ route('produto.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                         @endcan
                         @can('produto_show')
-                            <a href="{{ route('produto.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('produto.show', $item->id) }}" title="Vizualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                         @endcan
                         @can('produto_destroy')
                         <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
