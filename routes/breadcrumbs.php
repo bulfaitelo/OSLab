@@ -10,6 +10,7 @@ use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
+use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
 use App\Models\User;
 use Diglactic\Breadcrumbs\Breadcrumbs;
@@ -51,29 +52,54 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
 // FIM Clientes
 
 // Serviços
-Breadcrumbs::for('servico.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
-    $trail->push('Serviços', route('servico.index'));
-});
+    Breadcrumbs::for('servico.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Serviços', route('servico.index'));
+    });
 
-// Serviços > Novo Servico
-Breadcrumbs::for('servico.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('servico.index');
-    $trail->push('Novo Serviço', route('servico.create'));
-});
+    // Serviços > Novo Servico
+    Breadcrumbs::for('servico.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('servico.index');
+        $trail->push('Novo Serviço', route('servico.create'));
+    });
 
-// Serviços > [Visualização de Servico]
-Breadcrumbs::for('servico.show', function (BreadcrumbTrail $trail, Servico $item) {
-    $trail->parent('servico.index');
-    $trail->push($item->name, route('servico.show', $item));
-});
+    // Serviços > [Visualização de Servico]
+    Breadcrumbs::for('servico.show', function (BreadcrumbTrail $trail, Servico $item) {
+        $trail->parent('servico.index');
+        $trail->push($item->name, route('servico.show', $item));
+    });
 
-// Serviços > [Servico Name] > Editar Servico
-Breadcrumbs::for('servico.edit', function (BreadcrumbTrail $trail, Servico $item) {
-    $trail->parent('servico.index');
-    $trail->push('Editar Serviço', route('servico.edit', $item));
-});
+    // Serviços > [Servico Name] > Editar Servico
+    Breadcrumbs::for('servico.edit', function (BreadcrumbTrail $trail, Servico $item) {
+        $trail->parent('servico.index');
+        $trail->push('Editar Serviço', route('servico.edit', $item));
+    });
 // FIM Serviços
+
+// Produtos
+Breadcrumbs::for('produto.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Produtos', route('produto.index'));
+});
+
+// Produtos > Novo produto
+Breadcrumbs::for('produto.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('produto.index');
+    $trail->push('Novo Serviço', route('produto.create'));
+});
+
+// Produtos > [Visualização de produto]
+Breadcrumbs::for('produto.show', function (BreadcrumbTrail $trail, Produto $item) {
+    $trail->parent('produto.index');
+    $trail->push($item->name, route('produto.show', $item));
+});
+
+// Produtos > [produto Name] > Editar produto
+Breadcrumbs::for('produto.edit', function (BreadcrumbTrail $trail, Produto $item) {
+    $trail->parent('produto.index');
+    $trail->push('Editar Serviço', route('produto.edit', $item));
+});
+// FIM Produtos
 
 
 

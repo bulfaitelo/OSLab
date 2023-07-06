@@ -329,6 +329,13 @@ return [
             'can'     => 'cliente',
         ],
         [
+            'text'    => 'Produtos',
+            'icon'    => 'fas fa-box-open',
+            'route'   => 'produto.index',
+            'active'  => ['produto*'],
+            'can'     => 'produto',
+        ],
+        [
             'text'    => 'Serviços',
             'icon'    => 'fas fa-hand-holding-usd',
             'route'   => 'servico.index',
