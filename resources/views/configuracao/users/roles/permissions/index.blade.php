@@ -10,13 +10,18 @@
 <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <div class="row"></div>
-          <a href="{{ route('configuracao.roles.index') }}">
-              <button type="button"  class="btn  btn-info"><i class="fas fa-chevron-left"></i> Voltar</button>
-          </a>
+            <a href="{{ route('configuracao.roles.index') }}">
+                <button type="button"  class="btn  btn-default">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    Voltar
+                </button>
+            </a>
           @can('config_permissions_create')
             <a href="{{ route('configuracao.permissions.create') }}">
-                <button type="button"  class="btn  btn-primary">Criar Permissão</button>
+                <button type="button"  class="btn  btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    Criar Permissão
+                </button>
             </a>
           @endcan
       </div>

@@ -12,6 +12,14 @@
     <div class="col-md-10 ">
         <!-- general form elements -->
         <div class="card">
+            <div class="card-header">
+                <a href="{{ route('configuracao.permissions.index') }}">
+                    <button type="button"  class="btn  btn-default">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        Voltar
+                    </button>
+                </a>
+            </div>
 
           <!-- /.card-header -->
           <!-- form start -->

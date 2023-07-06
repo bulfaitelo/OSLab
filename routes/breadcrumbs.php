@@ -14,11 +14,12 @@ use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
 use App\Models\User;
 use Diglactic\Breadcrumbs\Breadcrumbs;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
 //  with `$trail`. This is nice for IDE type checking and completion.
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
-use Spatie\Permission\Models\Role;
 
 // Home
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
@@ -77,28 +78,28 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
 // FIM Serviços
 
 // Produtos
-Breadcrumbs::for('produto.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
-    $trail->push('Produtos', route('produto.index'));
-});
+    Breadcrumbs::for('produto.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Produtos', route('produto.index'));
+    });
 
-// Produtos > Novo produto
-Breadcrumbs::for('produto.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('produto.index');
-    $trail->push('Novo Serviço', route('produto.create'));
-});
+    // Produtos > Novo produto
+    Breadcrumbs::for('produto.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('produto.index');
+        $trail->push('Novo Serviço', route('produto.create'));
+    });
 
-// Produtos > [Visualização de produto]
-Breadcrumbs::for('produto.show', function (BreadcrumbTrail $trail, Produto $item) {
-    $trail->parent('produto.index');
-    $trail->push($item->name, route('produto.show', $item));
-});
+    // Produtos > [Visualização de produto]
+    Breadcrumbs::for('produto.show', function (BreadcrumbTrail $trail, Produto $item) {
+        $trail->parent('produto.index');
+        $trail->push($item->name, route('produto.show', $item));
+    });
 
-// Produtos > [produto Name] > Editar produto
-Breadcrumbs::for('produto.edit', function (BreadcrumbTrail $trail, Produto $item) {
-    $trail->parent('produto.index');
-    $trail->push('Editar Serviço', route('produto.edit', $item));
-});
+    // Produtos > [produto Name] > Editar produto
+    Breadcrumbs::for('produto.edit', function (BreadcrumbTrail $trail, Produto $item) {
+        $trail->parent('produto.index');
+        $trail->push('Editar Serviço', route('produto.edit', $item));
+    });
 // FIM Produtos
 
 
@@ -271,6 +272,26 @@ Breadcrumbs::for('produto.edit', function (BreadcrumbTrail $trail, Produto $item
         $trail->parent('configuracao.roles.index');
         $trail->push('Permissões: '. $item->name, route('configuracao.roles.assign', $item));
     });
+
+    // Perfis > Permissões
+    Breadcrumbs::for('configuracao.permissions.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.roles.index');
+        $trail->push('Permissões', route('configuracao.permissions.index'));
+    });
+
+    // Perfis > Nova Permissão
+    Breadcrumbs::for('configuracao.permissions.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.permissions.index');
+        $trail->push('Nova Permissão', route('configuracao.permissions.create'));
+    });
+
+    // Perfis > [Permissão Name] > Editar Permissão
+    Breadcrumbs::for('configuracao.permissions.edit', function (BreadcrumbTrail $trail, Permission $item) {
+        $trail->parent('configuracao.permissions.index');
+        $trail->push('Editar Permissões', route('configuracao.permissions.edit', $item));
+    });
+
+
 
     // Usuários
     Breadcrumbs::for('configuracao.users.index', function (BreadcrumbTrail $trail) {
