@@ -343,6 +343,13 @@ return [
             'can'     => 'servico',
         ],
         [
+            'text'    => 'Wiki',
+            'icon'    => 'fa-solid fa-book',
+            'route'   => 'servico.index',
+            'active'  => ['servico*'],
+            'can'     => 'servico',
+        ],
+        [
             // 'topnav' => true,
             'text'    => '',
             'icon'    => 'fas fa-cogs',
