@@ -45,6 +45,19 @@ class DefaultsConfigPermissionsProduto extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 8,
             ],
+
+            [
+                'description' => 'Acesso a listagem de Movimentações de produto',
+                'name' => 'produto_movimentacao',
+                'guard_name' => 'web',
+                'group_id' => 8,
+            ],
+            [
+                'description' => 'Adicionar produto ao Estoque',
+                'name' => 'produto_movimentacao_create',
+                'guard_name' => 'web',
+                'group_id' => 8,
+            ],
         ];
 
 

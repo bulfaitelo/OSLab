@@ -10,6 +10,7 @@ use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
+use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
 use App\Models\User;
@@ -100,6 +101,20 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->parent('produto.index');
         $trail->push('Editar Serviço', route('produto.edit', $item));
     });
+
+    // Produtos > Movimentação
+    Breadcrumbs::for('movimentacao.index', function (BreadcrumbTrail $trail, Produto $item) {
+        $trail->parent('produto.index');
+        $trail->push($item->name, route('produto.show', $item));
+        $trail->push('Movimentação');
+    });
+
+        // Produtos > Movimentação
+        Breadcrumbs::for('movimentacao.create', function (BreadcrumbTrail $trail, Produto $item) {
+            $trail->parent('produto.index');
+            $trail->push($item->name, route('produto.show', $item));
+            $trail->push('Adicionado Estoque');
+        });
 // FIM Produtos
 
 

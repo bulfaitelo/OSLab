@@ -38,7 +38,7 @@ class StoreProdutoRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'valor_custo' => str_replace(',', '.', str_replace('.','', $this->valor_custo)),
+            'valor_custo' => ($this->valor_custo) ? str_replace(',', '.', str_replace('.','', $this->valor_custo)) : null,
             'valor_venda' => str_replace(',', '.', str_replace('.','', $this->valor_venda)),
         ]);
     }

@@ -10,6 +10,7 @@ use App\Http\Controllers\Configuracao\User\PermissionsController;
 use App\Http\Controllers\Configuracao\User\RoleController;
 use App\Http\Controllers\Configuracao\User\SetorController;
 use App\Http\Controllers\Configuracao\User\UserController;
+use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
 use Illuminate\Support\Facades\Route;
@@ -39,9 +40,10 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/cliente', ClienteController::class);
     Route::resource('/servico', ServicoController::class);
     Route::resource('/produto', ProdutoController::class);
+    Route::resource('/produto/{produto}/movimentacao', MovimentacaoController::class);
 
     // Agrupamento de rotas de Configuração
-    Route::name('configuracao.')->prefix('configuracoes')->group(function (){
+    Route::name('configuracao.')->prefix('configuracoes')->group( function (){
         Route::resource('/users', UserController::class);
         Route::resource('/roles', RoleController::class);
         Route::resource('/permissions', PermissionsController::class);
@@ -50,18 +52,18 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::get('/users/permissions/{user}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{user}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
         // Configurações de usuário
-        Route::name('user.')->prefix('user')->group(function (){
+        Route::name('user.')->prefix('user')->group( function (){
             Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
             Route::get('/perfil/edit', [PerfilController::class, 'edit'])->name('perfil.edit');
             Route::put('/perfil/update', [PerfilController::class, 'update'])->name('perfil.update');
             Route::resource('/setor', SetorController::class);
         });
         // Financeiro
-        Route::name('financeiro.')->prefix('financeiro')->group(function (){
+        Route::name('financeiro.')->prefix('financeiro')->group( function (){
             Route::resource('/centro_custo', CentroCustoController::class);
         });
         // OS
-        Route::name('os.')->prefix('os')->group(function (){
+        Route::name('os.')->prefix('os')->group( function (){
             Route::resource('/garantia', GarantiaController::class)
                 ->parameters(['garantia' => 'garantia']);
             Route::resource('/categoria', CategoriaOsController::class)

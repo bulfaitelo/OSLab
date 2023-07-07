@@ -4,7 +4,7 @@ namespace App\Http\Requests\Produto;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProdutoRequest extends FormRequest
+class StoreUpdateMovimentacaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,8 @@ class UpdateProdutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:produtos,name,'.$this->produto->id,
+            'estoque'   => 'required|numeric',
             'valor_custo' => 'nullable|numeric|min:0|not_in:0',
-            'valor_venda' => 'required|numeric|min:0|not_in:0',
-            'estoque_minimo'   => 'nullable|numeric',
-            'centro_custo_id' => 'required|exists:centro_custos,id',
         ];
     }
 
@@ -37,17 +34,13 @@ class UpdateProdutoRequest extends FormRequest
     {
         $this->merge([
             'valor_custo' => ($this->valor_custo) ? str_replace(',', '.', str_replace('.','', $this->valor_custo)) : null,
-            'valor_venda' => str_replace(',', '.', str_replace('.','', $this->valor_venda)),
         ]);
     }
 
 
     public function messages() : array {
         return [
-           'name.required' => 'O nome do Produto é obrigatório',
-           'name.unique' => 'O nome do Produto já está em uso',
-           'valor_venda.required' => 'O valor de venda do Produto é obrigatório ',
-
+           'estoque.required' => 'A quantidade de entrada obrigatória',
         ];
     }
 }

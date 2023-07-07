@@ -14,6 +14,7 @@ class Movimentacao extends Model
         'quantidade_movimentada',
         'tipo_movimentacao',
         'estoque_antes',
+        'valor_custo',
         'estoque_apos',
     ];
 }

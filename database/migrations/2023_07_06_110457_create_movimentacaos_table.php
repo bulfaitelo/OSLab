@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('quantidade_movimentada');
             $table->char('tipo_movimentacao');
             $table->integer('estoque_antes');
+            $table->decimal('valor_custo', 9, 2)->nullable();
             $table->integer('estoque_apos');
             $table->unsignedBigInteger('os_id')->nullable();
             $table->unsignedBigInteger('venda_id')->nullable();

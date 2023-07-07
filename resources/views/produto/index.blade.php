@@ -44,12 +44,15 @@
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->name}}</td>
                 <td>{{ $item->estoque}}</td>
-                <td class="decimal">{{ $item->valor_produto}}</td>
+                <td class="decimal">{{ $item->valor_venda}}</td>
                 <td>{{ $item->updated_at }}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        @can('produto_edit')
-                            <a href="{{ route('produto.edit', $item->id) }}" title="Movimentações" class="btn btn-left bg-purple"><i class="fas fa-people-carry"></i></a>
+                        @can('produto_movimentacao')
+                            <a href="{{ route('movimentacao.index', $item->id) }}" title="Movimentações" class="btn btn-left bg-olive"><i class="fa-solid fa-boxes-packing"></i></a>
+                        @endcan
+                        @can('produto_movimentacao_create')
+                            <a href="{{ route('movimentacao.create', $item->id) }}" title="Adicionar Estoque" class="btn btn-left bg-primary"><i class="fa-solid fa-plus"></i></a>
                         @endcan
                         @can('produto_edit')
                             <a href="{{ route('produto.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>

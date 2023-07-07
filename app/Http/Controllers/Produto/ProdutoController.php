@@ -61,6 +61,7 @@ class ProdutoController extends Controller
                     [
                         'quantidade_movimentada' => $request->estoque,
                         'tipo_movimentacao' => 'ENTRADA',
+                        'valor_custo' => $request->valor_custo,
                         'estoque_antes' => 0,
                         'estoque_apos' => $request->estoque,
                     ]
