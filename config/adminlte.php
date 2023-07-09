@@ -357,7 +357,7 @@ return [
                 'config_users', 'config_roles', 'config_user_setor',
                 'config_financeiro_centro_custo',
                 'config_os_garantia', 'config_os_categoria',
-                'config_wiki_fabricante',
+                'config_wiki_fabricante', 'config_wiki_modelo',
 
             ],
             'submenu' => [
@@ -443,7 +443,7 @@ return [
                     'text'    => 'Wiki',
                     'icon'    => 'fa-solid fa-book',
                     'can'     => [
-                        'config_wiki_fabricante',
+                        'config_wiki_fabricante', 'config_wiki_modelo',
                     ],
                     'submenu'=> [
                         [
@@ -452,6 +452,13 @@ return [
                             'route'   => 'configuracao.wiki.fabricante.index',
                             'active'  => ['configuracoes/wiki/fabricante*'],
                             'can'     => 'config_wiki_fabricante',
+                        ],
+                        [
+                            'text'    => 'Modelos',
+                            'icon'    => 'fa-solid fa-book',
+                            'route'   => 'configuracao.wiki.modelo.index',
+                            'active'  => ['configuracoes/wiki/modelo*'],
+                            'can'     => 'config_wiki_modelo',
                         ],
                     ],
                 ],

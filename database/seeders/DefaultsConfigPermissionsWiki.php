@@ -76,6 +76,39 @@ class DefaultsConfigPermissionsWiki extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 9,
             ],
+
+            [
+                'description' => 'Acesso a Configuração de Modelos',
+                'name' => 'config_wiki_modelo',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+            [
+                'description' => 'Cadastrar Modelo',
+                'name' => 'config_wiki_modelo_create',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+            [
+                'description' => 'Editar Modelo',
+                'name' => 'config_wiki_modelo_edit',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+            [
+                'description' => 'Visualizar Modelo',
+                'name' => 'config_wiki_modelo_show',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+            [
+                'description' => 'Excluir Modelo',
+                'name' => 'config_wiki_modelo_destroy',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+
+
         ];
 
 

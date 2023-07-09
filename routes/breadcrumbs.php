@@ -11,6 +11,7 @@ use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
 use App\Models\Configuracao\Wiki\Fabricante;
+use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
@@ -408,5 +409,31 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     Breadcrumbs::for('configuracao.wiki.fabricante.edit', function (BreadcrumbTrail $trail, Fabricante $item) {
         $trail->parent('configuracao.wiki.fabricante.index');
         $trail->push('Editar Fabricante', route('configuracao.wiki.fabricante.edit', $item));
+    });
+
+    // Modelo
+    Breadcrumbs::for('configuracao.wiki.modelo.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Wiki');
+        $trail->push('Modelo', route('configuracao.wiki.modelo.index'));
+    });
+
+    // Modelo > Novo Modelo
+    Breadcrumbs::for('configuracao.wiki.modelo.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.wiki.modelo.index');
+        $trail->push('Novo Modelo', route('configuracao.wiki.modelo.create'));
+    });
+
+    // Modelo > [Visualização de Modelo]
+    Breadcrumbs::for('configuracao.wiki.modelo.show', function (BreadcrumbTrail $trail, Modelo $item) {
+        $trail->parent('configuracao.wiki.modelo.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.wiki.modelo.show', $item));
+    });
+
+    // Modelo > [Modelo Name] > Editar Modelo
+    Breadcrumbs::for('configuracao.wiki.modelo.edit', function (BreadcrumbTrail $trail, Modelo $item) {
+        $trail->parent('configuracao.wiki.modelo.index');
+        $trail->push('Editar Modelo', route('configuracao.wiki.modelo.edit', $item));
     });
 // Fim Configuração WIKI
