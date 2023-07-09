@@ -10,10 +10,12 @@ use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
+use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
 use App\Models\User;
+use App\Models\Wiki\Wiki;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -77,6 +79,31 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Serviço', route('servico.edit', $item));
     });
 // FIM Serviços
+
+// Wiki
+    Breadcrumbs::for('wiki.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Wiki', route('wiki.index'));
+    });
+
+    // Wiki > Novo Wiki
+    Breadcrumbs::for('wiki.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('wiki.index');
+        $trail->push('Novo Serviço', route('wiki.create'));
+    });
+
+    // Wiki > [Visualização de Wiki]
+    Breadcrumbs::for('wiki.show', function (BreadcrumbTrail $trail, Wiki $item) {
+        $trail->parent('wiki.index');
+        $trail->push($item->name, route('wiki.show', $item));
+    });
+
+    // Wiki > [Wiki Name] > Editar Wiki
+    Breadcrumbs::for('wiki.edit', function (BreadcrumbTrail $trail, Wiki $item) {
+        $trail->parent('wiki.index');
+        $trail->push('Editar Serviço', route('wiki.edit', $item));
+    });
+// FIM Wiki
 
 // Produtos
     Breadcrumbs::for('produto.index', function (BreadcrumbTrail $trail) {
@@ -352,5 +379,34 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar: '.Auth::user()->name , route('configuracao.user.perfil.edit'));
     });
 
+
+
 // FIM Configuração Usuários
 
+// Configuração WIKI
+    // Fabricante
+    Breadcrumbs::for('configuracao.wiki.fabricante.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Wiki');
+        $trail->push('Fabricante', route('configuracao.wiki.fabricante.index'));
+    });
+
+    // Fabricante > Novo Fabricante
+    Breadcrumbs::for('configuracao.wiki.fabricante.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.wiki.fabricante.index');
+        $trail->push('Novo Fabricante', route('configuracao.wiki.fabricante.create'));
+    });
+
+    // Fabricante > [Visualização de Fabricante]
+    Breadcrumbs::for('configuracao.wiki.fabricante.show', function (BreadcrumbTrail $trail, Fabricante $item) {
+        $trail->parent('configuracao.wiki.fabricante.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.wiki.fabricante.show', $item));
+    });
+
+    // Fabricante > [Fabricante Name] > Editar Fabricante
+    Breadcrumbs::for('configuracao.wiki.fabricante.edit', function (BreadcrumbTrail $trail, Fabricante $item) {
+        $trail->parent('configuracao.wiki.fabricante.index');
+        $trail->push('Editar Fabricante', route('configuracao.wiki.fabricante.edit', $item));
+    });
+// Fim Configuração WIKI

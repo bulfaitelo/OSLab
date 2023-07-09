@@ -10,9 +10,11 @@ use App\Http\Controllers\Configuracao\User\PermissionsController;
 use App\Http\Controllers\Configuracao\User\RoleController;
 use App\Http\Controllers\Configuracao\User\SetorController;
 use App\Http\Controllers\Configuracao\User\UserController;
+use App\Http\Controllers\Configuracao\Wiki\FabricanteController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
+use App\Http\Controllers\Wiki\WikiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +43,7 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/servico', ServicoController::class);
     Route::resource('/produto', ProdutoController::class);
     Route::resource('/produto/{produto}/movimentacao', MovimentacaoController::class);
+    Route::resource('/wiki', WikiController::class);
 
     // Agrupamento de rotas de Configuração
     Route::name('configuracao.')->prefix('configuracoes')->group( function (){
@@ -69,6 +72,11 @@ Route::group(['middleware'=> 'auth'], function() {
             Route::resource('/categoria', CategoriaOsController::class)
                 ->parameters(['categoria' => 'categoria']);
             Route::resource('/status', StatusOsController::class);
+        });
+        Route::name('wiki.')->prefix('wiki')->group( function (){
+            Route::resource('/fabricante', FabricanteController::class);
+
+
         });
 
 

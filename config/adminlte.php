@@ -345,9 +345,9 @@ return [
         [
             'text'    => 'Wiki',
             'icon'    => 'fa-solid fa-book',
-            'route'   => 'servico.index',
-            'active'  => ['servico*'],
-            'can'     => 'servico',
+            'route'   => 'wiki.index',
+            'active'  => ['wiki*'],
+            'can'     => 'wiki',
         ],
         [
             // 'topnav' => true,
@@ -357,6 +357,7 @@ return [
                 'config_users', 'config_roles', 'config_user_setor',
                 'config_financeiro_centro_custo',
                 'config_os_garantia', 'config_os_categoria',
+                'config_wiki_fabricante',
 
             ],
             'submenu' => [
@@ -435,6 +436,22 @@ return [
                             'route'   => 'configuracao.os.status.index',
                             'active'  => ['configuracoes/os/status*'],
                             'can'     => 'config_os_status',
+                        ],
+                    ],
+                ],
+                [
+                    'text'    => 'Wiki',
+                    'icon'    => 'fa-solid fa-book',
+                    'can'     => [
+                        'config_wiki_fabricante',
+                    ],
+                    'submenu'=> [
+                        [
+                            'text'    => 'Fabricantes',
+                            'icon'    => 'fa-solid fa-book',
+                            'route'   => 'configuracao.wiki.fabricante.index',
+                            'active'  => ['configuracoes/wiki/fabricante*'],
+                            'can'     => 'config_wiki_fabricante',
                         ],
                     ],
                 ],
