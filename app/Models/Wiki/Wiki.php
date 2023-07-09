@@ -16,4 +16,17 @@ class Wiki extends Model
     public function fabricante() {
         return $this->belongsTo(Fabricante::class);
     }
+
+    public function modelos () {
+        return $this->hasMany(Modelo::class);
+    }
+
+    public function modelosTitle() {
+        $return = "";
+        foreach ($this->modelos as $value) {
+            $return.= $value->name.', ';
+        }
+        return rtrim($return, ', ');
+    }
+
 }

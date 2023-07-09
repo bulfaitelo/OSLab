@@ -6,7 +6,7 @@
 
 @section('content_header')
     <h1>[{{ $wiki->fabricante->name }}] -  {{ $wiki->name}} </h1>
-    <h6> sm-123, sh-123, sh-2323  sm-123 </h6>
+    <h6>{{ $wiki->modelosTitle() }}</h6>
 @stop
 
 @section('content')
