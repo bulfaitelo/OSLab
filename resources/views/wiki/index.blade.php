@@ -72,7 +72,7 @@
                                 <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                                     {!! html()->form('delete', route('wiki.destroy', $item->id))->open() !!}
-                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Cliente">
+                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Wiki">
                                     {!! html()->form()->close() !!}
 
                                 </div>

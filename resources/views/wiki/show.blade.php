@@ -5,7 +5,7 @@
 @section('title', 'Home')
 
 @section('content_header')
-    <h1> {{ $wiki->name}} </h1>
+    <h1>[{{ $wiki->fabricante->name }}] -  {{ $wiki->name}} </h1>
     <h6> sm-123, sh-123, sh-2323  sm-123 </h6>
 @stop
 

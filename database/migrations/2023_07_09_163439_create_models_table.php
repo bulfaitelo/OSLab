@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wikis', function (Blueprint $table) {
+        Schema::create('wiki_models', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->mediumText('texto')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('categoria_id')->nullable();
-            $table->unsignedBigInteger('fabricante_id')->nullable();
+            $table->unsignedBigInteger('wiki_id');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wikis');
+        Schema::dropIfExists('wiki_models');
     }
 };
