@@ -56,9 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
                 <textarea name="texto" id="texto" >{!! $wiki->texto !!}</textarea>
-            </div>
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
@@ -86,7 +84,7 @@
     <script>
         $(document).ready(function() {
             $('#texto').summernote({
-                lang: 'pt-BR', // default: 'en-US'
+                lang: 'pt-BR',
                 height: 300,
                 // toolbar: [
                 //     [ 'style', [ 'style' ] ],

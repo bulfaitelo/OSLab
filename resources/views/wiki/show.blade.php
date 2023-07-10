@@ -17,17 +17,25 @@
                 <div class="d-flex justify-content-between">
                     <h3 class="card-title">Wiki</h3>
                     @can('wiki_edit')
-                    <a href="{{ route('wiki.edit', $wiki->id) }}" title="Editar" >
+                    {{-- <a href="{{ route('wiki.edit', $wiki->id) }}" title="Editar" >
                         <button type="button" class="btn btn-primary btn-sm">
                             <i class="fas fa-edit"></i>
                             Editar
                         </button>
-                    </a>
+                    </a> --}}
+                    <button id="edit" class="btn btn-primary" onclick="edit()" type="button">
+                        <i class="fas fa-edit"></i>
+                        Editar
+                    </button>
+                    <button style="display: none" id="save" class="btn btn-primary" onclick="save()" type="button">
+                        <i class="fas fa-save"></i>
+                        Salvar
+                    </button>
                     @endcan
                 </div>
             </div>
             <div class="card-body">
-                {!! $wiki->texto !!}
+                <div id="texto_wiki" class="texto_wiki">{!! $wiki->texto !!}</div>
             </div>
         </div>
     </div>
@@ -157,10 +165,72 @@
 @stop
 
 @section('css')
+<link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
 
 @stop
 @section('js')
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+@routes
+<script>
+    function edit() {
+        $('.texto_wiki').summernote({focus: true});
+        $('#edit').css('display', 'none');
+        $('#save').css('display', '');
+    };
+    function save() {
+        var texto = $("#texto_wiki").summernote("code")
+        var id = {{ $wiki->id }}
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: route('wiki.text.update', id),
+            method: 'PUT',
+            data: {
+                texto: texto,
+            },
+            success: function(response) {
+                console.log(response);
+                flasher.success(response.text);
+            },
+            error: function(xhr, status, error) {
+                flasher.error('Ouve um erro, recarregue a pagina e tente novamente');
+            }
+        });
+
+        $('.texto_wiki').summernote('destroy');
+        $('#edit').css('display', '');
+        $('#save').css('display', 'none');
+    };
+</script>
+<script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
+<script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#texto').summernote({
+            lang: 'pt-BR',
+            height: 300,
+            // toolbar: [
+            //     [ 'style', [ 'style' ] ],
+            //     [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+            //     [ 'fontname', [ 'fontname' ] ],
+            //     [ 'fontsize', [ 'fontsize' ] ],
+            //     [ 'color', [ 'color' ] ],
+            //     [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+            //     [ 'table', [ 'table' ] ],
+            //     [ 'insert', [ 'link'] ],
+            //     [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+            // ]
+        });
+    });
+
+
+
+</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
 @stop
 @section('footer')
 
