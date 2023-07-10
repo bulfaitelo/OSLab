@@ -5,7 +5,7 @@
 @section('title', 'Home')
 
 @section('content_header')
-    <h1>[{{ $wiki->fabricante->name }}] -  {{ $wiki->name}} </h1>
+    <h1><b>[{{ $wiki->fabricante->name }}]</b> -  {{ $wiki->name}} </h1>
     <h6>{{ $wiki->modelosTitle() }}</h6>
 @stop
 
@@ -15,16 +15,19 @@
         <div class="card">
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
-                    <h3 class="card-title">Online Store Visitors</h3>
-                    <button type="button" class="btn btn-primary btn-sm">Editar</button>
+                    <h3 class="card-title">Wiki</h3>
+                    @can('wiki_edit')
+                    <a href="{{ route('wiki.edit', $wiki->id) }}" title="Editar" >
+                        <button type="button" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit"></i>
+                            Editar
+                        </button>
+                    </a>
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo temporibus, inventore est, architecto quisquam nam cum enim natus laborum voluptatem ipsam, minima quidem sapiente nulla at autem provident quibusdam odit?
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod iusto eum, obcaecati nemo ipsa non quidem. Consequatur, eius in! Earum eius at nam qui atque distinctio, sapiente adipisci eveniet nihil.
-                Magnam fugiat sit doloribus, iure eos perspiciatis? Minus, mollitia non? Nihil consequatur nisi rerum porro asperiores. Optio dolore perferendis, corporis obcaecati ad quas harum cum facere incidunt deserunt architecto distinctio.
-                Commodi pariatur tempora quae rerum magnam. Fugit modi iusto velit est saepe possimus voluptas tempore eius architecto quia earum temporibus quas, laboriosam distinctio. Quam at cumque alias illo nam eveniet.
-                Blanditiis, unde asperiores eum ex recusandae odio quos placeat, veritatis qui officia, et illo odit? Nihil dolore optio, totam similique, et quisquam, minus libero maiores distinctio voluptatibus repudiandae sunt velit!
+                {!! $wiki->texto !!}
             </div>
         </div>
     </div>

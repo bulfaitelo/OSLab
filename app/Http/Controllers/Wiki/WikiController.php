@@ -79,7 +79,7 @@ class WikiController extends Controller
      */
     public function edit(Wiki $wiki)
     {
-        //
+        return view('wiki.edit', compact('wiki'));
     }
 
     /**
