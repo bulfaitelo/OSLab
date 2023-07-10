@@ -2,7 +2,7 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Home')
+@section('title', 'Wiki - '. $wiki->name)
 
 @section('content_header')
     <h1><b>[{{ $wiki->fabricante->name }}]</b> -  {{ $wiki->name}} </h1>
