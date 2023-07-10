@@ -27,32 +27,48 @@
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        <table class="table table-sm">
+        <table class="table table-sm table-hover">
           <thead>
             <tr>
               <th style="width: 10px">#</th>
               <th>Nome</th>
               <th>Modelos</th>
               <th>Categoria Padrão</th>
-              <th>Usuário</th>
+              <th>Criado pelo usuario</th>
               <th style="width: 40px"></th>
             </tr>
           </thead>
           <tbody>
             @foreach ($wikis as $item)
-              <tr>
+              <tr >
                 <td>{{ $item->id }}</td>
-                <td>{{ $item->name}}</td>
-                <td>{{ $item->name}}</td>
-                <td>{{ $item->categoria_id}}</td>
-                <td>{{ $item->user_id}}</td>
+                <td>
+                    @can('wiki_show')
+                        <a href="{{ route('wiki.show', $item->id) }}">
+                            {{ $item->name}}
+                        </a>
+                    @else()
+                        {{ $item->name}}
+                    @endcan
+                </td>
+                <td>
+                    @can('wiki_show')
+                        <a href="{{ route('wiki.show', $item->id) }}">
+                            {{ $item->modelosTitle()}}
+                        </a>
+                    @else()
+                        {{ $item->modelosTitle()}}
+                    @endcan
+                </td>
+                <td>{{ $item->categoria->name}}</td>
+                <td>{{ $item->user->name}}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        @can('wiki_edit')
-                            <a href="{{ route('wiki.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                        @endcan
                         @can('wiki_show')
                             <a href="{{ route('wiki.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                        @endcan
+                        @can('wiki_edit')
+                            <a href="{{ route('wiki.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                         @endcan
                         @can('wiki_destroy')
                         <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>

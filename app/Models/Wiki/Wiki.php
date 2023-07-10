@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Configuracao\Wiki\Fabricante;
-
+use App\Models\User;
+use App\Models\Configuracao\Os\CategoriaOs;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Wiki extends Model
 {
@@ -27,6 +29,16 @@ class Wiki extends Model
             $return.= $value->name.', ';
         }
         return rtrim($return, ', ');
+    }
+
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function categoria() : BelongsTo
+    {
+        return $this->belongsTo(CategoriaOs::class);
     }
 
 }
