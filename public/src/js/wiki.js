@@ -8,7 +8,11 @@ var id = route().params.wiki
 
 // WIKI
 function editWiki() {
-    $('.texto_wiki').summernote({focus: true});
+    $('.texto_wiki').summernote({
+        focus: true,
+        lang: 'pt-BR',
+        height: 300,
+    });
     $('#edit_wiki').css('display', 'none');
     $('#save_wiki').css('display', '');
 };
