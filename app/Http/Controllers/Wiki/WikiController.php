@@ -146,6 +146,7 @@ class WikiController extends Controller
         $imageFile = $dom->getElementsByTagName('img');
         $imagePath = "/uploads/wiki/". $id . "/imgs/";
         $path = public_path() . $imagePath;
+        $arrayImageUrl = [] ;
         foreach ($imageFile as $item => $image) {
             $data = $image->getAttribute('src');
             if(preg_match('/^data:image/m', $data)){
