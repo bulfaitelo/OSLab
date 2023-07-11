@@ -105,7 +105,7 @@
                                     <td class="p-2 text-truncate" >
                                         <a href="{{ $item->link }}" target="_blank" rel="noopener noreferrer">
                                             @if (strlen($item->name) > 0)
-                                                {{ $item->name }}
+                                                <b>{{ $item->name }}</b>
                                             @else
                                                 {{ $item->link }}
                                             @endif
@@ -277,20 +277,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     @routes
     <script src="{{ asset('src/js/wiki.js') }}"></script>
-    {{-- summernote --}}
     <script src="{{ url('') }}/vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="{{ url('') }}/vendor/jquery-validation/additional-methods.min.js"></script>
 
+    {{-- summernote --}}
     <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
     <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#texto').summernote({
-                lang: 'pt-BR',
-                height: 300,
-            });
-        });
-    </script>
     {{-- summernote --}}
     <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
     <script>
