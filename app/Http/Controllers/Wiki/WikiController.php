@@ -141,7 +141,7 @@ class WikiController extends Controller
     private function trataImagemEnviada($text, $id) {
         // tratando as imagens enviadas.
         $dom = new \DOMDocument();
-        @$dom->loadHTML($text, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        @$dom->loadHTML($this->utf8_to_iso8859_1($text), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $dom->encoding = 'utf-8';
         $imageFile = $dom->getElementsByTagName('img');
         $imagePath = "/uploads/wiki/". $id . "/imgs/";
@@ -174,5 +174,34 @@ class WikiController extends Controller
             }
         }
         return $dom->saveHTML($dom->documentElement);
+    }
+
+    private function utf8_to_iso8859_1(string $string): string {
+        $s = (string) $string;
+        $len = \strlen($s);
+
+        for ($i = 0, $j = 0; $i < $len; ++$i, ++$j) {
+            switch ($s[$i] & "\xF0") {
+                case "\xC0":
+                case "\xD0":
+                    $c = (\ord($s[$i] & "\x1F") << 6) | \ord($s[++$i] & "\x3F");
+                    $s[$j] = $c < 256 ? \chr($c) : '?';
+                    break;
+
+                case "\xF0":
+                    ++$i;
+                    // no break
+
+                case "\xE0":
+                    $s[$j] = '?';
+                    $i += 2;
+                    break;
+
+                default:
+                    $s[$j] = $s[$i];
+            }
+        }
+
+        return substr($s, 0, $j);
     }
 }
