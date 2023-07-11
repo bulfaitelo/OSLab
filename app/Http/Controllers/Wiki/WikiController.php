@@ -166,9 +166,11 @@ class WikiController extends Controller
             }
         }
         // Limpando imagens não usadas.
-        foreach (File::allFiles($path) as  $file) {
-            if (!in_array($file->getFileName(), $arrayImageUrl)) {
-                unlink($path.$file->getFileName());
+        if (File:: isDirectory($path)) {
+            foreach (File::allFiles($path) as  $file) {
+                if (!in_array($file->getFileName(), $arrayImageUrl)) {
+                    unlink($path.$file->getFileName());
+                }
             }
         }
         return $dom->saveHTML($dom->documentElement);
