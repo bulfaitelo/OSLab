@@ -11,11 +11,12 @@
 
 @section('content')
 <div class="row">
+    {{-- WIKI --}}
     <div class="col-md-9">
         <div class="card">
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
-                    <h3 class="card-title">Wiki</h3>
+                    <h3 class="card-title"><b>Wiki</b></h3>
                     @can('wiki_edit')
                     {{-- <a href="{{ route('wiki.edit', $wiki->id) }}" title="Editar" >
                         <button type="button" class="btn btn-primary btn-sm">
@@ -23,11 +24,11 @@
                             Editar
                         </button>
                     </a> --}}
-                    <button id="edit" class="btn btn-primary" onclick="edit()" type="button">
+                    <button id="edit_wiki" class="btn btn-primary btn-sm" onclick="editWiki()" type="button">
                         <i class="fas fa-edit"></i>
                         Editar
                     </button>
-                    <button style="display: none" id="save" class="btn btn-primary" onclick="save()" type="button">
+                    <button style="display: none" id="save_wiki" class="btn btn-primary btn-sm" onclick="saveWiki()" type="button">
                         <i class="fas fa-save"></i>
                         Salvar
                     </button>
@@ -39,60 +40,159 @@
             </div>
         </div>
     </div>
+    {{-- Fim - Wiki --}}
+    {{-- Links e arquivos --}}
     <div class="col-md-3">
         <div class="row">
+            {{-- Links --}}
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header border-0">
+                    <div class="p-2 card-header border-0">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Links</h3>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i></button>
+                            <h3 class="card-title"><b>Links</b></h3>
+                            {{-- <button type="button" class="btn btn-primary btn-sm pop_info" data-toggle="popover" data-placement="left" data-content="Adicionar Link"><i class="fas fa-plus-square"></i></button> --}}
+                            @can('wiki_link_create')
+                                <button type="button" class="btn btn-primary btn-sm pop_info" data-toggle="modal" data-target="#modal-link" title="Adicionar Link"><i class="fas fa-plus-square"></i></button>
+                                <div class="modal fade" id="modal-link">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="linkForm">
 
+
+                                            {!! html()->form('post',route('wiki.link.create', $wiki))->open() !!}
+                                            {{-- <form id="linkForm"> --}}
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Adicionar Novo Link</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="name_link">Nome</label>
+                                                        {!! html()->text('name_link')->class('form-control')->placeholder('Descrição do link (opcional)') !!}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="link">Link</label>
+                                                        {!! html()->text('link')->class('form-control')->placeholder('Link')->required() !!}
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        <i class="fas fa-times"></i>
+                                                        Fechar
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fas fa-save"></i>
+                                                        Salvar
+                                                    </button>
+                                                </div>
+                                            {!! html()->form()->close() !!}
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            @endcan
                         </div>
                     </div>
                     <div class="card-body p-0">
-                        <table class="table table-sm">
+                        <table id="table_link" class="table table-sm lateral_table ">
                             <tbody>
+                                @forelse ($wiki->links as $item)
                                 <tr>
-                                    <td>Manual de Uso</td>
-                                    <td style="width: 40px" >
-                                        <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_"><i class="fas fa-trash"></i></button>
-                                        </div>
+                                    <td class="p-2 text-truncate" >
+                                        <a href="{{ $item->link }}" target="_blank" rel="noopener noreferrer">
+                                            @if (strlen($item->name) > 0)
+                                                {{ $item->name }}
+                                            @else
+                                                {{ $item->link }}
+                                            @endif
+                                        </a>
                                     </td>
+                                    <td class="text-right" style="width: 40px" >
+                                        @can('wiki_link_destroy')
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        @endcan
+                                    </td>
+                                    @can('wiki_link_destroy')
+                                        <div class="modal fade" id="modal-excluir_{{ $item->id }}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <p><b>Nome:</b>
+                                                        @if (strlen($item->name) > 0)
+                                                            {{ $item->name }}
+                                                        @else
+                                                            {{ $item->link }}
+                                                        @endif
+                                                    </p>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                        {!! html()->form('delete', route('wiki.link.destroy', [$wiki->id, $item->id]))->open() !!}
+                                                            <input type="submit" class="btn btn-danger delete-permission" value="Excluir Wiki">
+                                                        {!! html()->form()->close() !!}
+
+                                                    </div>
+                                                </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    @endcan
                                 </tr>
+
+                                @empty
+
+                                @endforelse
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            {{-- Fim Links --}}
+            {{-- ARQUIVOS --}}
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header border-0">
+                    <div class="p-2 card-header border-0">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Arquivos</h3>
-                            <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus-square"></i></button>
-
+                            <h3 class="card-title"><b>Arquivos</b></h3>
+                            <button type="button" class="btn btn-primary btn-sm pop_info" data-toggle="popover" data-placement="left" data-content="Adicionar Link"><i class="fas fa-plus-square"></i></button>
                         </div>
                     </div>
                     <div class="card-body p-0">
-                        <table class="table table-sm">
+
+                        <table class="table table-sm lateral_table">
                             <tbody>
                                 <tr>
-                                    <td>Firmware... sd.asdssd lorem sdf</td>
-                                    <td style="width: 40px" >
-                                        <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_"><i class="fas fa-trash"></i></button>
-                                        </div>
+                                    <td class="p-2 text-truncate" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quae officia suscipit quis tempora laboriosam nulla. Error et dolores, possimus nostrum aspernatur excepturi dolorum, nobis vel consequatur ea quidem recusandae!</td>
+                                    <td class="text-right" style="width: 40px" >
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-excluir_">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            {{-- Fim ARQUIVOS --}}
         </div>
     </div>
+    {{-- Fim - Links e arquivos --}}
 
 </div>
 <div class="row">
@@ -165,72 +265,39 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
+    <style>
+        .lateral_table {
+            table-layout: fixed
+        }
+    </style>
 
 @stop
 @section('js')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @routes
+    <script src="{{ asset('src/js/wiki.js') }}"></script>
+    {{-- summernote --}}
+    <script src="{{ url('') }}/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="{{ url('') }}/vendor/jquery-validation/additional-methods.min.js"></script>
 
-<meta name="csrf-token" content="{{ csrf_token() }}" />
-@routes
-<script>
-    function edit() {
-        $('.texto_wiki').summernote({focus: true});
-        $('#edit').css('display', 'none');
-        $('#save').css('display', '');
-    };
-    function save() {
-        var texto = $("#texto_wiki").summernote("code")
-        var id = {{ $wiki->id }}
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+    <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#texto').summernote({
+                lang: 'pt-BR',
+                height: 300,
+            });
         });
-        $.ajax({
-            url: route('wiki.text.update', id),
-            method: 'PUT',
-            data: {
-                texto: texto,
-            },
-            success: function(response) {
-                console.log(response);
-                flasher.success(response.text);
-            },
-            error: function(xhr, status, error) {
-                flasher.error('Ouve um erro, recarregue a pagina e tente novamente');
-            }
-        });
-
-        $('.texto_wiki').summernote('destroy');
-        $('#edit').css('display', '');
-        $('#save').css('display', 'none');
-    };
-</script>
-<script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
-<script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#texto').summernote({
-            lang: 'pt-BR',
-            height: 300,
-            // toolbar: [
-            //     [ 'style', [ 'style' ] ],
-            //     [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
-            //     [ 'fontname', [ 'fontname' ] ],
-            //     [ 'fontsize', [ 'fontsize' ] ],
-            //     [ 'color', [ 'color' ] ],
-            //     [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
-            //     [ 'table', [ 'table' ] ],
-            //     [ 'insert', [ 'link'] ],
-            //     [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
-            // ]
-        });
-    });
-
-
-
-</script>
+    </script>
+    {{-- summernote --}}
     <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
+    <script>
+        $('.pop_info').popover({
+        trigger: 'hover'
+        });
+    </script>
 @stop
 @section('footer')
 

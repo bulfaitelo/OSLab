@@ -23,6 +23,10 @@ class Wiki extends Model
         return $this->hasMany(Modelo::class);
     }
 
+    public function links () {
+        return $this->hasMany(Link::class);
+    }
+
     public function modelosTitle() {
         $return = "";
         foreach ($this->modelos as $value) {

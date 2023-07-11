@@ -21,4 +21,5 @@ Route::group(['middleware'=> 'auth'], function() {
 
     Route::put('/wiki/text/{wiki}', [WikiController::class, 'textUpdate'])->name('wiki.text.update');
 
+
 });

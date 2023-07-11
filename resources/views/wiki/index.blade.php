@@ -72,27 +72,29 @@
                         @endcan
                         @can('wiki_destroy')
                         <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
+                        @endcan
                     </div>
+                        @can('wiki_destroy')
                         <div class="modal fade" id="modal-excluir_{{ $item->id }}">
                             <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                <p><b>Nome:</b> {{ $item->name}}</p>
-                                </div>
-                                <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                    {!! html()->form('delete', route('wiki.destroy', $item->id))->open() !!}
-                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Wiki">
-                                    {!! html()->form()->close() !!}
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <p><b>Nome:</b> {{ $item->name}}</p>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        {!! html()->form('delete', route('wiki.destroy', $item->id))->open() !!}
+                                            <input type="submit" class="btn btn-danger delete-permission" value="Excluir Wiki">
+                                        {!! html()->form()->close() !!}
 
+                                    </div>
                                 </div>
-                            </div>
                             <!-- /.modal-content -->
                             </div>
                             <!-- /.modal-dialog -->

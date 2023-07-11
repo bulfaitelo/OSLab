@@ -47,6 +47,19 @@ class DefaultsConfigPermissionsWiki extends Seeder
             ],
 
             [
+                'description' => 'Cadastrar Links na Wiki',
+                'name' => 'wiki_link_create',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+            [
+                'description' => 'Excluir Links da Wiki',
+                'name' => 'wiki_link_destroy',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+
+            [
                 'description' => 'Acesso a Configuração de Fabricantes',
                 'name' => 'config_wiki_fabricante',
                 'guard_name' => 'web',
@@ -107,6 +120,8 @@ class DefaultsConfigPermissionsWiki extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 9,
             ],
+
+
 
 
         ];

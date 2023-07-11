@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Wiki;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Wiki\StoreLinkRequest;
 use App\Http\Requests\Wiki\StoreWikiRequest;
 use App\Http\Requests\Wiki\UpdateWikiRequest;
 use App\Models\Wiki\Wiki;
 use App\Models\Configuracao\Wiki\Modelo;
+use App\Models\Wiki\Link;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -22,6 +24,11 @@ class WikiController extends Controller
         $this->middleware('permission:wiki_show', ['only'=> 'show']);
         $this->middleware('permission:wiki_edit', ['only'=> ['edit', 'update', 'textUpdate']]);
         $this->middleware('permission:wiki_destroy', ['only'=> 'destroy']);
+
+        $this->middleware('permission:wiki_link_create', ['only'=> ['linkCreate']]);
+        $this->middleware('permission:wiki_link_destroy', ['only'=> 'linkDestroy']);
+
+
 
     }
     /**
@@ -128,6 +135,59 @@ class WikiController extends Controller
                 'text' =>  'Ouve um erro, recarregue a pagina e tente novamente'
             ];
             return response()->json($response, 403);
+        }
+    }
+
+    /**
+     * Update Links Wiki
+     *
+     * recebe o link via post para inserir dentro do formulário
+     *
+     * @param Request $request Request
+     * @param Wiki $wiki Request
+     * @return response
+     **/
+    public function linkCreate(StoreLinkRequest $request, Wiki $wiki)
+    {
+
+        try {
+            $links = [
+                new Link([
+                    'name' => $request->name_link,
+                    'link' => $request->link,
+                    'wiki_id' => $wiki->id,
+                    'user_id' => Auth::id(),
+                ]),
+            ];
+            $wiki->links()->saveMany($links);
+            $response = [
+                'text' =>  'Link adicionado com sucesso.'
+            ];
+            return redirect()->route('wiki.show', $wiki->id)
+                ->with('success', 'Link cadastrado com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    /**
+     * Deletando Links da Wiki
+     *
+     * Undocumented function long description
+     *
+     * @param Wiki $wiki Description
+     * @param Link $Link Description
+     * @return response
+     **/
+    public function linkDestroy(Wiki $wiki, Link $link)
+    {
+        try {
+            $link->delete();
+            return redirect()->route('wiki.show', $wiki)
+                ->with('success', 'Link excluído com sucesso.');
+
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 

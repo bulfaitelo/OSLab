@@ -45,6 +45,10 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/produto', ProdutoController::class);
     Route::resource('/produto/{produto}/movimentacao', MovimentacaoController::class);
     Route::resource('/wiki', WikiController::class);
+    Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');
+    Route::delete('/wiki/link/{wiki}/{link}', [WikiController::class, 'linkDestroy'])->name('wiki.link.destroy');
+
+    // Route::get('/wiki/link/{wiki}', [WikiController::class, 'linkGet'])->name('wiki.link.get');
 
     // Agrupamento de rotas de Configuração
     Route::name('configuracao.')->prefix('configuracoes')->group( function (){
