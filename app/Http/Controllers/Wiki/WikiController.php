@@ -113,6 +113,7 @@ class WikiController extends Controller
     public function destroy(Wiki $wiki)
     {
         try {
+            Storage::deleteDirectory('public/wiki/'.$wiki->id);
             $wiki->delete();
             return redirect()->route('wiki.index')
                 ->with('success', 'Wiki excluída com sucesso.');
