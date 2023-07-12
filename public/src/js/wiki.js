@@ -63,13 +63,11 @@ function saveWiki() {
     // }
 
 
-    // Validação
+
+
+    // Validação - LINK
     $(function () {
-        $.validator.setDefaults({
-            submitHandler: function () {
-                saveLink()
-            }
-        });
+
         $('#linkForm').validate({
             rules: {
                 link: {
@@ -97,6 +95,39 @@ function saveWiki() {
             }
         });
     });
+
+    // Validação FILE
+    // $(function () {
+    //     $('#fileForm').validate({
+    //         rules: {
+    //             arquivo_import: {
+    //                 required: true,
+    //                 extension: "pdf",
+    //             },
+    //             name_file: {
+    //                 required: true
+    //             }
+
+    //         },
+    //         messages: {
+    //             arquivo_import: {
+    //                 required: "Por favor carregue o Arquivo",
+    //                 extension: "Por favor carregue um arquivo valido"
+    //             },
+    //         },
+    //         errorElement: 'span',
+    //         errorPlacement: function (error, element) {
+    //             error.addClass('invalid-feedback');
+    //             element.closest('.form-group').append(error);
+    //         },
+    //         highlight: function (element, errorClass, validClass) {
+    //             $(element).addClass('is-invalid');
+    //         },
+    //         unhighlight: function (element, errorClass, validClass) {
+    //             $(element).removeClass('is-invalid');
+    //         }
+    //     });
+    // });
     // FIM - Validação
 
     // GErando listagem de links

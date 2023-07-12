@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Wiki;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Wiki\StoreFileRequest;
 use App\Http\Requests\Wiki\StoreLinkRequest;
 use App\Http\Requests\Wiki\StoreWikiRequest;
 use App\Http\Requests\Wiki\UpdateWikiRequest;
 use App\Models\Wiki\Wiki;
 use App\Models\Configuracao\Wiki\Modelo;
+use App\Models\Wiki\File as WikiFile;
 use App\Models\Wiki\Link;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use File;
+use Illuminate\Support\Facades\Storage;
 
 class WikiController extends Controller
 {
@@ -160,9 +163,6 @@ class WikiController extends Controller
                 ]),
             ];
             $wiki->links()->saveMany($links);
-            $response = [
-                'text' =>  'Link adicionado com sucesso.'
-            ];
             return redirect()->route('wiki.show', $wiki->id)
                 ->with('success', 'Link cadastrado com sucesso.');
         } catch (\Throwable $th) {
@@ -191,6 +191,135 @@ class WikiController extends Controller
         }
     }
 
+
+    /**
+     * Criando arquivo na wiki
+     *
+     *
+     * @param Wiki $wiki WIki
+     * @param Request $request
+     * @return response
+     **/
+    public function fileCreate(Wiki $wiki, StoreFileRequest $request)
+    {
+        try {
+            $fileName = $this->createFileName($request);
+            $file = new WikiFile();
+            $file->name = $request->name_file;
+            $file->wiki_id = $wiki->id;
+            $file->user_id = Auth::id();
+            $file->file = $this->storageFile($request, $wiki, $fileName);
+            $file->file_name = $fileName;
+            $file->save();
+            return redirect()->route('wiki.show', $wiki->id)
+                ->with('success', 'Arquivo carregado com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    /**
+     * Apagando Arquivos da Wiki
+     *
+     * @param Wiki $wiki Wiki Model
+     * @return response
+
+     **/
+    public function fileDestroy(Wiki $wiki, WikiFile $file )
+    {
+        try {
+            $path = 'public/'.$file->file;
+            if (Storage::fileExists($path)) {
+                Storage::delete($path);
+            }
+            $file->delete();
+
+            return redirect()->route('wiki.show', $wiki)
+                ->with('success', 'Arquivo excluído com sucesso.');
+
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+
+
+    /**
+     * undocumented function summary
+     *
+     * Undocumented function long description
+     *
+     * @param Request $var Description
+     * @param Wiki $var Description
+     * @param Type $var Description
+     * @return String $fileUploaded
+     **/
+    private function storageFile($request, $wiki ,$fileName)
+    {
+        $fileUploaded = $request->arquivo_import->storeAs(
+            'wiki/'.$wiki->id. '/files/',
+            $fileName.'.'.$request->arquivo_import->getClientOriginalExtension(),
+            'public'
+        );
+        if (!$fileUploaded) {
+            throw new \Exception("Houve um erro com o upload do arquivo, reveja o tamanho dele ou as configurações do servidor!", 1);
+        }
+
+        return $fileUploaded;
+
+    }
+
+
+    /**
+     * undocumented function summary
+     *
+     * Undocumented function long description
+     *
+     * @param Type $var Description
+     * @return type
+     * @throws conditon
+     **/
+    private function createFileName($request)
+    {
+        $fileName = $this->removeSpecialChars($request->arquivo_import->getClientOriginalName()).'_'.$this->generateRandomLetters(7);;
+        return $fileName;
+    }
+
+    /**
+     * Gera letras aleatórias para upload de arquivos.
+     *
+     * @param Integer $length Tamanho do uuid
+     * @return String uuid
+     **/
+    private function generateRandomLetters($length) {
+        $random = '';
+        for ($i = 0; $i < $length; $i++) {
+            $random .= chr(rand(ord('a'), ord('z')));
+        }
+        return $random;
+    }
+
+    /**
+     * Tratando caracteres par remover possíveis caracteres inválidos.
+     *
+     * @param String $str
+     * @return String
+     **/
+    private function removeSpecialChars($str) {
+        $str = preg_replace('/[áàãâä]/ui', 'a', $str);
+        $str = preg_replace('/[éèêë]/ui', 'e', $str);
+        $str = preg_replace('/[íìîï]/ui', 'i', $str);
+        $str = preg_replace('/[óòõôö]/ui', 'o', $str);
+        $str = preg_replace('/[úùûü]/ui', 'u', $str);
+        $str = preg_replace('/[ç]/ui', 'c', $str);
+        // $str = preg_replace('/[,(),;:|!"#$%&/=?~^><ªº-]/', '_', $str);
+        $str = preg_replace('/[^a-z0-9]/i', '_', $str);
+        $str = preg_replace('/_+/', '_', $str); // ideia do Bacco :)
+        return $str;
+    }
+
+
     /**
      * Trata o texto e enviar as imagens para a pasta upload.
      * @param string $text
@@ -204,7 +333,7 @@ class WikiController extends Controller
         @$dom->loadHTML($this->utf8_to_iso8859_1($text), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $dom->encoding = 'utf-8';
         $imageFile = $dom->getElementsByTagName('img');
-        $imagePath = "/uploads/wiki/". $id . "/imgs/";
+        $imagePath = "/storage/wiki/". $id . "/imgs/";
         $path = public_path() . $imagePath;
         $arrayImageUrl = [] ;
         foreach ($imageFile as $item => $image) {

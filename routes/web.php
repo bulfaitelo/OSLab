@@ -47,6 +47,8 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');
     Route::delete('/wiki/link/{wiki}/{link}', [WikiController::class, 'linkDestroy'])->name('wiki.link.destroy');
+    Route::post('/wiki/file/{wiki}', [WikiController::class, 'fileCreate'])->name('wiki.file.create');
+    Route::delete('/wiki/file/{wiki}/{file}', [WikiController::class, 'fileDestroy'])->name('wiki.file.destroy');
 
     // Route::get('/wiki/link/{wiki}', [WikiController::class, 'linkGet'])->name('wiki.link.get');
 

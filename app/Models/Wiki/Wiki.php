@@ -27,6 +27,10 @@ class Wiki extends Model
         return $this->hasMany(Link::class);
     }
 
+    public function files () {
+        return $this->hasMany(File::class);
+    }
+
     public function modelosTitle() {
         $return = "";
         foreach ($this->modelos as $value) {

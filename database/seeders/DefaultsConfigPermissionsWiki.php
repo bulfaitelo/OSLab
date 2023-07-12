@@ -60,6 +60,19 @@ class DefaultsConfigPermissionsWiki extends Seeder
             ],
 
             [
+                'description' => 'Cadastrar Arquivo na Wiki',
+                'name' => 'wiki_file_create',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+            [
+                'description' => 'Excluir Arquivo da Wiki',
+                'name' => 'wiki_file_destroy',
+                'guard_name' => 'web',
+                'group_id' => 9,
+            ],
+
+            [
                 'description' => 'Acesso a Configuração de Fabricantes',
                 'name' => 'config_wiki_fabricante',
                 'guard_name' => 'web',
