@@ -31,6 +31,9 @@ class WikiController extends Controller
         $this->middleware('permission:wiki_link_create', ['only'=> ['linkCreate']]);
         $this->middleware('permission:wiki_link_destroy', ['only'=> 'linkDestroy']);
 
+        $this->middleware('permission:wiki_file_create', ['only'=> ['fileCreate']]);
+        $this->middleware('permission:wiki_file_destroy', ['only'=> 'fileDestroy']);
+
 
 
     }
