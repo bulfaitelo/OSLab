@@ -59,8 +59,9 @@
                                             <div class="linkForm">
 
 
-                                            {!! html()->form('post',route('wiki.link.create', $wiki))->open() !!}
-                                            {{-- <form id="linkForm"> --}}
+                                            {{-- {!! html()->form('post',route('wiki.link.create', $wiki))->open() !!} --}}
+                                            <form action="{{ route('wiki.link.create', $wiki) }}" id="linkForm" method="post">
+                                            @csrf
                                                 <div class="modal-header">
                                                     <h4 class="modal-title">Adicionar Novo Link</h4>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
