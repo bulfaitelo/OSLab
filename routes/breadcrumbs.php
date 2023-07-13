@@ -4,6 +4,7 @@
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
 // this import. This is nice for IDE syntax and refactoring.
 
+use App\Models\Checklist\Checklist;
 use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Os\CategoriaOs;
@@ -105,6 +106,31 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Serviço', route('wiki.edit', $item));
     });
 // FIM Wiki
+
+// Checklist
+Breadcrumbs::for('checklist.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Checklist', route('checklist.index'));
+});
+
+// Checklist > Novo Checklist
+Breadcrumbs::for('checklist.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('checklist.index');
+    $trail->push('Nova Checklist', route('checklist.create'));
+});
+
+// Checklist > [Visualização de Checklist]
+Breadcrumbs::for('checklist.show', function (BreadcrumbTrail $trail, Checklist $item) {
+    $trail->parent('checklist.index');
+    $trail->push($item->name, route('checklist.show', $item));
+});
+
+// Checklist > [Checklist Name] > Editar Checklist
+Breadcrumbs::for('checklist.edit', function (BreadcrumbTrail $trail, Checklist $item) {
+    $trail->parent('checklist.index');
+    $trail->push('Editar Checklist', route('checklist.edit', $item));
+});
+// FIM Checklist
 
 // Produtos
     Breadcrumbs::for('produto.index', function (BreadcrumbTrail $trail) {

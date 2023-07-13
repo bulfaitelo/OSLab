@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Checklist\ChecklistController;
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Os\GarantiaController;
@@ -44,12 +45,14 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/servico', ServicoController::class);
     Route::resource('/produto', ProdutoController::class);
     Route::resource('/produto/{produto}/movimentacao', MovimentacaoController::class);
+
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');
     Route::delete('/wiki/link/{wiki}/{link}', [WikiController::class, 'linkDestroy'])->name('wiki.link.destroy');
     Route::post('/wiki/file/{wiki}', [WikiController::class, 'fileCreate'])->name('wiki.file.create');
     Route::delete('/wiki/file/{wiki}/{file}', [WikiController::class, 'fileDestroy'])->name('wiki.file.destroy');
 
+    Route::resource('/checklist', ChecklistController::class);
     // Route::get('/wiki/link/{wiki}', [WikiController::class, 'linkGet'])->name('wiki.link.get');
 
     // Agrupamento de rotas de Configuração

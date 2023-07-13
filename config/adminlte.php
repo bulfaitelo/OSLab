@@ -350,6 +350,13 @@ return [
             'can'     => 'wiki',
         ],
         [
+            'text'    => 'Checklist',
+            'icon'    => 'fa-solid fa-list-check',
+            'route'   => 'checklist.index',
+            'active'  => ['checklist*'],
+            'can'     => 'checklist',
+        ],
+        [
             // 'topnav' => true,
             'text'    => '',
             'icon'    => 'fas fa-cogs',
@@ -508,7 +515,7 @@ return [
         [
             'text'       => 'Font Awesome',
             'icon'       => 'fas fa-external-link-square-alt',
-            'url'        => 'https://fontawesome.com/v5/search',
+            'url'        => 'https://fontawesome.com/search',
             'target' => '_blank',
             'can'     => 'config_url',
         ],
