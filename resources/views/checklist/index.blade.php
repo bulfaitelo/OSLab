@@ -32,7 +32,6 @@
             <tr>
               <th style="width: 10px">#</th>
               <th>Nome</th>
-              <th>Modelos</th>
               <th>Categoria Padrão</th>
               <th>Criado pelo usuario</th>
               <th style="width: 40px"></th>
@@ -42,26 +41,9 @@
             @foreach ($checklists as $item)
               <tr >
                 <td>{{ $item->id }}</td>
-                <td>
-                    @can('checklist_show')
-                        <a href="{{ route('checklist.show', $item->id) }}">
-                            {{ $item->name}}
-                        </a>
-                    @else()
-                        {{ $item->name}}
-                    @endcan
-                </td>
-                <td>
-                    @can('checklist_show')
-                        <a href="{{ route('checklist.show', $item->id) }}">
-                            {{ $item->modelosTitle()}}
-                        </a>
-                    @else()
-                        {{ $item->modelosTitle()}}
-                    @endcan
-                </td>
-                <td>{{ $item->categoria->name}}</td>
-                <td>{{ $item->user->name}}</td>
+                <td>{{ $item->name}}</td>
+                <td>{{ $item->categoria->name }}</td>
+                <td>{{ $item->user->name }}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
                         @can('checklist_show')

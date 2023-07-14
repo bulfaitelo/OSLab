@@ -26,7 +26,8 @@
           <div class="card-body">
             @include('adminlte::partials.form-alert')
             {{-- {!! html()->form('post', route('checklist.store'))->acceptsFiles()->open() !!} --}}
-            <form action="{{ route('checklist.store') }}" id="formChecklist" method="post">
+            <form action="{{ route('checklist.update', $checklist->id) }}" id="formChecklist" method="post">
+                @method('put')
                 @csrf
                 <input type="hidden" name="checklist" id="checklist">
             <div class="col-md-12">
@@ -34,13 +35,13 @@
                     <div class="col-md-9">
                         <div class="form-group">
                             <label for="name">Nome</label>
-                            {!! html()->text('checklist_name')->class('form-control')->placeholder('Nome do Checklist')->required() !!}
+                            {!! html()->text('checklist_name', $checklist->name)->class('form-control')->placeholder('Nome do Checklist')->required() !!}
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="categoria_id">Categoria</label>
-                            {!! html()->select('categoria_id', \App\Models\Configuracao\Os\CategoriaOs::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                            {!! html()->select('categoria_id', \App\Models\Configuracao\Os\CategoriaOs::orderBy('name')->pluck('name', 'id'), $checklist->categoria_id)->class('form-control')->placeholder('Selecione') !!}
                         </div>
                     </div>
                 </div>
@@ -48,7 +49,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="descricao">Descrição</label>
-                    {!! html()->text('descricao')->class('form-control')->placeholder('Descrição do Checklist') !!}
+                    {!! html()->text('descricao', $checklist->descricao)->class('form-control')->placeholder('Descrição do Checklist') !!}
                 </div>
             </div>
             <div class="col-md-12">
@@ -83,7 +84,7 @@
 @stop
 
 @section('js')
-<meta name="csrf-token" content="{{ csrf_token() }}" />
+{{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
     @routes
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -103,6 +104,7 @@ $(document).ready(function () {
         location: '/vendor/form-builder/'
       },
       disabledActionButtons: ['data', 'save', 'clear'],
+      formData: '{!! $checklist->checklist !!}',
       disableFields: [
         'autocomplete',
         'button',
@@ -132,6 +134,7 @@ $(document).ready(function() {
   $('#formChecklist').submit(function(event) {
     event.preventDefault(); // Impede o comportamento padrão de envio do formulário
     var checklist = $form.actions.save();
+
 
     var objetoSerializado = JSON.stringify(checklist);
     $('#checklist').val(objetoSerializado);

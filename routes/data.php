@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Checklist\ChecklistController;
 use App\Http\Controllers\Wiki\WikiController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware'=> 'auth'], function() {
 
     Route::put('/wiki/text/{wiki}', [WikiController::class, 'textUpdate'])->name('wiki.text.update');
+    // Route::post('/checklist', [ChecklistController::class, 'checklistStore'])->name('checklistStore');
 
 
 });

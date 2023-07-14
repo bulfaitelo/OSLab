@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('checklists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('descricao');
-            $table->unsignedBigInteger('categoria_id');
+            $table->string('descricao')->nullable();
+            $table->unsignedBigInteger('categoria_id')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->json('checklist');
+            $table->json('checklist')->nullable();
             $table->timestamps();
         });
     }
