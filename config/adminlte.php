@@ -322,6 +322,13 @@ return [
         ],
         // ['header' => 'account_settings'],
         [
+            'text'    => 'OS',
+            'icon'    => 'fa-regular fa-rectangle-list',
+            'route'   => 'produto.index',
+            'active'  => ['produto*'],
+            'can'     => 'produto',
+        ],
+        [
             'text'    => 'Clientes',
             'icon'    => 'fa-solid fa-users',
             'route'   => 'cliente.index',
@@ -343,11 +350,11 @@ return [
             'can'     => 'servico',
         ],
         [
-            'text'    => 'Wiki',
-            'icon'    => 'fa-solid fa-book',
-            'route'   => 'wiki.index',
-            'active'  => ['wiki*'],
-            'can'     => 'wiki',
+            'text'    => 'Lançamentos',
+            'icon'    => 'fa-solid fa-chart-line',
+            'route'   => 'lancamento.index',
+            'active'  => ['lancamento*'],
+            'can'     => 'lancamento',
         ],
         [
             'text'    => 'Checklist',
@@ -355,6 +362,13 @@ return [
             'route'   => 'checklist.index',
             'active'  => ['checklist*'],
             'can'     => 'checklist',
+        ],
+        [
+            'text'    => 'Wiki',
+            'icon'    => 'fa-solid fa-book',
+            'route'   => 'wiki.index',
+            'active'  => ['wiki*'],
+            'can'     => 'wiki',
         ],
         [
             // 'topnav' => true,
