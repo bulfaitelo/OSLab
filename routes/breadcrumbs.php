@@ -13,6 +13,7 @@ use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
 use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\Configuracao\Wiki\Modelo;
+use App\Models\Lancamento\Lancamento;
 use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
@@ -106,6 +107,31 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Serviço', route('wiki.edit', $item));
     });
 // FIM Wiki
+
+// Lançamentos
+    Breadcrumbs::for('lancamento.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Lançamentos', route('lancamento.index'));
+    });
+
+    // Lançamentos > Novo Lançamento
+    Breadcrumbs::for('lancamento.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('lancamento.index');
+        $trail->push('Novo Lançamento', route('lancamento.create'));
+    });
+
+    // Lançamentos > [Visualização de Lançamento]
+    Breadcrumbs::for('lancamento.show', function (BreadcrumbTrail $trail, Lancamento $item) {
+        $trail->parent('lancamento.index');
+        $trail->push($item->name, route('lancamento.show', $item));
+    });
+
+    // Lançamentos > [Lançamento Name] > Editar Lançamento
+    Breadcrumbs::for('lancamento.edit', function (BreadcrumbTrail $trail, Lancamento $item) {
+        $trail->parent('lancamento.index');
+        $trail->push('Editar Serviço', route('lancamento.edit', $item));
+    });
+// FIM Lançamentos
 
 // Checklist
 Breadcrumbs::for('checklist.index', function (BreadcrumbTrail $trail) {
