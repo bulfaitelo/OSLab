@@ -419,6 +419,7 @@ return [
                     'icon'    => 'fas fa-landmark',
                     'can'     => [
                         'config_financeiro_centro_custo',
+                        'config_financeiro_forma_pagamento',
                     ],
                     'submenu'=> [
                         [
@@ -427,6 +428,13 @@ return [
                             'route'   => 'configuracao.financeiro.centro_custo.index',
                             'active'  => ['configuracoes/financeiro/centro_custo*'],
                             'can'     => 'config_financeiro_centro_custo',
+                        ],
+                        [
+                            'text'    => 'Forma de Pagamento',
+                            'icon'    => 'fa-solid fa-money-bill-transfer',
+                            'route'   => 'configuracao.financeiro.forma_pagamento.index',
+                            'active'  => ['configuracoes/financeiro/forma_pagamento*'],
+                            'can'     => 'config_financeiro_forma_pagamento',
                         ],
                     ],
                 ],

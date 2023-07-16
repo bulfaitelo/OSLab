@@ -28,6 +28,7 @@ class DatabaseDefaultPermissionsUpdate extends Seeder
         $this->call(DefaultsConfigGarantiaOs::class);
         $this->call(DefaultsConfigCategoriaOs::class);
         $this->call(DefaultsConfigFabricante::class);
+        $this->call(DefaultsConfigFormaPagamento::class);
 
     }
 }

@@ -16,8 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('os_id')->nullable();
             $table->unsignedBigInteger('venda_id')->nullable();
             $table->unsignedBigInteger('centro_custo_id');
+            $table->unsignedBigInteger('forma_pagamento_id')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->tinyInteger('tipo_lancamento');
+            $table->char('tipo_lancamento');
             $table->string('cliente');
             $table->string('observacoes')->nullable();
             $table->decimal('valor', 9, 2);

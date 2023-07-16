@@ -47,6 +47,36 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 5,
             ],
+            [
+                'description' => 'Acesso a configuração Forma de Pagamento',
+                'name' => 'config_financeiro_forma_pagamento',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Criar Forma de Pagamento',
+                'name' => 'config_financeiro_forma_pagamento_create',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Editar Forma de Pagamento',
+                'name' => 'config_financeiro_forma_pagamento_edit',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Visualizar Forma de Pagamento',
+                'name' => 'config_financeiro_forma_pagamento_show',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Excluir Forma de Pagamento',
+                'name' => 'config_financeiro_forma_pagamento_destroy',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
         ];
 
 

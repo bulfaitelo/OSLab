@@ -7,6 +7,7 @@
 use App\Models\Checklist\Checklist;
 use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Financeiro\CentroCusto;
+use App\Models\Configuracao\Financeiro\FormaPagamento;
 use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
@@ -305,6 +306,32 @@ Breadcrumbs::for('checklist.edit', function (BreadcrumbTrail $trail, Checklist $
     Breadcrumbs::for('configuracao.financeiro.centro_custo.edit', function (BreadcrumbTrail $trail, CentroCusto $item) {
         $trail->parent('configuracao.financeiro.centro_custo.index');
         $trail->push('Editar Centro de Custo', route('configuracao.financeiro.centro_custo.edit', $item));
+    });
+
+    // Forma de Pagamento
+    Breadcrumbs::for('configuracao.financeiro.forma_pagamento.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Financeiro');
+        $trail->push('Forma de Pagamento', route('configuracao.financeiro.forma_pagamento.index'));
+    });
+
+    // Forma de Pagamento > Novo Forma de Pagamento
+    Breadcrumbs::for('configuracao.financeiro.forma_pagamento.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.financeiro.forma_pagamento.index');
+        $trail->push('Nova Forma de Pagamento', route('configuracao.financeiro.forma_pagamento.create'));
+    });
+
+    // Forma de Pagamento > [Visualização de Forma de Pagamento]
+    Breadcrumbs::for('configuracao.financeiro.forma_pagamento.show', function (BreadcrumbTrail $trail, FormaPagamento $item) {
+        $trail->parent('configuracao.financeiro.forma_pagamento.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.financeiro.forma_pagamento.show', $item));
+    });
+
+    // Forma de Pagamento > [Forma de Pagamento Name] > Editar Forma de Pagamento
+    Breadcrumbs::for('configuracao.financeiro.forma_pagamento.edit', function (BreadcrumbTrail $trail, FormaPagamento $item) {
+        $trail->parent('configuracao.financeiro.forma_pagamento.index');
+        $trail->push('Editar Forma de Pagamento', route('configuracao.financeiro.forma_pagamento.edit', $item));
     });
 // Fim Configuração FINANCEIRO
 

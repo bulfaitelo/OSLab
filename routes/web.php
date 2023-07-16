@@ -3,6 +3,7 @@
 use App\Http\Controllers\Checklist\ChecklistController;
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
+use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Os\GarantiaController;
 use App\Http\Controllers\Configuracao\Os\CategoriaOsController;
 use App\Http\Controllers\Configuracao\Os\StatusOsController;
@@ -77,6 +78,7 @@ Route::group(['middleware'=> 'auth'], function() {
         // Financeiro
         Route::name('financeiro.')->prefix('financeiro')->group( function (){
             Route::resource('/centro_custo', CentroCustoController::class);
+            Route::resource('/forma_pagamento', FormaPagamentoController::class);
         });
         // OS
         Route::name('os.')->prefix('os')->group( function (){
