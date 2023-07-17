@@ -32,8 +32,8 @@
             </a> --}}
       </div>
       <!-- /.card-header -->
-      <div class="card-body">
-        <table class="table table-sm">
+      <div class="card-body table-responsive">
+        <table class="table table-sm table-hover text-nowrap">
           <thead>
             <tr>
               <th style="width: 10px">#</th>
