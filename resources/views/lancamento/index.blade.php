@@ -55,6 +55,11 @@
                 </button>
             </a>
             @endcan
+            <hr>
+            <div class="form-group">
+                <label for="name">Forma de pagamento</label>
+                {!! html()->text('name')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
+            </div>
       </div>
       <!-- /.card-header -->
       <div class="card-body table-responsive">
