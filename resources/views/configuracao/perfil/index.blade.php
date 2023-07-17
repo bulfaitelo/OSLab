@@ -3,7 +3,7 @@
 @section('title', 'Perfil')
 
 @section('content_header')
-    <h1>DNCN - Perfil</h1>
+    <h1>Perfil</h1>
 @stop
 
 @section('content')
