@@ -9,12 +9,24 @@ use App\Models\Lancamento\Lancamento;
 
 class LancamentoController extends Controller
 {
+    function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:financeiro_lancamento', ['only'=> 'index']);
+        $this->middleware('permission:financeiro_lancamento_create', ['only'=> ['create', 'store']]);
+        $this->middleware('permission:financeiro_lancamento_show', ['only'=> 'show']);
+        $this->middleware('permission:financeiro_lancamento_edit', ['only'=> ['edit', 'update']]);
+        $this->middleware('permission:financeiro_lancamento_destroy', ['only'=> 'destroy']);
+
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $lancamentos = Lancamento::paginate(100);
+        return view('lancamento.index', compact('lancamentos'));
     }
 
     /**

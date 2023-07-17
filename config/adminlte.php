@@ -354,7 +354,7 @@ return [
             'icon'    => 'fa-solid fa-chart-line',
             'route'   => 'lancamento.index',
             'active'  => ['lancamento*'],
-            'can'     => 'lancamento',
+            'can'     => 'financeiro_lancamento',
         ],
         [
             'text'    => 'Checklist',

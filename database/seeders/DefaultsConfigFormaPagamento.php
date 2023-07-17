@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Configuracao\Financeiro\FormaPagamento;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -47,7 +48,7 @@ class DefaultsConfigFormaPagamento extends Seeder
         ];
 
         foreach ($insert as $key => $value) {
-            Setor::updateOrCreate(
+            FormaPagamento::updateOrCreate(
             // DB::table('permissions')->updateOrInsert(
                 [   'id' => $value['id'],
                 ],
