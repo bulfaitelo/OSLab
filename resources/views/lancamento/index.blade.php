@@ -18,7 +18,9 @@
             </a>
             @can('financeiro_lancamento_create')
                 <button type="button"  class="btn  btn-success" data-toggle="modal" data-target="#modal-receita">
-                    <i class="fa-solid fa-arrow-trend-up"></i>
+                    {{-- <i class="fa-solid fa-up-long"></i> --}}
+                    <i class="fa-solid fa-plus"></i>
+                    {{-- <i class="fa-solid fa-arrow-trend-up"></i> --}}
                     Adicionar Receita
                 </button>
                 <div class="modal fade modal-primary" id="modal-receita">
@@ -48,12 +50,96 @@
                         </div>
                     </div>
                 </div>
-            <a href="{{ route('configuracao.financeiro.forma_pagamento.create') }}">
-                <button type="button"  class="btn  btn-danger">
-                    <i class="fa-solid fa-arrow-trend-down"></i>
+                <button type="button"  class="btn  btn-danger" data-toggle="modal" data-target="#modal-despesa">
+                    {{-- <i class="fa-solid fa-arrow-trend-down"></i> --}}
+                    {{-- <i class="fa-solid fa-down-long"></i> --}}
+                    <i class="fa-solid fa-minus"></i>
                     Adicionar Despesa
                 </button>
-            </a>
+                <div class="modal fade modal-primary" id="modal-despesa">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header despesa" >
+                                <h4 class="modal-title">Adicionar Despesa</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="descricao">Descrição</label>
+                                            {!! html()->text('descricao')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="centro_custo_id">Centro de Custo</label>
+                                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="cliente">Cliente / Fonrcedor </label>
+                                            {!! html()->text('cliente')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="observacoes"> Observações </label>
+                                            {!! html()->textarea('observacoes')->class('form-control')->placeholder('Nome da forma de pagamento') !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="valor"> Valor </label>
+                                            {!! html()->text('valor')->class('form-control decimal')->placeholder('Nome da forma de pagamento') !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="vencimento"> Vencimento </label>
+                                            {!! html()->date('vencimento')->class('form-control')->placeholder('Nome da forma de pagamento') !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-switch custom-switch-on-danger">
+                                                {!! html()->checkbox('despesa')->class('custom-control-input ') !!}
+                                                <label class="custom-control-label" for="despesa">Despesa</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="forma_pagamento_id">Forma de pagamento</label>
+                                        {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    <i class="fas fa-times"></i>
+                                    Fechar
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    Salvar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endcan
             <hr>
             <div class="form-group">
