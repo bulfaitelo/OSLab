@@ -350,11 +350,28 @@ return [
             'can'     => 'servico',
         ],
         [
-            'text'    => 'Lançamentos',
+            'text'    => 'Financeiro',
             'icon'    => 'fa-solid fa-chart-line',
-            'route'   => 'lancamento.index',
-            'active'  => ['lancamento*'],
-            'can'     => 'financeiro_lancamento',
+            'can'     => [
+
+            ],
+            'submenu'=> [
+                [
+                    'text'    => 'Receitas',
+                    'icon'    => 'fa-solid fa-up-long',
+                    'route'   => 'configuracao.users.index',
+                    'active'  => ['configuracoes/users*'],
+                    'can'     => 'config_users',
+                ],
+                [
+                    'text'    => 'Despesas',
+                    'icon'    => 'fa-solid fa-down-long',
+                    'route'   => 'configuracao.users.index',
+                    'active'  => ['configuracoes/users*'],
+                    'can'     => 'config_users',
+                ],
+            ],
+
         ],
         [
             'text'    => 'Checklist',
