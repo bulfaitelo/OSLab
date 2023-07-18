@@ -116,16 +116,12 @@
                                                 <label class="custom-control-label" for="despesa">Despesa</label>
                                             </div>
                                         </div>
-
                                     </div>
-
-
                                     <div class="form-group">
                                         <label for="forma_pagamento_id">Forma de pagamento</label>
                                         {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
                                     </div>
                                 </div>
-
                             </div>
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">
