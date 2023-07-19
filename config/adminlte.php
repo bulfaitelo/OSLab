@@ -353,22 +353,22 @@ return [
             'text'    => 'Financeiro',
             'icon'    => 'fa-solid fa-chart-line',
             'can'     => [
-
+                'financeiro_receita', 'financeiro_despesa'
             ],
             'submenu'=> [
                 [
                     'text'    => 'Receitas',
                     'icon'    => 'fa-solid fa-up-long',
                     'route'   => 'configuracao.users.index',
-                    'active'  => ['configuracoes/users*'],
-                    'can'     => 'config_users',
+                    'active'  => ['financero/receita*'],
+                    'can'     => 'financeiro_receita',
                 ],
                 [
                     'text'    => 'Despesas',
                     'icon'    => 'fa-solid fa-down-long',
-                    'route'   => 'configuracao.users.index',
-                    'active'  => ['configuracoes/users*'],
-                    'can'     => 'config_users',
+                    'route'   => 'financeiro.despesa.index',
+                    'active'  => ['financero/despesa*'],
+                    'can'     => 'financeiro_despesa',
                 ],
             ],
 
@@ -645,7 +645,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

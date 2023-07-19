@@ -79,36 +79,67 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
                 'group_id' => 5,
             ],
 
-            // [
-            //     'description' => 'Acesso aos Lançamentos',
-            //     'name' => 'financeiro_lancamento',
-            //     'guard_name' => 'web',
-            //     'group_id' => 5,
-            // ],
-            // [
-            //     'description' => 'Criar Lançamento',
-            //     'name' => 'financeiro_lancamento_create',
-            //     'guard_name' => 'web',
-            //     'group_id' => 5,
-            // ],
-            // [
-            //     'description' => 'Editar Lançamento',
-            //     'name' => 'financeiro_lancamento_edit',
-            //     'guard_name' => 'web',
-            //     'group_id' => 5,
-            // ],
-            // [
-            //     'description' => 'Visualizar Lançamento',
-            //     'name' => 'financeiro_lancamento_show',
-            //     'guard_name' => 'web',
-            //     'group_id' => 5,
-            // ],
-            // [
-            //     'description' => 'Excluir Lançamento',
-            //     'name' => 'financeiro_lancamento_destroy',
-            //     'guard_name' => 'web',
-            //     'group_id' => 5,
-            // ],
+            [
+                'description' => 'Acesso as Despesas',
+                'name' => 'financeiro_despesa',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Criar Despesa',
+                'name' => 'financeiro_despesa_create',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Editar Despesa',
+                'name' => 'financeiro_despesa_edit',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Visualizar Despesa',
+                'name' => 'financeiro_despesa_show',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Excluir Despesa',
+                'name' => 'financeiro_despesa_destroy',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+
+            [
+                'description' => 'Acesso as Receitas',
+                'name' => 'financeiro_receita',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Criar Receita',
+                'name' => 'financeiro_receita_create',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Editar Receita',
+                'name' => 'financeiro_receita_edit',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Visualizar Receita',
+                'name' => 'financeiro_receita_show',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Excluir Receita',
+                'name' => 'financeiro_receita_destroy',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
         ];
 
 

@@ -14,7 +14,7 @@ use App\Http\Controllers\Configuracao\User\SetorController;
 use App\Http\Controllers\Configuracao\User\UserController;
 use App\Http\Controllers\Configuracao\Wiki\FabricanteController;
 use App\Http\Controllers\Configuracao\Wiki\ModeloController;
-use App\Http\Controllers\Lancamento\LancamentoController;
+use App\Http\Controllers\Financeiro\DespesaController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
@@ -45,10 +45,14 @@ Auth::routes();
 Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/cliente', ClienteController::class);
     Route::resource('/servico', ServicoController::class);
-    Route::resource('/lancamento', LancamentoController::class);
 
     Route::resource('/produto', ProdutoController::class);
     Route::resource('/produto/{produto}/movimentacao', MovimentacaoController::class);
+
+    // Financeiro
+    Route::name('financeiro.')->prefix('financeiro')->group( function (){
+        Route::resource('/despesa', DespesaController::class);
+    });
 
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');

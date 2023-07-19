@@ -14,6 +14,7 @@ use App\Models\Configuracao\Os\StatusOs;
 use App\Models\Configuracao\User\Setor;
 use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\Configuracao\Wiki\Modelo;
+use App\Models\Financeiro\Contas;
 use App\Models\Lancamento\Lancamento;
 use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
@@ -109,30 +110,58 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     });
 // FIM Wiki
 
-// Lançamentos
-    Breadcrumbs::for('lancamento.index', function (BreadcrumbTrail $trail) {
+// Financeiro
+    // Despesas
+    Breadcrumbs::for('financeiro.despesa.index', function (BreadcrumbTrail $trail) {
         $trail->parent('home');
-        $trail->push('Lançamentos', route('lancamento.index'));
+        $trail->push('Financeiro');
+        $trail->push('Despesas', route('financeiro.despesa.index'));
     });
 
-    // Lançamentos > Novo Lançamento
-    Breadcrumbs::for('lancamento.create', function (BreadcrumbTrail $trail) {
-        $trail->parent('lancamento.index');
-        $trail->push('Novo Lançamento', route('lancamento.create'));
+    // Financeiro > Nova Despesa
+    Breadcrumbs::for('financeiro.despesa.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('financeiro.despesa.index');
+        $trail->push('Nova Despesa', route('financeiro.despesa.create'));
     });
 
-    // Lançamentos > [Visualização de Lançamento]
-    Breadcrumbs::for('lancamento.show', function (BreadcrumbTrail $trail, Lancamento $item) {
-        $trail->parent('lancamento.index');
-        $trail->push($item->name, route('lancamento.show', $item));
+    // Financeiro > [Visualização de Lançamento]
+    Breadcrumbs::for('financeiro.despesa.show', function (BreadcrumbTrail $trail, Contas $item) {
+        $trail->parent('financeiro.despesa.index');
+        $trail->push($item->name, route('financeiro.despesa.show', $item));
     });
 
-    // Lançamentos > [Lançamento Name] > Editar Lançamento
-    Breadcrumbs::for('lancamento.edit', function (BreadcrumbTrail $trail, Lancamento $item) {
-        $trail->parent('lancamento.index');
-        $trail->push('Editar Serviço', route('lancamento.edit', $item));
+    // Financeiro > [Lançamento Name] > Editar Lançamento
+    Breadcrumbs::for('financeiro.despesa.edit', function (BreadcrumbTrail $trail, Contas $item) {
+        $trail->parent('financeiro.despesa.index');
+        $trail->push('Editar Despesa', route('financeiro.despesa.edit', $item));
     });
-// FIM Lançamentos
+
+
+    // Receitas
+    Breadcrumbs::for('financeiro.receita.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Financeiro');
+        $trail->push('Receitas', route('financeiro.receita.index'));
+    });
+
+    // Financeiro > Nova Receita
+    Breadcrumbs::for('financeiro.receita.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('financeiro.receita.index');
+        $trail->push('Nova Receita', route('financeiro.receita.create'));
+    });
+
+    // Financeiro > [Visualização de Lançamento]
+    Breadcrumbs::for('financeiro.receita.show', function (BreadcrumbTrail $trail, Contas $item) {
+        $trail->parent('financeiro.receita.index');
+        $trail->push($item->name, route('financeiro.receita.show', $item));
+    });
+
+    // Financeiro > [Lançamento Name] > Editar Lançamento
+    Breadcrumbs::for('financeiro.receita.edit', function (BreadcrumbTrail $trail, Contas $item) {
+        $trail->parent('financeiro.receita.index');
+        $trail->push('Editar Receita', route('financeiro.receita.edit', $item));
+    });
+// FIM Financeiro
 
 // Checklist
 Breadcrumbs::for('checklist.index', function (BreadcrumbTrail $trail) {

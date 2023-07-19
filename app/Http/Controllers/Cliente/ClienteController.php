@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Cliente\StoreClienteRequest;
 use App\Http\Requests\Cliente\UpdateClienteRequest;
 use App\Models\Cliente\Cliente;
+use Flasher\Laravel\Http\Request;
 
 class ClienteController extends Controller
 {
@@ -125,6 +126,20 @@ class ClienteController extends Controller
 
         } catch (\Throwable $th) {
             throw $th;
+        }
+    }
+
+
+    public function apiClientSelect (Request $request) {
+        try {
+
+            $cliente = new Cliente();
+            $cliente->where('name', 'LIKE', '%'.$request->term)
+
+            return response()->json($response, 200);
+
+        } catch (\Throwable $th) {
+            return response()->json($response, 403);
         }
     }
 }
