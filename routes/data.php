@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware'=> 'auth'], function() {
 
     Route::put('/wiki/text/{wiki}', [WikiController::class, 'textUpdate'])->name('wiki.text.update');
-    Route::get('clientes', [ClienteController::class, 'apiClientSelect'])->name('cliente.select');
+    Route::post('clientes', [ClienteController::class, 'apiClientSelect'])->name('cliente.select');
 
 
 });

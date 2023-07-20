@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Cliente\StoreClienteRequest;
 use App\Http\Requests\Cliente\UpdateClienteRequest;
 use App\Models\Cliente\Cliente;
-use Flasher\Laravel\Http\Request;
+use Illuminate\Http\Request;
+
 
 class ClienteController extends Controller
 {
     function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:cliente', ['only'=> 'index']);
+        $this->middleware('permission:cliente', ['only'=> ['index', 'apiClientSelect']]);
         $this->middleware('permission:cliente_create', ['only'=> ['create', 'store']]);
         $this->middleware('permission:cliente_show', ['only'=> 'show']);
         $this->middleware('permission:cliente_edit', ['only'=> ['edit', 'update']]);
@@ -132,14 +133,26 @@ class ClienteController extends Controller
 
     public function apiClientSelect (Request $request) {
         try {
+            $cliente = Cliente::where('name', 'LIKE', '%'. $request->q . '%');
+            $cliente->orderBy('name');
+            $cliente->limit(10);
+            $response = [];
+            foreach ($cliente->get() as $value) {
+                if ($value->pessoa_juridica == 1) {
+                    $textoSelect = '[PJ] ';
+                } else {
+                    $textoSelect = '[PF] ';
+                }
 
-            $cliente = new Cliente();
-            $cliente->where('name', 'LIKE', '%'.$request->term)
-
+                $response[] = [
+                    'id' => $value->id,
+                    'text' => $textoSelect .  $value->name,
+                ];
+            }
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {
-            return response()->json($response, 403);
+            return response()->json($th, 403);
         }
     }
 }
