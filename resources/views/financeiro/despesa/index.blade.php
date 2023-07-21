@@ -36,14 +36,14 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <label for="descricao">Descrição</label>
-                                            {!! html()->text('descricao')->class('form-control')->placeholder('Descrição da despesa ')->required() !!}
+                                            <label for="name">Despesa</label>
+                                            {!! html()->text('name')->class('form-control')->placeholder('Descrição da despesa ')->required() !!}
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="centro_custo_id">Centro de Custo</label>
-                                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="observacoes"> Observações </label>
-                                            {!! html()->textarea('observacoes')->class('form-control')->placeholder('Nome da forma de pagamento') !!}
+                                            {!! html()->textarea('observacoes')->class('form-control')->placeholder('Oboservcações (opcional)') !!}
                                         </div>
                                     </div>
                                 </div>
@@ -67,26 +67,66 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="valor"> Valor </label>
-                                            {!! html()->text('valor')->class('form-control decimal')->placeholder('Nome da forma de pagamento') !!}
+                                            {!! html()->text('valor')->class('form-control decimal')->placeholder('Valor total da despesa')->required() !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="vencimento"> Vencimento </label>
                                             {!! html()->date('vencimento')->class('form-control')->placeholder('Nome da forma de pagamento') !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <div class="form-group">
-                                            <div class="custom-control custom-switch custom-switch-on-danger">
-                                                {!! html()->checkbox('despesa')->class('custom-control-input ') !!}
-                                                <label class="custom-control-label" for="despesa">Despesa</label>
+                                            <label for="parcelas"> Parcelas </label>
+                                            <div class="input-group">
+                                                {!! html()->text('parcelas', 1)->class('form-control int')->placeholder('Parcelas')->required() !!}
+                                                <div id="data_info" class="input-group-append" data-container="body" data-toggle="popover" data-placement="top" data-content="O valor a ser recebido será automaticamente dividido pelo numero de parcelas, Podendo ser editado posteriormente.">
+                                                    <span class="input-group-text"><i class="fas fa-exclamation-circle"></i></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="forma_pagamento_id">Forma de pagamento</label>
-                                        {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Pago ?</label>
+                                            <br>
+                                            <input type="checkbox" name="my-checkbox" data-on-text="Sim" data-off-text="Não" data-bootstrap-switch>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h5>Parcelas</h5>
+                                <hr>
+
+                                <div class="repeater">
+                                    <div data-repeater-list="contas" >
+                                        <div data-repeater-item>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="valor"> Valor </label>
+                                                        {!! html()->text('valor')->class('form-control decimal')->placeholder('Valor total da despesa')->required() !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="vencimento"> Vencimento </label>
+                                                        {!! html()->date('vencimento')->class('form-control')->placeholder('Nome da forma de pagamento') !!}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="forma_pagamento_id">Forma de pagamento</label>
+                                                    {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <button data-repeater-create type="button" class=" btn btn-block btn-primary"><i class="fas fa-plus"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -214,8 +254,42 @@
 <script src='https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js'></script>
 <script src="{{ url('') }}/vendor/select2/dist/js/i18n/pt-BR.js"></script>
 <script src="{{ url('') }}/src/js/select-cliente.js"></script>
+<script src="https://adminlte.io/themes/v3/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js" integrity="sha512-foIijUdV0fR0Zew7vmw98E6mOWd9gkGWQBWaoA1EOFAx+pY+N8FmmtIYAVj64R98KeD2wzZh1aHK0JSpKmRH8w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    // $(document).ready(function () {
+       var teste =  $('.repeater').repeater({
+            // (Required if there is a nested repeater)
+            // Specify the configuration of the nested repeaters.
+            // Nested configuration follows the same format as the base configuration,
+            // supporting options "defaultValues", "show", "hide", etc.
+            // Nested repeaters additionally require a "selector" field.
+            repeaters: [{
+                // (Required)
+                // Specify the jQuery selector for this nested repeater
+                selector: '.inner-repeater'
+            }],
+            show: function () {
+                  $(this).slideDown();
+              },
+              hide: function (deleteElement) {
+                  if(confirm('Você tem certeza que deseja excluir essa linha ?')) {
+                      $(this).slideUp(deleteElement);
+                  }
+              },
+        });
+    // });
+  </script>
 
 <script>
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
     $('.decimal').mask('#.##0,00', { reverse: true });
+    $('.int').mask('#0', { reverse: true });
+    $('#data_info').popover({
+        trigger: 'hover'
+    });
 </script>
+
 @stop
