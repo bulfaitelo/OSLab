@@ -360,14 +360,14 @@ return [
                     'text'    => 'Receitas',
                     'icon'    => 'fa-solid fa-up-long',
                     'route'   => 'configuracao.users.index',
-                    'active'  => ['financero/receita*'],
+                    'active'  => ['financeiro/receita*'],
                     'can'     => 'financeiro_receita',
                 ],
                 [
                     'text'    => 'Despesas',
                     'icon'    => 'fa-solid fa-down-long',
                     'route'   => 'financeiro.despesa.index',
-                    'active'  => ['financero/despesa*'],
+                    'active'  => ['financeiro/despesa*'],
                     'can'     => 'financeiro_despesa',
                 ],
             ],
@@ -645,7 +645,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',

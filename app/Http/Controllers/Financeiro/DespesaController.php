@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Financeiro;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreContasRequest;
-use App\Http\Requests\UpdateContasRequest;
+use App\Http\Requests\Financeiro\StoreContasRequest;
+use App\Http\Requests\Financeiro\UpdateContasRequest;
 use App\Models\Financeiro\Contas;
 
 class DespesaController extends Controller
@@ -23,7 +23,7 @@ class DespesaController extends Controller
      */
     public function create()
     {
-        //
+        return view('financeiro.despesa.create');
     }
 
     /**
@@ -31,7 +31,7 @@ class DespesaController extends Controller
      */
     public function store(StoreContasRequest $request)
     {
-        //
+        dd($request->input());
     }
 
     /**
