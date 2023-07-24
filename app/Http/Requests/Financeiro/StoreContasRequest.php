@@ -50,7 +50,8 @@ class StoreContasRequest extends FormRequest
         ]);
     }
 
-    public function messages() {
+    public function messages() : array
+     {
         return [
          'name.required' => 'A despesa é obrigatória!'
         ];

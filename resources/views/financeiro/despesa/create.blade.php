@@ -20,7 +20,6 @@
                     </button>
                 </a>
             </div>
-
           <!-- /.card-header -->
           <!-- form start -->
 
@@ -74,7 +73,7 @@
                 <div class="form-group">
                     <label for="parcelado">Parcelado</label>
                     <div class="custom-control custom-switch custom-switch-md">
-                        <input type="checkbox" name="parcelado" id="parcelado" class="custom-control-input" onclick="alternaParcelamento()">
+                        <input type="checkbox" name="parcelado" id="parcelado" class="custom-control-input" @checked(old('parcelado') == 'on') onclick="alternaParcelamento()">
                         <label class="custom-control-label" for="parcelado"></label>
                     </div>
                 </div>
@@ -96,7 +95,7 @@
                 <div class="form-group">
                     <label for="parcelado_pago">Pago</label>
                     <div class="custom-control custom-switch custom-switch-md">
-                        <input type="checkbox" name="parcelado_pago" id="parcelado_pago" class="custom-control-input" onclick="alternaPagoParcelado()">
+                        <input type="checkbox" name="parcelado_pago" @checked(old('parcelado_pago') == 'on') id="parcelado_pago" class="custom-control-input" onclick="alternaPagoParcelado()">
                         <label class="custom-control-label" for="parcelado_pago"></label>
                     </div>
                 </div>
@@ -113,7 +112,7 @@
                 <div class="form-group">
                     <label for="avista_pago">Pago</label>
                     <div class="custom-control custom-switch custom-switch-md">
-                        <input type="checkbox" name="avista_pago" id="avista_pago" class="custom-control-input" onclick="alternaPagoAvista()">
+                        <input type="checkbox" name="avista_pago" @checked(old('avista_pago') == 'on') id="avista_pago" class="custom-control-input" onclick="alternaPagoAvista()">
                         <label class="custom-control-label" for="avista_pago"></label>
                     </div>
                 </div>
@@ -124,13 +123,18 @@
                     {!! html()->text('avista_valor')->class('form-control decimal')->placeholder('Valor Pago')->required() !!}
                 </div>
             </div>
+            <div style="display: none" class="col-md-2 div_avista_pago ">
+                <div class="form-group">
+                    <label for="data_pagamento"> Data pagamento </label>
+                    {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago')->required() !!}
+                </div>
+            </div>
             <div style="display: none" class="col-md-3 div_avista_pago ">
                 <div class="form-group">
                     <label for="forma_pagamento_id">Forma de pagamento</label>
                     {!! html()->select('avista_forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
                 </div>
             </div>
-
         </div>
 
 
@@ -193,8 +197,8 @@
 
 <script>
 
-    // $('.decimal').mask('#.##0,00', { reverse: true });
-    // $('.int').mask('#0', { reverse: true });
+    $('.decimal').mask('#.##0,00', { reverse: true });
+    $('.int').mask('#0', { reverse: true });
     $('#data_info').popover({
         trigger: 'hover'
     });
@@ -226,11 +230,13 @@
             divPAgo.css('display', '');
             $('#avista_valor').attr("required","required");
             $('#avista_forma_pagamento_id').attr("required","required");
+            $('#data_pagamento').attr("required","required");
 
         } else {
             divPAgo.css('display', 'none');
             $('#avista_valor').removeAttr("required");
             $('#avista_forma_pagamento_id').removeAttr("required");
+            $('#data_pagamento').removeAttr("required");
         }
 
     }
