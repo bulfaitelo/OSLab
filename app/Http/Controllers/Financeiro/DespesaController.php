@@ -13,13 +13,27 @@ use Ramsey\Uuid\Type\Decimal;
 
 class DespesaController extends Controller
 {
+
+    function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:financeiro_despesa', ['only'=> 'index']);
+        $this->middleware('permission:financeiro_despesa_create', ['only'=> ['create', 'store']]);
+        $this->middleware('permission:financeiro_despesa_show', ['only'=> 'show']);
+        $this->middleware('permission:financeiro_despesa_edit', ['only'=> ['edit', 'update']]);
+        $this->middleware('permission:financeiro_despesa_destroy', ['only'=> 'destroy']);
+
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $contas = Contas::paginate();
-        return view('financeiro.despesa.index', compact('contas'));
+        $despesas = Contas::Where('tipo', 'D')
+            ->paginate();
+        return view('financeiro.despesa.index', compact('despesas'));
     }
 
     /**
@@ -50,19 +64,42 @@ class DespesaController extends Controller
 
             if ($request->parcelas > 1) {
                 $vencimento = new Carbon($request->vencimento);
-                $valor = number_format($request->valor / $request->parcelas, 2);
-                $valorResto = fmod($request->valor, $request->parcelas);
+
+                $valorParcela = floor($request->valor / $request->parcelas * 100) / 100;
+                $valorResto = $request->valor - ($valorParcela * $request->parcelas);
+
                 for ($i=1; $i <= $request->parcelas ; $i++) {
+                    if ($i == 1) {
+                        $valor = $valorParcela + $valorResto;
+                    } else {
+                        $valor = $valorParcela;
+                    }
+
+                    if ($request->parcelado_pago) {
+                        $data_pagamento = $vencimento->format('Y-m-d');
+                    } else {
+                        $data_pagamento = null;
+                    }
+
+
                     $pagamento[] =  [
                         'forma_pagamento_id' => $request->parcelado_forma_pagamento_id,
                         'user_id' => Auth::id(),
                         'valor' => $valor,
                         'vencimento' =>  $vencimento->format('Y-m-d'),
-                        'data_pagamento' => $request->data_pagamento,
+                        'data_pagamento' => $data_pagamento,
                         'parcela' => $i,
+                        'forma_pagamento_id' => $request->parcelado_forma_pagamento_id,
                     ];
-                    $vencimento->addMonth(1);
+                    if($i != $request->parcelas){
+                        $vencimento->addMonth(1);
+                    }
                 }
+                if ($request->parcelado_pago) {
+                    $conta->data_quitacao = $vencimento->format('Y-m-d');
+                    $conta->save();
+                }
+
             } else {
                $pagamento[] =  [
                     'forma_pagamento_id' => $request->avista_forma_pagamento_id,
@@ -73,11 +110,10 @@ class DespesaController extends Controller
                     'parcela' => 1,
                 ];
 
-                $conta->pagamentos()->createMany($pagamento);
 
             }
+            $conta->pagamentos()->createMany($pagamento);
 
-            dd($valor * $request->parcelas + $valorResto, $valorResto, $request->input());
             DB::commit();
             return redirect()->route('financeiro.despesa.index')
             ->with('success', 'Despesa cadastrada com sucesso.');
@@ -92,7 +128,7 @@ class DespesaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Contas $contas)
+    public function show(Contas $despesa)
     {
         //
     }
@@ -100,15 +136,15 @@ class DespesaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contas $contas)
+    public function edit(Contas $despesa)
     {
-        //
+        dd($despesa);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContasRequest $request, Contas $contas)
+    public function update(UpdateContasRequest $request, Contas $despesa)
     {
         //
     }
@@ -116,7 +152,7 @@ class DespesaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contas $contas)
+    public function destroy(Contas $despesa)
     {
         //
     }

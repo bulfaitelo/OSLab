@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pagamentos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('conta_id');
-            $table->unsignedBigInteger('forma_pagamento_id');
+            $table->unsignedBigInteger('forma_pagamento_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->decimal('valor', 9, 2);
             $table->date('vencimento')->nullable();

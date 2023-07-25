@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="observacoes"> Observações </label>
-                    {!! html()->textarea('observacoes')->class('form-control')->placeholder('Oboservcações (opcional)') !!}
+                    {!! html()->textarea('observacoes')->class('form-control')->placeholder('Observações (opcional)') !!}
                 </div>
             </div>
         </div>

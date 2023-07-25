@@ -9,6 +9,9 @@ class Pagamentos extends Model
 {
     use HasFactory;
 
+    // protected $casts = [
+    //     'vencimento' => 'date',
+    // ];
 
     protected $fillable = [
         'forma_pagamento_id',

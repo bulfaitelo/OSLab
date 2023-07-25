@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Lançamento')
+@section('title', 'Despesas')
 
 @section('content_header')
-    <h1>Lançamento</h1>
+    <h1>Despesas</h1>
 @stop
 
 @section('content')
@@ -16,7 +16,7 @@
                     Voltar
                 </button>
             </a>
-            @can('financeiro_lancamento_create')
+            @can('financeiro_despesa_create')
             <a href="{{ route('financeiro.despesa.create') }}">
                 <button type="button"  class="btn  btn-danger" data-toggle="modal" data-target="#modal-despesa">
                     <i class="fa-solid fa-plus"></i>
@@ -50,30 +50,47 @@
           <thead>
             <tr>
               <th style="width: 10px">#</th>
-              <th>Nome</th>
-              <th>Descricao</th>
+              <th>Despesa</th>
+              <th>Cliente/ Fornecedor</th>
+              <th>Centro de Custo</th>
+              <th>Total</th>
+              <th>Valor Pago</th>
+              <th>Valor Pendente</th>
+              <th>Parcelas</th>
+              <th>Dia Vencimento</th>
+              <th>Quitação</th>
               <th style="width: 40px"></th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($contas as $item)
+            @foreach ($despesas as $item)
               <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->name}}</td>
-                <td>{{ $item->descricao}}</td>
+                <td>{{ $item->cliente->name}}</td>
+                <td>{{ $item->centroCusto->name}}</td>
+                <td>R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
+                <td>R$ {{ number_format($item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                <td>R$ {{ number_format($item->valor - $item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                <td>{{ $item->parcelas}}</td>
+                <td>{{ $item->getVencimentoDate()}}</td>
+                <td>{{ $item->data_quitacao?->format('d/m/Y') ?? ''}}</td>
+
+
+
                 <td>
                     <div class="btn-group btn-group-sm">
-                        @can('financeiro_lancamento_edit')
-                            <a href="{{ route('configuracao.financeiro.forma_pagamento.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                        @can('financeiro_despesa_edit')
+                            <a href="{{ route('financeiro.despesa.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                         @endcan
-                        @can('financeiro_lancamento_show')
-                            <a href="{{ route('configuracao.financeiro.forma_pagamento.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                        @can('financeiro_despesa_show')
+                            <a href="{{ route('financeiro.despesa.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                         @endcan
-                        @can('financeiro_lancamento_destroy')
+                        @can('financeiro_despesa_destroy')
                             <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
                         @endcan
                     </div>
-                        @can('financeiro_lancamento_destroy')
+                        @can('financeiro_despesa_destroy')
                         <div class="modal fade" id="modal-excluir_{{ $item->id }}">
                             <div class="modal-dialog">
                             <div class="modal-content">
@@ -88,8 +105,8 @@
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                    {!! html()->form('delete', route('configuracao.financeiro.forma_pagamento.destroy', $item->id))->open() !!}
-                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Lançamento">
+                                    {!! html()->form('delete', route('financeiro.despesa.destroy', $item->id))->open() !!}
+                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Despesa">
                                     {!! html()->form()->close() !!}
 
                                 </div>
@@ -111,8 +128,8 @@
 
       <!-- /.card-body -->
       <div class="card-footer clearfix">
-          {{-- {{$contas->appends(['busca' => $busca])->links() }} --}}
-          {{ $contas->links() }}
+          {{-- {{$despesas->appends(['busca' => $busca])->links() }} --}}
+          {{ $despesas->links() }}
       </div>
     </div>
 </div>
