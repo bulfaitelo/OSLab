@@ -9,16 +9,16 @@
 @section('content')
 <div class="col-md-12">
     <div class="card ">
-      <div class="card-header">
+      <div class="card-header despesa pb-0">
             <a href="{{ url()->previous() }}">
-                <button type="button"  class="btn  btn-default">
+                <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
                     Voltar
                 </button>
             </a>
             @can('financeiro_despesa_create')
             <a href="{{ route('financeiro.despesa.create') }}">
-                <button type="button"  class="btn  btn-danger" data-toggle="modal" data-target="#modal-despesa">
+                <button type="button"  class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-despesa">
                     <i class="fa-solid fa-plus"></i>
                     Adicionar Despesa
                 </button>
@@ -26,26 +26,56 @@
             @endcan
             <hr>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="cliente_id">Cliente / Fonrcedor </label>
-                        <select class="form-control cliente" name="" id=""></select>
-                        {{-- {!! html()->select('cliente_id', \App\Models\Cliente\Cliente::orderBy('name')->pluck('name', 'id'))->class('form-control cliente')->placeholder('Selecione')->required() !!} --}}
+                <div class="col-md-6">
+                    <div class="form-group mb-2 ">
+                            <label for="busca">Cliente / Despesa / Observação </label>
+                            {!! html()->text('busca')->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Despesa, Observação')->required() !!}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group mb-2 ">
+                        <label for="centro_custo">Centro de Custo</label>
+                        {!! html()->select('centro_custo', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'))->class('form-control form-control-sm')->placeholder('Selecione o Centro de Custo')->required() !!}
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="name">Forma de pagamento</label>
-                {!! html()->text('name')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group mb-2 ">
+                        <label for="periodo">Periodo</label>
+                        {!! html()->select('periodo',['1' => 'Dia', '2' => 'Mês', '3' => 'Ano'])->class('form-control form-control-sm')->placeholder('Periodo')->required() !!}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group mb-2 ">
+                        <label for="vencimento_inicio"> Data inicio </label>
+                        {!! html()->date('vencimento_inicio')->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento')->required() !!}
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group mb-2 ">
+                        <label for="vencimento_fim"> Data Fim </label>
+                        {!! html()->date('vencimento_fim')->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento')->required() !!}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group mb-2 ">
+                        <label for="status_id">Status</label>
+                        {!! html()->select('status_id',['1' => 'Quitado', '2' => 'Atrasado', '3' => 'Em aberto'])->class('form-control form-control-sm')->placeholder('Status')->required() !!}
+                    </div>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-group text-right mb-2">
+                        <button type="button"  class="btn btn-info btn-sm">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            Buscar
+                        </button>
+                    </div>
+                </div>
             </div>
-
-
-              <label for="parcelas">Número de Parcelas:</label>
-              <input type="number" id="parcelas" name="parcelas" min="1" value="1" />
-
       </div>
       <!-- /.card-header -->
-      <div class="card-body table-responsive">
+      <div class="card-body pt-2 table-responsive">
         <table class="table table-sm table-hover text-nowrap">
           <thead>
             <tr>
