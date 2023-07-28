@@ -67,7 +67,6 @@ class DespesaController extends Controller
 
 
         $despesas = $queryDespesa->paginate(100);
-        dump($request->all());
         return view('financeiro.despesa.index', compact('despesas', 'request', ));
     }
 
@@ -144,7 +143,10 @@ class DespesaController extends Controller
                     'data_pagamento' => $request->data_pagamento,
                     'parcela' => 1,
                 ];
-
+                if($request->avista_valor >= $request->valor){
+                    $conta->data_quitacao = $request->data_pagamento;
+                    $conta->save();
+                }
 
             }
             $conta->pagamentos()->createMany($pagamento);
