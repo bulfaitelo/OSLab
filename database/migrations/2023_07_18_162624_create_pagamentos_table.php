@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('conta_id');
             $table->unsignedBigInteger('forma_pagamento_id')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->decimal('valor', 9, 2);
+            $table->decimal('valor', 9, 2)->nullable();
             $table->date('vencimento')->nullable();
             $table->date('data_pagamento')->nullable();
             $table->unsignedTinyInteger('parcela');

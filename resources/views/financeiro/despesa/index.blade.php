@@ -25,17 +25,18 @@
             </a>
             @endcan
             <hr>
+            {{ html()->form('get', route('financeiro.despesa.index'))->open() }}
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-2 ">
                             <label for="busca">Cliente / Despesa / Observação </label>
-                            {!! html()->text('busca')->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Despesa, Observação')->required() !!}
+                            {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Despesa, Observação') !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group mb-2 ">
                         <label for="centro_custo">Centro de Custo</label>
-                        {!! html()->select('centro_custo', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'))->class('form-control form-control-sm')->placeholder('Selecione o Centro de Custo')->required() !!}
+                        {!! html()->select('centro_custo', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'), $request->centro_custo)->class('form-control form-control-sm')->placeholder('Selecione') !!}
                     </div>
                 </div>
             </div>
@@ -43,36 +44,45 @@
                 <div class="col-md-2">
                     <div class="form-group mb-2 ">
                         <label for="periodo">Periodo</label>
-                        {!! html()->select('periodo',['1' => 'Dia', '2' => 'Mês', '3' => 'Ano'])->class('form-control form-control-sm')->placeholder('Periodo')->required() !!}
+                        {!! html()->select('periodo',['dia' => 'Dia', 'mes' => 'Mês', 'ano' => 'Ano'], $request->periodo)->class('form-control form-control-sm')->placeholder('Selecione') !!}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group mb-2 ">
-                        <label for="vencimento_inicio"> Data inicio </label>
-                        {!! html()->date('vencimento_inicio')->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento')->required() !!}
+                        <label for="data_inicial"> Data inicio </label>
+                        {!! html()->date('data_inicial', $request->data_inicial)->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento') !!}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group mb-2 ">
-                        <label for="vencimento_fim"> Data Fim </label>
-                        {!! html()->date('vencimento_fim')->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento')->required() !!}
+                        <label for="data_final"> Data Fim </label>
+                        {!! html()->date('data_final', $request->data_final)->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento') !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group mb-2 ">
-                        <label for="status_id">Status</label>
-                        {!! html()->select('status_id',['1' => 'Quitado', '2' => 'Atrasado', '3' => 'Em aberto'])->class('form-control form-control-sm')->placeholder('Status')->required() !!}
+                        <label for="status">Status</label>
+                        {!! html()->select('status',['quitado' => 'Quitado',  'aberto' => 'Em aberto'], $request->status)->class('form-control form-control-sm')->placeholder('Selecione') !!}
                     </div>
                 </div>
                 <div class="col-md-3 d-flex align-items-end">
                     <div class="form-group text-right mb-2">
-                        <button type="button"  class="btn btn-info btn-sm">
+                        <button type="submit"  class="btn bg-lightblue btn-sm">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             Buscar
                         </button>
+                        @if (count($request->all()) > 0)
+                        <a href="{{ route('financeiro.despesa.index') }}">
+                            <button type="button"  class="btn bg-gray btn-sm">
+                                <i class="fa-solid fa-xmark"></i>
+                                Limpar
+                            </button>
+                        </a>
+                        @endif
                     </div>
                 </div>
             </div>
+            {!! html()->form()->close() !!}
       </div>
       <!-- /.card-header -->
       <div class="card-body pt-2 table-responsive">
@@ -183,4 +193,32 @@
 
 @section('js')
 
+<script>
+$(document).ready(function() {
+  $("#periodo").change(function() {
+    var periodoSelecionado = $(this).val();
+    var dataHoje = new Date().toISOString().split('T')[0];
+
+    switch (periodoSelecionado) {
+      case 'dia':
+        $("#data_inicial").val(dataHoje);
+        $("#data_final").val(dataHoje);
+        break;
+      case 'mes':
+        var primeiroDiaMes = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
+        var ultimoDiaMes = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).toISOString().split('T')[0];
+        $("#data_inicial").val(primeiroDiaMes);
+        $("#data_final").val(ultimoDiaMes);
+        break;
+      case 'ano':
+        var primeiroDiaAno = new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0];
+        var ultimoDiaAno = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
+        $("#data_inicial").val(primeiroDiaAno);
+        $("#data_final").val(ultimoDiaAno);
+        break;
+    }
+  });
+});
+
+</script>
 @stop

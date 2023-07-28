@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Financeiro;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Financeiro\StoreContasRequest;
 use App\Http\Requests\Financeiro\UpdateContasRequest;
+use App\Models\Cliente\Cliente;
 use App\Models\Financeiro\Contas;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Type\Decimal;
@@ -29,11 +31,44 @@ class DespesaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $despesas = Contas::Where('tipo', 'D')
-            ->paginate();
-        return view('financeiro.despesa.index', compact('despesas'));
+        $dataHoje = Carbon::now()->format('Y-d-m');
+        $queryDespesa = Contas::query();
+        $queryDespesa->where('tipo', 'D');
+        if($request->busca){
+            $queryDespesa->where(function ($query) use ($request) {
+                $query->whereHas('cliente', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                });
+                $query->orWhere('name', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhere('observacoes', 'LIKE', '%' . $request->busca . '%');
+            });
+        }
+        if ($request->centro_custo) {
+            $queryDespesa->where('centro_custo_id', $request->centro_custo);
+        }
+        if (($request->data_inicial) || ($request->data_final)) {
+            ($request->data_inicial) ? $dataInicial = $request->data_inicial : $dataInicial = $dataHoje;
+            ($request->data_final) ? $dataFinal = $request->data_final : $dataFinal = $dataHoje;
+            $queryDespesa->where(function ($query) use ($dataInicial, $dataFinal) {
+                $query->whereBetween('created_at', [$dataInicial, $dataFinal]);
+                $query->orWhereHas('pagamentos', function ($query) use ($dataInicial, $dataFinal){
+                    $query->whereBetween('vencimento', [$dataInicial, $dataFinal]);
+                });
+                $query->orWhereBetween('data_quitacao', [$dataInicial, $dataFinal]);
+            });
+        }
+        if ($request->status == 'quitado') {
+            $queryDespesa->WhereNotNull('data_quitacao');
+        } elseif ($request->status == 'aberto') {
+            $queryDespesa->WhereNull('data_quitacao');
+        }
+
+
+        $despesas = $queryDespesa->paginate(100);
+        dump($request->all());
+        return view('financeiro.despesa.index', compact('despesas', 'request', ));
     }
 
     /**
