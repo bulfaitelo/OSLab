@@ -9,7 +9,7 @@
 @section('content')
 <div class="col-md-12">
     <div class="card ">
-      <div class="card-header despesa pb-0">
+      <div class="card-header despesa pb-2 ">
             <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
@@ -24,65 +24,71 @@
                 </button>
             </a>
             @endcan
-            <hr>
-            {{ html()->form('get', route('financeiro.despesa.index'))->open() }}
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group mb-2 ">
-                            <label for="busca">Cliente / Despesa / Observação </label>
-                            {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Despesa, Observação') !!}
+            <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i class="fa-solid fa-filter"></i>
+                Filtros
+            </button>
+            <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseExample">
+                <hr>
+                {{ html()->form('get', route('financeiro.despesa.index'))->open() }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-2 ">
+                                <label for="busca">Cliente / Despesa / Observação </label>
+                                {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Despesa, Observação') !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-2 ">
+                            <label for="centro_custo">Centro de Custo</label>
+                            {!! html()->select('centro_custo', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'), $request->centro_custo)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group mb-2 ">
-                        <label for="centro_custo">Centro de Custo</label>
-                        {!! html()->select('centro_custo', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'), $request->centro_custo)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group mb-2 ">
+                            <label for="periodo">Periodo</label>
+                            {!! html()->select('periodo',['dia' => 'Dia', 'mes' => 'Mês', 'ano' => 'Ano'], $request->periodo)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="form-group mb-2 ">
-                        <label for="periodo">Periodo</label>
-                        {!! html()->select('periodo',['dia' => 'Dia', 'mes' => 'Mês', 'ano' => 'Ano'], $request->periodo)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                    <div class="col-md-2">
+                        <div class="form-group mb-2 ">
+                            <label for="data_inicial"> Data inicio </label>
+                            {!! html()->date('data_inicial', $request->data_inicial)->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento') !!}
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group mb-2 ">
-                        <label for="data_inicial"> Data inicio </label>
-                        {!! html()->date('data_inicial', $request->data_inicial)->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento') !!}
+                    <div class="col-md-2">
+                        <div class="form-group mb-2 ">
+                            <label for="data_final"> Data Fim </label>
+                            {!! html()->date('data_final', $request->data_final)->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento') !!}
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group mb-2 ">
-                        <label for="data_final"> Data Fim </label>
-                        {!! html()->date('data_final', $request->data_final)->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento') !!}
+                    <div class="col-md-3">
+                        <div class="form-group mb-2 ">
+                            <label for="status">Status</label>
+                            {!! html()->select('status',['quitado' => 'Quitado',  'aberto' => 'Em aberto'], $request->status)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group mb-2 ">
-                        <label for="status">Status</label>
-                        {!! html()->select('status',['quitado' => 'Quitado',  'aberto' => 'Em aberto'], $request->status)->class('form-control form-control-sm')->placeholder('Selecione') !!}
-                    </div>
-                </div>
-                <div class="col-md-3 d-flex align-items-end">
-                    <div class="form-group text-right mb-2">
-                        <button type="submit"  class="btn bg-lightblue btn-sm">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            Buscar
-                        </button>
-                        @if (count($request->all()) > 0)
-                        <a href="{{ route('financeiro.despesa.index') }}">
-                            <button type="button"  class="btn bg-gray btn-sm">
-                                <i class="fa-solid fa-xmark"></i>
-                                Limpar
+                    <div class="col-md-3 d-flex align-items-end">
+                        <div class="form-group text-right mb-2">
+                            <button type="submit"  class="btn bg-lightblue btn-sm">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Buscar
                             </button>
-                        </a>
-                        @endif
+                            @if (count($request->all()) > 0)
+                            <a href="{{ route('financeiro.despesa.index') }}">
+                                <button type="button"  class="btn bg-gray btn-sm">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    Limpar
+                                </button>
+                            </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
+                {!! html()->form()->close() !!}
             </div>
-            {!! html()->form()->close() !!}
       </div>
       <!-- /.card-header -->
       <div class="card-body pt-2 table-responsive">
