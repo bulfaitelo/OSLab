@@ -175,7 +175,7 @@ class DespesaController extends Controller
      */
     public function edit(Contas $despesa)
     {
-        dd($despesa);
+        return view('financeiro.despesa.edit', compact('despesa'));
     }
 
     /**
@@ -183,7 +183,7 @@ class DespesaController extends Controller
      */
     public function update(UpdateContasRequest $request, Contas $despesa)
     {
-        //
+        dd($request->input());
     }
 
     /**

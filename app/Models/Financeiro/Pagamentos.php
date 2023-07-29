@@ -2,8 +2,11 @@
 
 namespace App\Models\Financeiro;
 
+use App\Models\Configuracao\Financeiro\FormaPagamento;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Pagamentos extends Model
 {
@@ -21,4 +24,15 @@ class Pagamentos extends Model
         'data_pagamento',
         'parcela',
     ];
+
+
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function formaPagamento()
+    {
+        return $this->belongsTo(FormaPagamento::class);
+    }
 }

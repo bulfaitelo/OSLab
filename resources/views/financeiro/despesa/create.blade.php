@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Categoria')
+@section('title', 'Cadastrar Despesa')
 
 @section('content_header')
-    <h1>Criando Categoria</h1>
+    <h1>Cadastrar Despesa</h1>
 @stop
 
 @section('content')
