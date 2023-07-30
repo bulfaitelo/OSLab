@@ -118,6 +118,13 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
             ],
 
             [
+                'description' => 'editar Pagamento Despesa',
+                'name' => 'financeiro_despesa_pagamento_edit',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+
+            [
                 'description' => 'Acesso as Receitas',
                 'name' => 'financeiro_receita',
                 'guard_name' => 'web',

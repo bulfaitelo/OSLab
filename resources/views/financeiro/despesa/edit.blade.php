@@ -120,13 +120,13 @@
                                         <div  class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pagamento_valor"> Valor </label>
-                                                {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor')->required() !!}
+                                                {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor') !!}
                                             </div>
                                         </div>
                                         <div  class="col-md-4 ">
                                             <div class="form-group">
                                                 <label for="data_pagamento"> Data pagamento </label>
-                                                {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago')->required() !!}
+                                                {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago') !!}
                                             </div>
                                         </div>
                                         <div  class="col-md-4">
@@ -199,15 +199,65 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p><b>Nome:</b> {{ $item->name}}</p>
+                                                <form action="{{ route('financeiro.despesa.pagamento.update', [$despesa->id, $item->id]) }}" id="form-pagamento" method="post">
+                                                    @method('put')
+                                                    @csrf
+                                                <div class="row">
+                                                    <div  class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label for="parcela"> Parcela </label>
+                                                            {!! html()->text('parcela', $item->parcela)->class('form-control int')->placeholder('Parcela')->required() !!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="vencimento"> Vencimento </label>
+                                                            {!! html()->date('vencimento', $item->vencimento)->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <div class="form-group">
+                                                            <label for="pago_{{$item->id}}">Pago</label>
+                                                            <div class="custom-control custom-switch custom-switch-md">
+                                                                <input type="checkbox" name="pago" @checked($item->data_pagamento) id="pago_{{$item->id}}" class="custom-control-input" onclick="alternaPagoEdit({{ $item->id }})">
+                                                                <label class="custom-control-label" for="pago_{{$item->id}}"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row div_pago_{{$item->id}}  @if (!$item->data_pagamento) collapse @endif " id="collapseExample">
+                                                    <div  class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="pagamento_valor"> Valor </label>
+                                                            {!! html()->text('pagamento_valor', $item->valor)->class('form-control decimal')->placeholder('Valor') !!}
+                                                        </div>
+                                                    </div>
+                                                    <div  class="col-md-4 ">
+                                                        <div class="form-group">
+                                                            <label for="data_pagamento"> Data pagamento </label>
+                                                            {!! html()->date('data_pagamento', $item->data_pagamento)->class('form-control')->placeholder('Valor Pago') !!}
+                                                        </div>
+                                                    </div>
+                                                    <div  class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="forma_pagamento_id">Forma de pagamento</label>
+                                                            {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'), $item->forma_pagamento_id)->class('form-control')->placeholder('Selecione') !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                {!! html()->form('delete', route('financeiro.despesa.pagamento.destroy', [$despesa->id, $item->id]))->open() !!}
-                                                    <input type="submit" class="btn btn-danger delete-permission" value="Excluir Despesa">
-                                                {!! html()->form()->close() !!}
-
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                    <i class="fas fa-times"></i>
+                                                    Fechar
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-save"></i>
+                                                    Salvar
+                                                </button>
                                             </div>
+                                            {!! html()->form()->close() !!}
+
                                         </div>
                                         <!-- /.modal-content -->
                                     </div>
@@ -327,16 +377,35 @@ function alternaPago() {
         var divPAgo = $('.div_pago');
         if (checkPago.prop('checked') == true) {
             // divPAgo.css('display', '');
-            $('.div_pago').collapse('show')
+            $('.div_pago').collapse('show');
             $('#pagamento_valor').attr("required","required");
             $('#forma_pagamento_id').attr("required","required");
             $('#data_pagamento').attr("required","required");
         } else {
             // divPAgo.css('display', 'none');
-            $('.div_pago').collapse('hide')
+            $('.div_pago').collapse('hide');
             $('#pagamento_valor').removeAttr("required");
             $('#forma_pagamento_id').removeAttr("required");
             $('#data_pagamento').removeAttr("required");
+        }
+    }
+
+    function alternaPagoEdit(id) {
+        var checkPago = $('#pago_'+id);
+
+        if (checkPago.prop('checked') == true) {
+            // divPAgo.css('display', '');
+
+            $('.div_pago_'+id).collapse('show');
+            // $('#pagamento_valor').attr("required","required");
+            // $('#forma_pagamento_id').attr("required","required");
+            // $('#data_pagamento').attr("required","required");
+        } else {
+            // divPAgo.css('display', 'none');
+            $('.div_pago_'+id).collapse('hide');
+            // $('#pagamento_valor').removeAttr("required");
+            // $('#forma_pagamento_id').removeAttr("required");
+            // $('#data_pagamento').removeAttr("required");
         }
     }
 </script>

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Financeiro;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Financeiro\StoreDespesaPagamento;
+use App\Http\Requests\Financeiro\UpdateDespesaPagamento as FinanceiroUpdateDespesaPagamento;
 use App\Models\Financeiro\Contas;
 use App\Models\Financeiro\Pagamentos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DespesaPagamentoController extends Controller
 {
@@ -31,7 +34,32 @@ class DespesaPagamentoController extends Controller
      */
     public function store(Contas $despesa, StoreDespesaPagamento $request)
     {
-        dd($request->all());
+        DB::beginTransaction();
+        try {
+            $pagamento[] =  [
+                'forma_pagamento_id' => $request->parcelado_forma_pagamento_id,
+                'user_id' => Auth::id(),
+                'valor' => $request->pagamento_valor,
+                'vencimento' =>  $request->vencimento,
+                'data_pagamento' => $request->data_pagamento,
+                'parcela' => $request->parcela,
+                'forma_pagamento_id' => $request->forma_pagamento_id,
+            ];
+            $despesa->pagamentos()->createMany($pagamento);
+            if ($despesa->parcelas < $despesa->pagamentos->count()) {
+                $despesa->parcelas = $despesa->parcelas + 1;
+            }
+            if (($despesa->pagamentos->sum('valor') + $request->pagamento_valor) >= $despesa->valor) {
+                $despesa->data_quitacao = $request->data_pagamento;
+            }
+            $despesa->save();
+            DB::commit();
+            return redirect()->route('financeiro.despesa.edit', $despesa)
+            ->with('success', 'Pagamento adicionado com sucesso.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
@@ -53,9 +81,32 @@ class DespesaPagamentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(FinanceiroUpdateDespesaPagamento $request, Contas $despesa, Pagamentos $pagamento)
     {
-        //
+        DB::beginTransaction();
+        $pagamento = $despesa->pagamentos()->findOrFail($pagamento->id);
+        try {
+                $pagamento->forma_pagamento_id = $request->parcelado_forma_pagamento_id;
+                $pagamento->user_id = Auth::id();
+                $pagamento->valor = $request->pagamento_valor;
+                $pagamento->vencimento =  $request->vencimento;
+                $pagamento->data_pagamento = $request->data_pagamento;
+                $pagamento->parcela = $request->parcela;
+                $pagamento->forma_pagamento_id = $request->forma_pagamento_id;
+                $pagamento->save();
+
+            if (($despesa->pagamentos->sum('valor') + $request->pagamento_valor) >= $despesa->valor) {
+                $despesa->data_quitacao = $request->data_pagamento;
+            }
+            $despesa->save();
+            DB::commit();
+            return redirect()->route('financeiro.despesa.edit', $despesa)
+            ->with('success', 'Pagamento editado com sucesso.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+
     }
 
     /**
@@ -63,6 +114,8 @@ class DespesaPagamentoController extends Controller
      */
     public function destroy(Contas $despesa, Pagamentos $pagamento)
     {
+        // $despesa::with('pagamentos')->findOrFail($despesa->id);
+        $pagamento = $despesa->pagamentos()->findOrFail($pagamento->id);
         try {
             $pagamento->delete();
             return redirect()->route('financeiro.despesa.edit', $despesa)

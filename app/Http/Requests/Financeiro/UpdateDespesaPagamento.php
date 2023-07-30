@@ -4,7 +4,7 @@ namespace App\Http\Requests\Financeiro;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDespesaPagamento extends FormRequest
+class UpdateDespesaPagamento extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,14 @@ class StoreDespesaPagamento extends FormRequest
             'vencimento' => 'date|required',
             'parcela' => 'required|integer',
 
-            'pagamento_valor'     => 'required_if:pago,on|numeric|min:0|not_in:0|nullable',
-            'data_pagamento' => 'required_if:pago,on|date|nullable',
-            'forma_pagamento_id' => 'required_if:pago,on|exists:forma_pagamentos,id|nullable',
+            'data_pagamento' => 'date|nullable',
+            'pagamento_valor'     => 'required_unless:data_pagamento,|numeric|min:0|not_in:0|nullable',
+            'forma_pagamento_id' => 'required_unless:data_pagamento,|exists:forma_pagamentos,id|nullable',
 
         ];
     }
 
-
-    /**
+            /**
      * Prepare the data for validation.
      */
     protected function prepareForValidation(): void
