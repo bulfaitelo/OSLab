@@ -69,9 +69,46 @@
             <div class="col-md-2">
                 <div class="form-group ">
                     <label for="parcelas"> Parcelas </label>
+                    <div class="input-group">
                         {!! html()->text('parcelas', $despesa->parcelas)->class('form-control int')->placeholder('Parcelas')->required() !!}
+                        @can('financeiro_despesa_pagamento_create')
+                            <span class="input-group-append">
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-pagamento">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </span>
+                        @endcan
+                    </div>
+                    @can('financeiro_despesa_pagamento_create')
+                    <div class="modal fade" id="modal-pagamento">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Adicionar uma nova parcela</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        <i class="fas fa-times"></i>
+                                        Fechar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save"></i>
+                                        Salvar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endcan
                 </div>
             </div>
+
         </div>
         {!! html()->form()->close() !!}
         <div class="card-body pt-2 table-responsive">
@@ -94,45 +131,69 @@
                     <td>{{ $item->formaPagamento?->name}}</td>
                     <td>{{ $item->user->name}}</td>
                     <td>R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
-                    <td>{{ $item->vencimento}}</td>
-                    <td>{{ $item->data_pagamento}}</td>
+                    <td>{{ $item->vencimento?->format('d/m/Y') ?? ''}}</td>
+                    <td>{{ $item->data_pagamento?->format('d/m/Y') ?? ''}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
                             @can('financeiro_despesa_edit')
-                                <a href="{{ route('financeiro.despesa.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                            @endcan
-                            @can('financeiro_despesa_show')
-                                <a href="{{ route('financeiro.despesa.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                <button  title="Editar" class="btn btn-left btn-info" data-toggle="modal" data-target="#modal-editar_{{ $item->id }}"><i class="fas fa-edit"></i></button>
                             @endcan
                             @can('financeiro_despesa_destroy')
                                 <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
                             @endcan
                         </div>
-                            @can('financeiro_despesa_destroy')
-                            <div class="modal fade" id="modal-excluir_{{ $item->id }}">
-                                <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <p><b>Nome:</b> {{ $item->name}}</p>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                        {!! html()->form('delete', route('financeiro.despesa.destroy', $item->id))->open() !!}
-                                            <input type="submit" class="btn btn-danger delete-permission" value="Excluir Despesa">
-                                        {!! html()->form()->close() !!}
+                        @can('financeiro_despesa_pagamento_edit')
+                                <div class="modal fade" id="modal-editar_{{ $item->id }}">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Editar: Parcela </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><b>Nome:</b> {{ $item->name}}</p>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                {!! html()->form('delete', route('financeiro.despesa.pagamento.destroy', [$despesa->id, $item->id]))->open() !!}
+                                                    <input type="submit" class="btn btn-danger delete-permission" value="Excluir Despesa">
+                                                {!! html()->form()->close() !!}
 
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
                                     </div>
+                                    <!-- /.modal-dialog -->
                                 </div>
-                                <!-- /.modal-content -->
+                            @endcan
+
+                            @can('financeiro_despesa_pagamento_destroy')
+                                <div class="modal fade" id="modal-excluir_{{ $item->id }}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p><b>Nome:</b> {{ $item->name}}</p>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                {!! html()->form('delete', route('financeiro.despesa.pagamento.destroy', [$despesa->id, $item->id]))->open() !!}
+                                                    <input type="submit" class="btn btn-danger delete-permission" value="Excluir Despesa">
+                                                {!! html()->form()->close() !!}
+
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
                                 </div>
-                                <!-- /.modal-dialog -->
-                            </div>
                             @endcan
                         </div>
                       <!-- /.modal -->

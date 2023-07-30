@@ -111,6 +111,13 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
             ],
 
             [
+                'description' => 'Criar Pagamento Despesa',
+                'name' => 'financeiro_despesa_pagamento_create',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+
+            [
                 'description' => 'Acesso as Receitas',
                 'name' => 'financeiro_receita',
                 'guard_name' => 'web',

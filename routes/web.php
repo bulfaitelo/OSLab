@@ -15,6 +15,7 @@ use App\Http\Controllers\Configuracao\User\UserController;
 use App\Http\Controllers\Configuracao\Wiki\FabricanteController;
 use App\Http\Controllers\Configuracao\Wiki\ModeloController;
 use App\Http\Controllers\Financeiro\DespesaController;
+use App\Http\Controllers\Financeiro\DespesaPagamentoController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
@@ -52,6 +53,8 @@ Route::group(['middleware'=> 'auth'], function() {
     // Financeiro
     Route::name('financeiro.')->prefix('financeiro')->group( function (){
         Route::resource('/despesa', DespesaController::class);
+        // Route::resource('/despesa/{despesa}/pagamento', DespesaPagamentoController::class);
+        Route::delete('/despesa/{despesa}/pagamento/{pagamento}', [DespesaPagamentoController::class, 'destroy'])->name('despesa.pagamento.destroy');
     });
 
     Route::resource('/wiki', WikiController::class);
