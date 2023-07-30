@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Financeiro;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Financeiro\StoreDespesaPagamento;
 use App\Models\Financeiro\Contas;
 use App\Models\Financeiro\Pagamentos;
 use Illuminate\Http\Request;
@@ -28,9 +29,9 @@ class DespesaPagamentoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Contas $despesa, StoreDespesaPagamento $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

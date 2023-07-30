@@ -79,6 +79,7 @@
                             </span>
                         @endcan
                     </div>
+                    {!! html()->form()->close() !!}
                     @can('financeiro_despesa_pagamento_create')
                     <div class="modal fade" id="modal-pagamento">
                         <div class="modal-dialog modal-lg">
@@ -90,7 +91,51 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-
+                                    <form action="{{ route('financeiro.despesa.pagamento.store', $despesa) }}" id="form-pagamento" method="post">
+                                        @csrf
+                                    <div class="row">
+                                        <div  class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="parcela"> Parcela </label>
+                                                {!! html()->text('parcela')->class('form-control int')->placeholder('Parcela')->required() !!}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="vencimento"> Vencimento </label>
+                                                {!! html()->date('vencimento')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label for="pago">Pago</label>
+                                                <div class="custom-control custom-switch custom-switch-md">
+                                                    <input type="checkbox" name="pago" @checked(old('pago') == 'on') id="pago" class="custom-control-input" onclick="alternaPago()">
+                                                    <label class="custom-control-label" for="pago"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row div_pago collapse" id="collapseExample">
+                                        <div  class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="pagamento_valor"> Valor </label>
+                                                {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor')->required() !!}
+                                            </div>
+                                        </div>
+                                        <div  class="col-md-4 ">
+                                            <div class="form-group">
+                                                <label for="data_pagamento"> Data pagamento </label>
+                                                {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago')->required() !!}
+                                            </div>
+                                        </div>
+                                        <div  class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="forma_pagamento_id">Forma de pagamento</label>
+                                                {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -102,6 +147,7 @@
                                         Salvar
                                     </button>
                                 </div>
+                                {!! html()->form()->close() !!}
                             </div>
                         </div>
                     </div>
@@ -110,7 +156,7 @@
             </div>
 
         </div>
-        {!! html()->form()->close() !!}
+
         <div class="card-body pt-2 table-responsive">
             <table class="table table-sm table-hover text-nowrap">
               <thead>
@@ -271,5 +317,27 @@
         trigger: 'hover'
     });
 </script>
+<script>
 
+$(document).ready(function () {
+        alternaPago();
+});
+function alternaPago() {
+        var checkPago = $('#pago');
+        var divPAgo = $('.div_pago');
+        if (checkPago.prop('checked') == true) {
+            // divPAgo.css('display', '');
+            $('.div_pago').collapse('show')
+            $('#pagamento_valor').attr("required","required");
+            $('#forma_pagamento_id').attr("required","required");
+            $('#data_pagamento').attr("required","required");
+        } else {
+            // divPAgo.css('display', 'none');
+            $('.div_pago').collapse('hide')
+            $('#pagamento_valor').removeAttr("required");
+            $('#forma_pagamento_id').removeAttr("required");
+            $('#data_pagamento').removeAttr("required");
+        }
+    }
+</script>
 @stop

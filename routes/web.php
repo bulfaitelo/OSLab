@@ -55,6 +55,7 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::resource('/despesa', DespesaController::class);
         // Route::resource('/despesa/{despesa}/pagamento', DespesaPagamentoController::class);
         Route::delete('/despesa/{despesa}/pagamento/{pagamento}', [DespesaPagamentoController::class, 'destroy'])->name('despesa.pagamento.destroy');
+        Route::post('/despesa/{despesa}/pagamento/', [DespesaPagamentoController::class, 'store'])->name('despesa.pagamento.store');
     });
 
     Route::resource('/wiki', WikiController::class);

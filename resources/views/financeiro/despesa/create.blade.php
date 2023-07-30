@@ -238,7 +238,6 @@
             $('#avista_forma_pagamento_id').removeAttr("required");
             $('#data_pagamento').removeAttr("required");
         }
-
     }
 
     function alternaPagoParcelado() {
