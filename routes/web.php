@@ -16,6 +16,8 @@ use App\Http\Controllers\Configuracao\Wiki\FabricanteController;
 use App\Http\Controllers\Configuracao\Wiki\ModeloController;
 use App\Http\Controllers\Financeiro\DespesaController;
 use App\Http\Controllers\Financeiro\DespesaPagamentoController;
+use App\Http\Controllers\Financeiro\ReceitaController;
+use App\Http\Controllers\Financeiro\ReceitaPagamentoController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
@@ -53,10 +55,17 @@ Route::group(['middleware'=> 'auth'], function() {
     // Financeiro
     Route::name('financeiro.')->prefix('financeiro')->group( function (){
         Route::resource('/despesa', DespesaController::class);
-        // Route::resource('/despesa/{despesa}/pagamento', DespesaPagamentoController::class);
-        Route::delete('/despesa/{despesa}/pagamento/{pagamento}', [DespesaPagamentoController::class, 'destroy'])->name('despesa.pagamento.destroy');
         Route::put('/despesa/{despesa}/pagamento/{pagamento}', [DespesaPagamentoController::class, 'update'])->name('despesa.pagamento.update');
         Route::post('/despesa/{despesa}/pagamento/', [DespesaPagamentoController::class, 'store'])->name('despesa.pagamento.store');
+        Route::delete('/despesa/{despesa}/pagamento/{pagamento}', [DespesaPagamentoController::class, 'destroy'])->name('despesa.pagamento.destroy');
+
+        Route::resource('/receita', ReceitaController::class)
+                ->parameters(['receita' => 'receita']);
+        Route::put('/receita/{receita}/pagamento/{pagamento}', [ReceitaPagamentoController::class, 'update'])->name('receita.pagamento.update');
+        Route::post('/receita/{receita}/pagamento/', [ReceitaPagamentoController::class, 'store'])->name('receita.pagamento.store');
+        Route::delete('/receita/{receita}/pagamento/{pagamento}', [ReceitaPagamentoController::class, 'destroy'])->name('receita.pagamento.destroy');
+
+
     });
 
     Route::resource('/wiki', WikiController::class);

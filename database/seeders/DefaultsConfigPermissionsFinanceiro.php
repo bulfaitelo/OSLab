@@ -159,6 +159,25 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 5,
             ],
+
+            [
+                'description' => 'Criar Pagamento Receita',
+                'name' => 'financeiro_receita_pagamento_create',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'editar Pagamento Receita',
+                'name' => 'financeiro_receita_pagamento_edit',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Excluir Pagamento Receita',
+                'name' => 'financeiro_receita_pagamento_destroy',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
         ];
 
 

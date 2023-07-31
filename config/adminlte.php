@@ -359,7 +359,7 @@ return [
                 [
                     'text'    => 'Receitas',
                     'icon'    => 'fa-solid fa-up-long',
-                    'route'   => 'configuracao.users.index',
+                    'route'   => 'financeiro.receita.index',
                     'active'  => ['financeiro/receita*'],
                     'can'     => 'financeiro_receita',
                 ],
