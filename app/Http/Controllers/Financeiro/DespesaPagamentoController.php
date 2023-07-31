@@ -65,17 +65,33 @@ class DespesaPagamentoController extends Controller
         DB::beginTransaction();
         $pagamento = $despesa->pagamentos()->findOrFail($pagamento->id);
         try {
-                $pagamento->forma_pagamento_id = $request->parcelado_forma_pagamento_id;
-                $pagamento->user_id = Auth::id();
+            $pagamento->forma_pagamento_id = $request->parcelado_forma_pagamento_id;
+            $pagamento->user_id = Auth::id();
+            $pagamento->vencimento =  $request->vencimento;
+            $pagamento->parcela = $request->parcela;
+            if($request->pago) {
                 $pagamento->valor = $request->pagamento_valor;
-                $pagamento->vencimento =  $request->vencimento;
                 $pagamento->data_pagamento = $request->data_pagamento;
-                $pagamento->parcela = $request->parcela;
                 $pagamento->forma_pagamento_id = $request->forma_pagamento_id;
-                $pagamento->save();
 
-            if (($despesa->pagamentos->sum('valor') + $request->pagamento_valor) >= $despesa->valor) {
-                $despesa->data_quitacao = $request->data_pagamento;
+            } else {
+                $pagamento->valor = null;
+                $pagamento->data_pagamento = null;
+                $pagamento->forma_pagamento_id = null;
+
+            }
+            $pagamento->save();
+
+            if($request->pago) {
+                if (($despesa->pagamentos->sum('valor') + $request->pagamento_valor) >= $despesa->valor) {
+                    $despesa->data_quitacao = $request->data_pagamento;
+                }
+            } else {
+                if (($despesa->pagamentos->sum('valor')) >= $despesa->valor) {
+                    $despesa->data_quitacao = $request->data_pagamento;
+                } else {
+                    $despesa->data_quitacao = null;
+                }
             }
             $despesa->save();
             DB::commit();
@@ -93,14 +109,20 @@ class DespesaPagamentoController extends Controller
      */
     public function destroy(Contas $despesa, Pagamentos $pagamento)
     {
-        // $despesa::with('pagamentos')->findOrFail($despesa->id);
+        DB::beginTransaction();
         $pagamento = $despesa->pagamentos()->findOrFail($pagamento->id);
         try {
             $pagamento->delete();
+            if (($despesa->pagamentos->sum('valor')) <= $despesa->valor) {
+                $despesa->data_quitacao = null;
+            }
+            $despesa->save();
+            DB::commit();
             return redirect()->route('financeiro.despesa.edit', $despesa)
                 ->with('success', 'Pagamento excluído com sucesso.');
 
         } catch (\Throwable $th) {
+            DB::rollBack();
             throw $th;
         }
     }
