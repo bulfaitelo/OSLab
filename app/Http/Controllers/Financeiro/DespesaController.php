@@ -166,7 +166,7 @@ class DespesaController extends Controller
      */
     public function show(Contas $despesa)
     {
-        //
+        return view('financeiro.despesa.show', compact('despesa'));
     }
 
     /**
@@ -190,6 +190,14 @@ class DespesaController extends Controller
      */
     public function destroy(Contas $despesa)
     {
-        //
+        try {
+            $despesa->delete();
+            return redirect()->route('financeiro.dexpesa.index')
+                ->with('success', 'Despesa excluída com sucesso.');
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
     }
 }

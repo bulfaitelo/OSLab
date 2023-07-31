@@ -166,7 +166,7 @@
                   <th>Usuario</th>
                   <th>Valor</th>
                   <th>Vencimento</th>
-                  <th>data Pagamento</th>
+                  <th>Data Pagamento</th>
                   <th style="width: 40px"></th>
                 </tr>
               </thead>

@@ -13,21 +13,33 @@ use Illuminate\Support\Facades\DB;
 
 class DespesaPagamentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+
+    function __construct()
     {
-        //
+        // ACL DE PERMISSÕES
+
+        $this->middleware('permission:financeiro_despesa_pagamento_create', ['only'=> ['store']]);
+        $this->middleware('permission:financeiro_despesa_pagamento_edit', ['only'=> [ 'update']]);
+        $this->middleware('permission:financeiro_despesa_pagamento_destroy', ['only'=> 'destroy']);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Display a listing of the resource.
+    //  */
+    // public function index()
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Show the form for creating a new resource.
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -62,21 +74,21 @@ class DespesaPagamentoController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    // /**
+    //  * Display the specified resource.
+    //  */
+    // public function show(string $id)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(string $id)
+    // {
 
-    }
+    // }
 
     /**
      * Update the specified resource in storage.

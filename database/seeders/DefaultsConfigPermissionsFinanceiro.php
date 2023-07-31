@@ -116,10 +116,15 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 5,
             ],
-
             [
                 'description' => 'editar Pagamento Despesa',
                 'name' => 'financeiro_despesa_pagamento_edit',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Excluir Pagamento Despesa',
+                'name' => 'financeiro_despesa_pagamento_destroy',
                 'guard_name' => 'web',
                 'group_id' => 5,
             ],

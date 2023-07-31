@@ -45,8 +45,14 @@ class Contas extends Model
     }
 
     public function getVencimentoDate() {
-        $data = new Carbon($this->pagamentos()->select('vencimento')->first()->vencimento);
-        return $data->format('d');
+
+        if ($this->pagamentos->count() > 0) {
+            $data = new Carbon($this->pagamentos()->select('vencimento')->first()->vencimento);
+            return $data->format('d');
+        } else {
+
+        }
+
     }
 
 

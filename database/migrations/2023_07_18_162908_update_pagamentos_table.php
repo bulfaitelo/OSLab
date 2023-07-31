@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::table('pagamentos', function (Blueprint $table) {
             $table->foreign('conta_id', 'fk_pagamentos_contas')
-            ->references('id')->on('contas');
+            ->references('id')->on('contas')
+            ->onDelete('cascade');
 
             $table->foreign('forma_pagamento_id', 'fk_pagamentos_forma_pagamentos')
             ->references('id')->on('forma_pagamentos');
