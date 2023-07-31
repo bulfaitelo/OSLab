@@ -18,7 +18,7 @@
             </a>
             @can('financeiro_despesa_create')
             <a href="{{ route('financeiro.despesa.create') }}">
-                <button type="button"  class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-despesa">
+                <button type="button"  class="btn btn-sm btn-danger">
                     <i class="fa-solid fa-plus"></i>
                     Adicionar Despesa
                 </button>

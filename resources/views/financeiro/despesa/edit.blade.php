@@ -181,10 +181,10 @@
                     <td>{{ $item->data_pagamento?->format('d/m/Y') ?? ''}}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            @can('financeiro_despesa_edit')
+                            @can('financeiro_despesa_pagamento_edit')
                                 <button  title="Editar" class="btn btn-left btn-info" data-toggle="modal" data-target="#modal-editar_{{ $item->id }}"><i class="fas fa-edit"></i></button>
                             @endcan
-                            @can('financeiro_despesa_destroy')
+                            @can('financeiro_despesa_pagamento_destroy')
                                 <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
                             @endcan
                         </div>

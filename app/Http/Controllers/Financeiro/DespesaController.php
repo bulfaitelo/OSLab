@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Financeiro;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Financeiro\StoreDespesaRequest;
-use App\Http\Requests\Financeiro\UpdateDespesaRequest;
+use App\Http\Requests\Financeiro\StoreContaRequest;
+use App\Http\Requests\Financeiro\UpdateContaRequest;
 use App\Models\Financeiro\Contas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -80,7 +80,7 @@ class DespesaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDespesaRequest $request)
+    public function store(StoreContaRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -180,11 +180,9 @@ class DespesaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDespesaRequest $request, Contas $despesa)
+    public function update(UpdateContaRequest $request, Contas $despesa)
     {
         try {
-
-            $despesa->tipo = 'D'; //despesa
             $despesa->user_id = Auth::id();
             $despesa->name = $request->name;
             $despesa->centro_custo_id = $request->centro_custo_id;
@@ -208,7 +206,7 @@ class DespesaController extends Controller
     {
         try {
             $despesa->delete();
-            return redirect()->route('financeiro.dexpesa.index')
+            return redirect()->route('financeiro.despesa.index')
                 ->with('success', 'Despesa excluída com sucesso.');
 
         } catch (\Throwable $th) {

@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Financeiro;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Financeiro\StoreDespesaPagamentoRequest;
-use App\Http\Requests\Financeiro\UpdateDespesaPagamentoRequest;
-use App\Http\Requests\Financeiro\UpdateDespesaRequest;
+use App\Http\Requests\Financeiro\StoreContaPagamentoRequest;
+use App\Http\Requests\Financeiro\UpdateContaPagamentoRequest;
 use App\Models\Financeiro\Contas;
 use App\Models\Financeiro\Pagamentos;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DespesaPagamentoController extends Controller
 {
-
 
     function __construct()
     {
@@ -26,26 +23,10 @@ class DespesaPagamentoController extends Controller
 
     }
 
-    // /**
-    //  * Display a listing of the resource.
-    //  */
-    // public function index()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for creating a new resource.
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
-
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Contas $despesa, StoreDespesaPagamentoRequest $request)
+    public function store(Contas $despesa, StoreContaPagamentoRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -75,26 +56,11 @@ class DespesaPagamentoController extends Controller
         }
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    // public function edit(string $id)
-    // {
-
-    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDespesaRequest $request, Contas $despesa, Pagamentos $pagamento)
+    public function update(UpdateContaPagamentoRequest $request, Contas $despesa, Pagamentos $pagamento)
     {
         DB::beginTransaction();
         $pagamento = $despesa->pagamentos()->findOrFail($pagamento->id);
