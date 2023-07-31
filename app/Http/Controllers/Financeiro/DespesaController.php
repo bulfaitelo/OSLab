@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Financeiro;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Financeiro\StoreContasRequest;
-use App\Http\Requests\Financeiro\UpdateContasRequest;
+use App\Http\Requests\Financeiro\StoreDespesaRequest;
+use App\Http\Requests\Financeiro\UpdateDespesaRequest;
 use App\Models\Financeiro\Contas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -80,20 +80,20 @@ class DespesaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreContasRequest $request)
+    public function store(StoreDespesaRequest $request)
     {
         DB::beginTransaction();
         try {
-            $conta = new Contas();
-            $conta->tipo = 'D'; //despesa
-            $conta->user_id = Auth::id();
-            $conta->name = $request->name;
-            $conta->centro_custo_id = $request->centro_custo_id;
-            $conta->cliente_id = $request->cliente_id;
-            $conta->observacoes = $request->observacoes;
-            $conta->valor = $request->valor;
-            $conta->parcelas = $request->parcelas;
-            $conta->save();
+            $despesa = new Contas();
+            $despesa->tipo = 'D'; //despesa
+            $despesa->user_id = Auth::id();
+            $despesa->name = $request->name;
+            $despesa->centro_custo_id = $request->centro_custo_id;
+            $despesa->cliente_id = $request->cliente_id;
+            $despesa->observacoes = $request->observacoes;
+            $despesa->valor = $request->valor;
+            $despesa->parcelas = $request->parcelas;
+            $despesa->save();
 
             if ($request->parcelas > 1) {
                 $vencimento = new Carbon($request->vencimento);
@@ -129,8 +129,8 @@ class DespesaController extends Controller
                     }
                 }
                 if ($request->parcelado_pago) {
-                    $conta->data_quitacao = $vencimento->format('Y-m-d');
-                    $conta->save();
+                    $despesa->data_quitacao = $vencimento->format('Y-m-d');
+                    $despesa->save();
                 }
 
             } else {
@@ -143,12 +143,12 @@ class DespesaController extends Controller
                     'parcela' => 1,
                 ];
                 if($request->avista_valor >= $request->valor){
-                    $conta->data_quitacao = $request->data_pagamento;
-                    $conta->save();
+                    $despesa->data_quitacao = $request->data_pagamento;
+                    $despesa->save();
                 }
 
             }
-            $conta->pagamentos()->createMany($pagamento);
+            $despesa->pagamentos()->createMany($pagamento);
 
             DB::commit();
             return redirect()->route('financeiro.despesa.index')
@@ -180,9 +180,25 @@ class DespesaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContasRequest $request, Contas $despesa)
+    public function update(UpdateDespesaRequest $request, Contas $despesa)
     {
-        dd($request->input());
+        try {
+
+            $despesa->tipo = 'D'; //despesa
+            $despesa->user_id = Auth::id();
+            $despesa->name = $request->name;
+            $despesa->centro_custo_id = $request->centro_custo_id;
+            $despesa->cliente_id = $request->cliente_id;
+            $despesa->observacoes = $request->observacoes;
+            $despesa->valor = $request->valor;
+            $despesa->parcelas = $request->parcelas;
+            $despesa->save();
+
+            return redirect()->route('financeiro.despesa.index')
+            ->with('success', 'Despesa Atualizada com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Financeiro;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Financeiro\StoreDespesaPagamento;
-use App\Http\Requests\Financeiro\UpdateDespesaPagamento as FinanceiroUpdateDespesaPagamento;
+use App\Http\Requests\Financeiro\StoreDespesaPagamentoRequest;
+use App\Http\Requests\Financeiro\UpdateDespesaPagamentoRequest;
+use App\Http\Requests\Financeiro\UpdateDespesaRequest;
 use App\Models\Financeiro\Contas;
 use App\Models\Financeiro\Pagamentos;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class DespesaPagamentoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Contas $despesa, StoreDespesaPagamento $request)
+    public function store(Contas $despesa, StoreDespesaPagamentoRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -93,7 +94,7 @@ class DespesaPagamentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FinanceiroUpdateDespesaPagamento $request, Contas $despesa, Pagamentos $pagamento)
+    public function update(UpdateDespesaRequest $request, Contas $despesa, Pagamentos $pagamento)
     {
         DB::beginTransaction();
         $pagamento = $despesa->pagamentos()->findOrFail($pagamento->id);
