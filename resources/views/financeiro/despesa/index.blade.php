@@ -174,8 +174,8 @@
 
       <!-- /.card-body -->
       <div class="card-footer clearfix">
-          {{-- {{$despesas->appends(['busca' => $busca])->links() }} --}}
-          {{ $despesas->links() }}
+          {{$despesas->appends($request->all())->links() }}
+          {{-- {{ $despesas->links() }} --}}
       </div>
     </div>
 </div>
