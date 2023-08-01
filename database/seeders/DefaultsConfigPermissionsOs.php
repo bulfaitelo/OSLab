@@ -17,6 +17,37 @@ class DefaultsConfigPermissionsOs extends Seeder
         // permissões
         $insert = [
             [
+                'description' => 'Acesso a Ordem de serviço',
+                'name' => 'os',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
+                'description' => 'Criar Ordem de Serviço',
+                'name' => 'os_create',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
+                'description' => 'Editar Ordem de Serviço',
+                'name' => 'os_edit',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
+                'description' => 'Visualizar Ordem de Serviço',
+                'name' => 'os_show',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
+                'description' => 'Excluir Ordem de Serviço',
+                'name' => 'os_destroy',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+
+            [
                 'description' => 'Acesso a configuração de Garantias',
                 'name' => 'config_os_garantia',
                 'guard_name' => 'web',
@@ -46,6 +77,7 @@ class DefaultsConfigPermissionsOs extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
+
             [
                 'description' => 'Acesso a configuração de Categoria de Os',
                 'name' => 'config_os_categoria',
@@ -76,6 +108,7 @@ class DefaultsConfigPermissionsOs extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
+
             [
                 'description' => 'Acesso a configuração de Status de Os',
                 'name' => 'config_os_status',
