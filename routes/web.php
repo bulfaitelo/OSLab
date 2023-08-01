@@ -18,6 +18,7 @@ use App\Http\Controllers\Financeiro\DespesaController;
 use App\Http\Controllers\Financeiro\DespesaPagamentoController;
 use App\Http\Controllers\Financeiro\ReceitaController;
 use App\Http\Controllers\Financeiro\ReceitaPagamentoController;
+use App\Http\Controllers\Os\OsController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
@@ -64,9 +65,11 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::put('/receita/{receita}/pagamento/{pagamento}', [ReceitaPagamentoController::class, 'update'])->name('receita.pagamento.update');
         Route::post('/receita/{receita}/pagamento/', [ReceitaPagamentoController::class, 'store'])->name('receita.pagamento.store');
         Route::delete('/receita/{receita}/pagamento/{pagamento}', [ReceitaPagamentoController::class, 'destroy'])->name('receita.pagamento.destroy');
-
-
     });
+
+    Route::resource('/os', OsController::class)
+        ->parameters(['os' => 'os']);
+
 
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');

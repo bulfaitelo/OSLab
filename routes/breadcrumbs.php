@@ -16,6 +16,7 @@ use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Financeiro\Contas;
 use App\Models\Lancamento\Lancamento;
+use App\Models\Os\Os;
 use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
@@ -33,6 +34,31 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('home'));
 });
+
+// Os
+    Breadcrumbs::for('os.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Os', route('os.index'));
+    });
+
+    // Os > Novo Os
+    Breadcrumbs::for('os.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('os.index');
+        $trail->push('Novo Os', route('os.create'));
+    });
+
+    // Os > [Visualização de Os]
+    Breadcrumbs::for('os.show', function (BreadcrumbTrail $trail, Os $item) {
+        $trail->parent('os.index');
+        $trail->push($item->name, route('os.show', $item));
+    });
+
+    // Os > [Os Name] > Editar Os
+    Breadcrumbs::for('os.edit', function (BreadcrumbTrail $trail, Os $item) {
+        $trail->parent('os.index');
+        $trail->push('Editar Cliente', route('os.edit', $item));
+    });
+// FIM Os
 
 
 // Clientes
