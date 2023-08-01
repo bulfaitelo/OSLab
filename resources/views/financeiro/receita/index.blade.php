@@ -48,13 +48,13 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group mb-2 ">
-                            <label for="periodo">Periodo</label>
+                            <label for="periodo">Período</label>
                             {!! html()->select('periodo',['dia' => 'Dia', 'mes' => 'Mês', 'ano' => 'Ano'], $request->periodo)->class('form-control form-control-sm')->placeholder('Selecione') !!}
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group mb-2 ">
-                            <label for="data_inicial"> Data inicio </label>
+                            <label for="data_inicial"> Data Início </label>
                             {!! html()->date('data_inicial', $request->data_inicial)->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento') !!}
                         </div>
                     </div>

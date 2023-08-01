@@ -65,17 +65,33 @@ class ReceitaPagamentoController extends Controller
         DB::beginTransaction();
         $pagamento = $receita->pagamentos()->findOrFail($pagamento->id);
         try {
-                $pagamento->forma_pagamento_id = $request->parcelado_forma_pagamento_id;
-                $pagamento->user_id = Auth::id();
+            $pagamento->forma_pagamento_id = $request->parcelado_forma_pagamento_id;
+            $pagamento->user_id = Auth::id();
+            $pagamento->vencimento =  $request->vencimento;
+            $pagamento->parcela = $request->parcela;
+            if($request->pago) {
                 $pagamento->valor = $request->pagamento_valor;
-                $pagamento->vencimento =  $request->vencimento;
                 $pagamento->data_pagamento = $request->data_pagamento;
-                $pagamento->parcela = $request->parcela;
                 $pagamento->forma_pagamento_id = $request->forma_pagamento_id;
-                $pagamento->save();
 
-            if (($receita->pagamentos->sum('valor') + $request->pagamento_valor) >= $receita->valor) {
-                $receita->data_quitacao = $request->data_pagamento;
+            } else {
+                $pagamento->valor = null;
+                $pagamento->data_pagamento = null;
+                $pagamento->forma_pagamento_id = null;
+
+            }
+            $pagamento->save();
+
+            if($request->pago) {
+                if (($receita->pagamentos->sum('valor') + $request->pagamento_valor) >= $receita->valor) {
+                    $receita->data_quitacao = $request->data_pagamento;
+                }
+            } else {
+                if (($receita->pagamentos->sum('valor')) >= $receita->valor) {
+                    $receita->data_quitacao = $request->data_pagamento;
+                } else {
+                    $receita->data_quitacao = null;
+                }
             }
             $receita->save();
             DB::commit();
@@ -93,14 +109,19 @@ class ReceitaPagamentoController extends Controller
      */
     public function destroy(Contas $receita, Pagamentos $pagamento)
     {
-        // $receita::with('pagamentos')->findOrFail($receita->id);
+        DB::beginTransaction();
         $pagamento = $receita->pagamentos()->findOrFail($pagamento->id);
         try {
             $pagamento->delete();
+            if (($receita->pagamentos->sum('valor')) <= $receita->valor) {
+                $receita->data_quitacao = null;
+            }
+            $receita->save();
+            DB::commit();
             return redirect()->route('financeiro.receita.edit', $receita)
                 ->with('success', 'Pagamento excluído com sucesso.');
-
         } catch (\Throwable $th) {
+            DB::rollBack();
             throw $th;
         }
     }

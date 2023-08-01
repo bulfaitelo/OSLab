@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="cliente_id">Cliente / Fonrcedor </label>
+                    <label for="cliente_id">Cliente / Fornecedor </label>
                     {!! html()->select('cliente_id', [$despesa->cliente_id => $despesa->cliente->name], $despesa->cliente_id)->class('form-control cliente')->placeholder('Selecione')->required() !!}
                 </div>
             </div>

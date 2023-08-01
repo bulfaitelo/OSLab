@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Cadastrar Despesa')
+@section('title', 'Adicionar Despesa')
 
 @section('content_header')
-    <h1>Cadastrar Despesa</h1>
+    <h1>Adicionar Despesa</h1>
 @stop
 
 @section('content')
@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="cliente_id">Cliente / Fonrcedor </label>
+                    <label for="cliente_id">Cliente / Fornecedor </label>
                     {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
                 </div>
             </div>
