@@ -31,7 +31,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pagamentos', function (Blueprint $table) {
-            //
+            $table->dropForeign('fk_pagamentos_contas');
+            $table->dropForeign('fk_pagamentos_forma_pagamentos');
+            $table->dropForeign('fk_pagamentos_users');
+
         });
     }
 };
