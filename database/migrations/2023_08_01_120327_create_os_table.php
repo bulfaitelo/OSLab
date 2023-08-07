@@ -24,10 +24,10 @@ return new class extends Migration
             $table->unsignedBigInteger('modelo_id')->nullable();
             $table->unsignedBigInteger('categoria_id')->nullable();
             $table->string('serial')->nullable();
-            $table->string('descricao')->nullable();
-            $table->string('defeito')->nullable();
-            $table->string('observacoes')->nullable();
-            $table->string('laudo')->nullable();
+            $table->mediumText('descricao')->nullable();
+            $table->mediumText('defeito')->nullable();
+            $table->mediumText('observacoes')->nullable();
+            $table->mediumText('laudo')->nullable();
             $table->json('checklist')->nullable();
             $table->timestamps();
         });
