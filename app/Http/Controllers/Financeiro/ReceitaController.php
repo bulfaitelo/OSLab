@@ -62,7 +62,7 @@ class ReceitaController extends Controller
         } elseif ($request->status == 'aberto') {
             $queryReceita->WhereNull('data_quitacao');
         }
-
+        $queryReceita->orderBy('id', 'desc');
 
         $receitas = $queryReceita->paginate(100);
         return view('financeiro.receita.index', compact('receitas', 'request', ));

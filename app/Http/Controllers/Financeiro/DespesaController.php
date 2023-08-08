@@ -63,7 +63,7 @@ class DespesaController extends Controller
         } elseif ($request->status == 'aberto') {
             $queryDespesa->WhereNull('data_quitacao');
         }
-
+        $queryDespesa->orderBy('id', 'desc');
 
         $despesas = $queryDespesa->paginate(100);
         return view('financeiro.despesa.index', compact('despesas', 'request', ));
