@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Cliente\Cliente;
+use Database\Factories\ClienteFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +24,10 @@ class DatabaseSeeder extends Seeder
         $this->call(DefaultsUsers::class);
         $this->call(DefaultsConfigRoles::class);
         $this->call(DatabaseDefaultPermissionsUpdate::class);
+
+
+        // Factory
+        Cliente::factory()->count(200)->create();
 
     }
 }
