@@ -130,14 +130,21 @@ class ClienteController extends Controller
         }
     }
 
-
+    /**
+     * Select cliente
+     *
+     * Retorna o select com os dados dos clientes via Json.
+     *
+     * @param Request $request Request da variável Busca,
+     * @return response, json Retorna o json para ser montado.
+     **/
     public function apiClientSelect (Request $request) {
         try {
-            $cliente = Cliente::where('name', 'LIKE', '%'. $request->q . '%');
-            $cliente->orderBy('name');
-            $cliente->limit(10);
+            $select = Cliente::where('name', 'LIKE', '%'. $request->q . '%');
+            $select->orderBy('name');
+            $select->limit(10);
             $response = [];
-            foreach ($cliente->get() as $value) {
+            foreach ($select->get() as $value) {
                 if ($value->pessoa_juridica == 1) {
                     $textoSelect = '[PJ] ';
                 } else {
