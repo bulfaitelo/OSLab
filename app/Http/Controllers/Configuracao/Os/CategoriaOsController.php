@@ -49,6 +49,8 @@ class CategoriaOsController extends Controller
             $categoria->descricao = $request->descricao;
             $categoria->user_id = Auth::id();
             $categoria->garantia_id = $request->garantia_id;
+            $categoria->checklist_id = $request->checklist_id;
+            $categoria->checklist_required = $request->checklist_required;
             $categoria->save();
             return redirect()->route('configuracao.os.categoria.index')
             ->with('success', 'Categoria criada com sucesso.');
@@ -84,6 +86,8 @@ class CategoriaOsController extends Controller
             $categoria->descricao = $request->descricao;
             $categoria->user_id = Auth::id();
             $categoria->garantia_id = $request->garantia_id;
+            $categoria->checklist_id = $request->checklist_id;
+            $categoria->checklist_required = $request->checklist_required;
             $categoria->save();
             return redirect()->route('configuracao.os.categoria.index')
             ->with('success', 'Categoria atualizada com sucesso.');

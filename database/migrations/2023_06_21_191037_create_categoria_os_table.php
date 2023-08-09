@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('garantia_id')->nullable();
             $table->string('name');
-            $table->string('descricao');
+            $table->string('descricao')->nullable();
             $table->timestamps();
         });
     }

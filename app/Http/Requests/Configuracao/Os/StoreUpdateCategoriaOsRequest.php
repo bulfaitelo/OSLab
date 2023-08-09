@@ -23,7 +23,8 @@ class StoreUpdateCategoriaOsRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'garantia_id' => 'nullable|exists:garantias,id'
+            'garantia_id' => 'nullable|exists:garantias,id',
+            'checklist_id' => 'nullable|exists:checklists,id',
         ];
     }
 }
