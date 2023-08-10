@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Nova Os')
+@section('title', 'Editar Os')
 
 @section('content_header')
-    <h1>Nova Os</h1>
+    <h1>Editar Os</h1>
 @stop
 
 @section('content')
@@ -63,13 +63,13 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="data_entrada">Data Entrada</label>
-                        {!! html()->date('data_entrada', Carbon\Carbon::now()->format('d-m-Y'))->class('form-control') !!}
+                        {!! html()->date('data_entrada', $os->data_entrada)->class('form-control') !!}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="data_saida">Data Saída</label>
-                        {!! html()->date('data_saida')->class('form-control') !!}
+                        {!! html()->date('data_saida', $os->data_saida)->class('form-control') !!}
                     </div>
                 </div>
                 <div class="col-md-5 d-flex align-items-end">

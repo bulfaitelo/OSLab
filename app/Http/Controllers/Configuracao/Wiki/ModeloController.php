@@ -104,4 +104,32 @@ class ModeloController extends Controller
             throw $th;
         }
     }
+
+    /**
+     * Select Modelo
+     *
+     * Retorna o select com os modelos dos dispositivos relacionado wiki dos usuários via Json.
+     *
+     * @param Request $request Request da variável Busca,
+     * @return response, json Retorna o json para ser montado.
+     **/
+    public function apiModeloSelect (Request $request) {
+        try {
+            $select = Modelo::where('name', 'LIKE', '%'. $request->q . '%');
+            $select->orderBy('name');
+            $select->limit(10);
+            $response = [];
+            foreach ($select->get() as $value) {
+
+                $response[] = [
+                    'id' => $value->id,
+                    'text' => $value->name,
+                ];
+            }
+            return response()->json($response, 200);
+
+        } catch (\Throwable $th) {
+            return response()->json($th, 403);
+        }
+    }
 }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('tecnico_id');
             $table->unsignedBigInteger('status_id');
-            $table->date('data_inicial');
-            $table->date('data_final')->nullable();
+            $table->date('data_entrada');
+            $table->date('data_saida')->nullable();
             $table->date('prazo_garantia')->nullable();
             $table->unsignedBigInteger('termo_garantia_id')->nullable();
             $table->unsignedBigInteger('modelo_id')->nullable();

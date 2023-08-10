@@ -21,7 +21,7 @@ class UserController extends Controller
     function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_user', ['only'=> 'index']);
+        $this->middleware('permission:config_user', ['only'=> ['index', 'apiUserSelect']]);
         $this->middleware('permission:config_user_create', ['only'=> ['create', 'store']]);
         $this->middleware('permission:config_user_show', ['only'=> 'show']);
         $this->middleware('permission:config_user_edit', ['only'=> ['edit', 'update']]);
@@ -257,5 +257,33 @@ class UserController extends Controller
         return redirect()->route('configuracao.users.permissions_edit', [$user->id])->with('success', 'Permissões Atualizadas!'); ;
 
 
+    }
+
+    /**
+     * Select Users
+     *
+     * Retorna o select com os dados dos usuários via Json.
+     *
+     * @param Request $request Request da variável Busca,
+     * @return response, json Retorna o json para ser montado.
+     **/
+    public function apiUserSelect (Request $request) {
+        try {
+            $select = User::where('name', 'LIKE', '%'. $request->q . '%');
+            $select->orderBy('name');
+            $select->limit(10);
+            $response = [];
+            foreach ($select->get() as $value) {
+
+                $response[] = [
+                    'id' => $value->id,
+                    'text' => $value->name,
+                ];
+            }
+            return response()->json($response, 200);
+
+        } catch (\Throwable $th) {
+            return response()->json($th, 403);
+        }
     }
 }
