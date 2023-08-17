@@ -44,7 +44,7 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     // Os > Novo Os
     Breadcrumbs::for('os.create', function (BreadcrumbTrail $trail) {
         $trail->parent('os.index');
-        $trail->push('Novo Os', route('os.create'));
+        $trail->push('Nova Os', route('os.create'));
     });
 
     // Os > [Visualização de Os]
@@ -56,7 +56,7 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     // Os > [Os Name] > Editar Os
     Breadcrumbs::for('os.edit', function (BreadcrumbTrail $trail, Os $item) {
         $trail->parent('os.index');
-        $trail->push('Editar Cliente', route('os.edit', $item));
+        $trail->push('Editar Os', route('os.edit', $item));
     });
 // FIM Os
 
