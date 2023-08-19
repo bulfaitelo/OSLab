@@ -540,6 +540,13 @@ return [
                     'can'     => 'config_url',
                 ],
                 [
+                    'text'       => 'Livewire Documentation',
+                    'icon'       => 'fas fa-external-link-square-alt',
+                    'url'        => 'https://laravel-livewire.com/docs/',
+                    'target' => '_blank',
+                    'can'     => 'config_url',
+                ],
+                [
                     'text'       => 'AdminLte 3v',
                     'icon'       => 'fas fa-external-link-square-alt',
                     'url'        => 'https://adminlte.io/themes/v3/',
