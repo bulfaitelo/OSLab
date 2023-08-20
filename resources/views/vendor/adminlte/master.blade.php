@@ -43,7 +43,7 @@
         @if(app()->version() >= 7)
             @livewireStyles
         @else
-            @livewireStyles
+            <livewire:styles />
         @endif
     @endif
 
@@ -99,7 +99,7 @@
         @if(app()->version() >= 7)
             @livewireScripts
         @else
-            @livewireScripts
+            <livewire:scripts />
         @endif
     @endif
 
