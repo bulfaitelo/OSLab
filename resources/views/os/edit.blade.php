@@ -14,13 +14,13 @@
             <div class="card-header p-0 border-bottom-0">
                 <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="detalhes-tab" data-toggle="pill" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="true">
+                        <a class="nav-link " id="detalhes-tab" data-toggle="pill" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="false">
                             <i class="fa-regular fa-rectangle-list "></i>
                             Detalhes
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="false">
+                    <li class="nav-item active">
+                        <a class="nav-link" id="produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="true">
                             <i class="fas fa-box-open "></i>
                             Produtos
                         </a>
@@ -54,11 +54,11 @@
             </div>
             <div class="card-body">
                 <div class="tab-content">
-                    <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+                    <div class="tab-pane fade " id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
                         @livewire('os.detalhes', ['os' => $os])
                     </div>
-                    <div class="tab-pane fade" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                        @livewire('os.produtos')
+                    <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
+                        @livewire('os.produtos', ['os' => $os])
                     </div>
                     <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
                         servicos
