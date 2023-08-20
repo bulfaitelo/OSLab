@@ -45,5 +45,5 @@ class StoreOsRequest extends FormRequest
 
 
        ];
-   }
+    }
 }

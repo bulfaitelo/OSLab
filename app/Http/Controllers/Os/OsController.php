@@ -128,7 +128,30 @@ class OsController extends Controller
      */
     public function update(UpdateOsRequest $request, Os $os)
     {
-        //
+        // dd($request->input());
+        DB::beginTransaction();
+        try {
+            $os->user_id = Auth::id();
+            $os->cliente_id = $request->cliente_id;
+            $os->tecnico_id = $request->tecnico_id;
+            $os->categoria_id = $request->categoria_id;
+            $os->modelo_id = $request->modelo_id;
+            $os->status_id = $request->status_id;
+            $os->data_entrada = $request->data_entrada;
+            $os->data_saida = $request->data_saida;
+            $os->descricao = $request->descricao;
+            $os->defeito = $request->defeito;
+            $os->observacoes = $request->observacoes;
+            $os->laudo = $request->laudo;
+            $os->save();
+
+            DB::commit();
+            return redirect()->route('os.edit', $os->id)
+            ->with('success', 'Os Atualizada com sucesso.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**

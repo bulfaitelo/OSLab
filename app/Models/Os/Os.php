@@ -74,4 +74,47 @@ class Os extends Model
     {
         return $this->belongsTo(CategoriaOs::class);
     }
+
+    /**
+     * Retorna id e nome do Cliente.
+     *
+     * Retorna um vetor com o o id e o Cliente para ser usado no Select2
+     * @return array Categoria
+     **/
+    public function getClienteForSelect() : array {
+        if ($this->cliente_id) {
+            return [$this->cliente_id => $this->cliente->name];
+        } else {
+            return [] ;
+        }
+    }
+
+    /**
+     * Retorna id e nome do Técnico.
+     *
+     * Retorna um vetor com o o id e o técnico para ser usado no Select2
+     * @return array Categoria
+     **/
+    public function getTecnicoForSelect() : array {
+        if ($this->tecnico_id) {
+            return [$this->tecnico_id => $this->tecnico->name];
+        } else {
+            return [] ;
+        }
+    }
+
+    /**
+     * Retorna id e nome do Modelo.
+     *
+     * Retorna um vetor com o o id e o Modelo para ser usado no Select2
+     * @return array Categoria
+     **/
+    public function getModeloForSelect() : array {
+        if ($this->modelo_id) {
+            return [$this->modelo_id => $this->modelo->name];
+        } else {
+            return [] ;
+        }
+    }
+
 }

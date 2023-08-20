@@ -11,7 +11,7 @@ class UpdateOsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,26 @@ class UpdateOsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'cliente_id' => 'required|exists:clientes,id',
+            'tecnico_id' => 'required|exists:users,id',
+            'categoria_id' => 'required|exists:categoria_os,id',
+            'modelo_id' => 'nullable|exists:wiki_models,id',
+            'status_id' => 'required|exists:status_os,id',
+            'data_entrada' => 'required|date',
+            'data_saida' => 'nullable|date',
         ];
+    }
+
+    public function messages() : array
+    {
+       return [
+            'cliente_id' => 'Por favor preencha um cliente valido',
+            'tecnico_id' => 'Por favor preencha um técnico valido',
+            'categoria_id' => 'Por favor preencha uma categoria valida',
+            'modelo_id' => 'Por favor preencha um modelo valido',
+            'status_id' => 'Por favor preencha um status valido',
+            'data_entrada' => 'Por favor preencha uma data de entrada valida',
+            'data_saida' => 'Por favor preencha uma data de saída valida',
+       ];
     }
 }

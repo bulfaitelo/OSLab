@@ -35,28 +35,28 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('home'));
 });
 
-// Os
+// OS
     Breadcrumbs::for('os.index', function (BreadcrumbTrail $trail) {
         $trail->parent('home');
-        $trail->push('Os', route('os.index'));
+        $trail->push('OS', route('os.index'));
     });
 
-    // Os > Novo Os
+    // OS > Novo OS
     Breadcrumbs::for('os.create', function (BreadcrumbTrail $trail) {
         $trail->parent('os.index');
-        $trail->push('Nova Os', route('os.create'));
+        $trail->push('Nova OS', route('os.create'));
     });
 
-    // Os > [Visualização de Os]
+    // OS > [Visualização de OS]
     Breadcrumbs::for('os.show', function (BreadcrumbTrail $trail, Os $item) {
         $trail->parent('os.index');
         $trail->push($item->name, route('os.show', $item));
     });
 
-    // Os > [Os Name] > Editar Os
+    // OS > [OS Name] > Editar OS
     Breadcrumbs::for('os.edit', function (BreadcrumbTrail $trail, Os $item) {
         $trail->parent('os.index');
-        $trail->push('Editar Os', route('os.edit', $item));
+        $trail->push('Editar OS', route('os.edit', $item));
     });
 // FIM Os
 

@@ -322,7 +322,7 @@ return [
         ],
         // ['header' => 'account_settings'],
         [
-            'text'    => 'Os',
+            'text'    => 'OS',
             'icon'    => 'fa-regular fa-rectangle-list',
             'route'   => 'os.index',
             'active'  => ['os*'],
