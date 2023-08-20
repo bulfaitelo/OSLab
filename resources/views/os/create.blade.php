@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Nova Os')
+@section('title', 'Nova Ordem de Serviço')
 
 @section('content_header')
-    <h1>Nova Os</h1>
+    <h1>Nova Ordem de Serviço</h1>
 @stop
 
 @section('content')
@@ -48,8 +48,8 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="modelos_id">Modelo</label>
-                        {!! html()->select('modelos_id', [], )->class('form-control modelo')->placeholder('Selecione') !!}
+                        <label for="modelo_id">Modelo</label>
+                        {!! html()->select('modelo_id', [], )->class('form-control modelo')->placeholder('Selecione') !!}
                     </div>
                 </div>
             </div>

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Os')
+@section('title', 'Ordem de Serviço')
 
 @section('content_header')
-    <h1>Os</h1>
+    <h1>Ordem de Serviço</h1>
 @stop
 
 @section('content')
@@ -112,7 +112,7 @@
               <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->cliente->name}}</td>
-                <td>{{ $item->tecnico->name}}</td>
+                <td>{{ $item->tecnico?->name}}</td>
                 <td>{{ $item->data_entrada->format('d/m/Y') }}</td>
                 <td>{{ $item->data_saida?->format('d/m/Y') }}</td>
                 <td> garantia </td>
