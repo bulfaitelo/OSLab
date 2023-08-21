@@ -84,21 +84,66 @@
 <link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
 <link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/css/tom-select.css" rel="stylesheet">
 <style>
     .os {
         border-top: 3px solid #39cccc;
     }
+
+
+.icon{
+	width: 3rem;
+}
+.item{
+	width: 100%;
+}
+
+
 </style>
 @stop
 
 @section('js')
 @routes
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/js/tom-select.complete.min.js"></script>
 <script src="{{ url('') }}/vendor/select2/dist/js/select2.full.min.js"></script>
 <script src="{{ url('') }}/vendor/select2/dist/js/i18n/pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/src/js/os.js"></script>
+<script>
 
+
+$(document).ready(function() {
+
+
+
+    new TomSelect('#select-repo',{
+		valueField: 'url',
+		labelField: 'name',
+		searchField: 'name',
+		// fetch remote data
+		load: function(query, callback) {
+
+			var url = 'https://api.github.com/search/repositories?q=' + encodeURIComponent(query);
+			fetch(url)
+				.then(response => response.json())
+				.then(json => {
+					callback(json.items);
+				}).catch(()=>{
+					callback();
+				});
+
+		},
+	});
+
+
+
+
+
+});
+
+
+</script>
 <script>
     $(document).ready(function() {
         $('.texto').summernote({

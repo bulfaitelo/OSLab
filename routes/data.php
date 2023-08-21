@@ -4,6 +4,7 @@ use App\Http\Controllers\Checklist\ChecklistController;
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Configuracao\User\UserController;
 use App\Http\Controllers\Configuracao\Wiki\ModeloController;
+use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Wiki\WikiController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::post('select_clientes', [ClienteController::class, 'apiClientSelect'])->name('cliente.select');
     Route::post('select_users', [UserController::class, 'apiUserSelect'])->name('user.select');
     Route::post('select_modelos', [ModeloController::class, 'apiModeloSelect'])->name('modelo.select');
+    Route::post('select_produtos', [ProdutoController::class, 'apiProdutoSelect'])->name('produto.select');
 
 
 });

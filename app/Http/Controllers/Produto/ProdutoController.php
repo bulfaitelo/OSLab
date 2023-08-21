@@ -8,6 +8,7 @@ use App\Http\Requests\Produto\UpdateProdutoRequest;
 use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
@@ -129,6 +130,38 @@ class ProdutoController extends Controller
 
         } catch (\Throwable $th) {
             throw $th;
+        }
+    }
+
+
+
+
+    /**
+     * Select Produto
+     *
+     * Retorna o select com os Produtos via Json.
+     *
+     * @param Request $request Request da variável Busca,
+     * @return response, json Retorna o json para ser montado.
+     **/
+    public function apiProdutoSelect (Request $request) {
+        try {
+            $select = Produto::where('name', 'LIKE', '%'. $request->q . '%');
+            $select->orderBy('name');
+            $select->limit(10);
+            $response = [];
+            foreach ($select->get() as $value) {
+                $produto = $value->name . ' | Custo: R$' . $value->valor_custo . ' | Preço: R$' . $value->valor_venda . ' | Estoque: ' . $value->estoque;
+
+                $response[] = [
+                    'id' => $value->id,
+                    'text' => $produto,
+                ];
+            }
+            return response()->json($response, 200);
+
+        } catch (\Throwable $th) {
+            return response()->json($th, 403);
         }
     }
 }

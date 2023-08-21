@@ -56,29 +56,59 @@ $(document).ready(function() {
         minimumInputLength: 3,
     });
 
-         // Select2 Modelos
-         $(".modelo").select2({
-            theme: 'bootstrap4',
-            // dropdownParent: $('#modal-despesa'),
-            language: "pt-BR",
-            ajax: {
-                url: route('modelo.select'),
-                dataType: 'json',
-                method: 'post',
-                delay: 250,
-                data: function (params) {
-                return {
-                    q: params.term, // search term
-                };
-                },
-                processResults: function (data, params) {
-                return {
-                    results: data,
-                };
-                },
-                cache: true
+    // Select2 Modelos
+    $(".modelo").select2({
+        theme: 'bootstrap4',
+        // dropdownParent: $('#modal-despesa'),
+        language: "pt-BR",
+        ajax: {
+            url: route('modelo.select'),
+            dataType: 'json',
+            method: 'post',
+            delay: 250,
+            data: function (params) {
+            return {
+                q: params.term, // search term
+            };
             },
-            placeholder: 'Pesquise pelo Modelo',
-            minimumInputLength: 3,
-        });
+            processResults: function (data, params) {
+            return {
+                results: data,
+            };
+            },
+            cache: true
+        },
+        placeholder: 'Pesquise pelo Modelo',
+        minimumInputLength: 3,
+    });
+
+    // Select2 Produto
+    $(".produto").select2({
+        theme: 'bootstrap4',
+        // dropdownParent: $('#modal-despesa'),
+        language: "pt-BR",
+        ajax: {
+            url: route('produto.select'),
+            dataType: 'json',
+            method: 'post',
+            delay: 250,
+            data: function (params) {
+            return {
+                q: params.term, // search term
+            };
+            },
+            processResults: function (data, params) {
+            return {
+                results: data,
+            };
+            },
+            cache: true
+        },
+        placeholder: 'Pesquise pelo Produto',
+        minimumInputLength: 3,
+    });
+    $('#produto_id').on('change', function(e) {
+        Livewire.emit('GetProdutoId',
+        $('.produto').select2("val"));
+    });
 });
