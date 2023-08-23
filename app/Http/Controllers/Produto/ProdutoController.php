@@ -151,13 +151,16 @@ class ProdutoController extends Controller
             $select->limit(10);
             $response = [];
             foreach ($select->get() as $value) {
-                $produto = $value->name . ' | Custo: R$' . $value->valor_custo . ' | Preço: R$' . $value->valor_venda . ' | Estoque: ' . $value->estoque;
-
-                $response[] = [
+                $items[] = [
                     'id' => $value->id,
-                    'text' => $produto,
+                    'name' => $value->name,
+                    'valor_custo' => $value->valor_custo,
+                    'valor_venda' => $value->valor_venda,
+                    'estoque' => $value->estoque,
                 ];
             }
+            $response['total_count'] = 10;
+            $response['items'] = $items;
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {

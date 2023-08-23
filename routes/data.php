@@ -28,7 +28,7 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::post('select_clientes', [ClienteController::class, 'apiClientSelect'])->name('cliente.select');
     Route::post('select_users', [UserController::class, 'apiUserSelect'])->name('user.select');
     Route::post('select_modelos', [ModeloController::class, 'apiModeloSelect'])->name('modelo.select');
-    Route::post('select_produtos', [ProdutoController::class, 'apiProdutoSelect'])->name('produto.select');
+    Route::get('select_produtos', [ProdutoController::class, 'apiProdutoSelect'])->name('produto.select');
 
 
 });

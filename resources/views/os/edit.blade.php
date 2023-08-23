@@ -84,7 +84,8 @@
 <link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
 <link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
-<link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/css/tom-select.css" rel="stylesheet">
+<link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
+
 <style>
     .os {
         border-top: 3px solid #39cccc;
@@ -99,50 +100,63 @@
 }
 
 
+
+.ts-wrapper .option .title {
+	display: block;
+}
+.ts-wrapper .option .url {
+	font-size: 15px;
+	display: block;
+	color: #7c7c7c;
+}
+
+
+
 </style>
 @stop
 
 @section('js')
 @routes
-<script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0/dist/js/tom-select.complete.min.js"></script>
+<script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 <script src="{{ url('') }}/vendor/select2/dist/js/select2.full.min.js"></script>
 <script src="{{ url('') }}/vendor/select2/dist/js/i18n/pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/src/js/os.js"></script>
 <script>
-
-
-$(document).ready(function() {
-
-
-
-    new TomSelect('#select-repo',{
-		valueField: 'url',
-		labelField: 'name',
+    new TomSelect("#select-produto",{
+        // allowEmptyOption: true,
+        // create: true,
+        valueField: 'id',
+		// labelField: 'name',
 		searchField: 'name',
 		// fetch remote data
 		load: function(query, callback) {
 
-			var url = 'https://api.github.com/search/repositories?q=' + encodeURIComponent(query);
+			var url = route('produto.select') + '?q=' + encodeURIComponent(query);
 			fetch(url)
 				.then(response => response.json())
 				.then(json => {
-					callback(json.items);
+                    callback(json.items);
 				}).catch(()=>{
 					callback();
+                    console.log(response);
 				});
 
 		},
-	});
-
-
-
-
-
-});
-
-
+        // custom rendering function for options
+		render: {
+            option: function(data, escape) {
+			return '<div>' +
+					'<span class="title">' + escape(data.name) + '</span>' +
+					'<span class="url"> <b> Custo: </b> R$ 1235,00 | <b> Venda: </b> R$ 1231,00 | <b> Estoque: <b/> 5</span>' +
+				'</div>';
+            },
+            item: function(data, escape) {
+                return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+            }
+		},
+    });
 </script>
 <script>
     $(document).ready(function() {

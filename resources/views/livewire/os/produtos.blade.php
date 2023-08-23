@@ -12,10 +12,14 @@
                     </div> --}}
                     {{-- {!! html()->select('prpduto_id' )->class('form-control produto')->placeholder('')->required() !!} --}}
 
+                    <div wire:ignore >
+                        <select id="select-produto" wire:model="produto_id" placeholder="Selecione um produto" autocomplete="off">
+                        </select>
+                    </div>
 
 
 
-                    <select id="select-repo" class="form-control " placeholder="Pick a repository..."></select>
+
 
 
 
@@ -25,19 +29,19 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="valor_custo">Custo</label>
-                    <input class="form-control "  value="{{$valor_custo}}"  type="text" name="busca" id="valor_custo" placeholder="Custo do produto">
+                    <input class="form-control "  value="{{$valor_custo}}" wire:model.defer="valor_custo" type="text" name="busca" id="valor_custo" placeholder="Custo do produto" required>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="valor_venda">Preço</label>
-                    <input class="form-control " value="{{$valor_venda}}"  type="text" name="busca" id="valor_venda" placeholder="Preço de venda">
+                    <input class="form-control " value="{{$valor_venda}}"  wire:model.defer="valor_venda" type="text" name="busca" id="valor_venda" placeholder="Preço de venda" required>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="quantidade">Quantidade</label>
-                    <input class="form-control " wire:model.defer="quantidade" type="text" name="quantidade" id="quantidade" placeholder="Quantidade">
+                    <input class="form-control " wire:model.defer="quantidade" type="text" name="quantidade" id="quantidade" placeholder="Quantidade" @required(true)>
                 </div>
             </div>
             <div class="col-md-2 d-flex  text-right align-items-end">
