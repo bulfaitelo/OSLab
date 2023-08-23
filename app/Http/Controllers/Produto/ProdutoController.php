@@ -15,7 +15,7 @@ class ProdutoController extends Controller
     function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:produto', ['only'=> 'index']);
+        $this->middleware('permission:produto', ['only'=> ['index', 'apiProdutoSelect']]);
         $this->middleware('permission:produto_create', ['only'=> ['create', 'store']]);
         $this->middleware('permission:produto_show', ['only'=> 'show']);
         $this->middleware('permission:produto_edit', ['only'=> ['edit', 'update']]);
