@@ -12,7 +12,6 @@
                 <div class="form-group">
                     <label for="tecnico_id">Tecnico Responsavel </label>
                     {!! html()->select('tecnico_id', $os->getTecnicoForSelect(), $os->tecnico_id)->class('form-control user')->placeholder('Selecione')->required() !!}
-
                 </div>
             </div>
             <div class="col-md-2">
