@@ -44,7 +44,7 @@
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->name}}</td>
                 <td>{{ $item->estoque}}</td>
-                <td class="decimal">{{ $item->valor_venda}}</td>
+                <td >{{ $item->valor_venda}}</td>
                 <td>{{ $item->updated_at }}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
