@@ -15,12 +15,23 @@ class Produto extends Model
         return $this->hasMany(Movimentacao::class);
     }
 
+
+    /**
+     * Retornar o valor formatado em BRL
+     *
+     * @return Attribute
+     **/
     protected function valorCusto() : Attribute {
         return Attribute::make(
             get: fn (string $value) => number_format($value,2,",",".")
         );
     }
 
+    /**
+     * Retornar o valor formatado em BRL
+     *
+     * @return Attribute
+     **/
     protected function valorVenda() : Attribute {
         return Attribute::make(
             get: fn (string $value) => number_format($value,2,",",".")

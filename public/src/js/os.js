@@ -81,31 +81,4 @@ $(document).ready(function() {
         placeholder: 'Pesquise pelo Modelo',
         minimumInputLength: 3,
     });
-
-    // Select2 Produto
-    $(".produto").select2({
-        theme: 'bootstrap4',
-        // dropdownParent: $('#modal-despesa'),
-        language: "pt-BR",
-        ajax: {
-            url: route('produto.select'),
-            dataType: 'json',
-            method: 'post',
-            delay: 250,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                };
-            },
-            processResults: function (data, params) {
-                return {
-                    results: data,
-                };
-            },
-            cache: true
-        },
-        placeholder: 'Pesquise pelo Produto',
-        minimumInputLength: 3,
-    });
-
 });

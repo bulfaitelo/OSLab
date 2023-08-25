@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Os extends Model
 {
@@ -73,6 +74,17 @@ class Os extends Model
     public function categoria() : BelongsTo
     {
         return $this->belongsTo(CategoriaOs::class);
+    }
+
+    /**
+     * Retornar os Produtos da OS
+     *
+     * Retorna os produtos relacionado a os
+     * @return hasMany Produtos
+     **/
+    public function produtos() : HasMany
+    {
+        return $this->hasMany(OsProduto::class);
     }
 
     /**

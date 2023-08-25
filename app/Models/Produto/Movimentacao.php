@@ -16,5 +16,7 @@ class Movimentacao extends Model
         'estoque_antes',
         'valor_custo',
         'estoque_apos',
+        'os_id',
+        'venda_id',
     ];
 }

@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" id="produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="true">
+                        <a class="nav-link" id="#produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="true">
                             <i class="fas fa-box-open "></i>
                             Produtos
                         </a>
@@ -124,11 +124,15 @@
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/src/js/os.js"></script>
 <script>
-    new TomSelect("#select-produto",{
+    $('.decimal').mask('#.##0,00', { reverse: true });
+    $('.numero').mask('#', { reverse: true });
+</script>
+<script>
+    new TomSelect("#os-produto",{
         // allowEmptyOption: true,
-        // create: true,
+        create: true,
         valueField: 'id',
-		// labelField: 'name',
+		labelField: 'name',
 		searchField: 'name',
 		// fetch remote data
 		load: function(query, callback) {
@@ -137,10 +141,9 @@
 			fetch(url)
 				.then(response => response.json())
 				.then(json => {
-                    callback(json.items);
+                    callback(json);
 				}).catch(()=>{
 					callback();
-                    console.log(response);
 				});
 
 		},
@@ -149,7 +152,7 @@
             option: function(data, escape) {
 			return '<div>' +
 					'<span class="title">' + escape(data.name) + '</span>' +
-					'<span class="url"> <b> Custo: </b> R$ 1235,00 | <b> Venda: </b> R$ 1231,00 | <b> Estoque: <b/> 5</span>' +
+					'<span class="url"> <b> Custo: </b> R$ ' + escape(data.valor_custo) + ' | <b> Venda: </b> R$ ' + escape(data.valor_venda) + ' | <b> Estoque: </b> ' + escape(data.estoque) + '</span>' +
 				'</div>';
             },
             item: function(data, escape) {
@@ -157,6 +160,7 @@
             }
 		},
     });
+
 </script>
 <script>
     $(document).ready(function() {

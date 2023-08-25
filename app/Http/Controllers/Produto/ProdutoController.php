@@ -58,15 +58,13 @@ class ProdutoController extends Controller
             $produto->save();
 
             if ($request->estoque > 0) {
-                $produto->movimentacao()->createMany([
-                    [
+                $produto->movimentacao()->create([
                         'quantidade_movimentada' => $request->estoque,
                         'tipo_movimentacao' => 'ENTRADA',
                         'valor_custo' => $request->valor_custo,
                         'estoque_antes' => 0,
                         'estoque_apos' => $request->estoque,
-                    ]
-                ]);
+                    ]);
             }
             DB::commit();
             return redirect()->route('produto.index')
@@ -151,7 +149,7 @@ class ProdutoController extends Controller
             $select->limit(10);
             $response = [];
             foreach ($select->get() as $value) {
-                $items[] = [
+                $response[] = [
                     'id' => $value->id,
                     'name' => $value->name,
                     'valor_custo' => $value->valor_custo,
@@ -159,8 +157,7 @@ class ProdutoController extends Controller
                     'estoque' => $value->estoque,
                 ];
             }
-            $response['total_count'] = 10;
-            $response['items'] = $items;
+
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {
