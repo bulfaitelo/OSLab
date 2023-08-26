@@ -39,41 +39,43 @@
             </div>
         </div>
     </form>
-    <div class="row">
+    @if ($produtos->count() > 0)
+        <div class="row">
             <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Quantidade</th>
-                    <th>Preço Unit.</th>
-                    <th>Subtotal</th>
-                    <th style="width: 40px"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($produtos as $item)
+                <thead>
                     <tr>
-                        <td>{{ $item->produto->name }}</td>
-                        <td>{{ $item->quantidade }}</td>
-                        <td>R$ {{ number_format($item->valor_venda,2,",",".") }}</td>
-                        <td>R$ {{ number_format($item->valor_venda_total,2,",",".") }}</td>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unit.</th>
+                        <th>Subtotal</th>
+                        <th style="width: 40px"></th>
                     </tr>
-                @endforeach
-            <tfoot style=" border-top: 2px solid rgb(156, 156, 156)">
-                <tr>
+                </thead>
+                <tbody>
+                    @foreach ($produtos as $item)
+                        <tr>
+                            <td>{{ $item->produto->name }}</td>
+                            <td>{{ $item->quantidade }}</td>
+                            <td>R$ {{ number_format($item->valor_venda,2,",",".") }}</td>
+                            <td>R$ {{ number_format($item->valor_venda_total,2,",",".") }}</td>
+                            <td wire:key="item-{{ $item->id }}" > botao</td>
+                        </tr>
+                    @endforeach
+                <tfoot style=" border-top: 2px solid rgb(156, 156, 156)">
+                    <tr>
 
-                    <td colspan="2"></td>
-                    <td class="text-right">
-                        <b>
-                            Total:
-                        </b>
-                    </td>
-                    <td>R$ {{ number_format($produtos->sum('valor_venda_total'),2,",",".")  }}</td>
-                </tr>
-            </tfoot>
+                        <td colspan="2"></td>
+                        <td class="text-right">
+                            <b>
+                                Total:
+                            </b>
+                        </td>
+                        <td>R$ {{ number_format($produtos->sum('valor_venda_total'),2,",",".")  }}</td>
+                    </tr>
+                </tfoot>
 
-            </tbody>
+                </tbody>
             </table>
-
-    </div>
+        </div>
+    @endif
 </div>

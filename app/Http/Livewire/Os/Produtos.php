@@ -86,8 +86,13 @@ class Produtos extends Component
             $this->os->produtos()->create(
                 $osProduto
             );
-
             DB::commit();
+
+            $this->produto = '';
+            $this->valor_custo = '';
+            $this->valor_venda = '';
+            $this->quantidade = '';
+
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
