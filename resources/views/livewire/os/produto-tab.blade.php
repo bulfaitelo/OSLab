@@ -1,5 +1,5 @@
 <div>
-    @include('adminlte::partials.form-alert')
+    {{-- @include('adminlte::partials.form-alert') --}}
     <form method="POST" wire:submit.prevent="create">
         <div class="row" style="background-color: rgb(238, 238, 238); border-radius: 5px 5px 0px 0px" >
             <div class="col-md-4">
@@ -44,20 +44,7 @@
             </div>
         </div>
     </form>
-</div>
-{{-- <div>
-    @foreach ($osProduto as  $item)
-    <tr wire:key="{{ $loop->index }}" >
-        <td>{{ $item->produto->name }}</td>
-        <td>{{ $item->quantidade }}</td>
-        <td>R$ {{ number_format($item->valor_venda,2,",",".") }}</td>
-        <td>R$ {{ number_format($item->valor_venda_total,2,",",".") }}</td>
-        <td> botao</td>
-    </tr>
-    @endforeach
-</div> --}}
-<div>
-    {{-- @if ($os_produto->count() > 0) --}}
+    @if ($os_produto->count() > 0)
         <div class="row">
             <table class="table table-sm">
                 <thead>
@@ -93,7 +80,7 @@
                 </tfoot>
             </table>
         </div>
-    {{-- @endif --}}
+    @endif
 </div>
 
 <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />

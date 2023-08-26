@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Os;
 
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ProdutoTab extends Component
@@ -53,20 +54,89 @@ class ProdutoTab extends Component
         $produto = $this->validate();
 
         $this->createOsProduto($produto);
+        $this->updateProdutoQuantidadeEstoque();
 
 
 
     }
 
 
-    public function createOsProduto($produto) {
-        // $produtoData = Produto::find($produto['produto_id']);
-        $produto['valor_custo_total'] = $produto['valor_custo'] * $produto['quantidade'];
-        $produto['valor_venda_total'] = $produto['valor_venda'] * $produto['quantidade'];
-        $produto['user_id'] = auth()->id();
-        // dd($produto);
-        Os::find($this->os_id)->produtos()->create(
-            $produto
-        );
+    private function createOsProduto($produto) : void {
+        DB::beginTransaction();
+        try {
+            $produto['valor_custo_total'] = $produto['valor_custo'] * $produto['quantidade'];
+            $produto['valor_venda_total'] = $produto['valor_venda'] * $produto['quantidade'];
+            $produto['user_id'] = auth()->id();
+            Os::find($this->os_id)->produtos()->create(
+                $produto
+            );
+            // $this->updateProdutoQuantidadeEstoque();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+    }
+
+    private function updateProdutoQuantidadeEstoque() : void {
+        try {
+            $produto = Produto::find($this->produto_id);
+            $estoque = $produto->estoque;
+            if ($produto->estoque >= $this->quantidade) {
+                $produto->estoque = $produto->estoque - $this->quantidade;
+                $produto->save();
+                $this->insertSaidaMovimentacaoProduto($estoque, $this->quantidade);
+
+            } else {
+                $quantidadeEntrada = $this->quantidade - $produto->estoque;
+                $this->insertEntradaMovimentacaoProduto($quantidadeEntrada);
+                $this->insertSaidaMovimentacaoProduto($this->quantidade, $this->quantidade);
+                $produto->estoque = 0;
+                $produto->save();
+
+                # é this por quant, a sobra e gerado uma entrada e depois uma saida do valor total da quantidade
+            }
+
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    private function insertSaidaMovimentacaoProduto($estoque, $quantidade): void {
+        try {
+            $produto = Produto::find($this->produto_id);
+            $produto->movimentacao()->create([
+                'quantidade_movimentada' => $quantidade,
+                'tipo_movimentacao' => 'SAÍDA na OS: #'. $this->os_id,
+                'estoque_antes' => $estoque,
+                'estoque_apos' => $estoque - $quantidade,
+                'valor_custo' => $this->getValorCusto(),
+                'os_id' => $this->os_id,
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    private function insertEntradaMovimentacaoProduto($quantidade): void {
+        try {
+            $produto = Produto::find($this->produto_id);
+            $produto->movimentacao()->create([
+                'quantidade_movimentada' => $quantidade,
+                'tipo_movimentacao' => 'ENTRADA na OS: #'. $this->os_id,
+                'estoque_antes' => $produto->estoque,
+                'estoque_apos' => 0,
+                'valor_custo' => $this->getValorCusto(),
+                'os_id' => $this->os_id,
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    private  function getValorCusto()
+    {
+        return str_replace(',', '.', str_replace('.','', $this->valor_custo));
     }
 }
