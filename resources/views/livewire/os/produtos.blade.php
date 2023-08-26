@@ -6,9 +6,15 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="produto">Produto</label>
-                    <div wire:ignore >
+                    {{-- <div wire:ignore >
                         <select id="os-produto" wire:model="produto" placeholder="Selecione um produto"></select>
-                    </div>
+                    </div> --}}
+                    <select wire:model="produto" placeholder="Selecione um produto">
+                        <option value="1">aaaa</option>
+                        <option value="2">bbbbb</option>
+                        <option value="3">cccc</option>
+                    </select>
+
                 </div>
             </div>
             <div class="col-md-2">
@@ -39,6 +45,7 @@
             </div>
         </div>
     </form>
+
     @if ($produtos->count() > 0)
         <div class="row">
             <table class="table table-sm">
@@ -52,15 +59,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($produtos as $item)
-                        <tr>
+                    @foreach ($produtos as $i => $item)
+                        <tr wire:key="{{ $loop->index }}" >
                             <td>{{ $item->produto->name }}</td>
                             <td>{{ $item->quantidade }}</td>
                             <td>R$ {{ number_format($item->valor_venda,2,",",".") }}</td>
                             <td>R$ {{ number_format($item->valor_venda_total,2,",",".") }}</td>
-                            <td wire:key="item-{{ $item->id }}" > botao</td>
+                            <td> botao</td>
                         </tr>
                     @endforeach
+                </tbody>
                 <tfoot style=" border-top: 2px solid rgb(156, 156, 156)">
                     <tr>
 
@@ -73,8 +81,6 @@
                         <td>R$ {{ number_format($produtos->sum('valor_venda_total'),2,",",".")  }}</td>
                     </tr>
                 </tfoot>
-
-                </tbody>
             </table>
         </div>
     @endif

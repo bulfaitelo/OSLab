@@ -16,9 +16,23 @@ class Produtos extends Component
     public $os;
     public $valor_custo, $valor_venda, $quantidade, $produto;
 
-    function addProduto() {
+    public function render()
+    {
+        if ($produto = Produto::find($this->produto)) {
+            $this->valor_custo = $produto->valor_custo;
+            $this->valor_venda = $produto->valor_venda;
+        }
+
+        return view('livewire.os.produtos', [
+            'valor_custo' => $this->valor_custo,
+            'valor_venda' => $this->valor_venda,
+            'produtos' => $this->os->produtos,
+        ]);
+    }
+
+    public function addProduto() {
         $osProduto = $this->validate([
-            'produto' => ['required', new ProdutoValidation],
+            // 'produto' => ['required', new ProdutoValidation],
             'valor_custo' => 'required',
             'valor_venda' => 'required',
             'quantidade' => 'required|integer',
@@ -103,19 +117,7 @@ class Produtos extends Component
 
 
 
-    public function render()
-    {
-        if ($produto = Produto::find($this->produto)) {
-            $this->valor_custo = $produto->valor_custo;
-            $this->valor_venda = $produto->valor_venda;
-        }
 
-        return view('livewire.os.produtos', [
-            'valor_custo' => $this->valor_custo,
-            'valor_venda' => $this->valor_venda,
-            'produtos' => $this->os->produtos,
-        ]);
-    }
 
 
     private function checkTipeProduto($produto) {

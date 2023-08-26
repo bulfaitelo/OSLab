@@ -44,6 +44,10 @@ Route::get('/', function () {
 	}
 });
 
+Route::get('/teste', function () {
+    return view ('teste');
+})->name('teste');
+
 Auth::routes();
 
 Route::group(['middleware'=> 'auth'], function() {

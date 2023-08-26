@@ -58,7 +58,8 @@
                         @livewire('os.detalhes', ['os' => $os])
                     </div>
                     <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                        @livewire('os.produtos', ['os' => $os])
+                        @livewire('os.produto-tab', ['os' => $os])
+                        {{-- @livewire('teste') --}}
                     </div>
                     <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
                         servicos
@@ -81,34 +82,38 @@
 @stop
 
 @section('css')
-<link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
-<link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
+{{-- <link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+<link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" /> --}}
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
 <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
-
+{{-- <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet"> --}}
 <style>
     .os {
         border-top: 3px solid #39cccc;
     }
 
 
-.icon{
-	width: 3rem;
-}
-.item{
-	width: 100%;
-}
+    .icon{
+        width: 3rem;
+    }
+    .item{
+        width: 100%;
+    }
 
 
 
-.ts-wrapper .option .title {
-	display: block;
-}
-.ts-wrapper .option .url {
-	font-size: 15px;
-	display: block;
-	color: #7c7c7c;
-}
+    .ts-wrapper .option .title {
+        display: block;
+    }
+    .ts-wrapper .option .url {
+        font-size: 15px;
+        display: block;
+        color: #7c7c7c;
+    }
+
+    .ts-wrapper::after {
+        display: none;
+    }
 
 
 
@@ -117,7 +122,9 @@
 
 @section('js')
 @routes
-<script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
+{{-- <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.base.min.js"></script> --}}
+
 <script src="{{ url('') }}/vendor/select2/dist/js/select2.full.min.js"></script>
 <script src="{{ url('') }}/vendor/select2/dist/js/i18n/pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>

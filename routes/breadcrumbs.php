@@ -35,6 +35,11 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('home'));
 });
 
+// teste
+Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
+    $trail->push('teste', route('teste'));
+});
+
 // OS
     Breadcrumbs::for('os.index', function (BreadcrumbTrail $trail) {
         $trail->parent('home');
