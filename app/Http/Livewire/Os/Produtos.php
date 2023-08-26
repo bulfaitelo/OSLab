@@ -22,11 +22,11 @@ class Produtos extends Component
             $this->valor_custo = $produto->valor_custo;
             $this->valor_venda = $produto->valor_venda;
         }
-
+        $produtos = $osProduto = Os::find($this->os->id)->produtos;
         return view('livewire.os.produtos', [
             'valor_custo' => $this->valor_custo,
             'valor_venda' => $this->valor_venda,
-            'produtos' => $this->os->produtos,
+            'produtos' => $produtos,
         ]);
     }
 

@@ -6,14 +6,14 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="produto">Produto</label>
-                    {{-- <div wire:ignore >
+                    <div wire:ignore >
                         <select id="os-produto" wire:model="produto" placeholder="Selecione um produto"></select>
-                    </div> --}}
-                    <select wire:model="produto" placeholder="Selecione um produto">
+                    </div>
+                    {{-- <select wire:model="produto" placeholder="Selecione um produto">
                         <option value="1">aaaa</option>
                         <option value="2">bbbbb</option>
                         <option value="3">cccc</option>
-                    </select>
+                    </select> --}}
 
                 </div>
             </div>
@@ -85,3 +85,38 @@
         </div>
     @endif
 </div>
+<link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
+<script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
+<script>
+    new TomSelect("#os-produto",{
+        // allowEmptyOption: true,
+        // create: true,
+        valueField: 'id',
+		labelField: 'name',
+		searchField: 'name',
+		// fetch remote data
+		load: function(query, callback) {
+			var url = route('produto.select') + '?q=' + encodeURIComponent(query);
+			fetch(url)
+				.then(response => response.json())
+				.then(json => {
+                    callback(json);
+				}).catch(()=>{
+					callback();
+				});
+
+		},
+        // custom rendering function for options
+		render: {
+            option: function(data, escape) {
+			return '<div>' +
+					'<span class="title">' + escape(data.name) + '</span>' +
+					'<span class="url"> <b> Custo: </b> R$ ' + escape(data.valor_custo) + ' | <b> Venda: </b> R$ ' + escape(data.valor_venda) + ' | <b> Estoque: </b> ' + escape(data.estoque) + '</span>' +
+				'</div>';
+            },
+            item: function(data, escape) {
+                return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+            }
+		},
+    });
+</script>

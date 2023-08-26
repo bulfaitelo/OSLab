@@ -58,7 +58,8 @@
                         @livewire('os.detalhes', ['os' => $os])
                     </div>
                     <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                        @livewire('os.produto-tab', ['os' => $os])
+                        {{-- @livewire('os.produtos', ['os' => $os]) --}}
+                        @livewire('os.produto-tab', ['os_id' => $os->id])
                         {{-- @livewire('teste') --}}
                     </div>
                     <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
@@ -85,8 +86,8 @@
 {{-- <link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
 <link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" /> --}}
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
-<link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
-{{-- <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet"> --}}
+{{-- <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" /> --}}
+
 <style>
     .os {
         border-top: 3px solid #39cccc;
@@ -134,7 +135,7 @@
     $('.decimal').mask('#.##0,00', { reverse: true });
     $('.numero').mask('#', { reverse: true });
 </script>
-<script>
+{{-- <script>
     new TomSelect("#os-produto",{
         // allowEmptyOption: true,
         create: true,
@@ -168,7 +169,7 @@
 		},
     });
 
-</script>
+</script> --}}
 <script>
     $(document).ready(function() {
         $('.texto').summernote({
