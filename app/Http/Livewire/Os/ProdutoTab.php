@@ -108,7 +108,7 @@ class ProdutoTab extends Component
             $produto = Produto::find($this->produto_id);
             $produto->movimentacao()->create([
                 'quantidade_movimentada' => $quantidade,
-                'tipo_movimentacao' => 'SAÍDA na OS: #'. $this->os_id,
+                'tipo_movimentacao' => 'SAÍDA OS: #'. $this->os_id,
                 'estoque_antes' => $estoque,
                 'estoque_apos' => $estoque - $quantidade,
                 'valor_custo' => $this->getValorCusto(),
@@ -124,7 +124,7 @@ class ProdutoTab extends Component
             $produto = Produto::find($this->produto_id);
             $produto->movimentacao()->create([
                 'quantidade_movimentada' => $quantidade,
-                'tipo_movimentacao' => 'ENTRADA na OS: #'. $this->os_id,
+                'tipo_movimentacao' => 'ENTRADA OS: #'. $this->os_id,
                 'estoque_antes' => $produto->estoque,
                 'estoque_apos' => 0,
                 'valor_custo' => $this->getValorCusto(),
