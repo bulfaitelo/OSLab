@@ -35,12 +35,21 @@
                             GERAl
                         </div>
                         <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="default_os_create_status">Status Padrão OS</label>
-                                    {!! html()->select('default_os_create_status', App\Models\Configuracao\Os\StatusOs::orderBy('name')->pluck('name', 'id'), )->class('form-control')->placeholder('Selecione') !!}
-                                    <i>Status que sera carregado por padrão na criação de uma nova Os </i>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="default_os_create_status">Status Padrão OS</label>
+                                        {!! html()->select('default_os_create_status', App\Models\Configuracao\Os\StatusOs::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
+                                        <i>Status que sera carregado por padrão na criação de uma nova Os </i>
+                                    </div>
                                 </div>
+                                {{-- <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="default_os_create_status">Centro de custo padrão</label>
+                                        {!! html()->select('default_os_create_', App\Models\Configuracao\Os\StatusOs::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
+                                        <i>Esse centro centro de custo já será selecionado ao criar um novo.  </i>
+                                    </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
