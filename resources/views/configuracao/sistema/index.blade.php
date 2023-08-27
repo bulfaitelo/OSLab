@@ -55,10 +55,12 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i>
-                        Salvar
-                    </button>
+                    @can('config_sistema_edit')
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Salvar
+                        </button>
+                    @endcan
                 </div>
             </form>
         </div>

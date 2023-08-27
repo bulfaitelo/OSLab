@@ -11,6 +11,16 @@ use App\Models\Configuracao\Sistema\SistemaConfig;
 
 class SistemaConfigController extends Controller
 {
+
+
+    function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:config_sistema', ['only'=> 'index']);
+        $this->middleware('permission:config_sistema_edit', ['only'=> ['update', ]]);
+
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -20,37 +30,37 @@ class SistemaConfigController extends Controller
         return view('configuracao.sistema.index', compact('configuracoes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSistemaConfigRequest $request)
-    {
-        //
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
+    // public function store(StoreSistemaConfigRequest $request)
+    // {
+    //     //
+    // }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(SistemaConfig $sistemaConfig)
-    {
-        //
-    }
+    // /**
+    //  * Display the specified resource.
+    //  */
+    // public function show(SistemaConfig $sistemaConfig)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SistemaConfig $sistemaConfig)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(SistemaConfig $sistemaConfig)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -60,11 +70,11 @@ class SistemaConfigController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(SistemaConfig $sistemaConfig)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  */
+    // public function destroy(SistemaConfig $sistemaConfig)
+    // {
+    //     //
+    // }
 }

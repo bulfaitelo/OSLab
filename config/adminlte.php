@@ -514,7 +514,7 @@ return [
                     'icon'    => 'fa-solid fa-sitemap',
                     'route'   => 'configuracao.sistema.index',
                     'active'  => ['sistema*'],
-                    'can'     => 'sistema',
+                    'can'     => 'config_sistema',
                 ],
             ],
 

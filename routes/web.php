@@ -118,7 +118,9 @@ Route::group(['middleware'=> 'auth'], function() {
             Route::resource('/fabricante', FabricanteController::class);
             Route::resource('/modelo', ModeloController::class);
         });
-        Route::resource('/sistema', SistemaConfigController::class);
+        Route::resource('/sistema', SistemaConfigController::class)->only([
+            'index', 'update'
+        ]);
 
 
     });
