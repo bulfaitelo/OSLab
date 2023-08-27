@@ -48,7 +48,7 @@
               <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->quantidade_movimentada}}</td>
-                <td class="decimal">{{ $item->valor_custo}}</td>
+                <td>{{ $item->valor_custo}}</td>
                 <td>{{ $item->tipo_movimentacao}}</td>
                 <td>{{ $item->created_at }}</td>
               </tr>
@@ -72,7 +72,4 @@
 @stop
 
 @section('js')
-<script>
-    $('.decimal').mask('#.##0,00', { reverse: true });
-</script>
 @stop

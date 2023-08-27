@@ -41,7 +41,7 @@
               <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->name}}</td>
-                <td class="decimal">{{ $item->valor_servico}}</td>
+                <td>{{ $item->valor_servico}}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
                         @can('servico_edit')
@@ -102,7 +102,4 @@
 @stop
 
 @section('js')
-<script>
-    $('.decimal').mask('#.##0,00', { reverse: true });
-</script>
 @stop
