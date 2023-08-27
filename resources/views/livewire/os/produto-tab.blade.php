@@ -81,42 +81,55 @@
             </table>
         </div>
     @endif
+    <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
+    <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
+
+    <script>
+       var tomSelect = new TomSelect("#os-produto",{
+            // allowEmptyOption: true,
+            // create: true,
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            // fetch remote data
+            load: function(query, callback) {
+                var url = route('produto.select') + '?q=' + encodeURIComponent(query);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                    }).catch(()=>{
+                        callback();
+                    });
+
+            },
+            // custom rendering function for options
+            render: {
+                option: function(data, escape) {
+                return '<div>' +
+                        '<span class="title">' + escape(data.name) + '</span>' +
+                        '<span class="url"> <b> Custo: </b> R$ ' + escape(data.valor_custo) + ' | <b> Venda: </b> R$ ' + escape(data.valor_venda) + ' | <b> Estoque: </b> ' + escape(data.estoque) + '</span>' +
+                    '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                }
+            },
+        });
+    </script>
+    @if (session()->has('clear'))
+        <script>
+            tomSelect.clear();
+            tomSelect.clearOptions();
+        </script>
+    @endif
+    <script>
+        tomSelect.on('change', function (e) {
+            $('#quantidade').focus();
+        });
+    </script>
+
 </div>
 
-<link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
-<script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
-<script>
-    new TomSelect("#os-produto",{
-        // allowEmptyOption: true,
-        // create: true,
-        valueField: 'id',
-		labelField: 'name',
-		searchField: 'name',
-		// fetch remote data
-		load: function(query, callback) {
-			var url = route('produto.select') + '?q=' + encodeURIComponent(query);
-			fetch(url)
-				.then(response => response.json())
-				.then(json => {
-                    callback(json);
-				}).catch(()=>{
-					callback();
-				});
-
-		},
-        // custom rendering function for options
-		render: {
-            option: function(data, escape) {
-			return '<div>' +
-					'<span class="title">' + escape(data.name) + '</span>' +
-					'<span class="url"> <b> Custo: </b> R$ ' + escape(data.valor_custo) + ' | <b> Venda: </b> R$ ' + escape(data.valor_venda) + ' | <b> Estoque: </b> ' + escape(data.estoque) + '</span>' +
-				'</div>';
-            },
-            item: function(data, escape) {
-                return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
-            }
-		},
-    });
-</script>
 
 

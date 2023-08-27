@@ -56,7 +56,13 @@ class ProdutoTab extends Component
         $this->createOsProduto($produto);
         $this->updateProdutoQuantidadeEstoque();
 
+        $this->quantidade = null;
+        $this->valor_custo = null;
+        $this->valor_venda = null;
+        $this->produto_id = null;
 
+        session()->flash('clear', 'clear');
+        flasher('Produto adicionado com sucesso.');
 
     }
 
