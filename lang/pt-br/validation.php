@@ -131,6 +131,7 @@ return [
         'contas' => 'Conta orçamentária',
         'orcamento' => 'Orçamento',
         'contas.*.conta_id' => 'Conta orçamentária',
+        'password' => 'senha'
     ],
 
 ];
