@@ -23,6 +23,7 @@ class Contas extends Model
     {
         return $date->format('d/m/Y');
     }
+
     /**
      * Relacionamento com os Pagamentos
      */

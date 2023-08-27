@@ -137,9 +137,23 @@
 <link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
 <link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
+<link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
 <style>
     .os {
         border-top: 3px solid #39cccc;
+    }
+
+    .ts-wrapper .option .title {
+        display: block;
+    }
+    .ts-wrapper .option .url {
+        font-size: 15px;
+        display: block;
+        color: #7c7c7c;
+    }
+
+    .ts-wrapper::after {
+        display: none;
     }
 </style>
 @stop
@@ -150,8 +164,8 @@
 <script src="{{ url('') }}/vendor/select2/dist/js/i18n/pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
+<script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 <script src="{{ url('') }}/src/js/os.js"></script>
-
 <script>
     $(document).ready(function() {
         $('.texto').summernote({

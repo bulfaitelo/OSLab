@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware'=> 'auth'], function() {
 
     Route::put('/wiki/text/{wiki}', [WikiController::class, 'textUpdate'])->name('wiki.text.update');
-    Route::post('select_clientes', [ClienteController::class, 'apiClientSelect'])->name('cliente.select');
+    Route::get('select_clientes', [ClienteController::class, 'apiClientSelect'])->name('cliente.select');
     Route::post('select_users', [UserController::class, 'apiUserSelect'])->name('user.select');
     Route::post('select_modelos', [ModeloController::class, 'apiModeloSelect'])->name('modelo.select');
     Route::get('select_produtos', [ProdutoController::class, 'apiProdutoSelect'])->name('produto.select');

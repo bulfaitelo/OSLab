@@ -141,19 +141,22 @@ class ClienteController extends Controller
     public function apiClientSelect (Request $request) {
         try {
             $select = Cliente::where('name', 'LIKE', '%'. $request->q . '%');
+            $select->with('os');
             $select->orderBy('name');
             $select->limit(10);
             $response = [];
             foreach ($select->get() as $value) {
                 if ($value->pessoa_juridica == 1) {
-                    $textoSelect = '[PJ] ';
+                    $tipo = 'Pessoa Jurídica';
                 } else {
-                    $textoSelect = '[PF] ';
+                    $tipo = 'Pessoa Física';
                 }
 
                 $response[] = [
                     'id' => $value->id,
-                    'text' => $textoSelect .  $value->name,
+                    'name' => $value->name,
+                    'tipo' => $tipo,
+                    'os_count' => $value->os->count(),
                 ];
             }
             return response()->json($response, 200);
