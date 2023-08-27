@@ -396,6 +396,7 @@ return [
                 'config_financeiro_centro_custo',
                 'config_os_garantia', 'config_os_categoria',
                 'config_wiki_fabricante', 'config_wiki_modelo',
+                'config_sistema',
 
             ],
             'submenu' => [
@@ -508,7 +509,15 @@ return [
                         ],
                     ],
                 ],
+                [
+                    'text'    => 'Sistema',
+                    'icon'    => 'fa-solid fa-sitemap',
+                    'route'   => 'configuracao.sistema.index',
+                    'active'  => ['sistema*'],
+                    'can'     => 'sistema',
+                ],
             ],
+
         ],
 
         [

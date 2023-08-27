@@ -11,6 +11,7 @@ use App\Models\Configuracao\Financeiro\FormaPagamento;
 use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
+use App\Models\Configuracao\Sistema\SistemaConfig;
 use App\Models\Configuracao\User\Setor;
 use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\Configuracao\Wiki\Modelo;
@@ -195,28 +196,28 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
 // FIM Financeiro
 
 // Checklist
-Breadcrumbs::for('checklist.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
-    $trail->push('Checklist', route('checklist.index'));
-});
+    Breadcrumbs::for('checklist.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Checklist', route('checklist.index'));
+    });
 
-// Checklist > Novo Checklist
-Breadcrumbs::for('checklist.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('checklist.index');
-    $trail->push('Nova Checklist', route('checklist.create'));
-});
+    // Checklist > Novo Checklist
+    Breadcrumbs::for('checklist.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('checklist.index');
+        $trail->push('Nova Checklist', route('checklist.create'));
+    });
 
-// Checklist > [Visualização de Checklist]
-Breadcrumbs::for('checklist.show', function (BreadcrumbTrail $trail, Checklist $item) {
-    $trail->parent('checklist.index');
-    $trail->push($item->name, route('checklist.show', $item));
-});
+    // Checklist > [Visualização de Checklist]
+    Breadcrumbs::for('checklist.show', function (BreadcrumbTrail $trail, Checklist $item) {
+        $trail->parent('checklist.index');
+        $trail->push($item->name, route('checklist.show', $item));
+    });
 
-// Checklist > [Checklist Name] > Editar Checklist
-Breadcrumbs::for('checklist.edit', function (BreadcrumbTrail $trail, Checklist $item) {
-    $trail->parent('checklist.index');
-    $trail->push('Editar Checklist', route('checklist.edit', $item));
-});
+    // Checklist > [Checklist Name] > Editar Checklist
+    Breadcrumbs::for('checklist.edit', function (BreadcrumbTrail $trail, Checklist $item) {
+        $trail->parent('checklist.index');
+        $trail->push('Editar Checklist', route('checklist.edit', $item));
+    });
 // FIM Checklist
 
 // Produtos
@@ -576,3 +577,30 @@ Breadcrumbs::for('checklist.edit', function (BreadcrumbTrail $trail, Checklist $
         $trail->push('Editar Modelo', route('configuracao.wiki.modelo.edit', $item));
     });
 // Fim Configuração WIKI
+
+// Configuração Sistema
+    // Sistema
+    Breadcrumbs::for('configuracao.sistema.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Sistema', route('configuracao.sistema.index'));
+    });
+
+    // Sistema > Novo Sistema
+    Breadcrumbs::for('configuracao.sistema.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.sistema.index');
+        $trail->push('Novo Sistema', route('configuracao.sistema.create'));
+    });
+
+    // Sistema > [Visualização de Sistema]
+    Breadcrumbs::for('configuracao.sistema.show', function (BreadcrumbTrail $trail, SistemaConfig $item) {
+        $trail->parent('configuracao.sistema.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.sistema.show', $item));
+    });
+
+    // Sistema > [Sistema Name] > Editar Sistema
+    Breadcrumbs::for('configuracao.sistema.edit', function (BreadcrumbTrail $trail, SistemaConfig $item) {
+        $trail->parent('configuracao.sistema.index');
+        $trail->push('Editar Sistema', route('configuracao.sistema.edit', $item));
+    });
+// Fim Configuração Usuários

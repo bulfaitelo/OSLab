@@ -23,12 +23,14 @@ class DatabaseDefaultPermissionsUpdate extends Seeder
         $this->call(DefaultsConfigPermissionsProduto::class);
         $this->call(DefaultsConfigPermissionsWiki::class);
         $this->call(DefaultsConfigPermissionsChecklist::class);
+        $this->call(DefaultsConfigPermissionsSistema::class);
         $this->call(DefaultsConfigCentroCusto::class);
         $this->call(DefaultsConfigStatusOs::class);
         $this->call(DefaultsConfigGarantiaOs::class);
         $this->call(DefaultsConfigCategoriaOs::class);
         $this->call(DefaultsConfigFabricante::class);
         $this->call(DefaultsConfigFormaPagamento::class);
+        $this->call(DefaultsConfigSistema::class);
 
     }
 }
