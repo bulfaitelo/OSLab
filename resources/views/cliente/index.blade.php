@@ -30,22 +30,28 @@
         <table class="table table-sm table-hover text-nowrap">
           <thead>
             <tr>
-              <th style="width: 10px">#</th>
-              <th>Tipo</th>
+              <th style="width: 50px">Tipo</th>
               <th>Cliente</th>
-              <th>Setor</th>
-              <th>Validade</th>
+              <th>Celular</th>
+              <th>Email</th>
+              <th>OS</th>
               <th style="width: 40px"></th>
             </tr>
           </thead>
           <tbody>
             @foreach ($clientes as $item)
               <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->ativo }}</td>
+                <td>
+                @if ($item->pessoa_juridica == 1)
+                    <span class="badge bg-primary">PJ</span>
+                @else
+                    <span class="badge bg-success">PF</span>
+                @endif
+                </td>
                 <td>{{ $item->name}}</td>
-                <td>{{ $item->setor->name ?? ''}}</td>
-                <td>{{ $item->expire_at }}</td>
+                <td>{{ $item->celular}}</td>
+                <td>{{ $item->email}}</td>
+                <td>{{ $item->os->count() }}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
                         @can('cliente_edit')
