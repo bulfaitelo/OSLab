@@ -28,7 +28,7 @@ class Movimentacao extends Model
      **/
     protected function valorCusto() : Attribute {
         return Attribute::make(
-            get: fn (string $value) => number_format($value,2,",",".")
+            get: fn ($value) => ($value) ? str_replace(',', '.', str_replace('.','', $value)) : null,
         );
     }
 }
