@@ -32,6 +32,9 @@ class OsController extends Controller
     {
         $dataHoje = Carbon::now()->format('Y-d-m');
         $queryOs = Os::query();
+        $queryOs->with('cliente');
+        $queryOs->with('tecnico');
+        $queryOs->with('categoria');
         if ($request->busca) {
             $queryOs->where(function ($query) use ($request){
                 $query->whereHas('cliente', function ($query) use ($request) {
