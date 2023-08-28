@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Os;
 
 use Livewire\Component;
 
-class Detalhes extends Component
+class DetalhesTab extends Component
 {
 
     public $os;
@@ -12,7 +12,7 @@ class Detalhes extends Component
     public function render()
     {
 
-        return view('livewire.os.detalhes', [
+        return view('livewire.os.detalhes-tab', [
             'os' => $this->os
         ]);
     }
