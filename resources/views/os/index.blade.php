@@ -3,7 +3,7 @@
 @section('title', 'Ordem de Serviço')
 
 @section('content_header')
-    <h1>Ordem de Serviço</h1>
+    <h1><i class="fa-regular fa-rectangle-list "> </i> Ordem de Serviço</h1>
 @stop
 
 @section('content')

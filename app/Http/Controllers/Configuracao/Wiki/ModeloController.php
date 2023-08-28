@@ -123,7 +123,9 @@ class ModeloController extends Controller
 
                 $response[] = [
                     'id' => $value->id,
-                    'text' => $value->name,
+                    'name' => $value->name,
+                    'wiki'=> $value->wiki->name
+
                 ];
             }
             return response()->json($response, 200);

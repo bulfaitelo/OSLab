@@ -3,7 +3,7 @@
 @section('title', 'Editar Ordem de Serviço')
 
 @section('content_header')
-    <h1>Editar Ordem de Serviço</h1>
+    <h1><i class="fa-regular fa-rectangle-list "></i> Editar Ordem de Serviço</h1>
 @stop
 
 @section('content')
@@ -13,14 +13,14 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0 border-bottom-0">
                 <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link " id="detalhes-tab" data-toggle="pill" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="false">
+                    <li class="nav-item ">
+                        <a class="nav-link active" id="detalhes-tab" data-toggle="pill" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="true">
                             <i class="fa-regular fa-rectangle-list "></i>
                             Detalhes
                         </a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" id="#produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="true">
+                    <li class="nav-item ">
+                        <a class="nav-link" id="#produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="false">
                             <i class="fas fa-box-open "></i>
                             Produtos
                         </a>
@@ -54,13 +54,11 @@
             </div>
             <div class="card-body">
                 <div class="tab-content">
-                    <div class="tab-pane fade " id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
-                        @livewire('os.detalhes', ['os' => $os])
+                    <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+                        @livewire('os.detalhes-tab', ['os' => $os])
                     </div>
-                    <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                        {{-- @livewire('os.produtos', ['os' => $os]) --}}
+                    <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
                         @livewire('os.produto-tab', ['os_id' => $os->id])
-                        {{-- @livewire('teste') --}}
                     </div>
                     <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
                         servicos

@@ -277,13 +277,14 @@ class UserController extends Controller
 
                 $response[] = [
                     'id' => $value->id,
-                    'text' => $value->name,
+                    'name' => $value->name,
+                    'os_count' => $value->os->count(),
                 ];
             }
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {
-            return response()->json($th, 403);
+            return response()->json(throw $th, 403);
         }
     }
 }

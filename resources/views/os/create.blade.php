@@ -3,7 +3,7 @@
 @section('title', 'Nova Ordem de Serviço')
 
 @section('content_header')
-    <h1>Nova Ordem de Serviço</h1>
+    <h1><i class="fa-regular fa-rectangle-list "></i> Nova Ordem de Serviço</h1>
 @stop
 
 @section('content')
@@ -49,7 +49,7 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="modelo_id">Modelo</label>
-                        {!! html()->select('modelo_id', [], )->class('form-control modelo')->placeholder('Selecione') !!}
+                        {!! html()->select('modelo_id')->class('form-control modelo')->placeholder('Selecione') !!}
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                         {!! html()->date('data_saida')->class('form-control') !!}
                     </div>
                 </div>
-                <div class="col-md-5 d-flex align-items-end">
+                {{-- <div class="col-md-5 d-flex align-items-end">
                     <div class="form-group text-right">
                         <a href="#">
                             <button type="button"  class="btn bg-primary">
@@ -87,7 +87,7 @@
                             </button>
                         </a>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="row">
                 <div class="col-md-6">

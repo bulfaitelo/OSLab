@@ -5,7 +5,10 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Configuracao\User\Setor;
+use App\Models\Os\Os;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -48,13 +51,17 @@ class User extends Authenticatable
     ];
 
     /**
-     * Retorna o setor atribuíndo pra o usuário
-     *
-     * @var array
+     * Retorna o setor atribuindo pra o usuário
      */
-    public function setor() {
+    public function setor() : BelongsTo {
         return $this->belongsTo(Setor::class);
     }
 
+    /**
+     * Relacionamento com OS
+     */
+    public function os () : HasMany {
+        return $this->hasMany(Os::class);
+    }
 
 }
