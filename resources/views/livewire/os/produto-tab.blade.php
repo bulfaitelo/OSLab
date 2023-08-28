@@ -45,8 +45,8 @@
         </div>
     </form>
     @if ($os_produto->count() > 0)
-        <div class="row">
-            <table class="table table-sm">
+        <div class="row table-responsive">
+            <table class="table table-sm text-nowrap">
                 <thead>
                     <tr>
                         <th>Produto</th>
