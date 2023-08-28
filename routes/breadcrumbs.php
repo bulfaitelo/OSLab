@@ -126,7 +126,7 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
     // Wiki > Novo Wiki
     Breadcrumbs::for('wiki.create', function (BreadcrumbTrail $trail) {
         $trail->parent('wiki.index');
-        $trail->push('Novo Serviço', route('wiki.create'));
+        $trail->push('Nova Wiki', route('wiki.create'));
     });
 
     // Wiki > [Visualização de Wiki]
@@ -138,7 +138,7 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
     // Wiki > [Wiki Name] > Editar Wiki
     Breadcrumbs::for('wiki.edit', function (BreadcrumbTrail $trail, Wiki $item) {
         $trail->parent('wiki.index');
-        $trail->push('Editar Serviço', route('wiki.edit', $item));
+        $trail->push('Editar Wiki', route('wiki.edit', $item));
     });
 // FIM Wiki
 
@@ -229,7 +229,7 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
     // Produtos > Novo produto
     Breadcrumbs::for('produto.create', function (BreadcrumbTrail $trail) {
         $trail->parent('produto.index');
-        $trail->push('Novo Serviço', route('produto.create'));
+        $trail->push('Novo Produto', route('produto.create'));
     });
 
     // Produtos > [Visualização de produto]
@@ -241,7 +241,7 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
     // Produtos > [produto Name] > Editar produto
     Breadcrumbs::for('produto.edit', function (BreadcrumbTrail $trail, Produto $item) {
         $trail->parent('produto.index');
-        $trail->push('Editar Serviço', route('produto.edit', $item));
+        $trail->push('Editar Produto', route('produto.edit', $item));
     });
 
     // Produtos > Movimentação

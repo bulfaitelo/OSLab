@@ -11,14 +11,14 @@
   <div class="card">
     <div class="card-header">
         <a href="{{ url()->previous() }}">
-            <button type="button"  class="btn  btn-default">
+            <button type="button"  class="btn btn-sm btn-default">
                 <i class="fa-solid fa-chevron-left"></i>
                 Voltar
             </button>
         </a>
         @can('config_roles_create')
             <a href="{{ route('configuracao.roles.create') }}">
-                <button type="button"  class="btn  btn-primary">
+                <button type="button"  class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i>
                     Criar Perfil
                 </button>
@@ -26,7 +26,7 @@
         @endcan
         @can('config_permissions')
             <a href="{{ route('configuracao.permissions.index') }}">
-                <button type="button"  class="btn btn-success ">
+                <button type="button"  class="btn btn-sm btn-success ">
                     <i class="fas fa-stream"></i>
                     Listar Permissões
                 </button>

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Visualizando Usuário')
+@section('title', 'Visualizar Usuário')
 
 @section('content_header')
-    <h1>Visualizando Usuário</h1>
+    <h1><i class="fas fa-users "></i> Visualizar Usuário</h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-header">
                 <a href="{{ url()->previous() }}">
-                    <button type="button"  class="btn  btn-default">
+                    <button type="button"  class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
                         Voltar
                     </button>

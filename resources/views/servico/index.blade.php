@@ -3,7 +3,7 @@
 @section('title', 'Serviços')
 
 @section('content_header')
-    <h1>Serviços</h1>
+    <h1><i class="fas fa-hand-holding-usd "></i> Serviços</h1>
 @stop
 
 @section('content')
@@ -11,14 +11,14 @@
     <div class="card">
       <div class="card-header">
             <a href="{{ url()->previous() }}">
-                <button type="button"  class="btn  btn-default">
+                <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
                     Voltar
                 </button>
             </a>
             @can('servico_create')
             <a href="{{ route('servico.create') }}">
-                <button type="button"  class="btn  btn-primary">
+                <button type="button"  class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i>
                     Adicionar Serviço
                 </button>

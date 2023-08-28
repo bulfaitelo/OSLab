@@ -3,7 +3,7 @@
 @section('title', 'Adicionar Receita')
 
 @section('content_header')
-    <h1>Adicionar Receita</h1>
+    <h1><i class="fa-solid fa-up-long "></i> Adicionar Receita</h1>
 @stop
 
 @section('content')
@@ -143,7 +143,7 @@
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fas fa-save"></i>
                 Salvar
             </button>

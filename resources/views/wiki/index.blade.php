@@ -3,7 +3,7 @@
 @section('title', 'Wiki')
 
 @section('content_header')
-    <h1>Wiki</h1>
+    <h1><i class="fa-solid fa-book "></i> Wiki</h1>
 @stop
 
 @section('content')
@@ -11,14 +11,14 @@
     <div class="card">
       <div class="card-header">
             <a href="{{ url()->previous() }}">
-                <button type="button"  class="btn  btn-default">
+                <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
                     Voltar
                 </button>
             </a>
             @can('wiki_create')
             <a href="{{ route('wiki.create') }}">
-                <button type="button"  class="btn  btn-primary">
+                <button type="button"  class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i>
                     Adicionar Wiki
                 </button>

@@ -3,7 +3,7 @@
 @section('title', 'Visualizar Wiki')
 
 @section('content_header')
-    <h1>Visualizar Wiki</h1>
+    <h1><i class="fa-solid fa-list-check "></i> Visualizar Wiki</h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-header">
                 <a href="{{ url()->previous() }}">
-                    <button type="button"  class="btn  btn-default">
+                    <button type="button"  class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
                         Voltar
                     </button>

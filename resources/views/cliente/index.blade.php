@@ -3,7 +3,7 @@
 @section('title', 'Clientes')
 
 @section('content_header')
-    <h1>Configuração de Clientes</h1>
+    <h1><i class="fa-solid fa-users "></i> Clientes</h1>
 @stop
 
 @section('content')
@@ -11,14 +11,14 @@
     <div class="card">
       <div class="card-header">
             <a href="{{ url()->previous() }}">
-                <button type="button"  class="btn  btn-default">
+                <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
                     Voltar
                 </button>
             </a>
             @can('cliente_create')
             <a href="{{ route('cliente.create') }}">
-                <button type="button"  class="btn  btn-primary">
+                <button type="button"  class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i>
                     Criar Cliente
                 </button>
@@ -31,7 +31,7 @@
           <thead>
             <tr>
               <th style="width: 10px">#</th>
-              <th>Ativo</th>
+              <th>Tipo</th>
               <th>Cliente</th>
               <th>Setor</th>
               <th>Validade</th>
@@ -41,8 +41,8 @@
           <tbody>
             @foreach ($clientes as $item)
               <tr>
-                  <td>{{ $item->id }}</td>
-                  <td>{{ $item->ativo }}</td>
+                <td>{{ $item->id }}</td>
+                <td>{{ $item->ativo }}</td>
                 <td>{{ $item->name}}</td>
                 <td>{{ $item->setor->name ?? ''}}</td>
                 <td>{{ $item->expire_at }}</td>

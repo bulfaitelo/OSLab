@@ -12,7 +12,7 @@
     <div class="card card-default">
       <div class="card-header">
             <a href="{{ url()->previous() }}">
-                <button type="button"  class="btn  btn-default">
+                <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
                     Voltar
                 </button>
@@ -74,7 +74,7 @@
 
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fas fa-save"></i>
                 Salvar
             </button>

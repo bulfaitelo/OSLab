@@ -11,14 +11,14 @@
   <div class="card">
     <div class="card-header">
         <a href="{{ url()->previous() }}">
-            <button type="button"  class="btn  btn-default">
+            <button type="button"  class="btn btn-sm btn-default">
                 <i class="fa-solid fa-chevron-left"></i>
                 Voltar
             </button>
         </a>
         @can('config_os_garantia_create')
         <a href="{{ route('configuracao.os.garantia.create') }}">
-            <button type="button"  class="btn  btn-primary">
+            <button type="button"  class="btn btn-sm btn-primary">
                 <i class="fa-solid fa-plus"></i>
                 Criar Garantia
             </button>

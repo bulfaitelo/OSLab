@@ -3,7 +3,7 @@
 @section('title', 'Usuários')
 
 @section('content_header')
-    <h1>Configuração de Usuários</h1>
+    <h1><i class="fas fa-users "></i> Configuração de Usuários</h1>
 @stop
 
 @section('content')
@@ -12,14 +12,14 @@
       <div class="card-header">
         <div class="row"></div>
           <a href="{{ route('configuracao.roles.index') }}">
-                <button type="button"  class="btn  btn-default">
+                <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
                     Voltar
                 </button>
           </a>
           @can('config_users_create')
             <a href="{{ route('configuracao.users.create') }}">
-                <button type="button"  class="btn  btn-primary">
+                <button type="button"  class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i>
                     Criar Usuário
                 </button>

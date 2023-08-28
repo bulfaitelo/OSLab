@@ -3,7 +3,7 @@
 @section('title', 'Checklist')
 
 @section('content_header')
-    <h1>Checklist</h1>
+    <h1><i class="fa-solid fa-list-check "></i> Checklist</h1>
 @stop
 
 @section('content')
@@ -11,14 +11,14 @@
     <div class="card">
       <div class="card-header">
             <a href="{{ url()->previous() }}">
-                <button type="button"  class="btn  btn-default">
+                <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
                     Voltar
                 </button>
             </a>
             @can('checklist_create')
             <a href="{{ route('checklist.create') }}">
-                <button type="button"  class="btn  btn-primary">
+                <button type="button"  class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i>
                     Adicionar Checklist
                 </button>

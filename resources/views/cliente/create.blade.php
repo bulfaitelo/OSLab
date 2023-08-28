@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Clientes')
+@section('title', 'Cadastro Cliente')
 
 @section('content_header')
-    <h1>Criando Clientes</h1>
+    <h1><i class="fa-solid fa-users "></i> Cadastro Cliente</h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-header">
                 <a href="{{ url()->previous() }}">
-                    <button type="button"  class="btn  btn-default">
+                    <button type="button"  class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
                         Voltar
                     </button>
@@ -132,7 +132,7 @@
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fas fa-save"></i>
                 Salvar
             </button>

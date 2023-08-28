@@ -5,7 +5,7 @@
 @section('title', 'Wiki - '. $wiki->name)
 
 @section('content_header')
-    <h1><b>[{{ $wiki->fabricante->name }}]</b> -  {{ $wiki->name}} </h1>
+    <h1><i class="fa-solid fa-book "></i> <b>[{{ $wiki->fabricante->name }}]</b> -  {{ $wiki->name}} </h1>
     <h6>{{ $wiki->modelosTitle() }}</h6>
 @stop
 
