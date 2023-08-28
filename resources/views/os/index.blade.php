@@ -9,7 +9,7 @@
 @section('content')
 <div class="col-md-12">
     <div class="card ">
-      <div class="card-header os pb-2 ">
+      <div class="card-header card-outline card-primary pb-2 ">
             <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
@@ -18,7 +18,7 @@
             </a>
             @can('os_create')
             <a href="{{ route('os.create') }}">
-                <button type="button"  class="btn btn-sm bg-teal">
+                <button type="button"  class="btn btn-sm bg-primary">
                     <i class="fa-solid fa-plus"></i>
                     Adicionar OS
                 </button>

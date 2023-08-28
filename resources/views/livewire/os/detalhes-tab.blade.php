@@ -51,17 +51,11 @@
                     @if ($os->modelo_id)
                         <a target="_blank" href="{{route('wiki.show', $os->modelo->wiki->id)}}">
                             <button type="button"  class="btn bg-primary">
-                                <i class="fa-solid fa-list-check"></i>
+                                <i class="fa-solid fa-book"></i>
                                 Wiki
                             </button>
                         </a>
                     @endif
-                    <a href="#">
-                        <button type="button"  class="btn bg-primary">
-                            <i class="fa-solid fa-book"></i>
-                            Checklist
-                        </button>
-                    </a>
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@
 <div class="row justify-content-md-center">
     <div class="col-md-12">
         <!-- general form elements -->
-        <div class="card os">
+        <div class="card card-outline card-primary">
             <div class="card-header">
                 <a href="{{ url()->previous() }}">
                     <button type="button"  class="btn  btn-default">
