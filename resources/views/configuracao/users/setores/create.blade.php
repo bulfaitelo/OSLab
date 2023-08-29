@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Setor')
+@section('title', 'Criar Setor')
 
 @section('content_header')
-    <h1>Criando Setor</h1>
+    <h1><i class="fas fa-industry "></i> Criar Setor</h1>
 @stop
 
 @section('content')

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Fabricante')
+@section('title', 'Fabricantes')
 
 @section('content_header')
-    <h1>Fabricante</h1>
+    <h1><i class="fa-solid fa-book "></i> Fabricantes</h1>
 @stop
 
 @section('content')

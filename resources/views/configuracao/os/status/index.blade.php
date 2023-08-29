@@ -3,7 +3,7 @@
 @section('title', 'Status')
 
 @section('content_header')
-    <h1>Configuração de Status</h1>
+    <h1><i class="fas fa-wave-square "></i> Status</h1>
 @stop
 
 @section('content')

@@ -3,7 +3,7 @@
 @section('title', 'Perfis')
 
 @section('content_header')
-    <h1>Configuração de Perfis</h1>
+    <h1><i class="fas fa-user-tag "></i> Configuração de Perfis</h1>
 @stop
 
 @section('content')

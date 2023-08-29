@@ -3,7 +3,7 @@
 @section('title', 'Editar Modelo')
 
 @section('content_header')
-    <h1>Editar Modelo</h1>
+    <h1><i class="fa-solid fa-book "></i> Editar Modelo</h1>
 @stop
 
 @section('content')

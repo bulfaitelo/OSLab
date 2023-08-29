@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criar Usários')
+@section('title', 'Criar Usuário')
 
 @section('content_header')
-    <h1><i class="fas fa-users "> </i> Criar Usários</h1>
+    <h1><i class="fas fa-users "> </i> Criar Usuário</h1>
 @stop
 
 @section('content')

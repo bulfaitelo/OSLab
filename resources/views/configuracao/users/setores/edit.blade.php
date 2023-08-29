@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editando Setor')
+@section('title', 'Editar Setor')
 
 @section('content_header')
-    <h1>Editando Setor</h1>
+    <h1><i class="fas fa-industry "></i> Editar Setor</h1>
 @stop
 
 @section('content')
@@ -47,6 +47,7 @@
       {!! html()->form()->close() !!}
 
       </div>
+    </div>
 
 </div>
 @stop

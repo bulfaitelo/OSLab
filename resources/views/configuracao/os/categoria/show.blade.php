@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Visualizando Categoria')
+@section('title', 'Visualizar Categoria')
 
 @section('content_header')
-    <h1>Visualizando Categoria</h1>
+    <h1><i class="fas fa-clipboard-list "></i> Visualizar Categoria</h1>
 @stop
 
 @section('content')

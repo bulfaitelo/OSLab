@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Forma de Pagamento')
+@section('title', 'Visualizar Forma de Pagamento')
 
 @section('content_header')
-    <h1>Editar Forma de Pagamento</h1>
+    <h1><i class="fa-solid fa-money-bill-transfer "></i> Visualizar Forma de Pagamento</h1>
 @stop
 
 @section('content')

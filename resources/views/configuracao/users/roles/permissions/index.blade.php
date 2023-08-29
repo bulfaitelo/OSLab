@@ -3,7 +3,7 @@
 @section('title', 'Permissões')
 
 @section('content_header')
-    <h1>Configuração de Permissões</h1>
+    <h1><i class="fas fa-user-tag "></i> Permissões</h1>
 @stop
 
 @section('content')

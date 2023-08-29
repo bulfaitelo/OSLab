@@ -3,7 +3,7 @@
 @section('title', 'Criar Fabricante')
 
 @section('content_header')
-    <h1>Criar Fabricante</h1>
+    <h1><i class="fa-solid fa-book "></i> Criar Fabricante</h1>
 @stop
 
 @section('content')

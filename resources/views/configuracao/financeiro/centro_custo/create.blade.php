@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Centro de custo')
+@section('title', 'Criar Centro de custo')
 
 @section('content_header')
-    <h1>Criando Centro de custo</h1>
+    <h1><i class="fas fa-cubes "></i> Criar Centro de custo</h1>
 @stop
 
 @section('content')

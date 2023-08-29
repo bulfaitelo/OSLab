@@ -325,7 +325,7 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
     // Categoria > Novo Categoria
     Breadcrumbs::for('configuracao.os.categoria.create', function (BreadcrumbTrail $trail) {
         $trail->parent('configuracao.os.categoria.index');
-        $trail->push('Novo Categoria', route('configuracao.os.categoria.create'));
+        $trail->push('Nova Categoria', route('configuracao.os.categoria.create'));
     });
 
     // Categoria > [Visualização de Categoria]
@@ -435,7 +435,7 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
     // Perfis > Novo Perfis
     Breadcrumbs::for('configuracao.roles.create', function (BreadcrumbTrail $trail) {
         $trail->parent('configuracao.roles.index');
-        $trail->push('Novo Perfis', route('configuracao.roles.create'));
+        $trail->push('Novo Perfil', route('configuracao.roles.create'));
     });
 
     // Perfis > [Visualização de Perfis]
@@ -447,7 +447,7 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
     // Perfis > [Perfis Name] > Editar Perfis
     Breadcrumbs::for('configuracao.roles.edit', function (BreadcrumbTrail $trail, Role $item) {
         $trail->parent('configuracao.roles.index');
-        $trail->push('Editar Perfis', route('configuracao.roles.edit', $item));
+        $trail->push('Editar Perfil', route('configuracao.roles.edit', $item));
     });
 
     // Perfis > [Perfis Name] > Permissões

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Criando Perfil')
+@section('title', 'Criar Perfil')
 
 @section('content_header')
-    <h1>Criando Perfil</h1>
+    <h1><i class="fas fa-user-tag "></i> Criar Perfil</h1>
 @stop
 
 @section('content')

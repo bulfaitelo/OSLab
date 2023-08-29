@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Visualizando Perfil')
+@section('title', 'visualizar Perfil')
 
 @section('content_header')
-    <h1>Visualizando Perfil</h1>
+    <h1><i class="fas fa-user-tag "></i> visualizar Perfil</h1>
 @stop
 
 @section('content')

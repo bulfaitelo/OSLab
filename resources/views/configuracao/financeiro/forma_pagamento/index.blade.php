@@ -3,7 +3,7 @@
 @section('title', 'Forma de Pagamento')
 
 @section('content_header')
-    <h1>Forma de Pagamento</h1>
+    <h1><i class="fa-solid fa-money-bill-transfer "></i> Forma de Pagamento</h1>
 @stop
 
 @section('content')

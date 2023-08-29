@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editando Garantia')
+@section('title', 'Editar Termo de Garantia')
 
 @section('content_header')
-    <h1>Editando Garantia</h1>
+    <h1><i class="fas fa-shield-alt "></i> Editar Termo de Garantia</h1>
 @stop
 
 @section('content')

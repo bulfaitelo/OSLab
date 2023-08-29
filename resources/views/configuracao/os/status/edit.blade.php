@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editando Status')
+@section('title', 'Editar Status')
 
 @section('content_header')
-    <h1>Editando Status</h1>
+    <h1><i class="fas fa-wave-square "></i> Editar Status</h1>
 @stop
 
 @section('content')

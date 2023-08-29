@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Modelo')
+@section('title', 'Visualizar Modelo')
 
 @section('content_header')
-    <h1>Editar Modelo</h1>
+    <h1> <i class="fa-solid fa-book "></i> Visualizar Modelo</h1>
 @stop
 
 @section('content')

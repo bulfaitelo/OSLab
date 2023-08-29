@@ -3,7 +3,7 @@
 @section('title', 'Editar Centro de custo')
 
 @section('content_header')
-    <h1>Editar Centro de custo</h1>
+    <h1><i class="fas fa-cubes "></i> Editar Centro de custo</h1>
 @stop
 
 @section('content')

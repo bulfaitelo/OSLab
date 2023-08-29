@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editando permissões')
+@section('title', 'Editar permissões')
 
 @section('content_header')
-    <h1>Editando Permissões</h1>
+    <h1><i class="fas fa-user-tag "></i> Editar Permissões</h1>
 @stop
 
 @section('content')

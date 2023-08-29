@@ -3,7 +3,7 @@
 @section('title', 'Usuários')
 
 @section('content_header')
-    <h1><i class="fas fa-users "></i> Configuração de Usuários</h1>
+    <h1><i class="fas fa-users "></i> Usuários</h1>
 @stop
 
 @section('content')
