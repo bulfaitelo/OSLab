@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Produto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produto\StoreProdutoRequest;
 use App\Http\Requests\Produto\UpdateProdutoRequest;
-use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -60,7 +59,7 @@ class ProdutoController extends Controller
             if ($request->estoque > 0) {
                 $produto->movimentacao()->create([
                         'quantidade_movimentada' => $request->estoque,
-                        'tipo_movimentacao' => 'ENTRADA',
+                        'tipo_movimentacao' => 1,
                         'valor_custo' => $request->valor_custo,
                         'estoque_antes' => 0,
                         'estoque_apos' => $request->estoque,

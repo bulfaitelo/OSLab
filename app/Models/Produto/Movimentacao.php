@@ -19,6 +19,7 @@ class Movimentacao extends Model
         'estoque_apos',
         'os_id',
         'venda_id',
+        'descricao',
     ];
 
     /**
@@ -28,7 +29,18 @@ class Movimentacao extends Model
      **/
     protected function valorCusto() : Attribute {
         return Attribute::make(
-            get: fn ($value) => ($value) ? str_replace(',', '.', str_replace('.','', $value)) : null,
+            get: fn ($value) => ($value) ?  number_format($value,2,",",".") : ''
+        );
+    }
+
+    /**
+     * Retornar o tipo de movimentação em Texto
+     *
+     * @return Attribute
+     **/
+    protected function tipoMovimentacao() : Attribute {
+        return Attribute::make(
+            get: fn ($value) => ($value == 1) ? "Entrada" : "Saída"
         );
     }
 }

@@ -26,6 +26,11 @@ return new class extends Migration
                   ->on('users');
 
         });
+
+        Schema::table('movimentacaos', function (Blueprint $table) {
+            $table->foreign('os_produto_id', 'fk_movimentacaos_os_produtos')
+            ->references('id')->on('os_produtos');
+        });
     }
 
     /**
@@ -37,6 +42,10 @@ return new class extends Migration
             $table->dropForeign('fk_os_produtos_os');
             $table->dropForeign('fk_os_produtos_produtos');
             $table->dropForeign('fk_os_produtos_users');
+        });
+
+        Schema::table('movimentacaos', function (Blueprint $table) {
+            $table->dropForeign('fk_movimentacaos_os_produtos');
         });
     }
 };

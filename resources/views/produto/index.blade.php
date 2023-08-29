@@ -45,7 +45,7 @@
                 <td>{{ $item->name}}</td>
                 <td>{{ $item->estoque}}</td>
                 <td>{{ $item->valor_venda}}</td>
-                <td>{{ $item->updated_at }}</td>
+                <td>{{ $item->updated_at->format('H:i:s d/m/Y') }}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
                         @can('produto_movimentacao')

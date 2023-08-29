@@ -45,40 +45,44 @@
         </div>
     </form>
     @if ($os_produto->count() > 0)
-        <div class="row table-responsive">
-            <table class="table table-sm text-nowrap">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Preço Unit.</th>
-                        <th>Subtotal</th>
-                        <th style="width: 40px"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($os_produto as $i => $item)
-                        <tr wire:key="{{ $loop->index }}" >
-                            <td>{{ $item->produto->name }}</td>
-                            <td>{{ $item->quantidade }}</td>
-                            <td>R$ {{ number_format($item->valor_venda,2,",",".") }}</td>
-                            <td>R$ {{ number_format($item->valor_venda_total,2,",",".") }}</td>
-                            <td> botao</td>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-sm text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço Unit.</th>
+                            <th>Subtotal</th>
+                            <th style="width: 40px"></th>
                         </tr>
-                    @endforeach
-                </tbody>
-                <tfoot style=" border-top: 2px solid rgb(156, 156, 156)">
-                    <tr>
-                        <td colspan="2"></td>
-                        <td class="text-right">
-                            <b>
-                                Total:
-                            </b>
-                        </td>
-                        <td>R$ {{ number_format($os_produto->sum('valor_venda_total'),2,",",".")  }}</td>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($os_produto as $i => $item)
+                            <tr wire:key="{{ $loop->index }}" >
+                                <td>{{ $item->produto->name }}</td>
+                                <td>{{ $item->quantidade }}</td>
+                                <td>R$ {{ number_format($item->valor_venda,2,",",".") }}</td>
+                                <td>R$ {{ number_format($item->valor_venda_total,2,",",".") }}</td>
+                                <td>
+                                    <a title="Excluir" wire:click="delete({{ $item->id }})" class="btn btn-block btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot style=" border-top: 2px solid rgb(156, 156, 156)">
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="text-right">
+                                <b>
+                                    Total:
+                                </b>
+                            </td>
+                            <td>R$ {{ number_format($os_produto->sum('valor_venda_total'),2,",",".")  }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     @endif
     <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />

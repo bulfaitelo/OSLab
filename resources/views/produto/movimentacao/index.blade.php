@@ -36,21 +36,21 @@
         <table class="table table-sm table-hover text-nowrap">
           <thead>
             <tr>
-              <th style="width: 10px">#</th>
               <th>Quantidade Movimentada</th>
               <th>Valor de custo</th>
               <th>Tipo de movimentação</th>
+              <th>Observações</th>
               <th>Data da movimentação</th>
             </tr>
           </thead>
           <tbody>
             @foreach ($movimentacoes as $item)
               <tr>
-                <td>{{ $item->id }}</td>
                 <td>{{ $item->quantidade_movimentada}}</td>
                 <td>{{ $item->valor_custo}}</td>
                 <td>{{ $item->tipo_movimentacao}}</td>
-                <td>{{ $item->created_at }}</td>
+                <td>{{ $item->descricao}}</td>
+                <td>{{ $item->created_at->format('H:i:s d/m/Y') }}</td>
               </tr>
 
             @endforeach

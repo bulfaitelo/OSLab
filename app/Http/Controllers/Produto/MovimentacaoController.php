@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Produto;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produto\StoreUpdateMovimentacaoRequest;
-use App\Models\Produto\Movimentacao;
 use App\Models\Produto\Produto;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MovimentacaoController extends Controller
@@ -55,7 +53,7 @@ class MovimentacaoController extends Controller
             $produto->movimentacao()->createMany([
                 [
                     'quantidade_movimentada' => $request->estoque,
-                    'tipo_movimentacao' => 'ENTRADA',
+                    'tipo_movimentacao' => 1,
                     'valor_custo' => $request->valor_custo,
                     'estoque_antes' => $produto->estoque,
                     'estoque_apos' => $estoqueTemp,

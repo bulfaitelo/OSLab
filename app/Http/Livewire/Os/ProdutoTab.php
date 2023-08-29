@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\Os;
 
 use App\Models\Os\Os;
+use App\Models\Os\OsProduto;
 use App\Models\Produto\Produto;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use tidy;
 
 class ProdutoTab extends Component
 {
@@ -61,9 +63,23 @@ class ProdutoTab extends Component
         $this->valor_venda = null;
         $this->produto_id = null;
 
+        // pra apagar o produto
         session()->flash('clear', 'clear');
         flasher('Produto adicionado com sucesso.');
 
+    }
+
+    public function delete($id) {
+        try {
+            $osProduto = Os::findOrFail($this->os_id)->produtos()->find($id);
+            $produto = Produto::find($osProduto->produto_id);
+            dd($produto, $osProduto);
+
+            $osProduto->delete();
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
 
@@ -114,8 +130,8 @@ class ProdutoTab extends Component
             $produto = Produto::find($this->produto_id);
             $produto->movimentacao()->create([
                 'quantidade_movimentada' => $quantidade,
-                'tipo_movimentacao' => 'SAÍDA OS: #'. $this->os_id,
                 'estoque_antes' => $estoque,
+                'descricao' =>  'OS: #'. $this->os_id,
                 'estoque_apos' => $estoque - $quantidade,
                 'valor_custo' => $this->getValorCusto(),
                 'os_id' => $this->os_id,
@@ -130,7 +146,8 @@ class ProdutoTab extends Component
             $produto = Produto::find($this->produto_id);
             $produto->movimentacao()->create([
                 'quantidade_movimentada' => $quantidade,
-                'tipo_movimentacao' => 'ENTRADA OS: #'. $this->os_id,
+                'tipo_movimentacao' => 1,
+                'descricao' =>  'OS: #'. $this->os_id,
                 'estoque_antes' => $produto->estoque,
                 'estoque_apos' => 0,
                 'valor_custo' => $this->getValorCusto(),

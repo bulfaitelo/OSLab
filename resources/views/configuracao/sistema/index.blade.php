@@ -56,7 +56,7 @@
                 </div>
                 <div class="card-footer">
                     @can('config_sistema_edit')
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-sm btn-primary">
                             <i class="fas fa-save"></i>
                             Salvar
                         </button>
