@@ -55,8 +55,8 @@ class ProdutoTab extends Component
     public function create() {
         $produto = $this->validate();
 
-        $this->createOsProduto($produto);
-        $this->updateProdutoQuantidadeEstoque();
+        $osProduto = $this->createOsProduto($produto);
+        $this->updateProdutoQuantidadeEstoque($osProduto->id);
 
         $this->quantidade = null;
         $this->valor_custo = null;
@@ -83,36 +83,39 @@ class ProdutoTab extends Component
     }
 
 
-    private function createOsProduto($produto) : void {
+    private function createOsProduto($produto) : object {
         DB::beginTransaction();
         try {
             $produto['valor_custo_total'] = $produto['valor_custo'] * $produto['quantidade'];
             $produto['valor_venda_total'] = $produto['valor_venda'] * $produto['quantidade'];
             $produto['user_id'] = auth()->id();
-            Os::find($this->os_id)->produtos()->create(
+            $osProduto = Os::find($this->os_id)->produtos()->create(
                 $produto
             );
+
             // $this->updateProdutoQuantidadeEstoque();
             DB::commit();
+            return $osProduto;
+
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
     }
 
-    private function updateProdutoQuantidadeEstoque() : void {
+    private function updateProdutoQuantidadeEstoque($osProdutoId) : void {
         try {
             $produto = Produto::find($this->produto_id);
             $estoque = $produto->estoque;
             if ($produto->estoque >= $this->quantidade) {
                 $produto->estoque = $produto->estoque - $this->quantidade;
                 $produto->save();
-                $this->insertSaidaMovimentacaoProduto($estoque, $this->quantidade);
+                $this->insertSaidaMovimentacaoProduto($estoque, $this->quantidade, $osProdutoId);
 
             } else {
                 $quantidadeEntrada = $this->quantidade - $produto->estoque;
-                $this->insertEntradaMovimentacaoProduto($quantidadeEntrada);
-                $this->insertSaidaMovimentacaoProduto($this->quantidade, $this->quantidade);
+                $this->insertEntradaMovimentacaoProduto($quantidadeEntrada, $osProdutoId);
+                $this->insertSaidaMovimentacaoProduto($this->quantidade, $this->quantidade, $osProdutoId);
                 $produto->estoque = 0;
                 $produto->save();
 
@@ -125,7 +128,7 @@ class ProdutoTab extends Component
         }
     }
 
-    private function insertSaidaMovimentacaoProduto($estoque, $quantidade): void {
+    private function insertSaidaMovimentacaoProduto($estoque, $quantidade, $osProdutoId): void {
         try {
             $produto = Produto::find($this->produto_id);
             $produto->movimentacao()->create([
@@ -135,13 +138,14 @@ class ProdutoTab extends Component
                 'estoque_apos' => $estoque - $quantidade,
                 'valor_custo' => $this->getValorCusto(),
                 'os_id' => $this->os_id,
+                'os_produto_id' => $osProdutoId,
             ]);
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    private function insertEntradaMovimentacaoProduto($quantidade): void {
+    private function insertEntradaMovimentacaoProduto($quantidade, $osProdutoId): void {
         try {
             $produto = Produto::find($this->produto_id);
             $produto->movimentacao()->create([
@@ -152,6 +156,7 @@ class ProdutoTab extends Component
                 'estoque_apos' => 0,
                 'valor_custo' => $this->getValorCusto(),
                 'os_id' => $this->os_id,
+                'os_produto_id' => $osProdutoId,
             ]);
         } catch (\Throwable $th) {
             throw $th;

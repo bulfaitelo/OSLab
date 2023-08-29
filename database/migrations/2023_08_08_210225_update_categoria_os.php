@@ -17,6 +17,11 @@ return new class extends Migration
             $table->foreign('checklist_id', 'fk_categoria_os_checklists')
             ->references('id')->on('checklists');
         });
+
+        Schema::table('movimentacaos', function (Blueprint $table) {
+            $table->foreign('os_id', 'fk_movimentacaos_os')
+            ->references('id')->on('os');
+        });
     }
 
     /**
@@ -30,6 +35,10 @@ return new class extends Migration
                 'checklist_id',
                 'checklist_required'
             ]);
+        });
+
+        Schema::table('movimentacaos', function (Blueprint $table) {
+            $table->dropForeign('fk_movimentacaos_os');
         });
     }
 };

@@ -20,6 +20,7 @@ class Movimentacao extends Model
         'os_id',
         'venda_id',
         'descricao',
+        'os_produto_id',
     ];
 
     /**
