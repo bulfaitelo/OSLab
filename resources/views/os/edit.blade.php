@@ -8,7 +8,101 @@
 
 @section('content')
 
-<div class="row justify-content-md-center">
+
+
+
+<div class="card card-primary card-outline">
+    <div class="card-header border-0 pb-0">
+        <a href="{{ url()->previous() }}">
+            <button type="button"  class="btn btn-sm btn-default">
+                <i class="fa-solid fa-chevron-left"></i>
+                Voltar
+            </button>
+        </a>
+    </div>
+    <div class="card-body pt-2">
+        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+            <li class="nav-item ">
+                <a class="nav-link active" id="detalhes-tab" data-toggle="pill" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="true">
+                    <i class="fa-regular fa-rectangle-list "></i>
+                    Detalhes
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" id="#produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="false">
+                    <i class="fas fa-box-open "></i>
+                    Produtos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="servicos-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="servicos" aria-selected="false">
+                    <i class="fas fa-hand-holding-usd "></i>
+                    Serviços
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="checklist-tab" data-toggle="pill" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
+                    <i class="fa-solid fa-list-check "></i>
+                    Checklist
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="senhas-tab" data-toggle="pill" href="#senhas" role="tab" aria-controls="senhas" aria-selected="false">
+                    <i class="fa-solid fa-key"></i>
+                    Senhas
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="anexos-tab" data-toggle="pill" href="#anexos" role="tab" aria-controls="anexos" aria-selected="false">
+                    <i class="fa-solid fa-paperclip"></i>
+                    Anexos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="informacoes-tab" data-toggle="pill" href="#informacoes" role="tab" aria-controls="informacoes" aria-selected="false">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Informações
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="balancete-tab" data-toggle="pill" href="#balancete" role="tab" aria-controls="balancete" aria-selected="false">
+                    <i class="fas fa-balance-scale"></i>
+                    Balancete
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+                @livewire('os.detalhes-tab', ['os' => $os])
+            </div>
+            <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
+                @livewire('os.produto-tab', ['os_id' => $os->id])
+            </div>
+            <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
+                servicos
+            </div>
+            <div class="tab-pane fade" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
+                checklist
+            </div>
+            <div class="tab-pane fade" id="senhas" role="tabpanel" aria-labelledby="senhas-tab">
+                senhas
+            </div>
+            <div class="tab-pane fade" id="anexos" role="tabpanel" aria-labelledby="anexos-tab">
+                anexos
+            </div>
+            <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
+                informacoes
+            </div>
+
+            <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
+                balancete
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{-- <div class="row justify-content-md-center">
     <div class="col-12 col-md-12">
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0 border-bottom-0">
@@ -96,7 +190,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @stop
 
 @section('css')
