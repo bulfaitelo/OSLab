@@ -56,7 +56,6 @@ class ProdutoTab extends Component
         $produto = $this->validate();
 
         $osProduto = $this->createOsProduto($produto);
-        $this->updateProdutoQuantidadeEstoque($osProduto->id);
 
         $this->quantidade = null;
         $this->valor_custo = null;
@@ -72,11 +71,8 @@ class ProdutoTab extends Component
     public function delete($id) {
         try {
             $osProduto = Os::findOrFail($this->os_id)->produtos()->find($id);
-            $produto = Produto::find($osProduto->produto_id);
-            dd($produto, $osProduto);
-
             $osProduto->delete();
-
+            flasher('Produto removido com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -103,65 +99,65 @@ class ProdutoTab extends Component
         }
     }
 
-    private function updateProdutoQuantidadeEstoque($osProdutoId) : void {
-        try {
-            $produto = Produto::find($this->produto_id);
-            $estoque = $produto->estoque;
-            if ($produto->estoque >= $this->quantidade) {
-                $produto->estoque = $produto->estoque - $this->quantidade;
-                $produto->save();
-                $this->insertSaidaMovimentacaoProduto($estoque, $this->quantidade, $osProdutoId);
+    // private function updateProdutoQuantidadeEstoque($osProdutoId) : void {
+    //     try {
+    //         $produto = Produto::find($this->produto_id);
+    //         $estoque = $produto->estoque;
+    //         if ($produto->estoque >= $this->quantidade) {
+    //             $produto->estoque = $produto->estoque - $this->quantidade;
+    //             $produto->save();
+    //             $this->insertSaidaMovimentacaoProduto($estoque, $this->quantidade, $osProdutoId);
 
-            } else {
-                $quantidadeEntrada = $this->quantidade - $produto->estoque;
-                $this->insertEntradaMovimentacaoProduto($quantidadeEntrada, $osProdutoId);
-                $this->insertSaidaMovimentacaoProduto($this->quantidade, $this->quantidade, $osProdutoId);
-                $produto->estoque = 0;
-                $produto->save();
+    //         } else {
+    //             $quantidadeEntrada = $this->quantidade - $produto->estoque;
+    //             $this->insertEntradaMovimentacaoProduto($quantidadeEntrada, $osProdutoId);
+    //             $this->insertSaidaMovimentacaoProduto($this->quantidade, $this->quantidade, $osProdutoId);
+    //             $produto->estoque = 0;
+    //             $produto->save();
 
-                # é this por quant, a sobra e gerado uma entrada e depois uma saida do valor total da quantidade
-            }
+    //             # é this por quant, a sobra e gerado uma entrada e depois uma saida do valor total da quantidade
+    //         }
 
 
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
+    //     } catch (\Throwable $th) {
+    //         throw $th;
+    //     }
+    // }
 
-    private function insertSaidaMovimentacaoProduto($estoque, $quantidade, $osProdutoId): void {
-        try {
-            $produto = Produto::find($this->produto_id);
-            $produto->movimentacao()->create([
-                'quantidade_movimentada' => $quantidade,
-                'estoque_antes' => $estoque,
-                'descricao' =>  'OS: #'. $this->os_id,
-                'estoque_apos' => $estoque - $quantidade,
-                'valor_custo' => $this->getValorCusto(),
-                'os_id' => $this->os_id,
-                'os_produto_id' => $osProdutoId,
-            ]);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
+    // private function insertSaidaMovimentacaoProduto($estoque, $quantidade, $osProdutoId): void {
+    //     try {
+    //         $produto = Produto::find($this->produto_id);
+    //         $produto->movimentacao()->create([
+    //             'quantidade_movimentada' => $quantidade,
+    //             'estoque_antes' => $estoque,
+    //             'descricao' =>  'OS: #'. $this->os_id,
+    //             'estoque_apos' => $estoque - $quantidade,
+    //             'valor_custo' => $this->getValorCusto(),
+    //             'os_id' => $this->os_id,
+    //             'os_produto_id' => $osProdutoId,
+    //         ]);
+    //     } catch (\Throwable $th) {
+    //         throw $th;
+    //     }
+    // }
 
-    private function insertEntradaMovimentacaoProduto($quantidade, $osProdutoId): void {
-        try {
-            $produto = Produto::find($this->produto_id);
-            $produto->movimentacao()->create([
-                'quantidade_movimentada' => $quantidade,
-                'tipo_movimentacao' => 1,
-                'descricao' =>  'OS: #'. $this->os_id,
-                'estoque_antes' => $produto->estoque,
-                'estoque_apos' => 0,
-                'valor_custo' => $this->getValorCusto(),
-                'os_id' => $this->os_id,
-                'os_produto_id' => $osProdutoId,
-            ]);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
+    // private function insertEntradaMovimentacaoProduto($quantidade, $osProdutoId): void {
+    //     try {
+    //         $produto = Produto::find($this->produto_id);
+    //         $produto->movimentacao()->create([
+    //             'quantidade_movimentada' => $quantidade,
+    //             'tipo_movimentacao' => 1,
+    //             'descricao' =>  'OS: #'. $this->os_id,
+    //             'estoque_antes' => $produto->estoque,
+    //             'estoque_apos' => 0,
+    //             'valor_custo' => $this->getValorCusto(),
+    //             'os_id' => $this->os_id,
+    //             'os_produto_id' => $osProdutoId,
+    //         ]);
+    //     } catch (\Throwable $th) {
+    //         throw $th;
+    //     }
+    // }
 
     private  function getValorCusto()
     {
