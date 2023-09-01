@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(DefaultsUsers::class);
+        $this->call(DefaultsServicos::class);
         $this->call(DefaultsConfigRoles::class);
         $this->call(DatabaseDefaultPermissionsUpdate::class);
 
