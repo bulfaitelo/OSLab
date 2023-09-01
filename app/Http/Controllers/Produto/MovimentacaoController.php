@@ -57,7 +57,8 @@ class MovimentacaoController extends Controller
                     'valor_custo' => $request->valor_custo,
                     'estoque_antes' => $produto->estoque,
                     'estoque_apos' => $estoqueTemp,
-                ]
+                    'descricao' => $request->descricao,
+                    ]
             ]);
             DB::commit();
             return redirect()->route('movimentacao.index', $produto)

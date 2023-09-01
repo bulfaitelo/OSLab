@@ -60,6 +60,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="descricao">Descrição</label>
+                        <div class="input-group mb-3">
+                            {!! html()->text('descricao')->class('form-control')->placeholder('Descrição') !!}
+                        </div>
+                    </div>
+                </div>
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
