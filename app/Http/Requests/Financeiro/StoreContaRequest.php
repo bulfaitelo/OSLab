@@ -27,13 +27,11 @@ class StoreContaRequest extends FormRequest
             'cliente_id' => 'required|exists:clientes,id',
             'vencimento' => 'date|required',
             'valor'     => 'required|numeric|min:0|not_in:0',
-
+            'forma_pagamento_id' => 'required|exists:forma_pagamentos,id',
 
             'avista_valor' => 'required_with:avista_pago,on|numeric|min:0|not_in:0|nullable',
-            'avista_forma_pagamento_id' => 'required_if:avista_pago,on|exists:forma_pagamentos,id|nullable',
 
             'parcelas' => 'required_if:parcelado,on|numeric',
-            'parcelado_forma_pagamento_id' => 'required_if:parcelado_pago,on|exists:forma_pagamentos,id|nullable',
         ];
     }
 
@@ -53,7 +51,8 @@ class StoreContaRequest extends FormRequest
     public function messages() : array
      {
         return [
-         'name.required' => 'A despesa é obrigatória!'
+         'name.required' => 'A despesa é obrigatória!',
+         'pagamento_id' => 'A forma de pagamento é obrigatória ',
         ];
     }
 }

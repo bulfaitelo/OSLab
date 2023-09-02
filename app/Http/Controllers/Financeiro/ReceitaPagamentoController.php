@@ -31,13 +31,12 @@ class ReceitaPagamentoController extends Controller
         DB::beginTransaction();
         try {
             $pagamento[] =  [
-                'forma_pagamento_id' => $request->parcelado_forma_pagamento_id,
+                'forma_pagamento_id' => $request->forma_pagamento_id,
                 'user_id' => Auth::id(),
                 'valor' => $request->pagamento_valor,
                 'vencimento' =>  $request->vencimento,
                 'data_pagamento' => $request->data_pagamento,
                 'parcela' => $request->parcela,
-                'forma_pagamento_id' => $request->forma_pagamento_id,
             ];
             $receita->pagamentos()->createMany($pagamento);
             if ($receita->parcelas < $receita->pagamentos->count()) {
@@ -65,20 +64,16 @@ class ReceitaPagamentoController extends Controller
         DB::beginTransaction();
         $pagamento = $receita->pagamentos()->findOrFail($pagamento->id);
         try {
-            $pagamento->forma_pagamento_id = $request->parcelado_forma_pagamento_id;
+            $pagamento->forma_pagamento_id = $request->forma_pagamento_id;
             $pagamento->user_id = Auth::id();
             $pagamento->vencimento =  $request->vencimento;
             $pagamento->parcela = $request->parcela;
             if($request->pago) {
                 $pagamento->valor = $request->pagamento_valor;
                 $pagamento->data_pagamento = $request->data_pagamento;
-                $pagamento->forma_pagamento_id = $request->forma_pagamento_id;
-
             } else {
                 $pagamento->valor = null;
                 $pagamento->data_pagamento = null;
-                $pagamento->forma_pagamento_id = null;
-
             }
             $pagamento->save();
 

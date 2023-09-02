@@ -115,13 +115,12 @@ class ReceitaController extends Controller
 
 
                     $pagamento[] =  [
-                        'forma_pagamento_id' => $request->parcelado_forma_pagamento_id,
+                        'forma_pagamento_id' => $request->forma_pagamento_id,
                         'user_id' => Auth::id(),
                         'valor' => $valor,
                         'vencimento' =>  $vencimento->format('Y-m-d'),
                         'data_pagamento' => $data_pagamento,
                         'parcela' => $i,
-                        'forma_pagamento_id' => $request->parcelado_forma_pagamento_id,
                     ];
                     if($i != $request->parcelas){
                         $vencimento->addMonth(1);
@@ -134,7 +133,7 @@ class ReceitaController extends Controller
 
             } else {
                $pagamento[] =  [
-                    'forma_pagamento_id' => $request->avista_forma_pagamento_id,
+                    'forma_pagamento_id' => $request->forma_pagamento_id,
                     'user_id' => Auth::id(),
                     'valor' => $request->avista_valor,
                     'vencimento' =>  $request->vencimento,

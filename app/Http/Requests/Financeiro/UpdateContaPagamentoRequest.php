@@ -24,10 +24,10 @@ class UpdateContaPagamentoRequest extends FormRequest
         return [
             'vencimento' => 'date|required',
             'parcela' => 'required|integer',
+            'forma_pagamento_id' => 'required|exists:forma_pagamentos,id',
 
             'data_pagamento' => 'date|nullable',
             'pagamento_valor'     => 'required_unless:data_pagamento,null|numeric|min:0|not_in:0|nullable',
-            'forma_pagamento_id' => 'required_unless:data_pagamento,null|exists:forma_pagamentos,id|nullable',
 
         ];
     }

@@ -106,6 +106,12 @@
                                                 {!! html()->date('vencimento')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
                                             </div>
                                         </div>
+                                        <div  class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="forma_pagamento_id">Forma de pagamento</label>
+                                                {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                                            </div>
+                                        </div>
                                         <div class="col-md-1">
                                             <div class="form-group">
                                                 <label for="pago">Pago</label>
@@ -127,12 +133,6 @@
                                             <div class="form-group">
                                                 <label for="data_pagamento"> Data pagamento </label>
                                                 {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago') !!}
-                                            </div>
-                                        </div>
-                                        <div  class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="forma_pagamento_id">Forma de pagamento</label>
-                                                {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
                                             </div>
                                         </div>
                                     </div>
@@ -215,6 +215,12 @@
                                                             {!! html()->date('vencimento', $item->vencimento)->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
                                                         </div>
                                                     </div>
+                                                    <div  class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="forma_pagamento_id">Forma de pagamento</label>
+                                                            {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'), $item->forma_pagamento_id)->class('form-control')->placeholder('Selecione') !!}
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label for="pago_{{$item->id}}">Pago</label>
@@ -236,12 +242,6 @@
                                                         <div class="form-group">
                                                             <label for="data_pagamento"> Data pagamento </label>
                                                             {!! html()->date('data_pagamento', $item->data_pagamento)->class('form-control')->placeholder('Valor Pago') !!}
-                                                        </div>
-                                                    </div>
-                                                    <div  class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="forma_pagamento_id">Forma de pagamento</label>
-                                                            {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'), $item->forma_pagamento_id)->class('form-control')->placeholder('Selecione') !!}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -320,45 +320,53 @@
 @stop
 
 @section('css')
+<link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
+<style>
+    .receita {
+        border-top: 3px solid #12cd37;
+        /* background-color: #aaceb1; */
+    }
 
-<link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
-<link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
-    <style>
-        .receita {
-            border-top: 3px solid #12cd37;
-            /* background-color: #aaceb1; */
-        }
+    .custom-switch.custom-switch-md .custom-control-label {
+        padding-left: 2rem;
+        padding-bottom: 1.5rem;
+    }
 
-        .custom-switch.custom-switch-md .custom-control-label {
-            padding-left: 2rem;
-            padding-bottom: 1.5rem;
-        }
+    .custom-switch.custom-switch-md .custom-control-label::before {
+        height: 1.5rem;
+        width: calc(2rem + 0.75rem);
+        border-radius: 3rem;
+    }
 
-        .custom-switch.custom-switch-md .custom-control-label::before {
-            height: 1.5rem;
-            width: calc(2rem + 0.75rem);
-            border-radius: 3rem;
-        }
+    .custom-switch.custom-switch-md .custom-control-label::after {
+        width: calc(1.5rem - 4px);
+        height: calc(1.5rem - 4px);
+        border-radius: calc(2rem - (1.5rem / 2));
+    }
 
-        .custom-switch.custom-switch-md .custom-control-label::after {
-            width: calc(1.5rem - 4px);
-            height: calc(1.5rem - 4px);
-            border-radius: calc(2rem - (1.5rem / 2));
-        }
+    .custom-switch.custom-switch-md .custom-control-input:checked ~ .custom-control-label::after {
+        transform: translateX(calc(1.5rem - 0.25rem));
+    }
 
-        .custom-switch.custom-switch-md .custom-control-input:checked ~ .custom-control-label::after {
-            transform: translateX(calc(1.5rem - 0.25rem));
-        }
-    </style>
+    .ts-wrapper .option .title {
+        display: block;
+    }
+    .ts-wrapper .option .url {
+        font-size: 15px;
+        display: block;
+        color: #7c7c7c;
+    }
+
+    .ts-wrapper::after {
+        display: none;
+    }
+</style>
 @stop
 
 @section('js')
 @routes
-<script src="{{ url('') }}/vendor/select2/dist/js/select2.full.min.js"></script>
-<script src="{{ url('') }}/vendor/select2/dist/js/i18n/pt-BR.js"></script>
+<script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 <script src="{{ url('') }}/src/js/select-cliente.js"></script>
-{{-- <script src="https://adminlte.io/themes/v3/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script> --}}
-{{-- <script src="{{ url('') }}/vendor/bootstrap-switch/bootstrap-switch.min.js"></script> --}}
 
 <script>
 
