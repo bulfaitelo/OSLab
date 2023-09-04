@@ -3,7 +3,7 @@
 @section('title', 'Editar Receita')
 
 @section('content_header')
-    <h1><i class="fa-solid fa-up-long "></i> Editar Receita</h1>
+    <h1><i class="fa-solid fa-money-bill"></i> Editar Receita</h1>
 @stop
 
 @section('content')

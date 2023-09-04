@@ -3,7 +3,7 @@
 @section('title', 'Adicionar Despesa')
 
 @section('content_header')
-    <h1><i class="fa-solid fa-down-long "></i> Adicionar Despesa</h1>
+    <h1><i class="fa-solid fa-money-bill"></i> Adicionar Despesa</h1>
 @stop
 
 @section('content')

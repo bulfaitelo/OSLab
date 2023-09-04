@@ -358,14 +358,17 @@ return [
             'submenu'=> [
                 [
                     'text'    => 'Receitas',
-                    'icon'    => 'fa-solid fa-up-long',
+                    'icon'    => 'fa-solid fa-money-bill',
+                    'icon_color' =>'success',
                     'route'   => 'financeiro.receita.index',
                     'active'  => ['financeiro/receita*'],
                     'can'     => 'financeiro_receita',
+
                 ],
                 [
                     'text'    => 'Despesas',
-                    'icon'    => 'fa-solid fa-down-long',
+                    'icon'    => 'fa-solid fa-money-bill',
+                    'icon_color' =>'danger',
                     'route'   => 'financeiro.despesa.index',
                     'active'  => ['financeiro/despesa*'],
                     'can'     => 'financeiro_despesa',
