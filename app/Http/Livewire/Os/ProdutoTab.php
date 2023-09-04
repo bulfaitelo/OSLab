@@ -12,11 +12,11 @@ use tidy;
 class ProdutoTab extends Component
 {
 
+    public $os_id;
     public $valor_custo;
     public $valor_venda;
     public $quantidade;
     public $produto_id;
-    public $os_id;
 
 
     protected function rules() : array {
@@ -43,6 +43,7 @@ class ProdutoTab extends Component
         if ($produto = Produto::find($this->produto_id)) {
             $this->valor_custo = $produto->valor_custo;
             $this->valor_venda = $produto->valor_venda;
+            $this->quantidade = 1;
         }
         $os_produto = Os::find($this->os_id)->produtos;
         return view('livewire.os.produto-tab', [

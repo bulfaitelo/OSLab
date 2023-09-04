@@ -88,6 +88,18 @@ class Os extends Model
     }
 
     /**
+     * Retornar os Serviços da OS
+     *
+     * Retorna os serviços relacionado a os
+     * @return hasMany Serviços
+     **/
+    public function servicos() : HasMany
+    {
+        return $this->hasMany(OsServico::class);
+    }
+
+
+    /**
      * Retorna id e nome do Cliente.
      *
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2

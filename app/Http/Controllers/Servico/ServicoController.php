@@ -106,4 +106,36 @@ class ServicoController extends Controller
             throw $th;
         }
     }
+
+
+
+    /**
+     * Select Serviço
+     *
+     * Retorna o select com os Serviço s via Json.
+     *
+     * @param Request $request Request da variável Busca,
+     * @return response, json Retorna o json para ser montado.
+     **/
+    public function apiServicoSelect (Request $request) {
+        try {
+            $select = Servico::where('name', 'LIKE', '%'. $request->q . '%');
+            $select->orderBy('name');
+            $select->limit(10);
+            $response = [];
+            foreach ($select->get() as $value) {
+                $response[] = [
+                    'id' => $value->id,
+                    'name' => $value->name,
+                    'valor_servico' => $value->valor_servico,
+                    'descricao' => $value->descricao
+                ];
+            }
+
+            return response()->json($response, 200);
+
+        } catch (\Throwable $th) {
+            return response()->json($th, 403);
+        }
+    }
 }
