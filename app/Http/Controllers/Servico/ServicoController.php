@@ -13,7 +13,7 @@ class ServicoController extends Controller
     function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:servico', ['only'=> 'index']);
+        $this->middleware('permission:servico', ['only'=> ['index', 'apiServicoSelect']]);
         $this->middleware('permission:servico_create', ['only'=> ['create', 'store']]);
         $this->middleware('permission:servico_show', ['only'=> 'show']);
         $this->middleware('permission:servico_edit', ['only'=> ['edit', 'update']]);
