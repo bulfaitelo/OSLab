@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Visualizar Wiki')
+@section('title', 'Visualizar Checklist')
 
 @section('content_header')
-    <h1><i class="fa-solid fa-list-check "></i> Visualizar Wiki</h1>
+    <h1><i class="fa-solid fa-list-check "></i> Visualizar Checklist</h1>
 @stop
 
 @section('content')
