@@ -1,4 +1,7 @@
 <div>
+
+
+{{--
     {{ $texto}} {{ $descricao }}
     <form wire:submit.prevent="addTexto" method="POST">
         <select wire:model="texto">
@@ -20,5 +23,5 @@
         </tr>
     @endforeach
 
-</table>
+</table> --}}
 </div>

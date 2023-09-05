@@ -40,12 +40,14 @@
                     Serviços
                 </a>
             </li>
+            @if ($os->categoria->checklist_id)
             <li class="nav-item">
                 <a class="nav-link" id="checklist-tab" data-toggle="pill" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
                     <i class="fa-solid fa-list-check "></i>
-                    Checklist
+                    <span>Checklist</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" id="senhas-tab" data-toggle="pill" href="#senhas" role="tab" aria-controls="senhas" aria-selected="false">
                     <i class="fa-solid fa-key"></i>
@@ -72,7 +74,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+            <div class="tab-pane fade" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
                 @livewire('os.detalhes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
@@ -81,9 +83,11 @@
             <div class="tab-pane fade " id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
                 @livewire('os.servico-tab', ['os_id' => $os->id])
             </div>
-            <div class="tab-pane fade" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
-                checklist
+            @if ($os->categoria->checklist_id)
+            <div class="tab-pane fade  active show" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
+                @livewire('os.checklist-tab', ['os_id' => $os->id])
             </div>
+            @endif
             <div class="tab-pane fade" id="senhas" role="tabpanel" aria-labelledby="senhas-tab">
                 senhas
             </div>
@@ -146,6 +150,12 @@
 <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/src/js/os.js"></script>
+
+
+
+<script src="{{ url('') }}/vendor/form-builder/form-render.min.js"></script>
+
+
 {{-- <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script> --}}
 <script>
     $('.decimal').mask('#.##0,00', { reverse: true });
