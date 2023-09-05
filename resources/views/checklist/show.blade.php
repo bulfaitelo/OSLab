@@ -65,18 +65,13 @@
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css"> --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script src="https://formbuilder.online/assets/js/form-render.min.js?"></script>
+<script src="{{ url('') }}/vendor/form-builder/form-render.min.js"></script>
 
 <script>
-
 
 $(document).ready(function() {
     var fbRender = document.getElementById('fb-render');

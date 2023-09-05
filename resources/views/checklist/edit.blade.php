@@ -79,17 +79,12 @@
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css"> --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
-{{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
     @routes
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
+    <script src="{{ url('') }}/vendor/form-builder/jquery-ui.min.js"></script>
+    <script src="{{ url('') }}/vendor/form-builder/form-builder.min.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
