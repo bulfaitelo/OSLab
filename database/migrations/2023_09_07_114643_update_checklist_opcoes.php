@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->foreign('checklist_id','fk_checklist_opcoes_checklists')
             ->references('id')->on('checklists')
-            ->onDelete('cascade');
+            ->cascadeOnDelete();
         });
     }
 

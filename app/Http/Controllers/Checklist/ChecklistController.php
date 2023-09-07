@@ -7,6 +7,7 @@ use App\Http\Requests\Checklist\StoreUpdateChecklistRequest;
 use App\Models\Checklist\Checklist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ChecklistController extends Controller
 {
@@ -43,7 +44,12 @@ class ChecklistController extends Controller
      */
     public function store(StoreUpdateChecklistRequest $request)
     {
-        // dd($request->input());
+        foreach (json_decode($request->checklist) as $key => $value) {
+            $opcoes[$key]['user_id'] = auth()->id();
+            $opcoes[$key]['respondido'] = false;
+            $opcoes[$key]['opcao'] = json_encode($value);
+        }
+        DB::beginTransaction();
         try {
             $checklist = new Checklist();
             $checklist->name = $request->checklist_name;
@@ -52,9 +58,12 @@ class ChecklistController extends Controller
             $checklist->user_id = Auth::id();
             $checklist->checklist = $request->checklist;
             $checklist->save();
+            $checklist->opcoes()->createMany($opcoes);
+            DB::commit();
             return redirect()->route('checklist.index')
             ->with('success', 'Checklist cadastrado com sucesso.');
         } catch (\Throwable $th) {
+            DB::rollBack();
             throw $th;
 
         }

@@ -10,4 +10,10 @@ class Opcoes extends Model
     use HasFactory;
 
     protected $table = "checklist_opcoes";
+
+    protected $fillable = [
+        'user_id',
+        'respondido',
+        'opcao',
+    ];
 }
