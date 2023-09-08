@@ -98,7 +98,7 @@ class ChecklistController extends Controller
             $checklist->checklist = $request->checklist;
             $checklist->save();
             $checklist->opcoes()->delete();
-            $checklist->opcoes()->create($this->getOpcoes($request->checklist));
+            $checklist->opcoes()->createMany($this->getOpcoes($request->checklist));
             DB::commit();
             return redirect()->route('checklist.index')
             ->with('success', 'Checklist Atualizado com sucesso.');
