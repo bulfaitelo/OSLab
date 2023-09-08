@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('contas', function (Blueprint $table) {
             $table->id();
-            $table->char('tipo'); // receita ou despesa
+            $table->char('tipo', 1); // receita ou despesa
             $table->string('name');
             $table->unsignedBigInteger('os_id')->nullable();
             $table->unsignedBigInteger('venda_id')->nullable();
