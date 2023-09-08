@@ -13,7 +13,8 @@ class Opcoes extends Model
 
     protected $fillable = [
         'user_id',
-        'respondido',
+        'name',
         'opcao',
+        'type',
     ];
 }
