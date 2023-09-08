@@ -44,11 +44,7 @@ class ChecklistController extends Controller
      */
     public function store(StoreUpdateChecklistRequest $request)
     {
-        foreach (json_decode($request->checklist) as $key => $value) {
-            $opcoes[$key]['user_id'] = auth()->id();
-            $opcoes[$key]['respondido'] = false;
-            $opcoes[$key]['opcao'] = json_encode($value);
-        }
+
         DB::beginTransaction();
         try {
             $checklist = new Checklist();
@@ -58,7 +54,7 @@ class ChecklistController extends Controller
             $checklist->user_id = Auth::id();
             $checklist->checklist = $request->checklist;
             $checklist->save();
-            $checklist->opcoes()->createMany($opcoes);
+            $checklist->opcoes()->createMany($this->getOpcoes($request->checklist));
             DB::commit();
             return redirect()->route('checklist.index')
             ->with('success', 'Checklist cadastrado com sucesso.');
@@ -93,6 +89,7 @@ class ChecklistController extends Controller
      */
     public function update(StoreUpdateChecklistRequest $request, Checklist $checklist)
     {
+        DB::beginTransaction();
         try {
             $checklist->name = $request->checklist_name;
             $checklist->categoria_id = $request->categoria_id;
@@ -100,6 +97,9 @@ class ChecklistController extends Controller
             $checklist->user_id = Auth::id();
             $checklist->checklist = $request->checklist;
             $checklist->save();
+            $checklist->opcoes()->delete();
+            $checklist->opcoes()->create($this->getOpcoes($request->checklist));
+            DB::commit();
             return redirect()->route('checklist.index')
             ->with('success', 'Checklist Atualizado com sucesso.');
         } catch (\Throwable $th) {
@@ -121,5 +121,14 @@ class ChecklistController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    private function getOpcoes($checklist) : array {
+        foreach (json_decode($checklist) as $key => $value) {
+            $opcoes[$key]['user_id'] = auth()->id();
+            $opcoes[$key]['respondido'] = false;
+            $opcoes[$key]['opcao'] = json_encode($value);
+        }
+        return $opcoes;
     }
 }
