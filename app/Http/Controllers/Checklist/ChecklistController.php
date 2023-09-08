@@ -44,7 +44,6 @@ class ChecklistController extends Controller
      */
     public function store(StoreUpdateChecklistRequest $request)
     {
-
         DB::beginTransaction();
         try {
             $checklist = new Checklist();
@@ -125,8 +124,8 @@ class ChecklistController extends Controller
 
     private function getOpcoes($checklist) : array {
         foreach (json_decode($checklist) as $key => $value) {
+            $opcoes[$key]['name'] = $value->name;
             $opcoes[$key]['user_id'] = auth()->id();
-            $opcoes[$key]['respondido'] = false;
             $opcoes[$key]['opcao'] = json_encode($value);
         }
         return $opcoes;

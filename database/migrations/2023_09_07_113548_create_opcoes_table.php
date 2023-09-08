@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('checklist_id');
-            $table->boolean('respondido')->default(false);
             $table->string('name', 120)->nullable()->index();
             $table->json('opcao')->nullable();
             $table->timestamps();
