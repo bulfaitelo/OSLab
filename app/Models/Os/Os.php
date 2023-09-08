@@ -100,6 +100,18 @@ class Os extends Model
 
 
     /**
+     * Retornar as opções respondidas no checklist da OS
+     *
+     * Retorna retornar caso exista o as opções respondidas no checklist
+     * @return hasMany Checklist
+     **/
+    public function checklist() : HasMany
+    {
+        return $this->hasMany(OsServico::class);
+    }
+
+
+    /**
      * Retorna id e nome do Cliente.
      *
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2

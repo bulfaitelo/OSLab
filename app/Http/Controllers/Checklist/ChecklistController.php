@@ -125,6 +125,7 @@ class ChecklistController extends Controller
     private function getOpcoes($checklist) : array {
         foreach (json_decode($checklist) as $key => $value) {
             $opcoes[$key]['name'] =  (isset($value->name)) ? $value->name : null ;
+            $opcoes[$key]['type'] =  (isset($value->type)) ? $value->type : null ;
             $opcoes[$key]['user_id'] = auth()->id();
             $opcoes[$key]['opcao'] = json_encode($value);
         }
