@@ -2,6 +2,7 @@
 
 namespace App\Models\Os;
 
+use App\Http\Class\Checklist\CreateHtmlChecklist;
 use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\StatusOs;
@@ -107,7 +108,13 @@ class Os extends Model
      **/
     public function checklist() : HasMany
     {
-        return $this->hasMany(OsServico::class);
+        return $this->hasMany(OsChecklist::class);
+    }
+
+
+    public function getHtmlChecklist() {
+        $html = new CreateHtmlChecklist($this->categoria->checklist, $this->checklist);
+        return $html->render();
     }
 
 

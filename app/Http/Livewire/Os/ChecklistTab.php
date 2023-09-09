@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Os;
 use App\Models\Os\Os;
 use Illuminate\Http\Request;
 use Livewire\Component;
-use App\Http\Controllers\Checklist\ChecklistHtmlForm;
+
 
 class ChecklistTab extends Component
 {
@@ -17,11 +17,12 @@ class ChecklistTab extends Component
 
     public function render()
     {
-        $checklist = Os::find($this->os_id)->categoria->checklist;
-        $html = new ChecklistHtmlForm;
+        $os = Os::find($this->os_id);
+        $checklist = $os->categoria->checklist;
+
         return view('livewire.os.checklist-tab', [
+            'os' => $os,
             'checklist'=> $checklist,
-            'html' => $html,
         ]);
     }
 

@@ -5,11 +5,8 @@
         <h4>{{ $checklist->descricao }}</h4>
         <form method="POST"  wire:submit.prevent="create">
 
-            @forelse ($checklist->opcoes as $opcao)
-                {{ $html->render($opcao->name) }} <br>
-            @empty
+            {!! $os->getHtmlChecklist() !!}
 
-            @endforelse
         </form>
     </div>
 
