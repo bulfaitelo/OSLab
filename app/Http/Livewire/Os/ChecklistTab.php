@@ -12,6 +12,7 @@ class ChecklistTab extends Component
 
     public $os_id;
     public $checklistForm;
+    public $form;
 
 
 
@@ -28,6 +29,6 @@ class ChecklistTab extends Component
 
 
     public function create(Request $request): void {
-        dd($request->input());
+        dd($this->form);
     }
 }

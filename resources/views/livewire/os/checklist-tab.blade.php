@@ -6,7 +6,7 @@
         <form method="POST"  wire:submit.prevent="create">
 
             {!! $os->getHtmlChecklist() !!}
-
+        <input type="submit" value="salvar">
         </form>
     </div>
 

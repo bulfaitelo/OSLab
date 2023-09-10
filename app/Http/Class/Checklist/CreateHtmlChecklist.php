@@ -87,14 +87,75 @@ class CreateHtmlChecklist {
      * @return string
      **/
     private function text(object $option) : string {
-        dd($option);
-    // <div class="formbuilder-text form-group field-text-1694297771817-0">
-    //     <label for="text-1694297771817-0" class="formbuilder-text-label">Campo de texto<span class="tooltip-element" tooltip="tesxto de ajuda ">?</span></label>
-    //     <input name="text-1694297771817-0" type="text" value="valor inicial" class="form-control" maxlength="30" placeholder="placeholder aqui " id="text-1694297771817-0" title="tesxto de ajuda ">
-    // </div>
-        return '<'.$option->subtype.$this->setClass($option).'>'.$option->label.'</'.$option->subtype.'>';
+        $html = '<div class="form-group">';
+        $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+        if ($option->required) {
+            $html.='<span class="formbuilder-required">*</span>';
+        }
+        if ($option->description) {
+            $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+        }
+        $html.= '<input wire:model="form.'.$option->name.
+                '" id="'.$option->name.'" '.
+                $this->setClass($option).
+                'type="'.$option->subtype.'"'.
+                $this->setMaxlength($option).
+                $this->setPlaceholder($option).
+                $this->setTitle($option).
+                $this->setRequired($option).
+                ' >';
+        $html.= '</div>';
+    return $html;
     }
 
+    /**
+     * Define e retorna a required para o HTMl
+     *
+     * @param object $object objeto par apegar a required do html
+     * @return string|null
+     **/
+    private function setRequired(object $object) {
+        if (property_exists($object,'required')) {
+            return ' required="required" ';
+        }
+    }
+
+    /**
+     * Define e retorna a title para o HTMl
+     *
+     * @param object $object objeto par apegar a title do html
+     * @return string|null
+     **/
+    private function setTitle(object $object) {
+        if (property_exists($object,'description')) {
+            return ' title="'.$object->description.'" ';
+        }
+    }
+
+
+    /**
+     * Define e retorna a placeholder para o HTMl
+     *
+     * @param object $object objeto par apegar a placeholder do html
+     * @return string|null
+     **/
+    private function setPlaceholder(object $object) {
+        if (property_exists($object,'placeholder')) {
+            return ' placeholder="'.$object->placeholder.'" ';
+        }
+    }
+
+    /**
+     * Define e retorna a maxlength para o HTMl
+     *
+     * @param object $object objeto par apegar a maxlength do html
+     * @return string|null
+     **/
+    private function setMaxlength(object $object) {
+        if (property_exists($object,'maxlength')) {
+            return ' maxlength="'.$object->maxlength.'" ';
+        }
+    }
 
     /**
      * Define e retorna a classe para o HTMl
