@@ -10,7 +10,7 @@ namespace App\Http\Class\Checklist;
 class CreateHtmlChecklist {
 
 
-    private $checklist, $osChecklist;
+    private $checklist, $osChecklist, $html;
 
 /**
  * @param object|null $osChecklist Recebe as respostas  relacionada a Os
@@ -31,13 +31,13 @@ class CreateHtmlChecklist {
      * @return string
      **/
     public function render() {
-        $name = '';
+
         foreach ($this->checklist as $opcao) {
-             dump($this->getHtmlFromOption($opcao));
+           $this->html.= $this->getHtmlFromOption($opcao);
 
         }
+        return $this->html;
 
-        return $name;
     }
 
     /**
@@ -50,11 +50,8 @@ class CreateHtmlChecklist {
 
         if (method_exists($this, $option->type)) {
             return $this->{$option->type}($option);
-        } else {
-            return 'Não exite '.$option->type;
-
-
         }
+        return '<pre> Não exite '.$option->type.'</pre>';
     }
 
     /**
@@ -66,7 +63,49 @@ class CreateHtmlChecklist {
      * @return string
      **/
     private function header(object $option) : string {
-        return 'header function hue';
+        return '<'.$option->subtype.$this->setClass($option).'>'.$option->label.'</'.$option->subtype.'>';
+    }
+
+    /**
+     * paragraph
+     *
+     * cria o HTML do paragraph
+     *
+     * @param object $$option Recebe o objeto do paragraph
+     * @return string
+     **/
+    private function paragraph(object $option) : string {
+        return '<'.$option->subtype.$this->setClass($option).'>'.$option->label.'</'.$option->subtype.'>';
+    }
+
+    /**
+     * text
+     *
+     * cria o HTML do text
+     *
+     * @param object $$option Recebe o objeto do text
+     * @return string
+     **/
+    private function text(object $option) : string {
+        dd($option);
+    // <div class="formbuilder-text form-group field-text-1694297771817-0">
+    //     <label for="text-1694297771817-0" class="formbuilder-text-label">Campo de texto<span class="tooltip-element" tooltip="tesxto de ajuda ">?</span></label>
+    //     <input name="text-1694297771817-0" type="text" value="valor inicial" class="form-control" maxlength="30" placeholder="placeholder aqui " id="text-1694297771817-0" title="tesxto de ajuda ">
+    // </div>
+        return '<'.$option->subtype.$this->setClass($option).'>'.$option->label.'</'.$option->subtype.'>';
+    }
+
+
+    /**
+     * Define e retorna a classe para o HTMl
+     *
+     * @param object $object objeto par apegar a classe do html
+     * @return string|null
+     **/
+    private function setClass(object $object) {
+        if (property_exists($object,'className')) {
+            return ' class="'.$object->className.'" ';
+        }
     }
 
     /**
