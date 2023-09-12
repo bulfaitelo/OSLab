@@ -4,8 +4,9 @@
         <h2>{{ $checklist->name }}</h2>
         <h4>{{ $checklist->descricao }}</h4>
         <form method="POST"  wire:submit.prevent="create">
-
-            {!! $os->getHtmlChecklist() !!}
+            <div class="rendered-form">
+                {!! $os->getHtmlChecklist() !!}
+            </div>
         <input type="submit" value="salvar">
         </form>
     </div>

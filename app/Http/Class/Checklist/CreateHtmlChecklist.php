@@ -48,8 +48,8 @@ class CreateHtmlChecklist {
      */
     private function getHtmlFromOption(object $option) : string {
 
-        if (method_exists($this, $option->type)) {
-            return $this->{$option->type}($option);
+        if (method_exists($this, $this->dashToCamelCase($option->type))) {
+            return $this->{$this->dashToCamelCase($option->type)}($option);
         }
         return '<pre> Não exite '.$option->type.'</pre>';
     }
@@ -210,6 +210,59 @@ class CreateHtmlChecklist {
     }
 
     /**
+     * checkbox-group
+     *
+     * cria o HTML do checkbox-group
+     *
+     * @param object $$option Recebe o objeto do checkbox-group
+     * @return string
+     **/
+    private function checkboxGroup(object $option) : string {
+        // dd($option);
+        $html = '<div class="form-group">';
+            $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+            if ($option->required) {
+                $html.='<span class="formbuilder-required">*</span>';
+            }
+            if (property_exists($option,'description')) {
+                $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+            }
+            $html.='<div class="checkbox-group" >';
+                    foreach ($option->values as $key => $radioValues) {
+                        $html.='<div class="formbuilder-checkbox'.$this->setInline($option).'">';
+                            $html.='<input style="margin: 0 4px 0 0;" '.
+                                'wire:model="form.'.$option->name.'.'.$key.'" '.
+                                'value ="'.$radioValues->value.'"'.
+                                'name="form.'.$option->name.'[]" '.
+                                'id="'.$option->name.'-'.$key.'"'.
+                                $this->setClass($option).
+                                $this->setRequired($option).
+                                // 'aria-required="true"'.
+                                'type="checkbox">';
+                            $html.='<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
+                        $html.='</div>';
+                    }
+
+
+            $html.= '</div>'; // checkbox-group
+        $html.= '</div>'; // form-group
+        return $html;
+
+    }
+
+    /**
+     * Define e retorna a inline para o HTMl
+     *
+     * @param object $object objeto par apegar a inline do html
+     * @return string|null
+     **/
+    private function setInline(object $object) {
+        if (property_exists($object,'inline') && $object->inline == 'true') {
+            return '-inline';
+        }
+    }
+
+    /**
      * Define e retorna a multiple para o HTMl
      *
      * @param object $object objeto par apegar a multiple do html
@@ -278,7 +331,7 @@ class CreateHtmlChecklist {
      * @return string|null
      **/
     private function setRequired(object $object) {
-        if (property_exists($object,'required')) {
+        if (property_exists($object,'required') && $object->required == 'true') {
             return ' required="required" ';
         }
     }
@@ -354,6 +407,19 @@ class CreateHtmlChecklist {
     private function isJson($string) {
         json_decode($string);
         return json_last_error() === JSON_ERROR_NONE;
+    }
+
+    /**
+     * Converte hifen em CamelCase
+     * @param string $string texto par aser convertido
+     * @return string
+     */
+    private function dashToCamelCase($string, $capitalizeFirstCharacter = false): string {
+        $str = str_replace('-', '', ucwords($string, '-'));
+        if (!$capitalizeFirstCharacter) {
+           $str = lcfirst($str);
+        }
+        return $str;
     }
 
 

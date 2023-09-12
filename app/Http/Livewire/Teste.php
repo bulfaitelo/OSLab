@@ -11,7 +11,7 @@ class Teste extends Component
 
     public function render()
     {
-
+        dd($this->dashToCamelCase('text'));
         $collection = FormaPagamento::get();
         return view('livewire.teste', [
             'collection' => $collection,
@@ -26,4 +26,7 @@ class Teste extends Component
         $formaPagamento->descricao = $this->descricao;
         $formaPagamento->save();
     }
+
+
+
 }
