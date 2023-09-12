@@ -118,8 +118,6 @@ class CreateHtmlChecklist {
      * @return string
      **/
     private function number(object $option) : string {
-
-        dd($option);
         $html = '<div class="form-group">';
         $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
@@ -132,13 +130,51 @@ class CreateHtmlChecklist {
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 'type="number"'.
-                $this->setMaxlength($option).
                 $this->setPlaceholder($option).
+                $this->setMax($option).
+                $this->setMin($option).
+                $this->setStep($option).
                 $this->setTitle($option).
                 $this->setRequired($option).
                 ' >';
         $html.= '</div>';
     return $html;
+    }
+
+    /**
+     * Define e retorna a step para o HTMl
+     *
+     * @param object $object objeto par apegar a step do html
+     * @return string|null
+     **/
+    private function setStep(object $object) {
+        if (property_exists($object,'step')) {
+            return ' step="'.$object->step.'" ';
+        }
+    }
+
+    /**
+     * Define e retorna a min para o HTMl
+     *
+     * @param object $object objeto par apegar a min do html
+     * @return string|null
+     **/
+    private function setMin(object $object) {
+        if (property_exists($object,'min')) {
+            return ' min="'.$object->min.'" ';
+        }
+    }
+
+    /**
+     * Define e retorna a max para o HTMl
+     *
+     * @param object $object objeto par apegar a max do html
+     * @return string|null
+     **/
+    private function setMax(object $object) {
+        if (property_exists($object,'max')) {
+            return ' max="'.$object->max.'" ';
+        }
     }
 
     /**
