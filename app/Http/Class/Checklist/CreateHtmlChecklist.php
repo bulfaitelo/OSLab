@@ -92,13 +92,46 @@ class CreateHtmlChecklist {
         if ($option->required) {
             $html.='<span class="formbuilder-required">*</span>';
         }
-        if ($option->description) {
+        if (property_exists($option,'description')) {
             $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
         $html.= '<input wire:model="form.'.$option->name.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 'type="'.$option->subtype.'"'.
+                $this->setMaxlength($option).
+                $this->setPlaceholder($option).
+                $this->setTitle($option).
+                $this->setRequired($option).
+                ' >';
+        $html.= '</div>';
+    return $html;
+    }
+
+
+    /**
+     * number
+     *
+     * cria o HTML do number
+     *
+     * @param object $$option Recebe o objeto do number
+     * @return string
+     **/
+    private function number(object $option) : string {
+
+        dd($option);
+        $html = '<div class="form-group">';
+        $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+        if ($option->required) {
+            $html.='<span class="formbuilder-required">*</span>';
+        }
+        if (property_exists($option,'description')) {
+            $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+        }
+        $html.= '<input wire:model="form.'.$option->name.
+                '" id="'.$option->name.'" '.
+                $this->setClass($option).
+                'type="number"'.
                 $this->setMaxlength($option).
                 $this->setPlaceholder($option).
                 $this->setTitle($option).
