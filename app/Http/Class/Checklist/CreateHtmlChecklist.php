@@ -175,6 +175,54 @@ class CreateHtmlChecklist {
 
 
     /**
+     * select
+     *
+     * cria o HTML do select
+     *
+     * @param object $$option Recebe o objeto do select
+     * @return string
+     **/
+    private function select(object $option) : string {
+        // dd($option);
+        $html = '<div class="form-group">';
+        $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+        if ($option->required) {
+            $html.='<span class="formbuilder-required">*</span>';
+        }
+        if (property_exists($option,'description')) {
+            $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+        }
+        $html.= '<select wire:model="form.'.$option->name.
+                '" id="'.$option->name.'" '.
+                $this->setClass($option).
+                $this->setMaxlength($option).
+                $this->setPlaceholder($option).
+                $this->setTitle($option).
+                $this->setRequired($option).
+                $this->setMultiple($option).
+                ' >';
+                foreach ($option->values as $selectValues) {
+                    $html.='<option value="'.$selectValues->value.'"  >'.$selectValues->label.'</option>';
+                }
+                $html.='</select>';
+        $html.= '</div>';
+        return $html;
+    }
+
+    /**
+     * Define e retorna a multiple para o HTMl
+     *
+     * @param object $object objeto par apegar a multiple do html
+     * @return string|null
+     **/
+    private function setMultiple(object $object) {
+        if (property_exists($object,'multiple')) {
+            return ' multiple="multiple" ';
+        }
+    }
+
+
+    /**
      * Define e retorna a rows para o HTMl
      *
      * @param object $object objeto par apegar a rows do html
