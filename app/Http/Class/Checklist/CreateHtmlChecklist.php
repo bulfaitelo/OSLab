@@ -141,6 +141,52 @@ class CreateHtmlChecklist {
     return $html;
     }
 
+
+    /**
+     * textarea
+     *
+     * cria o HTML do textarea
+     *
+     * @param object $$option Recebe o objeto do textarea
+     * @return string
+     **/
+    private function textarea(object $option) : string {
+        $html = '<div class="form-group">';
+        $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+        if ($option->required) {
+            $html.='<span class="formbuilder-required">*</span>';
+        }
+        if (property_exists($option,'description')) {
+            $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+        }
+        $html.= '<textarea wire:model="form.'.$option->name.
+                '" id="'.$option->name.'" '.
+                $this->setClass($option).
+                'type="'.$option->subtype.'"'.
+                $this->setMaxlength($option).
+                $this->setPlaceholder($option).
+                $this->setTitle($option).
+                $this->setRequired($option).
+                $this->setRows($option).
+                ' ></textarea>';
+        $html.= '</div>';
+        return $html;
+    }
+
+
+    /**
+     * Define e retorna a rows para o HTMl
+     *
+     * @param object $object objeto par apegar a rows do html
+     * @return string|null
+     **/
+    private function setRows(object $object) {
+        if (property_exists($object,'rows')) {
+            return ' rows="'.$object->rows.'" ';
+        }
+    }
+
+
     /**
      * Define e retorna a step para o HTMl
      *
