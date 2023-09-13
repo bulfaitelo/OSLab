@@ -242,8 +242,19 @@ class CreateHtmlChecklist {
                             $html.='<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
                         $html.='</div>';
                     }
-
-
+                    if ($option->other == true) {
+                        $html.='<div class="formbuilder-checkbox'.$this->setInline($option).'">'.
+                            '<input  style="margin: 0 4px 0 0;"'.
+                            'wire:model="form.'.$option->name.'.-other" '.
+                            'id="'.$option->name.'-other"'.
+                            // $this->setClass($option).
+                            'class=" other-option"'.
+                            'type="checkbox">';
+                        $html.='<label for="'.$option->name.'-other" >Outro'.
+                            '<input '.
+                            'wire:model="form.'.$option->name.'.-other-value" '.
+                            'type="text" id="'.$option->name.'-other-value" class="other-val"></label></div>';
+                    }
             $html.= '</div>'; // checkbox-group
         $html.= '</div>'; // form-group
         return $html;
@@ -269,7 +280,7 @@ class CreateHtmlChecklist {
      * @return string|null
      **/
     private function setMultiple(object $object) {
-        if (property_exists($object,'multiple')) {
+        if (property_exists($object,'multiple') && $object->multiple == 'true') {
             return ' multiple="multiple" ';
         }
     }
