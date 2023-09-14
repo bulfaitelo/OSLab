@@ -229,14 +229,14 @@ class CreateHtmlChecklist {
             }
             $html.='<div class="formbuilder-checkbox-group form-group '.$option->name.'" >';
                     foreach ($option->values as $key => $radioValues) {
-                        $html.='<div class="formbuilder-checkbox'.$this->setInline($option).'">';
+                        $html.='<div class="formbuilder-checkbox '.$this->setInline($option).'">';
                             $html.='<input '.
                                 'wire:model="form.'.$option->name.'.'.$key.'" '.
                                 'value ="'.$radioValues->value.'"'.
                                 'name="'.$option->name.'[]" '.
                                 'id="'.$option->name.'-'.$key.'"'.
                                 $this->setClass($option).
-                                $this->setRequired($option).
+                                // $this->setRequired($option).
                                 'aria-required="true"'.
                                 'type="checkbox">';
                             $html.='<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
