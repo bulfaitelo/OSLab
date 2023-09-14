@@ -227,29 +227,81 @@ class CreateHtmlChecklist {
             if (property_exists($option,'description')) {
                 $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
             }
-            $html.='<div class="checkbox-group" >';
+            $html.='<div class="formbuilder-checkbox-group form-group '.$option->name.'" >';
                     foreach ($option->values as $key => $radioValues) {
                         $html.='<div class="formbuilder-checkbox'.$this->setInline($option).'">';
-                            $html.='<input style="margin: 0 4px 0 0;" '.
+                            $html.='<input '.
                                 'wire:model="form.'.$option->name.'.'.$key.'" '.
                                 'value ="'.$radioValues->value.'"'.
-                                'name="form.'.$option->name.'[]" '.
+                                'name="'.$option->name.'[]" '.
                                 'id="'.$option->name.'-'.$key.'"'.
                                 $this->setClass($option).
                                 $this->setRequired($option).
-                                // 'aria-required="true"'.
+                                'aria-required="true"'.
                                 'type="checkbox">';
                             $html.='<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
                         $html.='</div>';
                     }
                     if ($option->other == true) {
                         $html.='<div class="formbuilder-checkbox'.$this->setInline($option).'">'.
-                            '<input  style="margin: 0 4px 0 0;"'.
+                            '<input '.
                             'wire:model="form.'.$option->name.'.-other" '.
                             'id="'.$option->name.'-other"'.
                             // $this->setClass($option).
                             'class=" other-option"'.
                             'type="checkbox">';
+                        $html.='<label for="'.$option->name.'-other" >Outro'.
+                            '<input '.
+                            'wire:model="form.'.$option->name.'.-other-value" '.
+                            'type="text" id="'.$option->name.'-other-value" class="other-val"></label></div>';
+                    }
+            $html.= '</div>'; // checkbox-group
+        $html.= '</div>'; // form-group
+        return $html;
+
+    }
+
+    /**
+     * radio-group
+     *
+     * cria o HTML do radio-group
+     *
+     * @param object $$option Recebe o objeto do radio-group
+     * @return string
+     **/
+    private function radioGroup(object $option) : string {
+        // dd($option);
+        $html = '<div class="form-group">';
+            $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+            if ($option->required) {
+                $html.='<span class="formbuilder-required">*</span>';
+            }
+            if (property_exists($option,'description')) {
+                $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+            }
+            $html.='<div class="radio-group" >';
+                    foreach ($option->values as $key => $radioValues) {
+                        $html.='<div class="formbuilder-radio'.$this->setInline($option).'">';
+                            $html.='<input style="margin: 0 4px 0 0;" '.
+                                'wire:model="form.'.$option->name.'" '.
+                                'value ="'.$radioValues->value.'"'.
+                                'name="form.'.$option->name.'[]" '.
+                                'id="'.$option->name.'-'.$key.'"'.
+                                $this->setClass($option).
+                                $this->setRequired($option).
+                                // 'aria-required="true"'.
+                                'type="radio">';
+                            $html.='<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
+                        $html.='</div>';
+                    }
+                    if ($option->other == true) {
+                        $html.='<div class="formbuilder-radio'.$this->setInline($option).'">'.
+                            '<input  style="margin: 0 4px 0 0;"'.
+                            'wire:model="form.'.$option->name.'.-other" '.
+                            'id="'.$option->name.'-other"'.
+                            // $this->setClass($option).
+                            'class=" other-option"'.
+                            'type="radio">';
                         $html.='<label for="'.$option->name.'-other" >Outro'.
                             '<input '.
                             'wire:model="form.'.$option->name.'.-other-value" '.
