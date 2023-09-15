@@ -23,9 +23,6 @@ return new class extends Migration
                     ->references('id')->on('checklists')
                     ->cascadeOnDelete();
 
-            $table->foreign('name','fk_os_checklists_checklist_opcoes')
-                    ->references('name')->on('checklist_opcoes')
-                    ->cascadeOnDelete();
 
         });
     }
@@ -39,7 +36,6 @@ return new class extends Migration
             $table->dropForeign('fk_os_checklists_os');
             $table->dropForeign('fk_os_checklists_users');
             $table->dropForeign('fk_os_checklists_checklists');
-            $table->dropForeign('fk_os_checklists_checklist_opcoes');
         });
     }
 };

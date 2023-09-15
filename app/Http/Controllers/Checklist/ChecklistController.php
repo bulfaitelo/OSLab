@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Checklist;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Checklist\StoreUpdateChecklistRequest;
 use App\Models\Checklist\Checklist;
-use Illuminate\Http\Request;
+use App\Models\Configuracao\Os\CategoriaOs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -53,7 +53,6 @@ class ChecklistController extends Controller
             $checklist->user_id = Auth::id();
             $checklist->checklist = $request->checklist;
             $checklist->save();
-            $checklist->opcoes()->createMany($this->getOpcoes($request->checklist));
             DB::commit();
             return redirect()->route('checklist.index')
             ->with('success', 'Checklist cadastrado com sucesso.');
@@ -96,8 +95,6 @@ class ChecklistController extends Controller
             $checklist->user_id = Auth::id();
             $checklist->checklist = $request->checklist;
             $checklist->save();
-            $checklist->opcoes()->delete();
-            $checklist->opcoes()->createMany($this->getOpcoes($request->checklist));
             DB::commit();
             return redirect()->route('checklist.index')
             ->with('success', 'Checklist Atualizado com sucesso.');
@@ -113,6 +110,10 @@ class ChecklistController extends Controller
     public function destroy(Checklist $checklist)
     {
         try {
+            if (CategoriaOs::where('checklist_id', $checklist->id)->count() > 0) {
+                return redirect()->route('checklist.index')
+                ->with('warning', 'Checklist está sendo usado em alguma categoria!');
+            }
             $checklist->delete();
             return redirect()->route('checklist.index')
                 ->with('success', 'Checklist excluído com sucesso.');

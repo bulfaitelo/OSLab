@@ -24,7 +24,4 @@ class Checklist extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function opcoes() : HasMany {
-        return $this->hasMany(Opcoes::class);
-    }
 }
