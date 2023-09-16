@@ -29,7 +29,7 @@ class ChecklistTab extends Component
 
 
     public function create(Request $request): void {
-        dd(json_encode($this->form));
+        dd(json_encode($this->form['radio-group-1694520209244-0']));
     }
 
 

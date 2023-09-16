@@ -13,7 +13,7 @@ class CreateHtmlChecklist {
     private $checklist, $osChecklist, $html;
 
 /**
- * @param object|null $osChecklist Recebe as respostas  relacionada a Os
+ * @param object|null $osChecklist Recebe as do ostas  relacionada a Os
  * @param object|null $checklist Recebe o modelo de Checklist com base no OS->categoria->checklist
  **/
     public function __construct($checklist, $osChecklist = null) {
@@ -244,6 +244,7 @@ class CreateHtmlChecklist {
                                 'name="'.$option->name.'[]" '.
                                 'id="'.$option->name.'-'.$key.'"'.
                                 $this->setClass($option).
+                                $this->setChecked($option, $radioValues).
                                 // $this->setRequired($option).
                                 'aria-required="true"'.
                                 'type="checkbox">';
@@ -253,13 +254,14 @@ class CreateHtmlChecklist {
                     if ($option->other == true) {
                         $html.='<div class="formbuilder-checkbox'.$this->setInline($option).'">'.
                             '<input '.
-                            'wire:model.defer="form.'.$option->name.'.-other" '.
+                            // 'wire:model.defer="form.'.$option->name.'.-other" '.
                             'id="'.$option->name.'-other"'.
-                            // $this->setClass($option).
+                            $this->setCheckedOther($option).
                             'class=" other-option"'.
                             'type="checkbox">';
                         $html.='<label for="'.$option->name.'-other" >Outro'.
                             '<input '.
+                            $this->setCheckedOther($option, true).
                             'wire:model.defer="form.'.$option->name.'.-other-value" '.
                             'type="text" id="'.$option->name.'-other-value" class="other-val"></label></div>';
                     }
@@ -279,7 +281,7 @@ class CreateHtmlChecklist {
      **/
     private function radioGroup(object $option) : string {
         // dd($option);
-        $html = '<div class="form-group">';
+        $html = '<div class="formbuilder-radio-group form-group">';
             $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
             if ($option->required) {
                 $html.='<span class="formbuilder-required">*</span>';
@@ -290,11 +292,12 @@ class CreateHtmlChecklist {
             $html.='<div class="radio-group" >';
                     foreach ($option->values as $key => $radioValues) {
                         $html.='<div class="formbuilder-radio'.$this->setInline($option).'">';
-                            $html.='<input style="margin: 0 4px 0 0;" '.
+                            $html.='<input  '.
                                 'wire:model.defer="form.'.$option->name.'" '.
                                 'value ="'.$radioValues->value.'"'.
                                 'name="form.'.$option->name.'[]" '.
                                 'id="'.$option->name.'-'.$key.'"'.
+                                $this->setChecked($option, $radioValues).
                                 $this->setClass($option).
                                 $this->setRequired($option).
                                 // 'aria-required="true"'.
@@ -304,14 +307,17 @@ class CreateHtmlChecklist {
                     }
                     if ($option->other == true) {
                         $html.='<div class="formbuilder-radio'.$this->setInline($option).'">'.
-                            '<input  style="margin: 0 4px 0 0;"'.
-                            'wire:model.defer="form.'.$option->name.'.-other" '.
+                            '<input  '.
                             'id="'.$option->name.'-other"'.
+                            'name="form.'.$option->name.'[]" '.
+                            'value = "on"'.
                             // $this->setClass($option).
+                            $this->setCheckedOtherRadio($option).
                             'class=" other-option"'.
                             'type="radio">';
                         $html.='<label for="'.$option->name.'-other" >Outro'.
                             '<input '.
+                            $this->setCheckedOtherRadio($option, true).
                             'wire:model.defer="form.'.$option->name.'.-other-value" '.
                             'type="text" id="'.$option->name.'-other-value" class="other-val"></label></div>';
                     }
@@ -322,14 +328,71 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define o item selecionado para o HTMl
+     * Define o item selecionado para o HTML
      *
-     * @param object $object objeto po item selecionado do html
-     * @param object $object objeto po item selecionado do html
+     * @param object $object objeto do item selecionado do html
+     * @param object $object objeto da opção selecionado do html
+     * @return string|null
+     **/
+    private function setChecked(object $object, $option) {
+        // dd(json_decode($this->osChecklist->where('name', $object->name)->first()?->value));
+        if($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
+            if(in_array($option->value, $osOption)){
+                // dd($option->value, $osOption);
+                return ' checked="checked" ';
+            }
+        }
+        else {
+            if($option->selected == true){
+                return ' checked="checked" ';
+            }
+        }
+    }
+
+    /**
+     * Define o item selecionado (other) para o HTML
+     *
+     * @param object $object objeto do item selecionado do html
+     * @param object $object objeto da opção selecionado do html
+     * @return string|null
+     **/
+    private function setCheckedOtherRadio(object $object, $value = false) {
+        if($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
+            if(isset($osOption['-other-value'])){
+                if (!$value) {
+                    return ' checked="checked" ';
+                }
+                return 'value= "'.$osOption['-other-value'].'"';
+            }
+        }
+    }
+
+    /**
+     * Define o item selecionado (other) para o HTML
+     *
+     * @param object $object objeto do item selecionado do html
+     * @param object $object objeto da opção selecionado do html
+     * @return string|null
+     **/
+    private function setCheckedOther(object $object, $value = false) {
+        if($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
+            if(isset($osOption['-other-value'])){
+                if (!$value) {
+                    return ' checked="checked" ';
+                }
+                return 'value= "'.$osOption['-other-value'].'"';
+            }
+        }
+    }
+
+    /**
+     * Define o item selecionado para o HTML
+     *
+     * @param object $object objeto do item selecionado do html
+     * @param object $object objeto da opção selecionado do html
      * @return string|null
      **/
     private function setSelected(object $object, $option) {
-
         if($osOption = json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
             if(in_array($option->value, $osOption)){
                 return ' selected="selected" ';
@@ -344,7 +407,7 @@ class CreateHtmlChecklist {
 
 
     /**
-     * Define e retorna a Value para o HTMl
+     * Define e retorna a Value para o HTML
      *
      * @param object $object objeto par apegar a Value do html
      * @return string|null
@@ -362,7 +425,7 @@ class CreateHtmlChecklist {
 
 
     /**
-     * Define e retorna a inline para o HTMl
+     * Define e retorna a inline para o HTML
      *
      * @param object $object objeto par apegar a inline do html
      * @return string|null
@@ -374,7 +437,7 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define e retorna a multiple para o HTMl
+     * Define e retorna a multiple para o HTML
      *
      * @param object $object objeto par apegar a multiple do html
      * @return string|null
@@ -387,7 +450,7 @@ class CreateHtmlChecklist {
 
 
     /**
-     * Define e retorna a rows para o HTMl
+     * Define e retorna a rows para o HTML
      *
      * @param object $object objeto par apegar a rows do html
      * @return string|null
@@ -400,7 +463,7 @@ class CreateHtmlChecklist {
 
 
     /**
-     * Define e retorna a step para o HTMl
+     * Define e retorna a step para o HTML
      *
      * @param object $object objeto par apegar a step do html
      * @return string|null
@@ -412,7 +475,7 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define e retorna a min para o HTMl
+     * Define e retorna a min para o HTML
      *
      * @param object $object objeto par apegar a min do html
      * @return string|null
@@ -424,7 +487,7 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define e retorna a max para o HTMl
+     * Define e retorna a max para o HTML
      *
      * @param object $object objeto par apegar a max do html
      * @return string|null
@@ -436,7 +499,7 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define e retorna a required para o HTMl
+     * Define e retorna a required para o HTML
      *
      * @param object $object objeto par apegar a required do html
      * @return string|null
@@ -448,7 +511,7 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define e retorna a title para o HTMl
+     * Define e retorna a title para o HTML
      *
      * @param object $object objeto par apegar a title do html
      * @return string|null
@@ -461,7 +524,7 @@ class CreateHtmlChecklist {
 
 
     /**
-     * Define e retorna a placeholder para o HTMl
+     * Define e retorna a placeholder para o HTML
      *
      * @param object $object objeto par apegar a placeholder do html
      * @return string|null
@@ -473,7 +536,7 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define e retorna a maxlength para o HTMl
+     * Define e retorna a maxlength para o HTML
      *
      * @param object $object objeto par apegar a maxlength do html
      * @return string|null
@@ -485,7 +548,7 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define e retorna a classe para o HTMl
+     * Define e retorna a classe para o HTML
      *
      * @param object $object objeto par apegar a classe do html
      * @return string|null
