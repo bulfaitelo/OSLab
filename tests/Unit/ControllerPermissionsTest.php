@@ -25,6 +25,7 @@ class ControllerPermissionsTest extends TestCase
             '\App\Http\Controllers\Auth\RegisterController',
             '\App\Http\Controllers\Auth\ResetPasswordController',
             '\App\Http\Controllers\Auth\LoginController',
+            '\App\Http\Controllers\TestController',
         ];
         foreach ($files as $file) {
             $arrayControllers[] = '\App\Http\Controllers\\'.basename(str_replace('/', "\\", $file->getRelativePathName()), '.php');
