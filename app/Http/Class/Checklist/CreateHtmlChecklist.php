@@ -96,7 +96,7 @@ class CreateHtmlChecklist {
         if (property_exists($option,'description')) {
             $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<input wire:model.defer="form.'.$option->name.
+        $html.= '<input name="'.$option->name.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 'type="'.$option->subtype.'"'.
@@ -129,7 +129,7 @@ class CreateHtmlChecklist {
         if (property_exists($option,'description')) {
             $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<input wire:model.defer="form.'.$option->name.
+        $html.= '<input name="'.$option->name.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 'type="number"'.
@@ -163,7 +163,7 @@ class CreateHtmlChecklist {
         if (property_exists($option,'description')) {
             $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<textarea wire:model.defer="form.'.$option->name.
+        $html.= '<textarea name="'.$option->name.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 'type="'.$option->subtype.'"'.
@@ -196,7 +196,7 @@ class CreateHtmlChecklist {
         if (property_exists($option,'description')) {
             $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<select wire:model.defer="form.'.$option->name.
+        $html.= '<select name="'.$option->name.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 $this->setMaxlength($option).
@@ -239,7 +239,7 @@ class CreateHtmlChecklist {
                     foreach ($option->values as $key => $radioValues) {
                         $html.='<div class="formbuilder-checkbox '.$this->setInline($option).'">';
                             $html.='<input '.
-                                'wire:model.defer="form.'.$option->name.'.'.$key.'" '.
+                                // 'wire:model.defer="'.$option->name.'.'.$key.'" '.
                                 'value ="'.$radioValues->value.'"'.
                                 'name="'.$option->name.'[]" '.
                                 'id="'.$option->name.'-'.$key.'"'.
@@ -254,15 +254,18 @@ class CreateHtmlChecklist {
                     if ($option->other == true) {
                         $html.='<div class="formbuilder-checkbox'.$this->setInline($option).'">'.
                             '<input '.
-                            // 'wire:model.defer="form.'.$option->name.'.-other" '.
+                            // 'wire:model.defer="'.$option->name.'.-other" '.
                             'id="'.$option->name.'-other"'.
                             $this->setCheckedOther($option).
+                            'name="'.$option->name.'[]" '.
+
                             'class=" other-option"'.
                             'type="checkbox">';
                         $html.='<label for="'.$option->name.'-other" >Outro'.
                             '<input '.
                             $this->setCheckedOther($option, true).
-                            'wire:model.defer="form.'.$option->name.'.-other-value" '.
+                            'name="'.$option->name.'[-other-value]" '.
+                            // 'wire:model.defer="'.$option->name.'.-other-value" '.
                             'type="text" id="'.$option->name.'-other-value" class="other-val"></label></div>';
                     }
             $html.= '</div>'; // checkbox-group
@@ -293,9 +296,9 @@ class CreateHtmlChecklist {
                     foreach ($option->values as $key => $radioValues) {
                         $html.='<div class="formbuilder-radio'.$this->setInline($option).'">';
                             $html.='<input  '.
-                                'wire:model.defer="form.'.$option->name.'" '.
+                                // 'wire:model.defer="'.$option->name.'" '.
                                 'value ="'.$radioValues->value.'"'.
-                                'name="form.'.$option->name.'[]" '.
+                                'name="'.$option->name.'[]" '.
                                 'id="'.$option->name.'-'.$key.'"'.
                                 $this->setChecked($option, $radioValues).
                                 $this->setClass($option).
@@ -309,7 +312,7 @@ class CreateHtmlChecklist {
                         $html.='<div class="formbuilder-radio'.$this->setInline($option).'">'.
                             '<input  '.
                             'id="'.$option->name.'-other"'.
-                            'name="form.'.$option->name.'[]" '.
+                            'name="'.$option->name.'[]" '.
                             'value = "on"'.
                             // $this->setClass($option).
                             $this->setCheckedOtherRadio($option).
@@ -318,7 +321,8 @@ class CreateHtmlChecklist {
                         $html.='<label for="'.$option->name.'-other" >Outro'.
                             '<input '.
                             $this->setCheckedOtherRadio($option, true).
-                            'wire:model.defer="form.'.$option->name.'.-other-value" '.
+                            // 'wire:model.defer="'.$option->name.'.-other-value" '.
+                            'name="'.$option->name.'[-other-value]" '.
                             'type="text" id="'.$option->name.'-other-value" class="other-val"></label></div>';
                     }
             $html.= '</div>'; // checkbox-group
@@ -413,13 +417,15 @@ class CreateHtmlChecklist {
      * @return string|null
      **/
     private function setValue(object $object) {
-        if (property_exists($object,'value')){
-            $valor = $object->value;
+
+        $osValue = $this->osChecklist->where('name', $object->name)->first()?->value;
+        if (property_exists($object,'value') && ($osValue == null) ){
+            return $object->value;
         }
-        if ($osValue = $this->osChecklist->where('name', $object->name)->first()?->value) {
-            $valor = $osValue;
+        if ($osValue) {
+            return json_decode($osValue);
         }
-        return json_decode($valor);
+
 
     }
 
@@ -595,6 +601,4 @@ class CreateHtmlChecklist {
         }
         return $str;
     }
-
-
 }

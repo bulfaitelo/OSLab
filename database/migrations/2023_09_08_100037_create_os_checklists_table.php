@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('checklist_id');
             $table->string('name', 120)->index();
-            $table->string('value')->nullable();
+            $table->json('value')->nullable();
             $table->timestamps();
         });
     }
