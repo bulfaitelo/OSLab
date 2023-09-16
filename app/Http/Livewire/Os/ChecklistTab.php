@@ -20,7 +20,7 @@ class ChecklistTab extends Component
     {
         $os = Os::find($this->os_id);
         $checklist = $os->categoria->checklist;
-
+        $this->getValuesOsChecklist($os);
         return view('livewire.os.checklist-tab', [
             'os' => $os,
             'checklist'=> $checklist,
@@ -31,4 +31,23 @@ class ChecklistTab extends Component
     public function create(Request $request): void {
         dd($this->form);
     }
+
+
+    private function getValuesOsChecklist($os)  {
+        $checklist = $os->categoria->checklist;
+        $opcoes = json_decode($checklist->checklist);
+        foreach ($opcoes as $key => $value) {
+            if (property_exists($value,'value')) {
+                if ($osValue = $os->checklist()->where('name', $value->name)->first()) {
+                    $this->form[$value->name] = $osValue->resposta;
+                } else {
+                    $this->form[$value->name] = $value->value;
+                }
+            }
+        }
+    }
+
+
+
+
 }
