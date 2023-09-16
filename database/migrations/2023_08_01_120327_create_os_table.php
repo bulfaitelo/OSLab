@@ -28,7 +28,6 @@ return new class extends Migration
             $table->mediumText('defeito')->nullable();
             $table->mediumText('observacoes')->nullable();
             $table->mediumText('laudo')->nullable();
-            $table->json('checklist')->nullable();
             $table->timestamps();
         });
     }
