@@ -23,6 +23,7 @@ use App\Http\Controllers\Os\OsController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\Wiki\WikiController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,9 +46,11 @@ Route::get('/', function () {
 	}
 });
 
-Route::get('/teste', function () {
+Route::get('/live-test', function () {
     return view ('teste');
 })->name('teste');
+
+route::resource('teste', TestController::class);
 
 Auth::routes();
 
