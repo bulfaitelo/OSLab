@@ -29,7 +29,7 @@ class ChecklistTab extends Component
 
 
     public function create(Request $request): void {
-        dd($this->form);
+        dd(json_encode($this->form));
     }
 
 

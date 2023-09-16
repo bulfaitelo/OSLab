@@ -101,7 +101,7 @@ class CreateHtmlChecklist {
                 $this->setClass($option).
                 'type="'.$option->subtype.'"'.
                 $this->setMaxlength($option).
-                $this->setValue($option).
+                ' value="'.$this->setValue($option).'" '.
                 $this->setPlaceholder($option).
                 $this->setTitle($option).
                 $this->setRequired($option).
@@ -120,6 +120,7 @@ class CreateHtmlChecklist {
      * @return string
      **/
     private function number(object $option) : string {
+        // dd($option);
         $html = '<div class="form-group">';
         $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
@@ -133,6 +134,7 @@ class CreateHtmlChecklist {
                 $this->setClass($option).
                 'type="number"'.
                 $this->setPlaceholder($option).
+                ' value="'.$this->setValue($option).'" '.
                 $this->setMax($option).
                 $this->setMin($option).
                 $this->setStep($option).
@@ -170,7 +172,7 @@ class CreateHtmlChecklist {
                 $this->setTitle($option).
                 $this->setRequired($option).
                 $this->setRows($option).
-                ' ></textarea>';
+                ' >'.$this->setValue($option).'</textarea>';
         $html.= '</div>';
         return $html;
     }
@@ -185,7 +187,7 @@ class CreateHtmlChecklist {
      * @return string
      **/
     private function select(object $option) : string {
-        // dd($option);
+
         $html = '<div class="form-group">';
         $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
@@ -204,7 +206,11 @@ class CreateHtmlChecklist {
                 $this->setMultiple($option).
                 ' >';
                 foreach ($option->values as $selectValues) {
-                    $html.='<option value="'.$selectValues->value.'"  >'.$selectValues->label.'</option>';
+                    $html.='<option '.
+                    $this->setSelected($option, $selectValues).
+                    'value="'.$selectValues->value.'"  >'.
+                    $selectValues->label.
+                    '</option>';
                 }
                 $html.='</select>';
         $html.= '</div>';
@@ -316,17 +322,44 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * Define e retorna a inline para o HTMl
+     * Define o item selecionado para o HTMl
      *
-     * @param object $object objeto par apegar a inline do html
+     * @param object $object objeto po item selecionado do html
+     * @param object $object objeto po item selecionado do html
+     * @return string|null
+     **/
+    private function setSelected(object $object, $option) {
+
+        if($osOption = json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
+            if(in_array($option->value, $osOption)){
+                return ' selected="selected" ';
+            }
+        }
+        else {
+            if($option->selected == true){
+                return ' selected="selected" ';
+            }
+        }
+    }
+
+
+    /**
+     * Define e retorna a Value para o HTMl
+     *
+     * @param object $object objeto par apegar a Value do html
      * @return string|null
      **/
     private function setValue(object $object) {
         if (property_exists($object,'value')){
-            $value = $object->value;
+            $valor = $object->value;
         }
-        return ' value="'.$value.'" ';
+        if ($osValue = $this->osChecklist->where('name', $object->name)->first()?->value) {
+            $valor = $osValue;
+        }
+        return json_decode($valor);
+
     }
+
 
     /**
      * Define e retorna a inline para o HTMl
