@@ -9,6 +9,12 @@ class OsChecklist extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'value',
+        'user_id',
+        'checklist_id',
+    ];
 
 
 }

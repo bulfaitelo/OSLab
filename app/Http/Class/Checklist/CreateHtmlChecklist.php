@@ -59,7 +59,7 @@ class CreateHtmlChecklist {
      *
      * cria o HTML do header
      *
-     * @param object $$option Recebe o objeto do header
+     * @param object $option Recebe o objeto do header
      * @return string
      **/
     private function header(object $option) : string {
@@ -71,7 +71,7 @@ class CreateHtmlChecklist {
      *
      * cria o HTML do paragraph
      *
-     * @param object $$option Recebe o objeto do paragraph
+     * @param object $option Recebe o objeto do paragraph
      * @return string
      **/
     private function paragraph(object $option) : string {
@@ -83,7 +83,7 @@ class CreateHtmlChecklist {
      *
      * cria o HTML do text
      *
-     * @param object $$option Recebe o objeto do text
+     * @param object $option Recebe o objeto do text
      * @return string
      **/
     private function text(object $option) : string {
@@ -116,7 +116,7 @@ class CreateHtmlChecklist {
      *
      * cria o HTML do number
      *
-     * @param object $$option Recebe o objeto do number
+     * @param object $option Recebe o objeto do number
      * @return string
      **/
     private function number(object $option) : string {
@@ -151,7 +151,7 @@ class CreateHtmlChecklist {
      *
      * cria o HTML do textarea
      *
-     * @param object $$option Recebe o objeto do textarea
+     * @param object $option Recebe o objeto do textarea
      * @return string
      **/
     private function textarea(object $option) : string {
@@ -183,7 +183,7 @@ class CreateHtmlChecklist {
      *
      * cria o HTML do select
      *
-     * @param object $$option Recebe o objeto do select
+     * @param object $option Recebe o objeto do select
      * @return string
      **/
     private function select(object $option) : string {
@@ -196,7 +196,7 @@ class CreateHtmlChecklist {
         if (property_exists($option,'description')) {
             $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<select name="'.$option->name.
+        $html.= '<select name="'.$option->name.'[]'.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 $this->setMaxlength($option).
@@ -222,7 +222,7 @@ class CreateHtmlChecklist {
      *
      * cria o HTML do checkbox-group
      *
-     * @param object $$option Recebe o objeto do checkbox-group
+     * @param object $option Recebe o objeto do checkbox-group
      * @return string
      **/
     private function checkboxGroup(object $option) : string {
@@ -258,7 +258,7 @@ class CreateHtmlChecklist {
                             'id="'.$option->name.'-other"'.
                             $this->setCheckedOther($option).
                             'name="'.$option->name.'[]" '.
-
+                            'value = "other"'.
                             'class=" other-option"'.
                             'type="checkbox">';
                         $html.='<label for="'.$option->name.'-other" >Outro'.
@@ -279,7 +279,7 @@ class CreateHtmlChecklist {
      *
      * cria o HTML do radio-group
      *
-     * @param object $$option Recebe o objeto do radio-group
+     * @param object $option Recebe o objeto do radio-group
      * @return string
      **/
     private function radioGroup(object $option) : string {
@@ -313,7 +313,7 @@ class CreateHtmlChecklist {
                             '<input  '.
                             'id="'.$option->name.'-other"'.
                             'name="'.$option->name.'[]" '.
-                            'value = "on"'.
+                            'value = "other"'.
                             // $this->setClass($option).
                             $this->setCheckedOtherRadio($option).
                             'class=" other-option"'.
