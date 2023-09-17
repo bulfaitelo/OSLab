@@ -52,7 +52,6 @@ class ChecklistTab extends Component
             throw $th;
         }
 
-
     }
 
     /**
@@ -63,18 +62,12 @@ class ChecklistTab extends Component
      * @return string json tratado.
      */
     private function prepareDataValue($key, $value)  {
-
-
         if ((strpos($key, 'checkbox-group') !== false) || (strpos($key,'radio-group') !== false)) {
             if (!in_array('other', $value)) {
                 unset($value['-other-value']);
             }
         }
         return json_encode($value);
-
     }
-
-
-
 
 }
