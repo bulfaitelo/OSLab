@@ -49,21 +49,15 @@
             </li>
             @endif
             <li class="nav-item">
-                <a class="nav-link" id="senhas-tab" data-toggle="pill" href="#senhas" role="tab" aria-controls="senhas" aria-selected="false">
-                    <i class="fa-solid fa-key"></i>
-                    Senhas
+                <a class="nav-link" id="informacoes-tab" data-toggle="pill" href="#informacoes" role="tab" aria-controls="informacoes" aria-selected="false">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Informações
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="anexos-tab" data-toggle="pill" href="#anexos" role="tab" aria-controls="anexos" aria-selected="false">
                     <i class="fa-solid fa-paperclip"></i>
                     Anexos
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="informacoes-tab" data-toggle="pill" href="#informacoes" role="tab" aria-controls="informacoes" aria-selected="false">
-                    <i class="fa-solid fa-circle-info"></i>
-                    Informações
                 </a>
             </li>
             <li class="nav-item">
@@ -74,7 +68,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+            <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
                 @livewire('os.detalhes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
@@ -84,20 +78,16 @@
                 @livewire('os.servico-tab', ['os_id' => $os->id])
             </div>
             @if ($os->categoria->checklist_id)
-            <div class="tab-pane fade  active show" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
+            <div class="tab-pane fade" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
                 @livewire('os.checklist-tab', ['os_id' => $os->id])
             </div>
             @endif
-            <div class="tab-pane fade" id="senhas" role="tabpanel" aria-labelledby="senhas-tab">
-                senhas
+            <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
+                informacoes
             </div>
             <div class="tab-pane fade" id="anexos" role="tabpanel" aria-labelledby="anexos-tab">
                 anexos
             </div>
-            <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
-                informacoes
-            </div>
-
             <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                 balancete
             </div>
