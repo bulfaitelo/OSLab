@@ -55,12 +55,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="anexos-tab" data-toggle="pill" href="#anexos" role="tab" aria-controls="anexos" aria-selected="false">
-                    <i class="fa-solid fa-paperclip"></i>
-                    Anexos
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" id="balancete-tab" data-toggle="pill" href="#balancete" role="tab" aria-controls="balancete" aria-selected="false">
                     <i class="fas fa-balance-scale"></i>
                     Balancete
@@ -84,9 +78,6 @@
             @endif
             <div class="tab-pane fade active show" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
                 @livewire('os.informacoes-tab', ['os_id' => $os->id])
-            </div>
-            <div class="tab-pane fade" id="anexos" role="tabpanel" aria-labelledby="anexos-tab">
-                anexos
             </div>
             <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                 balancete
@@ -171,4 +162,6 @@
         });
     });
 </script>
+
+
 @stop
