@@ -111,7 +111,24 @@ class Os extends Model
         return $this->hasMany(OsChecklist::class);
     }
 
+    /**
+     * Retornar as informações da OS
+     *
+     * Retorna retora as informações, Senhas e arquivos relacionado A OS
+     * @return hasMany Checklist
+     **/
+    public function informacoes() : HasMany
+    {
+        return $this->hasMany(OsInformacao::class);
+    }
 
+
+    /**
+     * Retorna o HTML referente ao Checklist da OS
+     *
+     * Retorna o Checklist da OS, montado pronto para ser carregado na blade.
+     * @return string html
+     **/
     public function getHtmlChecklist() {
         $html = new CreateHtmlChecklist($this->categoria->checklist, $this->checklist);
         return $html->render();
