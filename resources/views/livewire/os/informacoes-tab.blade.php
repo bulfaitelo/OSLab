@@ -40,7 +40,7 @@
 
 
 <!-- Modal - ANOTACAO  -->
-<div class="modal fade" id="anotacaoModal" tabindex="-1" role="dialog" aria-labelledby="anotacaoModalLabel" aria-hidden="true">
+<div  class="modal fade" id="anotacaoModal" tabindex="-1" role="dialog" aria-labelledby="anotacaoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form method="POST" wire:submit.prevent="anotacaoCreate">
@@ -124,10 +124,8 @@
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        Livewire.on('exibirMensagemFoi', function () {
-            alert('foi');
-        });
-    });
+        window.addEventListener('exibirMensagemFoi', event => {
+            $('#anotacaoModal').modal('hide')
+        })
 </script>
 </div>
