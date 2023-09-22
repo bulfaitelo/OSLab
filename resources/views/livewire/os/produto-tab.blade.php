@@ -121,13 +121,11 @@
             },
         });
     </script>
-    @if (session()->has('clear'))
-        <script>
+    <script>
+        window.addEventListener('clear', event => {
             tomSelectProduto.clear();
             tomSelectProduto.clearOptions();
-        </script>
-    @endif
-    <script>
+        })
         tomSelectProduto.on('change', function (e) {
             $('#produto_quantidade').focus();
         });
