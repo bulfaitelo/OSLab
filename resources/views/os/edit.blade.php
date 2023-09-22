@@ -92,6 +92,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
+<link rel="stylesheet" href="{{ url('') }}/vendor/patternlock/patternlock.css">
 {{-- <link rel="stylesheet" href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" /> --}}
 <style>
     .os {
@@ -130,6 +131,7 @@
 @routes
 <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
+<script src="{{ url('') }}/vendor/patternlock/patternlock.js"></script>
 <script src="{{ url('') }}/src/js/os.js"></script>
 
 
@@ -160,6 +162,16 @@
                 [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
             ]
         });
+    });
+</script>
+<script type="text/javascript">
+    var e = document.getElementById('lock')
+    var p = new PatternLock(e, {
+        onPattern: function(pattern) {
+            this.success()
+            $('#senha_padrao').val(pattern);
+            console.log(pattern)
+        }
     });
 </script>
 
