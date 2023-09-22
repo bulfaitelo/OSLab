@@ -113,18 +113,15 @@
             },
         });
     </script>
-    @if (session()->has('clear'))
-        <script>
+    <script>
+        window.addEventListener('clear', event => {
             tomSelectServico.clear();
             tomSelectServico.clearOptions();
-        </script>
-    @endif
-    <script>
+        })
         tomSelectServico.on('change', function (e) {
             $('#servico_quantidade').focus();
         });
     </script>
-
 </div>
 
 

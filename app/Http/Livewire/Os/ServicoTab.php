@@ -53,8 +53,8 @@ class ServicoTab extends Component
         $this->valor_servico = null;
         $this->servico_id = null;
 
-        // pra apagar o produto
-        session()->flash('clear', 'clear');
+        // Apagando o serviço digitado.
+        $this->dispatchBrowserEvent('clear');
         flasher('Serviço adicionado com sucesso.');
     }
 

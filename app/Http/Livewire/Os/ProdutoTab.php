@@ -63,10 +63,8 @@ class ProdutoTab extends Component
         $this->valor_venda = null;
         $this->produto_id = null;
 
-        // pra apagar o produto
-        // session()->flash('clear', 'clear');
-        $this->dispatchBrowserEvent('clear', ['modalId' => 'anotacaoModal']);
-
+        // Apagando o produto digitado.
+        $this->dispatchBrowserEvent('clear');
         flasher('Produto adicionado com sucesso.');
 
     }
