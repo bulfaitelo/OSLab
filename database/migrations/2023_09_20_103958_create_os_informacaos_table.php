@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('tipo');
             $table->string('descricao')->nullable();
-            $table->string('tipo_informacao');
+            $table->string('tipo_informacao')->nullable();
             $table->string('informacao');
             $table->timestamps();
         });
