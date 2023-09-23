@@ -164,16 +164,6 @@
         });
     });
 </script>
-<script type="text/javascript">
-    var e = document.getElementById('lock')
-    var p = new PatternLock(e, {
-        onPattern: function(pattern) {
-            this.success()
-            $('#senha_padrao').val(pattern);
-            console.log(pattern)
-        }
-    });
-</script>
 
 
 @stop

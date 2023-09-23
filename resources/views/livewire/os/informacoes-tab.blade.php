@@ -81,7 +81,7 @@
 <div class="modal fade" id="senhaModal" tabindex="-1" role="dialog" aria-labelledby="senhaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form method="POST" wire:submit.prevent="senhaCreate()">
+            <form method="POST" wire:submit.prevent="senhaCreate(senha_padrao)">
                 <div class="modal-header">
                     <h5 class="modal-title" id="senhaModalLabel">Senha</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -112,7 +112,7 @@
                                 <input id="senha_texto" type="password" wire:label.defer="senha_texto" class="form-control " placeholder="Senha">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
-                                        <span id="togglePassword" class="fas fa-lock"></span>
+                                        <span id="senha_texto_icone" class="fas fa-lock"></span>
                                     </div>
                                 </div>
                             </div>
@@ -213,9 +213,9 @@
             divPadrao.style.display= "";
       }
     });
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#input_texto');
-    const icone = document.querySelector('#input_texto_icon');
+    const togglePassword = document.querySelector('#senha_texto_icone');
+    const password = document.querySelector('#senha_texto');
+    const icone = document.querySelector('#senha_texto_icone');
 
     togglePassword.addEventListener('click', function (e) {
         // toggle the type attribute
@@ -225,6 +225,33 @@
         this.classList.toggle('fa-lock-open');
     });
 </script>
+<script>
+    let senha_padrao ;
+    document.addEventListener('livewire:load', function () {
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        var e = document.getElementById('lock');
+
+        var p =  new PatternLock(e, {
+            onPattern: async function(pattern) {
+                senha = pattern.toString()
+
+
+                if (senha.length > 3 ) {
+                    this.success();
+                    senha_padrao = pattern;
+                } else {
+                    this.error();
+                    await sleep(1000);
+                    this.clear();
+                }
+
+            }
+        });
+    })
+</script>
+
 @if(count($errors) > 0)
 @php
     flash()->addError('Por favor verifique o formulário', 'Ocorreu um erro!');

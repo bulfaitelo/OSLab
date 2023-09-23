@@ -15,7 +15,7 @@ class InformacoesTab extends Component
     public $posts;
     public $os_id;
     public $descricao_senha;
-    public $tipo_senha;
+    public $tipo_senha = 'texto';
     public $senha_texto;
     public $senha_padrao;
 
@@ -53,9 +53,8 @@ class InformacoesTab extends Component
         }
     }
 
-
-    public function senhaCreate() : void {
-        dd($this->descricao_senha, $this->tipo_senha, $this->senha_texto, $this->senha_texto, $this->senha_padrao);
+    public function senhaCreate($senha_padrao) : void {
+        dd($senha_padrao, $this->descricao_senha, $this->tipo_senha, $this->senha_texto, $this->senha_texto, $this->senha_padrao);
 
     }
 }
