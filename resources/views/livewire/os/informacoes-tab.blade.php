@@ -109,13 +109,14 @@
                         <div class="form-group">
                             <label for="senha_texto">Senha</label>
                             <div class="input-group mb-3">
-                                <input id="senha_texto" type="password" wire:label.defer="senha_texto" class="form-control " placeholder="Senha">
+                                <input id="senha_texto" type="password" wire:model.defer="senha_texto" class="form-control " placeholder="Senha">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span id="senha_texto_icone" class="fas fa-lock"></span>
                                     </div>
                                 </div>
                             </div>
+                            @error('senha_texto') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md-12" style="display: none" id="padrao">
@@ -136,6 +137,7 @@
                                 <circle cx="80" cy="80" r="2"/>
                             </g>
                         </svg>
+                        @error('padrao') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -143,7 +145,7 @@
                         <i class="fa-regular fa-rectangle-xmark"></i>
                         Close
                     </button>
-                    <button type="submit" id="salvechecklist" class="btn btn-sm btn-primary">
+                    <button type="submit" id="salvesenha" class="btn btn-sm btn-primary">
                         <i class="fas fa-save"></i>
                         Salvar
                     </button>
@@ -236,20 +238,40 @@
         var p =  new PatternLock(e, {
             onPattern: async function(pattern) {
                 senha = pattern.toString()
-
-
                 if (senha.length > 3 ) {
                     this.success();
+                    $('#salvesenha').removeAttr("disabled", "disabled");
                     senha_padrao = pattern;
                 } else {
                     this.error();
+                    $('#salvesenha').attr("disabled", "disabled");
+                    senha_padrao = '';
                     await sleep(1000);
                     this.clear();
                 }
-
             }
         });
     })
+</script>
+<script>
+    document.addEventListener('livewire:load', function () {
+        prepareFormSenha()
+        $('#tipo_senha').on("change", function () {
+            prepareFormSenha()
+        })
+
+        function prepareFormSenha() {
+            var tipo_senha = $('#tipo_senha').val();
+            if (tipo_senha == 'texto') {
+                $('#senha_texto').attr("required","required");
+                $('#salvesenha').removeAttr("disabled", "disabled");
+            } else {
+                $('#senha_texto').removeAttr("required");
+                $('#salvesenha').attr("disabled", "disabled");
+
+            }
+        }
+    });
 </script>
 
 @if(count($errors) > 0)

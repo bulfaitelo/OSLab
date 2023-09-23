@@ -30,11 +30,9 @@ class InformacoesTab extends Component
 
     public function anotacaoCreate() : void {
 
-        $validatedData = $this->validate([
+        $this->validate([
             'anotacao' => 'required|',
         ]);
-
-
         DB::beginTransaction();
         try {
             $os = Os::find($this->os_id);
@@ -54,7 +52,39 @@ class InformacoesTab extends Component
     }
 
     public function senhaCreate($senha_padrao) : void {
-        dd($senha_padrao, $this->descricao_senha, $this->tipo_senha, $this->senha_texto, $this->senha_texto, $this->senha_padrao);
+        $this->senha_padrao = $senha_padrao;
+        $this->validate([
+            'tipo_senha' => 'required',
+            'senha_texto' => 'required_if:tipo_senha,texto',
+            'senha_padrao' => 'required_if:tipo_senha,padrao|min:4|nullable'
+        ]);
+        DB::beginTransaction();
+        try {
+            $os = Os::find($this->os_id);
 
+            if ($this->tipo_senha == 'texto') {
+                $infomacao = $this->senha_texto;
+            } else {
+                $infomacao = $this->senha_padrao;
+
+            }
+            $os->informacoes()->create([
+                'user_id'=> auth()->id(),
+                'descricao' => $this->descricao_senha,
+                'tipo'=> 'Senha',
+                'tipo_informacao' => $this->tipo_senha,
+                'informacao'=> $infomacao,
+            ]);
+            DB::commit();
+            $this->descricao_senha = "";
+            $this->senha_texto = "";
+            $this->tipo_senha = "texto";
+
+            $this->dispatchBrowserEvent('closeModal');
+            flasher('Anotação adicionada com sucesso.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 }
