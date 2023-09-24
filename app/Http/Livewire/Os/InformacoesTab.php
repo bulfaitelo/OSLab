@@ -116,6 +116,7 @@ class InformacoesTab extends Component
                 'tipo_informacao' => $this->arquivo->extension(),
                 'informacao'=> $arquivo,
             ]);
+            $this->descricao_arquivo = '';
             $this->dispatchBrowserEvent('closeModal');
             flasher('Arquivo adicionad com sucesso.');
             DB::commit();

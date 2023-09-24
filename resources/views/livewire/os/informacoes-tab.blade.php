@@ -32,15 +32,18 @@
                     <td>{{ $item->created_at->format('H:i - d/m/Y') }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                            <a href="{{ route('wiki.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                            {{-- <a title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a> --}}
+                            <button type="button"  title="Visualizar"  class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-vizualizar_{{ $item->id }}">
+                                <i class="fas fa-eye"></i>
+                            </button>
                             {{-- <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button> --}}
                             @if($confirmacaoDelete===$item->id)
                                 <button wire:click="delete({{ $item->id }})" title="Excluir"
-                                    class="btn btn-left  btn-danger" >
+                                    class="btn btn-left bg-olive " >
                                     <i class="fa-solid fa-check"></i>
                                 </button>
                                 <button wire:click="cancelDelete()" title="Cancelar"
-                                    class="btn btn-left bg-olive" >
+                                    class="btn btn-left bg-maroon" >
                                     <i class="fa-solid fa-ban"></i>
                                 </button>
                             @else
@@ -49,31 +52,40 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             @endif
+                            <a href="{{ route('wiki.show', $item->id) }}" title="Compartilhar" class="btn btn-left bg-lightblue">
+                                <i class="fa-solid fa-share-from-square"></i>
+                            </a>
                         </div>
-                        <td>
                     </td>
-                        {{-- <div wire:ignore.self class="modal fade" id="modal-excluir_{{ $item->id }}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                    <!-- Modal - Vizlualização  -->
+                    <div wire:ignore.self class="modal fade" id="modal-vizualizar_{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-vizualizar_{{ $item->id }}Label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="anotacaoModalLabel">Adicionar Anotação</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true">&times;</span>
                                     </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <p><b>Nome:</b> {{ $item->descricao}}</p>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                            <input wire:click="delete({{$item->id}})" class="btn btn-danger" value="Excluir Informação">
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="anotacao">Anotação</label>
+                                            <textarea type="text" id="anotacao" class="form-control" placeholder="Escreva aqui a anotação">{{$item->informacao}}</textarea>
+
+                                        </div>
                                     </div>
                                 </div>
-                            <!-- /.modal-content -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+                                        <i class="fa-regular fa-rectangle-xmark"></i>
+                                        Fechar
+                                    </button>
+                                </div>
                             </div>
-                            <!-- /.modal-dialog -->
-                        </div> --}}
-                    </td>
+                        </div>
+                    </div>
+                    <!-- FIM Modal - Vizlualização  -->
                 </tr>
             @endforeach
         </tbody>
@@ -219,7 +231,7 @@
                         <label for="arquivo">Arquivo</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" wire:model="arquivo" class="custom-file-input" id="arquivo" accept=".zip, .pdf, .jpg, .png, .bmp" >
+                                <input wire:ignore.self  type="file" wire:model="arquivo" class="custom-file-input" id="arquivo" accept=".zip, .pdf, .jpg, .png, .bmp" >
                                 <label class="custom-file-label" for="arquivo"></label>
                             </div>
                         </div>
@@ -273,7 +285,7 @@
         } else if (selectedOption === 'padrao') {
             divTexto.style.display= "none";
             divPadrao.style.display= "";
-      }
+        }
     });
     const togglePassword = document.querySelector('#senha_texto_icone');
     const password = document.querySelector('#senha_texto');

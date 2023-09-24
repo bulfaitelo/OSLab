@@ -163,9 +163,7 @@
 </script>
 
 <script>
-    $(function () {
-        bsCustomFileInput.init();
-    });
+
 </script>
 
 
