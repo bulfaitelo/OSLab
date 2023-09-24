@@ -17,4 +17,14 @@ class OsInformacao extends Model
         'informacao',
 
     ];
+
+
+    function getTipo() : string {
+        $tipo = [
+            1 => 'Anotação',
+            2=> 'Senha',
+            3=> 'Arquivo',
+        ];
+        return $tipo[$this->tipo];
+    }
 }

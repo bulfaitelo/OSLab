@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Os;
 
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -22,6 +23,7 @@ class InformacoesTab extends Component
     public $senha_padrao;
     public $arquivo;
     public $descricao_arquivo;
+    public $confirmacaoDelete;
 
     public function render()
     {
@@ -42,7 +44,7 @@ class InformacoesTab extends Component
             $os = Os::find($this->os_id);
             $os->informacoes()->create([
                 'user_id' => auth()->id(),
-                'tipo' => 'Anotação',
+                'tipo' => 1,
                 'informacao' => $this->anotacao
             ]);
             DB::commit();
@@ -75,7 +77,7 @@ class InformacoesTab extends Component
             $os->informacoes()->create([
                 'user_id'=> auth()->id(),
                 'descricao' => $this->descricao_senha,
-                'tipo'=> 'Senha',
+                'tipo'=> 2,
                 'tipo_informacao' => $this->tipo_senha,
                 'informacao'=> $infomacao,
             ]);
@@ -110,7 +112,7 @@ class InformacoesTab extends Component
             $os->informacoes()->create([
                 'user_id'=> auth()->id(),
                 'descricao' => $this->descricao_arquivo,
-                'tipo'=> 'Arquivo',
+                'tipo'=> 3,
                 'tipo_informacao' => $this->arquivo->extension(),
                 'informacao'=> $arquivo,
             ]);
@@ -121,8 +123,28 @@ class InformacoesTab extends Component
             DB::rollBack();
             throw $th;
         }
+    }
 
 
+    function confirmDelete($id) : void {
+        $this->confirmacaoDelete = $id;
+    }
 
+    function cancelDelete() : void {
+        $this->confirmacaoDelete = '';
+    }
+
+    function delete($informacao_id) : void {
+        try {
+            $informacao = Os::find($this->os_id)->informacoes->find($informacao_id);
+            if ($informacao->tipo == 3) { // tipo 3 é arquivo
+                $delete = Storage::delete($informacao->informacao);
+            }
+            $informacao->delete();
+            $this->dispatchBrowserEvent('closeModal');
+            flasher('Anotação removida com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

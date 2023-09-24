@@ -19,7 +19,7 @@
         <thead>
             <tr>
             <th>Tipo</th>
-            <th>Observações</th>
+            <th>Descrição</th>
             <th>Cadastro</th>
             <th style="width: 40px"></th>
             </tr>
@@ -27,9 +27,53 @@
         <tbody>
             @foreach ($informacoes as $item)
                 <tr>
-                    <td>{{ $item->tipo }}</td>
-                    <td>{{ Str::limit($item->informacao, '100') }}</td>
+                    <td>{{ $item->getTipo() }}</td>
+                    <td>{{ Str::limit($item->descricao, '100') }}</td>
                     <td>{{ $item->created_at->format('H:i - d/m/Y') }}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{{ route('wiki.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                            {{-- <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button> --}}
+                            @if($confirmacaoDelete===$item->id)
+                                <button wire:click="delete({{ $item->id }})" title="Excluir"
+                                    class="btn btn-left  btn-danger" >
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                                <button wire:click="cancelDelete()" title="Cancelar"
+                                    class="btn btn-left bg-olive" >
+                                    <i class="fa-solid fa-ban"></i>
+                                </button>
+                            @else
+                                <button wire:click="confirmDelete({{ $item->id }})"
+                                    class="btn btn-left  btn-danger" >
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            @endif
+                        </div>
+                        <td>
+                    </td>
+                        {{-- <div wire:ignore.self class="modal fade" id="modal-excluir_{{ $item->id }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <p><b>Nome:</b> {{ $item->descricao}}</p>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                            <input wire:click="delete({{$item->id}})" class="btn btn-danger" value="Excluir Informação">
+                                    </div>
+                                </div>
+                            <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div> --}}
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -62,7 +106,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
                         <i class="fa-regular fa-rectangle-xmark"></i>
-                        Close
+                        Fechar
                     </button>
                     <button type="submit" id="salvechecklist" class="btn btn-sm btn-primary">
                         <i class="fas fa-save"></i>
@@ -141,7 +185,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
                         <i class="fa-regular fa-rectangle-xmark"></i>
-                        Close
+                        Fechar
                     </button>
                     <button type="submit" id="salvesenha" class="btn btn-sm btn-primary">
                         <i class="fas fa-save"></i>
@@ -188,7 +232,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
                         <i class="fa-regular fa-rectangle-xmark"></i>
-                        Close
+                        Fechar
                     </button>
                     <button type="submit" id="salvechecklist" class="btn btn-sm btn-primary">
                         <i class="fas fa-save"></i>

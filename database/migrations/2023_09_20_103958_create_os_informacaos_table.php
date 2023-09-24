@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('os_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('tipo');
+            $table->tinyInteger('tipo'); // 1 anotação, 2 senha, 3 arquivo
             $table->string('descricao')->nullable();
             $table->string('tipo_informacao')->nullable();
             $table->string('informacao');
