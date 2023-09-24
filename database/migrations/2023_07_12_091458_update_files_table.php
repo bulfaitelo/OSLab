@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('files', function (Blueprint $table) {
+        Schema::table('wiki_files', function (Blueprint $table) {
             $table->foreign('wiki_id', 'fk_files_wikis')
             ->references('id')->on('wikis')
             ->onDelete('cascade');
@@ -27,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('files', function (Blueprint $table) {
+        Schema::table('wiki_files', function (Blueprint $table) {
             $table->dropForeign('fk_files_wikis');
             $table->dropForeign('fk_files_users');
         });

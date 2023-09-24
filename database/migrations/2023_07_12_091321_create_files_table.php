@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('wiki_files', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('file');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('wiki_files');
     }
 };

@@ -9,6 +9,8 @@ class Link extends Model
 {
     use HasFactory;
 
+    protected $table = 'wiki_links';
+
     protected $fillable = [
         'name',
         'link',
