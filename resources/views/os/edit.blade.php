@@ -132,12 +132,9 @@
 <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/patternlock/patternlock.js"></script>
-<script src="{{ url('') }}/src/js/os.js"></script>
-
-
-
 <script src="{{ url('') }}/vendor/form-builder/form-render.min.js"></script>
-
+<script src="{{ url('') }}/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="{{ url('') }}/src/js/os.js"></script>
 
 {{-- <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script> --}}
 <script>
@@ -162,6 +159,12 @@
                 [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
             ]
         });
+    });
+</script>
+
+<script>
+    $(function () {
+        bsCustomFileInput.init();
     });
 </script>
 

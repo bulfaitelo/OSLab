@@ -8,9 +8,9 @@
             <i class="fa-solid fa-plus"></i>
             Senha
         </button>
-        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#anexoModal">
+        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#arquivoModal">
             <i class="fa-solid fa-plus"></i>
-            Anexo
+            Arquivo
         </button>
     </div>
     <!-- /.card-header -->
@@ -31,9 +31,7 @@
                     <td>{{ Str::limit($item->informacao, '100') }}</td>
                     <td>{{ $item->created_at->format('H:i - d/m/Y') }}</td>
                 </tr>
-
             @endforeach
-
         </tbody>
         </table>
     </div>
@@ -42,7 +40,7 @@
 
 
 <!-- Modal - ANOTACAO  -->
-<div  class="modal fade" id="anotacaoModal" tabindex="-1" role="dialog" aria-labelledby="anotacaoModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="anotacaoModal" tabindex="-1" role="dialog" aria-labelledby="anotacaoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form method="POST" wire:submit.prevent="anotacaoCreate()">
@@ -78,7 +76,7 @@
 <!-- FIM Modal - ANOTACAO  -->
 
 <!-- Modal - SENHA  -->
-<div class="modal fade" id="senhaModal" tabindex="-1" role="dialog" aria-labelledby="senhaModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="senhaModal" tabindex="-1" role="dialog" aria-labelledby="senhaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form method="POST" wire:submit.prevent="senhaCreate(senha_padrao)">
@@ -105,7 +103,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-12" id="texto">
+                    <div class="col-md-12"  @if ($tipo_senha == 'padrao') style="display: none" @endif id="texto">
                         <div class="form-group">
                             <label for="senha_texto">Senha</label>
                             <div class="input-group mb-3">
@@ -119,7 +117,7 @@
                             @error('senha_texto') <span class="error">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md-12" style="display: none" id="padrao">
+                    <div class="col-md-12" @if ($tipo_senha == 'texto') style="display: none" @endif  id="padrao">
                         <label for="">Padrão</label>
                         <input type="hidden" id="senha_padrao" wire:model.defer="senha_padrao">
                         <svg class="patternlock" id="lock" viewBox="0 0 100 100" >
@@ -137,7 +135,7 @@
                                 <circle cx="80" cy="80" r="2"/>
                             </g>
                         </svg>
-                        @error('padrao') <span class="error">{{ $message }}</span> @enderror
+                        @error('senha_padrao') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -156,40 +154,58 @@
   </div>
 <!-- FIM Modal - SENHA  -->
 
-<!-- Modal - ANEXO  -->
-<div class="modal fade" id="anexoModal" tabindex="-1" role="dialog" aria-labelledby="anexoModalLabel" aria-hidden="true">
+<!-- Modal - ARQUIVO  -->
+<div wire:ignore.self class="modal fade" id="arquivoModal" tabindex="-1" role="dialog" aria-labelledby="arquivoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="anexoModalLabel">Anexo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            @include('adminlte::partials.form-alert')
+            <form method="POST" wire:submit.prevent="arquivoCreate()">
+                <div class="modal-header">
+                <h5 class="modal-title" id="arquivoModalLabel">Anexo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="descricao_arquivo">Descricao</label>
+                        <input type="text" wire:model.defer="descricao_arquivo" id="descricao_arquivo" class="form-control" placeholder="Descrição ">
+                        @error('descricao_arquivo') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="arquivo">Arquivo</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" wire:model="arquivo" class="custom-file-input" id="arquivo" accept=".zip, .pdf, .jpg, .png, .bmp" >
+                                <label class="custom-file-label" for="arquivo"></label>
+                            </div>
+                        </div>
 
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
-                <i class="fa-regular fa-rectangle-xmark"></i>
-                Close
-            </button>
-            <button type="submit" id="salvechecklist" class="btn btn-sm btn-primary">
-                <i class="fas fa-save"></i>
-                Salvar
-            </button>
-        </div>
+                        @error('arquivo') <span class="error">{{ $message }}</span> <br> @enderror
+
+                        <i>Extenções permitidas: .zip, .pdf, .jpg, .png, .bmp, tamanho maximo 5mb</i>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+                        <i class="fa-regular fa-rectangle-xmark"></i>
+                        Close
+                    </button>
+                    <button type="submit" id="salvechecklist" class="btn btn-sm btn-primary">
+                        <i class="fas fa-save"></i>
+                        Salvar
+                    </button>
+                </div>
+            </form>
       </div>
     </div>
   </div>
-<!-- FIM Modal - ANEXO  -->
+<!-- FIM Modal - ARQUIVO  -->
 
-@if(count($errors) > 0)
+{{-- @if(count($errors) > 0)
 <script>
     $('.modal').modal('hide');
 </script>
-@endif
+@endif --}}
 <script>
     window.addEventListener('closeModal', event => {
         $('.modal').modal('hide');

@@ -5,11 +5,13 @@ namespace App\Http\Livewire\Os;
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 // use LivewireUI\Modal\ModalComponent;
 
 class InformacoesTab extends Component
 {
+    use WithFileUploads;
 
     public $anotacao;
     public $posts;
@@ -18,6 +20,8 @@ class InformacoesTab extends Component
     public $tipo_senha = 'texto';
     public $senha_texto;
     public $senha_padrao;
+    public $arquivo;
+    public $descricao_arquivo;
 
     public function render()
     {
@@ -81,10 +85,44 @@ class InformacoesTab extends Component
             $this->tipo_senha = "texto";
 
             $this->dispatchBrowserEvent('closeModal');
-            flasher('Anotação adicionada com sucesso.');
+            flasher('Senha adicionada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
+    }
+
+    function updatedArquivo()  {
+        $this->validate([
+            'arquivo' => 'required|max:5120|mimes:zip,pdf,jpg,png,jpeg,bmp',
+        ]);
+    }
+
+    function arquivoCreate() : void {
+        $this->validate([
+            'arquivo' => 'required|max:5120|mimes:zip,pdf,jpg,png,jpeg,bmp',
+        ]);
+        $arquivo = $this->arquivo->store('os/'.$this->os_id);
+
+        DB::beginTransaction();
+        try {
+            $os = Os::find($this->os_id);
+            $os->informacoes()->create([
+                'user_id'=> auth()->id(),
+                'descricao' => $this->descricao_arquivo,
+                'tipo'=> 'Arquivo',
+                'tipo_informacao' => $this->arquivo->extension(),
+                'informacao'=> $arquivo,
+            ]);
+            $this->dispatchBrowserEvent('closeModal');
+            flasher('Arquivo adicionad com sucesso.');
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+
+
+
     }
 }
