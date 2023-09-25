@@ -5,6 +5,8 @@ namespace App\Models\Os;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use function PHPUnit\Framework\returnSelf;
+
 class OsInformacao extends Model
 {
     use HasFactory;
@@ -50,5 +52,9 @@ class OsInformacao extends Model
     public function url()
     {
         return asset('storage/'.$this->informacao);
+    }
+
+    public function urlShare() : string {
+        return route('os.public.edit', $this->uuid);
     }
 }

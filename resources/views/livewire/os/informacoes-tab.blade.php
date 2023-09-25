@@ -58,9 +58,9 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             @endif
-                            <a href="" title="Compartilhar" class="btn btn-left bg-lightblue">
+                            <button type="button"  title="Compartilhar"  class="btn btn-block bg-lightblue" data-toggle="modal" data-target="#modal-compartilhar_{{ $item->id }}" >
                                 <i class="fa-solid fa-share-from-square"></i>
-                            </a>
+                            </button>
                         </div>
                     </td>
                     <!-- Modal - Vizlualização  -->
@@ -170,6 +170,57 @@
                         </div>
                     </div>
                     <!-- FIM Modal - Vizlualização  -->
+                    <!-- Modal - Compartilhar  -->
+                    <div wire:ignore.self class="modal fade" id="modal-compartilhar_{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-compartilhar_{{ $item->id }}Label" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="anotacaoModalLabel">Compartilhar {{ Str::limit($item->getDescricao(), '100') }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12">
+                                        <button type="button"  class="btn btn-sm btn-success" onclick="copiar({{$item->id}});" >
+                                            <i class="fa-solid fa-paperclip"></i>
+                                            Copiar
+                                        </button>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row mb-3">
+                                            <input type="text" id="url_{{$item->id}}" class="form-control form-control-border" value="{{$item->urlShare()}}">
+                                        </div>
+                                        @if (!$item->uuid)
+                                            <button type="button" wire:click="createShareUrl({{$item->id}})" class="btn btn-sm btn-primary" >
+                                                <i class="fa-solid fa-share-nodes"></i>
+                                                Gerar URL
+                                            </button>
+                                        @else
+                                            <button type="button" wire:click="createShareUrl({{$item->id}})" class="btn btn-sm btn-primary" >
+                                                <i class="fa-solid fa-retweet"></i>
+                                                Atualizar URL
+                                            </button>
+
+                                        @endif
+                                        @if ($item->uuid)
+                                            <button type="button" wire:click="deleteShareUrl({{$item->id}})" class="btn btn-sm btn-danger" >
+                                                <i class="fa-solid fa-share-nodes"></i>
+                                                Apagar URL
+                                            </button>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+                                        <i class="fa-regular fa-rectangle-xmark"></i>
+                                        Fechar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIM Modal - Compartilhar  -->
                 </tr>
             @endforeach
         </tbody>
@@ -378,6 +429,13 @@
         // toggle the eye / eye slash icon
         this.classList.toggle('fa-lock-open');
     });
+
+    function copiar(id) {
+        let textoCopiado = document.getElementById("url_"+id);
+        textoCopiado.select();
+        textoCopiado.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+    }
 </script>
 <script>
     let senha_padrao ;
@@ -403,6 +461,8 @@
                 }
             }
         });
+
+
     })
 </script>
 <script>

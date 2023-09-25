@@ -18,7 +18,8 @@ return new class extends Migration
             $table->tinyInteger('tipo'); // 1 anotação, 2 senha, 3 arquivo
             $table->string('descricao')->nullable();
             $table->string('tipo_informacao')->nullable();
-            $table->string('informacao');
+            $table->string('informacao')->nullable();
+            $table->uuid('uuid')->nullable();
             $table->timestamps();
         });
     }

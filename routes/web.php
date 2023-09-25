@@ -20,6 +20,7 @@ use App\Http\Controllers\Financeiro\DespesaPagamentoController;
 use App\Http\Controllers\Financeiro\ReceitaController;
 use App\Http\Controllers\Financeiro\ReceitaPagamentoController;
 use App\Http\Controllers\Os\OsController;
+use App\Http\Controllers\Os\OsPublicController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
@@ -128,6 +129,9 @@ Route::group(['middleware'=> 'auth'], function() {
 
     });
 });
+
+
+Route::get('public/os/informacao/{uuid}', [OsPublicController::class,'edit'])->name('os.public.edit');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

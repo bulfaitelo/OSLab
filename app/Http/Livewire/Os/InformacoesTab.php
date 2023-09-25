@@ -101,7 +101,7 @@ class InformacoesTab extends Component
     /**
      * Pré validação do arquivo
      */
-    function updatedArquivo()  {
+    public function updatedArquivo()  {
         $this->validate([
             'arquivo' => 'required|max:5120|mimes:zip,pdf,jpg,png,jpeg,bmp',
         ]);
@@ -139,7 +139,7 @@ class InformacoesTab extends Component
     /**
      * Download do arquivo
      */
-    function getFile($id) {
+    public function getFile($id) {
         $arquivo = Os::find($this->os_id)
                     ->informacoes
                     ->where('tipo', 3)
@@ -150,14 +150,14 @@ class InformacoesTab extends Component
     /**
      * Exibe botão, para excluir item
      */
-    function confirmDelete($id) : void {
+    public function confirmDelete($id) : void {
         $this->confirmacaoDelete = $id;
     }
 
     /**
      * Cancela exibição do botão de excluir
      */
-    function cancelDelete() : void {
+    public function cancelDelete() : void {
         $this->confirmacaoDelete = '';
     }
 
@@ -180,7 +180,7 @@ class InformacoesTab extends Component
     /**
      * Deleta informação e caso exista arquivo o exclui também
      */
-    function delete($informacao_id) : void {
+    public function delete($informacao_id) : void {
         try {
             $informacao = Os::find($this->os_id)->informacoes->find($informacao_id);
             if ($informacao->tipo == 3) { // tipo 3 é arquivo
@@ -194,6 +194,30 @@ class InformacoesTab extends Component
         }
     }
 
+
+    /**
+     * Cria a uuid para compartilhar item
+     *
+     * @param int $id id da informacao
+     * @return void
+     **/
+    public function createShareUrl(int $id) : void {
+        $informacao = Os::find($this->os_id)->informacoes->find($id);
+        $informacao->uuid = \Str::uuid();
+        $informacao->save();
+    }
+
+    /**
+     * delete a uuid para do item
+     *
+     * @param int $id id da informacao
+     * @return void
+     **/
+    public function deleteShareUrl(int $id) : void {
+        $informacao = Os::find($this->os_id)->informacoes->find($id);
+        $informacao->uuid = null;
+        $informacao->save();
+    }
 
      /**
      * Cria o nome do arquivo enviado
