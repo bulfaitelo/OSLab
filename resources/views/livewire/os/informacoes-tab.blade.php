@@ -31,10 +31,13 @@
                     <td>{{ Str::limit($item->getDescricao(), '100') }}</td>
                     <td>{{ $item->created_at->format('H:i - d/m/Y') }}</td>
                     <td>
-                        <div class="btn-group btn-group-sm">
+                        <div class="btn-group btn-group-sm float-right">
+                            @if ($item->tipo == 3)
                             <button type="button" class="btn btn-sm btn-primary" wire:click="getFile({{$item->id}})">
                                 <i class="fa-solid fa-download"></i>
                             </button>
+
+                            @endif
                             {{-- <a title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a> --}}
                             <button type="button"  title="Visualizar"  class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-vizualizar_{{ $item->id }}" onclick="setPadrao('{{$item->id}}', '{{$item->tipo_informacao}}', '{{$item->informacao}}')" >
                                 <i class="fas fa-eye"></i>
