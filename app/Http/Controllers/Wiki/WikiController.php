@@ -207,7 +207,7 @@ class WikiController extends Controller
     public function fileCreate(Wiki $wiki, StoreFileRequest $request)
     {
         try {
-            $fileName = $this->createFileName($request);
+            $fileName = $this->createFileName($request->arquivo_import);
             $file = new WikiFile();
             $file->name = $request->name_file;
             $file->wiki_id = $wiki->id;
@@ -275,18 +275,17 @@ class WikiController extends Controller
     }
 
 
-    /**
-     * undocumented function summary
+     /**
+     * Cria o nome do arquivo enviado
      *
-     * Undocumented function long description
+     * Cria o nome do arquivo de forma que remova caracteres especiais e adiciona um uuid curto.
      *
-     * @param Type $var Description
-     * @return type
-     * @throws conditon
+     * @param File $arquivo
+     * @return string $fileName
      **/
-    private function createFileName($request)
+    private function createFileName($file)
     {
-        $fileName = $this->removeSpecialChars($request->arquivo_import->getClientOriginalName()).'_'.$this->generateRandomLetters(7);;
+        $fileName = $this->removeSpecialChars($file->getClientOriginalName()).'_'.$this->generateRandomLetters(7);;
         return $fileName;
     }
 
