@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Os;
 
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -143,7 +143,7 @@ class InformacoesTab extends Component
                     ->informacoes
                     ->where('tipo', 3)
                     ->find($id);
-        return Storage::disk('public')->download($arquivo->informacao);
+        return \Storage::disk('public')->download($arquivo->informacao);
     }
 
     /**
@@ -167,7 +167,7 @@ class InformacoesTab extends Component
         try {
             $informacao = Os::find($this->os_id)->informacoes->find($informacao_id);
             if ($informacao->tipo == 3) { // tipo 3 é arquivo
-                $delete = Storage::delete($informacao->informacao);
+                $delete = \Storage::delete($informacao->informacao);
             }
             $informacao->delete();
             $this->dispatchBrowserEvent('closeModal');
