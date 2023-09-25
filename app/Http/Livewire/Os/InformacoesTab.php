@@ -167,7 +167,7 @@ class InformacoesTab extends Component
         try {
             $informacao = Os::find($this->os_id)->informacoes->find($informacao_id);
             if ($informacao->tipo == 3) { // tipo 3 é arquivo
-                $delete = \Storage::delete($informacao->informacao);
+                $delete = \Storage::disk('public')->delete($informacao->informacao);
             }
             $informacao->delete();
             $this->dispatchBrowserEvent('closeModal');
