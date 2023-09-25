@@ -22,6 +22,7 @@ class InformacoesTab extends Component
     public $arquivo;
     public $descricao_arquivo;
     public $confirmacaoDelete;
+    public $checkPass;
 
     public function render()
     {
@@ -158,6 +159,22 @@ class InformacoesTab extends Component
      */
     function cancelDelete() : void {
         $this->confirmacaoDelete = '';
+    }
+
+    /**
+     * undocumented function summary
+     *
+     * Undocumented function long description
+     *
+     * @param int $id ID
+     * @return void
+     **/
+    public function showPass($id) {
+        if ($this->checkPass == $id) {
+            $this->checkPass = '';
+        } else {
+            $this->checkPass = $id;
+        }
     }
 
     /**

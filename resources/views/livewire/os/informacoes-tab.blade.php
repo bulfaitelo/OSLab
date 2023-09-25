@@ -58,7 +58,7 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             @endif
-                            <a href="{{ route('wiki.show', $item->id) }}" title="Compartilhar" class="btn btn-left bg-lightblue">
+                            <a href="" title="Compartilhar" class="btn btn-left bg-lightblue">
                                 <i class="fa-solid fa-share-from-square"></i>
                             </a>
                         </div>
@@ -87,7 +87,6 @@
                                         <div class="form-group">
                                             <label for="descricao_senha">Descricao</label>
                                             <input type="text" value="{{$item->descricao}}" disabled id="descricao_senha" class="form-control" placeholder="Descrição ">
-                                            @error('descricao_senha') <span class="error">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -100,10 +99,20 @@
                                         <div class="form-group">
                                             <label for="senha_texto">Senha</label>
                                             <div class="input-group mb-3">
-                                                <input id="senha_texto" value="{{$item->informacao}}" type="password" class="form-control" disabled placeholder="Senha">
+                                                @if ($checkPass === $item->id)
+                                                    <input value="{{$item->informacao}}" type="text" class="form-control" disabled placeholder="Senha">
+                                                @else
+                                                    <input value="nao tem nada aui não" type="password" class="form-control" disabled placeholder="Senha">
+                                                @endif
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">
-                                                        <span id="senha_texto_icone" class="fas fa-lock"></span>
+                                                        <span wire:click="showPass({{$item->id}})"
+                                                            @class([
+                                                                'fas fa-lock' => ($checkPass != $item->id),
+                                                                'fas fa-lock-open' => ($checkPass === $item->id)
+                                                                ])
+                                                             >
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -362,6 +371,7 @@
     const icone = document.querySelector('#senha_texto_icone');
 
     togglePassword.addEventListener('click', function (e) {
+        console.log(togglePassword);
         // toggle the type attribute
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
