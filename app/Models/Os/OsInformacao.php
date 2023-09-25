@@ -18,7 +18,11 @@ class OsInformacao extends Model
 
     ];
 
-
+    /**
+     * Retorna o tipo com base no id
+     *
+     * @return string Tipo
+     */
     function getTipo() : string {
         $tipo = [
             1 => 'Anotação',
@@ -26,5 +30,25 @@ class OsInformacao extends Model
             3=> 'Arquivo',
         ];
         return $tipo[$this->tipo];
+    }
+
+    /**
+     * trata o retorno da descrição
+     *
+     * @return string Descrição
+     */
+    function getDescricao()  {
+        if ($this->tipo == 1) {
+            return $this->informacao;
+        }
+        if (($this->tipo == 3) && (!$this->descricao) ) {
+            return explode('/',$this->informacao)[2];
+        }
+        return $this->descricao;
+    }
+
+    public function url()
+    {
+        return asset('storage/'.$this->informacao);
     }
 }

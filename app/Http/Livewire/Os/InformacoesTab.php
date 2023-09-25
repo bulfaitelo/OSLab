@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-// use LivewireUI\Modal\ModalComponent;
-
 class InformacoesTab extends Component
 {
     use WithFileUploads;
@@ -33,7 +31,9 @@ class InformacoesTab extends Component
         ]);
     }
 
-
+    /**
+     * Cria uma nova anotação
+     */
     public function anotacaoCreate() : void {
 
         $this->validate([
@@ -57,6 +57,9 @@ class InformacoesTab extends Component
         }
     }
 
+    /**
+     * Cria uma nova senha (texto ou padrão)
+     */
     public function senhaCreate($senha_padrao) : void {
         $this->senha_padrao = $senha_padrao;
         $this->validate([
@@ -94,18 +97,24 @@ class InformacoesTab extends Component
         }
     }
 
+    /**
+     * Pré validação do arquivo
+     */
     function updatedArquivo()  {
         $this->validate([
             'arquivo' => 'required|max:5120|mimes:zip,pdf,jpg,png,jpeg,bmp',
         ]);
     }
 
-    function arquivoCreate() : void {
+    /**
+     * Cria um novo arquivo.
+     */
+    public function arquivoCreate() : void {
         $this->validate([
             'arquivo' => 'required|max:5120|mimes:zip,pdf,jpg,png,jpeg,bmp',
         ]);
-        $arquivo = $this->arquivo->store('os/'.$this->os_id);
 
+        $arquivo = $this->arquivo->storeAs('os/'.$this->os_id, $this->createFileName($this->arquivo), 'public');
         DB::beginTransaction();
         try {
             $os = Os::find($this->os_id);
@@ -126,15 +135,34 @@ class InformacoesTab extends Component
         }
     }
 
+    /**
+     * Download do arquivo
+     */
+    function getFile($id) {
+        $arquivo = Os::find($this->os_id)
+                    ->informacoes
+                    ->where('tipo', 3)
+                    ->find($id);
+        return Storage::disk('public')->download($arquivo->informacao);
+    }
 
+    /**
+     * Exibe botão, para excluir item
+     */
     function confirmDelete($id) : void {
         $this->confirmacaoDelete = $id;
     }
 
+    /**
+     * Cancela exibição do botão de excluir
+     */
     function cancelDelete() : void {
         $this->confirmacaoDelete = '';
     }
 
+    /**
+     * Deleta informação e caso exista arquivo o exclui também
+     */
     function delete($informacao_id) : void {
         try {
             $informacao = Os::find($this->os_id)->informacoes->find($informacao_id);
@@ -148,4 +176,53 @@ class InformacoesTab extends Component
             throw $th;
         }
     }
+
+
+     /**
+     * Cria o nome do arquivo enviado
+     *
+     * Cria o nome do arquivo de forma que remova caracteres especiais e adiciona um uuid curto.
+     *
+     * @param File $arquivo
+     * @return string $fileName
+     **/
+    private function createFileName($arquivo)
+    {
+        $fileName = $this->removeSpecialChars($arquivo->getClientOriginalName()).'_'.$this->generateRandomLetters(7).'.'.$arquivo->extension();
+        return $fileName;
+    }
+
+    /**
+     * Gera letras aleatórias para upload de arquivos.
+     *
+     * @param Integer $length Tamanho do uuid
+     * @return String uuid
+     **/
+    private function generateRandomLetters($length) {
+        $random = '';
+        for ($i = 0; $i < $length; $i++) {
+            $random .= chr(rand(ord('a'), ord('z')));
+        }
+        return $random;
+    }
+
+    /**
+     * Tratando caracteres par remover possíveis caracteres inválidos.
+     *
+     * @param String $str
+     * @return String
+     **/
+    private function removeSpecialChars($str) {
+        $str = preg_replace('/[áàãâä]/ui', 'a', $str);
+        $str = preg_replace('/[éèêë]/ui', 'e', $str);
+        $str = preg_replace('/[íìîï]/ui', 'i', $str);
+        $str = preg_replace('/[óòõôö]/ui', 'o', $str);
+        $str = preg_replace('/[úùûü]/ui', 'u', $str);
+        $str = preg_replace('/[ç]/ui', 'c', $str);
+        // $str = preg_replace('/[,(),;:|!"#$%&/=?~^><ªº-]/', '_', $str);
+        $str = preg_replace('/[^a-z0-9]/i', '_', $str);
+        $str = preg_replace('/_+/', '_', $str); // ideia do Bacco :)
+        return $str;
+    }
+
 }

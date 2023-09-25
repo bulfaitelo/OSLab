@@ -28,12 +28,12 @@
             @foreach ($informacoes as $item)
                 <tr>
                     <td>{{ $item->getTipo() }}</td>
-                    <td>{{ Str::limit($item->descricao, '100') }}</td>
+                    <td>{{ Str::limit($item->getDescricao(), '100') }}</td>
                     <td>{{ $item->created_at->format('H:i - d/m/Y') }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
                             {{-- <a title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a> --}}
-                            <button type="button"  title="Visualizar"  class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-vizualizar_{{ $item->id }}">
+                            <button type="button"  title="Visualizar"  class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-vizualizar_{{ $item->id }}" onclick="setPadrao('{{$item->id}}', '{{$item->tipo_informacao}}', '{{$item->informacao}}')" >
                                 <i class="fas fa-eye"></i>
                             </button>
                             {{-- <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button> --}}
@@ -62,19 +62,88 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="anotacaoModalLabel">Adicionar Anotação</h5>
+                                    <h5 class="modal-title" id="anotacaoModalLabel">Vizualizar {{ $item->getTipo() }}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                @if ($item->tipo == 1)
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="anotacao">Anotação</label>
-                                            <textarea type="text" id="anotacao" class="form-control" placeholder="Escreva aqui a anotação">{{$item->informacao}}</textarea>
-
+                                            <textarea type="text" disabled id="anotacao" class="form-control" placeholder="Escreva aqui a anotação">{{$item->informacao}}</textarea>
                                         </div>
                                     </div>
+                                @endif
+                                @if ($item->tipo == 2)
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="descricao_senha">Descricao</label>
+                                            <input type="text" value="{{$item->descricao}}" disabled id="descricao_senha" class="form-control" placeholder="Descrição ">
+                                            @error('descricao_senha') <span class="error">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="tipo_senha">Tipo de senha</label>
+                                            {!! html()->select('', ['text'=> 'Texto', 'padrao'=> 'Padrão'], $item->tipo_informacao)->class('form-control')->disabled() !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12"  @if ($item->tipo_informacao == 'padrao') style="display: none" @endif >
+                                        <div class="form-group">
+                                            <label for="senha_texto">Senha</label>
+                                            <div class="input-group mb-3">
+                                                <input id="senha_texto" value="{{$item->informacao}}" type="password" class="form-control" disabled placeholder="Senha">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text">
+                                                        <span id="senha_texto_icone" class="fas fa-lock"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" @if ($item->tipo_informacao == 'texto') style="display: none" @endif >
+                                        <label for="">Padrão</label>
+                                        <svg class="patternlock" id="lock_view_{{$item->id}}" viewBox="0 0 100 100" >
+                                            <g class="lock-actives"></g>
+                                            <g class="lock-lines"></g>
+                                            <g class="lock-dots">
+                                                <circle cx="20" cy="20" r="2"/>
+                                                <circle cx="50" cy="20" r="2"/>
+                                                <circle cx="80" cy="20" r="2"/>
+                                                <circle cx="20" cy="50" r="2"/>
+                                                <circle cx="50" cy="50" r="2"/>
+                                                <circle cx="80" cy="50" r="2"/>
+                                                <circle cx="20" cy="80" r="2"/>
+                                                <circle cx="50" cy="80" r="2"/>
+                                                <circle cx="80" cy="80" r="2"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                @endif
+                                @if ($item->tipo == 3)
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="descricao_senha">Descricao</label>
+                                            <input type="text" value="{{$item->descricao}}" disabled id="descricao_senha" class="form-control" placeholder="Descrição ">
+                                            @error('descricao_senha') <span class="error">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
+                                    @if (in_array($item->tipo_informacao, ['jpg', 'bmp', 'png']))
+                                        <div class="col-md-12">
+                                            <img class="img-fluid" src="{{$item->url()}}" alt="{{$item->getDescricao()}}">
+                                        </div>
+                                    @endif
+                                    <div class="col-md-12 mt-3">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-sm btn-primary" wire:click="getFile({{$item->id}})">
+                                                <i class="fa-solid fa-download"></i>
+                                                Download
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endif
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
@@ -257,11 +326,6 @@
   </div>
 <!-- FIM Modal - ARQUIVO  -->
 
-{{-- @if(count($errors) > 0)
-<script>
-    $('.modal').modal('hide');
-</script>
-@endif --}}
 <script>
     window.addEventListener('closeModal', event => {
         $('.modal').modal('hide');
@@ -326,6 +390,14 @@
     })
 </script>
 <script>
+    function setPadrao(id, tipo, senha) {
+            if (tipo == 'padrao') {
+                var e = document.getElementById('lock_view_'+id);
+                var p =  new PatternLock(e, {
+                });
+                p.setPattern(senha);
+            }
+        }
     document.addEventListener('livewire:load', function () {
         prepareFormSenha()
         $('#tipo_senha').on("change", function () {
@@ -343,6 +415,8 @@
 
             }
         }
+
+
     });
 </script>
 
