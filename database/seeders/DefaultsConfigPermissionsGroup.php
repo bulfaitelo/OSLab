@@ -44,7 +44,7 @@ class DefaultsConfigPermissionsGroup extends Seeder
                 'name' => 'Wiki',
             ],
             [   'id' => 10,
-                'name' => 'Wiki',
+                'name' => 'Checklist',
             ],
             [   'id' => 11,
                 'name' => 'Sistema',
