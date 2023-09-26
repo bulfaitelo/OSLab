@@ -94,4 +94,141 @@
             Salvar
         </button>
     {!! html()->form()->close() !!}
+    <script>
+        document.addEventListener('livewire:load', function () {
+            $(document).ready(function() {
+                $('.texto').summernote({
+                    lang: 'pt-BR',
+                    height: 300,
+                    toolbar: [
+                        [ 'style', [ 'style' ] ],
+                        [ 'font', [ 'bold', 'italic', 'clear'] ],
+                        // [ 'fontname', [ 'fontname' ] ],
+                        [ 'fontsize', [ 'fontsize' ] ],
+                        [ 'color', [ 'color' ] ],
+                        [ 'para', [ 'ol', 'ul', 'paragraph', ] ],
+                        [ 'table', [ 'table' ] ],
+                        [ 'insert', ['link', 'picture',]],
+                        [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+                    ]
+                });
+            });
+            $(document).ready(function() {
+                // tom-select Clientes
+                var tomSelectCliente = new TomSelect(".cliente",{
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: 'name',
+                    // fetch remote data
+                    load: function(query, callback) {
+                        var url = route('cliente.select') + '?q=' + encodeURIComponent(query);
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(json => {
+                                callback(json);
+                            }).catch(()=>{
+                                callback();
+                            });
+                    },
+                    render: {
+                        option: function(data, escape) {
+                        return '<div>' +
+                                '<span class="title">' + escape(data.name) + '</span>' +
+                                '<span class="url"> <b> Tipo Cliente: </b> ' + escape(data.tipo) + ' | <b> Quant. OS: </b> ' + escape(data.os_count) + '</span>' +
+                            '</div>';
+                        },
+                        item: function(data, escape) {
+                            return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                        },
+                        no_results:function(data,escape){
+                            return '<div class="no-results">' +
+                                        '<p>Não foram encontrados Clientes </p>' +
+                                        '<a href="'+ route('cliente.create')+'">' +
+                                            '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i>Criar Cliente</button>' +
+                                        '</a>' +
+                                    '</div>';
+                        },
+                    },
+                });
+
+                // tom-select Users
+                var tomSelectUser = new TomSelect(".user",{
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: 'name',
+                    // fetch remote data
+                    load: function(query, callback) {
+                        var url = route('user.select') + '?q=' + encodeURIComponent(query);
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(json => {
+                                callback(json);
+                            }).catch(()=>{
+                                callback();
+                            });
+                    },
+                    render: {
+                        option: function(data, escape) {
+                        return '<div>' +
+                                '<span class="title">' + escape(data.name) + '</span>' +
+                                '<span class="url"> <b> Quant. OS: </b> ' + escape(data.os_count) + '</span>' +
+                            '</div>';
+                        },
+                        item: function(data, escape) {
+                            return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                        }
+                    },
+                });
+
+                // tom-select Modelos
+                var tomSelectModelo = new TomSelect(".modelo",{
+                    valueField: 'id',
+                    labelField: 'name',
+                    searchField: 'name',
+                    // fetch remote data
+                    load: function(query, callback) {
+                        var url = route('modelo.select') + '?q=' + encodeURIComponent(query);
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(json => {
+                                callback(json);
+                            }).catch(()=>{
+                                callback();
+                            });
+                    },
+                    render: {
+                        option: function(data, escape) {
+                        return '<div>' +
+                                '<span class="title">' + escape(data.name) + '</span>' +
+                                '<span class="url"> <b> ' + escape(data.wiki) + '</b> </span>' +
+                            '</div>';
+                        },
+                        item: function(data, escape) {
+                            return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                        }
+                    },
+                });
+
+                tomSelectCliente.on('change', function (){
+                    $('#categoria_id').focus();
+                });
+
+                tomSelectModelo.on('change', function () {
+                    $('#status_id').focus();
+                });
+
+                tomSelectUser.on('change', function () {
+                    $('#categoria_id').focus();
+
+                });
+
+                $('#categoria_id').on('change', function () {
+                    tomSelectModelo.focus()
+                });
+            });
+
+        });
+
+
+    </script>
 </div>

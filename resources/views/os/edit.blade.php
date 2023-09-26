@@ -134,37 +134,11 @@
 <script src="{{ url('') }}/vendor/patternlock/patternlock.js"></script>
 <script src="{{ url('') }}/vendor/form-builder/form-render.min.js"></script>
 <script src="{{ url('') }}/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-<script src="{{ url('') }}/src/js/os.js"></script>
+
 
 {{-- <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script> --}}
 <script>
     $('.decimal').mask('#.##0,00', { reverse: true });
     $('.numero').mask('#', { reverse: true });
 </script>
-
-<script>
-    $(document).ready(function() {
-        $('.texto').summernote({
-            lang: 'pt-BR',
-            height: 300,
-            toolbar: [
-                [ 'style', [ 'style' ] ],
-                [ 'font', [ 'bold', 'italic', 'clear'] ],
-                // [ 'fontname', [ 'fontname' ] ],
-                [ 'fontsize', [ 'fontsize' ] ],
-                [ 'color', [ 'color' ] ],
-                [ 'para', [ 'ol', 'ul', 'paragraph', ] ],
-                [ 'table', [ 'table' ] ],
-                [ 'insert', ['link', 'picture',]],
-                [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
-            ]
-        });
-    });
-</script>
-
-<script>
-
-</script>
-
-
 @stop
