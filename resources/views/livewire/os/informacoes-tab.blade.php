@@ -98,24 +98,7 @@
                                     <div class="col-md-12"  @if ($item->tipo_informacao == 'padrao') style="display: none" @endif >
                                         <div class="form-group">
                                             <label for="senha_texto">Senha</label>
-                                            <div class="input-group mb-3">
-                                                @if ($checkPass === $item->id)
-                                                    <input value="{{$item->informacao}}" type="text" class="form-control" disabled placeholder="Senha">
-                                                @else
-                                                    <input value="nao tem nada aui não" type="password" class="form-control" disabled placeholder="Senha">
-                                                @endif
-                                                <div class="input-group-append">
-                                                    <div class="input-group-text">
-                                                        <span wire:click="showPass({{$item->id}})"
-                                                            @class([
-                                                                'fas fa-lock' => ($checkPass != $item->id),
-                                                                'fas fa-lock-open' => ($checkPass === $item->id)
-                                                                ])
-                                                             >
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @livewire('os.informacoes.senha-input', ['senha' => $item->informacao, 'senha_id' => $item->id], key($item->id))
                                         </div>
                                     </div>
                                     <div class="col-md-12" @if ($item->tipo_informacao == 'texto') style="display: none" @endif >
