@@ -181,15 +181,19 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if ($item->uuid)
                                     <div class="col-md-12">
                                         <button type="button"  class="btn btn-sm btn-success" onclick="copiar({{$item->id}});" >
                                             <i class="fa-solid fa-paperclip"></i>
                                             Copiar
                                         </button>
                                     </div>
+                                    @endif
                                     <div class="col-md-12">
                                         <div class="row mb-3">
+                                            @if ($item->uuid)
                                             <input type="text" id="url_{{$item->id}}" class="form-control form-control-border" value="{{$item->urlShare()}}">
+                                            @endif
                                         </div>
                                         @if (!$item->uuid)
                                             <button type="button" wire:click="createShareUrl({{$item->id}})" class="btn btn-sm btn-primary" >
