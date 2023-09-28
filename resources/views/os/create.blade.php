@@ -142,6 +142,7 @@
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 
+
 <script>
     $(document).ready(function() {
         // tom-select Clientes
