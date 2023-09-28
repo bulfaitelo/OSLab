@@ -30,7 +30,7 @@
                 <div class="col-md-4">
                     <label for="name">CPF / CNPJ</label>
                     <div class="input-group ">
-                        {!! html()->text('registro', $cliente->registro)->class('form-control cpf_cnpj')->placeholder('Nome do usuário') !!}
+                        {!! html()->text('registro', $cliente->registro)->class('form-control cpf_cnpj')->placeholder('CPF ou CNPJ') !!}
                         <span class="input-group-append">
                             <button disabled type="button" id="busca_cnpj" class="btn btn-info">Buscar CNPJ</button>
                         </span>
@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="cep">Cep</label>
+                        <label for="cep">CEP</label>
                         {!! html()->text('cep', $cliente->cep)->class('form-control cep')->placeholder('CEP') !!}
                     </div>
                 </div>
