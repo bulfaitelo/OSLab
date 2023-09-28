@@ -118,15 +118,9 @@
 @stop
 
 @section('css')
-<link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
-<link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
 <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
 <style>
-    .os {
-        border-top: 3px solid #39cccc;
-    }
-
     .ts-wrapper .option .title {
         display: block;
     }
@@ -144,141 +138,144 @@
 
 @section('js')
 @routes
-<script src="{{ url('') }}/vendor/select2/dist/js/select2.full.min.js"></script>
-<script src="{{ url('') }}/vendor/select2/dist/js/i18n/pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 
 <script>
     $(document).ready(function() {
-    // tom-select Clientes
-    var tomSelectCliente = new TomSelect(".cliente",{
-        valueField: 'id',
-        labelField: 'name',
-        searchField: 'name',
-        // fetch remote data
-        load: function(query, callback) {
-            var url = route('cliente.select') + '?q=' + encodeURIComponent(query);
-            fetch(url)
-                .then(response => response.json())
-                .then(json => {
-                    callback(json);
-                }).catch(()=>{
-                    callback();
-                });
-        },
-        render: {
-            option: function(data, escape) {
-            return '<div>' +
-                    '<span class="title">' + escape(data.name) + '</span>' +
-                    '<span class="url"> <b> Tipo Cliente: </b> ' + escape(data.tipo) + ' | <b> Quant. OS: </b> ' + escape(data.os_count) + '</span>' +
-                '</div>';
+        // tom-select Clientes
+        var tomSelectCliente = new TomSelect(".cliente",{
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            // fetch remote data
+            load: function(query, callback) {
+                var url = route('cliente.select') + '?q=' + encodeURIComponent(query);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                    }).catch(()=>{
+                        callback();
+                    });
             },
-            item: function(data, escape) {
-                return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+            render: {
+                option: function(data, escape) {
+                return '<div>' +
+                        '<span class="title">' + escape(data.name) + '</span>' +
+                        '<span class="url"> <b> Tipo Cliente: </b> ' + escape(data.tipo) + ' | <b> Quant. OS: </b> ' + escape(data.os_count) + '</span>' +
+                    '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                },
+                @can('cliente_create')
+                no_results:function(data,escape){
+                    return '<div class="no-results">' +
+                                '<p>Cliente não encontrado</p>' +
+                                '<a href="'+ route('cliente.create')+'" target="_blank">' +
+                                    '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Criar</button>' +
+                                '</a>' +
+                            '</div>';
+                },
+                @endcan
             },
-            @can('cliente_create')
-            no_results:function(data,escape){
-                return '<div class="no-results">' +
-                            '<p>Não foram encontrados Clientes </p>' +
-                            '<a href="'+ route('cliente.create')+'" target="_blank">' +
-                                '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Criar</button>' +
-                            '</a>' +
-                        '</div>';
+        });
+
+        // tom-select Users
+        var tomSelectUser = new TomSelect(".user",{
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            // fetch remote data
+            load: function(query, callback) {
+                var url = route('user.select') + '?q=' + encodeURIComponent(query);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                    }).catch(()=>{
+                        callback();
+                    });
             },
-            @endcan
-        },
+            render: {
+                option: function(data, escape) {
+                return '<div>' +
+                        '<span class="title">' + escape(data.name) + '</span>' +
+                        '<span class="url"> <b> Quant. OS: </b> ' + escape(data.os_count) + '</span>' +
+                    '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                }
+            },
+        });
+
+        // tom-select Modelos
+        var tomSelectModelo = new TomSelect(".modelo",{
+            valueField: 'id',
+            labelField: 'name',
+            searchField: ['name', 'wiki'],
+            // fetch remote data
+            load: function(query, callback) {
+                var url = route('modelo.select') + '?q=' + encodeURIComponent(query);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                    }).catch(()=>{
+                        callback();
+                    });
+            },
+            render: {
+                option: function(data, escape) {
+                return '<div>' +
+                        '<span class="title">' + escape(data.name) + '</span>' +
+                        '<span class="url"> <b> ' + escape(data.wiki) + '</b> </span>' +
+                    '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                },
+                @canany(['wiki_create', 'config_wiki_modelo_create'])
+                no_results:function(data,escape){
+                    return '<div class="no-results">' +
+                                '<p>Modelo não Encontrado</p>' +
+                                @can('wiki_create')
+                                '<a href="'+ route('wiki.create')+'" target="_blank" >' +
+                                    '<button type="button"  class="mr-2 btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Wiki </button>' +
+                                '</a>' +
+                                @endcan
+                                @can('config_wiki_modelo_create')
+                                '<a href="'+ route('configuracao.wiki.modelo.create')+'" target="_blank" >' +
+                                    '<button type="button"  class=" btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Modelo</button>' +
+                                '</a>' +
+                                @endcan
+                            '</div>';
+                },
+                @endcan
+            },
+        });
+
+        tomSelectCliente.on('change', function (){
+            $('#categoria_id').focus();
+        });
+
+        tomSelectModelo.on('change', function () {
+            $('#status_id').focus();
+        });
+
+        tomSelectUser.on('change', function () {
+            $('#categoria_id').focus();
+
+        });
+
+        $('#categoria_id').on('change', function () {
+            tomSelectModelo.focus()
+        });
     });
 
-    // tom-select Users
-    var tomSelectUser = new TomSelect(".user",{
-        valueField: 'id',
-        labelField: 'name',
-        searchField: 'name',
-        // fetch remote data
-        load: function(query, callback) {
-            var url = route('user.select') + '?q=' + encodeURIComponent(query);
-            fetch(url)
-                .then(response => response.json())
-                .then(json => {
-                    callback(json);
-                }).catch(()=>{
-                    callback();
-                });
-        },
-        render: {
-            option: function(data, escape) {
-            return '<div>' +
-                    '<span class="title">' + escape(data.name) + '</span>' +
-                    '<span class="url"> <b> Quant. OS: </b> ' + escape(data.os_count) + '</span>' +
-                '</div>';
-            },
-            item: function(data, escape) {
-                return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
-            }
-        },
-    });
-
-    // tom-select Modelos
-    var tomSelectModelo = new TomSelect(".modelo",{
-        valueField: 'id',
-        labelField: 'name',
-        searchField: 'name',
-        // fetch remote data
-        load: function(query, callback) {
-            var url = route('modelo.select') + '?q=' + encodeURIComponent(query);
-            fetch(url)
-                .then(response => response.json())
-                .then(json => {
-                    callback(json);
-                }).catch(()=>{
-                    callback();
-                });
-        },
-        render: {
-            option: function(data, escape) {
-            return '<div>' +
-                    '<span class="title">' + escape(data.name) + '</span>' +
-                    '<span class="url"> <b> ' + escape(data.wiki) + '</b> </span>' +
-                '</div>';
-            },
-            item: function(data, escape) {
-                return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
-            },
-            @can('wiki_create')
-            no_results:function(data,escape){
-                return '<div class="no-results">' +
-                            '<p>Não foram encontrados Modelos </p>' +
-                            '<a href="'+ route('wiki.create')+'" target="_blank" >' +
-                                '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Criar</button>' +
-                            '</a>' +
-                        '</div>';
-            },
-            @endcan
-        },
-    });
-
-    tomSelectCliente.on('change', function (){
-        $('#categoria_id').focus();
-    });
-
-    tomSelectModelo.on('change', function () {
-        $('#status_id').focus();
-    });
-
-    tomSelectUser.on('change', function () {
-        $('#categoria_id').focus();
-
-    });
-
-    $('#categoria_id').on('change', function () {
-        tomSelectModelo.focus()
-    });
-});
-
-</script>
-<script>
     $(document).ready(function() {
         $('.texto').summernote({
             lang: 'pt-BR',

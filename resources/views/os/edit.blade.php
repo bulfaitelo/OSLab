@@ -8,9 +8,6 @@
 
 @section('content')
 
-
-
-
 <div class="card card-primary card-outline">
     <div class="card-header border-0 pb-0">
         <a href="{{ url()->previous() }}">
@@ -62,7 +59,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade " id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+            <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
                 @livewire('os.detalhes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
@@ -76,7 +73,7 @@
                 @livewire('os.checklist-tab', ['os_id' => $os->id])
             </div>
             @endif
-            <div class="tab-pane fade active show" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
+            <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
                 @livewire('os.informacoes-tab', ['os_id' => $os->id])
             </div>
             <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
@@ -86,19 +83,12 @@
     </div>
 </div>
 
-
-
 @stop
 
 @section('css')
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
 <link rel="stylesheet" href="{{ url('') }}/vendor/patternlock/patternlock.css">
-{{-- <link rel="stylesheet" href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" /> --}}
 <style>
-    .os {
-        border-top: 3px solid #39cccc;
-    }
-
 
     .icon{
         width: 3rem;
@@ -106,8 +96,6 @@
     .item{
         width: 100%;
     }
-
-
 
     .ts-wrapper .option .title {
         display: block;
@@ -122,8 +110,6 @@
         display: none;
     }
 
-
-
 </style>
 @stop
 
@@ -133,8 +119,6 @@
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/patternlock/patternlock.js"></script>
 <script src="{{ url('') }}/vendor/form-builder/form-render.min.js"></script>
-<script src="{{ url('') }}/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-
 
 {{-- <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script> --}}
 <script>

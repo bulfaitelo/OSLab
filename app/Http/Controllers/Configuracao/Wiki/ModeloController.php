@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Configuracao\Wiki\StoreModeloRequest;
 use App\Http\Requests\Configuracao\Wiki\UpdateModeloRequest;
 use App\Models\Configuracao\Wiki\Modelo;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 
@@ -116,6 +117,9 @@ class ModeloController extends Controller
     public function apiModeloSelect (Request $request) {
         try {
             $select = Modelo::where('name', 'LIKE', '%'. $request->q . '%');
+            $select->orWhereHas('wiki', function (Builder $query) use ($request) {
+                $query->where('name','LIKE', '%'. $request->q . '%');
+            });
             $select->orderBy('name');
             $select->limit(10);
             $response = [];

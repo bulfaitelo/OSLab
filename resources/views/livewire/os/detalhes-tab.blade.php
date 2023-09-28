@@ -5,13 +5,13 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="cliente_id">Cliente</label>
-                    {!! html()->select('cliente_id', $os->getClienteForSelect(), $os->cliente_id)->class('form-control cliente')->placeholder('Selecione')->required() !!}
+                    {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="tecnico_id">Tecnico Responsavel </label>
-                    {!! html()->select('tecnico_id', $os->getTecnicoForSelect(), $os->tecnico_id)->class('form-control user')->placeholder('Selecione')->required() !!}
+                    {!! html()->select('tecnico_id')->class('form-control user')->placeholder('Selecione')->required() !!}
                 </div>
             </div>
             <div class="col-md-2">
@@ -23,7 +23,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="modelo_id">Modelo</label>
-                    {!! html()->select('modelo_id', $os->getModeloForSelect(), $os->modelo_id)->class('form-control modelo')->placeholder('Selecione') !!}
+                    {!! html()->select('modelo_id')->class('form-control modelo')->placeholder('Selecione') !!}
                 </div>
             </div>
         </div>
@@ -95,27 +95,11 @@
         </button>
     {!! html()->form()->close() !!}
     <script>
+        var tomSelectCliente;
         document.addEventListener('livewire:load', function () {
             $(document).ready(function() {
-                $('.texto').summernote({
-                    lang: 'pt-BR',
-                    height: 300,
-                    toolbar: [
-                        [ 'style', [ 'style' ] ],
-                        [ 'font', [ 'bold', 'italic', 'clear'] ],
-                        // [ 'fontname', [ 'fontname' ] ],
-                        [ 'fontsize', [ 'fontsize' ] ],
-                        [ 'color', [ 'color' ] ],
-                        [ 'para', [ 'ol', 'ul', 'paragraph', ] ],
-                        [ 'table', [ 'table' ] ],
-                        [ 'insert', ['link', 'picture',]],
-                        [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
-                    ]
-                });
-            });
-            $(document).ready(function() {
                 // tom-select Clientes
-                var tomSelectCliente = new TomSelect(".cliente",{
+                tomSelectCliente = new TomSelect(".cliente",{
                     valueField: 'id',
                     labelField: 'name',
                     searchField: 'name',
@@ -140,19 +124,24 @@
                         item: function(data, escape) {
                             return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
                         },
+                        @can('cliente_create')
                         no_results:function(data,escape){
                             return '<div class="no-results">' +
-                                        '<p>Não foram encontrados Clientes </p>' +
-                                        '<a href="'+ route('cliente.create')+'">' +
-                                            '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i>Criar Cliente</button>' +
+                                        '<p>Cliente não encontrado</p>' +
+                                        '<a href="'+ route('cliente.create')+'" target="_blank">' +
+                                            '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Criar</button>' +
                                         '</a>' +
                                     '</div>';
                         },
+                        @endcan
                     },
                 });
+                // selecionando os dados do cliente
+                tomSelectCliente.addOption(@js($os->getClienteForSelect()));
+                tomSelectCliente.addItem(@js($os->cliente_id));
 
-                // tom-select Users
-                var tomSelectUser = new TomSelect(".user",{
+                // tom-select tecnico responsavel
+                var tomSelectTecnico = new TomSelect(".user",{
                     valueField: 'id',
                     labelField: 'name',
                     searchField: 'name',
@@ -179,12 +168,14 @@
                         }
                     },
                 });
+                tomSelectTecnico.addOption(@js($os->getTecnicoForSelect()));
+                tomSelectTecnico.addItem(@js($os->tecnico_id));
 
                 // tom-select Modelos
                 var tomSelectModelo = new TomSelect(".modelo",{
                     valueField: 'id',
                     labelField: 'name',
-                    searchField: 'name',
+                    searchField: ['name', 'wiki'],
                     // fetch remote data
                     load: function(query, callback) {
                         var url = route('modelo.select') + '?q=' + encodeURIComponent(query);
@@ -205,9 +196,28 @@
                         },
                         item: function(data, escape) {
                             return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
-                        }
+                        },
+                        @canany(['wiki_create', 'config_wiki_modelo_create'])
+                        no_results:function(data,escape){
+                            return '<div class="no-results">' +
+                                        '<p>Modelo não Encontrado</p>' +
+                                        @can('wiki_create')
+                                        '<a href="'+ route('wiki.create')+'" target="_blank" >' +
+                                            '<button type="button"  class="mr-2 btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Wiki </button>' +
+                                        '</a>' +
+                                        @endcan
+                                        @can('config_wiki_modelo_create')
+                                        '<a href="'+ route('configuracao.wiki.modelo.create')+'" target="_blank" >' +
+                                            '<button type="button"  class=" btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Modelo</button>' +
+                                        '</a>' +
+                                        @endcan
+                                    '</div>';
+                        },
+                        @endcan
                     },
                 });
+                tomSelectModelo.addOption(@js($os->getModeloForSelect()));
+                tomSelectModelo.addItem(@js($os->modelo_id));
 
                 tomSelectCliente.on('change', function (){
                     $('#categoria_id').focus();
@@ -217,7 +227,7 @@
                     $('#status_id').focus();
                 });
 
-                tomSelectUser.on('change', function () {
+                tomSelectTecnico.on('change', function () {
                     $('#categoria_id').focus();
 
                 });
@@ -227,8 +237,23 @@
                 });
             });
 
+            $(document).ready(function() {
+                $('.texto').summernote({
+                    lang: 'pt-BR',
+                    height: 300,
+                    toolbar: [
+                        [ 'style', [ 'style' ] ],
+                        [ 'font', [ 'bold', 'italic', 'clear'] ],
+                        // [ 'fontname', [ 'fontname' ] ],
+                        [ 'fontsize', [ 'fontsize' ] ],
+                        [ 'color', [ 'color' ] ],
+                        [ 'para', [ 'ol', 'ul', 'paragraph', ] ],
+                        [ 'table', [ 'table' ] ],
+                        [ 'insert', ['link', 'picture',]],
+                        [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+                    ]
+                });
+            });
         });
-
-
     </script>
 </div>

@@ -61,7 +61,7 @@ class User extends Authenticatable
      * Relacionamento com OS
      */
     public function os () : HasMany {
-        return $this->hasMany(Os::class);
+        return $this->hasMany(Os::class, 'tecnico_id');
     }
 
 }

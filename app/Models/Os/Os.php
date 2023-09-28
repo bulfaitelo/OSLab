@@ -143,10 +143,15 @@ class Os extends Model
      **/
     public function getClienteForSelect() : array {
         if ($this->cliente_id) {
-            return [$this->cliente_id => $this->cliente->name];
-        } else {
-            return [] ;
+            return [
+                'id' => $this->cliente_id,
+                'name' => $this->cliente->name,
+                'tipo' => $this->cliente->getTipoCliente(),
+                'os_count' => $this->cliente->os->count(),
+            ];
         }
+        return [] ;
+
     }
 
     /**
@@ -157,10 +162,14 @@ class Os extends Model
      **/
     public function getTecnicoForSelect() : array {
         if ($this->tecnico_id) {
-            return [$this->tecnico_id => $this->tecnico->name];
-        } else {
-            return [] ;
+            return [
+                'id' => $this->tecnico_id,
+                'name' => $this->tecnico->name,
+                'os_count' => $this->tecnico->os->count(),
+            ];
         }
+        return [] ;
+
     }
 
     /**
@@ -171,10 +180,14 @@ class Os extends Model
      **/
     public function getModeloForSelect() : array {
         if ($this->modelo_id) {
-            return [$this->modelo_id => $this->modelo->name];
-        } else {
-            return [] ;
+            return [
+                'id' => $this->modelo_id,
+                'name' => $this->modelo->name,
+                'wiki' => $this->modelo->wiki->name,
+            ];
         }
+        return [] ;
+
     }
 
 }
