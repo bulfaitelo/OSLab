@@ -29,7 +29,7 @@ class BladePermissionsTest extends TestCase
         $files = File::allFiles($path);
         foreach ($files as $file) {
 
-            $file_path = $file->getPathname();            
+            $file_path = $file->getPathname();
 
             $file_string = file_get_contents($file_path);
             preg_match_all('/@can( )?\(\'[\w\s]+\'\)/', $file_string, $itens);
@@ -49,19 +49,22 @@ class BladePermissionsTest extends TestCase
 
             $permission_count = preg_match_all('/@canany( )?\(\[([\'\w\s,]+)\]\)/', $file_string, $canany_array);
             if($permission_count > 0){
+
                 foreach ($canany_array[2] as $temp_canany) {
                     $canany = $temp_canany;
                     $canany = str_replace("'", "", $canany);
                     $canany = explode(',', $canany);
                     $canany = array_map('trim', $canany);
+
                     foreach ($canany as $permission_temp) {
                         $permission_blade[] = $permission_temp;
-                        $permission_blade_path[explode("'",$permission_temp)[1]] = $file_path;
+                        // $permission_blade_path[explode("'",$permission_temp)[1]] = $file_path;
+                        $permission_blade_path[$permission_temp] = $file_path;
                     }
                 }
-            }            
-        }        
-        
+            }
+        }
+
         // BLADES -
 
         // MENU AdminLTe
@@ -83,16 +86,16 @@ class BladePermissionsTest extends TestCase
                     $permission_blade_path[$permission_temp_sub] = $file;
                 }
             }
-        }        
+        }
         // @canany( )?\((\[[\'\w\s,]+\])\)
 
         // MENU AdminLTe -
         $permission_blade = array_unique($permission_blade);
         $this->permission_blade = $permission_blade;
-        
+
         $permission_blade_path = array_unique($permission_blade_path);
         $this->permission_blade_path = $permission_blade_path;
-        
+
         $permission_db = Permission::pluck('name')->toArray();
         $this->permission_db = $permission_db;
 
