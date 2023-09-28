@@ -197,7 +197,7 @@
                         item: function(data, escape) {
                             return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
                         },
-                        @canany(['wiki_create', 'config_wiki_modelo_create'])
+                        @canany(['wiki_create','config_wiki_modelo_create'])
                         no_results:function(data,escape){
                             return '<div class="no-results">' +
                                         '<p>Modelo não Encontrado</p>' +
@@ -213,7 +213,7 @@
                                         @endcan
                                     '</div>';
                         },
-                        @endcan
+                        @endcanany
                     },
                 });
                 tomSelectModelo.addOption(@js($os->getModeloForSelect()));
