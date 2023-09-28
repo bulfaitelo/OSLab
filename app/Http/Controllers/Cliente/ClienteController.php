@@ -148,16 +148,10 @@ class ClienteController extends Controller
             $select->limit(10);
             $response = [];
             foreach ($select->get() as $value) {
-                if ($value->pessoa_juridica == 1) {
-                    $tipo = 'Pessoa Jurídica';
-                } else {
-                    $tipo = 'Pessoa Física';
-                }
-
                 $response[] = [
                     'id' => $value->id,
                     'name' => $value->name,
-                    'tipo' => $tipo,
+                    'tipo' => $value->getTipoCliente(),
                     'os_count' => $value->os->count(),
                 ];
             }
@@ -165,6 +159,7 @@ class ClienteController extends Controller
 
         } catch (\Throwable $th) {
             return response()->json($th, 403);
+
         }
     }
 }

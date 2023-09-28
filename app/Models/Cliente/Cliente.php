@@ -27,4 +27,19 @@ class Cliente extends Model
     public function os () : HasMany {
         return $this->hasMany(Os::class);
     }
+
+    /**
+     * Retornar o tipo de cliente
+     *
+     * @return string
+     **/
+    public function getTipoCliente() : string {
+        if ($this->pessoa_juridica == 1) {
+           return 'Pessoa Jurídica';
+        }
+        return $tipo = 'Pessoa Física';
+    }
+
+
+
 }
