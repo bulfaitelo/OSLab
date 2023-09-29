@@ -454,13 +454,13 @@
 </script>
 <script>
     function setPadrao(id, tipo, senha) {
-            if (tipo == 'padrao') {
-                var e = document.getElementById('lock_view_'+id);
-                var p =  new PatternLock(e, {
-                });
-                p.setPattern(senha);
-            }
+        if (tipo == 'padrao') {
+            var e = document.getElementById('lock_view_'+id);
+            var p =  new PatternLock(e, {
+            });
+            p.setPattern(senha);
         }
+    }
     document.addEventListener('livewire:load', function () {
         prepareFormSenha()
         $('#tipo_senha').on("change", function () {
