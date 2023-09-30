@@ -130,8 +130,10 @@ Route::group(['middleware'=> 'auth'], function() {
     });
 });
 
-
+// OS >> informações (publica)
 Route::get('public/os/informacao/{uuid}', [OsPublicController::class,'edit'])->name('os.public.edit');
+Route::get('public/os/informacao', [OsPublicController::class,'updated'])->name('os.public.updated');
+Route::put('public/os/informacao/{uuid}', [OsPublicController::class,'update'])->name('os.public.update');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

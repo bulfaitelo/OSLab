@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Document</title>
+    <title>OS Lab - {{$informacao->getTipo()}}</title>
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ url('') }}/vendor/patternlock/patternlock.css">
+    @livewireStyles
     <style>
 
         .icon{
@@ -39,25 +40,28 @@
         <div class="container-fluid">
             <div class="row justify-content-md-center">
                 <div class="col-md-6 mt-3">
-                    <div class="card card-primary">
+                    <div class="card ">
                         <div class="card-header">
                             <h3 class="card-title">{{ $informacao->getTipo() }}</h3>
                         </div>
-                        <form>
+                        @include('adminlte::partials.form-alert')
+                        {!! html()->form('put', route('os.public.update', $informacao->uuid))->open() !!}
+                        {!! html()->hidden('tipo', $informacao->tipo) !!}
                             <div class="card-body">
                                 @if ($informacao->tipo == 1)
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="anotacao">Anotação</label>
-                                            <textarea type="text" disabled id="anotacao" class="form-control" placeholder="Escreva aqui a anotação">{{$informacao->informacao}}</textarea>
+                                            <textarea type="text" name="informacao" id="anotacao" class="form-control" placeholder="Escreva aqui a anotação">{{$informacao->informacao}}</textarea>
                                         </div>
                                     </div>
                                 @endif
                                 @if ($informacao->tipo == 2)
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="descricao_senha">Descricao</label>
-                                            <input type="text" value="{{$informacao->descricao}}" disabled id="descricao_senha" class="form-control" placeholder="Descrição ">
+                                            <input type="text" value="{{$informacao->descricao}}" name="descricao" id="descricao_senha" class="form-control" placeholder="Descrição ">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -69,7 +73,7 @@
                                     <div class="col-md-12"  @if ($informacao->tipo_informacao == 'padrao') style="display: none" @endif >
                                         <div class="form-group">
                                             <label for="senha_texto">Senha</label>
-                                            @livewire('os.informacoes.senha-input', ['senha' => $informacao->informacao, 'senha_id' => $informacao->id], key($informacao->id))
+                                            <input id="informacao" name="informacao" type="text" class="form-control" placeholder="Senha">
                                         </div>
                                     </div>
                                     <div class="col-md-12" @if ($informacao->tipo_informacao == 'texto') style="display: none" @endif >
@@ -106,10 +110,10 @@
                                     @endif
                                     <div class="col-md-12 mt-3">
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-sm btn-primary" wire:click="getFile({{$informacao->id}})">
-                                                <i class="fa-solid fa-download"></i>
-                                                Download
-                                            </button>
+                                                <a href="{{$informacao->url()}}" target="_blank" class="btn btn-sm btn-primary">
+                                                    <i class="fa-solid fa-download"></i>
+                                                    Download
+                                                </a>
                                         </div>
                                     </div>
                                 @endif
@@ -120,7 +124,7 @@
                                     Salvar
                                 </button>
                             </div>
-                        </form>
+                        {!! html()->form()->close() !!}
                     </div>
 
                 </div>
@@ -134,41 +138,28 @@
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-mask/jquery.mask.min.js') }}"></script>
     <script src="{{ url('') }}/vendor/patternlock/patternlock.js"></script>
-
+    @livewireScripts
     <script>
     $(document).ready(function() {
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        var e = document.getElementById('lock');
 
-        let senha_padrao ;
-
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-            var e = document.getElementById('lock');
-
-            var p =  new PatternLock(e, {
-                onPattern: async function(pattern) {
-                    senha = pattern.toString()
-                    if (senha.length > 3 ) {
-                        this.success();
-                        senha_padrao = pattern;
-                    } else {
-                        this.error();
-                        senha_padrao = '';
-                        await sleep(1000);
-                        this.clear();
-                    }
+        var p =  new PatternLock(e, {
+            onPattern: async function(pattern) {
+                senha = pattern.toString()
+                if (senha.length > 3 ) {
+                    $('#informacao').val(pattern)
+                    this.success();
+                } else {
+                    this.error();
+                    $('#informacao').val('')
+                    await sleep(1000);
+                    this.clear();
                 }
-            });
-            // function setPadrao(id, tipo, senha) {
-            //     if (tipo == 'padrao') {
-            //         var e = document.getElementById('lock_view_'+id);
-            //         var p =  new PatternLock(e, {
-            //         });
-            //         p.setPattern(senha);
-            //     }
-            // }
-
-
+            }
+        });
     })
     </script>
 </html>

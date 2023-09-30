@@ -14,4 +14,41 @@ class OsPublicController extends Controller
 
         return view("os.public.edit",compact("informacao"));
     }
+
+
+
+    /**
+     * Atualiza informações da OS com base no hash gerado
+     *
+     *
+     *
+     * @param $uuid Uuid
+     **/
+    public function update($uuid, Request $request){
+        $informacao = OsInformacao::where("uuid",$uuid)->firstOrfail();
+        $request->validate([
+            'tipo' => 'required|integer',
+            "informacao"=> "required",
+        ]);
+        // dd($request->input());
+        try {
+            $informacao->informacao = $request->informacao;
+            $informacao->descricao = $request->descricao;
+            $informacao->uuid = null;
+            $informacao->save();
+            return redirect()->route('os.public.updated')
+            ->with('success', 'Os Atualizada com sucesso.');
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
+
+
+    }
+
+    public function updated() {
+        return view ('os.public.updated');
+    }
+
 }

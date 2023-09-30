@@ -172,17 +172,17 @@
                                 <div class="modal-body">
                                     @if ($item->uuid)
                                     <div class="col-md-12">
-                                        <button type="button"  class="btn btn-sm btn-success" onclick="copiar({{$item->id}});" >
+                                        {{-- <button type="button"  class="btn btn-sm btn-success" id="" onclick="copiar()" >
                                             <i class="fa-solid fa-paperclip"></i>
                                             Copiar
-                                        </button>
+                                        </button> --}}
                                     </div>
                                     @endif
                                     <div class="col-md-12">
                                         <div class="row mb-1">
                                             @if ($item->uuid)
-                                            <a href="{{$item->urlShare()}}" class="ml-2" style="white-space: nowrap; overflow: hidden;" target="_blank" rel="noopener noreferrer">{{$item->urlShare()}}</a>
-                                            {{-- <input type="text" id="url_{{$item->id}}" class="form-control form-control-border" value="{{$item->urlShare()}}"> --}}
+                                            <a href="{{$item->urlShare()}}" id="url_{{$item->id}}" class="ml-2" style="white-space: nowrap; overflow: hidden;" target="_blank" rel="noopener noreferrer">{{$item->urlShare()}}</a>
+                                            {{-- <input type="text" id="url_{{$item->id}}"  value="{{$item->urlShare()}}"> --}}
                                             @endif
                                         </div>
                                         @if (!$item->uuid)
@@ -424,12 +424,18 @@
         this.classList.toggle('fa-lock-open');
     });
 
-    function copiar(id) {
-        let textoCopiado = document.getElementById("url_"+id);
-        textoCopiado.select();
-        textoCopiado.setSelectionRange(0, 99999)
-        document.execCommand("copy");
-    }
+    // function copiar(id) {
+    //     let textoCopiado = document.getElementById("url_"+id);
+
+    //     var tempTextArea = document.createElement("textarea").value = textoCopiado.href;
+    //     // tempTextArea.value = urlElement.href;
+    //     document.body.appendChild(tempTextArea);
+    //     tempTextArea.select();
+    //     tempTextArea.setSelectionRange(0, 99999)
+    //     document.execCommand("copy");
+    //     document.body.removeChild(tempTextArea);
+    // }
+
 </script>
 <script>
     let senha_padrao ;
@@ -455,6 +461,7 @@
                 }
             }
         });
+
 
 
     })

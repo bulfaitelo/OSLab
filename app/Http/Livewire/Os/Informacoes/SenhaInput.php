@@ -10,12 +10,14 @@ class SenhaInput extends Component
     public $senha;
     public $senha_id;
     public $checkPass;
+    public $public = false;
 
     public function render()
     {
         return view('livewire.os.informacoes.senha-input',[
             'senha'=> $this->senha,
             'senha_id'=> $this->senha_id,
+            'public' => $this->public,
             ]);
     }
 
