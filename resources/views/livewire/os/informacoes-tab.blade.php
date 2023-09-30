@@ -58,9 +58,15 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             @endif
-                            <button type="button"  title="Compartilhar"  class="btn btn-block bg-lightblue" data-toggle="modal" data-target="#modal-compartilhar_{{ $item->id }}" >
-                                <i class="fa-solid fa-share-from-square"></i>
-                            </button>
+                            @if ($item->uuid)
+                                <button type="button"  title="Compartilhado"  class="btn btn-block btn-success" data-toggle="modal" data-target="#modal-compartilhar_{{ $item->id }}" >
+                                    <i class="fa-solid fa-share-from-square"></i>
+                                </button>
+                            @else
+                                <button type="button"  title="Compartilhar"  class="btn btn-block bg-lightblue" data-toggle="modal" data-target="#modal-compartilhar_{{ $item->id }}" >
+                                    <i class="fa-solid fa-share-from-square"></i>
+                                </button>
+                            @endif
                         </div>
                     </td>
                     <!-- Modal - Vizlualização  -->
@@ -173,9 +179,10 @@
                                     </div>
                                     @endif
                                     <div class="col-md-12">
-                                        <div class="row mb-3">
+                                        <div class="row mb-1">
                                             @if ($item->uuid)
-                                            <input type="text" id="url_{{$item->id}}" class="form-control form-control-border" value="{{$item->urlShare()}}">
+                                            <a href="{{$item->urlShare()}}" class="ml-2" style="white-space: nowrap; overflow: hidden;" target="_blank" rel="noopener noreferrer">{{$item->urlShare()}}</a>
+                                            {{-- <input type="text" id="url_{{$item->id}}" class="form-control form-control-border" value="{{$item->urlShare()}}"> --}}
                                             @endif
                                         </div>
                                         @if (!$item->uuid)
