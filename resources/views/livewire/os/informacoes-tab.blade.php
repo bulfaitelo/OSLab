@@ -190,18 +190,21 @@
                                                 <i class="fa-solid fa-share-nodes"></i>
                                                 Gerar URL
                                             </button>
+                                            <br>
+                                            <i>Esse link terá validade por: {{getConfig('os_link_time_limit')}} minutos</i>
                                         @else
                                             <button type="button" wire:click="createShareUrl({{$item->id}})" class="btn btn-sm btn-primary" >
                                                 <i class="fa-solid fa-retweet"></i>
                                                 Atualizar URL
                                             </button>
-
                                         @endif
                                         @if ($item->uuid)
                                             <button type="button" wire:click="deleteShareUrl({{$item->id}})" class="btn btn-sm btn-danger" >
                                                 <i class="fa-solid fa-share-nodes"></i>
                                                 Apagar URL
                                             </button>
+                                            <br>
+                                            <i>Esse link será valido até: {{$item->validade_link?->format('H:i - d/m/Y')}}</i>
                                         @endif
                                     </div>
                                 </div>

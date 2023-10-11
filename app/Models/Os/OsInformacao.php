@@ -20,6 +20,10 @@ class OsInformacao extends Model
 
     ];
 
+    protected $casts = [
+        'validade_link' => 'datetime'
+    ];
+
     /**
      * Retorna o tipo com base no id
      *

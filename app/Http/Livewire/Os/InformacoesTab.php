@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Os;
 
 use App\Models\Os\Os;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use Livewire\Component;
@@ -188,6 +189,7 @@ class InformacoesTab extends Component
     public function createShareUrl(int $id) : void {
         $informacao = Os::find($this->os_id)->informacoes->find($id);
         $informacao->uuid = \Str::uuid();
+        $informacao->validade_link = Carbon::now()->addMinutes(getConfig('os_link_time_limit'));
         $informacao->save();
     }
 
@@ -200,6 +202,7 @@ class InformacoesTab extends Component
     public function deleteShareUrl(int $id) : void {
         $informacao = Os::find($this->os_id)->informacoes->find($id);
         $informacao->uuid = null;
+        $informacao->validade_link = null;
         $informacao->save();
     }
 

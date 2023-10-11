@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tipo_informacao')->nullable();
             $table->string('informacao')->nullable();
             $table->uuid('uuid')->nullable();
+            $table->timestamp('validade_link')->nullable();
             $table->timestamps();
         });
     }
