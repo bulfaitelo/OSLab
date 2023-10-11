@@ -17,7 +17,7 @@ class SistemaConfigController extends Controller
     {
         // ACL DE PERMISSÕES
         $this->middleware('permission:config_sistema', ['only'=> 'index']);
-        $this->middleware('permission:config_sistema_edit', ['only'=> ['update', ]]);
+        $this->middleware('permission:config_sistema_edit', ['only'=> ['store', ]]);
 
     }
 
