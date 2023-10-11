@@ -28,8 +28,9 @@
                     </li>
                 </ul>
             </div>
-            <form action="">
-                <div class="card-body">
+            {!! html()->form('post', route('configuracao.sistema.store'))->open() !!}
+            <div class="card-body">
+                    @include('adminlte::partials.form-alert')
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
                             GERAl
@@ -39,8 +40,15 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="default_os_create_status">Status Padrão OS</label>
-                                        {!! html()->select('default_os_create_status', App\Models\Configuracao\Os\StatusOs::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
+                                        {!! html()->select('sistema[default_os_create_status]', App\Models\Configuracao\Os\StatusOs::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
                                         <i>Status que sera carregado por padrão na criação de uma nova Os </i>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="tempo_link">Tempo da validade do Link: <output id="tempo_link_label">{{getConfig('os_link_time_limit')}}</output> Minutos</label>
+                                        <input type="range" name="sistema[os_link_time_limit]" value="{{getConfig('os_link_time_limit')}}" min="1" max="60" step="1" class="custom-range" id="tempo_link" oninput="tempo_link_label.value = tempo_link.value">
+                                        <i>Esse parametro define o tempo maximo de validade do link caso o cliente não preencha</i>
                                     </div>
                                 </div>
                                 {{-- <div class="col-md-4">
@@ -62,7 +70,7 @@
                         </button>
                     @endcan
                 </div>
-            </form>
+            {!! html()->form()->close() !!}
         </div>
     </div>
 </div>

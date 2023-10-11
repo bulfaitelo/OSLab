@@ -20,6 +20,12 @@ class DefaultsConfigSistema extends Seeder
                 'value' => '1',
 
             ],
+            [
+                'key' => 'os_link_time_limit',
+                'value' => '10',
+
+            ],
+
             // [
             //     'key' => 'default_os_create_category',
             //     'value' => '',

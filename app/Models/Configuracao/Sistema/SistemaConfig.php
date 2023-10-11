@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SistemaConfig extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'key',
+        'value',
+    ];
 }

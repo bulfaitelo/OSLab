@@ -11,7 +11,7 @@ class StoreSistemaConfigRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreSistemaConfigRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'sistema.default_os_create_status' => 'required|exists:status_os,id',
+            'sistema.os_link_time_limit' => 'required|integer'
+
         ];
     }
 }

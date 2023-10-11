@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Configuracao\Sistema\StoreSistemaConfigRequest;
 use App\Http\Requests\Configuracao\Sistema\UpdateSistemaConfigRequest;
 use App\Models\Configuracao\Sistema\SistemaConfig;
-
+use Illuminate\Support\Facades\DB;
 
 class SistemaConfigController extends Controller
 {
@@ -41,10 +41,28 @@ class SistemaConfigController extends Controller
     // /**
     //  * Store a newly created resource in storage.
     //  */
-    // public function store(StoreSistemaConfigRequest $request)
-    // {
-    //     //
-    // }
+    public function store(StoreSistemaConfigRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            foreach ($request->sistema as $key => $value) {
+                SistemaConfig::updateOrCreate(
+                    [
+                        'key' => $key
+                    ],
+                    [
+                        'value' => $value
+                    ]
+                );
+            }
+            DB::commit();
+            return redirect()->route('configuracao.sistema.index')
+            ->with('success', 'Configurações de sistema atualizadas com sucesso!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+    }
 
     // /**
     //  * Display the specified resource.
@@ -65,10 +83,10 @@ class SistemaConfigController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSistemaConfigRequest $request, SistemaConfig $sistemaConfig)
-    {
-        //
-    }
+    // public function update(UpdateSistemaConfigRequest $request, SistemaConfig $sistemaConfig)
+    // {
+    //     dd($request);
+    // }
 
     // /**
     //  * Remove the specified resource from storage.

@@ -123,7 +123,7 @@ Route::group(['middleware'=> 'auth'], function() {
             Route::resource('/modelo', ModeloController::class);
         });
         Route::resource('/sistema', SistemaConfigController::class)->only([
-            'index', 'update'
+            'index', 'store',
         ]);
 
 
