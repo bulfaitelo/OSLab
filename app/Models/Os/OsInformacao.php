@@ -17,6 +17,7 @@ class OsInformacao extends Model
         'descricao',
         'tipo_informacao',
         'informacao',
+        'status',
 
     ];
 
@@ -32,10 +33,24 @@ class OsInformacao extends Model
     function getTipo() : string {
         $tipo = [
             1 => 'Anotação',
-            2=> 'Senha',
-            3=> 'Arquivo',
+            2 => 'Senha',
+            3 => 'Arquivo',
         ];
         return $tipo[$this->tipo];
+    }
+
+    /**
+     * Retorna o status com base no id
+     *
+     * @return string status
+     */
+    function getStatus() : string {
+        $status = [
+            1 => 'Cadastrado',
+            2 => 'Expirado',
+            3 => 'Atualizado pelo Cliente',
+        ];
+        return $status[$this->status] ;
     }
 
     /**

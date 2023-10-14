@@ -46,7 +46,8 @@ class InformacoesTab extends Component
             $os->informacoes()->create([
                 'user_id' => auth()->id(),
                 'tipo' => 1,
-                'informacao' => $this->anotacao
+                'informacao' => $this->anotacao,
+                'status'=> 1,
             ]);
             DB::commit();
             $this->dispatchBrowserEvent('closeModal');
@@ -84,6 +85,7 @@ class InformacoesTab extends Component
                 'tipo'=> 2,
                 'tipo_informacao' => $this->tipo_senha,
                 'informacao'=> $infomacao,
+                'status'=> 1,
             ]);
             DB::commit();
             $this->descricao_senha = "";
@@ -125,6 +127,7 @@ class InformacoesTab extends Component
                 'tipo'=> 3,
                 'tipo_informacao' => $this->arquivo->extension(),
                 'informacao'=> $arquivo,
+                'status'=> 1,
             ]);
             $this->descricao_arquivo = '';
             $this->dispatchBrowserEvent('closeModal');

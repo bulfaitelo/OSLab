@@ -21,6 +21,7 @@
             <th>Tipo</th>
             <th>Descrição</th>
             <th>Cadastro</th>
+            <th>Status</th>
             <th style="width: 40px"></th>
             </tr>
         </thead>
@@ -30,6 +31,7 @@
                     <td>{{ $item->getTipo() }}</td>
                     <td>{{ Str::limit($item->getDescricao(), '100') }}</td>
                     <td>{{ $item->created_at->format('H:i - d/m/Y') }}</td>
+                    <td>{{ $item->getStatus() }}</td>
                     <td>
                         <div class="btn-group btn-group-sm float-right">
                             @if ($item->tipo == 3)

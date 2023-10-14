@@ -32,7 +32,8 @@ class ResetInformacaoLinks extends Command
             OsInformacao::where('validade_link',  '<', now() )
                 ->update([
                     'uuid' => null,
-                    'validade_link' => null
+                    'validade_link' => null,
+                    'status' => 2,
                 ]);
             DB::commit();
         } catch (\Throwable $th) {

@@ -35,6 +35,7 @@ class OsPublicController extends Controller
             $informacao->informacao = $request->informacao;
             $informacao->descricao = $request->descricao;
             $informacao->uuid = null;
+            $informacao->status = 3;
             $informacao->save();
             return redirect()->route('os.public.updated')
             ->with('success', 'Os Atualizada com sucesso.');
