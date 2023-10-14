@@ -478,23 +478,23 @@
             p.setPattern(senha);
         }
     }
-    document.addEventListener('livewire:load', function () {
-        prepareFormSenha()
-        $('#tipo_senha').on("change", function () {
-            prepareFormSenha()
-        })
+    // document.addEventListener('livewire:load', function () {
+    //     prepareFormSenha()
+    //     $('#tipo_senha').on("change", function () {
+    //         prepareFormSenha()
+    //     })
 
-        function prepareFormSenha() {
-            var tipo_senha = $('#tipo_senha').val();
-            if (tipo_senha == 'texto') {
-                $('#senha_texto').attr("required","required");
-                $('#salvesenha').removeAttr("disabled", "disabled");
-            } else {
-                $('#senha_texto').removeAttr("required");
-                $('#salvesenha').attr("disabled", "disabled");
+    //     function prepareFormSenha() {
+    //         var tipo_senha = $('#tipo_senha').val();
+    //         if (tipo_senha == 'texto') {
+    //             $('#senha_texto').attr("required","required");
+    //             $('#salvesenha').removeAttr("disabled", "disabled");
+    //         } else {
+    //             $('#senha_texto').removeAttr("required");
+    //             $('#salvesenha').attr("disabled", "disabled");
 
-            }
-        }
+    //         }
+    //     }
 
 
     });

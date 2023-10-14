@@ -65,8 +65,8 @@ class InformacoesTab extends Component
         $this->senha_padrao = $senha_padrao;
         $this->validate([
             'tipo_senha' => 'required',
-            'senha_texto' => 'required_if:tipo_senha,texto',
-            'senha_padrao' => 'required_if:tipo_senha,padrao|min:4|nullable'
+            // 'senha_texto' => 'required_if:tipo_senha,texto',
+            'senha_padrao' => '|min:4|nullable'
         ]);
         DB::beginTransaction();
         try {
