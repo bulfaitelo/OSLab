@@ -497,7 +497,7 @@
     //     }
 
 
-    });
+    // });
 </script>
 
 @if(count($errors) > 0)
