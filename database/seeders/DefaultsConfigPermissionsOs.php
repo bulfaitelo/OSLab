@@ -41,6 +41,12 @@ class DefaultsConfigPermissionsOs extends Seeder
                 'group_id' => 3,
             ],
             [
+                'description' => 'Visualizar Impressão Ordem de Serviço',
+                'name' => 'os_print',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
                 'description' => 'Excluir Ordem de Serviço',
                 'name' => 'os_destroy',
                 'guard_name' => 'web',
