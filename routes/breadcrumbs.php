@@ -56,13 +56,13 @@ Breadcrumbs::for('teste', function (BreadcrumbTrail $trail) {
     // OS > [Visualização de OS]
     Breadcrumbs::for('os.show', function (BreadcrumbTrail $trail, Os $item) {
         $trail->parent('os.index');
-        $trail->push($item->name, route('os.show', $item));
+        $trail->push('#' .$item->id, route('os.show', $item));
     });
 
     // OS > [OS Name] > Editar OS
     Breadcrumbs::for('os.edit', function (BreadcrumbTrail $trail, Os $item) {
         $trail->parent('os.index');
-        $trail->push('Editar OS', route('os.edit', $item));
+        $trail->push('#' .$item->id, route('os.edit', $item));
     });
 // FIM Os
 

@@ -115,7 +115,7 @@ class OsController extends Controller
      */
     public function show(Os $os)
     {
-        //
+        return view('os.show', compact('os'));
     }
 
     /**
