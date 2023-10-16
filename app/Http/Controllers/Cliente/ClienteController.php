@@ -123,6 +123,10 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         try {
+            if($cliente->os->count() > 0){
+                return redirect()->route('cliente.index')
+                ->with('warning', 'Existem OS cadastradas para esse cliente!');
+            }
             $cliente->delete();
             return redirect()->route('cliente.index')
                 ->with('success', 'Cliente excluído com sucesso.');
