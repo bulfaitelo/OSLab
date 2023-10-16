@@ -80,6 +80,7 @@
         </div>
     </div>
     {{-- Modal Excluir --}}
+    @can('cliente_destroy')
     <div class="modal fade"  id="modal-excluir" role="dialog"  aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -101,6 +102,7 @@
             </div>
         </div>
     </div>
+    @endcan
     {{-- // Modal Excluir --}}
 </div>
 @stop
