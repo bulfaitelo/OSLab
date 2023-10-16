@@ -70,11 +70,11 @@
                 </tbody>
             </table>
         </div>
-      <!-- /.card-body -->
-      <div class="card-footer clearfix">
-          {{-- {{$Produtos->appends(['busca' => $busca])->links() }} --}}
-          {{ $produtos->links() }}
-      </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+            {{-- {{$Produtos->appends(['busca' => $busca])->links() }} --}}
+            {{ $produtos->links() }}
+        </div>
     </div>
     {{-- Modal Excluir --}}
     @can('produto_destroy')

@@ -98,6 +98,11 @@ class ServicoController extends Controller
     public function destroy(Servico $servico)
     {
         try {
+            $servicoCount = $servico->os->count();
+            if ($servicoCount > 0) {
+                return redirect()->route('servico.index')
+                ->with('warning', 'O servico não pode ser excluído pois está sendo usado em: '. $servicoCount. ' Os');
+            }
             $servico->delete();
             return redirect()->route('servico.index')
                 ->with('success', 'Serviço excluído com sucesso.');
