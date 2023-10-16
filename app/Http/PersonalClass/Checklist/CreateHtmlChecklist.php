@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Class\Checklist;
+namespace App\Http\PersonalClass\Checklist;
 
 /**
  *

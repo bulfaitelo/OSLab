@@ -2,7 +2,7 @@
 
 namespace App\Models\Os;
 
-use App\Http\Class\Checklist\CreateHtmlChecklist;
+use App\Http\PersonalClass\Checklist\CreateHtmlChecklist;
 use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\StatusOs;
