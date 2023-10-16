@@ -121,6 +121,11 @@ class ProdutoController extends Controller
     public function destroy(Produto $produto)
     {
         try {
+            $produtoCount = $produto->os->count();
+            if ($produtoCount > 0) {
+                return redirect()->route('produto.index')
+                ->with('warning', 'O produto não pode ser excluído pois está sendo usado em: '. $produtoCount. ' Os');
+            }
             $produto->delete();
             return redirect()->route('produto.index')
                 ->with('success', 'Produto excluído com sucesso.');

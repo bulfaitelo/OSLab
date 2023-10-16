@@ -91,7 +91,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                <p><b>Nome:</b> <span>asd</span></p>
+                <p><b>Nome:</b> <span></span></p>
                 </div>
                 <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
