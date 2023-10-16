@@ -22,39 +22,40 @@
             <li class="nav-item ">
                 <a class="nav-link active" id="detalhes-tab" data-toggle="pill" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="true">
                     <i class="fa-regular fa-rectangle-list "></i>
-                    Detalhes
+                    <span class="d-none d-sm-inline">Detalhes</span>
                 </a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" id="#produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="false">
                     <i class="fas fa-box-open "></i>
-                    Produtos
+                    <span class="d-none d-sm-inline">Produtos</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="servicos-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="servicos" aria-selected="false">
                     <i class="fas fa-hand-holding-usd "></i>
-                    Serviços
+                    <span class="d-none d-sm-inline">Serviços</span>
                 </a>
             </li>
             @if ($os->categoria->checklist_id)
             <li class="nav-item">
                 <a class="nav-link" id="checklist-tab" data-toggle="pill" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
                     <i class="fa-solid fa-list-check "></i>
-                    <span>Checklist</span>
+                    <span class="d-none d-sm-inline">Checklist</span>
+
                 </a>
             </li>
             @endif
             <li class="nav-item">
                 <a class="nav-link" id="informacoes-tab" data-toggle="pill" href="#informacoes" role="tab" aria-controls="informacoes" aria-selected="false">
                     <i class="fa-solid fa-circle-info"></i>
-                    Informações
+                    <span class="d-none d-sm-inline">Informações</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="balancete-tab" data-toggle="pill" href="#balancete" role="tab" aria-controls="balancete" aria-selected="false">
                     <i class="fas fa-balance-scale"></i>
-                    Balancete
+                    <span class="d-none d-sm-inline">Balancete</span>
                 </a>
             </li>
         </ul>
