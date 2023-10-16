@@ -129,7 +129,6 @@ class ProdutoController extends Controller
             $produto->delete();
             return redirect()->route('produto.index')
                 ->with('success', 'Produto excluído com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -24,10 +24,10 @@ class Produto extends Model
     }
 
     /**
-     * Retornar as movimentações dos Produtos
+     * Retornar as Os dos Produtos
      *
-     * Retorna as movimentações relacionadas aos produtos.
-     * @return hasMany Movimentações
+     * Retorna as Os relacionadas aos produtos.
+     * @return hasMany OS
      **/
     public function os() : HasMany {
         return $this->hasMany(OsProduto::class);
