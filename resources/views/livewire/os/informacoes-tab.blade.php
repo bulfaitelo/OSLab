@@ -42,22 +42,7 @@
                             <button wire:click="$emitTo('os.informacoes.visualizar-modal', 'open', {{$item->id}} )"  class="btn btn-block btn-default"  title="Visualizar" >
                                 <i class="fas fa-eye"></i>
                             </button>
-                            {{-- <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button> --}}
-                            @if($confirmacaoDelete===$item->id)
-                                <button wire:click="delete({{ $item->id }})" title="Excluir"
-                                    class="btn btn-left bg-olive " >
-                                    <i class="fa-solid fa-check"></i>
-                                </button>
-                                <button wire:click="cancelDelete()" title="Cancelar"
-                                    class="btn btn-left bg-maroon" >
-                                    <i class="fa-solid fa-ban"></i>
-                                </button>
-                            @else
-                                <button wire:click="confirmDelete({{ $item->id }})"
-                                    class="btn btn-left  btn-danger" >
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            @endif
+                            @livewire('os.informacoes.delete-button', ['os_id' => $item->os_id, 'item_id' => $item->id], key($item->id))
                             <button type="button"
                                 @if ($item->uuid)
                                     title="Compartilhado"  class="btn btn-block btn-success"

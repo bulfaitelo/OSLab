@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Os\Informacoes;
 
 use App\Models\Os\Os;
-use App\Models\Os\OsInformacao;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -41,8 +40,7 @@ class CompartilharModal extends Component
         $informacao->uuid = \Str::uuid();
         $informacao->validade_link = Carbon::now()->addMinutes(getConfig('os_link_time_limit'));
         $informacao->save();
-        $this->emit('updateCompartilhar');
-
+        $this->emit('updateInformacoesTable');
     }
 
     /**
@@ -56,7 +54,7 @@ class CompartilharModal extends Component
         $informacao->uuid = null;
         $informacao->validade_link = null;
         $informacao->save();
-        $this->emit('updateCompartilhar');
+        $this->emit('updateInformacoesTable');
 
 
     }

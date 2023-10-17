@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Os;
 
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
-
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -12,7 +11,7 @@ class InformacoesTab extends Component
 {
     use WithFileUploads;
 
-    protected $listeners = ['updateCompartilhar' => '$refresh'];
+    protected $listeners = ['updateInformacoesTable' => '$refresh'];
 
     public $anotacao;
     public $posts;
@@ -23,7 +22,7 @@ class InformacoesTab extends Component
     public $senha_padrao;
     public $arquivo;
     public $descricao_arquivo;
-    public $confirmacaoDelete;
+
 
     public function render()
     {
@@ -151,47 +150,14 @@ class InformacoesTab extends Component
         return \Storage::disk('public')->download($arquivo->informacao);
     }
 
-    /**
-     * Exibe botão, para excluir item
-     */
-    public function confirmDelete($id) : void {
-        $this->confirmacaoDelete = $id;
-    }
-
-    /**
-     * Cancela exibição do botão de excluir
-     */
-    public function cancelDelete() : void {
-        $this->confirmacaoDelete = '';
-    }
 
 
     /**
-     * Deleta informação e caso exista arquivo o exclui também
-     */
-    public function delete($informacao_id) : void {
-        try {
-            $informacao = Os::find($this->os_id)->informacoes->find($informacao_id);
-            if ($informacao->tipo == 3) { // tipo 3 é arquivo
-                $delete = \Storage::disk('public')->delete($informacao->informacao);
-            }
-            $informacao->delete();
-            $this->dispatchBrowserEvent('closeModal');
-            flasher('Anotação removida com sucesso.');
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-
-
-
-     /**
      * Cria o nome do arquivo enviado
      *
      * Cria o nome do arquivo de forma que remova caracteres especiais e adiciona um uuid curto.
      *
-     * @param File $arquivo
+     * @param $arquivo
      * @return string $fileName
      **/
     private function createFileName($arquivo)
@@ -203,8 +169,8 @@ class InformacoesTab extends Component
     /**
      * Gera letras aleatórias para upload de arquivos.
      *
-     * @param Integer $length Tamanho do uuid
-     * @return String uuid
+     * @param integer $length Tamanho do uuid
+     * @return string uuid
      **/
     private function generateRandomLetters($length) {
         $random = '';
@@ -217,8 +183,8 @@ class InformacoesTab extends Component
     /**
      * Tratando caracteres par remover possíveis caracteres inválidos.
      *
-     * @param String $str
-     * @return String
+     * @param string $str
+     * @return string
      **/
     private function removeSpecialChars($str) {
         $str = preg_replace('/[áàãâä]/ui', 'a', $str);
