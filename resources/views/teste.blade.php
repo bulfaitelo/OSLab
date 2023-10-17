@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-@livewire('teste')
+@livewire('galaxy.index')
 @stop
 
 @section('css')
@@ -17,7 +17,9 @@
 @stop
 
 @section('js')
+<script>
 
+</script>
 @stop
 
 @section('footer')
