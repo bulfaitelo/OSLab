@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             @foreach ($informacoes as $item)
-                <tr>
+                <tr wire:key="{{ $item->id }}">
                     <td>{{ $item->getTipo() }}</td>
                     <td>{{ Str::limit($item->getDescricao(), '100') }}</td>
                     <td>{{ $item->created_at->format('H:i - d/m/Y') }}</td>
@@ -39,10 +39,11 @@
                                 <i class="fa-solid fa-download"></i>
                             </button>
 
+
                             @endif
                             {{-- <a title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a> --}}
                             {{-- <button type="button"  title="Visualizar"  class="btn btn-block btn-default" data-toggle="modal" data-target="#modal-vizualizar_{{ $item->id }}" onclick="setPadrao('{{$item->id}}', '{{$item->tipo_informacao}}', '{{$item->informacao}}')" > --}}
-                            <button wire:click="$emitTo('os.informacoes.visualisar-modal', 'open', {{$item->id}} )"  class="btn btn-block btn-default"  title="Visualizar"  >
+                            <button wire:click="$emitTo('os.informacoes.visualizar-modal', 'open', {{$item->id}} )"  class="btn btn-block btn-default"  title="Visualizar" >
                                 <i class="fas fa-eye"></i>
                             </button>
                             {{-- <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button> --}}
@@ -394,8 +395,20 @@
         @livewire('os.informacoes.visualizar-modal')
     </div>
     <!-- FIM Modal - Vizlualização  -->
-
-
+    <script>
+        document.addEventListener('livewire:load', function () {
+            window.livewire.on('toggleVisualizarModal', () => $('#modal-vizualizar').modal('toggle'));
+            window.livewire.on('senhaPadrao', (senha) => {
+                var e = document.getElementById('lock_view');
+                var p =  new PatternLock(e, {
+                });
+                if (senha) {
+                    p.setPattern(senha);
+                    p.success();;
+                }
+            });
+        });
+    </script>
 <script>
     window.addEventListener('closeModal', event => {
         $('.modal').modal('hide');
@@ -474,14 +487,14 @@
     })
 </script>
 <script>
-    function setPadrao(id, tipo, senha) {
-        if (tipo == 'padrao') {
-            var e = document.getElementById('lock_view_'+id);
-            var p =  new PatternLock(e, {
-            });
-            p.setPattern(senha);
-        }
-    }
+    // function setPadrao(id, tipo, senha) {
+    //     if (tipo == 'padrao') {
+    //         var e = document.getElementById('lock_view_'+id);
+    //         var p =  new PatternLock(e, {
+    //         });
+    //         p.setPattern(senha);
+    //     }
+    // }
     // document.addEventListener('livewire:load', function () {
     //     prepareFormSenha()
     //     $('#tipo_senha').on("change", function () {
