@@ -12,8 +12,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        $os = Os::find(4);
-        return ($os->getHtmlChecklist());
+        return view ('teste');
     }
 
     /**
