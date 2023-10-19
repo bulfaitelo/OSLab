@@ -9,7 +9,7 @@
 @section('content')
 <div class="col-md-12">
     <div class="card ">
-      <div class="card-header despesa pb-2 ">
+        <div class="card-header despesa pb-2 ">
             <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
@@ -34,8 +34,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-2 ">
-                                <label for="busca">Cliente / Despesa / Observação </label>
-                                {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Despesa, Observação') !!}
+                            <label for="busca">Cliente / Despesa / Observação </label>
+                            {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Despesa, Observação') !!}
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -89,95 +89,90 @@
                 </div>
                 {!! html()->form()->close() !!}
             </div>
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body pt-2 table-responsive">
-        <table class="table table-sm table-hover text-nowrap">
-          <thead>
-            <tr>
-              <th style="width: 10px">#</th>
-              <th>Despesa</th>
-              <th>Cliente/ Fornecedor</th>
-              <th>Centro de Custo</th>
-              <th>Total</th>
-              <th>Valor Pago</th>
-              <th>Valor Pendente</th>
-              <th>Parcelas</th>
-              <th>Dia Vencimento</th>
-              <th>Quitação</th>
-              <th style="width: 40px"></th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($despesas as $item)
-              <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->name}}</td>
-                <td>{{ $item->cliente->name}}</td>
-                <td>{{ $item->centroCusto->name}}</td>
-                <td>R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
-                <td>R$ {{ number_format($item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
-                <td>R$ {{ number_format($item->valor - $item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
-                <td>{{ $item->parcelas}}</td>
-                <td>{{ $item->getVencimentoDate()}}</td>
-                <td>{{ $item->data_quitacao?->format('d/m/Y') ?? ''}}</td>
-
-
-
-                <td>
-                    <div class="btn-group btn-group-sm">
-                        @can('financeiro_despesa_edit')
-                            <a href="{{ route('financeiro.despesa.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                        @endcan
-                        @can('financeiro_despesa_show')
-                            <a href="{{ route('financeiro.despesa.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
-                        @endcan
-                        @can('financeiro_despesa_destroy')
-                            <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                        @endcan
-                    </div>
-                        @can('financeiro_despesa_destroy')
-                        <div class="modal fade" id="modal-excluir_{{ $item->id }}">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                <p><b>Nome:</b> {{ $item->name}}</p>
-                                </div>
-                                <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                    {!! html()->form('delete', route('financeiro.despesa.destroy', $item->id))->open() !!}
-                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Despesa">
-                                    {!! html()->form()->close() !!}
-
-                                </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pt-2 table-responsive">
+            <table class="table table-sm table-hover text-nowrap">
+                <thead>
+                    <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Despesa</th>
+                    <th>Cliente/ Fornecedor</th>
+                    <th>Centro de Custo</th>
+                    <th>Total</th>
+                    <th>Valor Pago</th>
+                    <th>Valor Pendente</th>
+                    <th>Parcelas</th>
+                    <th>Dia Vencimento</th>
+                    <th>Quitação</th>
+                    <th style="width: 40px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($despesas as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->name}}</td>
+                        <td>{{ $item->cliente->name}}</td>
+                        <td>{{ $item->centroCusto->name}}</td>
+                        <td>R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
+                        <td>R$ {{ number_format($item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                        <td>R$ {{ number_format($item->valor - $item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                        <td>{{ $item->parcelas}}</td>
+                        <td>{{ $item->getVencimentoDate()}}</td>
+                        <td>{{ $item->data_quitacao?->format('d/m/Y') ?? ''}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                @can('financeiro_despesa_edit')
+                                    <a href="{{ route('financeiro.despesa.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                                @endcan
+                                @can('financeiro_despesa_show')
+                                    <a href="{{ route('financeiro.despesa.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                @endcan
+                                @can('financeiro_despesa_destroy')
+                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('financeiro.despesa.destroy', $item->id)}}" data-target="#modal-excluir" ><i class="fas fa-trash"></i></button>
+                                @endcan
                             </div>
-                            <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-                        @endcan
-                    </div>
-                  <!-- /.modal -->
-                </td>
-              </tr>
+                        <!-- /.modal -->
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-
-      <!-- /.card-body -->
-      <div class="card-footer clearfix">
-          {{$despesas->appends($request->all())->links() }}
-          {{-- {{ $despesas->links() }} --}}
-      </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+            {{$despesas->appends($request->all())->links() }}
+            {{-- {{ $despesas->links() }} --}}
+        </div>
     </div>
+</div>
+    {{-- Modal Excluir --}}
+    @can('financeiro_despesa_destroy')
+    <div class="modal fade"  id="modal-excluir" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <p><b>Nome:</b> <span></span></p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    {!! html()->form('delete')->open() !!}
+                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Despesa">
+                    {!! html()->form()->close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    @endcan
+    {{-- // Modal Excluir --}}
 </div>
 @stop
 
@@ -226,5 +221,15 @@ $(document).ready(function() {
   });
 });
 
+</script>
+<script>
+    $('#modal-excluir').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var name = button.data('name') // Extract info from data-* attributes
+        var url = button.data('url') // Extract info from data-* attributes
+        var modal = $(this)
+        modal.find('.modal-body span').text(name)
+        modal.find('form').attr('action', url);
+    })
 </script>
 @stop
