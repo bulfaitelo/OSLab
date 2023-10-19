@@ -47,7 +47,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="cliente_id">Cliente / Fornecedor </label>
-                    {!! html()->select('cliente_id', [$receita->cliente_id => $receita->cliente->name], $receita->cliente_id)->class('form-control cliente')->placeholder('Selecione')->required() !!}
+                    {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@
 
         </div>
 
-        <div class="card-body pt-2 table-responsive">
+        <div class="card-body  pr-0 pl-0 pt-2 table-responsive">
             <table class="table table-sm table-hover text-nowrap">
               <thead>
                 <tr>
@@ -362,11 +362,55 @@
     }
 </style>
 @stop
-
 @section('js')
 @routes
 <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
-<script src="{{ url('') }}/src/js/select-cliente.js"></script>
+<script>
+
+    $(document).ready(function() {
+        // tom-select Clientes
+        tomSelectCliente = new TomSelect(".cliente",{
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            // fetch remote data
+            load: function(query, callback) {
+                var url = route('cliente.select') + '?q=' + encodeURIComponent(query);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                    }).catch(()=>{
+                        callback();
+                    });
+            },
+            render: {
+                option: function(data, escape) {
+                return '<div>' +
+                        '<span class="title">' + escape(data.name) + '</span>' +
+                        '<span class="url"> <b> Tipo Cliente: </b> ' + escape(data.tipo) + ' | <b> Quant. OS: </b> ' + escape(data.os_count) + '</span>' +
+                    '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                },
+                @can('cliente_create')
+                no_results:function(data,escape){
+                    return '<div class="no-results">' +
+                                '<p>Cliente não encontrado</p>' +
+                                '<a href="'+ route('cliente.create')+'" target="_blank">' +
+                                    '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Criar</button>' +
+                                '</a>' +
+                            '</div>';
+                },
+                @endcan
+            },
+        });
+        // selecionando os dados do cliente
+        tomSelectCliente.addOption(@js($item->conta->getClienteForSelect()));
+        tomSelectCliente.addItem(@js($item->conta->cliente_id));
+    });
+</script>
 
 <script>
 

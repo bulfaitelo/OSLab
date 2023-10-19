@@ -72,7 +72,7 @@
 
         </div>
 
-        <div class="card-body pt-2 table-responsive">
+        <div class="card-body  pr-0 pl-0 pt-2 table-responsive">
             <table class="table table-sm table-hover text-nowrap">
               <thead>
                 <tr>

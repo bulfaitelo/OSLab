@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Visualizar Despesa')
+@section('title', 'Visualizar Receita')
 
 @section('content_header')
-    <h1><i class="fa-solid fa-money-bill"></i> Visualizar Despesa</h1>
+    <h1><i class="fa-solid fa-money-bill"></i> Visualizar Receita</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
     <div class="col-md-11 ">
         <!-- general form elements -->
         <div class="card">
-            <div class="card-header despesa">
+            <div class="card-header receita">
                 <a href="{{ url()->previous() }}">
                     <button type="button"  class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
@@ -28,13 +28,13 @@
             <div class="col-md-8">
                 <div class="form-group">
                     <label for="name">Despesa</label>
-                    {!! html()->text('name', $despesa->name)->class('form-control')->placeholder('Descrição da despesa ')->disabled() !!}
+                    {!! html()->text('name', $receita->name)->class('form-control')->placeholder('Descrição da despesa ')->disabled() !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="centro_custo_id">Centro de Custo</label>
-                    {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'),$despesa->centro_custo_id)->class('form-control')->placeholder('Selecione o Centro de Custo')->disabled() !!}
+                    {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'),$receita->centro_custo_id)->class('form-control')->placeholder('Selecione o Centro de Custo')->disabled() !!}
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="cliente_id">Cliente / Fornecedor </label>
-                    {!! html()->select('cliente_id', [$despesa->cliente_id => $despesa->cliente->name], $despesa->cliente_id)->class('form-control cliente')->placeholder('Selecione')->disabled() !!}
+                    {!! html()->select('cliente_id', [$receita->cliente_id => $receita->cliente->name], $receita->cliente_id)->class('form-control cliente')->placeholder('Selecione')->disabled() !!}
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="observacoes"> Observações </label>
-                    {!! html()->textarea('observacoes', $despesa->observacoes)->class('form-control')->placeholder('Observações (opcional)')->disabled() !!}
+                    {!! html()->textarea('observacoes', $receita->observacoes)->class('form-control')->placeholder('Observações (opcional)')->disabled() !!}
                 </div>
             </div>
         </div>
@@ -58,21 +58,21 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="valor"> Valor </label>
-                    {!! html()->text('valor', $despesa->valor)->class('form-control decimal')->placeholder('Valor total da despesa')->disabled() !!}
+                    {!! html()->text('valor', $receita->valor)->class('form-control decimal')->placeholder('Valor total da despesa')->disabled() !!}
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group ">
                     <label for="parcelas"> Parcelas </label>
                     <div class="input-group">
-                        {!! html()->text('parcelas', $despesa->parcelas)->class('form-control int')->placeholder('Parcelas')->disabled() !!}
+                        {!! html()->text('parcelas', $receita->parcelas)->class('form-control int')->placeholder('Parcelas')->disabled() !!}
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <div class="card-body pt-2 table-responsive">
+        <div class="card-body pr-0 pl-0 pt-2 table-responsive">
             <table class="table table-sm table-hover text-nowrap">
               <thead>
                 <tr>
@@ -85,7 +85,7 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach ($despesa->pagamentos as $item)
+                @foreach ($receita->pagamentos as $item)
                   <tr>
                     <td>{{ $item->parcela }}</td>
                     <td>{{ $item->formaPagamento?->name}}</td>

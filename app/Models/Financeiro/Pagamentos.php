@@ -31,6 +31,11 @@ class Pagamentos extends Model
 
 
 
+    public function conta() : BelongsTo
+    {
+        return $this->belongsTo(Contas::class);
+    }
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -40,4 +45,6 @@ class Pagamentos extends Model
     {
         return $this->belongsTo(FormaPagamento::class);
     }
+
+
 }

@@ -53,8 +53,26 @@ class Contas extends Model
         } else {
 
         }
-
     }
+
+    /**
+     * Retorna id e nome do Cliente.
+     *
+     * Retorna um vetor com o o id e o Cliente para ser usado no Select2
+     * @return array Categoria
+     **/
+    public function getClienteForSelect() : array {
+        if ($this->cliente_id) {
+            return [
+                'id' => $this->cliente_id,
+                'name' => $this->cliente->name,
+                'tipo' => $this->cliente->getTipoCliente(),
+                'os_count' => $this->cliente->os->count(),
+            ];
+        }
+        return [] ;
+    }
+
 
 
 }

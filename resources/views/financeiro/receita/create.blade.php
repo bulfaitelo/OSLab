@@ -197,7 +197,49 @@
 @section('js')
 @routes
 <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
-<script src="{{ url('') }}/src/js/select-cliente.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // tom-select Clientes
+        var tomSelectCliente = new TomSelect(".cliente",{
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            // fetch remote data
+            load: function(query, callback) {
+                var url = route('cliente.select') + '?q=' + encodeURIComponent(query);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(json => {
+                        callback(json);
+                    }).catch(()=>{
+                        callback();
+                    });
+            },
+            render: {
+                option: function(data, escape) {
+                return '<div>' +
+                        '<span class="title">' + escape(data.name) + '</span>' +
+                        '<span class="url"> <b> Tipo Cliente: </b> ' + escape(data.tipo) + ' | <b> Quant. OS: </b> ' + escape(data.os_count) + '</span>' +
+                    '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                },
+                @can('cliente_create')
+                no_results:function(data,escape){
+                    return '<div class="no-results">' +
+                                '<p>Cliente não encontrado</p>' +
+                                '<a href="'+ route('cliente.create')+'" target="_blank">' +
+                                    '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Criar</button>' +
+                                '</a>' +
+                            '</div>';
+                },
+                @endcan
+            },
+        });
+    });
+</script>
 
 <script>
 
