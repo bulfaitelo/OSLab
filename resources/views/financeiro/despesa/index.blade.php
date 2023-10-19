@@ -147,7 +147,7 @@
             {{-- {{ $despesas->links() }} --}}
         </div>
     </div>
-</div>
+
     {{-- Modal Excluir --}}
     @can('financeiro_despesa_destroy')
     <div class="modal fade"  id="modal-excluir" role="dialog"  aria-hidden="true">
