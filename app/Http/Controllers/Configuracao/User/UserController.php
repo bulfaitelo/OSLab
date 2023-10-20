@@ -5,13 +5,9 @@ namespace App\Http\Controllers\Configuracao\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Configuracao\Setor;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Configuracao\User\PermissionsGroup;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 
@@ -38,9 +34,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
         $users = User::orderBy('name', 'ASC')
-        ->get();
+                ->with('setor')
+                ->paginate(50);
         return view('configuracao.users.index', compact('users'));
     }
 
