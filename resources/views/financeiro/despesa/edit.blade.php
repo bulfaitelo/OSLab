@@ -20,311 +20,304 @@
                     </button>
                 </a>
             </div>
-          <!-- /.card-header -->
-          <!-- form start -->
+            <!-- /.card-header -->
+            <!-- form start -->
 
-          <div class="card-body">
-          @include('adminlte::partials.form-alert')
+            <div class="card-body">
+                @include('adminlte::partials.form-alert')
 
-          <form action="{{ route('financeiro.despesa.update', $despesa) }}" id="form-despesa" method="post">
-            @csrf
-            @method('PUT')
-          <div class="row">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label for="name">Despesa</label>
-                    {!! html()->text('name', $despesa->name)->class('form-control')->placeholder('Descrição da despesa ')->required() !!}
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="centro_custo_id">Centro de Custo</label>
-                    {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'),$despesa->centro_custo_id)->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="cliente_id">Cliente / Fornecedor </label>
-                    {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="observacoes"> Observações </label>
-                    {!! html()->textarea('observacoes', $despesa->observacoes)->class('form-control')->placeholder('Observações (opcional)') !!}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="valor"> Valor </label>
-                    {!! html()->text('valor', $despesa->valor)->class('form-control decimal')->placeholder('Valor total da despesa')->required() !!}
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group ">
-                    <label for="parcelas"> Parcelas </label>
-                    <div class="input-group">
-                        {!! html()->text('parcelas', $despesa->parcelas)->class('form-control int')->placeholder('Parcelas')->required() !!}
-                        @can('financeiro_despesa_pagamento_create')
-                            <span class="input-group-append">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-pagamento">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
-                            </span>
-                        @endcan
-                    </div>
-                    {!! html()->form()->close() !!}
-                    @can('financeiro_despesa_pagamento_create')
-                    <div class="modal fade" id="modal-pagamento">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Adicionar uma nova parcela</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('financeiro.despesa.pagamento.store', $despesa) }}" id="form-pagamento" method="post">
-                                        @csrf
-                                    <div class="row">
-                                        <div  class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="parcela"> Parcela </label>
-                                                {!! html()->text('parcela')->class('form-control int')->placeholder('Parcela')->required() !!}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="vencimento"> Vencimento </label>
-                                                {!! html()->date('vencimento')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
-                                            </div>
-                                        </div>
-                                        <div  class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="forma_pagamento_id">Forma de pagamento</label>
-                                                {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <div class="form-group">
-                                                <label for="pago">Pago</label>
-                                                <div class="custom-control custom-switch custom-switch-md">
-                                                    <input type="checkbox" name="pago" @checked(old('pago') == 'on') id="pago" class="custom-control-input" onclick="alternaPago()">
-                                                    <label class="custom-control-label" for="pago"></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row div_pago collapse" id="collapseExample">
-                                        <div  class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="pagamento_valor"> Valor </label>
-                                                {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor') !!}
-                                            </div>
-                                        </div>
-                                        <div  class="col-md-4 ">
-                                            <div class="form-group">
-                                                <label for="data_pagamento"> Data pagamento </label>
-                                                {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago') !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                        <i class="fas fa-times"></i>
-                                        Fechar
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-save"></i>
-                                        Salvar
-                                    </button>
-                                </div>
-                                {!! html()->form()->close() !!}
+                <form action="{{ route('financeiro.despesa.update', $despesa) }}" id="form-despesa" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="name">Receita</label>
+                                {!! html()->text('name', $despesa->name)->class('form-control')->placeholder('Descrição da despesa')->required() !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="centro_custo_id">Centro de Custo</label>
+                                {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'),$despesa->centro_custo_id)->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
                             </div>
                         </div>
                     </div>
-                    @endcan
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="cliente_id">Cliente / Fornecedor </label>
+                                {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="observacoes"> Observações </label>
+                                {!! html()->textarea('observacoes', $despesa->observacoes)->class('form-control')->placeholder('Observações (opcional)') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="valor"> Valor </label>
+                                {!! html()->text('valor', $despesa->valor)->class('form-control decimal')->placeholder('Valor total da Receita')->required() !!}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group ">
+                                <label for="parcelas"> Parcelas </label>
+                                <div class="input-group">
+                                    {!! html()->text('parcelas', $despesa->parcelas)->class('form-control int')->placeholder('Parcelas')->required() !!}
+                                    @can('financeiro_despesa_pagamento_create')
+                                        <span class="input-group-append">
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-pagamento">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    @endcan
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {!! html()->form()->close() !!}
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-sm table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">Parcela</th>
+                            <th>Forma Pagamento</th>
+                            <th>Usuario</th>
+                            <th>Valor</th>
+                            <th>Vencimento</th>
+                            <th>Data Pagamento</th>
+                            <th style="width: 40px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($despesa->pagamentos as $item)
+                        <tr>
+                            <td>{{ $item->parcela }}</td>
+                            <td>{{ $item->formaPagamento?->name}}</td>
+                            <td>{{ $item->user->name}}</td>
+                            <td>R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
+                            <td>{{ $item->vencimento?->format('d/m/Y') ?? ''}}</td>
+                            <td>{{ $item->data_pagamento?->format('d/m/Y') ?? ''}}</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    @can('financeiro_despesa_pagamento_edit')
+                                        <button  title="Editar" class="btn btn-left btn-info" data-toggle="modal" data-json="{{$item->dataModal()}}"  data-url="{{route('financeiro.despesa.pagamento.update', [$despesa->id, $item->id])}}" data-target="#modal-editar" ><i class="fas fa-edit"></i></button>
+                                    @endcan
+                                    @can('financeiro_despesa_pagamento_destroy')
+                                        <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->parcela}}" data-url="{{route('financeiro.despesa.pagamento.destroy', [$despesa->id, $item->id])}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
+                                    @endcan
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            {{-- Minimal with icon only --}}
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="button" onclick="$('#form-despesa').submit();" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Salvar
+                </button>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+    {{-- Modal par editar pagamento --}}
+    @can('financeiro_despesa_pagamento_edit')
+    <div class="modal fade" id="modal-editar">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar: Parcela </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-pagamento" method="post">
+                        @method('put')
+                        @csrf
+                    <div class="row">
+                        <div  class="col-md-2">
+                            <div class="form-group">
+                                <label for="parcela"> Parcela </label>
+                                {!! html()->text('parcela')->class('form-control int')->placeholder('Parcela')->required() !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="vencimento"> Vencimento </label>
+                                {!! html()->date('vencimento')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
+                            </div>
+                        </div>
+                        <div  class="col-md-4">
+                            <div class="form-group">
+                                <label for="forma_pagamento_id">Forma de pagamento</label>
+                                {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="pago_edit">Pago</label>
+                                <div class="custom-control custom-switch custom-switch-md">
+                                    <input type="checkbox" name="pago" id="pago_edit" class="custom-control-input" onchange="alternaPagoEdit()">
+                                    <label class="custom-control-label" for="pago_edit"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row div_pago_edit" id="collapseExample">
+                        <div  class="col-md-4">
+                            <div class="form-group">
+                                <label for="pagamento_valor"> Valor </label>
+                                {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor') !!}
+                            </div>
+                        </div>
+                        <div  class="col-md-4 ">
+                            <div class="form-group">
+                                <label for="data_pagamento"> Data pagamento </label>
+                                {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago') !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                        Fechar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Salvar
+                    </button>
+                </div>
+                {!! html()->form()->close() !!}
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    @endcan
+    {{-- /Modal par editar pagamento --}}
+
+    {{-- Modal para excluir Pagamento --}}
+    @can('financeiro_despesa_pagamento_destroy')
+    <div class="modal fade"  id="modal-excluir" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <p><b>Parcela:</b> <span></span></p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    {!! html()->form('delete')->open() !!}
+                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Pagamento">
+                    {!! html()->form()->close() !!}
                 </div>
             </div>
-
         </div>
+    </div>
+    @endcan
+    {{-- /Modal para excluir Pagamento --}}
 
-        <div class="card-body pr-0 pl-0 pt-2 table-responsive">
-            <table class="table table-sm table-hover text-nowrap">
-              <thead>
-                <tr>
-                  <th style="width: 10px">Parcela</th>
-                  <th>Forma Pagamento</th>
-                  <th>Usuario</th>
-                  <th>Valor</th>
-                  <th>Vencimento</th>
-                  <th>Data Pagamento</th>
-                  <th style="width: 40px"></th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($despesa->pagamentos as $item)
-                  <tr>
-                    <td>{{ $item->parcela }}</td>
-                    <td>{{ $item->formaPagamento?->name}}</td>
-                    <td>{{ $item->user->name}}</td>
-                    <td>R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
-                    <td>{{ $item->vencimento?->format('d/m/Y') ?? ''}}</td>
-                    <td>{{ $item->data_pagamento?->format('d/m/Y') ?? ''}}</td>
-                    <td>
-                        <div class="btn-group btn-group-sm">
-                            @can('financeiro_despesa_pagamento_edit')
-                                <button  title="Editar" class="btn btn-left btn-info" data-toggle="modal" data-target="#modal-editar_{{ $item->id }}"><i class="fas fa-edit"></i></button>
-                            @endcan
-                            @can('financeiro_despesa_pagamento_destroy')
-                                <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                            @endcan
+    {{-- Modal para criação de Pagamento de parcela --}}
+    @can('financeiro_despesa_pagamento_create')
+    <div class="modal fade" id="modal-pagamento">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Adicionar uma nova parcela</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('financeiro.despesa.pagamento.store', $despesa) }}" id="form-pagamento" method="post">
+                        @csrf
+                    <div class="row">
+                        <div  class="col-md-2">
+                            <div class="form-group">
+                                <label for="parcela"> Parcela </label>
+                                {!! html()->text('parcela')->class('form-control int')->placeholder('Parcela')->required() !!}
+                            </div>
                         </div>
-                        @can('financeiro_despesa_pagamento_edit')
-                                <div class="modal fade" id="modal-editar_{{ $item->id }}">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Editar: Parcela </h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{ route('financeiro.despesa.pagamento.update', [$despesa->id, $item->id]) }}" id="form-pagamento" method="post">
-                                                    @method('put')
-                                                    @csrf
-                                                <div class="row">
-                                                    <div  class="col-md-2">
-                                                        <div class="form-group">
-                                                            <label for="parcela"> Parcela </label>
-                                                            {!! html()->text('parcela', $item->parcela)->class('form-control int')->placeholder('Parcela')->required() !!}
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="vencimento"> Vencimento </label>
-                                                            {!! html()->date('vencimento', $item->vencimento)->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
-                                                        </div>
-                                                    </div>
-                                                    <div  class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="forma_pagamento_id">Forma de pagamento</label>
-                                                            {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'), $item->forma_pagamento_id)->class('form-control')->placeholder('Selecione') !!}
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <div class="form-group">
-                                                            <label for="pago_{{$item->id}}">Pago</label>
-                                                            <div class="custom-control custom-switch custom-switch-md">
-                                                                <input type="checkbox" name="pago" @checked($item->data_pagamento) id="pago_{{$item->id}}" class="custom-control-input" onclick="alternaPagoEdit({{ $item->id }})">
-                                                                <label class="custom-control-label" for="pago_{{$item->id}}"></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row div_pago_{{$item->id}}  @if (!$item->data_pagamento) collapse @endif " id="collapseExample">
-                                                    <div  class="col-md-4">
-                                                        <div class="form-group">
-                                                            <label for="pagamento_valor"> Valor </label>
-                                                            {!! html()->text('pagamento_valor', $item->valor)->class('form-control decimal')->placeholder('Valor') !!}
-                                                        </div>
-                                                    </div>
-                                                    <div  class="col-md-4 ">
-                                                        <div class="form-group">
-                                                            <label for="data_pagamento"> Data pagamento </label>
-                                                            {!! html()->date('data_pagamento', $item->data_pagamento)->class('form-control')->placeholder('Valor Pago') !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                    <i class="fas fa-times"></i>
-                                                    Fechar
-                                                </button>
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="fas fa-save"></i>
-                                                    Salvar
-                                                </button>
-                                            </div>
-                                            {!! html()->form()->close() !!}
-
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                            @endcan
-
-                            @can('financeiro_despesa_pagamento_destroy')
-                                <div class="modal fade" id="modal-excluir_{{ $item->id }}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p><b>Nome:</b> {{ $item->name}}</p>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                {!! html()->form('delete', route('financeiro.despesa.pagamento.destroy', [$despesa->id, $item->id]))->open() !!}
-                                                    <input type="submit" class="btn btn-danger delete-permission" value="Excluir Despesa">
-                                                {!! html()->form()->close() !!}
-
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                            @endcan
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="vencimento"> Vencimento </label>
+                                {!! html()->date('vencimento')->class('form-control')->placeholder('Nome da forma de pagamento')->required() !!}
+                            </div>
                         </div>
-                      <!-- /.modal -->
-                    </td>
-                  </tr>
-
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-
-
-
-          </div>
-          {{-- Minimal with icon only --}}
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="button" onclick="$('#form-despesa').submit();" class="btn btn-primary">
-                <i class="fas fa-save"></i>
-                Salvar
-            </button>
-          </div>
+                        <div  class="col-md-4">
+                            <div class="form-group">
+                                <label for="forma_pagamento_id">Forma de pagamento</label>
+                                {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="pago">Pago</label>
+                                <div class="custom-control custom-switch custom-switch-md">
+                                    <input type="checkbox" name="pago" @checked(old('pago') == 'on') id="pago" class="custom-control-input" onclick="alternaPago()">
+                                    <label class="custom-control-label" for="pago"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row div_pago collapse" id="collapseExample">
+                        <div  class="col-md-4">
+                            <div class="form-group">
+                                <label for="pagamento_valor"> Valor </label>
+                                {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor') !!}
+                            </div>
+                        </div>
+                        <div  class="col-md-4 ">
+                            <div class="form-group">
+                                <label for="data_pagamento"> Data pagamento </label>
+                                {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago') !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                        Fechar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Salvar
+                    </button>
+                </div>
+                {!! html()->form()->close() !!}
+            </div>
         </div>
-      <!-- /.card -->
-
-      </div>
+    </div>
+    @endcan
+    {{-- /Modal para criação de Pagamento de parcela --}}
 </div>
 @stop
 
 @section('css')
 <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
 <style>
-    .receita {
-        border-top: 3px solid #12cd37;
-        /* background-color: #aaceb1; */
+    .despesa {
+        border-top: 3px solid #cd121f;
     }
 
     .custom-switch.custom-switch-md .custom-control-label {
@@ -362,12 +355,10 @@
     }
 </style>
 @stop
-
 @section('js')
 @routes
 <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 <script>
-
     $(document).ready(function() {
         // tom-select Clientes
         tomSelectCliente = new TomSelect(".cliente",{
@@ -414,7 +405,6 @@
 </script>
 
 <script>
-
     $('.decimal').mask('#.##0,00', { reverse: true });
     $('.int').mask('#0', { reverse: true });
     $('#data_info').popover({
@@ -422,11 +412,10 @@
     });
 </script>
 <script>
-
-$(document).ready(function () {
-        alternaPago();
-});
-function alternaPago() {
+    $(document).ready(function () {
+            alternaPago();
+    });
+    function alternaPago() {
         var checkPago = $('#pago');
         var divPAgo = $('.div_pago');
         if (checkPago.prop('checked') == true) {
@@ -444,23 +433,57 @@ function alternaPago() {
         }
     }
 
-    function alternaPagoEdit(id) {
-        var checkPago = $('#pago_'+id);
+    function alternaPagoEdit() {
+        var checkPago = $('#pago_edit');
 
         if (checkPago.prop('checked') == true) {
             // divPAgo.css('display', '');
-
-            $('.div_pago_'+id).collapse('show');
+            $('.div_pago_edit').collapse('show');
             // $('#pagamento_valor').attr("required","required");
             // $('#forma_pagamento_id').attr("required","required");
             // $('#data_pagamento').attr("required","required");
         } else {
             // divPAgo.css('display', 'none');
-            $('.div_pago_'+id).collapse('hide');
+            $('.div_pago_edit').collapse('hide');
             // $('#pagamento_valor').removeAttr("required");
             // $('#forma_pagamento_id').removeAttr("required");
             // $('#data_pagamento').removeAttr("required");
         }
     }
+</script>
+
+<script>
+    $('#modal-excluir').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var name = button.data('name') // Extract info from data-* attributes
+        var url = button.data('url') // Extract info from data-* attributes
+        var modal = $(this)
+        modal.find('.modal-body span').text(name)
+        modal.find('form').attr('action', url);
+    })
+
+    $('#modal-editar').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var item = button.data('json') // Extract info from data-* attributes
+        console.log(item);
+        var url = button.data('url') // Extract info from data-* attributes
+        var modal = $(this)
+
+        // valores
+        modal.find('#parcela').val(item.parcela);
+        modal.find('#vencimento').val(item.vencimento);
+        modal.find('#forma_pagamento_id').val(item.forma_pagamento_id);
+        if (item.data_pagamento) {
+            modal.find('#pago_edit').prop('checked', true);
+            $('.div_pago_edit').collapse('show');
+        } else {
+            modal.find('#pago_edit').prop('checked', false);
+            $('.div_pago_edit').collapse('hide');
+        }
+
+        modal.find('#pagamento_valor').val(item.valor);
+        modal.find('#data_pagamento').val(item.data_pagamento);
+        modal.find('form').attr('action', url);
+    })
 </script>
 @stop
