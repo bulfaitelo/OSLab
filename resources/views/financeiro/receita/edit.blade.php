@@ -176,7 +176,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row div_pago_edit" id="collapseExample">
+                    <div class="row collapse div_pago_edit">
                         <div  class="col-md-4">
                             <div class="form-group">
                                 <label for="pagamento_valor"> Valor </label>
@@ -413,9 +413,9 @@
     });
 </script>
 <script>
-    $(document).ready(function () {
-            alternaPago();
-    });
+    // $(document).ready(function () {
+    //         alternaPago();
+    // });
     function alternaPago() {
         var checkPago = $('#pago');
         var divPAgo = $('.div_pago');
@@ -457,7 +457,6 @@
     $('#modal-editar').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var item = button.data('json') // Extract info from data-* attributes
-        console.log(item);
         var url = button.data('url') // Extract info from data-* attributes
         var modal = $(this)
 

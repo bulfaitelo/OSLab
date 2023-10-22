@@ -176,7 +176,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row div_pago_edit" id="collapseExample">
+                    <div class="row collapse div_pago_edit">
                         <div  class="col-md-4">
                             <div class="form-group">
                                 <label for="pagamento_valor"> Valor </label>
@@ -412,9 +412,6 @@
     });
 </script>
 <script>
-    $(document).ready(function () {
-            alternaPago();
-    });
     function alternaPago() {
         var checkPago = $('#pago');
         var divPAgo = $('.div_pago');
