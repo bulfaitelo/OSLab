@@ -8,6 +8,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\Configuracao\User\PermissionsGroup;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 
@@ -207,6 +208,10 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
+            if(Auth::id() == $user->id) {
+                return redirect()->route('configuracao.users.index')
+                ->with('warning', 'o Usuário logado não pode ser excluído!');
+            }
             $user->delete();
             return redirect()->route('configuracao.users.index')
                 ->with('success', 'Usuário excluído com sucesso.');
