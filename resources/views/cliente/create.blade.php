@@ -32,7 +32,7 @@
                     <div class="input-group ">
                         {!! html()->text('registro')->class('form-control cpf_cnpj')->placeholder('CPF ou CNPJ') !!}
                         <span class="input-group-append">
-                            <button disabled type="button" id="busca_cnpj" class="btn btn-info">Buscar CNPJ</button>
+                            <button disabled type="button" id="busca_registro" class="btn btn-info">Buscar CNPJ</button>
                         </span>
                     </div>
                     <i class="text-danger" id="msg_cpnj_error"></i>

@@ -1,11 +1,13 @@
 // Busca CNPJ
 $(document).ready(function() {
-    $('#busca_cnpj').click(function() {
+    $('#busca_registro').click(function() {
         var cnpj = $('#registro').val().replace(/\D/g, '');
 
         if (validateCnpj(cnpj)) {
             //Preenche os campos com "..." enquanto consulta webservice.
             $("#name").val("...");
+            $("#fantasia").val("...");
+            $("#porte").val("...");
             $("#email").val("...");
             $("#cep").val("...");
             $("#logradouro").val("...");
@@ -31,6 +33,8 @@ $(document).ready(function() {
                         if ($("#nomeEmitente").val() != null) {
                             $("#nomeEmitente").val(capital_letter(dados.nome));
                         }
+                        $("#fantasia").val(capital_letter(dados.fantasia));
+                        $("#porte").val(capital_letter(dados.porte));
                         $("#cep").val(dados.cep.replace(/\./g, ''));
                         $("#email").val(dados.email.toLocaleLowerCase());
                         $("#telefone").val(dados.telefone.split("/")[0].replace(/\ /g, ''));
@@ -110,18 +114,18 @@ $(document).ready(function() {
                 $('#registro').addClass('is-valid').removeClass('is-invalid');
                 $('#msg_cpnj_error').text('');
                 if (registro.length == 14) {
-                    $('#busca_cnpj').attr("disabled", false);
+                    $('#busca_registro').attr("disabled", false);
                 }
 
             } else {
                 $('#registro').addClass('is-invalid').removeClass('is-valid');
                 $('#msg_cpnj_error').text('CPF ou CNPJ Invalido');
-                $('#busca_cnpj').attr("disabled", true);
+                $('#busca_registro').attr("disabled", true);
             }
         } else {
             $('#registro').removeClass('is-valid').removeClass('is-invalid');
             $('#msg_cpnj_error').text('');
-            $('#busca_cnpj').attr("disabled", true);
+            $('#busca_registro').attr("disabled", true);
         }
     });
 
