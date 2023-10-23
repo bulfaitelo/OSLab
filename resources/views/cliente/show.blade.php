@@ -26,7 +26,7 @@
           <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
-                    <label for="name">CPF / CNPJ</label>
+                    <label for="registro">CPF / CNPJ</label>
                     <div class="input-group ">
                         {!! html()->text('registro', $cliente->registro)->class('form-control cpf_cnpj')->placeholder('Nome do usuário')->disabled() !!}
                     </div>

@@ -28,7 +28,7 @@
             {!! html()->form('post', route('cliente.store'))->acceptsFiles()->open() !!}
             <div class="row">
                 <div class="col-md-4">
-                    <label for="name">CPF / CNPJ</label>
+                    <label for="registro">CPF / CNPJ</label>
                     <div class="input-group ">
                         {!! html()->text('registro')->class('form-control cpf_cnpj')->placeholder('CPF ou CNPJ') !!}
                         <span class="input-group-append">
