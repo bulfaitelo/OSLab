@@ -400,6 +400,7 @@ return [
                 'config_os_garantia', 'config_os_categoria',
                 'config_wiki_fabricante', 'config_wiki_modelo',
                 'config_sistema',
+                'config_emitente'
 
             ],
             'submenu' => [
@@ -516,8 +517,15 @@ return [
                     'text'    => 'Sistema',
                     'icon'    => 'fa-solid fa-sitemap',
                     'route'   => 'configuracao.sistema.index',
-                    'active'  => ['sistema*'],
+                    'active'  => ['configuracoes/sistema*'],
                     'can'     => 'config_sistema',
+                ],
+                [
+                    'text'    => 'Emitente',
+                    'icon'    => 'fa-solid fa-building',
+                    'route'   => 'configuracao.emitente.index',
+                    'active'  => ['configuracoes/emitente*'],
+                    'can'     => 'config_emitente',
                 ],
             ],
 

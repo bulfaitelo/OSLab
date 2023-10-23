@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Checklist\ChecklistController;
 use App\Http\Controllers\Cliente\ClienteController;
+use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Os\GarantiaController;
@@ -125,6 +126,8 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::resource('/sistema', SistemaConfigController::class)->only([
             'index', 'store',
         ]);
+
+        Route::resource('emitente', EmitenteController::class);
 
 
     });

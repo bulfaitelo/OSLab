@@ -11,6 +11,7 @@ use App\Models\Configuracao\Financeiro\FormaPagamento;
 use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\StatusOs;
+use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Configuracao\Sistema\SistemaConfig;
 use App\Models\Configuracao\User\Setor;
 use App\Models\Configuracao\Wiki\Fabricante;
@@ -603,4 +604,31 @@ Breadcrumbs::for('teste.index', function (BreadcrumbTrail $trail) {
         $trail->parent('configuracao.sistema.index');
         $trail->push('Editar Sistema', route('configuracao.sistema.edit', $item));
     });
-// Fim Configuração Usuários
+// Fim Configuração Sistema
+
+// Configuração Emitente
+    // Emitente
+    Breadcrumbs::for('configuracao.emitente.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Emitente', route('configuracao.sistema.index'));
+    });
+
+    // Emitente > Novo Emitente
+    Breadcrumbs::for('configuracao.emitente.create', function (BreadcrumbTrail $trail) {
+        $trail->parent('configuracao.emitente.index');
+        $trail->push('Novo Emitente', route('configuracao.emitente.create'));
+    });
+
+    // Emitente > [Visualização de Emitente]
+    Breadcrumbs::for('configuracao.emitente.show', function (BreadcrumbTrail $trail, Emitente $item) {
+        $trail->parent('configuracao.emitente.index');
+        $trail->push(Str::limit($item->name, 20), route('configuracao.emitente.show', $item));
+    });
+
+    // Emitente > [Emitente Name] > Editar Emitente
+    Breadcrumbs::for('configuracao.emitente.edit', function (BreadcrumbTrail $trail, Emitente $item) {
+        $trail->parent('configuracao.emitente.index');
+        $trail->push('Editar Emitente', route('configuracao.emitente.edit', $item));
+    });
+// Fim Configuração Emitente
