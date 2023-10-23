@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('complemento')->nullable();
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
-            $table->string('estado', 2)->nullable();
+            $table->string('uf', 2)->nullable();
             $table->timestamps();
         });
     }
