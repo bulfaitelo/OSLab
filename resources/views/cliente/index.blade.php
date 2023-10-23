@@ -34,6 +34,7 @@
                     <th>Cliente</th>
                     <th>Celular</th>
                     <th>Email</th>
+                    <th>Estado</th>
                     <th>OS</th>
                     <th style="width: 40px"></th>
                     </tr>
@@ -51,6 +52,7 @@
                         <td>{{ $item->name}}</td>
                         <td>{{ $item->celular}}</td>
                         <td>{{ $item->email}}</td>
+                        <td>{{ $item->uf}}</td>
                         <td>{{ $item->os->count() }}</td>
                         <td>
                             <div class="btn-group btn-group-sm">

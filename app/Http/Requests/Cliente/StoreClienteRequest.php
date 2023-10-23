@@ -25,7 +25,7 @@ class StoreClienteRequest extends FormRequest
             'name' => 'required|',
             'email' => 'nullable|email|unique:clientes',
             'password' => 'nullable|confirmed|min:8',
-            'estado'=> 'nullable|max:2',
+            'uf'=> 'nullable|max:2',
             'registro' => 'cpf_ou_cnpj|nullable|unique:clientes',
         ];
     }

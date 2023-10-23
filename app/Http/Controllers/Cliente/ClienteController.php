@@ -61,7 +61,7 @@ class ClienteController extends Controller
             $cliente->numero = $request->numero;
             $cliente->bairro = $request->bairro;
             $cliente->cidade = $request->cidade;
-            $cliente->estado = $request->estado;
+            $cliente->uf = $request->uf;
             $cliente->complemento = $request->complemento;
             $cliente->save();
             return redirect()->route('cliente.index')

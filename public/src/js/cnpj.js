@@ -12,7 +12,7 @@ $(document).ready(function() {
             $("#numero").val("...");
             $("#bairro").val("...");
             $("#cidade").val("...");
-            $("#estado").val("...");
+            $("#uf").val("...");
             $("#complemento").val("...");
             $("#telefone").val("...");
             //Consulta o webservice receitaws.com.br/
@@ -38,7 +38,7 @@ $(document).ready(function() {
                         $("#numero").val(dados.numero);
                         $("#bairro").val(capital_letter(dados.bairro));
                         $("#cidade").val(capital_letter(dados.municipio));
-                        $("#estado").val(dados.uf);
+                        $("#uf").val(dados.uf);
                         if (dados.complemento != "") {
                             $("#complemento").val(capital_letter(dados.complemento));
                         } else{
@@ -218,7 +218,7 @@ $(document).ready(function() {
             $('#logradouro').val(data.logradouro);
             $('#bairro').val(data.bairro);
             $('#cidade').val(data.localidade);
-            $('#estado').val(data.uf);
+            $('#uf').val(data.uf);
             $('#cep').removeClass('is-valid').removeClass('is-invalid').addClass('is-valid');
             $('#numero').focus();
         } else {

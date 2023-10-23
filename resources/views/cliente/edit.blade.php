@@ -114,8 +114,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="estado">Estado</label>
-                        {!! html()->text('estado', $cliente->estado)->class('form-control')->placeholder('Estado') !!}
+                        <label for="uf">Estado</label>
+                        {!! html()->text('uf', $cliente->uf)->class('form-control')->placeholder('Estado') !!}
                     </div>
                 </div>
             </div>
