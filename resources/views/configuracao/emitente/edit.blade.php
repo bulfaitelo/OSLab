@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Cadastro Emitente')
+@section('title', 'Editar Emitente')
 
 @section('content_header')
-    <h1><i class="fa-solid fa-users "></i> Cadastro Emitente</h1>
+    <h1><i class="fa-solid fa-users "></i> Editar Emitente</h1>
 @stop
 
 @section('content')
@@ -25,14 +25,14 @@
 
           <div class="card-body">
             @include('adminlte::partials.form-alert')
-            {!! html()->form('post', route('configuracao.emitente.store'))->acceptsFiles()->open() !!}
+            {!! html()->form('put', route('configuracao.emitente.update', $emitente))->acceptsFiles()->open() !!}
             <div class="row">
                 <div class="col-md-4">
                     <label for="registro">CNPJ</label>
                     <div class="input-group ">
-                        {!! html()->text('registro')->class('form-control cnpj')->placeholder('CNPJ') !!}
+                        {!! html()->text('registro', $emitente->cnpj)->class('form-control cnpj')->placeholder('CNPJ') !!}
                         <span class="input-group-append">
-                            <button disabled type="button" id="busca_registro" class="btn btn-info">Buscar</button>
+                            <button type="button" id="busca_registro" class="btn btn-info">Buscar</button>
                         </span>
                     </div>
                     <i class="text-danger" id="msg_cpnj_error"></i>
@@ -40,13 +40,13 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="name">Razão Social</label>
-                        {!! html()->text('name')->class('form-control')->placeholder('Razão Social')->required() !!}
+                        {!! html()->text('name', $emitente->name)->class('form-control')->placeholder('Razão Social')->required() !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="fantasia">Nome Fantasia</label>
-                        {!! html()->text('fantasia')->class('form-control')->placeholder('Nome Fantasia') !!}
+                        {!! html()->text('fantasia', $emitente->fantasia)->class('form-control')->placeholder('Nome Fantasia') !!}
                     </div>
                 </div>
             </div>
@@ -54,25 +54,25 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="inscricao_estadual">Inscrição Estadual</label>
-                        {!! html()->text('inscricao_estadual')->class('form-control')->placeholder('Inscrição Estadual') !!}
+                        {!! html()->text('inscricao_estadual', $emitente->inscricao_estadual)->class('form-control')->placeholder('Inscrição Estadual') !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="porte">Porte</label>
-                        {!! html()->text('porte')->class('form-control')->placeholder('Porte, por exemplo MEI MICRO...') !!}
+                        {!! html()->text('porte', $emitente->porte)->class('form-control')->placeholder('Porte, por exemplo MEI MICRO...') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                       <label for="email">Email</label>
-                      {!! html()->email('email')->class('form-control')->placeholder('Email') !!}
+                      {!! html()->email('email', $emitente->email)->class('form-control')->placeholder('Email') !!}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="telefone">Telefone </label>
-                        {!! html()->text('telefone')->class('form-control tel')->placeholder('Telefone') !!}
+                        {!! html()->text('telefone', $emitente->telefone)->class('form-control tel')->placeholder('Telefone') !!}
                     </div>
                 </div>
             </div>
@@ -81,19 +81,19 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="cep">CEP</label>
-                        {!! html()->text('cep')->class('form-control cep')->placeholder('CEP') !!}
+                        {!! html()->text('cep', $emitente->cep)->class('form-control cep')->placeholder('CEP') !!}
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="Logradouro">Logradouro</label>
-                        {!! html()->text('logradouro')->class('form-control')->placeholder('Logradouro') !!}
+                        {!! html()->text('logradouro', $emitente->logradouro)->class('form-control')->placeholder('Logradouro') !!}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="numero">Número</label>
-                        {!! html()->text('numero')->class('form-control')->placeholder('Número') !!}
+                        {!! html()->text('numero', $emitente->numero)->class('form-control')->placeholder('Número') !!}
                     </div>
                 </div>
             </div>
@@ -101,19 +101,19 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="bairro">Bairro</label>
-                        {!! html()->text('bairro')->class('form-control')->placeholder('Bairro') !!}
+                        {!! html()->text('bairro', $emitente->bairro)->class('form-control')->placeholder('Bairro') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cidade">Cidade</label>
-                        {!! html()->text('cidade')->class('form-control')->placeholder('Cidade') !!}
+                        {!! html()->text('cidade', $emitente->cidade)->class('form-control')->placeholder('Cidade') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="uf">Estado</label>
-                        {!! html()->text('uf')->class('form-control')->placeholder('Estado') !!}
+                        {!! html()->text('uf', $emitente->uf)->class('form-control')->placeholder('Estado') !!}
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="complemento">Complemento</label>
-                        {!! html()->text('complemento')->class('form-control')->placeholder('Complemento') !!}
+                        {!! html()->text('complemento', $emitente->complemento)->class('form-control')->placeholder('Complemento') !!}
                     </div>
                 </div>
             </div>

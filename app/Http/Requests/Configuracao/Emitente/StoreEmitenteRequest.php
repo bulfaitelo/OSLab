@@ -11,7 +11,7 @@ class StoreEmitenteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,13 +25,14 @@ class StoreEmitenteRequest extends FormRequest
             'name' => 'required|',
             'email' => 'nullable|email',
             'uf'=> 'nullable|max:2',
+            'registro' => 'cnpj|nullable',
         ];
     }
 
     public function messages() {
         return [
             'name.required' => 'O campo Cliente é obrigatório.',
-            'registro.unique' => 'O CPF ou CNPJ já está em uso.',
+            'registro.cnpj' => 'O CNPJ não é válido.',
         ];
     }
 }

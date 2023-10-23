@@ -11,7 +11,7 @@ class UpdateEmitenteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class UpdateEmitenteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|',
+            'email' => 'nullable|email',
+            'uf'=> 'nullable|max:2',
+            'registro' => 'cnpj|nullable',
+        ];
+    }
+
+    public function messages() {
+        return [
+            'name.required' => 'O campo Cliente é obrigatório.',
+            'registro.cnpj' => 'O CNPJ não é válido.',
         ];
     }
 }

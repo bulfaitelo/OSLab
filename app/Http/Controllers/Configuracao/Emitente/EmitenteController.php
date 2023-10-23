@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Configuracao\Emitente\StoreEmitenteRequest;
 use App\Http\Requests\Configuracao\Emitente\UpdateEmitenteRequest;
 use App\Models\Configuracao\Sistema\Emitente;
+use Illuminate\Support\Facades\DB;
 
 class EmitenteController extends Controller
 {
@@ -26,7 +27,6 @@ class EmitenteController extends Controller
     public function index()
     {
         $emitente = Emitente::find(1);
-        // dd($emitente);
         if(!$emitente){
             return redirect()->route('configuracao.emitente.create');
         }
@@ -46,7 +46,33 @@ class EmitenteController extends Controller
      */
     public function store(StoreEmitenteRequest $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $emitente = new Emitente();
+            $emitente->cnpj = $request->registro;
+            $emitente->name = $request->name;
+            $emitente->fantasia = $request->fantasia;
+            $emitente->inscricao_estadual = $request->inscricao_estadual;
+            $emitente->porte = $request->porte;
+            $emitente->email = $request->email;
+            $emitente->telefone = $request->telefone;
+            $emitente->cep = $request->cep;
+            $emitente->logradouro = $request->logradouro;
+            $emitente->numero = $request->numero;
+            $emitente->bairro = $request->bairro;
+            $emitente->cidade = $request->cidade;
+            $emitente->uf = $request->uf;
+            $emitente->complemento = $request->complemento;
+            $emitente->save();
+            DB::commit();
+            return redirect()->route('configuracao.emitente.edit', [$emitente])
+            ->with('success', 'Emitente cadastrado com sucesso.');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+
     }
 
     /**
@@ -62,7 +88,7 @@ class EmitenteController extends Controller
      */
     public function edit(Emitente $emitente)
     {
-        //
+        return view('configuracao.emitente.edit', compact('emitente'));
     }
 
     /**
@@ -70,7 +96,31 @@ class EmitenteController extends Controller
      */
     public function update(UpdateEmitenteRequest $request, Emitente $emitente)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $emitente->cnpj = $request->registro;
+            $emitente->name = $request->name;
+            $emitente->fantasia = $request->fantasia;
+            $emitente->inscricao_estadual = $request->inscricao_estadual;
+            $emitente->porte = $request->porte;
+            $emitente->email = $request->email;
+            $emitente->telefone = $request->telefone;
+            $emitente->cep = $request->cep;
+            $emitente->logradouro = $request->logradouro;
+            $emitente->numero = $request->numero;
+            $emitente->bairro = $request->bairro;
+            $emitente->cidade = $request->cidade;
+            $emitente->uf = $request->uf;
+            $emitente->complemento = $request->complemento;
+            $emitente->save();
+            DB::commit();
+            return redirect()->route('configuracao.emitente.edit', [$emitente])
+            ->with('success', 'Emitente atualizado com sucesso.');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
