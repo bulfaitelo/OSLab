@@ -11,10 +11,16 @@
             <p><b>Nome:</b> <span></span></p>
             </div>
             <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                {!! html()->form('delete')->open() !!}
-                    <input type="submit" class="btn btn-danger delete-permission" value="Excluir">
-                {!! html()->form()->close() !!}
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+                <i class="fa-solid fa-ban"></i>
+                Fechar
+            </button>
+            {!! html()->form('delete')->open() !!}
+                <button type="submit" class="btn btn-danger delete-permission">
+                    <i class="fa-solid fa-trash"></i>
+                    Excluir
+                </button>
+            {!! html()->form()->close() !!}
             </div>
         </div>
     </div>
