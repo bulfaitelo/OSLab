@@ -49,6 +49,7 @@ class EmitenteController extends Controller
         DB::beginTransaction();
         try {
             $emitente = new Emitente();
+            $emitente->id = 1;
             $emitente->cnpj = $request->registro;
             $emitente->name = $request->name;
             $emitente->fantasia = $request->fantasia;
@@ -63,6 +64,12 @@ class EmitenteController extends Controller
             $emitente->cidade = $request->cidade;
             $emitente->uf = $request->uf;
             $emitente->complemento = $request->complemento;
+            $emitente->save();
+            $emitente->logo_url = $request->emitente_file->storeAs(
+                'emitente/',
+                $emitente->id.'.'.$request->emitente_file->getClientOriginalExtension(),
+                'public'
+            );
             $emitente->save();
             DB::commit();
             return redirect()->route('configuracao.emitente.edit', [$emitente])
@@ -112,6 +119,11 @@ class EmitenteController extends Controller
             $emitente->cidade = $request->cidade;
             $emitente->uf = $request->uf;
             $emitente->complemento = $request->complemento;
+            $emitente->logo_url = $request->emitente_file->storeAs(
+                'emitente/',
+                $emitente->id.'.'.$request->emitente_file->getClientOriginalExtension(),
+                'public'
+            );
             $emitente->save();
             DB::commit();
             return redirect()->route('configuracao.emitente.edit', [$emitente])
