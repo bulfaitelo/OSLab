@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class TestController extends Controller
      */
     public function index()
     {
-        return view ('teste');
+        // $emitente = new \App\Models\Configuracao\Sistema\Emitente();
+        // dd($emitente->getHtmlEmitente(1));
+        return Emitente::getHtmlEmitente(1);
     }
 
     /**
