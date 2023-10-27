@@ -15,14 +15,15 @@ class CompartilharModal extends Component
     protected $listeners = ['open' => 'loadCompartilharModal'];
 
 
-    function loadCompartilharModal($informacao_id) {
+    function loadCompartilharModal($informacao_id, $os_id) {
         $this->informacao_id = $informacao_id;
+        $this->os_id = $os_id;
 
         $this->emit('toggleCompartilharModal');
     }
     public function render()
     {
-        $this->item = Os::find($this->os_id)->informacoes->find($this->informacao_id);
+        $this->item = Os::find($this->os_id)?->informacoes->find($this->informacao_id);
         return view('livewire.os.informacoes.compartilhar-modal', [
             'item' => $this->item
         ]);

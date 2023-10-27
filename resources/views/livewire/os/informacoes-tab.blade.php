@@ -49,7 +49,7 @@
                                 @else
                                     title="Compartilhar"  class="btn btn-block bg-lightblue"
                                 @endif
-                                wire:click="$emitTo('os.informacoes.compartilhar-modal', 'open', {{$item->id}} )"  >
+                                wire:click="$emitTo('os.informacoes.compartilhar-modal', 'open', {{$item->id}}, {{$item->os_id}} )"  >
                                 <i class="fa-solid fa-share-from-square"></i>
                             </button>
                         </div>
@@ -230,7 +230,7 @@
 
     <!-- Modal - Compartilhar  -->
     <div wire:ignore.self class="modal fade" id="modal-compartilhar" tabindex="-1" role="dialog" aria-hidden="true">
-        @livewire('os.informacoes.compartilhar-modal', ['os_id' => $item->os_id])
+        @livewire('os.informacoes.compartilhar-modal')
     </div>
     <!-- FIM Modal - Compartilhar  -->
 <script>
