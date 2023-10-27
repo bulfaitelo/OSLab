@@ -31,12 +31,10 @@
                 <div class="col-md-3">
                     <div class="img-container">
                         <label>Logo</label>
-                        <input type="file" id="emitente_file" name="emitente_file" />
+                        <input type="file" id="emitente_file" name="emitente_file" accept=".jpeg, .jpg, .png, .bmp" />
                         <img id="logo_emitente"
                             @if ($emitente->logo_url)
                                 src="{{ asset('storage/'.$emitente->logo_url) }}"
-                                http://oslab.teste/storage/wiki/1/files//Thiago_Frente_pdf_nazpbhh.pdf
-                                http://oslab.teste/storage/emitente/1.jpeg
                             @else
                                 src="{{ asset('vendor/oslab/imgs/oslab_logo.png') }}"
                             @endif

@@ -7,6 +7,7 @@ use App\Http\Requests\Configuracao\Emitente\StoreEmitenteRequest;
 use App\Http\Requests\Configuracao\Emitente\UpdateEmitenteRequest;
 use App\Models\Configuracao\Sistema\Emitente;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class EmitenteController extends Controller
 {
@@ -64,12 +65,13 @@ class EmitenteController extends Controller
             $emitente->cidade = $request->cidade;
             $emitente->uf = $request->uf;
             $emitente->complemento = $request->complemento;
-            $emitente->save();
-            $emitente->logo_url = $request->emitente_file->storeAs(
-                'emitente/',
-                $emitente->id.'.'.$request->emitente_file->getClientOriginalExtension(),
-                'public'
-            );
+            if($request->emitente_file){
+                $emitente->logo_url = $request->emitente_file->storeAs(
+                    'emitente/',
+                    \Str::uuid().'.'.$request->emitente_file->getClientOriginalExtension(),
+                    'public'
+                );
+            }
             $emitente->save();
             DB::commit();
             return redirect()->route('configuracao.emitente.edit', [$emitente])
@@ -119,11 +121,17 @@ class EmitenteController extends Controller
             $emitente->cidade = $request->cidade;
             $emitente->uf = $request->uf;
             $emitente->complemento = $request->complemento;
-            $emitente->logo_url = $request->emitente_file->storeAs(
-                'emitente/',
-                $emitente->id.'.'.$request->emitente_file->getClientOriginalExtension(),
-                'public'
-            );
+            if($request->emitente_file){
+                if ($emitente->logo_url) {
+                    $imgTemp = $emitente->logo_url;
+                    $del = Storage::delete('public/'.$imgTemp);
+                }
+                $emitente->logo_url = $request->emitente_file->storeAs(
+                    'emitente',
+                    \Str::uuid().'.'.$request->emitente_file->getClientOriginalExtension(),
+                    'public'
+                );
+            }
             $emitente->save();
             DB::commit();
             return redirect()->route('configuracao.emitente.edit', [$emitente])

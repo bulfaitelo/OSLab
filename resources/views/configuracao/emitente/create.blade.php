@@ -30,7 +30,7 @@
                 <div class="col-md-3">
                     <div class="img-container">
                         <label>Logo</label>
-                        <input type="file" id="emitente_file" name="emitente_file" />
+                        <input type="file" id="emitente_file" name="emitente_file"  accept=".jpeg, .jpg, .png, .bmp"  />
                         <img id="logo_emitente" src="{{ asset('vendor/oslab/imgs/oslab_logo.png') }}" alt="Logo da empresa" class="rounded image img-fluid">
                         <div id="img-upload" class="overlay">
                           <div class="text">
