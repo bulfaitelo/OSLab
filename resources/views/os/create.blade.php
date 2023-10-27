@@ -72,6 +72,15 @@
                         {!! html()->date('data_saida')->class('form-control') !!}
                     </div>
                 </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="data_saida">Serial</label>
+                        {!! html()->text('serial')->class('form-control')->placeholder('Serial') !!}
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-6">

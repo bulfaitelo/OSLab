@@ -46,7 +46,7 @@
                     {!! html()->date('data_saida', $os->data_saida)->class('form-control') !!}
                 </div>
             </div>
-            <div class="col-md-5 d-flex align-items-end">
+            <div class="col-md-3 d-flex align-items-end">
                 <div class="form-group text-right">
                     @if ($os->modelo_id)
                         <a target="_blank" href="{{route('wiki.show', $os->modelo->wiki->id)}}">
@@ -56,6 +56,12 @@
                             </button>
                         </a>
                     @endif
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="data_saida">Serial</label>
+                    {!! html()->text('serial', $os->serial)->class('form-control')->placeholder('Serial') !!}
                 </div>
             </div>
         </div>

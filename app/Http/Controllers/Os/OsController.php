@@ -99,6 +99,7 @@ class OsController extends Controller
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
             $os->laudo = $request->laudo;
+            $os->serial = $request->serial;
             $os->save();
 
             DB::commit();
@@ -146,6 +147,7 @@ class OsController extends Controller
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
             $os->laudo = $request->laudo;
+            $os->serial = $request->serial;
             $os->save();
 
             DB::commit();
