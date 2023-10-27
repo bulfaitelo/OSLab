@@ -33,18 +33,18 @@ class DefaultsConfigPermissionsEmitente extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 7,
             ],
-            [
-                'description' => 'Visualizar Emitente',
-                'name' => 'config_emitente_show',
-                'guard_name' => 'web',
-                'group_id' => 7,
-            ],
-            [
-                'description' => 'Excluir Emitente',
-                'name' => 'config_emitente_destroy',
-                'guard_name' => 'web',
-                'group_id' => 7,
-            ],
+            // [
+            //     'description' => 'Visualizar Emitente',
+            //     'name' => 'config_emitente_show',
+            //     'guard_name' => 'web',
+            //     'group_id' => 7,
+            // ],
+            // [
+            //     'description' => 'Excluir Emitente',
+            //     'name' => 'config_emitente_destroy',
+            //     'guard_name' => 'web',
+            //     'group_id' => 7,
+            // ],
         ];
 
 

@@ -146,10 +146,12 @@
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary">
-                <i class="fas fa-save"></i>
-                Salvar
-            </button>
+            @can('config_emitente_create')
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="fas fa-save"></i>
+                    Salvar
+                </button>
+            @endcan
           </div>
         </div>
       <!-- /.card -->
