@@ -8,6 +8,7 @@ use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\User;
 use App\Models\Configuracao\Os\CategoriaOs;
+use App\Models\Os\Os;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Wiki extends Model
@@ -30,6 +31,22 @@ class Wiki extends Model
     public function files () {
         return $this->hasMany(File::class);
     }
+
+    public function os () {
+        return $this->hasManyThrough(
+            Os::class,
+            Modelo::class,
+            'wiki_id', // Chave da Wiki
+            'modelo_id', // Chave_modelo
+            'id', // Chave local de Modelos
+            'id' // Chave Local de Os
+        )
+        ->with('cliente')
+        ->with('tecnico')
+        ->with('categoria')
+        ->with('status');
+    }
+
 
     public function modelosTitle() {
         $return = "";

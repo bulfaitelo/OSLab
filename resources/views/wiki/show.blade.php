@@ -296,64 +296,81 @@
         <div class="card">
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
-                    <h3 class="card-title">OS</h3>
-                    {{-- <button type="button" class="btn btn-primary btn-sm">Editar</button> --}}
+                    <h3 class="card-title"><b>OS</b></h3>
+                    <h3 class="card-title">Total: {{ $wiki->os->count() }}</h3>
                 </div>
             </div>
             <div class="card-body p-0">
-                <table class="table table-sm">
-                <thead>
-                <tr>
-                <th style="width: 10px">#</th>
-                <th>Task</th>
-                <th>Progress</th>
-                <th style="width: 40px">Label</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                <td>1.</td>
-                <td>Update software</td>
-                <td>
-                <div class="progress progress-xs">
-                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                </div>
-                </td>
-                <td><span class="badge bg-danger">55%</span></td>
-                </tr>
-                <tr>
-                <td>2.</td>
-                <td>Clean database</td>
-                <td>
-                <div class="progress progress-xs">
-                <div class="progress-bar bg-warning" style="width: 70%"></div>
-                </div>
-                </td>
-                <td><span class="badge bg-warning">70%</span></td>
-                </tr>
-                <tr>
-                <td>3.</td>
-                <td>Cron job running</td>
-                <td>
-                <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-primary" style="width: 30%"></div>
-                </div>
-                </td>
-                <td><span class="badge bg-primary">30%</span></td>
-                </tr>
-                <tr>
-                <td>4.</td>
-                <td>Fix and squish bugs</td>
-                <td>
-                <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar bg-success" style="width: 90%"></div>
-                </div>
-                </td>
-                <td><span class="badge bg-success">90%</span></td>
-                </tr>
-                </tbody>
-                </table>
-                </div>
+                <table class="table table-sm table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Cliente</th>
+                        <th>Técnico</th>
+                        <th>Data Entrada</th>
+                        <th>Data Saída</th>
+                        <th>Garantia</th>
+                        <th>Valor Total</th>
+                        <th>Categoria</th>
+                        <th>Status</th>
+                        <th style="width: 40px"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($wiki->os as $item)
+                        <tr>
+                          <td>{{ $item->id }}</td>
+                          <td>{{ $item->cliente->name}}</td>
+                          <td>{{ $item->tecnico?->name}}</td>
+                          <td>{{ $item->data_entrada->format('d/m/Y') }}</td>
+                          <td>{{ $item->data_saida?->format('d/m/Y') }}</td>
+                          <td> garantia </td>
+                          <td> valor </td>
+                          <td> {{ $item->categoria->name }} </td>
+                          <td>
+                              <span class="badge {{ $item->status->color }}">{{ $item->status->name }}</span>
+                          </td>
+                          <td>
+                              <div class="btn-group btn-group-sm">
+                                  @can('os_show')
+                                      <a href="{{ route('os.show', $item->id) }}" title="Editar" target="_blank" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                  @endcan
+                              </div>
+                                  @can('os_destroy')
+                                  <div class="modal fade" id="modal-excluir_{{ $item->id }}">
+                                      <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                          <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                          </div>
+                                          <div class="modal-body">
+                                          <p><b>Nome:</b> {{ $item->name}}</p>
+                                          </div>
+                                          <div class="modal-footer justify-content-between">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                              {!! html()->form('delete', route('os.destroy', $item->id))->open() !!}
+                                                  <input type="submit" class="btn btn-danger delete-permission" value="Excluir Receita">
+                                              {!! html()->form()->close() !!}
+
+                                          </div>
+                                      </div>
+                                      <!-- /.modal-content -->
+                                      </div>
+                                      <!-- /.modal-dialog -->
+                                  </div>
+                                  @endcan
+                              </div>
+                            <!-- /.modal -->
+                          </td>
+                        </tr>
+
+                      @endforeach
+                    </tbody>
+                  </table>
+            </div>
         </div>
     </div>
 </div>

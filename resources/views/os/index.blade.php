@@ -9,7 +9,7 @@
 @section('content')
 <div class="col-md-12">
     <div class="card ">
-      <div class="card-header card-outline card-primary pb-2 ">
+        <div class="card-header card-outline card-primary pb-2 ">
             <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
@@ -89,94 +89,91 @@
                 </div>
                 {!! html()->form()->close() !!}
             </div>
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body pt-2 table-responsive">
-        <table class="table table-sm table-hover text-nowrap">
-          <thead>
-            <tr>
-              <th style="width: 10px">#</th>
-              <th>Cliente</th>
-              <th>Técnico</th>
-              <th>Data Entrada</th>
-              <th>Data Saída</th>
-              <th>Garantia</th>
-              <th>Valor Total</th>
-              <th>Categoria</th>
-              <th>Status</th>
-              <th style="width: 40px"></th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($os as $item)
-              <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->cliente->name}}</td>
-                <td>{{ $item->tecnico?->name}}</td>
-                <td>{{ $item->data_entrada->format('d/m/Y') }}</td>
-                <td>{{ $item->data_saida?->format('d/m/Y') }}</td>
-                <td> garantia </td>
-                <td> valor </td>
-                <td> {{ $item->categoria->name }} </td>
-                <td>
-                    <span class="badge {{ $item->status->color }}">{{ $item->status->name }}</span>
-                </td>
-
-
-
-                <td>
-                    <div class="btn-group btn-group-sm">
-                        @can('os_edit')
-                            <a href="{{ route('os.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                        @endcan
-                        @can('os_show')
-                            <a href="{{ route('os.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
-                        @endcan
-                        @can('os_destroy')
-                            <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                        @endcan
-                    </div>
-                        @can('os_destroy')
-                        <div class="modal fade" id="modal-excluir_{{ $item->id }}">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                </div>
-                                <div class="modal-body">
-                                <p><b>Nome:</b> {{ $item->name}}</p>
-                                </div>
-                                <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                    {!! html()->form('delete', route('os.destroy', $item->id))->open() !!}
-                                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Receita">
-                                    {!! html()->form()->close() !!}
-
-                                </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pt-2 table-responsive">
+            <table class="table table-sm table-hover text-nowrap">
+                <thead>
+                    <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Cliente</th>
+                    <th>Técnico</th>
+                    <th>Data Entrada</th>
+                    <th>Data Saída</th>
+                    <th>Garantia</th>
+                    <th>Valor Total</th>
+                    <th>Categoria</th>
+                    <th>Status</th>
+                    <th style="width: 40px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($os as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->cliente->name}}</td>
+                        <td>{{ $item->tecnico?->name}}</td>
+                        <td>{{ $item->data_entrada->format('d/m/Y') }}</td>
+                        <td>{{ $item->data_saida?->format('d/m/Y') }}</td>
+                        <td> garantia </td>
+                        <td> valor </td>
+                        <td> {{ $item->categoria->name }} </td>
+                        <td>
+                            <span class="badge {{ $item->status->color }}">{{ $item->status->name }}</span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                @can('os_edit')
+                                    <a href="{{ route('os.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                                @endcan
+                                @can('os_show')
+                                    <a href="{{ route('os.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                @endcan
+                                @can('os_destroy')
+                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
+                                @endcan
                             </div>
-                            <!-- /.modal-content -->
+                                @can('os_destroy')
+                                <div class="modal fade" id="modal-excluir_{{ $item->id }}">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <p><b>Nome:</b> {{ $item->name}}</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                            {!! html()->form('delete', route('os.destroy', $item->id))->open() !!}
+                                                <input type="submit" class="btn btn-danger delete-permission" value="Excluir Receita">
+                                            {!! html()->form()->close() !!}
+
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                @endcan
                             </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-                        @endcan
-                    </div>
-                  <!-- /.modal -->
-                </td>
-              </tr>
+                        <!-- /.modal -->
+                        </td>
+                    </tr>
 
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-      <!-- /.card-body -->
-      <div class="card-footer clearfix">
-          {{$os->appends($request->all())->links() }}
-          {{-- {{ $os->links() }} --}}
-      </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+            {{$os->appends($request->all())->links() }}
+            {{-- {{ $os->links() }} --}}
+        </div>
     </div>
 </div>
 @stop
