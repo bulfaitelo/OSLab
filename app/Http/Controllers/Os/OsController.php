@@ -35,6 +35,8 @@ class OsController extends Controller
         $queryOs->with('cliente');
         $queryOs->with('tecnico');
         $queryOs->with('categoria');
+        $queryOs->with('status');
+
         if ($request->busca) {
             $queryOs->where(function ($query) use ($request){
                 $query->whereHas('cliente', function ($query) use ($request) {
