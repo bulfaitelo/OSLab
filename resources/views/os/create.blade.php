@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="tecnico_id">Tecnico Responsavel </label>
+                        <label for="tecnico_id">Técnico Responsavel </label>
                         {!! html()->select('tecnico_id', [Auth()->id() => Auth()->user()->name], Auth()->id())->class('form-control user')->placeholder('Selecione')->required() !!}
 
                     </div>
@@ -159,6 +159,8 @@
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
+            selectOnTab: true,
+            placeholder: 'Selecione o Cliente',
             // fetch remote data
             load: function(query, callback) {
                 var url = route('cliente.select') + '?q=' + encodeURIComponent(query);
@@ -198,6 +200,8 @@
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
+            selectOnTab: true,
+            placeholder: 'Selecione o Técnico',
             // fetch remote data
             load: function(query, callback) {
                 var url = route('user.select') + '?q=' + encodeURIComponent(query);
@@ -227,6 +231,8 @@
             valueField: 'id',
             labelField: 'name',
             searchField: ['name', 'wiki'],
+            selectOnTab: true,
+            placeholder: 'Selecione o Modelo',
             // fetch remote data
             load: function(query, callback) {
                 var url = route('modelo.select') + '?q=' + encodeURIComponent(query);

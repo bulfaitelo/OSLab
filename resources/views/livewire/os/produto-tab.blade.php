@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label for="produto_id">Produto</label>
                     <div wire:ignore >
-                        <select id="os-produto" wire:model="produto_id" placeholder="Selecione um produto"></select>
+                        <select id="os-produto" wire:model="produto_id" placeholder="Selecione um Produto"></select>
                     </div>
                     @error('produto_id') <span class="error">{{ $message }}</span> @enderror
                 </div>
@@ -95,6 +95,7 @@
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
+            selectOnTab: true,
             // fetch remote data
             load: function(query, callback) {
                 var url = route('produto.select') + '?q=' + encodeURIComponent(query);

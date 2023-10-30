@@ -87,6 +87,7 @@
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
+            selectOnTab: true,
             // fetch remote data
             load: function(query, callback) {
                 var url = route('servico.select') + '?q=' + encodeURIComponent(query);
