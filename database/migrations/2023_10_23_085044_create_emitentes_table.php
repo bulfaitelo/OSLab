@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('cidade')->nullable();
             $table->string('uf', 2)->nullable();
             $table->string('telefone')->nullable();
+            $table->string('site_url')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('complemento')->nullable();
             $table->string('logo_url')->nullable();

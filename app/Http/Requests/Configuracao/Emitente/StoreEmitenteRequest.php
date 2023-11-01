@@ -27,6 +27,7 @@ class StoreEmitenteRequest extends FormRequest
             'uf'=> 'nullable|max:2',
             'registro' => 'cnpj|nullable',
             'emitente_file' => 'nullable|file|max:2000|mimes:jpeg,jpg,png,bmp',
+            'site_url' => 'nullable|url'
         ];
     }
 

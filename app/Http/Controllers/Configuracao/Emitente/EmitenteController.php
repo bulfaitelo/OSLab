@@ -58,6 +58,7 @@ class EmitenteController extends Controller
             $emitente->porte = $request->porte;
             $emitente->email = $request->email;
             $emitente->telefone = $request->telefone;
+            $emitente->site_url = $request->site_url;
             $emitente->cep = $request->cep;
             $emitente->logradouro = $request->logradouro;
             $emitente->numero = $request->numero;
@@ -114,6 +115,7 @@ class EmitenteController extends Controller
             $emitente->porte = $request->porte;
             $emitente->email = $request->email;
             $emitente->telefone = $request->telefone;
+            $emitente->site_url = $request->site_url;
             $emitente->cep = $request->cep;
             $emitente->logradouro = $request->logradouro;
             $emitente->numero = $request->numero;

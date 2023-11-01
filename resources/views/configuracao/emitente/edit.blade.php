@@ -79,19 +79,27 @@
                                 {!! html()->text('inscricao_estadual', $emitente->inscricao_estadual)->class('form-control')->placeholder('Inscrição Estadual') !!}
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="porte">Porte</label>
                                 {!! html()->text('porte', $emitente->porte)->class('form-control')->placeholder('Porte, por exemplo MEI MICRO...') !!}
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="form-group">
                               <label for="email">Email</label>
                               {!! html()->email('email', $emitente->email)->class('form-control')->placeholder('Email') !!}
                             </div>
                         </div>
-                        <div class="col-md-3">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="site_url">Site </label>
+                                {!! html()->text('site_url', $emitente->site_url)->class('form-control')->placeholder('Site, exemplo: http://www.oslab.com.br') !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="telefone">Telefone </label>
                                 {!! html()->text('telefone', $emitente->telefone)->class('form-control tel')->placeholder('Telefone') !!}
