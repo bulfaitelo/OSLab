@@ -1,1 +1,62 @@
-<table class="table table-condensed"> <tbody> <tr> <td style="width: 25%"><img src=" https://i.imgur.com/N5zf2lM.jpg " style="max-height: 100px"></td> <td><span style="font-size: 20px; "> RM Info</span> <br> <span>34.059.520/0001-91 <br> Av. Professor Josué de Castro, 40 - Porto do Rosa - São Gonçalo - RJ </span> <br> <span> E-mail: thiago@rminfo.tec.br - Fone: (21)99952-7572</span> </td> <td style="width: 18%; text-align: center"><b>N° OS:</b> <span>402</span><br> <br> <span>Emissão: 24/10/2023</span> </td> </tr> </tbody> </table>
+<div class="col-md-12">
+    <hr class="mb-2 ">
+    @if ($emitente)
+    <div class="row">
+        <div class="col-md-2">
+            <img
+                @if ($emitente->logo_url)
+                    src="{{ asset('storage/'.$emitente->logo_url) }}"
+
+                @else
+                    src="{{ asset('vendor/oslab/imgs/oslab_logo.png') }} "
+                @endif
+            class="rounded image img-fluid" >
+        </div>
+        <div class="col-md-7">
+            <h4 class="mb-0 " ><b>{{ $emitente->fantasia }}</b></h4>
+            <h6 class="mt-0 mb-0 ">CNPJ: {{ $emitente->cnpj }}</h6>
+            <p class="mb-0 "  >{{ $emitente->logradouro }}, nº: {{ $emitente->numero }}, {{ $emitente->bairro }}</p>
+            <p class="mb-0 "  >{{ $emitente->cidade }} - {{ $emitente->uf }}, CEP: {{ $emitente->cep}}</p>
+        </div>
+        <div style="font-size: 14px;" class="col-md-3 text-right">
+            @if ($emitente->telefone)
+            <p class="mb-0 mt-0" > Contato: {{ $emitente->telefone }} </p>
+            @endif
+            @if ($emitente->site_url)
+                <p class="mb-0 mt-0" >
+                    <a href="{{ $emitente->site_url }}" style="color: #212529" target="_blank" rel="noopener noreferrer">
+                        {{ preg_replace("(^https?://)", "", $emitente->site_url ) }}
+                    </a>
+                </p>
+            @endif
+            @if ($os)
+                <p class="mb-0 mt-0" > Emissor: {{ $os->user->name }} </p>
+                <p class="mb-0 mt-0" > Técnico: {{ $os->tecnico->name }} </p>
+                <p class="mb-0 mt-0" > Emissão: {{date('d/m/Y')}} </p>
+            @endif
+        </div>
+    </div>
+    @else
+    <div class="row">
+        <div class="col-md-2">
+            <img src="{{ asset('vendor/oslab/imgs/oslab_logo.png') }} " class="rounded image img-fluid" >
+        </div>
+        <div class="col-md-7">
+            <h4 class="mb-0 " ><b> Nome FAntasia </b></h4>
+            <h6 class="mt-0 mb-0 ">CNPJ: 00.000.0001-01</h6>
+            <p class="mb-0 "  >AV OsLAb, nº: 123, Bairro do Bairro</p>
+            <p class="mb-0 "  >Cidade - RJ, CEP: 24000-000</p>
+        </div>
+        <div style="font-size: 14px;" class="col-md-3 text-right">
+            <p class="mb-0 mt-0" > Contato: (21) 99999-9999 </p>
+            <p class="mb-0 mt-0" > admin@oslab.com.br </p>
+            <p class="mb-0 mt-0" > www.oslab.com.br </p>
+            <p class="mb-0 mt-0" > Responsavel: Atendimento </p>
+            <p class="mb-0 mt-0" > Tecnico: bulfaitelo </p>
+            <p class="mb-0 mt-0" > Emissão: {{date('d/m/Y')}} </p>
+        </div>
+    </div>
+
+    @endif
+</div>
+

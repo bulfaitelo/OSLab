@@ -15,7 +15,8 @@ class TestController extends Controller
     {
         // $emitente = new \App\Models\Configuracao\Sistema\Emitente();
         // dd($emitente->getHtmlEmitente(1));
-        return Emitente::getHtmlEmitente(1);
+        $emitente = Emitente::getHtmlEmitente(1);
+        return view("teste", compact("emitente"));
     }
 
     /**

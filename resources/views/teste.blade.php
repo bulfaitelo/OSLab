@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-@livewire('galaxy.index')
+    {!! $emitente !!}
 @stop
 
 @section('css')
