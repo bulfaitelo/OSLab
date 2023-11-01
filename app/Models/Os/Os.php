@@ -34,6 +34,17 @@ class Os extends Model
     }
 
     /**
+     * Retornar o usuário
+     *
+     * Retorna o usuário relacionado
+     * @return BelongsTo Técnico
+     **/
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * Retornar o Cliente
      *
      * Retorna o Cliente relacionado
