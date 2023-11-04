@@ -53,6 +53,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="log-tab" data-toggle="pill" href="#log" role="tab" aria-controls="log" aria-selected="false">
+                    <i class="fa-regular fa-file-lines"></i>
+                    <span class="d-none d-sm-inline">Log</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="balancete-tab" data-toggle="pill" href="#balancete" role="tab" aria-controls="balancete" aria-selected="false">
                     <i class="fas fa-balance-scale"></i>
                     <span class="d-none d-sm-inline">Balancete</span>
@@ -76,6 +82,9 @@
             @endif
             <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
                 @livewire('os.informacoes-tab', ['os_id' => $os->id])
+            </div>
+            <div class="tab-pane fade" id="log" role="tabpanel" aria-labelledby="log-tab">
+                log
             </div>
             <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                 balancete

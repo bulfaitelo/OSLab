@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('os_status_logs', function (Blueprint $table) {
-            $table->foreign('os_id', 'fk_os_status_logs_os')
+        Schema::table('os_logs', function (Blueprint $table) {
+            $table->foreign('os_id', 'fk_os_logs_os')
                     ->references('id')->on('os')
                     ->cascadeOnDelete();
 
-            $table->foreign('user_id', 'fk_os_status_logs_users')
+            $table->foreign('user_id', 'fk_os_logs_users')
                     ->references('id')->on('users');
 
-            $table->foreign('status_id','fk_os_status_logs_os_status')
+            $table->foreign('status_id','fk_os_logs_os_status')
                     ->references('id')->on('os_status');
         });
     }
@@ -29,8 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('os_status_logs', function (Blueprint $table) {
-            //
+        Schema::table('os_logs', function (Blueprint $table) {
+            $table->dropForeign('fk_os_logs_os');
+            $table->dropForeign('fk_os_logs_users');
+            $table->dropForeign('fk_os_logs_os_status');
         });
     }
 };
