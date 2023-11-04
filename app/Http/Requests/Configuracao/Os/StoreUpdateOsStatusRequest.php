@@ -4,7 +4,7 @@ namespace App\Http\Requests\Configuracao\Os;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateStatusOsRequest extends FormRequest
+class StoreUpdateOsStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

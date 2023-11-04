@@ -7,7 +7,7 @@ use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Os\GarantiaController;
 use App\Http\Controllers\Configuracao\Os\CategoriaOsController;
-use App\Http\Controllers\Configuracao\Os\StatusOsController;
+use App\Http\Controllers\Configuracao\Os\OsStatusController;
 use App\Http\Controllers\Configuracao\Sistema\SistemaConfigController;
 use App\Http\Controllers\Configuracao\User\PerfilController;
 use App\Http\Controllers\Configuracao\User\PermissionsController;
@@ -117,7 +117,7 @@ Route::group(['middleware'=> 'auth'], function() {
                 ->parameters(['garantia' => 'garantia']);
             Route::resource('/categoria', CategoriaOsController::class)
                 ->parameters(['categoria' => 'categoria']);
-            Route::resource('/status', StatusOsController::class);
+            Route::resource('/status', OsStatusController::class);
         });
         Route::name('wiki.')->prefix('wiki')->group( function (){
             Route::resource('/fabricante', FabricanteController::class);

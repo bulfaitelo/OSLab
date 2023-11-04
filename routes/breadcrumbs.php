@@ -10,7 +10,7 @@ use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Financeiro\FormaPagamento;
 use App\Models\Configuracao\Os\CategoriaOs;
 use App\Models\Configuracao\Os\Garantia;
-use App\Models\Configuracao\Os\StatusOs;
+use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Configuracao\Sistema\SistemaConfig;
 use App\Models\Configuracao\User\Setor;
@@ -278,13 +278,13 @@ Breadcrumbs::for('teste.index', function (BreadcrumbTrail $trail) {
     });
 
     // Status de Os > [Visualização de Status de OS]
-    Breadcrumbs::for('configuracao.os.status.show', function (BreadcrumbTrail $trail, StatusOs $item) {
+    Breadcrumbs::for('configuracao.os.status.show', function (BreadcrumbTrail $trail, OsStatus $item) {
         $trail->parent('configuracao.os.status.index');
         $trail->push($item->name, route('configuracao.os.status.show', $item));
     });
 
     // Status de Os > [Status de OS Name] > Editar Status de OS
-    Breadcrumbs::for('configuracao.os.status.edit', function (BreadcrumbTrail $trail, StatusOs $item) {
+    Breadcrumbs::for('configuracao.os.status.edit', function (BreadcrumbTrail $trail, OsStatus $item) {
         $trail->parent('configuracao.os.status.index');
         $trail->push('Editar Status de OS', route('configuracao.os.status.edit', $item));
     });

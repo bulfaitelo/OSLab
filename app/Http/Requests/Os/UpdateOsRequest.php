@@ -26,7 +26,7 @@ class UpdateOsRequest extends FormRequest
             'tecnico_id' => 'required|exists:users,id',
             'categoria_id' => 'required|exists:categoria_os,id',
             'modelo_id' => 'nullable|exists:wiki_models,id',
-            'status_id' => 'required|exists:status_os,id',
+            'status_id' => 'required|exists:os_status,id',
             'data_entrada' => 'required|date',
             'data_saida' => 'nullable|date',
         ];

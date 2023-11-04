@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreign('tecnico_id', 'fk_os_users_tecnico')
             ->references('id')->on('users');
 
-            $table->foreign('status_id', 'fk_os_status_os')
-            ->references('id')->on('status_os');
+            $table->foreign('status_id', 'fk_os_os_status')
+            ->references('id')->on('os_status');
 
             $table->foreign('termo_garantia_id', 'fk_os_garantias')
             ->references('id')->on('garantias');
@@ -44,7 +44,7 @@ return new class extends Migration
             $table->dropForeign('fk_os_users');
             $table->dropForeign('fk_os_clientes');
             $table->dropForeign('fk_os_users_tecnico');
-            $table->dropForeign('fk_os_status_os');
+            $table->dropForeign('fk_os_os_status');
             $table->dropForeign('fk_os_garantias');
             $table->dropForeign('fk_os_wiki_models');
             $table->dropForeign('fk_os_categoria_os');

@@ -57,7 +57,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="status_id">Status</label>
-                        {!! html()->select('status_id', \App\Models\Configuracao\Os\StatusOs::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
+                        {!! html()->select('status_id', \App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
                     </div>
                 </div>
                 <div class="col-md-2">

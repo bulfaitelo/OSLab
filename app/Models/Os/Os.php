@@ -5,7 +5,7 @@ namespace App\Models\Os;
 use App\Http\OsLabClass\Checklist\CreateHtmlChecklist;
 use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Os\CategoriaOs;
-use App\Models\Configuracao\Os\StatusOs;
+use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -63,7 +63,7 @@ class Os extends Model
      **/
     public function status() : BelongsTo
     {
-        return $this->belongsTo(StatusOs::class);
+        return $this->belongsTo(OsStatus::class);
     }
 
     /**
