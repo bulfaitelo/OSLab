@@ -12,6 +12,7 @@
 </head>
 <body>
     <div class="content">
+        {!! $emitente !!}
         <div class="container-fluid">
             <div class="row justify-content-md-center">
                 <div class="col-md-6 mt-3">

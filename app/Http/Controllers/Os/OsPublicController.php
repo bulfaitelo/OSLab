@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Os;
 
 use App\Http\Controllers\Controller;
+use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use App\Models\Os\OsInformacao;
 use Illuminate\Http\Request;
@@ -11,8 +12,9 @@ class OsPublicController extends Controller
 {
     public function edit($uuid){
         $informacao = OsInformacao::where("uuid",$uuid)->firstOrfail();
+        $emitente = Emitente::getHtmlEmitente(1);
 
-        return view("os.public.edit",compact("informacao"));
+        return view("os.public.edit",compact("informacao", "emitente"));
     }
 
 
@@ -49,7 +51,9 @@ class OsPublicController extends Controller
     }
 
     public function updated() {
-        return view ('os.public.updated');
+        $emitente = Emitente::getHtmlEmitente(1);
+
+        return view ('os.public.updated', compact('emitente'));
     }
 
 }
