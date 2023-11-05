@@ -67,6 +67,17 @@ class Os extends Model
     }
 
     /**
+     * Retornar o log de alterações da Os.
+     *
+     * Retorna o log relacionado
+     * @return BelongsTo log
+     **/
+    public function logs() : HasMany
+    {
+        return $this->hasMany(OsLog::class);
+    }
+
+    /**
      * Retornar o Status
      *
      * Retorna o Status relacionado

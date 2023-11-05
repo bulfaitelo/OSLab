@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('os_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('status_id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('os_id');
-            $table->string('descricao');
+            $table->unsignedBigInteger('status_id')->nullable();
+            $table->unsignedBigInteger('conta_id')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('descricao')->nullable();
             $table->timestamps();
         });
     }
