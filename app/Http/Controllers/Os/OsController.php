@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Os;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Os\StoreOsRequest;
 use App\Http\Requests\Os\UpdateOsRequest;
+use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -118,7 +119,8 @@ class OsController extends Controller
      */
     public function show(Os $os)
     {
-        return view('os.show', compact('os'));
+        $emitente = Emitente::getHtmlEmitente(1);
+        return view('os.show', compact('os', 'emitente'));
     }
 
     /**

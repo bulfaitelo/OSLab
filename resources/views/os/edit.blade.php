@@ -16,6 +16,23 @@
                 Voltar
             </button>
         </a>
+        @can('os_show')
+        <a href="{{ route('os.show', $os) }}">
+            <button type="button" title="Editar" class="btn btn-sm btn-default">
+                <i class="fas fa-eye"></i>
+                visualizar
+            </button>
+        </a>
+        @endcan
+        @can('os_print')
+        <a href="{{ route('os.show', $os) }}">
+            <button type="button" title="Imprimir" class="btn btn-sm bg-navy">
+                <i class="fa-solid fa-print"></i>
+                Imprimir
+            </button>
+        </a>
+        @endcan
+
     </div>
     <div class="card-body pt-2">
         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">

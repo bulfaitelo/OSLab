@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<div class="col-md-12">
+
     <div class="card ">
         <div class="card-header card-outline card-primary pb-2 ">
             <a href="{{ url()->previous() }}">
@@ -174,7 +174,7 @@
             {{$os->appends($request->all())->links() }}
             {{-- {{ $os->links() }} --}}
         </div>
-    </div>
+
 </div>
 @stop
 

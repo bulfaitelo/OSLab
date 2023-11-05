@@ -35,7 +35,7 @@
 
     </div>
     <div class="card-body pt-2">
-
+        {!! $emitente !!}
     </div>
 </div>
 
