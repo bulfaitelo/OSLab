@@ -47,6 +47,12 @@ class DefaultsConfigPermissionsOs extends Seeder
                 'group_id' => 3,
             ],
             [
+                'description' => 'Faturar Ordem de Serviço',
+                'name' => 'os_faturar',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
                 'description' => 'Excluir Ordem de Serviço',
                 'name' => 'os_destroy',
                 'guard_name' => 'web',

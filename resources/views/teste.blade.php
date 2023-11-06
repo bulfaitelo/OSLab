@@ -39,6 +39,19 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group mb-0">
+                            <label data-toggle="collapse" href="#observacoes-div" role="button" for="observacoes" aria-expanded="true" aria-controls="observacoes" >
+                                Observações
+                                <i id="obervacoes-icon" class="fa-solid fa-caret-right"></i>
+                            </label>
+                            <div id="observacoes-div" class="collapse ">
+                                {!! html()->textarea('observacoes')->class('form-control mb-2')->placeholder('Observações (opcional)') !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="entrada">Entrada</label>
@@ -53,15 +66,15 @@
                     </div>
                     <div class="col-md-1">
                         <div class="form-group">
-                            <label for="avista_pago">Recebido</label>
+                            <label for="recebido">Recebido</label>
                             <div class="custom-control custom-switch custom-switch-md">
-                                <input type="checkbox" name="avista_pago" id="avista_pago" class="custom-control-input" onclick="alternaPagoAvista()">
-                                <label class="custom-control-label" for="avista_pago"></label>
+                                <input type="checkbox" name="recebido" id="recebido" class="custom-control-input" >
+                                <label class="custom-control-label" for="recebido"></label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div id="recebido-div" class="row" style="display: none">
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="data_recebimento">Data Recebimento</label>
@@ -123,6 +136,20 @@
 @section('js')
 <script>
 
+    $('#observacoes-div').on('show.bs.collapse', function () {
+        $('#obervacoes-icon').removeClass('fa-caret-right').addClass('fa-caret-down');
+    })
+    $('#observacoes-div').on('hidden.bs.collapse', function () {
+        $('#obervacoes-icon').removeClass('fa-caret-down').addClass('fa-caret-right');
+    })
+
+    $('#recebido').on('change', function () {
+        if (this.checked) {
+            $('#recebido-div').css('display', '');
+        } else {
+            $('#recebido-div').css('display', 'none');
+        }
+    });
 </script>
 @stop
 
