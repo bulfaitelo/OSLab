@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <div class="custom-control custom-switch custom-switch-on-success">
+                        <div class="custom-control custom-switch custom-switch-on-success custom-switch custom-switch-md">
                             {!! html()->checkbox('receita')->class('custom-control-input ') !!}
                             <label class="custom-control-label" for="receita">Receita</label>
                         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <div class="custom-control custom-switch custom-switch-on-danger">
+                        <div class="custom-control custom-switch custom-switch-on-danger custom-switch custom-switch-md">
                             {!! html()->checkbox('despesa')->class('custom-control-input ') !!}
                             <label class="custom-control-label" for="despesa">Despesa</label>
                         </div>
@@ -74,6 +74,28 @@
 @stop
 
 @section('css')
+<style>
+    .custom-switch.custom-switch-md .custom-control-label {
+        padding-left: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .custom-switch.custom-switch-md .custom-control-label::before {
+        height: 1.5rem;
+        width: calc(2rem + 0.75rem);
+        border-radius: 3rem;
+    }
+
+    .custom-switch.custom-switch-md .custom-control-label::after {
+        width: calc(1.5rem - 4px);
+        height: calc(1.5rem - 4px);
+        border-radius: calc(2rem - (1.5rem / 2));
+    }
+
+    .custom-switch.custom-switch-md .custom-control-input:checked ~ .custom-control-label::after {
+        transform: translateX(calc(1.5rem - 0.25rem));
+    }
+</style>
 @stop
 
 @section('js')
