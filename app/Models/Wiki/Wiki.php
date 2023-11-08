@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\User;
-use App\Models\Configuracao\Os\CategoriaOs;
+use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Os\Os;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -63,7 +63,7 @@ class Wiki extends Model
 
     public function categoria() : BelongsTo
     {
-        return $this->belongsTo(CategoriaOs::class);
+        return $this->belongsTo(OsCategoria::class);
     }
 
 }

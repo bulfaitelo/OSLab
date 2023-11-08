@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Configuracao\Os;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Configuracao\Os\StoreUpdateCategoriaOsRequest;
-use App\Models\Configuracao\Os\CategoriaOs;
+use App\Http\Requests\Configuracao\Os\StoreUpdateOsCategoriaRequest;
+use App\Models\Configuracao\Os\OsCategoria;
 use Illuminate\Support\Facades\Auth;
 
-class CategoriaOsController extends Controller
+class OsCategoriaController extends Controller
 {
 
     function __construct()
@@ -26,7 +26,9 @@ class CategoriaOsController extends Controller
      */
     public function index()
     {
-        $categoria = CategoriaOs::paginate(100);
+        $categoria = OsCategoria::with('garantia')
+                ->with('centroCusto')
+                ->paginate(100);
         return view ('configuracao.os.categoria.index', compact('categoria'));
     }
 
@@ -41,14 +43,15 @@ class CategoriaOsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUpdateCategoriaOsRequest $request)
+    public function store(StoreUpdateOsCategoriaRequest $request)
     {
         try {
-            $categoria = new CategoriaOs();
+            $categoria = new OsCategoria();
             $categoria->name = $request->name;
             $categoria->descricao = $request->descricao;
             $categoria->user_id = Auth::id();
             $categoria->garantia_id = $request->garantia_id;
+            $categoria->centro_custo_id = $request->centro_custo_id;
             $categoria->checklist_id = $request->checklist_id;
             $categoria->checklist_required = $request->checklist_required;
             $categoria->save();
@@ -63,7 +66,7 @@ class CategoriaOsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CategoriaOs $categoria)
+    public function show(OsCategoria $categoria)
     {
        return view('configuracao.os.categoria.show', compact('categoria'));
     }
@@ -71,7 +74,7 @@ class CategoriaOsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CategoriaOs $categoria)
+    public function edit(OsCategoria $categoria)
     {
        return view('configuracao.os.categoria.edit', compact('categoria'));
     }
@@ -79,13 +82,14 @@ class CategoriaOsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreUpdateCategoriaOsRequest $request, CategoriaOs $categoria)
+    public function update(StoreUpdateOsCategoriaRequest $request, OsCategoria $categoria)
     {
         try {
             $categoria->name = $request->name;
             $categoria->descricao = $request->descricao;
             $categoria->user_id = Auth::id();
             $categoria->garantia_id = $request->garantia_id;
+            $categoria->centro_custo_id = $request->centro_custo_id;
             $categoria->checklist_id = $request->checklist_id;
             $categoria->checklist_required = $request->checklist_required;
             $categoria->save();
@@ -100,7 +104,7 @@ class CategoriaOsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CategoriaOs $categoria)
+    public function destroy(OsCategoria $categoria)
     {
         try {
             $categoria->delete();

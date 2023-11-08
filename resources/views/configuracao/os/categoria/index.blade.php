@@ -33,6 +33,7 @@
                 <th style="width: 10px">#</th>
                 <th>Categoria</th>
                 <th>Garantia</th>
+                <th>Centro de custo padrão</th>
                 <th>Checklist</th>
                 <th style="width: 40px"></th>
             </tr>
@@ -43,6 +44,7 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->garantia->name ?? '' }}</td>
+                    <td>{{ $item->centroCusto->name ?? '' }}</td>
                     <td>{{ $item->checklist->name ?? '' }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">

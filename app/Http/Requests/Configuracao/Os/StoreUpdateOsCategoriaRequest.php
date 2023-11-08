@@ -4,7 +4,7 @@ namespace App\Http\Requests\Configuracao\Os;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateCategoriaOsRequest extends FormRequest
+class StoreUpdateOsCategoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,7 @@ class StoreUpdateCategoriaOsRequest extends FormRequest
             'name' => 'required',
             'garantia_id' => 'nullable|exists:garantias,id',
             'checklist_id' => 'nullable|exists:checklists,id',
+            'centro_custo_id' => 'nullable|exists:centro_custos,id',
         ];
     }
 }

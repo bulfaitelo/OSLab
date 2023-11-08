@@ -52,7 +52,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="categoria_id">Categoria</label>
-                        {!! html()->select('categoria_id', \App\Models\Configuracao\Os\CategoriaOs::orderBy('name')->pluck('name', 'id'), $wiki->categoria_id)->class('form-control')->placeholder('Selecione') !!}
+                        {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'), $wiki->categoria_id)->class('form-control')->placeholder('Selecione') !!}
                     </div>
                 </div>
             </div>

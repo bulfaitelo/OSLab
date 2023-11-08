@@ -23,7 +23,7 @@ class StoreUpdateChecklistRequest extends FormRequest
     {
         return [
             'checklist_name' => 'required',
-            'categoria_id' => 'required|exists:categoria_os,id',
+            'categoria_id' => 'required|exists:os_categorias,id',
         ];
     }
 

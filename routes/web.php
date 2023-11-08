@@ -6,7 +6,7 @@ use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Os\GarantiaController;
-use App\Http\Controllers\Configuracao\Os\CategoriaOsController;
+use App\Http\Controllers\Configuracao\Os\OsCategoriaController;
 use App\Http\Controllers\Configuracao\Os\OsStatusController;
 use App\Http\Controllers\Configuracao\Sistema\SistemaConfigController;
 use App\Http\Controllers\Configuracao\User\PerfilController;
@@ -115,7 +115,7 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::name('os.')->prefix('os')->group( function (){
             Route::resource('/garantia', GarantiaController::class)
                 ->parameters(['garantia' => 'garantia']);
-            Route::resource('/categoria', CategoriaOsController::class)
+            Route::resource('/categoria', OsCategoriaController::class)
                 ->parameters(['categoria' => 'categoria']);
             Route::resource('/status', OsStatusController::class);
         });

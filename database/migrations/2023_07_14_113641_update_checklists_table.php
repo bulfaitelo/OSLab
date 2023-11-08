@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('checklists', function (Blueprint $table) {
-            $table->foreign('categoria_id', 'fk_checklists_categoria_os')
-            ->references('id')->on('categoria_os');
+            $table->foreign('categoria_id', 'fk_checklists_os_categorias')
+            ->references('id')->on('os_categorias');
 
             $table->foreign('user_id', 'fk_checklists_users')
             ->references('id')->on('users');
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('checklists', function (Blueprint $table) {
-            $table->dropForeign('fk_checklists_categoria_os');
+            $table->dropForeign('fk_checklists_os_categorias');
             $table->dropForeign('fk_checklists_users');
         });
     }

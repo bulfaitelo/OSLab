@@ -35,9 +35,19 @@
                 <label for="descricao">Descrição</label>
                 {!! html()->text('descricao', $categoria->descricao)->class('form-control')->placeholder('Descrição') !!}
             </div>
-            <div class="form-group">
-                <label for="garantia_id">Garantia</label>
-                {!! html()->select('garantia_id', \App\Models\Configuracao\Os\Garantia::orderBy('name')->pluck('name', 'id'), $categoria->garantia_id)->class('form-control')->placeholder('Selecione') !!}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="garantia_id">Garantia</label>
+                        {!! html()->select('garantia_id', \App\Models\Configuracao\Os\Garantia::orderBy('name')->pluck('name', 'id'), $categoria->garantia_id)->class('form-control')->placeholder('Selecione') !!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="centro_custo_id">Centro de Custo padrão</label>
+                        {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), $categoria->centro_custo_id)->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-6">

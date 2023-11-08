@@ -2,7 +2,7 @@
 
 namespace App\Models\Checklist;
 
-use App\Models\Configuracao\Os\CategoriaOs;
+use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +16,7 @@ class Checklist extends Model
 
     public function categoria() : BelongsTo
     {
-        return $this->belongsTo(CategoriaOs::class);
+        return $this->belongsTo(OsCategoria::class);
     }
 
     public function user() : BelongsTo

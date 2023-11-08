@@ -3,10 +3,11 @@
 namespace App\Models\Configuracao\Os;
 
 use App\Models\Checklist\Checklist;
+use App\Models\Configuracao\Financeiro\CentroCusto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoriaOs extends Model
+class OsCategoria extends Model
 {
     use HasFactory;
 
@@ -27,5 +28,15 @@ class CategoriaOs extends Model
      */
     public function checklist() {
         return $this->belongsTo(Checklist::class);
+    }
+
+
+    /**
+     * Retorna a o centroCusto
+     *
+     * @var array
+     */
+    public function centroCusto() {
+        return $this->belongsTo(CentroCusto::class);
     }
 }

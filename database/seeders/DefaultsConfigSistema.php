@@ -30,7 +30,7 @@ class DefaultsConfigSistema extends Seeder
             //     'key' => 'default_os_create_category',
             //     'value' => '',
             //     'descricao' => '',
-            //     'model' => 'App\Models\Configuracao\Os\CategoriaOs', // Caso seja true é um select
+            //     'model' => 'App\Models\Configuracao\Os\OsCategoria', // Caso seja true é um select
             //     'group_id' => 6
             // ],
 

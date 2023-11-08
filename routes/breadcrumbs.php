@@ -8,7 +8,7 @@ use App\Models\Checklist\Checklist;
 use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Financeiro\FormaPagamento;
-use App\Models\Configuracao\Os\CategoriaOs;
+use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Os\Garantia;
 use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Sistema\Emitente;
@@ -330,13 +330,13 @@ Breadcrumbs::for('teste.index', function (BreadcrumbTrail $trail) {
     });
 
     // Categoria > [Visualização de Categoria]
-    Breadcrumbs::for('configuracao.os.categoria.show', function (BreadcrumbTrail $trail, CategoriaOs $item) {
+    Breadcrumbs::for('configuracao.os.categoria.show', function (BreadcrumbTrail $trail, OsCategoria $item) {
         $trail->parent('configuracao.os.categoria.index');
         $trail->push($item->name, route('configuracao.os.categoria.show', $item));
     });
 
     // Categoria > [Categoria Name] > Editar Categoria
-    Breadcrumbs::for('configuracao.os.categoria.edit', function (BreadcrumbTrail $trail, CategoriaOs $item) {
+    Breadcrumbs::for('configuracao.os.categoria.edit', function (BreadcrumbTrail $trail, OsCategoria $item) {
         $trail->parent('configuracao.os.categoria.index');
         $trail->push('Editar Categoria', route('configuracao.os.categoria.edit', $item));
     });

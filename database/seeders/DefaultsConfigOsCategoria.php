@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Configuracao\Os\CategoriaOs;
+use App\Models\Configuracao\Os\OsCategoria;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DefaultsConfigCategoriaOs extends Seeder
+class DefaultsConfigOsCategoria extends Seeder
 {
     /**
      * Run the database seeds.
@@ -60,7 +60,7 @@ class DefaultsConfigCategoriaOs extends Seeder
         ];
 
         foreach ($insert as $key => $value) {
-            CategoriaOs::updateOrCreate(
+            OsCategoria::updateOrCreate(
                 [
                     'id' => $value['id'],
                 ],

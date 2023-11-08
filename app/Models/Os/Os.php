@@ -4,7 +4,7 @@ namespace App\Models\Os;
 
 use App\Http\OsLabClass\Checklist\CreateHtmlChecklist;
 use App\Models\Cliente\Cliente;
-use App\Models\Configuracao\Os\CategoriaOs;
+use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\User;
@@ -96,7 +96,7 @@ class Os extends Model
      **/
     public function categoria() : BelongsTo
     {
-        return $this->belongsTo(CategoriaOs::class);
+        return $this->belongsTo(OsCategoria::class);
     }
 
     /**
@@ -209,6 +209,15 @@ class Os extends Model
         }
         return [] ;
 
+    }
+
+    /**
+     * Retorna o valor total da OS
+     *
+     * @return string Valor total
+     */
+    function valorTotal() : string {
+        return $this->servicos->sum('valor_servico') + $this->produtos->sum('valor_venda');
     }
 
 }

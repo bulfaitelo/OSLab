@@ -25,7 +25,7 @@ class StoreWikiRequest extends FormRequest
             'fabricante_id' => 'required|exists:fabricantes,id',
             'name' => 'required|unique:wikis',
             'modelo' => 'required|unique:wiki_models,name',
-            'categoria_id' => 'required|exists:categoria_os,id',
+            'categoria_id' => 'required|exists:os_categorias,id',
 
         ];
     }
