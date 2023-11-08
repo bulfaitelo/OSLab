@@ -39,7 +39,6 @@
             </button>
         </a>
         @endcan
-
     </div>
     <div class="card-body pt-2">
         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -117,13 +116,13 @@
     </div>
 </div>
 
-<!-- Modal - ANOTACAO  -->
+<!-- Modal - FATURA  -->
 <div class="modal fade" id="faturarModal" tabindex="-1" role="dialog" aria-labelledby="faturarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="faturarModalLabel">Adicionar Anotação</h5>
+                    <h5 class="modal-title" id="faturarModalLabel">Faturar OS: #{{ $os->id }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,13 +132,56 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="descricao">Descrição</label>
-                                {!! html()->text('descricao')->class('form-control')->placeholder('Modelo do aparelho')->required() !!}
+                                {!! html()->text('descricao', 'Fatura OS Nº: #'. $os->id)->class('form-control')->placeholder('Descrição do faturamento')->required() !!}
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="centro_custo_id">Centro de Custo</label>
-                                {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
+                                {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), $os->centroCustoPadrao())->class('form-control')->placeholder('Selecione o Centro de Custo') !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="data_entrada">Entrada</label>
+                                {!! html()->date('data_entrada', now())->class('form-control')->placeholder('Data de Entrada')->required() !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="valor">Valor Total</label>
+                                {!! html()->text('valor', $os->valorTotal())->class('form-control decimal')->placeholder('Valor Total')->attributes(['inputmode' => 'numeric'])->required() !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="recebido">Recebido</label>
+                                <div class="custom-control custom-switch custom-switch-md">
+                                    <input type="checkbox" name="recebido" id="recebido" class="custom-control-input" >
+                                    <label class="custom-control-label" for="recebido"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="recebido-div" class="row" style="display: none">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="data_recebimento">Data Recebimento</label>
+                                {!! html()->date('data_recebimento', now())->class('form-control')->placeholder('Data de recebimento') !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="valor_recebido">Valor Recebido</label>
+                                {!! html()->text('valor_recebido')->class('form-control decimal')->placeholder('Valor Recebido')->attributes(['inputmode' => 'numeric']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="forma_pagamento_id">Forma de pagamento</label>
+                                {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
                             </div>
                         </div>
                     </div>
@@ -153,43 +195,6 @@
                                 <div id="observacoes-div" class="collapse ">
                                     {!! html()->textarea('observacoes')->class('form-control mb-2')->placeholder('Observações (opcional)') !!}
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="entrada">Entrada</label>
-                                {!! html()->date('entrada')->class('form-control')->placeholder('Modelo do aparelho')->required() !!}
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="valor">Valor</label>
-                                {!! html()->text('valor')->class('form-control')->placeholder('Modelo do aparelho')->required() !!}
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="recebido">Recebido</label>
-                                <div class="custom-control custom-switch custom-switch-md">
-                                    <input type="checkbox" name="recebido" id="recebido" class="custom-control-input" >
-                                    <label class="custom-control-label" for="recebido"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="recebido-div" class="row" style="display: none">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="data_recebimento">Data Recebimento</label>
-                                {!! html()->date('data_recebimento')->class('form-control')->placeholder('Modelo do aparelho')->required() !!}
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="forma_pagamento_id">Forma de pagamento</label>
-                                {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
                             </div>
                         </div>
                     </div>
@@ -208,7 +213,7 @@
         </div>
     </div>
 </div>
-<!-- FIM Modal - ANOTACAO  -->
+<!-- FIM Modal - FATURA  -->
 
 @stop
 
@@ -283,8 +288,15 @@
     $('#recebido').on('change', function () {
         if (this.checked) {
             $('#recebido-div').css('display', '');
+            $('#data_recebimento').attr("required","required");
+            $('#forma_pagamento_id').attr("required","required");
+            $('#valor_recebido').attr("required","required");
+
         } else {
             $('#recebido-div').css('display', 'none');
+            $('#data_recebimento').removeAttr("required");
+            $('#forma_pagamento_id').removeAttr("required");
+            $('#valor_recebido').removeAttr("required");
         }
     });
 </script>

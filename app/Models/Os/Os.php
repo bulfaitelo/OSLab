@@ -220,4 +220,15 @@ class Os extends Model
         return $this->servicos->sum('valor_servico') + $this->produtos->sum('valor_venda');
     }
 
+    /**
+     * Retorna o Centro de custo padrão
+     *
+     * Com base na categoria é retornado o centro de custo padrão da OS
+     *
+     * @return int|null,
+     */
+    function centroCustoPadrao() {
+        return $this->categoria->centroCusto?->id;
+    }
+
 }
