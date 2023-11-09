@@ -47,16 +47,7 @@
                 </div>
             </div>
             <div class="col-md-3 d-flex align-items-end">
-                <div class="form-group text-right">
-                    @if ($os->modelo_id)
-                        <a target="_blank" href="{{route('wiki.show', $os->modelo->wiki->id)}}">
-                            <button type="button"  class="btn bg-primary">
-                                <i class="fa-solid fa-book"></i>
-                                Wiki
-                            </button>
-                        </a>
-                    @endif
-                </div>
+
             </div>
             <div class="col-md-2">
                 <div class="form-group">
