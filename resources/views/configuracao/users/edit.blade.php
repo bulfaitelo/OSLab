@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md-1">
                     <label for="chek_ativo">Ativo</label>
-                    <div class="custom-control custom-switch">
+                    <div class="custom-control custom-switch custom-switch-md">
                         {!! html()->checkbox('ativo', $user->ativo)->class('custom-control-input') !!}
                         <label class="custom-control-label" for="ativo"></label>
                     </div>
