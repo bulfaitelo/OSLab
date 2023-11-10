@@ -34,8 +34,8 @@ class StoreSistemaConfigRequest extends FormRequest
     {
         return [
             'sistema.default_os_create_status' => 'Por favor selecione uma Status Padrão OS',
-            'sistema.os_link_time_limit' => 'por favor defina o Tempo da validade do Link',
-            'sistema.default_os_faturar_produto_despesa' => 'por favor defina o Tipo de despesa Padrão',
+            'sistema.os_link_time_limit' => 'Por favor defina o Tempo da validade do Link',
+            'sistema.default_os_faturar_produto_despesa' => 'Por favor defina o Tipo de despesa Padrão',
         ];
     }
 }
