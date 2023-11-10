@@ -59,6 +59,15 @@
                                     </div>
                                 </div> --}}
                             </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="default_os_create_status">Tipo de despesa Padrão</label>
+                                        {!! html()->select('sistema[default_os_faturar_produto_despesa]', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar_produto_despesa'))->class('form-control')->placeholder('Selecione') !!}
+                                        <i>Tipo de despesa padrão para os produtos quando for faturada uma nova OS</i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -23,8 +23,19 @@ class StoreSistemaConfigRequest extends FormRequest
     {
         return [
             'sistema.default_os_create_status' => 'required|exists:os_status,id',
-            'sistema.os_link_time_limit' => 'required|integer'
+            'sistema.os_link_time_limit' => 'required|integer',
+            'sistema.default_os_faturar_produto_despesa' => 'required|exists:forma_pagamentos,id',
 
+
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'sistema.default_os_create_status' => 'Por favor selecione uma Status Padrão OS',
+            'sistema.os_link_time_limit' => 'por favor defina o Tempo da validade do Link',
+            'sistema.default_os_faturar_produto_despesa' => 'por favor defina o Tipo de despesa Padrão',
         ];
     }
 }
