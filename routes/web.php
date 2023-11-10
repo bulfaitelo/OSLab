@@ -79,7 +79,8 @@ Route::group(['middleware'=> 'auth'], function() {
 
     Route::resource('/os', OsController::class)
         ->parameters(['os' => 'os']);
-
+    Route::put('/os/{os}/faturar', [OsController::class, 'faturar'])
+        ->name('os.faturar');
 
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');

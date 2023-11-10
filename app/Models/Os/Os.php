@@ -7,6 +7,7 @@ use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Wiki\Modelo;
+use App\Models\Financeiro\Contas;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -76,6 +77,19 @@ class Os extends Model
     {
         return $this->hasMany(OsLog::class);
     }
+
+    /**
+     * Retorna as despesas e receitas da Os.
+     *
+     * Retorna as despesas e receitas da Os.
+     *
+     * @return BelongsTo conta
+     **/
+    public function contas() : HasMany
+    {
+        return $this->hasMany(Contas::class);
+    }
+
 
     /**
      * Retornar o Status
@@ -217,7 +231,7 @@ class Os extends Model
      * @return string Valor total
      */
     function valorTotal() : string {
-        return $this->servicos->sum('valor_servico') + $this->produtos->sum('valor_venda');
+        return number_format($this->servicos->sum('valor_servico') + $this->produtos->sum('valor_venda'), 2);
     }
 
     /**

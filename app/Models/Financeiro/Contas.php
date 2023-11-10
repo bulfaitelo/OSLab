@@ -14,6 +14,18 @@ class Contas extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'tipo',
+        'name',
+        'os_id',
+        'user_id',
+        'centro_custo_id',
+        'cliente_id',
+        'valor',
+        'data_quitacao',
+        'parcelas',
+    ];
+
 
     protected $casts = [
         'data_quitacao' => 'date',

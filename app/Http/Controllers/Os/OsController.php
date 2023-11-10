@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Os;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Os\FaturarOsRequest;
 use App\Http\Requests\Os\StoreOsRequest;
 use App\Http\Requests\Os\UpdateOsRequest;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
+use App\Models\Produto\Produto;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -169,5 +171,95 @@ class OsController extends Controller
     public function destroy(Os $os)
     {
         //
+    }
+
+    /**
+     *  Fatura a OS,
+     *
+     * @param FaturarOsRequest $request
+     * @param OS $os os
+     *
+     */
+    function faturar(FaturarOsRequest $request, Os $os) {
+
+        DB::beginTransaction();
+        try {
+            //Gerando despesas Referente a produtos.
+            //Gerando atualizações de estoque .
+            foreach ($os->produtos as $osProduto) {
+                // Adicionando despesa,
+                $os->contas()->create([
+                    'tipo'=> 'D',
+                    'name'=> 'OS Nº: #'. $os->id. ', Produto:'. $osProduto->produto->name,
+                    'os_id' => $os->id,
+                    'user_id' => auth()->id(),
+                    'centro_custo_id' => $osProduto->produto->centro_custo_id,
+                    'cliente_id' => $os->cliente_id,
+                    'valor' => $osProduto->valor_custo,
+                    'data_quitacao' => $request->data_entrada,
+                    'parcelas' => 1,
+                ])->pagamentos()->create([
+                    'forma_pagamento_id' => getConfig('default_os_faturar_produto_despesa'),
+                    'user_id' => auth()->id(),
+                    'valor' => $osProduto->valor_custo,
+                    'vencimento' =>  $request->data_entrada,
+                    'data_pagamento' => $request->data_entrada,
+                    'parcela' => 1,
+                ]);
+
+                // Adicionando movimentação de estoque
+                $produto = Produto::find($osProduto->produto->id);
+                // Com estoque
+                if ($produto->estoque >= $osProduto->quantidade) {
+                    $produto->estoque = ($produto->estoque - $osProduto->quantidade);
+                    $produto->save();
+                    $produto->movimentacao()->create([
+                        'quantidade_movimentada' =>  $osProduto->quantidade,
+                        'tipo_movimentacao' => 0,
+                        'valor_custo' => $osProduto->valor_custo,
+                        'estoque_antes' => ($produto->estoque + $osProduto->quantidade),
+                        'estoque_apos' => $produto->estoque,
+                        'os_id' => $os->id,
+                        'descricao' => 'OS Nº: #'. $os->id,
+                    ]);
+                // Sem estoque
+                } else {
+                    $entrada = (-1*($produto->estoque - $osProduto->quantidade));
+                    $produto->movimentacao()->create([
+                        'quantidade_movimentada' =>  $entrada,
+                        'tipo_movimentacao' => 1,
+                        'valor_custo' => $osProduto->valor_custo,
+                        'estoque_antes' => ($produto->estoque),
+                        'estoque_apos' => ($produto->estoque + $entrada),
+                        'os_id' => $os->id,
+                        'descricao' => 'OS Nº: #'. $os->id,
+                    ]);
+                    $produto->movimentacao()->create([
+                        'quantidade_movimentada' =>  $osProduto->quantidade,
+                        'tipo_movimentacao' => 0,
+                        'valor_custo' => $osProduto->valor_custo,
+                        'estoque_antes' => ($produto->estoque + $osProduto->quantidade),
+                        'estoque_apos' => $produto->estoque,
+                        'os_id' => $os->id,
+                        'descricao' => 'OS Nº: #'. $os->id,
+                    ]);
+                    $produto->estoque = 0;
+                    $produto->valor_custo = $osProduto->valor_custo;
+                    $produto->valor_venda = $osProduto->valor_venda;
+                    $produto->save();
+
+                }
+
+
+
+
+            }
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+
     }
 }

@@ -39,6 +39,14 @@
             </button>
         </a>
         @endcan
+        @if ($os->modelo_id)
+            <a target="_blank" href="{{route('wiki.show', $os->modelo->wiki->id)}}">
+                <button type="button"  class="btn bg-primary btn-sm float-right">
+                    <i class="fa-solid fa-book"></i>
+                    <span class="d-none d-sm-inline">Wiki</span>
+                </button>
+            </a>
+        @endif
     </div>
     <div class="card-body pt-2">
         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -120,7 +128,7 @@
 <div class="modal fade" id="faturarModal" tabindex="-1" role="dialog" aria-labelledby="faturarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form method="POST">
+            {!! html()->form('put', route('os.faturar', $os->id))->open() !!}
                 <div class="modal-header">
                     <h5 class="modal-title" id="faturarModalLabel">Faturar OS: #{{ $os->id }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -138,7 +146,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="centro_custo_id">Centro de Custo</label>
-                                {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), $os->centroCustoPadrao())->class('form-control')->placeholder('Selecione o Centro de Custo') !!}
+                                {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), $os->centroCustoPadrao())->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
                             </div>
                         </div>
                     </div>
@@ -209,7 +217,7 @@
                         Salvar
                     </button>
                 </div>
-            </form>
+            {!! html()->form()->close() !!}
         </div>
     </div>
 </div>
@@ -242,26 +250,7 @@
         display: none;
     }
 
-    .custom-switch.custom-switch-md .custom-control-label {
-        padding-left: 2rem;
-        padding-bottom: 1.5rem;
-    }
 
-    .custom-switch.custom-switch-md .custom-control-label::before {
-        height: 1.5rem;
-        width: calc(2rem + 0.75rem);
-        border-radius: 3rem;
-    }
-
-    .custom-switch.custom-switch-md .custom-control-label::after {
-        width: calc(1.5rem - 4px);
-        height: calc(1.5rem - 4px);
-        border-radius: calc(2rem - (1.5rem / 2));
-    }
-
-    .custom-switch.custom-switch-md .custom-control-input:checked ~ .custom-control-label::after {
-        transform: translateX(calc(1.5rem - 0.25rem));
-    }
 
 </style>
 @stop
