@@ -25,6 +25,7 @@ class OsController extends Controller
         $this->middleware('permission:os_show', ['only'=> 'show']);
         $this->middleware('permission:os_edit', ['only'=> ['edit', 'update']]);
         $this->middleware('permission:os_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:os_faturar', ['only'=> 'faturar']);
 
     }
 
