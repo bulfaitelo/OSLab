@@ -94,12 +94,21 @@ class DefaultsConfigOsStatus extends Seeder
                 // 'ativar_email' => 0,
                 // 'prazo_email' => null,1
             ],
-
             [
                 'id' => 9,
                 'name' => 'Aprovado',
                 'descricao' => 'OS Aprovada',
                 'color' => 'bg-primary',
+                // 'email_id' => null,
+                // 'ativar_rastreio' => 0,
+                // 'ativar_email' => 0,
+                // 'prazo_email' => null,1
+            ],
+            [
+                'id' => 10,
+                'name' => 'Pagto. Parcial',
+                'descricao' => 'OS Aprovada',
+                'color' => 'bg-pink',
                 // 'email_id' => null,
                 // 'ativar_rastreio' => 0,
                 // 'ativar_email' => 0,

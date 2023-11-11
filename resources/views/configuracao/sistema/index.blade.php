@@ -67,6 +67,20 @@
                                         <i>Tipo de despesa padrão para os produtos quando for faturada uma nova OS</i>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="default_os_create_status">Status OS Pagto. em Aberto</label>
+                                        {!! html()->select('sistema[default_os_faturar_pagto_parcial]', App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar_pagto_parcial'))->class('form-control')->placeholder('Não alterar status') !!}
+                                        <i>Quando a Os for faturada ela irá receber esse status se o valor do pagamento for menor do que o valor total da Os </i>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="default_os_create_status">Status OS ao ser Quitada</label>
+                                        {!! html()->select('sistema[default_os_faturar_pagto_quitado]', App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar_pagto_quitado'))->class('form-control')->placeholder('Não alterar status') !!}
+                                        <i>Quando a Os for faturada ela irá receber esse status se o valor do pagamento igual ou maior do que o valor da Os</i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
