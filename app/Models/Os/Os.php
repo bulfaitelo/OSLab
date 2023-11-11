@@ -231,7 +231,7 @@ class Os extends Model
      * @return string Valor total
      */
     function valorTotal() : string {
-        return number_format($this->servicos->sum('valor_servico') + $this->produtos->sum('valor_venda'), 2);
+        return number_format($this->servicos->sum('valor_servico_total') + $this->produtos->sum('valor_venda_total'), 2);
     }
 
     /**
