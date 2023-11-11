@@ -18,7 +18,31 @@
                         <i class="fa-solid fa-chevron-left"></i>
                         Voltar
                     </button>
-              </a>
+                </a>
+                @can('produto_show')
+                <a href="{{ route('produto.show', $produto) }}">
+                    <button type="button" title="Visualizar" class="btn btn-sm btn-default">
+                        <i class="fas fa-edit"></i>
+                        Visualizar
+                    </button>
+                </a>
+                @endcan
+                @can('produto_movimentacao')
+                <a href="{{ route('movimentacao.index', $produto->id) }}" >
+                    <button type="button" title="Movimentações" class="btn btn-sm bg-olive" >
+                        <i class="fa-solid fa-boxes-packing"></i>
+                        Movimentações
+                    </button>
+                </a>
+                @endcan
+                @can('produto_movimentacao_create')
+                <a href="{{ route('movimentacao.create', $produto->id) }}">
+                    <button type="button" title="Adicionar Estoque" class="btn btn-sm bg-primary">
+                        <i class="fa-solid fa-plus"></i>
+                        Adicionar Estoque
+                    </button>
+                </a>
+                @endcan
             </div>
           <!-- /.card-header -->
           <!-- form start -->
