@@ -183,6 +183,11 @@ class OsController extends Controller
      */
     function faturar(FaturarOsRequest $request, Os $os) {
 
+        if (!getConfig('default_os_faturar_produto_despesa')) {
+            return redirect()->route('os.edit', $os->id)
+            ->with('warning', 'Por favor vejas as configurações do sistema.');
+        }
+
         DB::beginTransaction();
         try {
             //Gerando despesas Referente a produtos.
@@ -248,15 +253,61 @@ class OsController extends Controller
                     $produto->valor_custo = $osProduto->valor_custo;
                     $produto->valor_venda = $osProduto->valor_venda;
                     $produto->save();
-
                 }
-
-
-
-
             }
 
+            // Adicionando receita
+            // com pagamento recebido
+            if ($request->recebido) {
+                if ($os->valorTotal() <= $request->valor_recebido) {
+                    $dataQuitacao = $request->data_recebimento;
+                } else {
+                    $dataQuitacao = null;
+                }
+                $os->contas()->create([
+                    'tipo'=> 'R',
+                    'name'=> 'OS Nº: #'. $os->id,
+                    'os_id' => $os->id,
+                    'user_id' => auth()->id(),
+                    'centro_custo_id' => $request->centro_custo_id,
+                    'cliente_id' => $os->cliente_id,
+                    'valor' => $os->valorTotal(),
+                    'data_quitacao' => $dataQuitacao,
+                    'parcelas' => 1,
+                ])->pagamentos()->create([
+                    'forma_pagamento_id' => getConfig('default_os_faturar_produto_despesa'),
+                    'user_id' => auth()->id(),
+                    'valor' => $request->valor_recebido,
+                    'vencimento' =>  $request->data_entrada,
+                    'data_pagamento' => $request->data_recebimento,
+                    'parcela' => 1,
+                ]);
+
+            // Sem pagamento
+            } else {
+                $os->contas()->create([
+                    'tipo'=> 'R',
+                    'name'=> 'OS Nº: #'. $os->id,
+                    'os_id' => $os->id,
+                    'user_id' => auth()->id(),
+                    'centro_custo_id' => $request->centro_custo_id,
+                    'cliente_id' => $os->cliente_id,
+                    'valor' => $os->valorTotal(),
+                    'parcelas' => 1,
+                ]);
+            }
+
+            if (isset($dataQuitacao) && !empty($dataQuitacao)) {
+                $os->status_id =  getConfig('default_os_faturar_pagto_quitado');
+            } else {
+                $os->status_id =  getConfig('default_os_faturar_pagto_parcial');
+            }
+            $os->data_saida = $request->data_entrada;
+            $os->faturada = true;
+            $os->save();
             DB::commit();
+            return redirect()->route('os.edit', $os->id)
+            ->with('success', 'Os Faturada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

@@ -107,7 +107,7 @@ class DefaultsConfigOsStatus extends Seeder
             [
                 'id' => 10,
                 'name' => 'Pagto. Parcial',
-                'descricao' => 'OS Aprovada',
+                'descricao' => 'OS Pagamento Parcial',
                 'color' => 'bg-pink',
                 // 'email_id' => null,
                 // 'ativar_rastreio' => 0,

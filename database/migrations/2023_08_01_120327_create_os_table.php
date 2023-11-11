@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('tecnico_id');
             $table->unsignedBigInteger('status_id');
+            $table->boolean('faturada')->default(false);
             $table->date('data_entrada');
             $table->date('data_saida')->nullable();
             $table->date('prazo_garantia')->nullable();

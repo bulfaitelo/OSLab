@@ -25,11 +25,12 @@
         </a>
         @endcan
         @can('os_faturar')
-        <button type="button" title="Editar" class="btn btn-sm btn-success" data-toggle="modal" data-target="#faturarModal">
-            <i class="fa-solid fa-dollar-sign"></i>
-            <span class="d-none d-sm-inline">Faturar</span>
-
-        </button>
+            @if (!$os->faturada)
+            <button type="button" title="Editar" class="btn btn-sm btn-success" data-toggle="modal" data-target="#faturarModal">
+                <i class="fa-solid fa-dollar-sign"></i>
+                <span class="d-none d-sm-inline">Faturar</span>
+            </button>
+            @endif
         @endcan
         @can('os_print')
         <a href="{{ route('os.show', $os) }}">
