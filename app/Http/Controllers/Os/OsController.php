@@ -26,6 +26,7 @@ class OsController extends Controller
         $this->middleware('permission:os_edit', ['only'=> ['edit', 'update']]);
         $this->middleware('permission:os_destroy', ['only'=> 'destroy']);
         $this->middleware('permission:os_faturar', ['only'=> 'faturar']);
+        $this->middleware('permission:os_cancelar_faturar', ['only'=> 'cancelarFaturamento']);
 
     }
 
@@ -313,5 +314,25 @@ class OsController extends Controller
             throw $th;
         }
 
+    }
+
+    /**
+     * Cancela o faturamento da os
+     *
+     * @param OS $os
+     */
+    function cancelarFaturamento(Os $os) {
+        DB::beginTransaction();
+        try {
+            foreach ($os->produtos as $osProduto) {
+                $produto = Produto::find($osProduto->produto->id);
+                dd($produto->movimentacao);
+
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 }

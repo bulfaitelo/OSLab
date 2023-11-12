@@ -32,6 +32,14 @@
             </button>
             @endif
         @endcan
+        @can('os_cancelar_faturar')
+            @if ($os->faturada)
+            <button type="button" title="Editar" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#cancelarFaturarModal">
+                <i class="fa-solid fa-dollar-sign"></i>
+                <span class="d-none d-sm-inline">Cancelar Fatura</span>
+            </button>
+            @endif
+        @endcan
         @can('os_print')
         <a href="{{ route('os.show', $os) }}">
             <button type="button" title="Imprimir" class="btn btn-sm bg-navy">
@@ -125,6 +133,7 @@
     </div>
 </div>
 
+@can('os_faturar')
 <!-- Modal - FATURA  -->
 <div class="modal fade" id="faturarModal" tabindex="-1" role="dialog" aria-labelledby="faturarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -223,6 +232,11 @@
     </div>
 </div>
 <!-- FIM Modal - FATURA  -->
+@endcan
+
+@can('os_cancelar_faturar')
+
+@endcan
 
 @stop
 

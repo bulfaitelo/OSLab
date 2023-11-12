@@ -53,6 +53,12 @@ class DefaultsConfigPermissionsOs extends Seeder
                 'group_id' => 3,
             ],
             [
+                'description' => 'Cancelar Faturamento Ordem de Serviço',
+                'name' => 'os_cancelar_faturar',
+                'guard_name' => 'web',
+                'group_id' => 3,
+            ],
+            [
                 'description' => 'Excluir Ordem de Serviço',
                 'name' => 'os_destroy',
                 'guard_name' => 'web',
