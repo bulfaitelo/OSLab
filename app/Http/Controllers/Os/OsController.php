@@ -330,10 +330,26 @@ class OsController extends Controller
         try {
             foreach ($os->produtos as $osProduto) {
                 $produto = Produto::find($osProduto->produto->id);
-                dd($produto->movimentacao);
+                $movimentacoes = $produto->movimentacao()->where('os_id', $os->id);
+                foreach ($movimentacoes->get() as $movimentacao) {
+                    // Se houver entrada na movimentação pegamos o estoque_antes e somamos no estoque, caso não somamos o estoque_antes da saida do produto.
+                    if ($movimentacao->tipo_movimentacao == 1) {
+                        $produto->estoque = ($produto->estoque + $movimentacao->estoque_antes);
+                    } else {
+                        $produto->estoque = ($produto->estoque + $movimentacao->quantidade_movimentada);
+                    }
+                    $produto->save();
+                }
+                $movimentacoes->delete();
 
             }
+            $os->contas()->delete();
+            $os->faturada = false;
+            $os->status_id = getConfig('default_os_create_status');
+            $os->save();
             DB::commit();
+            return redirect()->route('os.edit', $os->id)
+            ->with('success', 'Fatura cancelada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

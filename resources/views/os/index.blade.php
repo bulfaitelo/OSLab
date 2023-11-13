@@ -116,7 +116,7 @@
                         <td>{{ $item->data_entrada->format('d/m/Y') }}</td>
                         <td>{{ $item->data_saida?->format('d/m/Y') }}</td>
                         <td> garantia </td>
-                        <td> valor </td>
+                        <td class="decimal">{{ $item->valorTotal() }}</td>
                         <td> {{ $item->categoria->name }} </td>
                         <td>
                             <span class="badge {{ $item->status->color }}">{{ $item->status->name }}</span>

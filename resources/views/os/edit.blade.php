@@ -235,7 +235,39 @@
 @endcan
 
 @can('os_cancelar_faturar')
-
+<!-- Modal - CANCELAR FATURA  -->
+<div class="modal fade" id="cancelarFaturarModal" tabindex="-1" role="dialog" aria-labelledby="cancelarfaturarModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            {!! html()->form('delete', route('os.cancelar-faturar', $os->id))->open() !!}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="faturarModalLabel">Cancelar Fatura OS: #{{ $os->id }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>Observações ao cancelar uma fatura:</h5>
+                    <p>Receitas e despesa serão escluidas.</p>
+                    <p>Movimentações de estoque serão apagadas.</p>
+                    <p>Estoque será atualizado com o saldo antes do faturamento dessa OS. <br> Talvez seja necessáro corrigir o estoque!</p>
+                    <p>O status da os será retornado par ao status padrão.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+                        <i class="fa-regular fa-rectangle-xmark"></i>
+                        Fechar
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="fas fa-save"></i>
+                        Cancelar Fatura
+                    </button>
+                </div>
+            {!! html()->form()->close() !!}
+        </div>
+    </div>
+</div>
+<!-- FIM Modal - CANCELAR FATURA  -->
 @endcan
 
 @stop

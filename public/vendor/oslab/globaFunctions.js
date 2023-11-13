@@ -7,3 +7,6 @@ $('#modal-excluir').on('show.bs.modal', function (event) {
     modal.find('.modal-body span').text(name)
     modal.find('form').attr('action', url);
 })
+
+// Formatação padrão
+$('.decimal').mask('#.##0,00', { reverse: true });
