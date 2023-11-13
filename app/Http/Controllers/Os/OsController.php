@@ -299,9 +299,13 @@ class OsController extends Controller
             }
 
             if (isset($dataQuitacao) && !empty($dataQuitacao)) {
-                $os->status_id =  getConfig('default_os_faturar_pagto_quitado');
+                if (getConfig('default_os_faturar_pagto_quitado') != '') {
+                    $os->status_id =  getConfig('default_os_faturar_pagto_quitado');
+                }
             } else {
-                $os->status_id =  getConfig('default_os_faturar_pagto_parcial');
+                if (getConfig('default_os_faturar_pagto_parcial') != '') {
+                    $os->status_id =  getConfig('default_os_faturar_pagto_parcial');
+                }
             }
             $os->data_saida = $request->data_entrada;
             $os->faturada = true;
