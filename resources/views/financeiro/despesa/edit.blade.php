@@ -377,8 +377,8 @@
             },
         });
         // selecionando os dados do cliente
-        tomSelectCliente.addOption(@js($item->conta->getClienteForSelect()));
-        tomSelectCliente.addItem(@js($item->conta->cliente_id));
+        tomSelectCliente.addOption(@js($despesa->getClienteForSelect()));
+        tomSelectCliente.addItem(@js($despesa->cliente_id));
     });
 </script>
 

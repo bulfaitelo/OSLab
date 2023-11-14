@@ -74,7 +74,7 @@ class Pagamentos extends Model
         return json_encode([
             'id'=> $this->id,
             'parcela' => $this->parcela,
-            'vencimento' => $this->vencimento->format('Y-m-d'),
+            'vencimento' => $this->vencimento?->format('Y-m-d'),
             'data_pagamento' => $this->data_pagamento?->format('Y-m-d'),
             'forma_pagamento_id' => $this->forma_pagamento_id,
             'valor' => number_format($this->valor, 2, ',', '.'),

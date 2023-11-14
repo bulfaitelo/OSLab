@@ -378,8 +378,8 @@
             },
         });
         // selecionando os dados do cliente
-        tomSelectCliente.addOption(@js($item->conta->getClienteForSelect()));
-        tomSelectCliente.addItem(@js($item->conta->cliente_id));
+        tomSelectCliente.addOption(@js($receita->getClienteForSelect()));
+        tomSelectCliente.addItem(@js($receita->cliente_id));
     });
 </script>
 
