@@ -117,7 +117,7 @@
             </div>
             @if ($os->categoria->checklist_id)
             <div class="tab-pane fade" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
-                @livewire('os.checklist-tab', ['os_id' => $os->id])
+                @livewire('os.checklist-tab', ['os' => $os])
             </div>
             @endif
             <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
