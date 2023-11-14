@@ -1,5 +1,6 @@
 <div>
     {{-- @include('adminlte::partials.form-alert') --}}
+    @if ($os->faturada != 1)
     <form method="POST" wire:submit.prevent="create">
         <div class="row" style="background-color: #f7f7f7; border-radius: 5px 5px 0px 0px" >
             <div class="col-md-6">
@@ -36,6 +37,7 @@
             </div>
         </div>
     </form>
+    @endif
     @if ($os_servico->count() > 0)
         <div class="row">
             <div class="table-responsive">
@@ -57,7 +59,9 @@
                                 <td>R$ {{ number_format($item->valor_servico,2,",",".") }}</td>
                                 <td>R$ {{ number_format($item->valor_servico_total,2,",",".") }}</td>
                                 <td>
+                                    @if ($os->faturada != 1)
                                     <a title="Excluir" wire:click="delete({{ $item->id }})" class="btn btn-block btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

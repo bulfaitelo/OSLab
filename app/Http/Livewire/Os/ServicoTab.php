@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Os;
 
 use App\Models\Os\Os;
-use App\Models\Os\OsServico;
 use App\Models\Servico\Servico;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -11,7 +10,7 @@ use Livewire\Component;
 class ServicoTab extends Component
 {
 
-    public $os_id;
+    public $os;
     public $valor_servico;
     public $servico_id;
     public $quantidade;
@@ -38,7 +37,7 @@ class ServicoTab extends Component
             $this->valor_servico = $servico->valor_servico;
             $this->quantidade = 1;
         }
-        $os_servico = Os::find($this->os_id)->servicos;
+        $os_servico = $this->os->servicos()->get();
 
         return view('livewire.os.servico-tab', [
             'os_servico' => $os_servico
@@ -47,23 +46,35 @@ class ServicoTab extends Component
 
     public function create(): void {
         $servico = $this->validate();
-        $this->createOsServico($servico);
+        if ($this->os->faturada == 1) {
+            // Apagando o produto digitado.
+            $this->dispatchBrowserEvent('clear');
+            flash()->addError('Serviço não pode ser adicionado a uma os Faturada.');
+        } else {
+            $this->createOsServico($servico);
 
-        $this->quantidade = null;
-        $this->valor_servico = null;
-        $this->servico_id = null;
+            $this->quantidade = null;
+            $this->valor_servico = null;
+            $this->servico_id = null;
 
-        // Apagando o serviço digitado.
-        $this->dispatchBrowserEvent('clear');
-        flasher('Serviço adicionado com sucesso.');
+            // Apagando o serviço digitado.
+            $this->dispatchBrowserEvent('clear');
+            flasher('Serviço adicionado com sucesso.');
+        }
     }
 
 
     public function delete($id) {
         try {
-            $osServico = Os::findOrFail($this->os_id)->servicos()->find($id);
-            $osServico->delete();
-            flasher('Serviço removido com sucesso.');
+            if ($this->os->faturada == 1) {
+                // Apagando o produto digitado.
+                $this->dispatchBrowserEvent('clear');
+                flash()->addError('Serviço não pode ser apagado a uma os Faturada.');
+            } else {
+                $osServico = $this->os->servicos()->find($id);
+                $osServico->delete();
+                flasher('Serviço removido com sucesso.');
+            }
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -74,10 +85,9 @@ class ServicoTab extends Component
         try {
             $servico['valor_servico_total'] = $servico['valor_servico'] * $servico['quantidade'];
             $servico['user_id'] = auth()->id();
-            $osServico = Os::find($this->os_id)->servicos()->create(
+            $osServico = $this->os->servicos()->create(
                 $servico
             );
-
             DB::commit();
             return $osServico;
         } catch (\Throwable $th) {
