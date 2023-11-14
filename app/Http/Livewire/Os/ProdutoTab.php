@@ -56,7 +56,7 @@ class ProdutoTab extends Component
     public function create() {
         $produto = $this->validate();
 
-        $osProduto = $this->createOsProduto($produto);
+        $this->createOsProduto($produto);
 
         $this->quantidade = null;
         $this->valor_custo = null;
@@ -80,20 +80,29 @@ class ProdutoTab extends Component
     }
 
 
-    private function createOsProduto($produto) : object {
+    private function createOsProduto($produto) {
+
         DB::beginTransaction();
         try {
             $produto['valor_custo_total'] = $produto['valor_custo'] * $produto['quantidade'];
             $produto['valor_venda_total'] = $produto['valor_venda'] * $produto['quantidade'];
             $produto['user_id'] = auth()->id();
-            $osProduto = Os::find($this->os_id)->produtos()->create(
-                $produto
-            );
-
+            $osProduto = Os::find($this->os_id)->produtos();
+            if ($osProdutoTemp = $osProduto->where('produto_id', $produto['produto_id'])->first()) {
+                $osProdutoTemp->valor_custo = $produto['valor_custo'];
+                $osProdutoTemp->valor_venda = $produto['valor_venda'];
+                $osProdutoTemp->valor_custo_total = ($produto['valor_custo_total'] + ($produto['valor_custo_total'] * $osProdutoTemp->quantidade));
+                $osProdutoTemp->valor_venda_total = ($produto['valor_venda_total'] + ($produto['valor_venda_total'] * $osProdutoTemp->quantidade));
+                $osProdutoTemp->increment('quantidade', $produto['quantidade']);
+                $osProdutoReturn = $osProdutoTemp->save();
+            } else{
+                $osProdutoReturn = $osProduto->create(
+                    $produto
+                );
+            }
             // $this->updateProdutoQuantidadeEstoque();
             DB::commit();
-            return $osProduto;
-
+            return $osProdutoReturn;
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
