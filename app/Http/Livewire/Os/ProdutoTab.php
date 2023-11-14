@@ -2,17 +2,15 @@
 
 namespace App\Http\Livewire\Os;
 
-use App\Models\Os\Os;
-use App\Models\Os\OsProduto;
+
 use App\Models\Produto\Produto;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use tidy;
 
 class ProdutoTab extends Component
 {
 
-    public $os_id;
+    public $os;
     public $valor_custo;
     public $valor_venda;
     public $quantidade;
@@ -45,9 +43,10 @@ class ProdutoTab extends Component
             $this->valor_venda = $produto->valor_venda;
             $this->quantidade = 1;
         }
-        $os_produto = Os::find($this->os_id)->produtos;
+        $os_produto = $this->os->produtos()->get();
         return view('livewire.os.produto-tab', [
-            'os_produto' => $os_produto
+            'os_produto' => $os_produto,
+            'os' => $this->os
         ]);
     }
 
@@ -56,24 +55,36 @@ class ProdutoTab extends Component
     public function create() {
         $produto = $this->validate();
 
-        $this->createOsProduto($produto);
+        if ($this->os->faturada == 1) {
+            // Apagando o produto digitado.
+            $this->dispatchBrowserEvent('clear');
+            flash()->addError('Produto não pode ser adicionado a uma os Faturada.');
+        } else {
 
-        $this->quantidade = null;
-        $this->valor_custo = null;
-        $this->valor_venda = null;
-        $this->produto_id = null;
+            $this->createOsProduto($produto);
+            $this->quantidade = null;
+            $this->valor_custo = null;
+            $this->valor_venda = null;
+            $this->produto_id = null;
+            // Apagando o produto digitado.
+            $this->dispatchBrowserEvent('clear');
+            flasher('Produto adicionado com sucesso.');
+        }
 
-        // Apagando o produto digitado.
-        $this->dispatchBrowserEvent('clear');
-        flasher('Produto adicionado com sucesso.');
 
     }
 
     public function delete($id) {
         try {
-            $osProduto = Os::findOrFail($this->os_id)->produtos()->find($id);
-            $osProduto->delete();
-            flasher('Produto removido com sucesso.');
+            if ($this->os->faturada == 1) {
+                // Apagando o produto digitado.
+                $this->dispatchBrowserEvent('clear');
+                flash()->addError('Produto não pode ser removido a uma os Faturada.');
+            } else {
+                $osProduto = $this->os->produtos()->find($id);
+                $osProduto->delete();
+                flasher('Produto removido com sucesso.');
+            }
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -87,7 +98,7 @@ class ProdutoTab extends Component
             $produto['valor_custo_total'] = $produto['valor_custo'] * $produto['quantidade'];
             $produto['valor_venda_total'] = $produto['valor_venda'] * $produto['quantidade'];
             $produto['user_id'] = auth()->id();
-            $osProduto = Os::find($this->os_id)->produtos();
+            $osProduto = $this->os->produtos();
             if ($osProdutoTemp = $osProduto->where('produto_id', $produto['produto_id'])->first()) {
                 $osProdutoTemp->valor_custo = $produto['valor_custo'];
                 $osProdutoTemp->valor_venda = $produto['valor_venda'];

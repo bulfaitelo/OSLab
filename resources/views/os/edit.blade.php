@@ -110,7 +110,7 @@
                 @livewire('os.detalhes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                @livewire('os.produto-tab', ['os_id' => $os->id])
+                @livewire('os.produto-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
                 @livewire('os.servico-tab', ['os_id' => $os->id])
