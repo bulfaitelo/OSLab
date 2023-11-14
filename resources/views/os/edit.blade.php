@@ -121,7 +121,7 @@
             </div>
             @endif
             <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
-                @livewire('os.informacoes-tab', ['os_id' => $os->id])
+                @livewire('os.informacoes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade" id="log" role="tabpanel" aria-labelledby="log-tab">
                 log

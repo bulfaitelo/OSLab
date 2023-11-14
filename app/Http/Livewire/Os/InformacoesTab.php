@@ -15,7 +15,7 @@ class InformacoesTab extends Component
 
     public $anotacao;
     public $posts;
-    public $os_id;
+    public $os;
     public $descricao_senha;
     public $tipo_senha = 'texto';
     public $senha_texto;
@@ -26,7 +26,7 @@ class InformacoesTab extends Component
 
     public function render()
     {
-        $informacoes = Os::find($this->os_id)->informacoes;
+        $informacoes = $this->os->informacoes()->get();
         return view('livewire.os.informacoes-tab', [
             'informacoes'=> $informacoes
         ]);
@@ -42,8 +42,7 @@ class InformacoesTab extends Component
         ]);
         DB::beginTransaction();
         try {
-            $os = Os::find($this->os_id);
-            $os->informacoes()->create([
+            $this->os->informacoes()->create([
                 'user_id' => auth()->id(),
                 'tipo' => 1,
                 'informacao' => $this->anotacao,
@@ -71,7 +70,6 @@ class InformacoesTab extends Component
         ]);
         DB::beginTransaction();
         try {
-            $os = Os::find($this->os_id);
 
             if ($this->tipo_senha == 'texto') {
                 $infomacao = $this->senha_texto;
@@ -79,7 +77,7 @@ class InformacoesTab extends Component
                 $infomacao = $this->senha_padrao;
 
             }
-            $os->informacoes()->create([
+            $this->os->informacoes()->create([
                 'user_id'=> auth()->id(),
                 'descricao' => $this->descricao_senha,
                 'tipo'=> 2,
@@ -117,11 +115,10 @@ class InformacoesTab extends Component
             'arquivo' => 'required|max:5120|mimes:zip,pdf,jpg,png,jpeg,bmp',
         ]);
 
-        $arquivo = $this->arquivo->storeAs('os/'.$this->os_id, $this->createFileName($this->arquivo), 'public');
+        $arquivo = $this->arquivo->storeAs('os/'.$this->os->id, $this->createFileName($this->arquivo), 'public');
         DB::beginTransaction();
         try {
-            $os = Os::find($this->os_id);
-            $os->informacoes()->create([
+            $this->os->informacoes()->create([
                 'user_id'=> auth()->id(),
                 'descricao' => $this->descricao_arquivo,
                 'tipo'=> 3,
@@ -143,7 +140,7 @@ class InformacoesTab extends Component
      * Download do arquivo
      */
     public function getFile($id) {
-        $arquivo = Os::find($this->os_id)
+        $arquivo = $this->os
                     ->informacoes
                     ->where('tipo', 3)
                     ->find($id);
