@@ -227,6 +227,7 @@ class OsController extends Controller
                         'estoque_antes' => ($produto->estoque + $osProduto->quantidade),
                         'estoque_apos' => $produto->estoque,
                         'os_id' => $os->id,
+                        'os_produto_id' => $osProduto->id,
                         'descricao' => 'OS Nº: #'. $os->id,
                     ]);
                 // Sem estoque
@@ -239,6 +240,7 @@ class OsController extends Controller
                         'estoque_antes' => ($produto->estoque),
                         'estoque_apos' => ($produto->estoque + $entrada),
                         'os_id' => $os->id,
+                        'os_produto_id' => $osProduto->id,
                         'descricao' => 'OS Nº: #'. $os->id,
                     ]);
                     $produto->movimentacao()->create([
@@ -248,6 +250,7 @@ class OsController extends Controller
                         'estoque_antes' => ($produto->estoque + $osProduto->quantidade),
                         'estoque_apos' => $produto->estoque,
                         'os_id' => $os->id,
+                        'os_produto_id' => $osProduto->id,
                         'descricao' => 'OS Nº: #'. $os->id,
                     ]);
                     $produto->estoque = 0;
@@ -330,18 +333,21 @@ class OsController extends Controller
         try {
             foreach ($os->produtos as $osProduto) {
                 $produto = Produto::find($osProduto->produto->id);
-                $movimentacoes = $produto->movimentacao()->where('os_id', $os->id);
-                foreach ($movimentacoes->get() as $movimentacao) {
-                    // Se houver entrada na movimentação pegamos o estoque_antes e somamos no estoque, caso não somamos o estoque_antes da saida do produto.
-                    if ($movimentacao->tipo_movimentacao == 1) {
-                        $produto->estoque = ($produto->estoque + $movimentacao->estoque_antes);
-                    } else {
-                        $produto->estoque = ($produto->estoque + $movimentacao->quantidade_movimentada);
-                    }
-                    $produto->save();
-                }
-                $movimentacoes->delete();
+                $movimentacoesModel = $produto->movimentacao()->where('os_produto_id', $osProduto->id);
+                $movimentacoes = $movimentacoesModel->get();
+                foreach ($movimentacoes as $movimentacao) {
 
+                    if(($movimentacoes->count() > 1 )){
+                        $produto->estoque = ($produto->estoque + $movimentacao->estoque_antes);
+                        break;
+                    }
+                    if (($movimentacoes->count() == 1 )) {
+                        $produto->estoque = ($produto->estoque + $movimentacao->quantidade_movimentada);
+                        break;
+                    }
+                }
+                $produto->save();
+                $movimentacoesModel->delete();
             }
             $os->contas()->delete();
             $os->faturada = false;
