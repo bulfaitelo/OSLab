@@ -106,7 +106,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+            <div class="tab-pane fade" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
                 @livewire('os.detalhes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
@@ -123,8 +123,8 @@
             <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
                 @livewire('os.informacoes-tab', ['os' => $os])
             </div>
-            <div class="tab-pane fade" id="log" role="tabpanel" aria-labelledby="log-tab">
-                log
+            <div class="tab-pane fade active show" id="log" role="tabpanel" aria-labelledby="log-tab">
+                @livewire('os.log-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                 balancete
