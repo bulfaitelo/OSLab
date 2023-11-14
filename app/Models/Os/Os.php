@@ -121,7 +121,8 @@ class Os extends Model
      **/
     public function produtos() : HasMany
     {
-        return $this->hasMany(OsProduto::class);
+        return $this->hasMany(OsProduto::class)
+                    ->with('produto');
     }
 
     /**
@@ -132,7 +133,8 @@ class Os extends Model
      **/
     public function servicos() : HasMany
     {
-        return $this->hasMany(OsServico::class);
+        return $this->hasMany(OsServico::class)
+                    ->with('servico');
     }
 
 
@@ -231,7 +233,7 @@ class Os extends Model
      * @return string Valor total
      */
     function valorTotal() : string {
-        return number_format($this->servicos->sum('valor_servico_total') + $this->produtos->sum('valor_venda_total'), 2, '.', '');
+        return number_format($this->servicos()->sum('valor_servico_total') + $this->produtos()->sum('valor_venda_total'), 2, '.', '');
     }
 
     /**
