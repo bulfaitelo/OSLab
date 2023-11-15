@@ -8,34 +8,23 @@
         <div>
             <i class="fas fa-user bg-green"></i>
             <div class="timeline-item">
-                <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                <span class="time"><i class="fas fa-clock"></i> 11:20:55 01/11/2023 </span>
                 <h3 class="timeline-header no-border">
-                    <a href="#">Sarah Young</a> accepted your friend request
-                    <a class="btn btn-warning btn-sm">View comment</a>
+                    <b>Alteração no status:</b>
+                   <span class="badge bg-warning">Orçamento</span>
+                    <a class="mt-0 float-right btn btn-warning btn-xs" data-toggle="collapse" href="#observacoes-log-div"   aria-expanded="true" aria-controls="observacoes" >
+                        Adicionar Comentário
+                        <i id="obervacoes-log-icon" class="fa-solid fa-caret-right"></i>
+                    </a>
+                    <div id="observacoes-log-div" class="collapse timeline-body">
+                        {!! html()->textarea('observacoes')->class('form-control mb-2')->placeholder('Observações (opcional)') !!}
+                    </div>
                 </h3>
             </div>
         </div>
 
-
-        <div>
-        <i class="fas fa-comments bg-yellow"></i>
-        <div class="timeline-item">
-        <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-        <div class="timeline-body">
-        Take me to your leader!
-        Switzerland is small and neutral!
-        We are more like Germany, ambitious and misunderstood!
-        </div>
-        <div class="timeline-footer">
-        <a class="btn btn-warning btn-sm">View comment</a>
-        </div>
-        </div>
-        </div>
-
-
         <div class="time-label">
-            <span class="bg-green">3 Jan. 2014</span>
+            <span class="bg-green">3 Jan. 2014</span> Abertura da OS
         </div>
 
 
@@ -43,4 +32,14 @@
             <i class="fas fa-clock bg-gray"></i>
         </div>
     </div>
+    <script>
+         document.addEventListener('livewire:load', function () {
+             $('#observacoes-log-div').on('show.bs.collapse', function () {
+                 $('#obervacoes-log-icon').removeClass('fa-caret-right').addClass('fa-caret-down');
+             })
+             $('#observacoes-log-div').on('hidden.bs.collapse', function () {
+                 $('#obervacoes-log-icon').removeClass('fa-caret-down').addClass('fa-caret-right');
+             })
+        });
+    </script>
 </div>
