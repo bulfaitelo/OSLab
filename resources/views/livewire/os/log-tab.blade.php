@@ -1,10 +1,34 @@
 <div>
     <div class="timeline mt-2">
         <div class="time-label">
-            <span class="bg-red">10 Feb. 2014</span>
+            <span class="bg-lightblue">10 Feb. 2014</span>
         </div>
-
-
+        <div>
+            <i class="fas fa-money-bill  bg-danger"></i>
+            <div class="timeline-item">
+                <span class="time"><i class="fas fa-clock"></i> 11:20:55 01/11/2023 </span>
+                <h3 class="timeline-header no-border">
+                    <b>Despesa </b> R$ 120,00
+                    <a href="" class="mt-0 float-right btn btn-default btn-xs">
+                        <i class="fas fa-eye"></i>
+                        <span class="d-none d-sm-inline">visualizar</span>
+                    </a>
+                </h3>
+            </div>
+        </div>
+        <div>
+            <i class="fas fa-money-bill  bg-green"></i>
+            <div class="timeline-item">
+                <span class="time"><i class="fas fa-clock"></i> 11:20:55 01/11/2023 </span>
+                <h3 class="timeline-header no-border">
+                    <b>Pagamento Recebido</b> R$ 120,00
+                    <a href="" class="mt-0 float-right btn btn-default btn-xs">
+                        <i class="fas fa-eye"></i>
+                        <span class="d-none d-sm-inline">visualizar</span>
+                    </a>
+                </h3>
+            </div>
+        </div>
         <div>
             <i class="fas fa-user bg-green"></i>
             <div class="timeline-item">
@@ -24,12 +48,18 @@
         </div>
 
         <div class="time-label">
-            <span class="bg-green">3 Jan. 2014</span> Abertura da OS
+            <span class="bg-lightblue">3 Jan. 2014</span>
         </div>
 
 
         <div>
-            <i class="fas fa-clock bg-gray"></i>
+            <i class="fas fa-plus bg-lightblue"></i>
+            <div class="timeline-item">
+                <span class="time"><i class="fas fa-clock"></i> 11:20:55 01/11/2023 </span>
+                <h3 class="timeline-header no-border">
+                    <b>Abertura de OS</b>
+                </h3>
+            </div>
         </div>
     </div>
     <script>
