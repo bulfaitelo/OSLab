@@ -10,3 +10,4 @@ $('#modal-excluir').on('show.bs.modal', function (event) {
 
 // Formatação padrão
 $('.decimal').mask('#.##0,00', { reverse: true });
+$('.int').mask('#0', { reverse: true });
