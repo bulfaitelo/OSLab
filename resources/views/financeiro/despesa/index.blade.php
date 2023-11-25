@@ -168,7 +168,6 @@
         .despesa {
             border-top: 3px solid #cd121f;
         }
-
     </style>
 @stop
 

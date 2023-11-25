@@ -34,24 +34,24 @@
         @endcan
         @can('os_cancelar_faturar')
             @if ($os->fatura_id)
-            <button type="button" title="Editar" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#cancelarFaturarModal">
-                <i class="fa-solid fa-dollar-sign"></i>
-                <span class="d-none d-sm-inline">Cancelar Fatura</span>
-            </button>
-            <div class="btn-group btn-group-sm">
-                @can('os_receita_create')
-                <a href="{{ route('os.show', $os) }}" title="Adicionar Receita" class="btn btn-left bg-success">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="d-none d-sm-inline">Receita</span>
-                </a>
-                @endcan
-                @can('os_despesa_create')
-                <a href="{{ route('os.show', $os) }}" title="Adicionar Despesa" class="btn btn-left bg-danger" >
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="d-none d-sm-inline">Despesa</span>
-                </a>
-                @endcan
-            </div>
+                <button type="button" title="Editar" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#cancelarFaturarModal">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                    <span class="d-none d-sm-inline">Cancelar Fatura</span>
+                </button>
+                <div class="btn-group btn-group-sm">
+                    @can('os_receita_create')
+                    <a href="{{ route('os.show', $os) }}" title="Adicionar Receita" class="btn btn-left bg-success">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="d-none d-sm-inline">Receita</span>
+                    </a>
+                    @endcan
+                    @canany(['os_despesa_create', 'financeiro_despesa_create'])
+                    <a href="{{route('os.despesa.create', $os)}}" target="_blank" title="Adicionar Despesa" class="btn btn-left bg-danger"  >
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="d-none d-sm-inline">Despesa</span>
+                    </a>
+                    @endcanany
+                </div>
             @endif
         @endcan
         @can('os_print')

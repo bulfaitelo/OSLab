@@ -24,7 +24,7 @@ class StoreContaRequest extends FormRequest
         return [
             'name' => 'required',
             'centro_custo_id' => 'required|exists:centro_custos,id',
-            'cliente_id' => 'required|exists:clientes,id',
+            'cliente_id' => 'required_without:os_id|exists:clientes,id',
             'vencimento' => 'date|required',
             'valor'     => 'required|numeric|min:0|not_in:0',
             'forma_pagamento_id' => 'required|exists:forma_pagamentos,id',
@@ -32,6 +32,8 @@ class StoreContaRequest extends FormRequest
             'avista_valor' => 'required_with:avista_pago,on|numeric|min:0|not_in:0|nullable',
 
             'parcelas' => 'required_if:parcelado,on|numeric',
+
+            'os_id' => 'nullable|exists:os,id'
         ];
     }
 
@@ -53,6 +55,7 @@ class StoreContaRequest extends FormRequest
         return [
          'name.required' => 'A despesa é obrigatória!',
          'pagamento_id' => 'A forma de pagamento é obrigatória ',
+         'cliente_id' => 'O Cliente / Fornecedor é obrigatório',
         ];
     }
 }

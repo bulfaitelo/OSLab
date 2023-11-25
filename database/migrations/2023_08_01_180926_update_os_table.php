@@ -36,6 +36,12 @@ return new class extends Migration
             $table->foreign('fatura_id', 'fk_os_contas')
             ->references('id')->on('contas');
         });
+
+        Schema::table('contas', function (Blueprint $table) {
+            $table->foreign('os_id', 'fk_contas_os')
+            ->references('id')->on('os');
+        });
+
     }
 
     /**
@@ -51,7 +57,11 @@ return new class extends Migration
             $table->dropForeign('fk_os_garantias');
             $table->dropForeign('fk_os_wiki_models');
             $table->dropForeign('fk_os_os_categorias');
+            $table->dropForeign('fk_os_contas');
+        });
 
+        Schema::table('contas', function (Blueprint $table) {
+            $table->dropForeign('fk_contas_os');
         });
     }
 };

@@ -20,7 +20,7 @@ class OsController extends Controller
     function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:os', ['only'=> 'index']);
+        $this->middleware('permission:os', ['only'=> ['index']]);
         $this->middleware('permission:os_create', ['only'=> ['create', 'store']]);
         $this->middleware('permission:os_show', ['only'=> 'show']);
         $this->middleware('permission:os_edit', ['only'=> ['edit', 'update']]);
@@ -349,10 +349,10 @@ class OsController extends Controller
                 $produto->save();
                 $movimentacoesModel->delete();
             }
-            $os->contas()->delete();
             $os->fatura_id = null;
             $os->status_id = getConfig('default_os_create_status');
             $os->save();
+            $os->contas()->delete();
             DB::commit();
             return redirect()->route('os.edit', $os->id)
             ->with('success', 'Fatura cancelada com sucesso.');

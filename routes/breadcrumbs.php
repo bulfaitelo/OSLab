@@ -65,6 +65,16 @@ Breadcrumbs::for('teste.index', function (BreadcrumbTrail $trail) {
         $trail->parent('os.index');
         $trail->push('#' .$item->id, route('os.edit', $item));
     });
+
+    // OS > [OS Name] > Editar OS
+    Breadcrumbs::for('os.despesa.create', function (BreadcrumbTrail $trail, Os $item) {
+        $trail->parent('os.index');
+        $trail->push('#' .$item->id, route('os.edit', $item));
+        $trail->push('Nova despesa Os: #'.$item->id);
+    });
+
+
+
 // FIM Os
 
 

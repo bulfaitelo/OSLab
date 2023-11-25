@@ -19,6 +19,9 @@
                         Voltar
                     </button>
                 </a>
+                @isset($os->id)
+                    <span class="float-right" ><b>Despesa Relacionada a OS: #{{ $os->id }}</b></span>
+                @endisset
             </div>
           <!-- /.card-header -->
           <!-- form start -->
@@ -26,14 +29,17 @@
           <div class="card-body">
           @include('adminlte::partials.form-alert')
           {!! html()->form('post', route('financeiro.despesa.store'))->open() !!}
+          @isset($os->id)
+          {!! html()->hidden('os_id', $os?->id) !!}
+          @endisset
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="form-group">
                     <label for="name">Despesa</label>
                     {!! html()->text('name')->class('form-control')->placeholder('Descrição da despesa ')->required() !!}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="centro_custo_id">Centro de Custo</label>
                     {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
@@ -44,7 +50,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="cliente_id">Cliente / Fornecedor </label>
-                    {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
+                    {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required()->disabled($os->id == true) !!}
                 </div>
             </div>
         </div>
@@ -153,9 +159,8 @@
 <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
 
 <style>
-    .receita {
-        border-top: 3px solid #12cd37;
-        /* background-color: #aaceb1; */
+    .despesa {
+        border-top: 3px solid #cd121f;
     }
     .ts-wrapper .option .title {
         display: block;
@@ -215,13 +220,16 @@
                 @endcan
             },
         });
+        // selecionando os dados do cliente
+        tomSelectCliente.addOption(@js($os?->getClienteForSelect()));
+        tomSelectCliente.addItem(@js($os?->cliente_id));
+
     });
 </script>
 
 <script>
 
-    $('.decimal').mask('#.##0,00', { reverse: true });
-    $('.int').mask('#0', { reverse: true });
+
     $('#data_info').popover({
         trigger: 'hover'
     });

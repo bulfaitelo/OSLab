@@ -83,6 +83,9 @@ Route::group(['middleware'=> 'auth'], function() {
         ->name('os.faturar');
     Route::delete('/os/{os}/cancelar-faturar', [OsController::class, 'cancelarFaturamento'])
         ->name('os.cancelar-faturar');
+    Route::get('os/{os}/despesa/create/', [DespesaController::class, 'create'])
+        ->name('os.despesa.create');
+
 
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');

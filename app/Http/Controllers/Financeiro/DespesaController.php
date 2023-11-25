@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Financeiro\StoreContaRequest;
 use App\Http\Requests\Financeiro\UpdateContaRequest;
 use App\Models\Financeiro\Contas;
+use App\Models\Os\Os;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,9 +73,10 @@ class DespesaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Os $os)
     {
-        return view('financeiro.despesa.create');
+        // $os = $request->os_id ? Os::findOrFail($request->os_id) : null;
+        return view('financeiro.despesa.create', ['os' => $os]);
     }
 
     /**
@@ -82,17 +84,26 @@ class DespesaController extends Controller
      */
     public function store(StoreContaRequest $request)
     {
+        // dd($request->input());
         DB::beginTransaction();
         try {
+            if ($request->os_id) {
+                $os = Os::findOrFail($request->os_id);
+            }
             $despesa = new Contas();
             $despesa->tipo = 'D'; //despesa
             $despesa->user_id = Auth::id();
             $despesa->name = $request->name;
             $despesa->centro_custo_id = $request->centro_custo_id;
-            $despesa->cliente_id = $request->cliente_id;
+            if ($request->os_id) {
+                $despesa->cliente_id = $os->cliente_id;
+            } else {
+                $despesa->cliente_id = $request->cliente_id;
+            }
             $despesa->observacoes = $request->observacoes;
             $despesa->valor = $request->valor;
             $despesa->parcelas = $request->parcelas;
+            $despesa->os_id = $os->id;
             $despesa->save();
 
             if ($request->parcelas > 1) {
