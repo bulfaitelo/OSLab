@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pagamentos', function (Blueprint $table) {
+        Schema::table('contas_pagamentos', function (Blueprint $table) {
             $table->foreign('conta_id', 'fk_pagamentos_contas')
             ->references('id')->on('contas')
             ->onDelete('cascade');

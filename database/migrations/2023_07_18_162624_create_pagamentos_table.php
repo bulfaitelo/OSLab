@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pagamentos', function (Blueprint $table) {
+        Schema::create('contas_pagamentos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('conta_id');
             $table->unsignedBigInteger('forma_pagamento_id')->nullable();

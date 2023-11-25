@@ -14,6 +14,8 @@ class Pagamentos extends Model
 {
     use HasFactory;
 
+    protected $table = 'contas_pagamentos';
+
     protected $casts = [
         'vencimento' => 'date',
         'data_pagamento' => 'date',
