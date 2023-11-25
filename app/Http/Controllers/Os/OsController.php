@@ -268,7 +268,7 @@ class OsController extends Controller
                 } else {
                     $dataQuitacao = null;
                 }
-                $os->contas()->create([
+                $fatura = $os->contas()->create([
                     'tipo'=> 'R',
                     'name'=> 'OS Nº: #'. $os->id,
                     'os_id' => $os->id,
@@ -289,7 +289,7 @@ class OsController extends Controller
 
             // Sem pagamento
             } else {
-                $os->contas()->create([
+                $fatura = $os->contas()->create([
                     'tipo'=> 'R',
                     'name'=> 'OS Nº: #'. $os->id,
                     'os_id' => $os->id,
@@ -311,7 +311,7 @@ class OsController extends Controller
                 }
             }
             $os->data_saida = $request->data_entrada;
-            $os->faturada = true;
+            $os->fatura_id = $fatura->id;
             $os->save();
             DB::commit();
             return redirect()->route('os.edit', $os->id)
@@ -350,7 +350,7 @@ class OsController extends Controller
                 $movimentacoesModel->delete();
             }
             $os->contas()->delete();
-            $os->faturada = false;
+            $os->fatura_id = null;
             $os->status_id = getConfig('default_os_create_status');
             $os->save();
             DB::commit();

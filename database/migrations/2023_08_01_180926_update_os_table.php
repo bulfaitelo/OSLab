@@ -32,6 +32,9 @@ return new class extends Migration
 
             $table->foreign('categoria_id', 'fk_os_os_categorias')
             ->references('id')->on('os_categorias');
+
+            $table->foreign('fatura_id', 'fk_os_contas')
+            ->references('id')->on('contas');
         });
     }
 

@@ -25,7 +25,7 @@
         </a>
         @endcan
         @can('os_faturar')
-            @if (!$os->faturada)
+            @if (!$os->fatura_id)
             <button onclick="Livewire.emit('faturarOs', {{$os->id}})"  type="button" title="Editar" class="btn btn-sm btn-success" >
                 <i class="fa-solid fa-dollar-sign"></i>
                 <span class="d-none d-sm-inline">Faturar</span>
@@ -33,7 +33,7 @@
             @endif
         @endcan
         @can('os_cancelar_faturar')
-            @if ($os->faturada)
+            @if ($os->fatura_id)
             <button type="button" title="Editar" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#cancelarFaturarModal">
                 <i class="fa-solid fa-dollar-sign"></i>
                 <span class="d-none d-sm-inline">Cancelar Fatura</span>
