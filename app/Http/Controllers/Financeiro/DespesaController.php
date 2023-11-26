@@ -97,13 +97,13 @@ class DespesaController extends Controller
             $despesa->centro_custo_id = $request->centro_custo_id;
             if ($request->os_id) {
                 $despesa->cliente_id = $os->cliente_id;
+                $despesa->os_id = $os->id;
             } else {
                 $despesa->cliente_id = $request->cliente_id;
             }
             $despesa->observacoes = $request->observacoes;
             $despesa->valor = $request->valor;
             $despesa->parcelas = $request->parcelas;
-            $despesa->os_id = $os->id;
             $despesa->save();
 
             if ($request->parcelas > 1) {
@@ -135,7 +135,7 @@ class DespesaController extends Controller
                         'parcela' => $i,
                     ];
                     if($i != $request->parcelas){
-                        $vencimento->addMonth(1);
+                        $vencimento->addMonth();
                     }
                 }
                 if ($request->parcelado_pago) {
