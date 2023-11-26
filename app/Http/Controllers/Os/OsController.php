@@ -286,6 +286,7 @@ class OsController extends Controller
                     'data_pagamento' => $request->data_recebimento,
                     'parcela' => 1,
                 ]);
+                $fatura_id = $fatura->conta_id;
 
             // Sem pagamento
             } else {
@@ -299,6 +300,7 @@ class OsController extends Controller
                     'valor' => $os->valorTotal(),
                     'parcelas' => 1,
                 ]);
+                $fatura_id = $fatura->id;
             }
 
             if (isset($dataQuitacao) && !empty($dataQuitacao)) {
@@ -311,7 +313,7 @@ class OsController extends Controller
                 }
             }
             $os->data_saida = $request->data_entrada;
-            $os->fatura_id = $fatura->id;
+            $os->fatura_id = $fatura_id;
             $os->save();
             DB::commit();
             return redirect()->route('os.edit', $os->id)
