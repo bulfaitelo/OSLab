@@ -122,7 +122,7 @@ class ReceitaController extends Controller
                         'parcela' => $i,
                     ];
                     if($i != $request->parcelas){
-                        $vencimento->addMonth(1);
+                        $vencimento->addMonth();
                     }
                 }
                 if ($request->parcelado_pago) {
