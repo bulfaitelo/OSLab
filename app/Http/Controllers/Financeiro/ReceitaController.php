@@ -88,7 +88,6 @@ class ReceitaController extends Controller
             $receita->user_id = Auth::id();
             $receita->name = $request->name;
             $receita->centro_custo_id = $request->centro_custo_id;
-            $receita->cliente_id = $request->cliente_id;
             $receita->observacoes = $request->observacoes;
             $receita->valor = $request->valor;
             $receita->parcelas = $request->parcelas;
@@ -184,7 +183,9 @@ class ReceitaController extends Controller
             $receita->user_id = Auth::id();
             $receita->name = $request->name;
             $receita->centro_custo_id = $request->centro_custo_id;
-            $receita->cliente_id = $request->cliente_id;
+            if(!$receita->os_id){
+                $receita->cliente_id = $request->cliente_id;
+            }
             $receita->observacoes = $request->observacoes;
             $receita->valor = $request->valor;
             $receita->parcelas = $request->parcelas;

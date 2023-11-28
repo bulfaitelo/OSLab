@@ -47,7 +47,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="cliente_id">Cliente / Fornecedor </label>
-                                {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
+                                {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required()->disabled($despesa->os_id) !!}
                             </div>
                         </div>
                     </div>

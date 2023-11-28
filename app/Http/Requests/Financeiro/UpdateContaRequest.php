@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Financeiro;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateContaRequest extends FormRequest
 {
@@ -21,10 +22,24 @@ class UpdateContaRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->route('receita')?->os_id) {
+            $os_id = $this->route('receita')?->os_id;
+        } else {
+            $os_id = $this->route('despesa')?->os_id;
+
+        }
+
+
         return [
             'name' => 'required',
             'centro_custo_id' => 'required|exists:centro_custos,id',
-            'cliente_id' => 'required|exists:clientes,id',
+            'cliente_id' => [
+                Rule::requiredIf(function () use ($os_id){
+                    return ($os_id !== null) ? false : true ;
+                }),
+                'exists:clientes,id'
+            ],
+            // 'cliente_id' => 'required_without:os_id|exists:clientes,id',
             'valor'     => 'required|numeric|min:0|not_in:0',
             'parcelas' => 'numeric',
 

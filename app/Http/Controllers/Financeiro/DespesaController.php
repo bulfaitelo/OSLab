@@ -75,7 +75,6 @@ class DespesaController extends Controller
      */
     public function create(Os $os)
     {
-        // $os = $request->os_id ? Os::findOrFail($request->os_id) : null;
         return view('financeiro.despesa.create', ['os' => $os]);
     }
 
@@ -196,7 +195,9 @@ class DespesaController extends Controller
             $despesa->user_id = Auth::id();
             $despesa->name = $request->name;
             $despesa->centro_custo_id = $request->centro_custo_id;
-            $despesa->cliente_id = $request->cliente_id;
+            if(!$despesa->os_id){
+                $despesa->cliente_id = $request->cliente_id;
+            }
             $despesa->observacoes = $request->observacoes;
             $despesa->valor = $request->valor;
             $despesa->parcelas = $request->parcelas;
