@@ -39,16 +39,16 @@
                     <span class="d-none d-sm-inline">Cancelar Fatura</span>
                 </button>
                 <div class="btn-group btn-group-sm">
-                    @can('os_receita_create')
-                    <a href="{{ route('os.show', $os) }}" title="Adicionar Receita" class="btn btn-left bg-success">
+                    @can('os_receita_pagamento_create')
+                    <a title="Adicionar Receita" class="btn btn-left bg-success" data-toggle="modal" data-target="#modal-pagamento" >
                         <i class="fa-solid fa-plus"></i>
-                        <span class="d-none d-sm-inline">Receita</span>
+                        <span class="d-none d-sm-inline">Add. Pagamento</span>
                     </a>
                     @endcan
                     @canany(['os_despesa_create', 'financeiro_despesa_create'])
                     <a href="{{route('os.despesa.create', $os)}}" target="_blank" title="Adicionar Despesa" class="btn btn-left bg-danger"  >
                         <i class="fa-solid fa-plus"></i>
-                        <span class="d-none d-sm-inline">Despesa</span>
+                        <span class="d-none d-sm-inline">Add. Despesa</span>
                     </a>
                     @endcanany
                 </div>
@@ -190,6 +190,59 @@
 </div>
 <!-- FIM Modal - CANCELAR FATURA  -->
 @endcan
+
+
+{{-- Modal para criação de Pagamento de parcela --}}
+@can('os_receita_pagamento_create')
+<div class="modal fade" id="modal-pagamento">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Adicionar uma nova parcela</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('financeiro.receita.pagamento.store', $os->fatura_id) }}" id="form-pagamento" method="post">
+                    @csrf
+                <div class="row" id="collapseExample">
+                    <div  class="col-md-4">
+                        <div class="form-group">
+                            <label for="pagamento_valor"> Valor </label>
+                            {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor') !!}
+                        </div>
+                    </div>
+                    <div  class="col-md-4 ">
+                        <div class="form-group">
+                            <label for="data_pagamento"> Data pagamento </label>
+                            {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago') !!}
+                        </div>
+                    </div>
+                    <div  class="col-md-4">
+                        <div class="form-group">
+                            <label for="forma_pagamento_id">Forma de pagamento</label>
+                            {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                    Fechar
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Salvar
+                </button>
+            </div>
+            {!! html()->form()->close() !!}
+        </div>
+    </div>
+</div>
+@endcan
+{{-- /Modal para criação de Pagamento de parcela --}}
 
 @stop
 

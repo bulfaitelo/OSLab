@@ -60,7 +60,7 @@ class DefaultsConfigPermissionsOs extends Seeder
             ],
             [
                 'description' => 'Adicionar Receita a Ordem de Serviço',
-                'name' => 'os_receita_create',
+                'name' => 'os_receita_pagamento_create',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
