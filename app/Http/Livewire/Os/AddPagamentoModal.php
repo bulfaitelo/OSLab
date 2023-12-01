@@ -18,8 +18,16 @@ class AddPagamentoModal extends Component
 
     public function render()
     {
+        $conta = $this->os->contas()->where('tipo', 'R')->first();
+
         return view('livewire.os.add-pagamento-modal', [
-            'os' => $this->os
+            'os' => $this->os,
+            'conta' => $conta,
         ]);
     }
+
+    function pagamentoCreate() : void {
+
+    }
+
 }
