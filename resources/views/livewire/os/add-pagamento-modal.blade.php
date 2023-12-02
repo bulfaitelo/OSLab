@@ -14,19 +14,23 @@
                 <div  class="col-md-4">
                     <div class="form-group">
                         <label for="pagamento_valor"> Valor </label>
-                        {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor')->required() !!}
+                        <input wire:model.defer="valor_pagamento" type="text" class="form-control decimal" placeholder="Valor Recebido" >
+                        @error('valor_pagamento') <span class="error">{{ $message }}</span> @enderror
+
                     </div>
                 </div>
                 <div  class="col-md-4 ">
-                    <div class="form-group"> wire:model.defer="anotacao"
+                    <div class="form-group">
                         <label for="data_pagamento"> Data pagamento </label>
-                        {!! html()->date('data_pagamento', now())->class('form-control')->placeholder('Valor Pago')->required() !!}
+                        <input type="date" wire:model.defer="data_pagamento" class="form-control" placeholder="Data do Pagamento">
+                        @error('data_pagamento') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div  class="col-md-4">
                     <div class="form-group">
                         <label for="forma_pagamento_id">Forma de pagamento</label>
-                        {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                        {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->attribute('wire:model', 'forma_pagamento_id')->placeholder('Selecione')->required() !!}
+                        @error('forma_pagamento_id') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </div>
             </div>
