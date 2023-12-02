@@ -13,6 +13,9 @@ class AddPagamentoModal extends Component
 
     protected $listeners = ['adicionarPagamento' => 'loadAdicionarPagamento'];
 
+    /**
+     * Rules
+     */
     protected function rules() : array {
         return [
             'valor_pagamento' => 'required|numeric|min:0|not_in:0',
@@ -22,12 +25,18 @@ class AddPagamentoModal extends Component
         ];
     }
 
+    /**
+     * Prepare the data for validation.
+     */
     protected function prepareForValidation($attributes) {
         $attributes['valor_pagamento'] = str_replace(',', '.', str_replace('.','', $attributes['valor_pagamento']));
         return $attributes;
     }
 
 
+    /**
+     * Carrega Model de Adicionar Pagamento
+     */
     function loadAdicionarPagamento(){
         // dd($this->os->contas->where('tipo', 'R'));
         $this->emit('toggleAddPagamentoModal');
@@ -36,13 +45,15 @@ class AddPagamentoModal extends Component
     public function render()
     {
         $conta = $this->os->contas()->where('tipo', 'R')->first();
-
         return view('livewire.os.add-pagamento-modal', [
             'os' => $this->os,
             'conta' => $conta,
         ]);
     }
 
+    /**
+     * Método para adicionar pagamento a receita relacionada a Os
+     */
     function pagamentoCreate() : void {
         $pagamentoRequest = $this->validate();
         $conta = $this->os->contas()->where('tipo', 'R')->first();

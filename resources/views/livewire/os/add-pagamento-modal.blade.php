@@ -48,7 +48,7 @@
                     </thead>
                     @endif
                     <tbody>
-                        @forelse ($conta->pagamentos as $pagamento)
+                        @forelse ($conta->pagamentos()->with('formaPagamento')->get() as $pagamento)
                             <tr>
                                 <td> {{ $pagamento->data_pagamento->format('d/m/Y') }} </td>
                                 <td> {{ $pagamento->formaPagamento->name }} </td>
