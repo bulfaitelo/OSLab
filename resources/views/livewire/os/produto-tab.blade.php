@@ -1,6 +1,6 @@
 <div>
     {{-- @include('adminlte::partials.form-alert') --}}
-    @if ($os->faturada != 1)
+    @if (!$os->fatura_id)
     <form method="POST" wire:submit.prevent="create">
         <div class="row" style="background-color: #f7f7f7; border-radius: 5px 5px 0px 0px" >
             <div class="col-md-4">
@@ -67,7 +67,7 @@
                                 <td>R$ {{ number_format($item->valor_venda,2,",",".") }}</td>
                                 <td>R$ {{ number_format($item->valor_venda_total,2,",",".") }}</td>
                                 <td>
-                                    @if ($os->faturada != 1)
+                                    @if (!$os->fatura_id)
                                     <a title="Excluir" wire:click="delete({{ $item->id }})" class="btn btn-block btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                     @endif
                                 </td>
