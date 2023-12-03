@@ -19,6 +19,7 @@
                             ->placeholder('Valor')
                             ->attribute('wire:model', 'pagamento_valor')
                             ->disabled($os->osQuitada())
+                            ->attributes(['inputmode' => 'numeric'])
                             ->required()
                         !!}
                         @error('pagamento_valor') <span class="error">{{ $message }}</span> @enderror

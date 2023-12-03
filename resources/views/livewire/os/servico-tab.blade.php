@@ -15,7 +15,14 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="valor_servico">Preço</label>
-                    <input class="form-control decimal"  wire:model.defer="valor_servico" type="text" name="busca" id="valor_servico" placeholder="Preço do serviço" >
+                    <input
+                        class="form-control decimal"
+                        wire:model.defer="valor_servico"
+                        type="text" name="busca"
+                        id="valor_servico"
+                        inputmode="numeric"
+                        placeholder="Preço do serviço"
+                    >
                     @error('valor_servico') <span class="error">{{ $message }}</span> @enderror
 
                 </div>
@@ -23,7 +30,15 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="servico_quantidade">Quantidade</label>
-                    <input class="form-control numero" wire:model.defer="quantidade" type="text" name="quantidade" id="servico_quantidade" placeholder="Quantidade" >
+                    <input
+                        class="form-control numero"
+                        wire:model.defer="quantidade"
+                        type="text"
+                        name="quantidade"
+                        id="servico_quantidade"
+                        inputmode="numeric"
+                        placeholder="Quantidade"
+                    >
                     @error('quantidade') <span class="error">{{ $message }}</span> @enderror
                 </div>
             </div>

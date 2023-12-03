@@ -15,7 +15,15 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="valor_custo">Custo</label>
-                    <input class="form-control decimal"   wire:model.defer="valor_custo" type="text" name="busca" id="valor_custo" placeholder="Custo do produto" >
+                    <input
+                        class="form-control decimal"
+                        wire:model.defer="valor_custo"
+                        type="text"
+                        name="busca"
+                        id="valor_custo"
+                        placeholder="Custo do produto"
+                        inputmode="numeric"
+                    >
                     @error('valor_custo') <span class="error">{{ $message }}</span> @enderror
 
                 </div>
@@ -23,7 +31,14 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="valor_venda">Preço</label>
-                    <input class="form-control decimal"  wire:model.defer="valor_venda" type="text" name="busca" id="valor_venda" placeholder="Preço de venda" >
+                    <input
+                        class="form-control decimal"
+                        wire:model.defer="valor_venda"
+                        type="text"
+                        name="busca"
+                        id="valor_venda"placeholder="Preço de venda"
+                        inputmode="numeric"
+                    >
                     @error('valor_venda') <span class="error">{{ $message }}</span> @enderror
 
                 </div>
@@ -31,7 +46,15 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="produto_quantidade">Quantidade</label>
-                    <input class="form-control numero" wire:model.defer="quantidade" type="text" name="quantidade" id="produto_quantidade" placeholder="Quantidade" >
+                    <input
+                        class="form-control numero"
+                        wire:model.defer="quantidade"
+                        type="text"
+                        name="quantidade"
+                        id="produto_quantidade"
+                        inputmode="numeric"
+                        placeholder="Quantidade"
+                    >
                     @error('quantidade') <span class="error">{{ $message }}</span> @enderror
                 </div>
             </div>
