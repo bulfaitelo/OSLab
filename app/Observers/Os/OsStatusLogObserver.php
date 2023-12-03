@@ -4,7 +4,7 @@ namespace App\Observers\Os;
 
 use App\Models\Os\Os;
 
-class OsLogObserver
+class OsStatusLogObserver
 {
     private $statusIdtemp;
     /**
@@ -12,7 +12,7 @@ class OsLogObserver
      */
     public function created(Os $os): void
     {
-        $os->logs()->create([
+        $os->statusLogs()->create([
             'status_id'=> $os->status_id,
             'user_id'=> $os->user_id,
         ]);
@@ -25,7 +25,7 @@ class OsLogObserver
     public function updated(Os $os): void
     {
         if ($os->getOriginal('status_id') != (int) $os->status_id) {
-            $os->logs()->create([
+            $os->statusLogs()->create([
                 'status_id'=> $os->status_id,
                 'user_id'=> $os->user_id,
             ]);

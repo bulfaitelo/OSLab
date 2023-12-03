@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Os\Os;
-use App\Observers\Os\OsLogObserver;
+use App\Observers\Os\OsStatusLogObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,7 +27,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Os::observe(OsLogObserver::class);
+        Os::observe(OsStatusLogObserver::class);
     }
 
     /**

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('os_logs', function (Blueprint $table) {
+        Schema::create('os_status_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('os_id');
             $table->unsignedBigInteger('status_id')->nullable();
-            $table->unsignedBigInteger('conta_id')->nullable();
+            // $table->unsignedBigInteger('conta_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->string('descricao')->nullable();
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('os_logs');
+        Schema::dropIfExists('os_status_logs');
     }
 };
