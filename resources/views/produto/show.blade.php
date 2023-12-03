@@ -16,14 +16,14 @@
                 <a href="{{ url()->previous() }}">
                     <button type="button"  class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
+                        <span class="d-none d-sm-inline">Voltar</span>
                     </button>
                 </a>
                 @can('produto_edit')
                 <a href="{{ route('produto.edit', $produto) }}">
                     <button type="button" title="Editar" class="btn btn-sm btn-info">
                         <i class="fas fa-edit"></i>
-                        Editar
+                        <span class="d-none d-sm-inline">Editar</span>
                     </button>
                 </a>
                 @endcan
@@ -31,7 +31,7 @@
                 <a href="{{ route('movimentacao.index', $produto->id) }}" >
                     <button type="button" title="Movimentações" class="btn btn-sm bg-olive" >
                         <i class="fa-solid fa-boxes-packing"></i>
-                        Movimentações
+                        <span class="d-none d-sm-inline">Movimentações</span>
                     </button>
                 </a>
                 @endcan
@@ -39,7 +39,7 @@
                 <a href="{{ route('movimentacao.create', $produto->id) }}">
                     <button type="button" title="Adicionar Estoque" class="btn btn-sm bg-primary">
                         <i class="fa-solid fa-plus"></i>
-                        Adicionar Estoque
+                        <span class="d-none d-sm-inline">Adicionar Estoque</span>
                     </button>
                 </a>
                 @endcan

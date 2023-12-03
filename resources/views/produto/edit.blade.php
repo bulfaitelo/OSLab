@@ -16,14 +16,14 @@
                 <a href="{{ url()->previous() }}">
                     <button type="button"  class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
+                        <span class="d-none d-sm-inline">Voltar</span>
                     </button>
                 </a>
                 @can('produto_show')
                 <a href="{{ route('produto.show', $produto) }}">
                     <button type="button" title="Visualizar" class="btn btn-sm btn-default">
-                        <i class="fas fa-edit"></i>
-                        Visualizar
+                        <i class="fas fa-eye"></i>
+                        <span class="d-none d-sm-inline">Visualizar</span>
                     </button>
                 </a>
                 @endcan
@@ -31,7 +31,7 @@
                 <a href="{{ route('movimentacao.index', $produto->id) }}" >
                     <button type="button" title="Movimentações" class="btn btn-sm bg-olive" >
                         <i class="fa-solid fa-boxes-packing"></i>
-                        Movimentações
+                        <span class="d-none d-sm-inline">Movimentações</span>
                     </button>
                 </a>
                 @endcan
@@ -39,7 +39,7 @@
                 <a href="{{ route('movimentacao.create', $produto->id) }}">
                     <button type="button" title="Adicionar Estoque" class="btn btn-sm bg-primary">
                         <i class="fa-solid fa-plus"></i>
-                        Adicionar Estoque
+                        <span class="d-none d-sm-inline">Adicionar Estoque</span>
                     </button>
                 </a>
                 @endcan
@@ -64,7 +64,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_custo', $produto->valor_custo)->class('form-control decimal')->placeholder('Valor de custo do Produto') !!}
+                            {!! html()->text('valor_custo', $produto->valor_custo)->class('form-control decimal')->placeholder('Valor de custo do Produto')->attributes(['inputmode' => 'numeric']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -73,7 +73,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_venda', $produto->valor_venda)->class('form-control decimal')->placeholder('Valor de venda do Produto') !!}
+                            {!! html()->text('valor_venda', $produto->valor_venda)->class('form-control decimal')->placeholder('Valor de venda do Produto')->attributes(['inputmode' => 'numeric']) !!}
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="estoque_minimo">Estoque Minimo</label>
-                            {!! html()->text('estoque_minimo', $produto->estoque_minimo)->class('form-control numero')->placeholder('Estoque minimo do protuto') !!}
+                            {!! html()->text('estoque_minimo', $produto->estoque_minimo)->class('form-control numero')->placeholder('Estoque minimo do protuto')->attributes(['inputmode' => 'numeric']) !!}
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,7 @@
         <a href="{{ route('os.show', $os) }}">
             <button type="button" title="Editar" class="btn btn-sm btn-default">
                 <i class="fas fa-eye"></i>
-                <span class="d-none d-sm-inline">visualizar</span>
+                <span class="d-none d-sm-inline">Visualizar</span>
             </button>
         </a>
         @endcan

@@ -42,7 +42,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    {!! html()->text('valor_servico', $servico->valor_servico)->class('form-control decimal')->placeholder('Valor do serviço') !!}
+                    {!! html()->text('valor_servico', $servico->valor_servico)->class('form-control decimal')->placeholder('Valor do serviço')->attributes(['inputmode' => 'numeric']) !!}
                 </div>
           </div>
           {{-- Minimal with icon only --}}

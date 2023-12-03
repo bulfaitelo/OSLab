@@ -13,14 +13,14 @@
             <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
-                    Voltar
+                    <span class="d-none d-sm-inline">Voltar</span>
                 </button>
             </a>
             @can('produto_movimentacao_create')
             <a href="{{ route('movimentacao.create', $produto->id) }}">
                 <button type="button"  class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i>
-                    Adicionar Estoque
+                    <span class="d-none d-sm-inline">Adicionar Estoque</span>
                 </button>
             </a>
             @endcan

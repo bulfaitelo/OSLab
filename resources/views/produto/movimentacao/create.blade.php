@@ -44,7 +44,7 @@
                     <div class="col-md-6">
                         <label for="estoque">Quantdade de entrada </label>
                         <div class="input-group mb-3">
-                            {!! html()->text('estoque')->class('form-control numero')->placeholder('Quandade em unidades de entrada')->required() !!}
+                            {!! html()->text('estoque')->class('form-control numero')->placeholder('Quandade em unidades de entrada')->required()->attributes(['inputmode' => 'numeric']) !!}
                             <div class="input-group-append">
                                 <span class="input-group-text">Unit.</span>
                             </div>
@@ -56,7 +56,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_custo')->class('form-control decimal')->placeholder('Valor de venda do Produto') !!}
+                            {!! html()->text('valor_custo')->class('form-control decimal')->placeholder('Valor de venda do Produto')->attributes(['inputmode' => 'numeric']) !!}
                         </div>
                     </div>
                 </div>

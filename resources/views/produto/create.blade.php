@@ -41,7 +41,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_custo')->class('form-control decimal')->placeholder('Valor de custo do Produto') !!}
+                            {!! html()->text('valor_custo')->class('form-control decimal')->placeholder('Valor de custo do Produto')->attributes(['inputmode' => 'numeric']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -50,7 +50,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_venda')->class('form-control decimal')->placeholder('Valor de venda do Produto') !!}
+                            {!! html()->text('valor_venda')->class('form-control decimal')->placeholder('Valor de venda do Produto')->attributes(['inputmode' => 'numeric']) !!}
                         </div>
                     </div>
                 </div>
@@ -58,13 +58,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="estoque">Estoque Inicial</label>
-                            {!! html()->text('estoque')->class('form-control numero')->placeholder('Estoque inicial do produto') !!}
+                            {!! html()->text('estoque')->class('form-control numero')->placeholder('Estoque inicial do produto')->attributes(['inputmode' => 'numeric']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="estoque_minimo">Estoque Minimo</label>
-                            {!! html()->text('estoque_minimo')->class('form-control numero')->placeholder('Estoque minimo do protuto') !!}
+                            {!! html()->text('estoque_minimo')->class('form-control numero')->placeholder('Estoque minimo do protuto')->attributes(['inputmode' => 'numeric']) !!}
                         </div>
                     </div>
                 </div>
