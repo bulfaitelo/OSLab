@@ -247,4 +247,19 @@ class Os extends Model
         return $this->categoria->centroCusto?->id;
     }
 
+
+/**
+ * Verifica se a os já foi quitada.
+ *
+ * @return bool
+ **/
+public function osQuitada() : bool {
+    $conta = $this->contas()->find($this->fatura_id);
+    $pagamentos = $conta->pagamentos;
+    if ($conta->valor <= $pagamentos->sum('valor')) {
+        return true;
+    }
+    return false;
+}
+
 }

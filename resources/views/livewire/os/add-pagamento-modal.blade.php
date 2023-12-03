@@ -14,23 +14,39 @@
                 <div  class="col-md-4">
                     <div class="form-group">
                         <label for="pagamento_valor"> Valor </label>
-                        {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor')->attribute('wire:model', 'pagamento_valor')->required() !!}
+                        {!! html()->text('pagamento_valor')
+                            ->class('form-control decimal')
+                            ->placeholder('Valor')
+                            ->attribute('wire:model', 'pagamento_valor')
+                            ->disabled($os->osQuitada())
+                            ->required()
+                        !!}
                         @error('pagamento_valor') <span class="error">{{ $message }}</span> @enderror
-
                     </div>
                 </div>
                 <div  class="col-md-4 ">
                     <div class="form-group">
                         <label for="data_pagamento"> Data pagamento </label>
-                        {!! html()->date('data_pagamento', )->class('form-control')->placeholder('Data do Pagamento')->attribute('wire:model', 'data_pagamento')->required() !!}
-
+                        {!! html()->date('data_pagamento')
+                            ->class('form-control')
+                            ->placeholder('Data do Pagamento')
+                            ->attribute('wire:model', 'data_pagamento')
+                            ->disabled($os->osQuitada())
+                            ->required()
+                        !!}
                         @error('data_pagamento') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div  class="col-md-4">
                     <div class="form-group">
                         <label for="forma_pagamento_id">Forma de pagamento</label>
-                        {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->attribute('wire:model', 'forma_pagamento_id')->placeholder('Selecione')->required() !!}
+                        {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))
+                            ->class('form-control')
+                            ->attribute('wire:model', 'forma_pagamento_id')
+                            ->placeholder('Selecione')
+                            ->disabled($os->osQuitada())
+                            ->required()
+                        !!}
                         @error('forma_pagamento_id') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </div>
@@ -93,7 +109,7 @@
                 <i class="fas fa-times"></i>
                 Fechar
             </button>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" @disabled($os->osQuitada())>
                 <i class="fas fa-save"></i>
                 Salvar
             </button>

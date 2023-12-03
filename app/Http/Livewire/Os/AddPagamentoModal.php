@@ -60,6 +60,10 @@ class AddPagamentoModal extends Component
      */
     function pagamentoCreate() : void {
         $pagamentoRequest = $this->validate();
+        if ($this->os->osQuitada()) {
+            flash()->addError('a OS ja foi Quitada!');
+            return ;
+        }
         $conta = $this->os->contas()->where('tipo', 'R')->first();
         $parcela = $conta->pagamentos()->latest()->first()?->parcela;
         DB::beginTransaction();
