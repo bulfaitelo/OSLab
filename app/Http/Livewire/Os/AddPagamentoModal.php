@@ -57,6 +57,7 @@ class AddPagamentoModal extends Component
     function pagamentoCreate() : void {
         $pagamentoRequest = $this->validate();
         $conta = $this->os->contas()->where('tipo', 'R')->first();
+        $parcela = $conta->pagamentos()->latest()->first()?->parcela;
         DB::beginTransaction();
         try {
             $pagamento =  [
@@ -65,7 +66,7 @@ class AddPagamentoModal extends Component
                 'valor' => $pagamentoRequest['valor_pagamento'],
                 'vencimento' =>  $pagamentoRequest['data_pagamento'],
                 'data_pagamento' => $pagamentoRequest['data_pagamento'],
-                'parcela' => $conta->pagamentos()->latest()->first()->parcela + 1,
+                'parcela' => ((!$parcela) ? 0 : $parcela) + 1,
             ];
             $conta->pagamentos()->create($pagamento);
             if ($conta->parcelas < $conta->pagamentos->count()) {
@@ -73,6 +74,10 @@ class AddPagamentoModal extends Component
             }
             if (($conta->pagamentos->sum('valor') + $pagamentoRequest['valor_pagamento']) >= $conta->valor) {
                 $conta->data_quitacao = $pagamentoRequest['data_pagamento'];
+                if (getConfig('default_os_faturar_pagto_quitado') != '') {
+                    $this->os->status_id =  getConfig('default_os_faturar_pagto_quitado');
+                    $this->os->save();
+                }
             }
             $conta->save();
             $this->valor_pagamento = null;
