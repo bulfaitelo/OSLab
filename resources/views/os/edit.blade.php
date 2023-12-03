@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-
 <div class="card card-primary card-outline">
     <div class="card-header border-0 pb-0">
         <a href="{{ url()->previous() }}">

@@ -9,7 +9,7 @@ class AddPagamentoModal extends Component
 {
 
     public $os;
-    public $valor_pagamento, $data_pagamento, $forma_pagamento_id;
+    public $pagamento_valor, $data_pagamento, $forma_pagamento_id;
 
     protected $listeners = ['adicionarPagamento' => 'loadAdicionarPagamento'];
 
@@ -18,7 +18,7 @@ class AddPagamentoModal extends Component
      */
     protected function rules() : array {
         return [
-            'valor_pagamento' => 'required|numeric|min:0|not_in:0',
+            'pagamento_valor' => 'required|numeric|min:0|not_in:0',
             'data_pagamento' => 'required|date',
             'forma_pagamento_id' => 'required|exists:forma_pagamentos,id',
 
@@ -29,7 +29,7 @@ class AddPagamentoModal extends Component
      * Prepare the data for validation.
      */
     protected function prepareForValidation($attributes) {
-        $attributes['valor_pagamento'] = str_replace(',', '.', str_replace('.','', $attributes['valor_pagamento']));
+        $attributes['pagamento_valor'] = str_replace(',', '.', str_replace('.','', $attributes['pagamento_valor']));
         return $attributes;
     }
 
@@ -40,6 +40,10 @@ class AddPagamentoModal extends Component
     function loadAdicionarPagamento(){
         // dd($this->os->contas->where('tipo', 'R'));
         $this->emit('toggleAddPagamentoModal');
+    }
+
+    function mount() {
+        $this->data_pagamento = now()->format('Y-m-d');
     }
 
     public function render()
@@ -63,7 +67,7 @@ class AddPagamentoModal extends Component
             $pagamento =  [
                 'forma_pagamento_id' => $this->forma_pagamento_id,
                 'user_id' => auth()->id(),
-                'valor' => $pagamentoRequest['valor_pagamento'],
+                'valor' => $pagamentoRequest['pagamento_valor'],
                 'vencimento' =>  $pagamentoRequest['data_pagamento'],
                 'data_pagamento' => $pagamentoRequest['data_pagamento'],
                 'parcela' => ((!$parcela) ? 0 : $parcela) + 1,
@@ -72,7 +76,7 @@ class AddPagamentoModal extends Component
             if ($conta->parcelas < $conta->pagamentos->count()) {
                 $conta->parcelas = $conta->parcelas + 1;
             }
-            if (($conta->pagamentos->sum('valor') + $pagamentoRequest['valor_pagamento']) >= $conta->valor) {
+            if (($conta->pagamentos->sum('valor') + $pagamentoRequest['pagamento_valor']) >= $conta->valor) {
                 $conta->data_quitacao = $pagamentoRequest['data_pagamento'];
                 if (getConfig('default_os_faturar_pagto_quitado') != '') {
                     $this->os->status_id =  getConfig('default_os_faturar_pagto_quitado');
@@ -80,8 +84,8 @@ class AddPagamentoModal extends Component
                 }
             }
             $conta->save();
-            $this->valor_pagamento = null;
-            $this->data_pagamento = null;
+            $this->pagamento_valor = null;
+            $this->data_pagamento = now()->format('Y-m-d');
             $this->forma_pagamento_id = null;
             DB::commit();
             flasher('Pagamento adicionado com sucesso.');

@@ -14,15 +14,16 @@
                 <div  class="col-md-4">
                     <div class="form-group">
                         <label for="pagamento_valor"> Valor </label>
-                        <input wire:model.defer="valor_pagamento" type="text" class="form-control decimal" placeholder="Valor Recebido" >
-                        @error('valor_pagamento') <span class="error">{{ $message }}</span> @enderror
+                        {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor')->attribute('wire:model', 'pagamento_valor')->required() !!}
+                        @error('pagamento_valor') <span class="error">{{ $message }}</span> @enderror
 
                     </div>
                 </div>
                 <div  class="col-md-4 ">
                     <div class="form-group">
                         <label for="data_pagamento"> Data pagamento </label>
-                        <input type="date" wire:model.defer="data_pagamento" class="form-control" placeholder="Data do Pagamento">
+                        {!! html()->date('data_pagamento', )->class('form-control')->placeholder('Data do Pagamento')->attribute('wire:model', 'data_pagamento')->required() !!}
+
                         @error('data_pagamento') <span class="error">{{ $message }}</span> @enderror
                     </div>
                 </div>
