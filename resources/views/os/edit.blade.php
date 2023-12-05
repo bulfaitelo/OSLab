@@ -137,7 +137,7 @@
                 @livewire('os.informacoes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade active show" id="log" role="tabpanel" aria-labelledby="log-tab">
-                {{-- @livewire('os.log-tab', ['os' => $os]) --}}
+                @livewire('os.log-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                 balancete
