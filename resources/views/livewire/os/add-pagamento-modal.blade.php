@@ -17,8 +17,8 @@
                         {!! html()->text('pagamento_valor')
                             ->class('form-control decimal')
                             ->placeholder('Valor')
-                            ->attribute('wire:model', 'pagamento_valor')
-                            ->disabled($os->osQuitada())
+                            ->attribute('wire:model.defer', 'pagamento_valor')
+                            ->disabled($osQuitada)
                             ->attributes(['inputmode' => 'numeric'])
                             ->required()
                         !!}
@@ -31,8 +31,8 @@
                         {!! html()->date('data_pagamento')
                             ->class('form-control')
                             ->placeholder('Data do Pagamento')
-                            ->attribute('wire:model', 'data_pagamento')
-                            ->disabled($os->osQuitada())
+                            ->attribute('wire:model.defer', 'data_pagamento')
+                            ->disabled($osQuitada)
                             ->required()
                         !!}
                         @error('data_pagamento') <span class="error">{{ $message }}</span> @enderror
@@ -43,9 +43,9 @@
                         <label for="forma_pagamento_id">Forma de pagamento</label>
                         {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))
                             ->class('form-control')
-                            ->attribute('wire:model', 'forma_pagamento_id')
+                            ->attribute('wire:model.defer', 'forma_pagamento_id')
                             ->placeholder('Selecione')
-                            ->disabled($os->osQuitada())
+                            ->disabled($osQuitada)
                             ->required()
                         !!}
                         @error('forma_pagamento_id') <span class="error">{{ $message }}</span> @enderror
@@ -53,20 +53,19 @@
                 </div>
             </div>
             <div class="row">
-                {{-- @dd($os->contas()->where('tipo', 'R')->first()->pagamentos); --}}
                 <h4>Pagamentos Recebidos</h4>
                 <table class="table table-sm">
                     @if (!$conta->pagamentos->isEmpty())
-                    <thead>
-                        <tr>
-                        <th>Data</th>
-                        <th>Forma de Pagamento</th>
-                        <th>Valor</th>
-                        </tr>
-                    </thead>
+                        <thead>
+                            <tr>
+                            <th>Data</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Valor</th>
+                            </tr>
+                        </thead>
                     @endif
                     <tbody>
-                        @forelse ($conta->pagamentos()->with('formaPagamento')->get() as $pagamento)
+                        @forelse ($pagamentos as $pagamento)
                             <tr>
                                 <td> {{ $pagamento->data_pagamento->format('d/m/Y') }} </td>
                                 <td> {{ $pagamento->formaPagamento->name }} </td>
@@ -81,7 +80,7 @@
                         @endforelse
                     </tbody>
                     <tfoot style=" border-top: 2px solid rgb(225, 225, 225)">
-                        @if (!$conta->pagamentos->isEmpty())
+                        @if (!$pagamentos->isEmpty())
                         <tr>
                             <td colspan="1"></td>
                             <td class="text-right">
@@ -89,7 +88,7 @@
                                     Total Recebido:
                                 </b>
                             </td>
-                            <td>R$ {{ number_format($conta->pagamentos->sum('valor'), 2, ',', '.') }}</td>
+                            <td>R$ {{ number_format($pagamentos->sum('valor'), 2, ',', '.') }}</td>
                         </tr>
                         @endif
                         <tr style="border-bottom: 2px solid rgb(156, 156, 156)">
@@ -110,7 +109,7 @@
                 <i class="fas fa-times"></i>
                 Fechar
             </button>
-            <button type="submit" class="btn btn-primary" @disabled($os->osQuitada())>
+            <button type="submit" class="btn btn-primary" @disabled($osQuitada)>
                 <i class="fas fa-save"></i>
                 Salvar
             </button>
