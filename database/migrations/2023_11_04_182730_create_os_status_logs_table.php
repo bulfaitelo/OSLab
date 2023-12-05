@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id')->nullable();
             // $table->unsignedBigInteger('conta_id')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->string('descricao')->nullable();
+            $table->string('observacao')->nullable();
             $table->timestamps();
         });
     }

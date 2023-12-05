@@ -222,11 +222,11 @@
     </div>
     <!-- FIM Modal - ARQUIVO  -->
 
-    <!-- Modal - Vizlualização  -->
+    <!-- Modal - Vizualização  -->
     <div wire:ignore class="modal fade" id="modal-vizualizar" tabindex="-1" role="dialog" aria-hidden="true">
         @livewire('os.informacoes.visualizar-modal')
     </div>
-    <!-- FIM Modal - Vizlualização  -->
+    <!-- FIM Modal - Vizualização  -->
 
     <!-- Modal - Compartilhar  -->
     <div wire:ignore.self class="modal fade" id="modal-compartilhar" tabindex="-1" role="dialog" aria-hidden="true">

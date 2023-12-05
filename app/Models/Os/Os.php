@@ -271,31 +271,33 @@ class Os extends Model
      **/
     public function getOsLogs() {
         $log = [];
-        $dateTemp = null;
-        $statusLog = $this->statusLogs()->orderBy('created_at', 'desc')->get();
+        $statusLog = $this->statusLogs()->orderByDesc('created_at')->get();
         foreach ($statusLog as $status) {
             // if(($dateTemp == null) && ($dateTemp != $status['created_at']->format('d/m/Y')) ){
-                $log[$status['created_at']->format('d/m/Y')][] = [
-                    'log_type' => 'status',
-                    'id' => $status->id,
-                    'descricao' => $status->descricao,
-                    'created_at' => $status->created_at,
-                    'status' => $status->status->name,
-                    'status_color' => $status->status->color,
-                ];
+            $log[$status['created_at']->format('Y-m-d')][] = [
+                'log_type' => 'status',
+                'id' => $status->id,
+                'observacao' => $status->observacao,
+                'created_at' => $status->created_at->format('d/m/Y'),
+                'status' => $status->status->name,
+                'status_color' => $status->status->color,
+            ];
         }
         foreach ($this->contas as $conta) {
-            foreach ($conta->pagamentos  as $pagamento) {
-                $log[$pagamento->created_at->format('d/m/Y')][] = [
+            foreach ($conta->pagamentos()->orderByDesc('data_pagamento')->get()  as $pagamento) {
+                $log[$pagamento->data_pagamento->format('Y-m-d')][] = [
                     'log_type' => 'conta',
                     'conta_tipo' => $conta->tipo,
+                    'name' => ($conta->tipo == 'D') ? $conta->name : null,
                     'id' => $pagamento->id,
                     'conta_id' => $pagamento->conta_id,
-                    'data_pagamento' => $pagamento->data_pagamento,
-                    'valor' => $pagamento->valor,
+                    'data_pagamento' => $pagamento->data_pagamento->format('d/m/Y'),
+                    'valor' => number_format($pagamento->valor, 2, ',', '.'),
                 ];
             }
         }
+
+        krsort($log);
         return $log;
     }
 
