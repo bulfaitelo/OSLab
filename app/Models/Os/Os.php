@@ -248,18 +248,55 @@ class Os extends Model
     }
 
 
-/**
- * Verifica se a os já foi quitada.
- *
- * @return bool
- **/
-public function osQuitada() : bool {
-    $conta = $this->contas()->find($this->fatura_id);
-    $pagamentos = $conta->pagamentos;
-    if ($conta->valor <= $pagamentos->sum('valor')) {
-        return true;
+    /**
+     * Verifica se a os já foi quitada.
+     *
+     * @return bool
+     **/
+    public function osQuitada() : bool {
+        $conta = $this->contas()->find($this->fatura_id);
+        $pagamentos = $conta->pagamentos;
+        if ($conta->valor <= $pagamentos->sum('valor')) {
+            return true;
+        }
+        return false;
     }
-    return false;
-}
+
+    /**
+     * Retorna logs da os
+     *
+     * Retorna um vetor com os logs da Os, que consiste em alteração de status, alterações nas contas.
+     *
+     * @return array
+     **/
+    public function getOsLogs() {
+        $log = [];
+        $dateTemp = null;
+        $statusLog = $this->statusLogs()->orderBy('created_at', 'desc')->get();
+        foreach ($statusLog as $status) {
+            // if(($dateTemp == null) && ($dateTemp != $status['created_at']->format('d/m/Y')) ){
+                $log[$status['created_at']->format('d/m/Y')][] = [
+                    'log_type' => 'status',
+                    'id' => $status->id,
+                    'descricao' => $status->descricao,
+                    'created_at' => $status->created_at,
+                    'status' => $status->status->name,
+                    'status_color' => $status->status->color,
+                ];
+        }
+        foreach ($this->contas as $conta) {
+            foreach ($conta->pagamentos  as $pagamento) {
+                $log[$pagamento->created_at->format('d/m/Y')][] = [
+                    'log_type' => 'conta',
+                    'conta_tipo' => $conta->tipo,
+                    'id' => $pagamento->id,
+                    'conta_id' => $pagamento->conta_id,
+                    'data_pagamento' => $pagamento->data_pagamento,
+                    'valor' => $pagamento->valor,
+                ];
+            }
+        }
+        return $log;
+    }
 
 }
