@@ -128,6 +128,15 @@ class OsController extends Controller
     }
 
     /**
+     * Tela de impressão da OS
+     */
+    public function print(Os $os)
+    {
+        $emitente = Emitente::getHtmlEmitente(1);
+        return view('os.print', compact('os', 'emitente'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Os $os)

@@ -54,7 +54,7 @@
             @endif
         @endcan
         @can('os_print')
-        <a href="{{ route('os.show', $os) }}">
+        <a href="{{ route('os.print', $os) }}" target="_blank">
             <button type="button" title="Imprimir" class="btn btn-sm bg-navy">
                 <i class="fa-solid fa-print"></i>
                 <span class="d-none d-sm-inline">Imprimir</span>

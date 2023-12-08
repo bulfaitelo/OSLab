@@ -85,6 +85,8 @@ Route::group(['middleware'=> 'auth'], function() {
         ->name('os.cancelar-faturar');
     Route::get('os/{os}/despesa/create/', [DespesaController::class, 'create'])
         ->name('os.despesa.create');
+    Route::get('/os/{os}/print', [osController::class, 'print'])
+        ->name('os.print');
 
 
     Route::resource('/wiki', WikiController::class);
