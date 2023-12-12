@@ -22,7 +22,7 @@ class OsController extends Controller
         // ACL DE PERMISSÕES
         $this->middleware('permission:os', ['only'=> ['index']]);
         $this->middleware('permission:os_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:os_show', ['only'=> 'show']);
+        $this->middleware('permission:os_show', ['only'=> ['show', 'print']]);
         $this->middleware('permission:os_edit', ['only'=> ['edit', 'update']]);
         $this->middleware('permission:os_destroy', ['only'=> 'destroy']);
         $this->middleware('permission:os_faturar', ['only'=> 'faturar']);
@@ -123,7 +123,7 @@ class OsController extends Controller
      */
     public function show(Os $os)
     {
-        $emitente = Emitente::getHtmlEmitente(1);
+        $emitente = Emitente::getHtmlEmitente(1, $os->id);
         return view('os.show', compact('os', 'emitente'));
     }
 
@@ -132,7 +132,7 @@ class OsController extends Controller
      */
     public function print(Os $os)
     {
-        $emitente = Emitente::getHtmlEmitente(1);
+        $emitente = Emitente::getHtmlEmitente(1, $os->id);
         return view('os.print', compact('os', 'emitente'));
     }
 

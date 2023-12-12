@@ -1,8 +1,8 @@
-<div class="col-md-12">
+<div class="col-sm-12">
     <hr class="mb-2 ">
     @if ($emitente)
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
             <img
                 @if ($emitente->logo_url)
                     src="{{ asset('storage/'.$emitente->logo_url) }}"
@@ -12,13 +12,13 @@
                 @endif
             class="rounded image img-fluid" >
         </div>
-        <div class="col-md-7">
+        <div class="col-sm-7">
             <h4 class="mb-0 " ><b>{{ $emitente->fantasia }}</b></h4>
             <h6 class="mt-0 mb-0 ">CNPJ: {{ $emitente->cnpj }}</h6>
             <p class="mb-0 "  >{{ $emitente->logradouro }}, nº: {{ $emitente->numero }}, {{ $emitente->bairro }}</p>
             <p class="mb-0 "  >{{ $emitente->cidade }} - {{ $emitente->uf }}, CEP: {{ $emitente->cep}}</p>
         </div>
-        <div style="font-size: 14px;" class="col-md-3 text-right">
+        <div style="font-size: 14px;" class="col-sm-3 text-right">
             @if ($emitente->telefone)
             <p class="mb-0 mt-0" > Contato: {{ $emitente->telefone }} </p>
             @endif
@@ -38,16 +38,16 @@
     </div>
     @else
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
             <img src="{{ asset('vendor/oslab/imgs/oslab_logo.png') }} " class="rounded image img-fluid" >
         </div>
-        <div class="col-md-7">
+        <div class="col-sm-7">
             <h4 class="mb-0 " ><b> Nome FAntasia </b></h4>
             <h6 class="mt-0 mb-0 ">CNPJ: 00.000.0001-01</h6>
             <p class="mb-0 "  >AV OsLAb, nº: 123, Bairro do Bairro</p>
             <p class="mb-0 "  >Cidade - RJ, CEP: 24000-000</p>
         </div>
-        <div style="font-size: 14px;" class="col-md-3 text-right">
+        <div style="font-size: 14px;" class="col-sm-3 text-right">
             <p class="mb-0 mt-0" > Contato: (21) 99999-9999 </p>
             <p class="mb-0 mt-0" > admin@oslab.com.br </p>
             <p class="mb-0 mt-0" > www.oslab.com.br </p>
