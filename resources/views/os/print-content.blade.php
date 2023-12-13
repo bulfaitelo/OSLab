@@ -1,8 +1,8 @@
 @section('os-print-content')
-    <div class="content" >
+    <div class="content " >
         {!! $emitente !!}
-        <table class=" mt-2 mb-2 table table-sm table-bordered ">
-            <thead class="bloco-div">
+        <table class=" mt-2 mb-2">
+            <thead class="header">
                 <tr>
                     <th class="pt-0 pb-0" >OS Nº: 123456</th>
                     <th class="pt-0 pb-0" >Status: Faturada</th>
@@ -13,59 +13,59 @@
             </thead>
         </table>
 
-        <table class=" mt-2 mb-2 table table-sm table-bordered ">
-            <thead class="bloco-div">
+        <table class=" mt-2 mb-2 ">
+            <thead class="header">
                 <tr>
                     <td colspan="4" class="pt-0 pb-0" ><b>DADOS DO CLIENTE</b></td>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td  class="pt-0 pb-0"  ><b>Cliente</b></td>
-                    <td  class="pt-0 pb-0"   colspan="3"> thiafo fodfodosfos sdofdofdoof sfodoof</td>
+                <tr >
+                    <td  class="pt-0 pb-0 bordered"  ><b>Cliente</b></td>
+                    <td  class="pt-0 pb-0 bordered"   colspan="3"> thiafo fodfodosfos sdofdofdoof sfodoof</td>
                 </tr>
                 <tr>
-                    <td  class="pt-0 pb-0"  ><b> CNPJ/CPF: </b></td>
-                    <td  class="pt-0 pb-0"  >126.123.123-83</td>
-                    <td  class="pt-0 pb-0"  ><b>Endereço:</b></td>
-                    <td  class="pt-0 pb-0"  >Av porto do rosa n40 boladão </td>
+                    <td  class="pt-0 pb-0 bordered"  ><b> CNPJ/CPF: </b></td>
+                    <td  class="pt-0 pb-0 bordered"  >126.123.123-83</td>
+                    <td  class="pt-0 pb-0 bordered"  ><b>Endereço:</b></td>
+                    <td  class="pt-0 pb-0 bordered"  >Av porto do rosa n40 boladão </td>
                 </tr>
                 <tr>
-                    <td  class="pt-0 pb-0"  ><b>CEP:</b></td>
-                    <td  class="pt-0 pb-0"  >24470-000</td>
-                    <td  class="pt-0 pb-0"  ><b>Cidade/UF</b></td>
-                    <td  class="pt-0 pb-0"  > São gonçalo/RJ </td>
+                    <td  class="pt-0 pb-0 bordered"  ><b>CEP:</b></td>
+                    <td  class="pt-0 pb-0 bordered"  >24470-000</td>
+                    <td  class="pt-0 pb-0 bordered"  ><b>Cidade/UF</b></td>
+                    <td  class="pt-0 pb-0 bordered"  > São gonçalo/RJ </td>
                 </tr>
                 <tr>
-                    <td  class="pt-0 pb-0"  ><b>Telefone:</b></td>
-                    <td  class="pt-0 pb-0"  > (21) 98765-4321, (21) 98765-4321 </td>
-                    <td  class="pt-0 pb-0"  ><b>e-mail:</b></td>
-                    <td  class="pt-0 pb-0"  >oslab@oslab.com.br</td>
+                    <td  class="pt-0 pb-0 bordered"  ><b>Telefone:</b></td>
+                    <td  class="pt-0 pb-0 bordered"  > (21) 98765-4321, (21) 98765-4321 </td>
+                    <td  class="pt-0 pb-0 bordered"  ><b>e-mail:</b></td>
+                    <td  class="pt-0 pb-0 bordered"  >oslab@oslab.com.br</td>
                 </tr>
             </tbody>
         </table>
 
-        <table class=" mt-2 mb-2 table table-sm table-bordered ">
-            <thead class="bloco-div">
+        <table class=" mt-2 mb-2">
+            <thead class="header">
                 <tr>
                     <td colspan="4" class="pt-0 pb-0" ><b>DADOS DO EQUIPAMENTO</b></td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="pt-0">
+                    <td class="pt-0 bordered">
                         <span class="text-dark" style="font-size: 13px" ><b>Equipamento</b></span><br>
                         <span>iphone 12 pro </span>
                     </td>
-                    <td  class="pt-0" >
+                    <td  class="pt-0 bordered" >
                         <span  class="text-dark" style="font-size: 13px"  ><b>Fabricante</b></span><br>
                         <span>iphone 12 pro </span>
                     </td>
-                    <td  class="pt-0" >
+                    <td  class="pt-0 bordered" >
                         <span  class="text-dark" style="font-size: 13px"  ><b>Modelo</b></span><br>
                         <span>A1259</span>
                     </td>
-                    <td  class="pt-0" >
+                    <td  class="pt-0 bordered" >
                         <span  class="text-dark" style="font-size: 13px"  ><b>Serial/Imei</b></span><br>
                         <span>123123213213 1232321 213123 21321 </span>
                     </td>
@@ -99,10 +99,10 @@
             </tbody>
         </table>
 
-        <table class=" mt-2 mb-2 table table-sm table-bordered ">
+        <table class=" mt-2 mb-2">
             <thead>
                 <tr>
-                    <th colspan="5" class="pt-0 pb-0 bloco-div" ><b>PRODUTOS</b></th>
+                    <th colspan="5" class="pt-0 pb-0 header" ><b>PRODUTOS</b></th>
                 </tr>
                 <tr>
                     <th class="pt-0 pb-0" >ITEM</th>
@@ -136,7 +136,7 @@
                 </tr>
             </tbody>
             <tfoot>
-                <tr class="bloco-div">
+                <tr class="header">
                     <td  class="pt-0 pb-0 font-weight-bold" colspan="2">
                         TOTAL
                     </td>
@@ -147,10 +147,10 @@
             </tfoot>
         </table>
 
-        <table class=" mt-2 mb-2 table table-sm table-bordered ">
+        <table class=" mt-2 mb-2">
             <thead>
                 <tr>
-                    <th colspan="5" class="pt-0 pb-0 bloco-div" ><b>SERVIÇOS</b></th>
+                    <th colspan="5" class="pt-0 pb-0 header" ><b>SERVIÇOS</b></th>
                 </tr>
                 <tr>
                     <th class="pt-0 pb-0" >ITEM</th>
@@ -168,23 +168,9 @@
                     <td  class="pt-0 pb-0 text-right "  > 350,00 </td>
                     <td  class="pt-0 pb-0 text-right "  > 350,00 </td>
                 </tr>
-                <tr>
-                    <td  class="pt-0 pb-0"  > 1 </td>
-                    <td  class="pt-0 pb-0"  > Bateria iphone pro 15 A1265 </td>
-                    <td  class="pt-0 pb-0 text-right "  > 1 </td>
-                    <td  class="pt-0 pb-0 text-right "  > 350,00 </td>
-                    <td  class="pt-0 pb-0 text-right "  > 350,00 </td>
-                </tr>
-                <tr>
-                    <td  class="pt-0 pb-0"  > 1 </td>
-                    <td  class="pt-0 pb-0"  > Bateria iphone pro 15 A1265 </td>
-                    <td  class="pt-0 pb-0 text-right "  > 1 </td>
-                    <td  class="pt-0 pb-0 text-right "  > 350,00 </td>
-                    <td  class="pt-0 pb-0 text-right "  > 350,00 </td>
-                </tr>
             </tbody>
             <tfoot>
-                <tr class="bloco-div">
+                <tr class="header">
                     <td  class="pt-0 pb-0 font-weight-bold" colspan="2">
                         TOTAL
                     </td>
@@ -195,20 +181,20 @@
             </tfoot>
         </table>
 
-        <table class=" mt-2 mb-2 table table-sm table-bordered ">
+        <table class=" radius mt-2 mb-2">
             <thead>
                 {{-- <tr>
-                    <th  class="pt-0 pb-0 bloco-div text-right" ><b>DESCONTO: - 123,00</b></th>
+                    <th  class="pt-0 pb-0 header text-right" ><b>DESCONTO: - 123,00</b></th>
                 </tr> --}}
                 <tr>
-                    <th  class="pt-0 pb-0 bloco-div text-right" ><b>VALOR TOTAL DA OS: 1.123,00</b></th>
+                    <th  class="pt-0 pb-0 header text-right" ><b>VALOR TOTAL DA OS: 1.123,00</b></th>
                 </tr>
             </thead>
 
         </table>
 
-        <table class=" mt-2 mb-2 table table-sm table-bordered ">
-            <thead class="bloco-div">
+        <table class="mt-2 mb-2 ">
+            <thead class="header">
                 <tr>
                     <td colspan="4" class="pt-0 pb-0" ><b>INFORMAÇÕES</b></td>
                 </tr>
@@ -224,19 +210,19 @@
                 </tr>
             </tbody>
         </table>
-        <div class="footer">
+        <div class="footer bordered rounded">
             <div class="row">
                 <div class="col-sm-2">
                     Data
-                    <hr>
+                    <hr class="bordered-small">
                 </div>
                 <div class="col-sm-5">
                     Assinatura Cliente
-                    <hr>
+                    <hr class="bordered-small">
                 </div>
                 <div class="col-sm-5">
                     Assinatura Técnico Responsavel
-                    <hr>
+                    <hr class="bordered-small">
                 </div>
             </div>
         </div>
@@ -246,25 +232,40 @@
 
 @section('css')
     <style>
-        .bloco-div {
+        .header {
             background-color: #d5d6d7 ;
         }
 
-        @media print {
-            .bloco-div {
-                background-color: #d5d6d7 ;
-            }
-
-        }
-
         .footer {
-            border: 1px solid #dee2e6;
             padding: .3rem;
+            border: 2px solid rgb(146, 146, 146);
         }
 
-        .borda {
-            border: 2px solid black
+
+        .radius {
+            border-radius: 5px;
         }
+
+        table {
+            width: 100%;
+            border: 2px solid rgb(53, 53, 53) !important;
+        }
+
+        tr  {
+            border: 2px solid rgb(146, 146, 146);
+        }
+
+        .bordered {
+            border: 2px solid rgb(146, 146, 146);
+
+        }
+
+        .bordered-small {
+            border: 1px solid rgb(146, 146, 146);
+        }
+
+
+
 
     </style>
 @stop

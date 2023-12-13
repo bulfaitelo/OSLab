@@ -1,5 +1,4 @@
-<div class="col-sm-12">
-    <hr class="mb-2 ">
+<div class="col-sm-12 mt-1">
     @if ($emitente)
     <div class="row">
         <div class="col-sm-2">
