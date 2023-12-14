@@ -21,6 +21,7 @@ class Os extends Model
     protected $casts = [
         'data_entrada' => 'date',
         'data_saida' => 'date',
+        'prazo_garantia' => 'date',
     ];
 
     /**
