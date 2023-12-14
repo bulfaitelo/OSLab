@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Os\FaturarOsRequest;
 use App\Http\Requests\Os\StoreOsRequest;
 use App\Http\Requests\Os\UpdateOsRequest;
+use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
@@ -93,6 +94,7 @@ class OsController extends Controller
         // dd($request->input());
         DB::beginTransaction();
         try {
+
             $os = new Os();
             $os->user_id = Auth::id();
             $os->cliente_id = $request->cliente_id;
@@ -102,6 +104,7 @@ class OsController extends Controller
             $os->status_id = $request->status_id;
             $os->data_entrada = $request->data_entrada;
             $os->data_saida = $request->data_saida;
+            $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $request->categoria_id);
             $os->descricao = $request->descricao;
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
@@ -152,6 +155,8 @@ class OsController extends Controller
         // dd($request->input());
         DB::beginTransaction();
         try {
+
+
             $os->user_id = Auth::id();
             $os->cliente_id = $request->cliente_id;
             $os->tecnico_id = $request->tecnico_id;
@@ -160,6 +165,7 @@ class OsController extends Controller
             $os->status_id = $request->status_id;
             $os->data_entrada = $request->data_entrada;
             $os->data_saida = $request->data_saida;
+            $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $request->categoria_id);
             $os->descricao = $request->descricao;
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
@@ -371,5 +377,23 @@ class OsController extends Controller
             DB::rollBack();
             throw $th;
         }
+    }
+
+
+    /**
+     * REtorna o dia de vencimento com base na categoria selecionada
+     *
+     * @param string $data_entrada Data de entrada
+     * @param int $categoria_id id da categoria da os para gera os dias de garantia
+     * @return string|null retorna o dia de vendimento ou null caso nao exista
+
+     **/
+    private function addDayGarantia($data_entrada, $categoria_id) : string|null {
+        $prazoEmDias = OsCategoria::find($categoria_id)->garantia?->prazo_garantia;
+        if($prazoEmDias) {
+            $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_entrada);
+            return $dataGarantia->addDays($prazoEmDias)->format('Y-m-d');
+        }
+        return null;
     }
 }
