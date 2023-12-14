@@ -1,14 +1,23 @@
 @section('os-print-content')
+    @dump($os)
     <div class="content " >
         {!! $emitente !!}
         <table class=" mt-2 mb-2">
             <thead class="header">
                 <tr>
-                    <th class="pl-1 pt-0 pb-0" >OS Nº: 123456</th>
-                    <th class="pt-0 pb-0" >Status: Faturada</th>
-                    <th class="pt-0 pb-0" >Venc. Garantia: 12/12/2023</th>
-                    <th class="pt-0 pb-0" >Entrada: 12/12/2023</th>
-                    <th class="pt-0 pb-0" >Saída: 12/12/2023</th>
+                    <th class="pl-1 pt-0 pb-0" >OS Nº: {{ $os->id }}</th>
+                    <th class="pt-0 pb-0" >Status: {{ $os->status->name }}</th>
+                    <th class="pt-0 pb-0" >
+                        @if ($os->prazo_garantia)
+                            Venc. Garantia: {{ $os->prazo_garantia?->format('d/m/Y') }}
+                        @endif
+                    </th>
+                    <th class="pt-0 pb-0" >Entrada: {{ $os->data_entrada?->format('d/m/Y') }}</th>
+                    <th class="pt-0 pb-0" >
+                        @if ($os->data_saida)
+                            Saída: {{ $os->data_saida?->format('d/m/Y') }}
+                        @endif
+                    </th>
                 </tr>
             </thead>
         </table>
