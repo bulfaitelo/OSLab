@@ -197,27 +197,34 @@
         @endif
         {{-- FIM - Produtos --}}
 
+        {{-- SERVIÇOS --}}
+        @if ($os->servicos->count() > 0)
         <table class=" mt-2 mb-2">
             <thead>
                 <tr>
                     <th colspan="5" class="pl-1 pt-0 pb-0 header" ><b>SERVIÇOS</b></th>
                 </tr>
                 <tr>
-                    <th class="pt-0 pb-0 pl-1  " >ITEM</th>
-                    <th class="pt-0 pb-0 pl-1  " >NOME</th>
-                    <th class="pt-0 pb-0 pr-1   text-right" >QTD.</th>
-                    <th class="pt-0 pb-0 pr-1   text-right" >Preço Unit.</th>
-                    <th class="pt-0 pb-0 pr-1   text-right" >SUBTOTAL</th>
+                    <th class="pt-0 pb-0 pl-1" >ITEM</th>
+                    <th class="pt-0 pb-0 pl-1" >NOME</th>
+                    <th class="pt-0 pb-0 pr-1 text-right" >QTD.</th>
+                    <th class="pt-0 pb-0 pr-1 text-right" >Preço Unit.</th>
+                    <th class="pt-0 pb-0 pr-1 text-right" >SUBTOTAL</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td  class="pt-0 pb-0 pl-1  "  > 1 </td>
-                    <td  class="pt-0 pb-0 pl-1  "  > Bateria iphone pro 15 A1265 </td>
-                    <td  class="pt-0 pb-0 pr-1   text-right "  > 1 </td>
-                    <td  class="pt-0 pb-0 pr-1   text-right "  > 350,00 </td>
-                    <td  class="pt-0 pb-0 pr-1   text-right "  > 350,00 </td>
-                </tr>
+                @php
+                    $count = 1
+                @endphp
+                @foreach ($os->servicos as $item)
+                    <tr>
+                        <td  class="pt-0 pb-0 pl-1 " > {{ $count++ }} </td>
+                        <td  class="pt-0 pb-0 pl-1 " > {{$item->servico->name}} </td>
+                        <td  class="pt-0 pb-0 pr-1 text-right" > {{ $item->quantidade }} </td>
+                        <td  class="pt-0 pb-0 pr-1 text-right" > R$ {{ number_format($item->valor_servico,2,",",".") }} </td>
+                        <td  class="pt-0 pb-0 pr-1 text-right" > R$ {{ number_format($item->valor_servico_total,2,",",".") }} </td>
+                    </tr>
+                @endforeach
             </tbody>
             <tfoot>
                 <tr class="header">
@@ -228,7 +235,7 @@
                                     TOTAL
                             </div>
                             <div class="col-md-6 text-right">
-                                    350,00
+                                   R$ {{ number_format($os->servicos->sum('valor_servico_total'),2,",",".")}}
                             </div>
                            </div>
                         </div>
@@ -236,6 +243,8 @@
                 </tr>
             </tfoot>
         </table>
+        @endif
+        {{-- FIM - SERVIÇOS --}}
 
         <table class=" radius mt-2 mb-2">
             <thead>
@@ -243,7 +252,7 @@
                     <th  class="pt-0 pb-0 header text-right" ><b>DESCONTO: - 123,00</b></th>
                 </tr> --}}
                 <tr>
-                    <th  class="pt-0 pr-1 pb-0 header text-right" ><b>VALOR TOTAL DA OS: 1.123,00</b></th>
+                    <th  class="pt-0 pr-1 pb-0 header text-right" ><b>VALOR TOTAL DA OS: {{ number_format($os->valorTotal(),2,",",".") }}</b></th>
                 </tr>
             </thead>
 
