@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OsController extends Controller
 {
@@ -137,6 +138,9 @@ class OsController extends Controller
     {
         $emitente = Emitente::getHtmlEmitente(1, $os->id);
         return view('os.print', compact('os', 'emitente'));
+
+        // $pdf = Pdf::loadView('os.print', compact('os', 'emitente'));
+        // return $pdf->download('invoice.pdf');
     }
 
     /**
