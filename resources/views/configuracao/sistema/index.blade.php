@@ -15,13 +15,13 @@
             <div class="card-header p-0 border-bottom-0">
                 <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="#produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="true">
+                        <a class="nav-link active" id="#geral-tab" data-toggle="pill" href="#geral" role="tab" aria-controls="geral" aria-selected="true">
                             {{-- <i class="fas fa-box-open "></i> --}}
                             Geral
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="servicos-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="servicos" aria-selected="false">
+                        <a class="nav-link" id="os-tab" data-toggle="pill" href="#os" role="tab" aria-controls="os" aria-selected="false">
                             {{-- <i class="fas fa-hand-holding-usd "></i> --}}
                             OS
                         </a>
@@ -32,10 +32,12 @@
             <div class="card-body">
                     @include('adminlte::partials.form-alert')
                     <div class="tab-content">
-                        <div class="tab-pane fade active show" id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
+                        {{-- GERAL --}}
+                        <div class="tab-pane fade active show" id="geral" role="tabpanel" aria-labelledby="geral-tab">
                             GERAl
                         </div>
-                        <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
+                        {{-- OS --}}
+                        <div class="tab-pane fade" id="os" role="tabpanel" aria-labelledby="os-tab">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
