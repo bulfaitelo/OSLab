@@ -33,11 +33,11 @@
                     @include('adminlte::partials.form-alert')
                     <div class="tab-content">
                         {{-- GERAL --}}
-                        <div class="tab-pane fade active show" id="geral" role="tabpanel" aria-labelledby="geral-tab">
+                        <div class="tab-pane fade" id="geral" role="tabpanel" aria-labelledby="geral-tab">
                             GERAl
                         </div>
                         {{-- OS --}}
-                        <div class="tab-pane fade" id="os" role="tabpanel" aria-labelledby="os-tab">
+                        <div class="tab-pane fade  active show" id="os" role="tabpanel" aria-labelledby="os-tab">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -92,19 +92,33 @@
                                         <i>Esse campo fica no fim da OS impressa.</i>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="sistema[os_listagem_padrao]">Exibição padrão de Os</label>
+                                        @foreach (App\Models\Configuracao\Os\OsStatus::orderBy('name')->get() as $item)
+                                            <div class="custom-control custom-checkbox">
+                                                <input name="sistema[os_listagem_padrao][]" class="custom-control-input" type="checkbox" id="os_list_{{ $item->id }}" value="{{ $item->id }}">
+                                                <label for="os_list_{{ $item->id }}" class="custom-control-label">{{ $item->name }}</label>
+                                            </div>
+                                        @endforeach
+                                        <i>Itens exibidos por padrão na listagem de OS, sem filtros.</i>
+                                    </div>
+
+
+                                </div>
                             </div>
 
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    @can('config_sistema_edit')
-                        <button type="submit" class="btn btn-sm btn-primary">
-                            <i class="fas fa-save"></i>
-                            Salvar
-                        </button>
-                    @endcan
-                </div>
+            </div>
+            <div class="card-footer">
+                @can('config_sistema_edit')
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        <i class="fas fa-save"></i>
+                        Salvar
+                    </button>
+                @endcan
+            </div>
             {!! html()->form()->close() !!}
         </div>
     </div>
