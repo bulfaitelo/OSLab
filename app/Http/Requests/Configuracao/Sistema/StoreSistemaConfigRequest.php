@@ -27,6 +27,7 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.default_os_faturar_produto_despesa' => 'required|exists:forma_pagamentos,id',
             'sistema.default_os_faturar_pagto_parcial' => 'nullable|exists:os_status,id',
             'sistema.default_os_faturar_pagto_quitado' => 'nullable|exists:os_status,id',
+            'sistema.os_informacao' => 'nullable|string|max:1000',
 
         ];
     }

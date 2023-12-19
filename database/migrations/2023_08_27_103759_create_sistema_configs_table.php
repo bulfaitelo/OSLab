@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sistema_configs', function (Blueprint $table) {
             $table->id();
             $table->string('key')->index()->unique();
-            $table->string('value')->nullable();
+            $table->string('value', 1000)->nullable();
             // $table->string('descricao')->nullable();
             // $table->string('model')->nullable();
             // $table->unsignedBigInteger('group_id');

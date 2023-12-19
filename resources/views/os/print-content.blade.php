@@ -258,6 +258,8 @@
 
         </table>
 
+        @if (strlen(getConfig('os_informacao')) > 5)
+
         <table class="mt-2 mb-2 table-rounded">
             <thead class="header">
                 <tr>
@@ -267,14 +269,12 @@
             <tbody>
                 <tr>
                     <td colspan="4" class="pl-1 " >
-                        <span  class="text-dark" style="font-size: 13px"  ><b>Descrição</b></span><br>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. In nemo voluptas eos inventore modi quae eum dicta magnam sit voluptatem, aspernatur ut ea nisi ex accusamus eveniet repellat, provident cupiditate.
-                        <BR>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste incidunt ab eum voluptatibus architecto minus debitis quas dicta ex. Ab consectetur nihil et necessitatibus mollitia. Exercitationem harum nisi blanditiis veniam.
+                        {!! getConfig('os_informacao') !!}
                     </td>
                 </tr>
             </tbody>
         </table>
+        @endif
         <div class="footer  rounded">
             <div class="row">
                 <div class="col-sm-2">
