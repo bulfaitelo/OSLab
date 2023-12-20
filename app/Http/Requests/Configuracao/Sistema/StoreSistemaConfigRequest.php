@@ -27,6 +27,8 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.default_os_faturar_produto_despesa' => 'required|exists:forma_pagamentos,id',
             'sistema.default_os_faturar_pagto_parcial' => 'nullable|exists:os_status,id',
             'sistema.default_os_faturar_pagto_quitado' => 'nullable|exists:os_status,id',
+            'sistema.os_informacao' => 'nullable|string|max:1000',
+            'sistema.os_listagem_padrao' => 'nullable|exists:os_status,id',
 
         ];
     }
@@ -38,5 +40,22 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.os_link_time_limit' => 'Por favor defina o Tempo da validade do Link',
             'sistema.default_os_faturar_produto_despesa' => 'Por favor defina o Tipo de despesa Padrão',
         ];
+    }
+
+
+    function withValidator($validator): void {
+        $validator->after(function ($validator) {
+            // Verifica se não há erros de validação até agora
+            if (!$validator->failed()) {
+                // Obtém os dados validados
+                $data = $this->validated();
+
+                // Converte o array em JSON
+                $jsonOsListagemPadrao = json_encode($data['sistema']['os_listagem_padrao']);
+                // Substitui o array original pelo JSON
+                // $this->merge(['os_listagem_padrao' => $jsonOsListagemPadrao]);
+                $this->merge(['sistema' => ['os_listagem_padrao' => $jsonOsListagemPadrao]]);
+            }
+        });
     }
 }

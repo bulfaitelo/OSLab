@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Os\FaturarOsRequest;
 use App\Http\Requests\Os\StoreOsRequest;
 use App\Http\Requests\Os\UpdateOsRequest;
+use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
@@ -13,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OsController extends Controller
 {
@@ -22,7 +24,7 @@ class OsController extends Controller
         // ACL DE PERMISSÕES
         $this->middleware('permission:os', ['only'=> ['index']]);
         $this->middleware('permission:os_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:os_show', ['only'=> 'show']);
+        $this->middleware('permission:os_show', ['only'=> ['show', 'print']]);
         $this->middleware('permission:os_edit', ['only'=> ['edit', 'update']]);
         $this->middleware('permission:os_destroy', ['only'=> 'destroy']);
         $this->middleware('permission:os_faturar', ['only'=> 'faturar']);
@@ -93,6 +95,7 @@ class OsController extends Controller
         // dd($request->input());
         DB::beginTransaction();
         try {
+
             $os = new Os();
             $os->user_id = Auth::id();
             $os->cliente_id = $request->cliente_id;
@@ -102,6 +105,7 @@ class OsController extends Controller
             $os->status_id = $request->status_id;
             $os->data_entrada = $request->data_entrada;
             $os->data_saida = $request->data_saida;
+            $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $request->categoria_id);
             $os->descricao = $request->descricao;
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
@@ -123,7 +127,7 @@ class OsController extends Controller
      */
     public function show(Os $os)
     {
-        $emitente = Emitente::getHtmlEmitente(1);
+        $emitente = Emitente::getHtmlEmitente(1, $os->id);
         return view('os.show', compact('os', 'emitente'));
     }
 
@@ -132,8 +136,11 @@ class OsController extends Controller
      */
     public function print(Os $os)
     {
-        $emitente = Emitente::getHtmlEmitente(1);
+        $emitente = Emitente::getHtmlEmitente(1, $os->id);
         return view('os.print', compact('os', 'emitente'));
+
+        // $pdf = Pdf::loadView('os.print', compact('os', 'emitente'));
+        // return $pdf->download('invoice.pdf');
     }
 
     /**
@@ -152,6 +159,8 @@ class OsController extends Controller
         // dd($request->input());
         DB::beginTransaction();
         try {
+
+
             $os->user_id = Auth::id();
             $os->cliente_id = $request->cliente_id;
             $os->tecnico_id = $request->tecnico_id;
@@ -160,6 +169,7 @@ class OsController extends Controller
             $os->status_id = $request->status_id;
             $os->data_entrada = $request->data_entrada;
             $os->data_saida = $request->data_saida;
+            $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $request->categoria_id);
             $os->descricao = $request->descricao;
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
@@ -371,5 +381,23 @@ class OsController extends Controller
             DB::rollBack();
             throw $th;
         }
+    }
+
+
+    /**
+     * REtorna o dia de vencimento com base na categoria selecionada
+     *
+     * @param string $data_entrada Data de entrada
+     * @param int $categoria_id id da categoria da os para gera os dias de garantia
+     * @return string|null retorna o dia de vendimento ou null caso nao exista
+
+     **/
+    private function addDayGarantia($data_entrada, $categoria_id) : string|null {
+        $prazoEmDias = OsCategoria::find($categoria_id)->garantia?->prazo_garantia;
+        if($prazoEmDias) {
+            $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_entrada);
+            return $dataGarantia->addDays($prazoEmDias)->format('Y-m-d');
+        }
+        return null;
     }
 }
