@@ -196,7 +196,18 @@ class OsController extends Controller
      */
     public function destroy(Os $os)
     {
-        //
+        try {
+            if($os->fatura_id){
+                return redirect()->route('os.index')
+                ->with('warning', 'Essa OS já está faturada, cancele a fatura antes de exclui-la !');
+            }
+            $os->delete();
+            return redirect()->route('os.index')
+            ->with('success', 'OS Excluida com sucesso.');
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
