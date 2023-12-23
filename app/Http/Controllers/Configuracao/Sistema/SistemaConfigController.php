@@ -43,7 +43,8 @@ class SistemaConfigController extends Controller
     //  */
     public function store(StoreSistemaConfigRequest $request)
     {
-        dd($request->input());
+        // dd($request->input());
+        SistemaConfig::truncate();
         DB::beginTransaction();
         try {
             foreach ($request->sistema as $key => $value) {

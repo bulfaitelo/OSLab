@@ -73,6 +73,11 @@ class OsController extends Controller
         if ($request->status_id) {
             $queryOs->where('status_id', $request->status_id);
         }
+        if(!$request->input()) {
+            if(getConfig('os_listagem_padrao')){
+                $queryOs->whereIn('status_id', getConfig('os_listagem_padrao'));
+            }
+        }
         $queryOs->orderBy('id', 'desc');
         $os = $queryOs->paginate(100);
         return view('os.index', compact('os', 'request'));

@@ -42,20 +42,18 @@ class StoreSistemaConfigRequest extends FormRequest
         ];
     }
 
+    protected function passedValidation() {
+        $data = $this->validated()['sistema'];
 
-    function withValidator($validator): void {
-        $validator->after(function ($validator) {
-            // Verifica se não há erros de validação até agora
-            if (!$validator->failed()) {
-                // Obtém os dados validados
-                $data = $this->validated();
 
-                // Converte o array em JSON
-                $jsonOsListagemPadrao = json_encode($data['sistema']['os_listagem_padrao']);
-                // Substitui o array original pelo JSON
-                // $this->merge(['os_listagem_padrao' => $jsonOsListagemPadrao]);
-                $this->merge(['sistema' => ['os_listagem_padrao' => $jsonOsListagemPadrao]]);
-            }
-        });
+
+        foreach ($data as $key => $value) {
+                $data[$key] = json_encode($data[$key]);
+        }
+        // $data['os_listagem_padrao'] = json_encode($data['os_listagem_padrao']);
+        // dd($data);
+        $this->merge([
+            'sistema' => $data
+        ]);
     }
 }

@@ -14,7 +14,7 @@ use App\Models\Configuracao\Sistema\SistemaConfig;
 if (! function_exists('getConfig')) {
     function getConfig(string $keyConfig){
         if($keyConfig){
-            return (string) SistemaConfig::where('key', $keyConfig)->value('value');
+            return json_decode(SistemaConfig::where('key', $keyConfig)->value('value'));
         }
     }
 }

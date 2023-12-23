@@ -17,23 +17,23 @@ class DefaultsConfigSistema extends Seeder
         $insert = [
             [
                 'key' => 'default_os_create_status',
-                'value' => '1',
-
+                'value' => '"1"',
             ],
             [
                 'key' => 'os_link_time_limit',
-                'value' => '10',
-
+                'value' => '"10"',
             ],
             [
                 'key' => 'default_os_faturar_pagto_parcial',
-                'value' => '10',
-
+                'value' => '"10"',
             ],
             [
                 'key' => 'default_os_faturar_pagto_quitado',
-                'value' => '6',
-
+                'value' => '"6"',
+            ],
+            [
+                'key' => 'default_os_faturar_produto_despesa',
+                'value' => '"4"',
             ],
 
 

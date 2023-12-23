@@ -94,17 +94,19 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
+
                                         <label for="sistema[os_listagem_padrao]">Exibição padrão de Os</label>
+                                        @php
+                                            $osListagemPadrao =  getConfig('os_listagem_padrao')
+                                        @endphp
                                         @foreach (App\Models\Configuracao\Os\OsStatus::orderBy('name')->get() as $item)
                                             <div class="custom-control custom-checkbox">
-                                                <input name="sistema[os_listagem_padrao][]" class="custom-control-input" type="checkbox" id="os_list_{{ $item->id }}" value="{{ $item->id }}">
+                                                <input name="sistema[os_listagem_padrao][]" @checked((is_array($osListagemPadrao)) ? in_array($item->id, $osListagemPadrao) : null) class="custom-control-input" type="checkbox" id="os_list_{{ $item->id }}" value="{{ $item->id }}">
                                                 <label for="os_list_{{ $item->id }}" class="custom-control-label">{{ $item->name }}</label>
                                             </div>
                                         @endforeach
                                         <i>Itens exibidos por padrão na listagem de OS, sem filtros.</i>
                                     </div>
-
-
                                 </div>
                             </div>
 
