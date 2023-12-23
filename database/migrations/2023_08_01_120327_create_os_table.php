@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tecnico_id');
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('fatura_id')->nullable();
+            $table->decimal('valor_total', 9, 2)->nullable();
             $table->date('data_entrada');
             $table->date('data_saida')->nullable();
             $table->date('prazo_garantia')->nullable();

@@ -336,7 +336,10 @@ class OsController extends Controller
                     $os->status_id =  getConfig('default_os_faturar_pagto_parcial');
                 }
             }
-            $os->data_saida = $request->data_entrada;
+            $os->valor_total = $os->valorTotal();
+            if(!$os->data_saida){
+                $os->data_saida = now();
+            }
             $os->fatura_id = $fatura_id;
             $os->save();
             DB::commit();
@@ -376,6 +379,7 @@ class OsController extends Controller
                 $movimentacoesModel->delete();
             }
             $os->fatura_id = null;
+            $os->valor_total = null;
             $os->status_id = getConfig('default_os_create_status');
             $os->save();
             $os->contas()->delete();

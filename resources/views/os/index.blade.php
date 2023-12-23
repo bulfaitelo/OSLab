@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-
+<div class="col-md-12">
     <div class="card ">
         <div class="card-header card-outline card-primary pb-2 ">
             <a href="{{ url()->previous() }}">
@@ -116,7 +116,7 @@
                         <td>{{ $item->data_entrada->format('d/m/Y') }}</td>
                         <td>{{ $item->data_saida?->format('d/m/Y') }}</td>
                         <td> garantia </td>
-                        <td class="decimal">{{ $item->valorTotal() }}</td>
+                        <td class="decimal">{{ $item->valor_total }}</td>
                         <td> {{ $item->categoria->name }} </td>
                         <td>
                             <span class="badge {{ $item->status->color }}">{{ $item->status->name }}</span>
@@ -130,40 +130,12 @@
                                     <a href="{{ route('os.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('os_destroy')
-                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                                @endcan
-                            </div>
-                                @can('os_destroy')
-                                <div class="modal fade" id="modal-excluir_{{ $item->id }}">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>
-                                        <div class="modal-body">
-                                        <p><b>Nome:</b> {{ $item->name}}</p>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                            {!! html()->form('delete', route('os.destroy', $item->id))->open() !!}
-                                                <input type="submit" class="btn btn-danger delete-permission" value="Excluir Receita">
-                                            {!! html()->form()->close() !!}
-
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
+                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->cliente->name}}" data-url="{{route('os.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
                                 @endcan
                             </div>
                         <!-- /.modal -->
                         </td>
                     </tr>
-
                     @endforeach
                 </tbody>
             </table>
@@ -175,12 +147,16 @@
             {{-- {{ $os->links() }} --}}
         </div>
 
+    {{-- Modal Excluir --}}
+    @can('os_destroy')
+        @include('adminlte::partials.modal.modal-excluir')
+    @endcan
+    {{-- // Modal Excluir --}}
+    </div>
 </div>
 @stop
 
 @section('css')
-<link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
-<link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
 
 <style>
     .os {
@@ -190,34 +166,4 @@
 @stop
 
 @section('js')
-
-
-{{-- <script>
-$(document).ready(function() {
-  $("#periodo").change(function() {
-    var periodoSelecionado = $(this).val();
-    var dataHoje = new Date().toISOString().split('T')[0];
-
-    switch (periodoSelecionado) {
-      case 'dia':
-        $("#data_inicial").val(dataHoje);
-        $("#data_final").val(dataHoje);
-        break;
-      case 'mes':
-        var primeiroDiaMes = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
-        var ultimoDiaMes = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).toISOString().split('T')[0];
-        $("#data_inicial").val(primeiroDiaMes);
-        $("#data_final").val(ultimoDiaMes);
-        break;
-      case 'ano':
-        var primeiroDiaAno = new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0];
-        var ultimoDiaAno = new Date(new Date().getFullYear(), 11, 31).toISOString().split('T')[0];
-        $("#data_inicial").val(primeiroDiaAno);
-        $("#data_final").val(ultimoDiaAno);
-        break;
-    }
-  });
-});
-
-</script> --}}
 @stop
