@@ -17,7 +17,7 @@ Ainda estamos em uma versão bem embrionária, porem os processos principais já
 Apache com php 8.1 e um banco de dados podendo ser mysql ou algum outro banco relacional
 
 ## Docker_Dev_Web
-Esse container que usei para desevolver o projeto, caso queiram usar basta seguir nese link:
+Esse container que usei para desenvolver o projeto, caso queiram usar basta seguir nesse link:
 
 [https://github.com/bulfaitelo/Docker_Dev_Web](https://github.com/bulfaitelo/Docker_Dev_Web)
 
