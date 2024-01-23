@@ -167,7 +167,9 @@ class RoleController extends Controller
             'assign_id' => 'required|array'
             ]);
 
-        $role->syncPermissions($request->assign_id);
+        // dd($request->assign_id);
+
+        $role->syncPermissions(array_map(fn($val)=>(int)$val, $request->assign_id));
         return redirect()->route('configuracao.roles.assign', [$id])->with('success', 'Permissões Atualizadas!');
 
     }

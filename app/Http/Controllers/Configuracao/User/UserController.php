@@ -90,7 +90,7 @@ class UserController extends Controller
         $user->estado = $request->estado;
         $user->complemento = $request->complemento;
         $user->expire_at = $request->expire_at;
-        $user->syncRoles($request->role);
+        $user->syncRoles(array_map(fn($val)=>(int)$val, $request->role));
 
         if ($request->img_perfil) {
             $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
@@ -192,7 +192,7 @@ class UserController extends Controller
             $resizedImage->save(storage_path('app/public/img_perfil/' . $imageName));
             $user->img_url = $imageName;
         }
-        $user->syncRoles($request->role);
+        $user->syncRoles(array_map(fn($val)=>(int)$val, $request->role));
 
         if($user->save()){
             return redirect()->route('configuracao.users.index', [$user->id])->with('success', 'Permissão atualizada!'); ;
