@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
 
 
         // Factory
-        Cliente::factory()->count(200)->create();
-        Os::factory()->count(200)->create();
+        // Cliente::factory()->count(200)->create();
+        // Os::factory()->count(200)->create();
 
     }
 }
