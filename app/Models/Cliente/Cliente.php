@@ -41,5 +41,16 @@ class Cliente extends Model
     }
 
 
+    /**
+     * Retorna o nome do Cliente separados por underline e sem acentuação
+     *
+     * @return string
+     **/
+    public function titleName() : string {
+        $return = str_replace(" ","_",preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($this->name))));
+        return $return ;
+    }
+
+
 
 }

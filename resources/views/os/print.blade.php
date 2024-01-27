@@ -1,5 +1,6 @@
-@section('title', 'adasd')
+@section('title', 'OSLab_'.$os->id.'_'.$os->cliente->titleName())
 @include('os.print-content')
+
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -20,7 +21,7 @@
 
     @yield('css')
 </head>
-<body style="margin: 15px">
+<body style="margin: 15px" onload="window.print()">
     @yield('os-print-content')
 </body>
     {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
