@@ -1,4 +1,4 @@
-<div>
+<div >
     <div class="timeline mt-2">
         @foreach ($os->getOsLogs() as $data => $items)
         <div class="time-label">

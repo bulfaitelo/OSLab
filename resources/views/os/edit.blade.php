@@ -71,28 +71,28 @@
         @endif
     </div>
     <div class="card-body pt-2">
-        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+        <ul class="nav nav-tabs" id="os-tabs" role="tablist">
             <li class="nav-item ">
-                <a class="nav-link active" id="detalhes-tab" data-toggle="pill" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="true">
+                <a class="nav-link active" id="detalhes-tab" data-toggle="tab" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="true">
                     <i class="fa-regular fa-rectangle-list "></i>
                     <span class="d-none d-sm-inline">Detalhes</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" id="#produtos-tab" data-toggle="pill" href="#produtos" role="tab" aria-controls="produtos" aria-selected="false">
+                <a class="nav-link" id="#produtos-tab" data-toggle="tab" href="#produtos" role="tab" aria-controls="produtos" aria-selected="false">
                     <i class="fas fa-box-open "></i>
                     <span class="d-none d-sm-inline">Produtos</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="servicos-tab" data-toggle="pill" href="#servicos" role="tab" aria-controls="servicos" aria-selected="false">
+                <a class="nav-link" id="servicos-tab" data-toggle="tab" href="#servicos" role="tab" aria-controls="servicos" aria-selected="false">
                     <i class="fas fa-hand-holding-usd "></i>
                     <span class="d-none d-sm-inline">Serviços</span>
                 </a>
             </li>
             @if ($os->categoria->checklist_id)
             <li class="nav-item">
-                <a class="nav-link" id="checklist-tab" data-toggle="pill" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
+                <a class="nav-link" id="checklist-tab" data-toggle="tab" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
                     <i class="fa-solid fa-list-check "></i>
                     <span class="d-none d-sm-inline">Checklist</span>
 
@@ -100,19 +100,19 @@
             </li>
             @endif
             <li class="nav-item">
-                <a class="nav-link" id="informacoes-tab" data-toggle="pill" href="#informacoes" role="tab" aria-controls="informacoes" aria-selected="false">
+                <a class="nav-link" id="informacoes-tab" data-toggle="tab" href="#informacoes" role="tab" aria-controls="informacoes" aria-selected="false">
                     <i class="fa-solid fa-circle-info"></i>
                     <span class="d-none d-sm-inline">Informações</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="log-tab" data-toggle="pill" href="#log" role="tab" aria-controls="log" aria-selected="false">
+                <a class="nav-link" id="log-tab" data-toggle="tab" href="#log" role="tab" aria-controls="log" aria-selected="false">
                     <i class="fa-regular fa-file-lines"></i>
                     <span class="d-none d-sm-inline">Log</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="balancete-tab" data-toggle="pill" href="#balancete" role="tab" aria-controls="balancete" aria-selected="false">
+                <a class="nav-link" id="balancete-tab" data-toggle="tab" href="#balancete" role="tab" aria-controls="balancete" aria-selected="false">
                     <i class="fas fa-balance-scale"></i>
                     <span class="d-none d-sm-inline">Balancete</span>
                 </a>
@@ -137,7 +137,7 @@
                 @livewire('os.informacoes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade" id="log" role="tabpanel" aria-labelledby="log-tab">
-                {{-- @livewire('os.log-tab', ['os' => $os]) --}}
+                @livewire('os.log-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                 balancete
@@ -262,6 +262,16 @@
             $('#data_recebimento').removeAttr("required");
             $('#forma_pagamento_id').removeAttr("required");
             $('#valor_recebido').removeAttr("required");
+        }
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        tabId = e.target.id;
+        if(tabId == 'log-tab'){
+            console.log(e.target.id);
+        }
+        if(tabId == 'balancete-tab'){
+            console.log(e.target.id);
         }
     });
 </script>
