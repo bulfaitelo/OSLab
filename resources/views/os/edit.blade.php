@@ -265,14 +265,18 @@
         }
     });
 
+
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         tabId = e.target.id;
         if(tabId == 'log-tab'){
-            console.log(e.target.id);
+            Livewire.emitTo('os.log-tab', 'showLogTab', true );
         }
         if(tabId == 'balancete-tab'){
             console.log(e.target.id);
         }
     });
+
+
+
 </script>
 @stop

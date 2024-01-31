@@ -1,4 +1,5 @@
-<div >
+<div>
+    @if ($showDisplay === true)
     <div class="timeline mt-2">
         @foreach ($os->getOsLogs() as $data => $items)
         <div class="time-label">
@@ -96,17 +97,15 @@
         //          $('#obervacoes-log-icon').removeClass('fa-caret-down').addClass('fa-caret-right');
         //      })
         // });
+        // document.addEventListener('livewire:load', function () {
+        //     $('.observacoes-log-div').on('show.bs.collapse', function () {
+        //         $(this).find('.obervacoes-log-icon').removeClass('fa-caret-right').addClass('fa-caret-down');
+        //     });
 
-        document.addEventListener('livewire:load', function () {
-            $('.observacoes-log-div').on('show.bs.collapse', function () {
-                $(this).find('.obervacoes-log-icon').removeClass('fa-caret-right').addClass('fa-caret-down');
-            });
-
-            $('.observacoes-log-div').on('hidden.bs.collapse', function () {
-                $(this).find('.obervacoes-log-icon').removeClass('fa-caret-down').addClass('fa-caret-right');
-            });
-        });
-
-
+        //     $('.observacoes-log-div').on('hidden.bs.collapse', function () {
+        //         $(this).find('.obervacoes-log-icon').removeClass('fa-caret-down').addClass('fa-caret-right');
+        //     });
+        // });
     </script>
+    @endif
 </div>
