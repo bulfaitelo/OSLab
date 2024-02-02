@@ -140,7 +140,7 @@
                 @livewire('os.log-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
-                balancete
+                @livewire('os.balancete-tab', ['os' => $os])
             </div>
         </div>
     </div>
@@ -237,6 +237,7 @@
 <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
 <script src="{{ url('') }}/vendor/patternlock/patternlock.js"></script>
 <script src="{{ url('') }}/vendor/form-builder/form-render.min.js"></script>
+<script src="https://adminlte.io/themes/v3/plugins/chart.js/Chart.min.js"></script>
 
 {{-- <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script> --}}
 <script>
@@ -272,7 +273,7 @@
             Livewire.emitTo('os.log-tab', 'showLogTab', true );
         }
         if(tabId == 'balancete-tab'){
-            console.log(e.target.id);
+            Livewire.emitTo('os.balancete-tab', 'showBalanceteTab', true );
         }
     });
 
