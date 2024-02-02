@@ -53,20 +53,20 @@
                                         <i>Esse parametro define o tempo maximo de validade do link caso o cliente não preencha</i>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="default_os_create_status">Centro de custo padrão</label>
-                                        {!! html()->select('default_os_create_', App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
-                                        <i>Esse centro centro de custo já será selecionado ao criar um novo.  </i>
-                                    </div>
-                                </div> --}}
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="sistema[default_os_faturar_produto_despesa]">Tipo de despesa Padrão</label>
                                         {!! html()->select('sistema[default_os_faturar_produto_despesa]', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar_produto_despesa'))->class('form-control')->placeholder('Selecione') !!}
                                         <i>Tipo de despesa padrão para os produtos quando for faturada uma nova OS</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="sistema[default_os_faturar]">Status OS ao Faturar </label>
+                                        {!! html()->select('sistema[default_os_faturar]', App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar'))->class('form-control')->placeholder('Não alterar status') !!}
+                                        <i>Quando a Os for faturada ela irá receber esse status se não for recebido nenhum valor</i>
                                     </div>
                                 </div>
                                 <div class="col-md-4">

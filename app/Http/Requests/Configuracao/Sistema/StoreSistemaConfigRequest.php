@@ -25,6 +25,7 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.default_os_create_status' => 'required|exists:os_status,id',
             'sistema.os_link_time_limit' => 'required|integer',
             'sistema.default_os_faturar_produto_despesa' => 'required|exists:forma_pagamentos,id',
+            'sistema.default_os_faturar' => 'nullable|exists:os_status,id',
             'sistema.default_os_faturar_pagto_parcial' => 'nullable|exists:os_status,id',
             'sistema.default_os_faturar_pagto_quitado' => 'nullable|exists:os_status,id',
             'sistema.os_informacao' => 'nullable|string|max:1000',

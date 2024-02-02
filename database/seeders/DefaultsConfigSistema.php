@@ -24,6 +24,10 @@ class DefaultsConfigSistema extends Seeder
                 'value' => '"10"',
             ],
             [
+                'key' => 'default_os_faturar',
+                'value' => '"3"',
+            ],
+            [
                 'key' => 'default_os_faturar_pagto_parcial',
                 'value' => '"10"',
             ],
