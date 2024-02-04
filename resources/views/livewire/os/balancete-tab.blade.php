@@ -1,98 +1,93 @@
 <div>
+    @dump($os->contas)
     @if ($showDisplay === true)
-
     <div class="row">
         <div class="col-md-7">
             <table class="table table-sm">
                 <thead>
                     <tr>
-                        <th>Tipo</th>
-                        <th>Centro de Custo</th>
-                        <th>Valor</th>
+                        <th style="border-top-color: white">Tipo</th>
+                        <th style="border-top-color: white">Centro de Custo</th>
+                        <th style="border-top-color: white" class="text-right">Valor</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Despesa</td>
+                        <td>
+                            <span class="badge bg-success">CRÉDITO</span>
+                        </td>
+                        <td> Manutenção Console </td>
+                        <td>
+                            R$ <span class="balancete-credito float-right " >200,00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="badge bg-danger">DÉBITO</span>
+                        </td>
                         <td> Material </td>
-                        <td>R$ 123,12</td>
+                        <td>
+                            R$ <span class="balancete-debito float-right " >-100,00</span>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>Despesa</td>
-                        <td> passagem </td>
-                        <td>R$ 23,12</td>
-                    </tr>
-                    <tr>
-                        <td>Receita</td>
-                        <td> Manutenção console </td>
-                        <td>R$ 100,00</td>
-                    </tr>
-                    <tr>
-                        <td>Pendente</td>
-                        <td> </td>
-                        <td>R$ 50,00</td>
-                    </tr>
+
                 </tbody>
-                <tfoot>
+                <tfoot style=" border-top: 2px solid #dee2e6;">
                     <tr>
-                        <td colspan="2">Receita Lioquida</td>
-                        <td>R$ 50,00</td>
+                        <td colspan="2">Crédito previsto</td>
+                        <td>
+                            R$ <span class="float-right " >620,00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Crédito pendente</td>
+                        <td>
+                            R$ <span class="float-right " >400,00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><b>Saldo</b></td>
+                        <td>
+                           <b> R$ <span class="balancete-credito float-right " >100,00</span></b>
+                        </td>
                     </tr>
                 </tfoot>
             </table>
         </div>
-        <div class="col-md-5">
-
-            <script>
-
-
-                var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-                console.log(donutChartCanvas);
-              var donutData        = {
-                  labels: [
-                      'Passagem',
-                      'Material',
-                      'Receita Liquida',
-                      'Pendente'
-
-                  ],
-                  datasets: [
-                  {
-                      data: [30,100,100,50],
-                      backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#f29c12', '#f39c33'],
-                  }
-                  ]
-              }
-              var donutOptions     = {
-                  maintainAspectRatio : false,
-                  responsive : true,
-              }
-              //Create pie or douhnut chart
-              // You can switch between pie and douhnut using the method below.
-              new Chart(donutChartCanvas, {
-                  type: 'doughnut',
-                  data: donutData,
-                  options: donutOptions
-
-
-
-
-              })
-      </script>
-
-
-                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-
-
-
-
-
-        </div>
+        {{-- <div class="col-md-5">
+            <canvas id="myChart"></canvas>
+        </div> --}}
     </div>
 
 
 
 
+
     @endif
+
+    {{-- <script>
+        // document.addEventListener('livewire:load', function () {
+
+            const ctx = document.getElementById('myChart');
+            new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                y: {
+                    beginAtZero: true
+                }
+                }
+            }
+            });
+        // });
+      </script> --}}
 </div>

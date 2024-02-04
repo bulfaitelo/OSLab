@@ -20,3 +20,14 @@
 .custom-switch.custom-switch-md .custom-control-input:checked ~ .custom-control-label::after {
     transform: translateX(calc(1.5rem - 0.25rem));
 }
+
+/* Define cor do valor na tabela de balancete  */
+
+.balancete-credito {
+    color: #2e8654;
+}
+
+.balancete-debito {
+    color: #862e2e;
+
+}
