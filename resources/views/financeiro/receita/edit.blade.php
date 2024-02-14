@@ -63,7 +63,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="valor"> Valor </label>
-                                {!! html()->text('valor', $receita->valor)->class('form-control decimal')->placeholder('Valor total da Receita')->required() !!}
+                                {!! html()->text('valor', $receita->valor)->class('form-control decimal')->placeholder('Valor total da Receita')->attributes(['inputmode' => 'numeric'])->required() !!}
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -283,13 +283,13 @@
                         <div  class="col-md-4">
                             <div class="form-group">
                                 <label for="pagamento_valor"> Valor </label>
-                                {!! html()->text('pagamento_valor')->class('form-control decimal')->placeholder('Valor') !!}
+                                {!! html()->text('pagamento_valor')->class('form-control decimal')->attributes(['inputmode' => 'numeric'])->placeholder('Valor') !!}
                             </div>
                         </div>
                         <div  class="col-md-4 ">
                             <div class="form-group">
                                 <label for="data_pagamento"> Data pagamento </label>
-                                {!! html()->date('data_pagamento')->class('form-control')->placeholder('Valor Pago') !!}
+                                {!! html()->date('data_pagamento')->class('form-control')->placeholder('Data pagamento') !!}
                             </div>
                         </div>
                     </div>

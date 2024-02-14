@@ -66,7 +66,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="valor"> Valor </label>
-                    {!! html()->text('valor')->class('form-control decimal')->placeholder('Valor total da despesa')->required() !!}
+                    {!! html()->text('valor')->class('form-control decimal')->placeholder('Valor total da despesa')->attributes(['inputmode' => 'numeric'])->required() !!}
                 </div>
             </div>
             <div class="col-md-2">
@@ -126,7 +126,7 @@
             <div style="display: none" class="col-md-2 div_avista_pago ">
                 <div class="form-group">
                     <label for="avista_valor"> Valor </label>
-                    {!! html()->text('avista_valor')->class('form-control decimal')->placeholder('Valor Pago')->required() !!}
+                    {!! html()->text('avista_valor')->class('form-control decimal')->placeholder('Valor Pago')->attributes(['inputmode' => 'numeric'])->required() !!}
                 </div>
             </div>
             <div style="display: none" class="col-md-2 div_avista_pago ">
