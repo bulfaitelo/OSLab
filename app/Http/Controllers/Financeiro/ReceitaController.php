@@ -83,11 +83,20 @@ class ReceitaController extends Controller
     {
         DB::beginTransaction();
         try {
+            if ($request->os_id) {
+                $os = Os::findOrFail($request->os_id);
+            }
             $receita = new Contas();
             $receita->tipo = 'R'; //Receita
             $receita->user_id = Auth::id();
             $receita->name = $request->name;
             $receita->centro_custo_id = $request->centro_custo_id;
+            if ($request->os_id) {
+                $receita->cliente_id = $os->cliente_id;
+                $receita->os_id = $os->id;
+            } else {
+                $receita->cliente_id = $request->cliente_id;
+            }
             $receita->observacoes = $request->observacoes;
             $receita->valor = $request->valor;
             $receita->parcelas = $request->parcelas;
