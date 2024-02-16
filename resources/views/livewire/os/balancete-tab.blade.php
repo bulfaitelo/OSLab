@@ -1,14 +1,21 @@
 <div>
-    @dump($os->contas)
     @if ($showDisplay === true)
+    @dump($os->balancete())
     <div class="row">
         <div class="col-md-7">
-            <table class="table table-sm">
+            <table class="table table-bordered table-sm">
                 <thead>
+                    {{-- <tr>
+                        <th style=""  colspan="3">Total de crédito previsto</th>
+                        <th style="" >
+                            R$ <span class="float-right " >620,00</span>
+                        </th>
+                    </tr> --}}
                     <tr>
-                        <th style="border-top-color: white">Tipo</th>
-                        <th style="border-top-color: white">Centro de Custo</th>
-                        <th style="border-top-color: white" class="text-right">Valor</th>
+                        <th>Tipo</th>
+                        <th>Centro de Custo</th>
+                        <th class="text-right">Previsto</th>
+                        <th class="text-right">Executado</th>
 
                     </tr>
                 </thead>
@@ -21,6 +28,9 @@
                         <td>
                             R$ <span class="balancete-credito float-right " >200,00</span>
                         </td>
+                        <td>
+                            R$ <span class="balancete-credito float-right " >200,00</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -30,25 +40,105 @@
                         <td>
                             R$ <span class="balancete-debito float-right " >-100,00</span>
                         </td>
+                        <td>
+                            R$ <span class="balancete-debito float-right " >-100,00</span>
+                        </td>
                     </tr>
 
                 </tbody>
-                <tfoot style=" border-top: 2px solid #dee2e6;">
+                {{-- <tfoot style=" border-top: 2px solid #dee2e6;">
                     <tr>
-                        <td colspan="2">Crédito previsto</td>
+                        <td colspan="2">Total Crédito</td>
                         <td>
-                            R$ <span class="float-right " >620,00</span>
+                            R$ <span class="float-right " >400,00</span>
+                        </td>
+                        <td>
+                            R$ <span class="float-right " >400,00</span>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Crédito pendente</td>
+                        <td colspan="2">Total Débito</td>
+                        <td>
+                            R$ <span class="float-right " >400,00</span>
+                        </td>
                         <td>
                             R$ <span class="float-right " >400,00</span>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2"><b>Saldo</b></td>
+                        <td colspan="2" >
+                           <b> R$ <span class="balancete-credito float-right " >100,00</span></b>
+                        </td>
+                    </tr>
+                </tfoot> --}}
+            </table>
+
+            <table class="table table-bordered table-sm">
+                <thead>
+                    {{-- <tr>
+                        <th style=""  colspan="3">Total de crédito previsto</th>
+                        <th style="" >
+                            R$ <span class="float-right " >620,00</span>
+                        </th>
+                    </tr> --}}
+                    <tr>
+                        <th colspan="2">Totais </th>
+
+                        <th class="text-right">Previsto</th>
+                        <th class="text-right">Executado</th>
+
+                    </tr>
+                </thead>
+                {{-- <tbody>
+                    <tr>
                         <td>
+                            <span class="badge bg-success">CRÉDITO</span>
+                        </td>
+                        <td> Manutenção Console </td>
+                        <td>
+                            R$ <span class="balancete-credito float-right " >200,00</span>
+                        </td>
+                        <td>
+                            R$ <span class="balancete-credito float-right " >200,00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="badge bg-danger">DÉBITO</span>
+                        </td>
+                        <td> Material </td>
+                        <td>
+                            R$ <span class="balancete-debito float-right " >-100,00</span>
+                        </td>
+                        <td>
+                            R$ <span class="balancete-debito float-right " >-100,00</span>
+                        </td>
+                    </tr>
+
+                </tbody> --}}
+                <tfoot style=" border-top: 2px solid #dee2e6;">
+                    <tr>
+                        <td colspan="2">Total Crédito</td>
+                        <td>
+                            R$ <span class="float-right " >400,00</span>
+                        </td>
+                        <td>
+                            R$ <span class="float-right " >400,00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Total Débito</td>
+                        <td>
+                            R$ <span class="float-right " >400,00</span>
+                        </td>
+                        <td>
+                            R$ <span class="float-right " >400,00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><b>Saldo</b></td>
+                        <td colspan="2" >
                            <b> R$ <span class="balancete-credito float-right " >100,00</span></b>
                         </td>
                     </tr>
