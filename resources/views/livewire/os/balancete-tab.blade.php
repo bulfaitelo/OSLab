@@ -1,6 +1,5 @@
 <div>
-    @if ($showDisplay === true)    
-    @dump($balancete)
+    @if ($showDisplay === true)        
     <div class="row">
         <div class="col-md-7">
             <table class="table table-bordered table-sm">
@@ -87,35 +86,5 @@
             <canvas id="myChart"></canvas>
         </div> --}}
     </div>
-
-
-
-
-
     @endif
-
-    {{-- <script>
-        // document.addEventListener('livewire:load', function () {
-
-            const ctx = document.getElementById('myChart');
-            new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                y: {
-                    beginAtZero: true
-                }
-                }
-            }
-            });
-        // });
-      </script> --}}
 </div>
