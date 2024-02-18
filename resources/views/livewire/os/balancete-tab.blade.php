@@ -1,6 +1,6 @@
 <div>
     @if ($showDisplay === true)    
-    {{-- @dump($balancete) --}}
+    @dump($balancete)
     <div class="row">
         <div class="col-md-7">
             <table class="table table-bordered table-sm">

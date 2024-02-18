@@ -111,12 +111,14 @@
                     <span class="d-none d-sm-inline">Log</span>
                 </a>
             </li>
+            @if ($os->fatura_id)
             <li class="nav-item">
                 <a class="nav-link" id="balancete-tab" data-toggle="tab" href="#balancete" role="tab" aria-controls="balancete" aria-selected="false">
                     <i class="fas fa-balance-scale"></i>
                     <span class="d-none d-sm-inline">Balancete</span>
                 </a>
-            </li>
+            </li>                
+            @endif
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
@@ -139,9 +141,11 @@
             <div class="tab-pane fade" id="log" role="tabpanel" aria-labelledby="log-tab">
                 @livewire('os.log-tab', ['os' => $os])
             </div>
-            <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
-                @livewire('os.balancete-tab', ['os' => $os])
-            </div>
+            @if ($os->fatura_id)
+                <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
+                    @livewire('os.balancete-tab', ['os' => $os])
+                </div>                
+            @endif
         </div>
     </div>
 </div>
