@@ -311,12 +311,12 @@ class Os extends Model
      *
      * @return array
      **/
-    public function balancete() {
+    public function balancete() : array {
 
-        $array_balancete['totais']['total_credito_previsto'] = 0;
-        $array_balancete['totais']['total_debito_previsto'] = 0;
-        $array_balancete['totais']['total_credito_executado'] = 0;
-        $array_balancete['totais']['total_debito_executado'] = 0;
+        $array_balancete['total_credito_previsto'] = 0;
+        $array_balancete['total_debito_previsto'] = 0;
+        $array_balancete['total_credito_executado'] = 0;
+        $array_balancete['total_debito_executado'] = 0;
 
         $balancete = $this->contas()
                 ->select(DB::raw('tipo, centro_custos.name as centro_custo, sum(DISTINCT contas.valor) as previsto, sum(contas_pagamentos.valor) as valor_executado'))
@@ -330,45 +330,27 @@ class Os extends Model
                 $array_balancete['detalhes'][] = [
                     'tipo' => $value->tipo,
                     'centro_custo' => $value->centro_custo,
-                    'previsto' => $value->previsto,
+                    'valor_previsto' => $value->previsto,
                     'valor_executado' => $value->valor_executado,
 
                 ];
-                $array_balancete['totais']['total_credito_previsto']+= $value->previsto;
-                $array_balancete['totais']['total_credito_executado']+= $value->valor_executado;
+                $array_balancete['total_credito_previsto']+= $value->previsto;
+                $array_balancete['total_credito_executado']+= $value->valor_executado;
             }
             elseif ($value->tipo == 'D') {
                 $array_balancete['detalhes'][] = [
                     'tipo' => $value->tipo,
                     'centro_custo' => $value->centro_custo,
-                    'previsto' => $value->previsto,
+                    'valor_previsto' => $value->previsto,
                     'valor_executado' => $value->valor_executado,
                 ];
-                $array_balancete['totais']['total_debito_previsto']+= $value->previsto;
-                $array_balancete['totais']['total_debito_executado']+= $value->valor_executado;
+                $array_balancete['total_debito_previsto']+= $value->previsto;
+                $array_balancete['total_debito_executado']+= $value->valor_executado;
             }
         }
-        $array_balancete['saldo'] = ($array_balancete['totais']['total_credito_executado'] - $array_balancete['totais']['total_debito_executado']);
+        $array_balancete['saldo'] = ($array_balancete['total_credito_executado'] - $array_balancete['total_debito_executado']);
 
-        dd($array_balancete);
-
-        // $credito = $this->contas()->where('tipo', 'R')->get();
-        // $debito = $this->contas()->where('tipo', 'D')->get();
-        // $return['valor_os'] = $this->valor_total;
-        // $return['credito'] = $credito;
-        // $return['debito'] = $debito;
-        // dd($return);
-
-        // SELECT
-        //     tipo, centro_custo_id, sum(contas_pagamentos.valor)
-        // FROM
-        //     `contas`
-        // INNER JOIN contas_pagamentos ON contas_pagamentos.conta_id = contas.id
-        // WHERE
-        //     `contas`.`os_id` = 2 AND `contas`.`os_id` IS NOT NULL
-        //     GROUP BY centro_custo_id, tipo
-
-
+        return $array_balancete;
     }
 
 }

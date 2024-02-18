@@ -1,87 +1,49 @@
 <div>
-    @if ($showDisplay === true)
-    @dump($os->balancete())
+    @if ($showDisplay === true)    
+    {{-- @dump($balancete) --}}
     <div class="row">
         <div class="col-md-7">
             <table class="table table-bordered table-sm">
                 <thead>
-                    {{-- <tr>
-                        <th style=""  colspan="3">Total de crédito previsto</th>
-                        <th style="" >
-                            R$ <span class="float-right " >620,00</span>
-                        </th>
-                    </tr> --}}
                     <tr>
                         <th>Tipo</th>
                         <th>Centro de Custo</th>
                         <th class="text-right">Previsto</th>
                         <th class="text-right">Executado</th>
-
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <span class="badge bg-success">CRÉDITO</span>
-                        </td>
-                        <td> Manutenção Console </td>
-                        <td>
-                            R$ <span class="balancete-credito float-right " >200,00</span>
-                        </td>
-                        <td>
-                            R$ <span class="balancete-credito float-right " >200,00</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="badge bg-danger">DÉBITO</span>
-                        </td>
-                        <td> Material </td>
-                        <td>
-                            R$ <span class="balancete-debito float-right " >-100,00</span>
-                        </td>
-                        <td>
-                            R$ <span class="balancete-debito float-right " >-100,00</span>
-                        </td>
-                    </tr>
-
-                </tbody>
-                {{-- <tfoot style=" border-top: 2px solid #dee2e6;">
-                    <tr>
-                        <td colspan="2">Total Crédito</td>
-                        <td>
-                            R$ <span class="float-right " >400,00</span>
-                        </td>
-                        <td>
-                            R$ <span class="float-right " >400,00</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Total Débito</td>
-                        <td>
-                            R$ <span class="float-right " >400,00</span>
-                        </td>
-                        <td>
-                            R$ <span class="float-right " >400,00</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><b>Saldo</b></td>
-                        <td colspan="2" >
-                           <b> R$ <span class="balancete-credito float-right " >100,00</span></b>
-                        </td>
-                    </tr>
-                </tfoot> --}}
+                    @foreach ($balancete['detalhes'] as $item)
+                        <tr>
+                            <td>
+                                @if ($item['tipo'] == 'R')
+                                    <span class="badge bg-success">CRÉDITO</span>                                    
+                                @else
+                                    <span class="badge bg-danger">DÉBITO</span>                                                                        
+                                @endif
+                            </td>
+                            <td>{{ $item['centro_custo'] }}</td>
+                            @if ($item['tipo'] == 'R')
+                                <td class="balancete-credito ">
+                                    R$ <span class="float-right " >{{ number_format($item['valor_previsto'],2,",",".") }}</span>
+                                </td>
+                                <td class="balancete-credito ">
+                                    R$ <span class=" float-right " >{{ number_format($item['valor_executado'],2,",",".") }}</span>
+                                </td>                                
+                            @else
+                                <td class="balancete-debito ">
+                                    R$ <span class="float-right " >-{{ number_format($item['valor_previsto'],2,",",".") }}</span>
+                                </td>
+                                <td class="balancete-debito ">
+                                    R$ <span class=" float-right " >-{{ number_format($item['valor_executado'],2,",",".") }}</span>
+                                </td>                      
+                            @endif
+                        </tr>                        
+                    @endforeach 
+                </tbody>              
             </table>
-
             <table class="table table-bordered table-sm">
                 <thead>
-                    {{-- <tr>
-                        <th style=""  colspan="3">Total de crédito previsto</th>
-                        <th style="" >
-                            R$ <span class="float-right " >620,00</span>
-                        </th>
-                    </tr> --}}
                     <tr>
                         <th colspan="2">Totais </th>
 
@@ -90,56 +52,32 @@
 
                     </tr>
                 </thead>
-                {{-- <tbody>
-                    <tr>
-                        <td>
-                            <span class="badge bg-success">CRÉDITO</span>
-                        </td>
-                        <td> Manutenção Console </td>
-                        <td>
-                            R$ <span class="balancete-credito float-right " >200,00</span>
-                        </td>
-                        <td>
-                            R$ <span class="balancete-credito float-right " >200,00</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="badge bg-danger">DÉBITO</span>
-                        </td>
-                        <td> Material </td>
-                        <td>
-                            R$ <span class="balancete-debito float-right " >-100,00</span>
-                        </td>
-                        <td>
-                            R$ <span class="balancete-debito float-right " >-100,00</span>
-                        </td>
-                    </tr>
-
-                </tbody> --}}
                 <tfoot style=" border-top: 2px solid #dee2e6;">
                     <tr>
                         <td colspan="2">Total Crédito</td>
-                        <td>
-                            R$ <span class="float-right " >400,00</span>
+                        <td class="balancete-credito ">
+                            R$ <span class="float-right " >{{ number_format($balancete['total_credito_previsto'],2,",",".") }}</span>
                         </td>
-                        <td>
-                            R$ <span class="float-right " >400,00</span>
+                        <td class="balancete-credito ">
+                            R$ <span class="float-right " >{{ number_format($balancete['total_credito_executado'],2,",",".") }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">Total Débito</td>
-                        <td>
-                            R$ <span class="float-right " >400,00</span>
+                        <td class="balancete-debito ">
+                            R$ <span class="float-right " >-{{ number_format($balancete['total_debito_previsto'],2,",",".") }}</span>
                         </td>
-                        <td>
-                            R$ <span class="float-right " >400,00</span>
+                        <td class="balancete-debito ">
+                            R$ <span class="float-right " >-{{ number_format($balancete['total_debito_executado'],2,",",".") }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2"><b>Saldo</b></td>
-                        <td colspan="2" >
-                           <b> R$ <span class="balancete-credito float-right " >100,00</span></b>
+                        <td colspan="2" @class([
+                            'balancete-credito' => ($balancete['saldo'] > 0),
+                            'balancete-debito' => ($balancete['saldo'] < 0),
+                        ])>
+                           <b> R$ <span class=" float-right " >{{ number_format($balancete['saldo'],2,",",".") }}</span></b>
                         </td>
                     </tr>
                 </tfoot>

@@ -18,6 +18,8 @@ class BalanceteTab extends Component
 
     public function render()
     {
-        return view('livewire.os.balancete-tab');
+        return view('livewire.os.balancete-tab', [
+            'balancete' => $this->os->balancete()     
+        ]);
     }
 }
