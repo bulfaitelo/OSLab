@@ -327,25 +327,19 @@ class Os extends Model
                 ->orderBy('tipo', 'desc')
                 ->get();        
         foreach ($balancete as $key => $value) {
-            if($value->tipo == 'R') {
-                $receita_count++;
-                $array_balancete['detalhes'][] = [
-                    'tipo' => $value->tipo,
-                    'centro_custo' => $value->centro_custo,
-                    'valor_previsto' => $value->previsto,
-                    'valor_executado' => $value->valor_executado,
+            $array_balancete['detalhes'][] = [
+                'tipo' => $value->tipo,
+                'centro_custo' => $value->centro_custo,
+                'valor_previsto' => $value->previsto,
+                'valor_executado' => $value->valor_executado,
 
-                ];
+            ];
+            if($value->tipo == 'R') {
+                $receita_count++;                
                 $array_balancete['total_credito_previsto']+= $value->previsto;
                 $array_balancete['total_credito_executado']+= $value->valor_executado;
             }
-            elseif ($value->tipo == 'D') {
-                $array_balancete['detalhes'][] = [
-                    'tipo' => $value->tipo,
-                    'centro_custo' => $value->centro_custo,
-                    'valor_previsto' => $value->previsto,
-                    'valor_executado' => $value->valor_executado,
-                ];
+            elseif ($value->tipo == 'D') {                
                 $array_balancete['total_debito_previsto']+= $value->previsto;
                 $array_balancete['total_debito_executado']+= $value->valor_executado;
             }
