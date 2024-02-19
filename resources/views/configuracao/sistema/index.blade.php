@@ -16,14 +16,20 @@
                 <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="#geral-tab" data-toggle="pill" href="#geral" role="tab" aria-controls="geral" aria-selected="true">
-                            {{-- <i class="fas fa-box-open "></i> --}}
-                            Geral
+                            <i class="fas fa-cogs "></i>
+                            <span class="d-none d-sm-inline">Geral</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="os-tab" data-toggle="pill" href="#os" role="tab" aria-controls="os" aria-selected="false">
-                            {{-- <i class="fas fa-hand-holding-usd "></i> --}}
-                            OS
+                            <i class="fa-regular fa-rectangle-list "></i>
+                            <span class="d-none d-sm-inline">OS</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="os-tab" data-toggle="pill" href="#backup" role="tab" aria-controls="os" aria-selected="false">
+                            <i class="fa-solid fa-house-lock"></i>
+                            <span class="d-none d-sm-inline">Backup</span>
                         </a>
                     </li>
                 </ul>
@@ -34,7 +40,7 @@
                     <div class="tab-content">
                         {{-- GERAL --}}
                         <div class="tab-pane fade" id="geral" role="tabpanel" aria-labelledby="geral-tab">
-                            GERAl
+                            GERAL
                         </div>
                         {{-- OS --}}
                         <div class="tab-pane fade  active show" id="os" role="tabpanel" aria-labelledby="os-tab">
@@ -110,6 +116,10 @@
                                 </div>
                             </div>
 
+                        </div>
+                        {{-- BACKUP --}}
+                        <div class="tab-pane fade" id="backup" role="tabpanel" aria-labelledby="backup-tab">
+                            Backup
                         </div>
                     </div>
             </div>

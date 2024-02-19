@@ -18,6 +18,7 @@
         "laravellegends/pt-br-validator": "^10.0",
         "livewire/livewire": "^2.12",
         "php-flasher/flasher-laravel": "^1.15",
+        "spatie/laravel-backup": "^8.6",
         "spatie/laravel-html": "^3.2",
         "spatie/laravel-permission": "^6.00",
         "tightenco/ziggy": "^1.6"
