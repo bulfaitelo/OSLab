@@ -26,7 +26,7 @@
           <div class="card-body">
                 <div class="form-group">
                     <label for="name">Fabricante</label>
-                    {!! html()->text('name', $fabricante->name)->class('form-control')->placeholder('Nome do serviço')->required()->disabled() !!}
+                    {!! html()->text('name', $fabricante->name)->class('form-control')->placeholder('Fabricante')->required()->disabled() !!}
                 </div>
 
                 <div class="form-group">

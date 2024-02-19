@@ -28,7 +28,7 @@
             {!! html()->form('post', route('configuracao.wiki.fabricante.store'))->open() !!}
                 <div class="form-group">
                     <label for="name">Fabricante</label>
-                    {!! html()->text('name')->class('form-control')->placeholder('Nome do serviço')->required() !!}
+                    {!! html()->text('name')->class('form-control')->placeholder('Fabricante')->required() !!}
                 </div>
 
                 <div class="form-group">
