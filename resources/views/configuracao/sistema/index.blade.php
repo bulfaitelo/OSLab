@@ -26,12 +26,12 @@
                             <span class="d-none d-sm-inline">OS</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" id="os-tab" data-toggle="pill" href="#backup" role="tab" aria-controls="os" aria-selected="false">
                             <i class="fa-solid fa-house-lock"></i>
                             <span class="d-none d-sm-inline">Backup</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             {!! html()->form('post', route('configuracao.sistema.store'))->open() !!}
@@ -117,10 +117,10 @@
                             </div>
 
                         </div>
-                        {{-- BACKUP --}}
+                        {{-- BACKUP
                         <div class="tab-pane fade" id="backup" role="tabpanel" aria-labelledby="backup-tab">
                             Backup
-                        </div>
+                        </div> --}}
                     </div>
             </div>
             <div class="card-footer">
