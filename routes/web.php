@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Checklist\ChecklistController;
 use App\Http\Controllers\Cliente\ClienteController;
+use App\Http\Controllers\Configuracao\Backup\BackupController;
 use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
@@ -136,6 +137,7 @@ Route::group(['middleware'=> 'auth'], function() {
         ]);
 
         Route::resource('emitente', EmitenteController::class);
+        Route::resource('backup', BackupController::class);
 
 
     });

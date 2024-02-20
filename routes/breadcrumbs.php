@@ -642,3 +642,12 @@ Breadcrumbs::for('teste.index', function (BreadcrumbTrail $trail) {
         $trail->push('Editar Emitente', route('configuracao.emitente.edit', $item));
     });
 // Fim Configuração Emitente
+
+// Configuração Backup
+    // Backup
+    Breadcrumbs::for('configuracao.backup.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Configurações');
+        $trail->push('Backup', route('configuracao.backup.index'));
+    });
+// Fim Configuração Backup
