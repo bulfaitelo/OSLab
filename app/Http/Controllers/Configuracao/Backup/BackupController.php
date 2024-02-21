@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Configuracao\Backup;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
+use Spatie\Backup\Helpers\Format;
+use Spatie\Backup\BackupDestination\Backup;
 
 class BackupController extends Controller
 {
@@ -13,9 +15,9 @@ class BackupController extends Controller
      */
     public function index()
     {
-        
+
         return view('configuracao.backup.index', [
-            'backup' => $this->getBackupLogInfo()
+            'backupInfo' => $this->getBackupInfo()
         ]);
     }
 
@@ -70,10 +72,10 @@ class BackupController extends Controller
 
     /**
      * Retona a lista de backup
-     * 
+     *
      */
-    private function getBackupLogInfo() : array {
-        
+    private function getBackupInfo() : array {
+
         $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
         $info = [];
         foreach ($statuses as $status) {
@@ -85,19 +87,31 @@ class BackupController extends Controller
                 'storageType' => $destination->filesystemType(),
                 'reachable' => $destination->isReachable(),
                 'healthy' => $status->isHealthy(),
+                'newest' => $this->getFormattedBackupDate($destination->newestBackup()),
                 'count' => $backups->count(),
-                'storageSpace' => $destination->usedStorage(),
+                'storageSpace' => Format::humanReadableSize($destination->usedStorage()),
                 'backups' => [],
             ];
             foreach ($backups as $backup) {
                 $destInfo['backups'][] = [
-                    'path' => $backup->path(),
+                    'name' => explode($destination->backupName().'/', $backup->path())[1],
+                    // 'path' => storage_path($backup->path()),
                     'date' => $backup->date(),
-                    'size' => $backup->sizeInBytes(),
+                    'size' => Format::humanReadableSize($backup->sizeInBytes()),
                 ];
             }
             $info[] = $destInfo;
         }
         return $info;
     }
+
+    protected function getFormattedBackupDate(Backup $backup = null)
+    {
+        return is_null($backup)
+            ? 'No backups present'
+            : Format::ageInDays($backup->date());
+    }
+
+    // $path = storage_path('app/OsLab/OsLab_2023-02-19-14-36-53.zip');
+    //         return response()->download($path);
 }

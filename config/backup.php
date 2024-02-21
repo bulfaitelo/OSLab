@@ -28,6 +28,7 @@ return [
                  */
                 'exclude' => [
                     base_path('storage/app/').env('APP_NAME'),
+                    base_path('storage/framework'),
                     base_path('vendor'),
                     base_path('node_modules'),
                 ],
@@ -148,6 +149,7 @@ return [
              */
             'disks' => [
                 'local',
+                'public'
             ],
         ],
 
@@ -254,6 +256,15 @@ return [
         [
             'name' => env('APP_NAME', 'laravel-backup'),
             'disks' => ['local'],
+            'health_checks' => [
+                \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
+                \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => 5000,
+            ],
+        ],
+
+        [
+            'name' => env('APP_NAME', 'laravel-backup'),
+            'disks' => ['public'],
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => 5000,

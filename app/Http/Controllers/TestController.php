@@ -22,8 +22,10 @@ class TestController extends Controller
         // $emitente = new \App\Models\Configuracao\Sistema\Emitente();
         // dd($emitente->getHtmlEmitente(1));
 
-        $teste = new GetBackupDataInfo;
-        dd($teste->teste());
+
+            $path = storage_path('app/OsLab/OsLab_2023-02-19-14-36-53.zip');
+            return response()->download($path);
+            // dd($path);
 
 
 
