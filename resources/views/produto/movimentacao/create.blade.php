@@ -36,7 +36,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Ultima Atualização</label>
-                        {{ $produto->updated_at->format('d/m/Y h:m') }}
+                        {{ $produto->updated_at->format('d/m/Y h:i') }}
                     </div>
                 </div>
             </div>
