@@ -33,7 +33,7 @@
                     @include('adminlte::partials.form-alert')
                     <div class="tab-content">
                         {{-- LIST --}}
-                        <div class="tab-pane fade  active show" id="list" role="tabpanel" aria-labelledby="list-tab">
+                        <div class="tab-pane fade " id="list" role="tabpanel" aria-labelledby="list-tab">
                             {{-- @dump($backupInfo) --}}
                             @forelse ($backupInfo as $disco)
                             <div class="card card-primary card-outline card-outline-tabs">
@@ -127,14 +127,19 @@
 
                         </div>
                         {{-- CONFIG --}}
-                        <div class="tab-pane fade " id="configuracao" role="tabpanel" aria-labelledby="os-tab">
-                            <div class="card-footer">
-                                @can('config_backup_edit')
-                                    <button type="submit" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-save"></i>
-                                        Salvar
-                                    </button>
-                                @endcan
+                        <div class="tab-pane fade active show" id="configuracao" role="tabpanel" aria-labelledby="os-tab">
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-body">
+
+                                </div>
+                                <div class="card-footer">
+                                    @can('config_backup_edit')
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-save"></i>
+                                            Salvar
+                                        </button>
+                                    @endcan
+                                </div>
                             </div>
                         </div>
                     </div>
