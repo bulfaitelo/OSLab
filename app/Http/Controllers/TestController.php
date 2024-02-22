@@ -7,6 +7,7 @@ use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use Artisan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 use Spatie\Backup\BackupDestination\BackupDestinationFactory;
 
@@ -23,7 +24,10 @@ class TestController extends Controller
         // dd($emitente->getHtmlEmitente(1));
 
 
-            $path = storage_path('app/OsLab/OsLab_2023-02-19-14-36-53.zip');
+            // dd(config('filesystems.disks.local.root').'/OsLab/OsLab_2023-02-19-14-36-53.zip');
+            $path = config('filesystems.disks.local.root').'/OsLab/OsLab_2023-02-19-14-36-53.zip';
+            dd(file_exists($path));
+            //  $path = storage_path('app/OsLab/OsLab_2023-02-19-14-36-53.zip');
             return response()->download($path);
             // dd($path);
 

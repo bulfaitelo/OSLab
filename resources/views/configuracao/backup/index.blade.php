@@ -29,13 +29,12 @@
 
                 </ul>
             </div>
-            {!! html()->form('post', route('configuracao.sistema.store'))->open() !!}
             <div class="card-body">
                     @include('adminlte::partials.form-alert')
                     <div class="tab-content">
                         {{-- LIST --}}
                         <div class="tab-pane fade  active show" id="list" role="tabpanel" aria-labelledby="list-tab">
-                            @dump($backupInfo)
+                            {{-- @dump($backupInfo) --}}
                             @forelse ($backupInfo as $disco)
                             <div class="card card-primary card-outline card-outline-tabs">
                                 <table class="table table-bordered table-sm">
@@ -75,8 +74,6 @@
                                         <td>{{ $disco['storageSpace'] }}</td>
                                     </tr>
                                 </table>
-
-
                                 @if (count($disco['backups']))
                                 <table class="table table-sm">
                                     <thead>
@@ -90,20 +87,35 @@
                                     <tbody>
                                             @foreach ($disco['backups'] as $backup)
                                             <tr>
-                                                {{-- @dump(config('filesysten')) --}}
                                                 <td>{{ $backup['name'] }}</td>
                                                 <td>{{ $backup['date']->format('d/m/Y h:i:s') }}</td>
                                                 <td>{{ $backup['size'] }}</td>
-                                                <td>botões</td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm ">
+                                                    @can('config_backup_download')
+                                                        @if ($backup['path'])
+                                                        <a onclick="document.getElementById('{{ $backup['name'] }}').submit();"  title="Download" class="btn btn-left btn-primary"><i class="fa-solid fa-download"></i></a>
+                                                        {!! html()->form('post', route('configuracao.backup.download'))->attribute('id', $backup['name'])->open() !!}
+                                                            {!! html()->hidden('path', $backup['path']) !!}
+                                                        {!! html()->form()->close() !!}
+                                                        @else
+                                                            <a href="" title="Download" class="btn btn-left btn-primary disabled"><i class="fa-solid fa-download"></i></a>
+                                                        @endif
+                                                    @endcan
+                                                    @can('config_backup_destroy')
+                                                        @if ($backup['path'])
+                                                            <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$backup['name']}}" data-path="{{$backup['path']}}" data-url="{{route('configuracao.backup.delete')}}" data-target="#modal-excluir-download"><i class="fas fa-trash"></i></button>
+                                                        @else
+                                                            <button type="button" class="btn btn-block btn-danger disabled"><i class="fas fa-trash"></i></button>
+                                                        @endif
+                                                    @endcan
+                                                    </div>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                 </table>
                                 @endif
-
-
-
-
                             </div>
                             @empty
                                 <h5>Backup não configurado.</h5>
@@ -116,21 +128,52 @@
                         </div>
                         {{-- CONFIG --}}
                         <div class="tab-pane fade " id="configuracao" role="tabpanel" aria-labelledby="os-tab">
-                            Config
+                            <div class="card-footer">
+                                @can('config_backup_edit')
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-save"></i>
+                                        Salvar
+                                    </button>
+                                @endcan
+                            </div>
                         </div>
                     </div>
             </div>
-            <div class="card-footer">
-                @can('config_sistema_edit')
-                    <button type="submit" class="btn btn-sm btn-primary">
-                        <i class="fas fa-save"></i>
-                        Salvar
-                    </button>
-                @endcan
-            </div>
-            {!! html()->form()->close() !!}
+
         </div>
     </div>
+    {{-- Modal Excluir --}}
+    @can('config_backup_destroy')
+        <div class="modal fade"  id="modal-excluir-download" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title">Realmente deseja Excluir?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <p><b>Nome:</b> <span></span></p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa-solid fa-ban"></i>
+                        Fechar
+                    </button>
+                    {!! html()->form('post', route('configuracao.backup.delete'))->open() !!}
+                        {!! html()->hidden('path') !!}
+                        <button type="submit" class="btn btn-danger delete-permission">
+                            <i class="fa-solid fa-trash"></i>
+                            Excluir
+                        </button>
+                    {!! html()->form()->close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
+    {{-- // Modal Excluir --}}
 </div>
 @stop
 
@@ -139,7 +182,16 @@
 @stop
 
 @section('js')
-
+<script>
+    $('#modal-excluir-download').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var name = button.data('name') // Extract info from data-* attributes
+        var path = button.data('path') // Extract info from data-* attributes
+        var modal = $(this)
+        modal.find('.modal-body span').text(name)
+        modal.find('#path').val(path)
+    })
+</script>
 @stop
 
 @section('footer')

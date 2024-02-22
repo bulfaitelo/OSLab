@@ -10,6 +10,18 @@ use Spatie\Backup\BackupDestination\Backup;
 
 class BackupController extends Controller
 {
+
+    function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:config_backup', ['only'=> 'index']);
+        $this->middleware('permission:config_backup_edit', ['only'=> 'store']);
+        $this->middleware('permission:config_backup_download', ['only'=> ['download', ]]);
+        $this->middleware('permission:config_backup_destroy', ['only'=> ['destroy', ]]);
+
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -21,13 +33,6 @@ class BackupController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,36 +43,37 @@ class BackupController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Baixa o arquivo.
      */
-    public function show(string $id)
+    public function download(Request $request)
     {
-        //
+        if(file_exists($request->path)){
+            return response()->download($request->path);
+        }
+        return false;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Baixa o arquivo.
      */
-    public function edit(string $id)
+    public function destroy(Request $request)
     {
-        //
+
+        if(file_exists($request->path)){
+            try {
+                unlink($request->path);
+                return redirect()->route('configuracao.backup.index')
+                ->with('success', 'Backup Excluído com sucesso.');
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        }
+        return redirect()->route('configuracao.backup.index')
+            ->with('danger', 'Houve um erro na exclusão od arquivo');
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 
 
     /**
@@ -95,7 +101,7 @@ class BackupController extends Controller
             foreach ($backups as $backup) {
                 $destInfo['backups'][] = [
                     'name' => explode($destination->backupName().'/', $backup->path())[1],
-                    // 'path' => storage_path($backup->path()),
+                    'path' => $this->getFilePAth($destination->diskName(), $backup->path()),
                     'date' => $backup->date(),
                     'size' => Format::humanReadableSize($backup->sizeInBytes()),
                 ];
@@ -112,6 +118,21 @@ class BackupController extends Controller
             : Format::ageInDays($backup->date());
     }
 
-    // $path = storage_path('app/OsLab/OsLab_2023-02-19-14-36-53.zip');
-    //         return response()->download($path);
+
+    /**
+     * Retorna o caminho no backup com base no disco e arquivo.
+     * @param string $disk Disco onde está o arquivo
+     * @param string $fileName nome do arquivo
+     * @return string|false retorna o caminho completo ou false caso nao exista
+
+    */
+    protected function getFilePAth($disk, $fileName) : string|false {
+
+        $path = 'filesystems.disks.'.$disk.'.root';
+        $filePath = config($path).'/'.$fileName;
+        if(file_exists($filePath)){
+            return $filePath;
+        }
+        return false;
+    }
 }

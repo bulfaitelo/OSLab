@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Spatie\Permission\Models\Permission;
 class DefaultsConfigPermissionsBackup extends Seeder
 {
  /**
@@ -18,31 +18,25 @@ class DefaultsConfigPermissionsBackup extends Seeder
                 'description' => 'Acesso ao módulo de Backups',
                 'name' => 'config_backup',
                 'guard_name' => 'web',
-                'group_id' => 10,
+                'group_id' => 12,
             ],
             [
-                'description' => 'Cadastrar Checklist',
-                'name' => 'config_backup_create',
+                'description' => 'Pode baixar o backup?',
+                'name' => 'config_backup_download',
                 'guard_name' => 'web',
-                'group_id' => 10,
+                'group_id' => 12,
             ],
             [
-                'description' => 'Editar Checklist',
-                'name' => 'config_backup_edit',
-                'guard_name' => 'web',
-                'group_id' => 10,
-            ],
-            [
-                'description' => 'Visualizar Checklist',
-                'name' => 'config_backup_show',
-                'guard_name' => 'web',
-                'group_id' => 10,
-            ],
-            [
-                'description' => 'Excluir Checklist',
+                'description' => 'Excluir Backup Checklist',
                 'name' => 'config_backup_destroy',
                 'guard_name' => 'web',
-                'group_id' => 10,
+                'group_id' => 12,
+            ],
+            [
+                'description' => 'Editar Configurações do backup',
+                'name' => 'config_backup_edit',
+                'guard_name' => 'web',
+                'group_id' => 12,
             ],
         ];
 

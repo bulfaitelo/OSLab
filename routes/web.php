@@ -135,10 +135,14 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::resource('/sistema', SistemaConfigController::class)->only([
             'index', 'store',
         ]);
-
+        // Emitente
         Route::resource('emitente', EmitenteController::class);
-        Route::resource('backup', BackupController::class);
-
+        // Backup
+        // Route::resource('backup', BackupController::class);
+        Route::get('backup', [BackupController::class, 'index'])->name('backup.index');
+        Route::post('backup', [BackupController::class, 'store'])->name('backup.store');
+        Route::post('backup/download', [BackupController::class, 'download'])->name('backup.download');
+        Route::post('backup/destroy', [BackupController::class, 'destroy'])->name('backup.delete');
 
     });
 });

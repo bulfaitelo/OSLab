@@ -532,7 +532,7 @@ return [
                     'icon'    => 'fa-solid fa-server',
                     'route'   => 'configuracao.backup.index',
                     'active'  => ['configuracoes/backup*'],
-                    'can'     => 'config_emitente',
+                    'can'     => 'config_backup',
                 ],
             ],
 
