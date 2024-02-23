@@ -26,7 +26,6 @@
                             <span class="d-none d-sm-inline">Configurações</span>
                         </a>
                     </li>
-
                 </ul>
             </div>
             <div class="card-body">
@@ -130,7 +129,37 @@
                         <div class="tab-pane fade active show" id="configuracao" role="tabpanel" aria-labelledby="os-tab">
                             <div class="card card-primary card-outline card-outline-tabs">
                                 <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="local">Ativar Backup Local</label>
+                                            <div class="custom-control custom-switch custom-switch-md">
+                                                {!! html()->checkbox('local', true)->class('custom-control-input') !!}
+                                                <label class="custom-control-label" for="local"></label>
 
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="drive">Ativar Backup Google Drive</label>
+                                            <div class="custom-control custom-switch custom-switch-md">
+                                                {!! html()->checkbox('drive', true)->class('custom-control-input') !!}
+                                                <label class="custom-control-label" for="drive"></label>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="sistema[default_os_create_status]"> Recorrência de Backup </label>
+                                                {!! html()->select('sistema[default_os_create_status]', $recorrenciaBackup, getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
+                                                <i>Define a recorrência do backup. </i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <h4>Dados de configuração do Google Drive</h4>
+                                        @dump(config('backup'))
+                                        @dump(getConfig('default_os_create_status'))
+
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     @can('config_backup_edit')

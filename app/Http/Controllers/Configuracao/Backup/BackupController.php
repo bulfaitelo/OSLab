@@ -27,9 +27,16 @@ class BackupController extends Controller
      */
     public function index()
     {
+        $recorrenciaBackup = [
+            'd' => 'Diario',
+            'w' => 'Semanal',
+            'm' => 'Mensal',
+            'y' => 'Anual'
+        ];
 
         return view('configuracao.backup.index', [
-            'backupInfo' => $this->getBackupInfo()
+            'backupInfo' => $this->getBackupInfo(),
+            'recorrenciaBackup' => $recorrenciaBackup,
         ]);
     }
 
