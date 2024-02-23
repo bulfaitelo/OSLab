@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "barryvdh/laravel-dompdf": "^2.0",
         "diglactic/laravel-breadcrumbs": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
@@ -21,7 +20,8 @@
         "spatie/laravel-backup": "^8.6",
         "spatie/laravel-html": "^3.2",
         "spatie/laravel-permission": "^6.00",
-        "tightenco/ziggy": "^1.6"
+        "tightenco/ziggy": "^1.6",
+        "yaza/laravel-google-drive-storage": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
