@@ -30,7 +30,10 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.default_os_faturar_pagto_quitado' => 'nullable|exists:os_status,id',
             'sistema.os_informacao' => 'nullable|string|max:1000',
             'sistema.os_listagem_padrao' => 'nullable|exists:os_status,id',
-
+            'sistema.backup_local_store' => 'boolean',
+            'sistema.backup_gdrive_store' => 'boolean',
+            'sistema.backup_recorrencia' => 'required|in:d,w,m,y',      
+            'sistema.backup_horario' => 'required|date_format:H:i',
         ];
     }
 
@@ -40,6 +43,8 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.default_os_create_status' => 'Por favor selecione uma Status Padrão OS',
             'sistema.os_link_time_limit' => 'Por favor defina o Tempo da validade do Link',
             'sistema.default_os_faturar_produto_despesa' => 'Por favor defina o Tipo de despesa Padrão',
+            'sistema.backup_horario' => 'Por favor defina uma hora valida para realização do backup',
+            'sistema.backup_recorrencia' => 'Por favor selecione um período válido para realização do backup.',
         ];
     }
 

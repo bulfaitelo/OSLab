@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\DB;
 class SistemaConfigController extends Controller
 {
 
-
+    private $recorrenciaBackup = [
+        'd' => 'Diario',
+        'w' => 'Semanal',
+        'm' => 'Mensal',
+        'y' => 'Anual'
+    ];
     function __construct()
     {
         // ACL DE PERMISSÕES
@@ -26,7 +31,10 @@ class SistemaConfigController extends Controller
     public function index()
     {
         $configuracoes = SistemaConfig::get();
-        return view('configuracao.sistema.index', compact('configuracoes'));
+        return view('configuracao.sistema.index', [
+            'configuracoes' => $configuracoes,
+            'recorrenciaBackup' => $this->recorrenciaBackup,
+        ]);
     }
 
     // /**

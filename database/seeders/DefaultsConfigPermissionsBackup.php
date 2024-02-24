@@ -31,13 +31,7 @@ class DefaultsConfigPermissionsBackup extends Seeder
                 'name' => 'config_backup_destroy',
                 'guard_name' => 'web',
                 'group_id' => 12,
-            ],
-            [
-                'description' => 'Editar Configurações do backup',
-                'name' => 'config_backup_edit',
-                'guard_name' => 'web',
-                'group_id' => 12,
-            ],
+            ],            
         ];
 
 
