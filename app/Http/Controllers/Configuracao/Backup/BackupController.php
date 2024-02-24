@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Configuracao\Backup;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Configuracao\Backup\StoreBackup;
 use Illuminate\Http\Request;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 use Spatie\Backup\Helpers\Format;
@@ -11,11 +12,16 @@ use Spatie\Backup\BackupDestination\Backup;
 class BackupController extends Controller
 {
 
+    private $recorrenciaBackup = [
+        'd' => 'Diario',
+        'w' => 'Semanal',
+        'm' => 'Mensal',
+        'y' => 'Anual'
+    ];
     function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_backup', ['only'=> 'index']);
-        $this->middleware('permission:config_backup_edit', ['only'=> 'store']);
+        $this->middleware('permission:config_backup', ['only'=> 'index']);        
         $this->middleware('permission:config_backup_download', ['only'=> ['download', ]]);
         $this->middleware('permission:config_backup_destroy', ['only'=> ['destroy', ]]);
 
@@ -26,28 +32,13 @@ class BackupController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $recorrenciaBackup = [
-            'd' => 'Diario',
-            'w' => 'Semanal',
-            'm' => 'Mensal',
-            'y' => 'Anual'
-        ];
+    {        
 
         return view('configuracao.backup.index', [
-            'backupInfo' => $this->getBackupInfo(),
-            'recorrenciaBackup' => $recorrenciaBackup,
+            'backupInfo' => $this->getBackupInfo(),            
         ]);
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Baixa o arquivo.
