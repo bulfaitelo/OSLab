@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 use Spatie\Backup\BackupDestination\BackupDestinationFactory;
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
 
 
 
@@ -25,10 +27,12 @@ class TestController extends Controller
 
 
             // dd(config('filesystems.disks.local.root').'/OsLab/OsLab_2023-02-19-14-36-53.zip');
-            $path = config('filesystems.disks.local.root').'/OsLab/OsLab_2023-02-19-14-36-53.zip';
-            dd(file_exists($path));
-            //  $path = storage_path('app/OsLab/OsLab_2023-02-19-14-36-53.zip');
-            return response()->download($path);
+            // $path = config('filesystems.disks.local.root').'/OsLab/OsLab_2024-02-19-18-37-54.zip';
+            // $teste = Gdrive::put('filename.zip', $path);
+            
+        dd(collect(Storage::disk('google')->listContents('')));
+        $teste = Gdrive::all('/');
+        dd($teste);
             // dd($path);
 
 

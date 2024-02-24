@@ -81,7 +81,7 @@
                                             @foreach ($disco['backups'] as $backup)
                                             <tr>
                                                 <td>{{ $backup['name'] }}</td>
-                                                <td>{{ $backup['date']->format('d/m/Y h:i:s') }}</td>
+                                                <td>{{ $backup['date']->format('d/m/Y H:i:s') }}</td>
                                                 <td>{{ $backup['size'] }}</td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm ">

@@ -32,8 +32,9 @@ class BackupController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {        
+    {      
 
+        
         return view('configuracao.backup.index', [
             'backupInfo' => $this->getBackupInfo(),            
         ]);
@@ -80,7 +81,7 @@ class BackupController extends Controller
      */
     private function getBackupInfo() : array {
 
-        $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
+        $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));        
         $info = [];
         foreach ($statuses as $status) {
             $destination = $status->backupDestination();
@@ -95,7 +96,7 @@ class BackupController extends Controller
                 'count' => $backups->count(),
                 'storageSpace' => Format::humanReadableSize($destination->usedStorage()),
                 'backups' => [],
-            ];
+            ];            
             foreach ($backups as $backup) {
                 $destInfo['backups'][] = [
                     'name' => explode($destination->backupName().'/', $backup->path())[1],

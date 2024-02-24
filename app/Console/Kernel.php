@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('app:reset-informacao-links')->everyMinute();
+        $schedule->command('backup:schedule')->dailyAt(getConfig('backup_horario'));
     }
 
     /**
