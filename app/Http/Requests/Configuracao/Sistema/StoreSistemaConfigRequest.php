@@ -32,7 +32,7 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.os_listagem_padrao' => 'nullable|exists:os_status,id',
             'sistema.backup_local_store' => 'boolean',
             'sistema.backup_gdrive_store' => 'boolean',
-            'sistema.backup_recorrencia' => 'required|in:d,w,m,y',      
+            // 'sistema.backup_recorrencia' => 'required|in:d,w,m,y',      
             'sistema.backup_horario' => 'required|date_format:H:i',
         ];
     }

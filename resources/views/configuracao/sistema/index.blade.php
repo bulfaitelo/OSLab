@@ -136,13 +136,13 @@
 
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                {{-- <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="sistema[backup_recorrencia]"> Recorrência de Backup </label>
                                         {!! html()->select('sistema[backup_recorrencia]', $recorrenciaBackup, getConfig('backup_recorrencia'))->class('form-control') !!}
                                         <i>Define a recorrência do backup. </i>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-3">
                                     <div class="form-group">                                        
                                         <label for="sistema[backup_horario]"> Horário execução Backup </label>
