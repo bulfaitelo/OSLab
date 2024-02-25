@@ -16,11 +16,11 @@
                         <!-- /.card-header -->
                         <!-- form start -->
             
-                        <div class="card-body">
+                        <div class="card-body ">
                             @include('adminlte::partials.form-alert')
                             @forelse ($backupInfo as $disco)
-                            <div class="card card-primary card-outline card-outline-tabs">
-                                <table class="table table-bordered table-sm">
+                            <div class="card card-primary table-responsive card-outline card-outline-tabs">
+                                <table class="table table-bordered table-sm text-nowrap">
                                     <thead>
                                         <tr>
                                             <th>Nome</th>
