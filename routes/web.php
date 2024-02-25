@@ -139,8 +139,7 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::resource('emitente', EmitenteController::class);
         // Backup
         // Route::resource('backup', BackupController::class);
-        Route::get('backup', [BackupController::class, 'index'])->name('backup.index');
-        Route::post('backup', [BackupController::class, 'store'])->name('backup.store');
+        Route::get('backup', [BackupController::class, 'index'])->name('backup.index');                      
         Route::post('backup/download', [BackupController::class, 'download'])->name('backup.download');
         Route::post('backup/destroy', [BackupController::class, 'destroy'])->name('backup.delete');
 
