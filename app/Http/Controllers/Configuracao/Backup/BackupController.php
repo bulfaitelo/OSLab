@@ -3,11 +3,7 @@
 namespace App\Http\Controllers\Configuracao\Backup;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Configuracao\Backup\StoreBackup;
 use Illuminate\Http\Request;
-use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
-use Spatie\Backup\Helpers\Format;
-use Spatie\Backup\BackupDestination\Backup;
 
 class BackupController extends Controller
 {
@@ -35,8 +31,7 @@ class BackupController extends Controller
     {      
 
         
-        return view('configuracao.backup.index', [
-            'backupInfo' => $this->getBackupInfo(),            
+        return view('configuracao.backup.index', [                 
         ]);
     }
 
@@ -74,64 +69,4 @@ class BackupController extends Controller
 
 
 
-
-    /**
-     * Retona a lista de backup
-     *
-     */
-    private function getBackupInfo() : array {
-
-        $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));        
-        $info = [];
-        foreach ($statuses as $status) {
-            $destination = $status->backupDestination();
-            $backups = $destination->backups();
-            $destInfo = [
-                'name' => $destination->backupName(),
-                'disk' => $destination->diskName(),
-                'storageType' => $destination->filesystemType(),
-                'reachable' => $destination->isReachable(),
-                'healthy' => $status->isHealthy(),
-                'newest' => $this->getFormattedBackupDate($destination->newestBackup()),
-                'count' => $backups->count(),
-                'storageSpace' => Format::humanReadableSize($destination->usedStorage()),
-                'backups' => [],
-            ];            
-            foreach ($backups as $backup) {
-                $destInfo['backups'][] = [
-                    'name' => explode($destination->backupName().'/', $backup->path())[1],
-                    'path' => $this->getFilePAth($destination->diskName(), $backup->path()),
-                    'date' => $backup->date(),
-                    'size' => Format::humanReadableSize($backup->sizeInBytes()),
-                ];
-            }
-            $info[] = $destInfo;
-        }
-        return $info;
-    }
-
-    protected function getFormattedBackupDate(Backup $backup = null)
-    {
-        return is_null($backup)
-            ? 'No backups present'
-            : Format::ageInDays($backup->date());
-    }
-
-
-    /**
-     * Retorna o caminho no backup com base no disco e arquivo.
-     * @param string $disk Disco onde está o arquivo
-     * @param string $fileName nome do arquivo
-     * @return string|false retorna o caminho completo ou false caso nao exista
-
-    */
-    protected function getFilePAth($disk, $fileName) : string|false {
-
-        $path = 'filesystems.disks.'.$disk.'.root';
-        $filePath = config($path).'/'.$fileName;
-        if(file_exists($filePath)){
-            return $filePath;
-        }
-        return false;
-    }
 }
