@@ -20,61 +20,61 @@
                     </button>
               </a>
             </div>
-          <!-- /.card-header -->
-          <!-- form start -->
+            <!-- /.card-header -->
+            <!-- form start -->
 
-          <div class="card-body">
-            @include('adminlte::partials.form-alert')
-            {!! html()->form('post', route('wiki.store'))->acceptsFiles()->open() !!}
-            <div class="row">
+            <div class="card-body">
+                @include('adminlte::partials.form-alert')
+                {!! html()->form('post', route('wiki.store'))->acceptsFiles()->open() !!}
+                <div class="row">
 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="fabricant_id">Fabricante</label>
-                        <div class="input-group mb-3">
-                            {!! html()->select('fabricante_id', \App\Models\Configuracao\Wiki\Fabricante::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
-                            @can('config_wiki_fabricante_create')
-                                <span class="input-group-append">
-                                    <a href="{{ route('configuracao.wiki.fabricante.create') }}" target="_blank" >
-                                        <button type="button" class="btn btn-primary">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </button>
-                                    </a>
-                                </span>
-                            @endcan
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="fabricant_id">Fabricante</label>
+                            <div class="input-group mb-3">
+                                {!! html()->select('fabricante_id', \App\Models\Configuracao\Wiki\Fabricante::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                                @can('config_wiki_fabricante_create')
+                                    <span class="input-group-append">
+                                        <a href="{{ route('configuracao.wiki.fabricante.create') }}" target="_blank" >
+                                            <button type="button" class="btn btn-primary">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </a>
+                                    </span>
+                                @endcan
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            {!! html()->text('name')->class('form-control')->placeholder('Nome do dispositivo')->required() !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="modelo">Modelo</label>
+                            {!! html()->text('modelo')->class('form-control')->placeholder('Modelo do Dispositivo')->required() !!}
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name">Nome</label>
-                        {!! html()->text('name')->class('form-control')->placeholder('Nome do dispositivo')->required() !!}
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="modelo">Modelo</label>
-                        {!! html()->text('modelo')->class('form-control')->placeholder('Modelo do Dispositivo')->required() !!}
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="categoria_id">Categoria</label>
+                            {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="categoria_id">Categoria</label>
-                        {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
-                    </div>
-                </div>
+            {{-- Minimal with icon only --}}
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="fas fa-save"></i>
+                    Salvar
+                </button>
             </div>
-          </div>
-          {{-- Minimal with icon only --}}
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary">
-                <i class="fas fa-save"></i>
-                Salvar
-            </button>
-          </div>
         </div>
       <!-- /.card -->
       {!! html()->form()->close() !!}

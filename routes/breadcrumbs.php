@@ -1,4 +1,3 @@
-
 <?php // routes/breadcrumbs.php
 
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
@@ -651,3 +650,14 @@ Breadcrumbs::for('teste.index', function (BreadcrumbTrail $trail) {
         $trail->push('Backup', route('configuracao.backup.index'));
     });
 // Fim Configuração Backup
+
+
+// Relatório
+    // Financeiro Balancete
+    Breadcrumbs::for('relatorio.financeiro.balancete.index', function (BreadcrumbTrail $trail) {
+        $trail->parent('home');
+        $trail->push('Relatórios');
+        $trail->push('Backup', route('relatorio.financeiro.balancete.index'));
+    });
+// Felatório
+

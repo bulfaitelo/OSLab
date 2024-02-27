@@ -391,6 +391,31 @@ return [
             'can'     => 'wiki',
         ],
         [
+            'text'    => 'Relatórios',
+            'icon'    => 'fa-regular fa-file-lines',
+            'can'     => [
+                'relatorio_financeiro_balancete'
+            ],
+            'submenu' => [
+                [
+                    'text'    => 'Financeiro',
+                    'icon'    => 'fa-solid fa-chart-line',
+                    'can'     => [
+                        'relatorio_financeiro_balancete'
+                    ],
+                    'submenu'=> [
+                        [
+                            'text'    => 'Balancete',
+                            'icon'    => 'fas fa-balance-scale',
+                            'route'   => 'relatorio.financeiro.balancete.index',
+                            'active'  => ['relatorio/financeiro/balancete*'],
+                            'can'     => 'relatorio_financeiro_balancete',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        [
             // 'topnav' => true,
             'text'    => '',
             'icon'    => 'fas fa-cogs',
