@@ -17,7 +17,7 @@ class BackupController extends Controller
     function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_backup', ['only'=> 'index']);        
+        $this->middleware('permission:config_backup', ['only'=> 'index']);
         $this->middleware('permission:config_backup_download', ['only'=> ['download', ]]);
         $this->middleware('permission:config_backup_destroy', ['only'=> ['destroy', ]]);
 
@@ -28,10 +28,9 @@ class BackupController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {      
+    {
 
-        
-        return view('configuracao.backup.index', [                 
+        return view('configuracao.backup.index', [
         ]);
     }
 

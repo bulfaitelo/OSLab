@@ -100,69 +100,70 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/checklist', ChecklistController::class);
     // Route::get('/wiki/link/{wiki}', [WikiController::class, 'linkGet'])->name('wiki.link.get');
 
-    // Agrupamento de rotas de Configuração
+
+    // Agrupamento de rotas de Relatório
     Route::name('relatorio.')->prefix('relatorio')->group( function (){
         // Financeiro
         Route::name('financeiro.')->prefix('financeiro')->group( function (){
-            Route::resource('/balancete', BalanceteController::class);
+            Route::get('/balancete', [BalanceteController::class, 'index'])->name('balancete.index');
         });
 
-        // OS
-        Route::name('os.')->prefix('os')->group( function (){
+        // // OS
+        // Route::name('os.')->prefix('os')->group( function (){
 
-        });
-        Route::name('wiki.')->prefix('wiki')->group( function (){
+        // });
+        // Route::name('wiki.')->prefix('wiki')->group( function (){
 
-        });
+        // });
 
 
     });
 
-        // Agrupamento de rotas de Relatório
-        Route::name('configuracao.')->prefix('configuracoes')->group( function (){
-            Route::resource('/users', UserController::class);
-            Route::resource('/roles', RoleController::class);
-            Route::resource('/permissions', PermissionsController::class);
-            Route::get('/roles/assign/{role}', [RoleController::class, 'assign'])->name('roles.assign');
-            Route::put('/roles/assign/{role}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
-            Route::get('/users/permissions/{user}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
-            Route::put('/users/permissions/{user}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
-            // Configurações de usuário
-            Route::name('user.')->prefix('user')->group( function (){
-                Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
-                Route::get('/perfil/edit', [PerfilController::class, 'edit'])->name('perfil.edit');
-                Route::put('/perfil/update', [PerfilController::class, 'update'])->name('perfil.update');
-                Route::resource('/setor', SetorController::class);
-            });
-            // Financeiro
-            Route::name('financeiro.')->prefix('financeiro')->group( function (){
-                Route::resource('/centro_custo', CentroCustoController::class);
-                Route::resource('/forma_pagamento', FormaPagamentoController::class);
-            });
-            // OS
-            Route::name('os.')->prefix('os')->group( function (){
-                Route::resource('/garantia', GarantiaController::class)
-                    ->parameters(['garantia' => 'garantia']);
-                Route::resource('/categoria', OsCategoriaController::class)
-                    ->parameters(['categoria' => 'categoria']);
-                Route::resource('/status', OsStatusController::class);
-            });
-            Route::name('wiki.')->prefix('wiki')->group( function (){
-                Route::resource('/fabricante', FabricanteController::class);
-                Route::resource('/modelo', ModeloController::class);
-            });
-            Route::resource('/sistema', SistemaConfigController::class)->only([
-                'index', 'store',
-            ]);
-            // Emitente
-            Route::resource('emitente', EmitenteController::class);
-            // Backup
-            // Route::resource('backup', BackupController::class);
-            Route::get('backup', [BackupController::class, 'index'])->name('backup.index');
-            Route::post('backup/download', [BackupController::class, 'download'])->name('backup.download');
-            Route::post('backup/destroy', [BackupController::class, 'destroy'])->name('backup.delete');
-
+    // Agrupamento de rotas de Configuração
+    Route::name('configuracao.')->prefix('configuracoes')->group( function (){
+        Route::resource('/users', UserController::class);
+        Route::resource('/roles', RoleController::class);
+        Route::resource('/permissions', PermissionsController::class);
+        Route::get('/roles/assign/{role}', [RoleController::class, 'assign'])->name('roles.assign');
+        Route::put('/roles/assign/{role}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
+        Route::get('/users/permissions/{user}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
+        Route::put('/users/permissions/{user}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
+        // Configurações de usuário
+        Route::name('user.')->prefix('user')->group( function (){
+            Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
+            Route::get('/perfil/edit', [PerfilController::class, 'edit'])->name('perfil.edit');
+            Route::put('/perfil/update', [PerfilController::class, 'update'])->name('perfil.update');
+            Route::resource('/setor', SetorController::class);
         });
+        // Financeiro
+        Route::name('financeiro.')->prefix('financeiro')->group( function (){
+            Route::resource('/centro_custo', CentroCustoController::class);
+            Route::resource('/forma_pagamento', FormaPagamentoController::class);
+        });
+        // OS
+        Route::name('os.')->prefix('os')->group( function (){
+            Route::resource('/garantia', GarantiaController::class)
+                ->parameters(['garantia' => 'garantia']);
+            Route::resource('/categoria', OsCategoriaController::class)
+                ->parameters(['categoria' => 'categoria']);
+            Route::resource('/status', OsStatusController::class);
+        });
+        Route::name('wiki.')->prefix('wiki')->group( function (){
+            Route::resource('/fabricante', FabricanteController::class);
+            Route::resource('/modelo', ModeloController::class);
+        });
+        Route::resource('/sistema', SistemaConfigController::class)->only([
+            'index', 'store',
+        ]);
+        // Emitente
+        Route::resource('emitente', EmitenteController::class);
+        // Backup
+        // Route::resource('backup', BackupController::class);
+        Route::get('backup', [BackupController::class, 'index'])->name('backup.index');
+        Route::post('backup/download', [BackupController::class, 'download'])->name('backup.download');
+        Route::post('backup/destroy', [BackupController::class, 'destroy'])->name('backup.delete');
+
+    });
 });
 
 // OS >> informações (publica)
