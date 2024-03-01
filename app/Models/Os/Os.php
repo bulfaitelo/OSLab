@@ -8,6 +8,7 @@ use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Financeiro\Contas;
+use App\Models\Financeiro\Pagamentos;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -325,7 +326,7 @@ class Os extends Model
                 ->join('centro_custos', 'contas.centro_custo_id', 'centro_custos.id')
                 ->groupBy(['centro_custos.name', 'tipo'])
                 ->orderBy('tipo', 'desc')
-                ->get();        
+                ->get();
         foreach ($balancete as $key => $value) {
             $array_balancete['detalhes'][] = [
                 'tipo' => $value->tipo,
@@ -335,11 +336,11 @@ class Os extends Model
 
             ];
             if($value->tipo == 'R') {
-                $receita_count++;                
+                $receita_count++;
                 $array_balancete['total_credito_previsto']+= $value->previsto;
                 $array_balancete['total_credito_executado']+= $value->valor_executado;
             }
-            elseif ($value->tipo == 'D') {                
+            elseif ($value->tipo == 'D') {
                 $array_balancete['total_debito_previsto']+= $value->previsto;
                 $array_balancete['total_debito_executado']+= $value->valor_executado;
             }
@@ -348,8 +349,100 @@ class Os extends Model
             $array_balancete['total_credito_previsto'] = $this->valor_total;
         }
 
-        $array_balancete['saldo'] = ($array_balancete['total_credito_executado'] - $array_balancete['total_debito_executado']);        
+        $array_balancete['saldo'] = ($array_balancete['total_credito_executado'] - $array_balancete['total_debito_executado']);
         return $array_balancete;
+    }
+
+
+    /**
+     * Retorna o relatório de os para balancetes
+     * @param string|null $dataInicio Data de inicio da busca
+     * @param string|null $dataFim Data de fim da busca
+     * @param string|null $ordenacao Ordenação padrão
+     */
+    public static function RelatorioBalancete($dataInicio = null, $dataFim = null, $ordenacao = null)  {
+
+        $query = Os::query();
+        $query->select(DB::raw('
+            os.id,
+            os.created_at,
+            clientes.name,
+            os_status.name as status,
+            os.data_entrada,
+            valor_total,
+            IFNULL(debito, 0) AS debito,
+            IFNULL(credito, 0) AS credito,
+            (credito - debito) as saldo
+        '));
+        $query->join('clientes', 'os.cliente_id', '=', 'clientes.id');
+        $query->join('os_status', 'os.status_id', '=', 'os_status.id');
+        $query->leftJoin(DB::raw("
+            (
+                SELECT
+                    contas.os_id,
+                    SUM(pagamentos.valor) AS debito
+                FROM
+                    contas
+                LEFT JOIN contas_pagamentos AS pagamentos ON pagamentos.conta_id = contas.id
+                WHERE
+                    contas.tipo = 'D'
+                GROUP BY
+                    contas.os_id
+            ) AS debitos
+        "), 'debitos.os_id', '=', 'os.id');
+        $query->leftJoin(DB::raw("
+            (
+                SELECT
+                    contas.os_id,
+                    SUM(pagamentos.valor) AS credito
+                FROM
+                    contas
+                LEFT JOIN contas_pagamentos AS pagamentos ON pagamentos.conta_id = contas.id
+                WHERE
+                    contas.tipo = 'R'
+                GROUP BY
+                    contas.os_id
+            ) AS creditos
+        "), 'creditos.os_id', '=', 'os.id');
+        $query->whereBetween('data_entrada', [$dataInicio, $dataFim]);
+        if($ordenacao != null){
+            $orderArray = [
+                'data' => [
+                    'colun' => 'data_entrada',
+                    'order' => 'asc',
+                ],
+                'saldo' => [
+                    'colun' => 'saldo',
+                    'order' => 'desc',
+                ],
+                'nome' => [
+                    'colun' => 'name',
+                    'order' => 'asc',
+                    ]
+            ];
+            $query->orderBy($orderArray[$ordenacao]['colun'], $orderArray[$ordenacao]['order']);
+            $query->orderBy('created_at', 'asc');
+
+        }
+
+        return $query->get();
+
+
+
+
+
+    // LEFT JOIN (
+    //     SELECT
+    //         contas.os_id,
+    //         SUM(pagamentos.valor) AS credito
+    //     FROM
+    //         contas
+    //     LEFT JOIN contas_pagamentos AS pagamentos ON pagamentos.conta_id = contas.id
+    //     WHERE
+    //         contas.tipo = 'R'
+    //     GROUP BY
+    //         contas.os_id
+    // ) AS creditos ON creditos.os_id = os.id;";
     }
 
 }

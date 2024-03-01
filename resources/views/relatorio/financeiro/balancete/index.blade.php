@@ -11,6 +11,7 @@
 @section('content')
 <div class="col-md-12">
     <div class="card">
+        {!! html()->form('get', route('relatorio.financeiro.balancete.index'))->open() !!}
         <div class="card-header">
             <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn btn-sm btn-default">
@@ -21,11 +22,12 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            @include('adminlte::partials.form-alert')
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                     <label for="data_inicio">Data Início</label>
-                        {!! html()->date('data_inicio')->class('form-control')->placeholder('Data Início') !!}
+                        {!! html()->date('data_inicio', Carbon\Carbon::now()->subMonth()->format('d-m-Y'))->class('form-control')->placeholder('Data Início') !!}
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -34,12 +36,12 @@
                         {!! html()->date('data_fim', Carbon\Carbon::now()->format('d-m-Y'))->class('form-control')->placeholder('Data Fim') !!}
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Tipo de agrupamento</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        {!! html()->radio('tipo_de_agrupamento', '', 'os')->class('form-check-input')->attribute('id', 'radio_os') !!}
+                        {!! html()->radio('tipo_de_agrupamento', true, 'os')->class('form-check-input')->attribute('id', 'radio_os') !!}
                         <label class="form-check-label" for="radio_os">OS</label>
                     </div>
                     <div class="form-check form-check-inline">
@@ -51,6 +53,29 @@
                         <label class="form-check-label" for="radio_centro_custo">Centro de Custo</label>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Tipo de agrupamento</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        {!! html()->radio('teste[]', true, 'os')->class('form-check-input')->attribute('id', 'radio_os') !!}
+                        <label class="form-check-label" for="radio_os">OS</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        {!! html()->radio('teste[]', '', 'mes')->class('form-check-input')->attribute('id', 'radio_mes') !!}
+                        <label class="form-check-label" for="radio_mes">Mês</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        {!! html()->radio('teste[]', '', 'centro_de_custo')->class('form-check-input')->attribute('id', 'radio_centro_custo') !!}
+                        <label class="form-check-label" for="radio_centro_custo">Centro de Custo</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                    <label for="ordenacao" >Ordenação </label>
+                    {!! html()->select('ordenacao', ['data' => 'Data', 'nome' => 'Nome', 'saldo' => 'Saldo'])->class('form-control') !!}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-footer">
@@ -59,7 +84,7 @@
                 Buscar
             </button>
         </div>
-
+        {!! html()->form()->close() !!}
     </div>
 </div>
 @stop
