@@ -366,7 +366,7 @@ class Os extends Model
         $query->select(DB::raw('
             os.id,
             os.created_at,
-            clientes.name,
+            clientes.name as cliente,
             os_status.name as status,
             os.data_entrada,
             valor_total,
@@ -416,7 +416,7 @@ class Os extends Model
                     'order' => 'desc',
                 ],
                 'nome' => [
-                    'colun' => 'name',
+                    'colun' => 'cliente',
                     'order' => 'asc',
                     ]
             ];

@@ -27,9 +27,11 @@ class CreateHtmlRequestBusca {
         $return = "";
         try {
             if(is_array($request)){
+                $return.='<ul>';
                 foreach ($request as $key => $value) {
-                    $return.= "<span>". $this->convertToString($key) . ": " . $this->checkType($value) . "</span>";
+                    $return.= "<li><strong>". $this->convertToString($key) .'</strong>' . $this->checkType($value) . "</li>";
                 }
+                $return.='</ul>';
             }
         } catch (\Throwable $th) {
             throw $th;
@@ -37,25 +39,37 @@ class CreateHtmlRequestBusca {
         return $return;
     }
 
-    private function convertToString ($key) {
-        return \Str::of($key)->snake()->replace('_', ' ')->title();
+    private function convertToString ($key, $subArray = false) {
+        $ponto = '';
+        if (is_integer($key)) {
+            if($key > 0){
+                
+            }
+        } else {
+            if (!$subArray) {
+                $ponto = ': ';
+            }
+            
+            return \Str::of($key)->snake()->replace('_', ' ')->title() . $ponto;
+        }
+        
     }
 
 
     private function checkType ($value) {
 
        if (is_array($value)){
-
-            return 'array';
+            return $this->createRender($value);            
         }
-        else {
-            return 'strung';
-            // $data = \DateTime::createFromFormat('Y-m-d', $value);
-            // if($data && $data->format('Y-m-d') === $value){
-            //     return $data->format('d/m/Y');
-            // } else {
-            //     return $value;
-            // }
+        else {            
+            $data = \DateTime::createFromFormat('Y-m-d', $value);
+            if($data && $data->format('Y-m-d') === $value){
+                return $data->format('d/m/Y');
+            } else {
+                // return $value;
+                return $this->convertToString($value, true);
+
+            }
         }
 
         // if() {

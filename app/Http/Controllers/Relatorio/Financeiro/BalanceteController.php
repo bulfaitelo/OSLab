@@ -28,19 +28,14 @@ class BalanceteController extends Controller
                 'ordenacao' => 'required|in:data,nome,saldo',
             ]);
             if($validated['tipo_de_agrupamento'] == 'os'){
-                // $os = new Os;
-                // $osRelatorio = $os->RelatorioBalancete();
-
                 $osRelatorio = Os::RelatorioBalancete($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
-
-            }
-            return view('relatorio.financeiro.balancete.relatorio', [
-                'osRelatorio' => $osRelatorio
-            ]);
-        } else {
-            return view('relatorio.financeiro.balancete.index');
-        }
-
+            }            
+        } 
+        return view('relatorio.financeiro.balancete.index', [
+            'request' => $request,
+            'osRelatorio' => $osRelatorio
+        ]);
+        
     }
 
 }
