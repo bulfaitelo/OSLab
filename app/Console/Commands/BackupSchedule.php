@@ -40,9 +40,7 @@ class BackupSchedule extends Command
      */
     public function handle()
     {        
-        try {
-            Artisan::call('backup:clean');
-            echo Artisan::output();
+        try {            
             if (getConfig('backup_local_store')) {                
                 Artisan::call('backup:run --only-to-disk=local --disable-notifications');
                 Artisan::output();
@@ -51,8 +49,7 @@ class BackupSchedule extends Command
             if (getConfig('backup_gdrive_store')) {
                 Artisan::call('backup:run --only-to-disk=google --disable-notifications');
                 echo Artisan::output();                           
-            }
-            echo Artisan::output();         
+            }            
         } catch (\Throwable $th) {
             throw $th;
         }
