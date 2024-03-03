@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Relatorio\Financeiro;
 
 use App\Http\Controllers\Controller;
+use App\Models\Financeiro\Contas;
 use App\Models\Os\Os;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,7 @@ class BalanceteController extends Controller
     public function index(Request $request)
     {
         $osRelatorio = null;
+        $mesRelatorio = null;
         if ($request->input()) {
             $validated = $request->validate([
                 'data_inicio' => 'required|date',
@@ -29,13 +31,17 @@ class BalanceteController extends Controller
             ]);
             if($validated['tipo_de_agrupamento'] == 'os'){
                 $osRelatorio = Os::RelatorioBalancete($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
-            }            
-        } 
+            }
+            if($validated['tipo_de_agrupamento'] == 'mes'){
+                $mesRelatorio = Contas::RelatorioBalancete($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
+            }
+        }
         return view('relatorio.financeiro.balancete.index', [
             'request' => $request,
-            'osRelatorio' => $osRelatorio
+            'osRelatorio' => $osRelatorio,
+            'mesRelatorio' => $mesRelatorio,
         ]);
-        
+
     }
 
 }

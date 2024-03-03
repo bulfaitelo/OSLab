@@ -12,7 +12,7 @@
 <div class="col-md-12">
     <div class="card">
         {!! html()->form('get', route('relatorio.financeiro.balancete.index'))->open() !!}
-        <div class="card-header ">            
+        <div class="card-header ">
             <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn btn-sm btn-default d-print-none">
                     <i class="fa-solid fa-chevron-left"></i>
@@ -25,8 +25,8 @@
                     <i class="fa-solid fa-print"></i>
                     <span class="d-none d-sm-inline">Imprimir</span>
                 </button>
-            </a>            
-            @endif           
+            </a>
+            @endif
             <button type="submit"  class="float-right btn bg-lightblue btn-sm d-print-none">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 Buscar
@@ -43,7 +43,7 @@
                     <div class="form-group">
                     <label for="data_inicio">Data Início</label>
                         {!! html()->date('data_inicio', ($request->data_inicio == true) ? $request->data_inicio : Carbon\Carbon::now()->subMonth()->format('d-m-Y') )->class('form-control')->placeholder('Data Início') !!}
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label>Tipo de agrupamento</label>
                     </div>
-                    <div class="form-check form-check-inline">  
+                    <div class="form-check form-check-inline">
                         {!! html()->radio('tipo_de_agrupamento', ($request->tipo_de_agrupamento == 'os') ? $request->tipo_de_agrupamento : true, 'os')->class('form-check-input')->attribute('id', 'radio_os') !!}
                         <label class="form-check-label" for="radio_os">OS</label>
                     </div>
@@ -67,7 +67,7 @@
                         {!! html()->radio('tipo_de_agrupamento', ($request->tipo_de_agrupamento == 'centro_de_custo') ? $request->tipo_de_agrupamento : '', 'centro_de_custo')->class('form-check-input')->attribute('id', 'radio_centro_custo') !!}
                         <label class="form-check-label" for="radio_centro_custo">Centro de Custo</label>
                     </div>
-                </div>                
+                </div>
                 <div class="col-md-2">
                     <div class="form-group">
                     <label for="ordenacao" >Ordenação </label>
@@ -75,14 +75,20 @@
                     </div>
                 </div>
             </div>
-            @if ($osRelatorio)      
-                <hr>       
-                @include('relatorio.financeiro.balancete.relatorio-os')
-            @endif
+            <div class=" table-responsive">
+                @if ($osRelatorio)
+                    <hr>
+                    @include('relatorio.financeiro.balancete.relatorio-os')
+                @endif
+                @if ($mesRelatorio)
+                    <hr>
+                    @include('relatorio.financeiro.balancete.relatorio-mes')
+                @endif
+            </div>
         </div>
-        <div class="card-footer">    
-            @if (Request::all())     
-                @include('oslab.relatorio.listar-request')   
+        <div class="card-footer">
+            @if (Request::all())
+                @include('oslab.relatorio.listar-request')
             @endif
         </div>
         {!! html()->form()->close() !!}
