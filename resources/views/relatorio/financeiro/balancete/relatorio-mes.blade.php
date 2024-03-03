@@ -1,5 +1,5 @@
 @if ( isset($mesRelatorio) && ($mesRelatorio->count() > 0))
-<table class="table table-bordered table-sm">
+<table class="table table-bordered table-sm text-nowrap">
     <thead>
         <tr>
             <th style="width: 10px">#</th>

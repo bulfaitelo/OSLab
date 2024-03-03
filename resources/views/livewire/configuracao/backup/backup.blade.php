@@ -1,5 +1,5 @@
 <div>
-    <div wire:init="loadBackups">  
+    <div wire:init="loadBackups">
         <div class="row justify-content-md-center">
             <div class="col-md-11 ">
                 <!-- general form elements -->
@@ -14,7 +14,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-        
+
                     <div class="card-body ">
                         @include('adminlte::partials.form-alert')
                         @forelse ($backupInfo as $disco)
@@ -57,7 +57,7 @@
                                 </tr>
                             </table>
                             @if (count($disco['backups']))
-                            <table class="table table-sm">
+                            <table class="table table-sm text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>Arquivo</th>
@@ -102,15 +102,15 @@
                         @empty
                             <h5>Carregando Backups <i class="fa-solid fa-spinner fa-spin"></i></h5>
                         @endforelse
-                
+
                     </div>
                     {{-- Minimal with icon only --}}
-                    
+
                 </div>
                 <!-- /.card -->
-        
+
             </div>
-        </div>        
+        </div>
     </div>
     <script>
         document.addEventListener('livewire:load', function () {
@@ -118,11 +118,11 @@
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var name = button.data('name') // Extract info from data-* attributes
                 var path = button.data('path') // Extract info from data-* attributes
-                var url = button.data('url') // Extract info from data-* attributes                
+                var url = button.data('url') // Extract info from data-* attributes
                 var modal = $(this)
                 modal.find('.modal-body span').text(name)
                 modal.find('#path').val(path)
-                modal.find('form').attr('action', url)                
+                modal.find('form').attr('action', url)
             })
         });
     </script>
