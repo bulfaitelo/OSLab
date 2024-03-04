@@ -404,7 +404,9 @@ class Os extends Model
                     contas.os_id
             ) AS creditos
         "), 'creditos.os_id', '=', 'os.id');
-        $query->whereBetween('data_entrada', [$dataInicio, $dataFim]);
+        if ($dataInicio and $dataFim) {
+            $query->whereBetween('data_entrada', [$dataInicio, $dataFim]);
+        }
         if($ordenacao != null){
             $orderArray = [
                 'data' => [
@@ -420,6 +422,7 @@ class Os extends Model
                     'order' => 'asc',
                     ]
             ];
+
             $query->orderBy($orderArray[$ordenacao]['colun'], $orderArray[$ordenacao]['order']);
             $query->orderBy('created_at', 'asc');
 
@@ -427,22 +430,6 @@ class Os extends Model
 
         return $query->get();
 
-
-
-
-
-    // LEFT JOIN (
-    //     SELECT
-    //         contas.os_id,
-    //         SUM(pagamentos.valor) AS credito
-    //     FROM
-    //         contas
-    //     LEFT JOIN contas_pagamentos AS pagamentos ON pagamentos.conta_id = contas.id
-    //     WHERE
-    //         contas.tipo = 'R'
-    //     GROUP BY
-    //         contas.os_id
-    // ) AS creditos ON creditos.os_id = os.id;";
     }
 
 }
