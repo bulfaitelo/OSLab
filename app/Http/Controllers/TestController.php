@@ -25,11 +25,13 @@ class TestController extends Controller
         // $emitente = new \App\Models\Configuracao\Sistema\Emitente();
         // dd($emitente->getHtmlEmitente(1));
 
+        $config = config('backup.backup.destination.disks');
+        dd(explode(',', env('BACKUP_DIRECTORY')), $config);
 
             // dd(config('filesystems.disks.local.root').'/OsLab/OsLab_2023-02-19-14-36-53.zip');
             // $path = config('filesystems.disks.local.root').'/OsLab/OsLab_2024-02-19-18-37-54.zip';
             // $teste = Gdrive::put('filename.zip', $path);
-            
+
         dd(collect(Storage::disk('google')->listContents('')));
         $teste = Gdrive::all('/');
         dd($teste);

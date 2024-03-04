@@ -148,10 +148,13 @@ return [
             /*
              * The disk names on which the backups will be stored.
              */
-            'disks' => [
-                'local',
-                'google'
-            ],
+            // 'disks' => [
+            //     'local',
+            //     'google'
+            // ],
+            'disks' =>
+                explode(',', env('BACKUP_DIRECTORY'))
+            ,
         ],
 
         /*
@@ -256,7 +259,8 @@ return [
     'monitor_backups' => [
         [
             'name' => env('APP_NAME', 'laravel-backup'),
-            'disks' => ['local', 'google'],
+            // 'disks' => ['local', 'google'],
+            'disks' => explode(',', env('BACKUP_DIRECTORY')),
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => 5000,
