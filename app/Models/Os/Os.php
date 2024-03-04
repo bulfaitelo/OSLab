@@ -360,7 +360,7 @@ class Os extends Model
      * @param string|null $dataFim Data de fim da busca
      * @param string|null $ordenacao Ordenação padrão
      */
-    public static function RelatorioBalancete($dataInicio = null, $dataFim = null, $ordenacao = null)  {
+    public static function RelatorioBalanceteOs($dataInicio = null, $dataFim = null, $ordenacao = null)  {
 
         $query = Os::query();
         $query->select(DB::raw('

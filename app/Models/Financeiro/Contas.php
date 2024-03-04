@@ -92,14 +92,16 @@ class Contas extends Model
      * @param string|null $ordenacao Ordenação padrão
      * @return object|null
      */
-    public static function RelatorioBalancete($dataInicio = null, $dataFim = null, $ordenacao = null) : object|null {
+    public static function RelatorioBalanceteMes($dataInicio = null, $dataFim = null, $ordenacao = null) : object|null {
         $query = Pagamentos::query();
-        $query->selectRaw('YEAR(vencimento) AS ano,
-                     MONTH(vencimento) AS mes,
-                     IFNULL(SUM(CASE WHEN contas.tipo = "R" THEN contas_pagamentos.valor ELSE 0 END), 0) AS receita,
-                     IFNULL(SUM(CASE WHEN contas.tipo = "D" THEN contas_pagamentos.valor ELSE 0 END), 0) AS despesa,
-                     (IFNULL(SUM(CASE WHEN contas.tipo = "R" THEN contas_pagamentos.valor ELSE 0 END), 0) -
-                      IFNULL(SUM(CASE WHEN contas.tipo = "D" THEN contas_pagamentos.valor ELSE 0 END), 0)) AS saldo');
+        $query->selectRaw('
+            YEAR(vencimento) AS ano,
+            MONTH(vencimento) AS mes,
+            IFNULL(SUM(CASE WHEN contas.tipo = "R" THEN contas_pagamentos.valor ELSE 0 END), 0) AS receita,
+            IFNULL(SUM(CASE WHEN contas.tipo = "D" THEN contas_pagamentos.valor ELSE 0 END), 0) AS despesa,
+            (IFNULL(SUM(CASE WHEN contas.tipo = "R" THEN contas_pagamentos.valor ELSE 0 END), 0) -
+            IFNULL(SUM(CASE WHEN contas.tipo = "D" THEN contas_pagamentos.valor ELSE 0 END), 0)) AS saldo
+        ');
         $query->leftJoin('contas', 'contas_pagamentos.conta_id', '=', 'contas.id');
         $query->groupByRaw('YEAR(vencimento), MONTH(vencimento)');
         if ($dataInicio and $dataFim) {
@@ -109,5 +111,48 @@ class Contas extends Model
     }
 
 
+
+        /**
+     * Retorna o relatório de contas agrupados por centro de custo para balancetes
+     * @param string|null $dataInicio Data de inicio da busca
+     * @param string|null $dataFim Data de fim da busca
+     * @param string|null $ordenacao Ordenação padrão
+     * @return object|null
+     */
+    public static function RelatorioBalanceteCentroCusto($dataInicio = null, $dataFim = null, $ordenacao = null) : object|null {
+        $query = Pagamentos::query();
+        $query->selectRaw('
+            centro_custos.name as centro_custo,
+            IFNULL(SUM(CASE WHEN contas.tipo = "R" THEN contas_pagamentos.valor ELSE 0 END), 0) AS receita,
+            IFNULL(SUM(CASE WHEN contas.tipo = "D" THEN contas_pagamentos.valor ELSE 0 END), 0) AS despesa,
+            (IFNULL(SUM(CASE WHEN contas.tipo = "R" THEN contas_pagamentos.valor ELSE 0 END), 0) -
+            IFNULL(SUM(CASE WHEN contas.tipo = "D" THEN contas_pagamentos.valor ELSE 0 END), 0)) AS saldo
+        ');
+        $query->leftJoin('contas', 'contas_pagamentos.conta_id', '=', 'contas.id');
+        $query->join('centro_custos', 'contas.centro_custo_id', '=', 'centro_custos.id');
+        $query->groupByRaw('contas.centro_custo_id');
+        if ($dataInicio and $dataFim) {
+            $query->whereBetween('vencimento', [$dataInicio, $dataFim]);
+        }
+        if(($ordenacao != null)){
+            $orderArray = [
+                'saldo' => [
+                    'colun' => 'saldo',
+                    'order' => 'desc',
+                ],
+                'nome' => [
+                    'colun' => 'centro_custo',
+                    'order' => 'asc',
+                ],
+                'data' => [
+                    'colun' => 'centro_custo',
+                    'order' => 'asc',
+                ]
+            ];
+            $query->orderBy($orderArray[$ordenacao]['colun'], $orderArray[$ordenacao]['order']);
+
+        }
+        return $query->get();
+    }
 
 }

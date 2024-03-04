@@ -84,6 +84,10 @@
                     <hr>
                     @include('relatorio.financeiro.balancete.relatorio-mes')
                 @endif
+                @if ($centroCustoRelatorio)
+                    <hr>
+                    @include('relatorio.financeiro.balancete.relatorio-centro-custo')
+                @endif
             </div>
         </div>
         <div class="card-footer">

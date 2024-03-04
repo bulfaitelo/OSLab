@@ -30,16 +30,20 @@ class BalanceteController extends Controller
                 'ordenacao' => 'required|in:data,nome,saldo',
             ]);
             if($validated['tipo_de_agrupamento'] == 'os'){
-                $osRelatorio = Os::RelatorioBalancete($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
+                $osRelatorio = Os::RelatorioBalanceteOs($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
             }
             if($validated['tipo_de_agrupamento'] == 'mes'){
-                $mesRelatorio = Contas::RelatorioBalancete($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
+                $mesRelatorio = Contas::RelatorioBalanceteMes($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
+            }
+            if($validated['tipo_de_agrupamento'] == 'centro_de_custo'){
+                $centroCustoRelatorio = Contas::RelatorioBalanceteCentroCusto($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
             }
         }
         return view('relatorio.financeiro.balancete.index', [
             'request' => $request,
             'osRelatorio' => $osRelatorio,
             'mesRelatorio' => $mesRelatorio,
+            'centroCustoRelatorio' => $centroCustoRelatorio,
         ]);
 
     }
