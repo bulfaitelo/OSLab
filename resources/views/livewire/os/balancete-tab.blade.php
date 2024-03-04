@@ -1,5 +1,5 @@
 <div>
-    @if ($showDisplay === true)        
+    @if ($showDisplay === true)
     <div class="row">
         <div class="col-md-7">
             <table class="table table-bordered table-sm">
@@ -16,9 +16,9 @@
                         <tr>
                             <td>
                                 @if ($item['tipo'] == 'R')
-                                    <span class="badge bg-success">CRÉDITO</span>                                    
+                                    <span class="badge bg-success">RECEITA</span>
                                 @else
-                                    <span class="badge bg-danger">DÉBITO</span>                                                                        
+                                    <span class="badge bg-danger">DESPESA</span>
                                 @endif
                             </td>
                             <td>{{ $item['centro_custo'] }}</td>
@@ -28,18 +28,18 @@
                                 </td>
                                 <td class="balancete-credito ">
                                     R$ <span class=" float-right " >{{ number_format($item['valor_executado'],2,",",".") }}</span>
-                                </td>                                
+                                </td>
                             @else
                                 <td class="balancete-debito ">
                                     R$ <span class="float-right " >-{{ number_format($item['valor_previsto'],2,",",".") }}</span>
                                 </td>
                                 <td class="balancete-debito ">
                                     R$ <span class=" float-right " >-{{ number_format($item['valor_executado'],2,",",".") }}</span>
-                                </td>                      
+                                </td>
                             @endif
-                        </tr>                        
-                    @endforeach 
-                </tbody>              
+                        </tr>
+                    @endforeach
+                </tbody>
             </table>
             <table class="table table-bordered table-sm">
                 <thead>
