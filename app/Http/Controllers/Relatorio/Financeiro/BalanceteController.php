@@ -22,6 +22,7 @@ class BalanceteController extends Controller
     {
         $osRelatorio = null;
         $mesRelatorio = null;
+        $centroCustoRelatorio = null;
         if ($request->input()) {
             $validated = $request->validate([
                 'data_inicio' => 'required|date',
