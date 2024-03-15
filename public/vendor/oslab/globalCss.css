@@ -31,3 +31,25 @@
     color: #862e2e;
 
 }
+
+@font-face {
+    font-family: 'metropolis-regular';
+    src: url('./fonts/Metropolis-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+ @font-face {
+    font-family: 'metropolis-bold';
+    src: url('./fonts/Metropolis-Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+ }
+
+.logo-font {
+    font-family: 'metropolis-regular', sans-serif;
+}
+
+.logo-font b {
+    font-family: 'metropolis-bold', sans-serif;
+}

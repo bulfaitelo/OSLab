@@ -1,4 +1,4 @@
-<p align="center"><a href="https://oslab.com" target="_blank"><img src="https://raw.githubusercontent.com/bulfaitelo/oslab/main/public/vendor/oslab/imgs/oslab_logo.png?token=GHSAT0AAAAAACLZ2RMQTXGEAH5ZFA6LX5RGZMMBXXA" width="400" alt="OSLab"></a></p>
+<p align="center"><a href="https://oslab.com" target="_blank"><img src="https://raw.githubusercontent.com/bulfaitelo/oslab/main/public/vendor/oslab/imgs/oslab_logo.svg?token=GHSAT0AAAAAACLZ2RMQTXGEAH5ZFA6LX5RGZMMBXXA" width="400" alt="OSLab"></a></p>
 
 <p align="center">
 <a href="https://github.com/bulfaitelo/OSLab/issues" target="_blank" ><img alt="GitHub issues" src="https://img.shields.io/github/issues/bulfaitelo/OsLAb"></a>

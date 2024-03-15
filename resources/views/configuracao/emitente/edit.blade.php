@@ -36,7 +36,7 @@
                             @if ($emitente->logo_url)
                                 src="{{ asset('storage/'.$emitente->logo_url) }}"
                             @else
-                                src="{{ asset('vendor/oslab/imgs/oslab_logo.png') }}"
+                                src="{{ asset('vendor/oslab/imgs/oslab_logo.svg') }}"
                             @endif
                             alt="Logo da empresa" class="rounded image img-fluid">
                         <div id="img-upload" class="overlay">

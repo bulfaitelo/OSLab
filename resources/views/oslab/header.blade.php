@@ -7,7 +7,7 @@
                     src="{{ asset('storage/'.$emitente->logo_url) }}"
 
                 @else
-                    src="{{ asset('vendor/oslab/imgs/oslab_logo.png') }} "
+                    src="{{ asset('vendor/oslab/imgs/oslab_logo.svg') }} "
                 @endif
             class="rounded image img-fluid" >
         </div>
@@ -38,7 +38,7 @@
     @else
     <div class="row">
         <div class="col-sm-2">
-            <img src="{{ asset('vendor/oslab/imgs/oslab_logo.png') }} " class="rounded image img-fluid" >
+            <img src="{{ asset('vendor/oslab/imgs/oslab_logo.svg') }} " class="rounded image img-fluid" >
         </div>
         <div class="col-sm-7">
             <h4 class="mb-0 " ><b> Nome FAntasia </b></h4>
