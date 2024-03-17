@@ -53,3 +53,22 @@
 .logo-font b {
     font-family: 'metropolis-bold', sans-serif;
 }
+
+
+.btn-oslab {    
+    color: #fff;
+    background-color: #544ceb;
+    border-color: #3d37ad;
+    box-shadow: none;
+}
+
+.btn-oslab:hover {    
+    color: #fff;
+    background-color: #423cb6;
+    border-color: #282375;
+    box-shadow: none;
+}
+
+.login-page {
+    background-image: ;
+}

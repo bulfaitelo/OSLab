@@ -16,7 +16,7 @@
 @section('classes_body'){{ ($auth_type ?? 'login') . '-page' }}@stop
 
 @section('body')
-    <div class="{{ $auth_type ?? 'login' }}-box">
+    <div class="{{ $auth_type ?? 'login' }}-box">   
 
         {{-- Logo --}}
         <div class="{{ $auth_type ?? 'login' }}-logo">
@@ -35,13 +35,16 @@
                          @if (config('adminlte.auth_logo.img.height', null))
                             height="{{ config('adminlte.auth_logo.img.height') }}"
                          @endif>
+                    {{-- Logo Label --}}
+                    {!! config('adminlte.auth_logo.logo', '<b>Admin</b>LTE') !!}
+                        
                 @else
                     <img src="{{ asset(config('adminlte.logo_img')) }}"
                          alt="{{ config('adminlte.logo_img_alt') }}" height="50">
+                        {{-- Logo Label --}}
+                        {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
                 @endif
 
-                {{-- Logo Label --}}
-                {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
 
             </a>
         </div>

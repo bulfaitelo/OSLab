@@ -84,13 +84,14 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
+        'logo' => '',
         'img' => [
-            'path' => 'vendor/oslab/imgs/oslab_logo.svg',
-            'alt' => 'Auth Logo',
+            'path' => 'vendor/oslab/imgs/oslab_logo_marca.png',
+            'alt' => 'OSLAb',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => '',
+            'height' => 180,
         ],
     ],
 
@@ -172,7 +173,7 @@ return [
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
-    'classes_auth_btn' => ' btn-primary',
+    'classes_auth_btn' => ' btn-oslab',
 
     /*
     |--------------------------------------------------------------------------
