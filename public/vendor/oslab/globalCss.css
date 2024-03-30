@@ -56,9 +56,9 @@
 
 
 .btn-oslab {    
-    color: #fff;
-    background-color: #544ceb;
-    border-color: #3d37ad;
+    color: #fff;    
+    background-color: #5d52ef;    
+    border-color: #4a42d3;
     box-shadow: none;
 }
 
@@ -69,6 +69,6 @@
     box-shadow: none;
 }
 
-.login-page {
-    background-image: ;
+.card-oslab {
+    border-top: 3px solid #5d52ef;  
 }
