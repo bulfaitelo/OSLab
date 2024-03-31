@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>OS</b>Lab',
-    'logo_img' => 'vendor/oslab/imgs/oslab_logo.svg',
+    'logo_img' => 'vendor/oslab/imgs/oslab_logo-white.png',
     'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => null,
