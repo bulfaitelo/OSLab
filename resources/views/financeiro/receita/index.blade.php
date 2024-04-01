@@ -7,8 +7,8 @@
 @stop
 
 @section('content')
-<div class="col-md-12">
-    <div class="card ">
+<div class="">
+    <div class="card">
         <div class="card-header receita pb-2 ">
                 <a href="{{ url()->previous() }}">
                     <button type="button"  class="btn btn-sm btn-default">

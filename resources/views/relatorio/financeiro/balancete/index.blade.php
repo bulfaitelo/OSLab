@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-<div class="col-md-12">
+<div class="">
     <div class="card">
         {!! html()->form('get', route('relatorio.financeiro.balancete.index'))->open() !!}
         <div class="card-header ">
