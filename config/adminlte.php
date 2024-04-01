@@ -302,8 +302,12 @@ return [
         // Navbar items:
         [
             'type'         => 'navbar-search',
-            'text'         => 'search',
+            'text'         => 'Buscar',
             'topnav_right' => true,
+            'url' => 'home',
+            'method' => 'GET',
+            'input_name' => 'buscar',
+
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -312,7 +316,7 @@ return [
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Buscar',
         ],
         [
             'text'        => 'pages',
