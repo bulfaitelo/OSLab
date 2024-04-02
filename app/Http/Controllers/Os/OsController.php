@@ -110,7 +110,7 @@ class OsController extends Controller
             $os->status_id = $request->status_id;
             $os->data_entrada = $request->data_entrada;
             $os->data_saida = $request->data_saida;
-            $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $request->categoria_id);
+            // $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $request->categoria_id);
             $os->descricao = $request->descricao;
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
@@ -174,7 +174,7 @@ class OsController extends Controller
             $os->status_id = $request->status_id;
             $os->data_entrada = $request->data_entrada;
             $os->data_saida = $request->data_saida;
-            $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $request->categoria_id);
+            $os->prazo_garantia = $this->addDayGarantia($request->data_saida, $request->categoria_id);
             $os->descricao = $request->descricao;
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
@@ -357,6 +357,7 @@ class OsController extends Controller
                 $os->data_saida = now();
             }
             $os->fatura_id = $fatura_id;
+            $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $os->categoria_id);
             $os->save();
             DB::commit();
             return redirect()->route('os.edit', $os->id)
@@ -412,15 +413,15 @@ class OsController extends Controller
     /**
      * REtorna o dia de vencimento com base na categoria selecionada
      *
-     * @param string $data_entrada Data de entrada
+     * @param string $data_saida Data de saida da os
      * @param int $categoria_id id da categoria da os para gera os dias de garantia
      * @return string|null retorna o dia de vendimento ou null caso nao exista
 
      **/
-    private function addDayGarantia($data_entrada, $categoria_id) : string|null {
+    private function addDayGarantia($data_saida, $categoria_id) : string|null {
         $prazoEmDias = OsCategoria::find($categoria_id)->garantia?->prazo_garantia;
         if($prazoEmDias) {
-            $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_entrada);
+            $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_saida);
             return $dataGarantia->addDays($prazoEmDias)->format('Y-m-d');
         }
         return null;
