@@ -304,7 +304,7 @@ return [
             'type'         => 'navbar-search',
             'text'         => 'Buscar',
             'topnav_right' => true,
-            'url' => 'home',
+            'url' => 'buscar',
             'method' => 'GET',
             'input_name' => 'buscar',
 

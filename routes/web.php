@@ -59,6 +59,10 @@ route::resource('teste', TestController::class);
 Auth::routes();
 
 Route::group(['middleware'=> 'auth'], function() {
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/buscar', [App\Http\Controllers\BuscarController::class, 'index'])->name('buscar');
+
     Route::resource('/cliente', ClienteController::class);
     Route::resource('/servico', ServicoController::class);
 
@@ -171,5 +175,5 @@ Route::get('public/os/informacao/{uuid}', [OsPublicController::class,'edit'])->n
 Route::get('public/os/informacao', [OsPublicController::class,'updated'])->name('os.public.updated');
 Route::put('public/os/informacao/{uuid}', [OsPublicController::class,'update'])->name('os.public.update');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 

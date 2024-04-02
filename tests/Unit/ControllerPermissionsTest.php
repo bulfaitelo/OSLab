@@ -21,6 +21,7 @@ class ControllerPermissionsTest extends TestCase
             '\App\Http\Controllers\Configuracao\PermissionsGroupController',
             '\App\Http\Controllers\Auth\VerificationController',
             '\App\Http\Controllers\HomeController', // Esse eu vou ter que tirar
+            '\App\Http\Controllers\BuscarController', // Esse eu vou ter que tirar
             'App\Http\Controllers\Auth\LoginController',
             '\App\Http\Controllers\Auth\RegisterController',
             '\App\Http\Controllers\Auth\ResetPasswordController',
