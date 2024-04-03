@@ -26,7 +26,7 @@
             @endcan
         </div>
       <!-- /.card-header -->
-        <div class="card-body table-responsive">
+        <div class="card-body pt-2 table-responsive">
             <table class="table table-sm table-hover text-nowrap">
                 <thead>
                     <tr>
