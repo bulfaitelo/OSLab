@@ -92,8 +92,9 @@
         </div>
         <!-- /.card-header -->
         <!-- card-body -->
-        {{-- @include('os.partials.os-table', ['osTable' => $os,  'edit' => true, 'show'=> true,  'destroy' => true]) --}}
-        @include('os.partials.os-table', ['osTable' => $os,   'show'=> true])
+        <div class="card-body pt-2 table-responsive">
+            @include('os.partials.os-table', ['osTable' => $os,  'edit' => true, 'show'=> true,  'destroy' => true])
+        </div>
 
         <!-- /.card-body -->
         <div class="card-footer clearfix">

@@ -300,7 +300,9 @@
                     <h3 class="card-title">Total: {{ $wiki->os->count() }}</h3>
                 </div>
             </div>
+            <div class="card-body pt-2 table-responsive">
             @include('os.partials.os-table', ['osTable' => $wiki->os,  'show'=> true])
+            </div>
         </div>
     </div>
 </div>

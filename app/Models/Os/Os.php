@@ -176,7 +176,7 @@ class Os extends Model
         $dataHoje = Carbon::now()->format('Y-d-m');
         $osListagemPadrao = getConfig('os_listagem_padrao');
 
-        $queryOs = Os::query();
+        $queryOs = self::query();
         $queryOs->with('cliente');
         $queryOs->with('tecnico');
         $queryOs->with('categoria');
