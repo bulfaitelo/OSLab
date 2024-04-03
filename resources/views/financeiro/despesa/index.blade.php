@@ -95,31 +95,37 @@
             <table class="table table-sm table-hover text-nowrap">
                 <thead>
                     <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Despesa</th>
-                    <th>Cliente/ Fornecedor</th>
-                    <th>Centro de Custo</th>
-                    <th>Total</th>
-                    <th>Valor Pago</th>
-                    <th>Valor Pendente</th>
-                    <th>Parcelas</th>
-                    <th>Dia Vencimento</th>
-                    <th>Quitação</th>
-                    <th style="width: 40px"></th>
+                        <th style="width: 10px">#</th>
+                        <th>Despesa</th>
+                        <th>Cliente/ Fornecedor</th>
+                        <th>Centro de Custo</th>
+                        <th>Total</th>
+                        <th>Valor Pago</th>
+                        <th>Valor Pendente</th>
+                        <th>Parcelas</th>
+                        {{-- <th>Dia Vencimento</th> --}}
+                        <th>Quitação</th>
+                        <th style="width: 40px"></th>
                     </tr>
                 </thead>
                 <tbody>
+
+                    @php
+                        $valorPago = 0;
+                        $valorPendente = 0;
+                    @endphp
+
                     @foreach ($despesas as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->name}}</td>
                         <td>{{ $item->cliente->name}}</td>
                         <td>{{ $item->centroCusto->name}}</td>
-                        <td>R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
-                        <td>R$ {{ number_format($item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
-                        <td>R$ {{ number_format($item->valor - $item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                        <td>R$ <span class="float-right" >{{ number_format($item->valor, 2, ',', '.')}} </span> </td>
+                        <td>R$ <span class="float-right" >{{ number_format($item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}} </span> </td>
+                        <td>R$ <span class="float-right" >{{ number_format($item->valor - $item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}} </span> </td>
                         <td>{{ $item->parcelas}}</td>
-                        <td>{{ $item->getVencimentoDate()}}</td>
+                        {{-- <td>{{ $item->getVencimentoDate()}}</td> --}}
                         <td>{{ $item->data_quitacao?->format('d/m/Y') ?? ''}}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
@@ -138,6 +144,23 @@
                     </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="text-right" colspan="4">
+                            Totais:
+                        </th>
+                        <th>
+                            R$ <span class="float-right" >{{ number_format($despesas->sum('valor'), 2, ',', '.')}} </span>
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+
+                        </th>
+
+                    </tr>
+                </tfoot>
             </table>
         </div>
 
@@ -157,8 +180,6 @@
 @stop
 
 @section('css')
-<link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
-<link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
     <style>
         .receita {
             border-top: 3px solid #12cd37;
