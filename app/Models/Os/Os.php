@@ -8,13 +8,14 @@ use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Financeiro\Contas;
-use App\Models\Financeiro\Pagamentos;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class Os extends Model
 {
@@ -161,6 +162,62 @@ class Os extends Model
     public function informacoes() : HasMany
     {
         return $this->hasMany(OsInformacao::class);
+    }
+
+
+    /**
+     * Retorna o objeto pra modelagem da tabela de OS
+     *
+     * @param Request $request
+     * @param int $itensPorPagina default 100
+     */
+    static public function indexTable(Request $request, int $itensPorPagina = 100) : object {
+
+        $dataHoje = Carbon::now()->format('Y-d-m');
+        $osListagemPadrao = getConfig('os_listagem_padrao');
+
+        $queryOs = Os::query();
+        $queryOs->with('cliente');
+        $queryOs->with('tecnico');
+        $queryOs->with('categoria');
+        $queryOs->with('status');
+
+        if ($request->busca) {
+            $queryOs->where(function ($query) use ($request){
+                $query->whereHas('cliente', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                });
+                $query->orWhere('descricao', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhere('defeito', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhere('observacoes', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhere('laudo', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhereHas('modelo', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                });
+            });
+        }
+        if ($request->categoria_id) {
+            $queryOs->where('categoria_id', $request->categoria_id);
+        }
+        if (($request->data_inicial) || ($request->data_final)) {
+            ($request->data_inicial) ? $dataInicial = $request->data_inicial : $dataInicial = $dataHoje;
+            ($request->data_final) ? $dataFinal = $request->data_final : $dataFinal = $dataHoje;
+            $queryOs->where(function ($query) use ($dataInicial, $dataFinal) {
+                $query->whereBetween('created_at', [$dataInicial, $dataFinal]);
+                $query->orWhereBetween('data_entrada', [$dataInicial, $dataFinal]);
+                $query->orWhereBetween('data_saida', [$dataInicial, $dataFinal]);
+            });
+        }
+        if ($request->status_id) {
+            $queryOs->where('status_id', $request->status_id);
+        }
+        if(!$request->input()) {
+            if($osListagemPadrao){
+                $queryOs->whereIn('status_id', $osListagemPadrao);
+            }
+        }
+        $queryOs->orderBy('id', 'desc');
+        return  $queryOs->paginate($itensPorPagina);
     }
 
 

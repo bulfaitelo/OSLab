@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class OsController extends Controller
 {
@@ -37,49 +36,7 @@ class OsController extends Controller
      */
     public function index(Request $request)
     {
-        $dataHoje = Carbon::now()->format('Y-d-m');
-        $queryOs = Os::query();
-        $queryOs->with('cliente');
-        $queryOs->with('tecnico');
-        $queryOs->with('categoria');
-        $queryOs->with('status');
-
-        if ($request->busca) {
-            $queryOs->where(function ($query) use ($request){
-                $query->whereHas('cliente', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
-                });
-                $query->orWhere('descricao', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('defeito', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('observacoes', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('laudo', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhereHas('modelo', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
-                });
-            });
-        }
-        if ($request->categoria_id) {
-            $queryOs->where('categoria_id', $request->categoria_id);
-        }
-        if (($request->data_inicial) || ($request->data_final)) {
-            ($request->data_inicial) ? $dataInicial = $request->data_inicial : $dataInicial = $dataHoje;
-            ($request->data_final) ? $dataFinal = $request->data_final : $dataFinal = $dataHoje;
-            $queryOs->where(function ($query) use ($dataInicial, $dataFinal) {
-                $query->whereBetween('created_at', [$dataInicial, $dataFinal]);
-                $query->orWhereBetween('data_entrada', [$dataInicial, $dataFinal]);
-                $query->orWhereBetween('data_saida', [$dataInicial, $dataFinal]);
-            });
-        }
-        if ($request->status_id) {
-            $queryOs->where('status_id', $request->status_id);
-        }
-        if(!$request->input()) {
-            if(getConfig('os_listagem_padrao')){
-                $queryOs->whereIn('status_id', getConfig('os_listagem_padrao'));
-            }
-        }
-        $queryOs->orderBy('id', 'desc');
-        $os = $queryOs->paginate(100);
+        $os = OS::indexTable($request);
         return view('os.index', compact('os', 'request'));
     }
 
