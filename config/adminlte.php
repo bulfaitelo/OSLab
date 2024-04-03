@@ -306,7 +306,7 @@ return [
             'topnav_right' => true,
             'url' => 'buscar',
             'method' => 'GET',
-            'input_name' => 'buscar',
+            'input_name' => 'busca',
 
         ],
         [

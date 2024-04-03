@@ -9,31 +9,27 @@
 @stop
 
 @section('content')
-<div class="card direct-chat direct-chat-primary" style="position: relative; left: 0px; top: 0px;">
-    <div class="card-header ui-sortable-handle" style="cursor: move;">
-        <h3 class="card-title pt-1">Os</h3>
-        <div class="card-tools">
-            <button class="btn btn-sm btn-oslab" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <b>Ver todos </b>
-                <span title="Total encontrados 132132" class="badge bg-indigo">3234</span>
-
-        </button>
-        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-        <i class="fas fa-minus"></i>
-        </button>
+@if ($os->total() > 0)
+    <div class="card" style="position: relative; left: 0px; top: 0px;">
+        <div class="card-header ui-sortable-handle">
+            <h3 class="card-title pt-1">Os</h3>
+            <div class="card-tools">
+                <a href="{{ route('os.index', ['busca' => $request->busca]) }}">
+                    <button class="btn btn-sm btn-oslab" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <b>Ver todos </b>
+                        <span title="Total encontrados 132132" class="badge bg-indigo">{{ $os->total() }}</span>
+                    </button>
+                </a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body pt-2 table-responsive" >
+            @include('os.partials.os-table', ['osTable' => $os,   'show'=> true ])
         </div>
     </div>
-
-    <div class="card-body" >
-
-adasdad
-
-
-    </div>
-
-
-
-    </div>
+@endif
 @stop
 
 @section('css')
