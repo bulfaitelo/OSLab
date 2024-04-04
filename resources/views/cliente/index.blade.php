@@ -24,61 +24,53 @@
                 </button>
             </a>
             @endcan
+            <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseCliente" aria-expanded="false" aria-controls="collapseCliente">
+                <i class="fa-solid fa-filter"></i>
+                Filtros
+            </button>
+            <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseCliente">
+                <hr>
+                {{ html()->form('get', route('cliente.index'))->open() }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-2 ">
+                            <label for="busca">Cliente / email / Celular / Telefone</label>
+                            {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Email, Celular, ou telefone') !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-2 ">
+                            <label for="tipo">Tipo de Cliente</label>
+                            {!! html()->select('tipo', ['1' => 'Pessoa Jurídica', '0' => 'Pessoa Física'], $request->tipo)->class('form-control form-control-sm')->placeholder('Todos') !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <div class="form-group text-right mb-2">
+                            <button type="submit"  class="btn bg-lightblue btn-sm">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Buscar
+                            </button>
+                            @if (count($request->all()) > 0)
+                            <a href="{{ route('cliente.index') }}">
+                                <button type="button"  class="btn bg-gray btn-sm">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    Limpar
+                                </button>
+                            </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                {!! html()->form()->close() !!}
+            </div>
         </div>
-      <!-- /.card-header -->
+        <!-- /.card-header -->
         <div class="card-body pt-2 table-responsive">
-            <table class="table table-sm table-hover text-nowrap">
-                <thead>
-                    <tr>
-                    <th style="width: 50px">Tipo</th>
-                    <th>Cliente</th>
-                    <th>Celular</th>
-                    <th>Email</th>
-                    <th>Estado</th>
-                    <th>OS</th>
-                    <th style="width: 40px"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($clientes as $item)
-                    <tr>
-                        <td>
-                        @if ($item->pessoa_juridica == 1)
-                            <span class="badge bg-primary">PJ</span>
-                        @else
-                            <span class="badge bg-success">PF</span>
-                        @endif
-                        </td>
-                        <td>{{ $item->name}}</td>
-                        <td>{{ $item->celular}}</td>
-                        <td>{{ $item->email}}</td>
-                        <td>{{ $item->uf}}</td>
-                        <td>{{ $item->os->count() }}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                @can('cliente_edit')
-                                    <a href="{{ route('cliente.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                                @endcan
-                                @can('cliente_show')
-                                    <a href="{{ route('cliente.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
-                                @endcan
-                                @can('cliente_destroy')
-                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('cliente.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
-                                @endcan
-                            </div>
-
-                            <!-- /.modal -->
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            @include('cliente.partials.cliente-table', ['clientesTable' => $clientes,  'edit' => true, 'show'=> true,  'destroy' => true])
         </div>
-
         <!-- /.card-body -->
         <div class="card-footer clearfix">
-            {{-- {{$clientes->appends(['busca' => $busca])->links() }} --}}
-            {{ $clientes->links() }}
+            {{ $clientes->appends($request->all())->links() }}
         </div>
     </div>
     {{-- Modal Excluir --}}

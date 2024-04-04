@@ -24,12 +24,10 @@ class ClienteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::with('os')
-                    ->orderBy('name')
-                    ->paginate(100);
-        return view ('cliente.index', compact('clientes'));
+        $clientes = Cliente::getDataTable($request);
+        return view ('cliente.index', compact('clientes', 'request'));
     }
 
     /**

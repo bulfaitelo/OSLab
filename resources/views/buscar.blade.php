@@ -58,6 +58,30 @@
     </div>
 @endif
 {{-- FIM - Produto  --}}
+
+{{-- Cliente --}}
+@if ($clientes->total() > 0)
+    <div class="card" style="position: relative; left: 0px; top: 0px;">
+        <div class="card-header ui-sortable-handle">
+            <h3 class="card-title pt-1">Clientes</h3>
+            <div class="card-tools">
+                <a href="{{ route('cliente.index', ['busca' => $request->busca]) }}">
+                    <button class="btn btn-sm btn-oslab" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <b>Ver todos </b>
+                        <span title="Total encontrados 132132" class="badge bg-indigo">{{ $clientes->total() }}</span>
+                    </button>
+                </a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body pt-2 table-responsive" >
+            @include('cliente.partials.cliente-table', ['clientesTable' => $clientes,  'edit' => true, 'show'=> true,  'destroy' => true])
+        </div>
+    </div>
+@endif
+{{-- FIM - Cliente  --}}
 @stop
 
 @section('css')

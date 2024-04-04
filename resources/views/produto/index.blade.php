@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="form-group mb-2 ">
                             <label for="busca">Produto / Descrição</label>
-                            {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por PRoduto ou Descrição de produto') !!}
+                            {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Produto ou Descrição de produto') !!}
                         </div>
                     </div>
                     <div class="col-md-3">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente\Cliente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
 use Illuminate\Http\Request;
@@ -14,10 +15,12 @@ class BuscarController extends Controller
 
         $os = Os::getDataTable($request, $rowLimit);
         $produtos = Produto::getDataTable($request, $rowLimit);
+        $clientes = Cliente::getDataTable($request, $rowLimit);
         return view('buscar', [
             'request' => $request,
             'os' => $os,
             'produtos' => $produtos,
+            'clientes' => $clientes,
         ]);
     }
 }
