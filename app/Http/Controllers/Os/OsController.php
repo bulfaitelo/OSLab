@@ -36,7 +36,7 @@ class OsController extends Controller
      */
     public function index(Request $request)
     {
-        $os = OS::indexTable($request);
+        $os = OS::getDataTable($request);
         return view('os.index', compact('os', 'request'));
     }
 

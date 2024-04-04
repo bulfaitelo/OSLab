@@ -9,6 +9,7 @@
 @stop
 
 @section('content')
+{{-- OS --}}
 @if ($os->total() > 0)
     <div class="card" style="position: relative; left: 0px; top: 0px;">
         <div class="card-header ui-sortable-handle">
@@ -30,6 +31,33 @@
         </div>
     </div>
 @endif
+{{-- FIM - OS  --}}
+
+{{-- Produto --}}
+@if ($produtos->total() > 0)
+    <div class="card" style="position: relative; left: 0px; top: 0px;">
+        <div class="card-header ui-sortable-handle">
+            <h3 class="card-title pt-1">Produtos</h3>
+            <div class="card-tools">
+                <a href="{{ route('produto.index', ['busca' => $request->busca]) }}">
+                    <button class="btn btn-sm btn-oslab" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <b>Ver todos </b>
+                        <span title="Total encontrados 132132" class="badge bg-indigo">{{ $produtos->total() }}</span>
+                    </button>
+                </a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body pt-2 table-responsive" >
+            @include('produto.partials.produto-table',
+                ['produtoTable' => $produtos, 'show'=> true, ]
+            )
+        </div>
+    </div>
+@endif
+{{-- FIM - Produto  --}}
 @stop
 
 @section('css')

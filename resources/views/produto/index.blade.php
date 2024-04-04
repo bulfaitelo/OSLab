@@ -10,70 +10,70 @@
 <div class="">
     <div class="card">
         <div class="card-header">
-                <a href="{{ url()->previous() }}">
-                    <button type="button"  class="btn btn-sm btn-default">
-                        <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
-                    </button>
-                </a>
-                @can('produto_create')
-                <a href="{{ route('produto.create') }}">
-                    <button type="button"  class="btn btn-sm btn-primary">
-                        <i class="fa-solid fa-plus"></i>
-                        Adicionar Produto
-                    </button>
-                </a>
-                @endcan
+            <a href="{{ url()->previous() }}">
+                <button type="button"  class="btn btn-sm btn-default">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    Voltar
+                </button>
+            </a>
+            @can('produto_create')
+            <a href="{{ route('produto.create') }}">
+                <button type="button"  class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    Adicionar Produto
+                </button>
+            </a>
+            @endcan
+            <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseProduto" aria-expanded="false" aria-controls="collapseProduto">
+                <i class="fa-solid fa-filter"></i>
+                Filtros
+            </button>
+            <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseProduto">
+                <hr>
+                {{ html()->form('get', route('produto.index'))->open() }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-2 ">
+                            <label for="busca">Produto / Descrição</label>
+                            {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por PRoduto ou Descrição de produto') !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group mb-2 ">
+                            <label for="centro_custo_id">Centro de Custo</label>
+                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('despesa', '1')->pluck('name', 'id'), $request->centro_custo_id)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <div class="form-group text-right mb-2">
+                            <button type="submit"  class="btn bg-lightblue btn-sm">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                Buscar
+                            </button>
+                            @if (count($request->all()) > 0)
+                            <a href="{{ route('produto.index') }}">
+                                <button type="button"  class="btn bg-gray btn-sm">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    Limpar
+                                </button>
+                            </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                {!! html()->form()->close() !!}
+            </div>
         </div>
         <!-- /.card-header -->
         <div class="card-body pt-2 table-responsive">
-            <table class="table table-sm table-hover text-nowrap">
-                <thead>
-                    <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Produto</th>
-                        <th>Estoque</th>
-                        <th>Valor</th>
-                        <th>Ultima atualização</th>
-                        <th style="width: 40px"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($produtos as $item)
-                    <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->name}}</td>
-                        <td>{{ $item->estoque}}</td>
-                        <td>{{ $item->valor_venda}}</td>
-                        <td>{{ $item->updated_at->format('H:i:s d/m/Y') }}</td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                @can('produto_movimentacao')
-                                    <a href="{{ route('movimentacao.index', $item->id) }}" title="Movimentações" class="btn btn-left bg-olive"><i class="fa-solid fa-boxes-packing"></i></a>
-                                @endcan
-                                @can('produto_movimentacao_create')
-                                    <a href="{{ route('movimentacao.create', $item->id) }}" title="Adicionar Estoque" class="btn btn-left bg-primary"><i class="fa-solid fa-plus"></i></a>
-                                @endcan
-                                @can('produto_edit')
-                                    <a href="{{ route('produto.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                                @endcan
-                                @can('produto_show')
-                                    <a href="{{ route('produto.show', $item->id) }}" title="Vizualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
-                                @endcan
-                                @can('produto_destroy')
-                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('produto.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
-                                @endcan
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            @include('produto.partials.produto-table',
+                ['produtoTable' => $produtos,  'edit' => true, 'show'=> true,  'destroy' => true, 'movimentacao' => true , 'movimentacao_create' => true]
+            )
         </div>
+
         <!-- /.card-body -->
         <div class="card-footer clearfix">
-            {{-- {{$Produtos->appends(['busca' => $busca])->links() }} --}}
-            {{ $produtos->links() }}
+            {{$produtos->appends($request->all())->links() }}
         </div>
     </div>
     {{-- Modal Excluir --}}

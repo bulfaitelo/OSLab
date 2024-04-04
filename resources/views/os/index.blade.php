@@ -24,11 +24,11 @@
                 </button>
             </a>
             @endcan
-            <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseOs" aria-expanded="false" aria-controls="collapseOs">
                 <i class="fa-solid fa-filter"></i>
                 Filtros
             </button>
-            <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseExample">
+            <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseOs">
                 <hr>
                 {{ html()->form('get', route('os.index'))->open() }}
                 <div class="row">
@@ -99,7 +99,6 @@
         <!-- /.card-body -->
         <div class="card-footer clearfix">
             {{$os->appends($request->all())->links() }}
-            {{-- {{ $os->links() }} --}}
         </div>
 
     {{-- Modal Excluir --}}

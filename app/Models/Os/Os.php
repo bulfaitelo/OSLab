@@ -171,7 +171,7 @@ class Os extends Model
      * @param Request $request
      * @param int $itensPorPagina default 100
      */
-    static public function indexTable(Request $request, int $itensPorPagina = 100) : object {
+    static public function getDataTable(Request $request, int $itensPorPagina = 100) : object {
 
         $dataHoje = Carbon::now()->format('Y-d-m');
         $osListagemPadrao = getConfig('os_listagem_padrao');

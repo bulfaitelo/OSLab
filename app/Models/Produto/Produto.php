@@ -2,10 +2,13 @@
 
 namespace App\Models\Produto;
 
+use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Os\OsProduto;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Produto extends Model
@@ -21,6 +24,16 @@ class Produto extends Model
      **/
     public function movimentacao() : HasMany {
         return $this->hasMany(Movimentacao::class);
+    }
+
+    /**
+     * Retornar o centro de custo do Produtos
+     *
+     * Retorna o centro de custo do produto.
+     * @return BelongsTo Centro de Custo
+     **/
+    public function centroCusto(): BelongsTo {
+        return $this->belongsTo(CentroCusto::class);
     }
 
     /**
@@ -54,6 +67,24 @@ class Produto extends Model
         return Attribute::make(
             get: fn (string $value) => number_format($value,2,",",".")
         );
+    }
+
+    /**
+     * Retorna o objeto pra modelagem da tabela de Produtos
+     *
+     * @param Request $request
+     * @param int $itensPorPagina default 100
+     */
+    static public function getDataTable(Request $request, int $itensPorPagina = 100) : object {
+        $queryProduto = self::query();
+        $queryProduto->with('centroCusto');
+        if ($request->busca) {
+            $queryProduto->Where('name', 'LIKE', '%' . $request->busca . '%');
+        }
+        if($request->centro_custo_id){
+            $queryProduto->where('centro_custo_id', $request->centro_custo_id);
+        }
+        return $queryProduto->paginate($itensPorPagina);
     }
 
 

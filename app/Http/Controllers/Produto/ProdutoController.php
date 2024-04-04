@@ -24,10 +24,10 @@ class ProdutoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = Produto::paginate(100);
-        return view('produto.index', compact('produtos'));
+        $produtos = Produto::getDataTable($request, 100);
+        return view('produto.index', compact('produtos', 'request'));
     }
 
     /**
