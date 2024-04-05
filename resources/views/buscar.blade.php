@@ -27,7 +27,10 @@
             </div>
         </div>
         <div class="card-body pt-2 table-responsive" >
-            @include('os.partials.os-table', ['osTable' => $os,   'show'=> true ])
+            @include('os.partials.os-table', [
+                'osTable' => $os,
+                'show'=> true
+            ])
         </div>
     </div>
 @endif
@@ -51,9 +54,10 @@
             </div>
         </div>
         <div class="card-body pt-2 table-responsive" >
-            @include('produto.partials.produto-table',
-                ['produtoTable' => $produtos, 'show'=> true, ]
-            )
+            @include('produto.partials.produto-table', [
+                'produtoTable' => $produtos,
+                'show'=> true,
+            ])
         </div>
     </div>
 @endif
@@ -77,11 +81,41 @@
             </div>
         </div>
         <div class="card-body pt-2 table-responsive" >
-            @include('cliente.partials.cliente-table', ['clientesTable' => $clientes,  'edit' => true, 'show'=> true,  'destroy' => true])
+            @include('cliente.partials.cliente-table', [
+                'clientesTable' => $clientes,
+                'show'=> true,
+            ])
         </div>
     </div>
 @endif
 {{-- FIM - Cliente  --}}
+
+{{-- Wiki --}}
+@if ($wikis->total() > 0)
+    <div class="card" style="position: relative; left: 0px; top: 0px;">
+        <div class="card-header ui-sortable-handle">
+            <h3 class="card-title pt-1">Wikis</h3>
+            <div class="card-tools">
+                <a href="{{ route('wiki.index', ['busca' => $request->busca]) }}">
+                    <button class="btn btn-sm btn-oslab" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <b>Ver todos </b>
+                        <span title="Total encontrados 132132" class="badge bg-indigo">{{ $wikis->total() }}</span>
+                    </button>
+                </a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body pt-2 table-responsive" >
+            @include('wiki.partials.wiki-table', [
+                'wikiTable' => $wikis,
+                'show'=> true,
+            ])
+        </div>
+    </div>
+@endif
+{{-- FIM - Wiki  --}}
 @stop
 
 @section('css')

@@ -9,112 +9,78 @@
 @section('content')
 <div class="">
     <div class="card">
-      <div class="card-header">
-            <a href="{{ url()->previous() }}">
-                <button type="button"  class="btn btn-sm btn-default">
-                    <i class="fa-solid fa-chevron-left"></i>
-                    Voltar
+        <div class="card-header">
+                <a href="{{ url()->previous() }}">
+                    <button type="button"  class="btn btn-sm btn-default">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        Voltar
+                    </button>
+                </a>
+                @can('wiki_create')
+                <a href="{{ route('wiki.create') }}">
+                    <button type="button"  class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-plus"></i>
+                        Adicionar Wiki
+                    </button>
+                </a>
+                @endcan
+                <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseWiki" aria-expanded="false" aria-controls="collapseWiki">
+                    <i class="fa-solid fa-filter"></i>
+                    Filtros
                 </button>
-            </a>
-            @can('wiki_create')
-            <a href="{{ route('wiki.create') }}">
-                <button type="button"  class="btn btn-sm btn-primary">
-                    <i class="fa-solid fa-plus"></i>
-                    Adicionar Wiki
-                </button>
-            </a>
-            @endcan
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body table-responsive">
-        <table class="table table-sm table-hover text-nowrap">
-          <thead>
-            <tr>
-              <th style="width: 10px">#</th>
-              <th>Nome</th>
-              <th>Modelos</th>
-              <th>Categoria Padrão</th>
-              <th>Criado pelo usuario</th>
-              <th style="width: 40px"></th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($wikis as $item)
-              <tr >
-                <td>{{ $item->id }}</td>
-                <td>
-                    @can('wiki_show')
-                        <a href="{{ route('wiki.show', $item->id) }}">
-                            {{ $item->name}}
-                        </a>
-                    @else()
-                        {{ $item->name}}
-                    @endcan
-                </td>
-                <td>
-                    @can('wiki_show')
-                        <a href="{{ route('wiki.show', $item->id) }}">
-                            {{ $item->modelosTitle()}}
-                        </a>
-                    @else()
-                        {{ $item->modelosTitle()}}
-                    @endcan
-                </td>
-                <td>{{ $item->categoria->name}}</td>
-                <td>{{ $item->user->name}}</td>
-                <td>
-                    <div class="btn-group btn-group-sm">
-                        @can('wiki_show')
-                            <a href="{{ route('wiki.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
-                        @endcan
-                        @can('wiki_edit')
-                            <a href="{{ route('wiki.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
-                        @endcan
-                        @can('wiki_destroy')
-                        <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-target="#modal-excluir_{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                        @endcan
-                    </div>
-                        @can('wiki_destroy')
-                        <div class="modal fade" id="modal-excluir_{{ $item->id }}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h4 class="modal-title">Realmente deseja Excluir?</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <p><b>Nome:</b> {{ $item->name}}</p>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                        {!! html()->form('delete', route('wiki.destroy', $item->id))->open() !!}
-                                            <input type="submit" class="btn btn-danger delete-permission" value="Excluir Wiki">
-                                        {!! html()->form()->close() !!}
-
-                                    </div>
-                                </div>
-                            <!-- /.modal-content -->
+                <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseWiki">
+                    <hr>
+                    {{ html()->form('get', route('wiki.index'))->open() }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-2 ">
+                                <label for="busca">Nome / Modelo </label>
+                                {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Nome ou Modelo') !!}
                             </div>
-                            <!-- /.modal-dialog -->
                         </div>
-                        @endcan
+                        <div class="col-md-3">
+                            <div class="form-group mb-2 ">
+                                <label for="categoria_id">Categoria</label>
+                                {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'), $request->categoria_id)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <div class="form-group text-right mb-2">
+                                <button type="submit"  class="btn bg-lightblue btn-sm">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    Buscar
+                                </button>
+                                @if (count($request->all()) > 0)
+                                <a href="{{ route('wiki.index') }}">
+                                    <button type="button"  class="btn bg-gray btn-sm">
+                                        <i class="fa-solid fa-xmark"></i>
+                                        Limpar
+                                    </button>
+                                </a>
+                                @endif
+                            </div>
+                        </div>
                     </div>
-                  <!-- /.modal -->
-                </td>
-              </tr>
+                    {!! html()->form()->close() !!}
+                </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body pt-2 table-responsive">
+            @include('wiki.partials.wiki-table', [
+                'wikiTable' => $wikis,
+                'edit' => true, 'show'=> true,  'destroy' => true
+            ])
+        </div>
 
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-
-      <!-- /.card-body -->
-      <div class="card-footer clearfix">
-          {{-- {{$Wiki->appends(['busca' => $busca])->links() }} --}}
-          {{ $wikis->links() }}
-      </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+            {{$wikis->appends($request->all())->links() }}
+        </div>
+    {{-- Modal Excluir --}}
+    @can('wiki_destroy')
+        @include('adminlte::partials.modal.modal-excluir')
+    @endcan
+    {{-- // Modal Excluir --}}
     </div>
 </div>
 @stop

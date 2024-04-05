@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Os\Os;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
 
 class Wiki extends Model
 {
@@ -32,6 +33,16 @@ class Wiki extends Model
         return $this->hasMany(File::class);
     }
 
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function categoria() : BelongsTo
+    {
+        return $this->belongsTo(OsCategoria::class);
+    }
+
     public function os () {
         return $this->hasManyThrough(
             Os::class,
@@ -48,6 +59,32 @@ class Wiki extends Model
     }
 
 
+    /**
+     * Retorna o objeto pra modelagem da tabela de Produtos
+     *
+     * @param Request $request
+     * @param int $itensPorPagina default 100
+     */
+    static public function getDataTable(Request $request, int $itensPorPagina = 100) : object {
+        $queryWiki = self::query();
+        $queryWiki->with('modelos');
+        $queryWiki->with('user');
+        $queryWiki->with('categoria');
+        if (isset($request->busca)) {
+            $queryWiki->where(function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhereHas('modelos', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                });
+            });
+        }
+        if($request->categoria_id){
+            $queryWiki->where('categoria_id', $request->categoria_id);
+        }
+        return $queryWiki->paginate($itensPorPagina);
+    }
+
+
 
 
     public function modelosTitle() {
@@ -58,14 +95,6 @@ class Wiki extends Model
         return rtrim($return, ', ');
     }
 
-    public function user() : BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
-    public function categoria() : BelongsTo
-    {
-        return $this->belongsTo(OsCategoria::class);
-    }
 
 }

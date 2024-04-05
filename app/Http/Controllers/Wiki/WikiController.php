@@ -40,10 +40,10 @@ class WikiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $wikis = Wiki::paginate(100);
-        return view('wiki.index',compact('wikis'));
+        $wikis = Wiki::getDataTable($request);
+        return view('wiki.index',compact('wikis', 'request'));
     }
 
     /**
