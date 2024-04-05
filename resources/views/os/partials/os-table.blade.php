@@ -4,10 +4,10 @@
         <th style="width: 10px">#</th>
         <th>Cliente</th>
         <th>Técnico</th>
-        <th>Data Entrada</th>
-        <th>Data Saída</th>
+        <th>Entrada</th>
+        <th>Saída</th>
         <th>Garantia</th>
-        <th>Valor Total</th>
+        <th>Valor</th>
         <th>Categoria</th>
         <th>Status</th>
         @if ((isset($edit) && $edit === true) || (isset($show) && $show === true) || (isset($destroy) && $destroy === true))
