@@ -26,7 +26,6 @@ class StoreWikiRequest extends FormRequest
             'name' => 'required|unique:wikis',
             'modelo' => 'required|unique:wiki_models,name',
             'categoria_id' => 'required|exists:os_categorias,id',
-
         ];
     }
 

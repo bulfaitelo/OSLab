@@ -102,9 +102,21 @@ class WikiController extends Controller
      */
     public function update(UpdateWikiRequest $request, Wiki $wiki)
     {
-        $teste = $this->trataImagemEnviada($request->texto, $wiki->id);
-
-        dd($teste, $request->input() );
+        DB::beginTransaction();
+        try {
+            $wiki->name = $request->name;
+            $wiki->fabricante_id = $request->fabricante_id;
+            $wiki->categoria_id = $request->categoria_id;
+            $wiki->user_id = Auth::id();
+            $wiki->save();           
+            DB::commit();
+            return redirect()->route('wiki.index')
+            ->with('success', 'Wiki atualizada com sucesso.'); 
+            
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**

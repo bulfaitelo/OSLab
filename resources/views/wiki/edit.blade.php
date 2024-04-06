@@ -55,8 +55,7 @@
                         {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'), $wiki->categoria_id)->class('form-control')->placeholder('Selecione') !!}
                     </div>
                 </div>
-            </div>
-                <textarea name="texto" id="texto" >{!! $wiki->texto !!}</textarea>
+            </div>                
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
@@ -74,30 +73,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
-    <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
-    <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#texto').summernote({
-                lang: 'pt-BR',
-                height: 300,
-                // toolbar: [
-                //     [ 'style', [ 'style' ] ],
-                //     [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
-                //     [ 'fontname', [ 'fontname' ] ],
-                //     [ 'fontsize', [ 'fontsize' ] ],
-                //     [ 'color', [ 'color' ] ],
-                //     [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
-                //     [ 'table', [ 'table' ] ],
-                //     [ 'insert', [ 'link'] ],
-                //     [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
-                // ]
-            });
-        });
-    </script>
 @stop

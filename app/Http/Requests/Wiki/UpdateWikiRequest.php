@@ -22,7 +22,18 @@ class UpdateWikiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'fabricante_id' => 'required|exists:fabricantes,id',
+            'name' => 'required|unique:wikis,name,'.$this->wiki->id,
+            'categoria_id' => 'required|exists:os_categorias,id',
+        ];
+    }
+
+    public function messages() : array {
+        return [
+           'fabricante_id' => 'O Fabricante é obrigatório',
+           'name' => 'O nome do dispositivo é obrigatório',
+           'name.unique' => 'O nome do dispositivo já está em uso!',
+           'modelo' => 'O modelo é obrigatório',
         ];
     }
 }
