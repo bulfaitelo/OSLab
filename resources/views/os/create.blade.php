@@ -297,15 +297,15 @@
             lang: 'pt-BR',
             height: 300,
             toolbar: [
-                [ 'style', [ 'style' ] ],
+                // [ 'style', [ 'style' ] ],
                 [ 'font', [ 'bold', 'italic', 'clear'] ],
                 // [ 'fontname', [ 'fontname' ] ],
-                [ 'fontsize', [ 'fontsize' ] ],
-                [ 'color', [ 'color' ] ],
+                // [ 'fontsize', [ 'fontsize' ] ],
+                // [ 'color', [ 'color' ] ],
                 [ 'para', [ 'ol', 'ul', 'paragraph', ] ],
                 [ 'table', [ 'table' ] ],
                 [ 'insert', ['link', 'picture',]],
-                [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+                [ 'view', [ 'undo', 'redo', 'codeview', 'help' ] ]
             ]
         });
     });
