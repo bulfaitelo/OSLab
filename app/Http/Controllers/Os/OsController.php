@@ -121,8 +121,6 @@ class OsController extends Controller
         // dd($request->input());
         DB::beginTransaction();
         try {
-
-
             $os->user_id = Auth::id();
             $os->cliente_id = $request->cliente_id;
             $os->tecnico_id = $request->tecnico_id;
@@ -131,7 +129,11 @@ class OsController extends Controller
             $os->status_id = $request->status_id;
             $os->data_entrada = $request->data_entrada;
             $os->data_saida = $request->data_saida;
-            $os->prazo_garantia = $this->addDayGarantia($request->data_saida, $request->categoria_id);
+            if (isset($request->data_saida)) {
+                $os->prazo_garantia = $this->addDayGarantia($request->data_saida, $request->categoria_id);                
+            } else {
+                $os->prazo_garantia = null;
+            }
             $os->descricao = $request->descricao;
             $os->defeito = $request->defeito;
             $os->observacoes = $request->observacoes;
