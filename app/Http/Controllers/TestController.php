@@ -25,31 +25,31 @@ class TestController extends Controller
         // $emitente = new \App\Models\Configuracao\Sistema\Emitente();
         // dd($emitente->getHtmlEmitente(1));
 
-        $config = config('backup.backup.destination.disks');
-        dd(explode(',', env('BACKUP_DIRECTORY')), $config);
+        // $config = config('backup.backup.destination.disks');
+        // dd(explode(',', env('BACKUP_DIRECTORY')), $config);
 
-            // dd(config('filesystems.disks.local.root').'/OsLab/OsLab_2023-02-19-14-36-53.zip');
-            // $path = config('filesystems.disks.local.root').'/OsLab/OsLab_2024-02-19-18-37-54.zip';
-            // $teste = Gdrive::put('filename.zip', $path);
+        //     // dd(config('filesystems.disks.local.root').'/OsLab/OsLab_2023-02-19-14-36-53.zip');
+        //     // $path = config('filesystems.disks.local.root').'/OsLab/OsLab_2024-02-19-18-37-54.zip';
+        //     // $teste = Gdrive::put('filename.zip', $path);
 
-        dd(collect(Storage::disk('google')->listContents('')));
-        $teste = Gdrive::all('/');
-        dd($teste);
-            // dd($path);
-
-
-
-        // $backupStatus = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
-        // dd($backupStatus->wasSuccessful());
-
-        // $backupDestinations = BackupDestinationFactory::createFromArray(config('backup.backup'));
-        // dd($backupDestinations);
-        // // dd(config('backup.backup'));
+        // dd(collect(Storage::disk('google')->listContents('')));
+        // $teste = Gdrive::all('/');
+        // dd($teste);
+        //     // dd($path);
 
 
 
-        $emitente = Emitente::getHtmlEmitente(1);
-        return view("teste", compact("emitente"));
+        // // $backupStatus = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
+        // // dd($backupStatus->wasSuccessful());
+
+        // // $backupDestinations = BackupDestinationFactory::createFromArray(config('backup.backup'));
+        // // dd($backupDestinations);
+        // // // dd(config('backup.backup'));
+
+
+
+        // $emitente = Emitente::getHtmlEmitente(1);
+        return view("teste");
     }
 
     /**
@@ -65,7 +65,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

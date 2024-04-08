@@ -23,8 +23,8 @@
                 </a>
             </div>
             <div class="card-body">
-                {!! html()->form('post', route('configuracao.wiki.modelo.store'))->open() !!}
-                <div class="row">
+                {!! html()->form('post', route('teste.store'))->id('form')->open() !!}
+                {{-- <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="descricao">Descrição</label>
@@ -87,7 +87,17 @@
                             {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
                         </div>
                     </div>
+                </div> --}}
+                <!-- Create the editor container -->
+                <div id="editor">
+                    <b>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea ad ratione reiciendis suscipit! Libero ratione, ipsum laudantium optio error quis animi reiciendis rem illum labore esse eaque dolore voluptatibus rerum!
+                    </b>
+                    <span>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, nobis minima fugiat vero impedit quaerat, optio saepe consequuntur architecto ab hic. Facere natus nam aliquam voluptatum tempore! Deserunt, non veritatis.
+                    </span>
                 </div>
+                <input type="hidden" id="quill_html" name="name"></input>
 
             </div>
             {{-- Minimal with icon only --}}
@@ -107,26 +117,39 @@
 @stop
 
 @section('css')
+<!-- Include stylesheet -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.5/dist/quill.snow.css" rel="stylesheet" />
 @stop
 
 @section('js')
+<!-- Include the Quill library -->
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.5/dist/quill.js"></script>
 <script>
+    // const initialData = {
 
-    $('#observacoes-div').on('show.bs.collapse', function () {
-        $('#obervacoes-icon').removeClass('fa-caret-right').addClass('fa-caret-down');
-    })
-    $('#observacoes-div').on('hidden.bs.collapse', function () {
-        $('#obervacoes-icon').removeClass('fa-caret-down').addClass('fa-caret-right');
-    })
-
-    $('#recebido').on('change', function () {
-        if (this.checked) {
-            $('#recebido-div').css('display', '');
-        } else {
-            $('#recebido-div').css('display', 'none');
-        }
+    // `about` is a Delta object
+    // Learn more at: https://quilljs.com/docs/delta
+    // about: [
+    //     {
+    //     insert:
+    //         'A robot who has developed sentience, and is the only robot of his kind shown to be still functioning on Earth.\n',
+    //     },
+    // ],
+    // };
+    const quill = new Quill('#editor', {
+      theme: 'snow'
     });
-</script>
+
+    quill.submit('text-change', function(delta, oldDelta, source) {
+        document.getElementById("quill_html").value = quill.root.innerHTML;
+    });
+
+    // const form = document.querySelector('#form');
+    //     form.addEventListener('formdata', (event) => {
+    //     // Append Quill content before submitting
+    //     event.formData.append('about', JSON.stringify(quill.getContents().ops));
+    // });
+  </script>
 @stop
 
 @section('footer')
