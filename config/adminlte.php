@@ -318,13 +318,13 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'Buscar',
         ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 5,
-            'label_color' => 'success',
-        ],
+        // [
+        //     'text'        => 'pages',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'label'       => 5,
+        //     'label_color' => 'success',
+        // ],
         // ['header' => 'account_settings'],
         [
             'text'    => 'OS',
