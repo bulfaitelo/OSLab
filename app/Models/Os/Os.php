@@ -165,6 +165,8 @@ class Os extends Model
     }
 
 
+
+
     /**
      * Retorna o objeto pra modelagem da tabela de OS
      *

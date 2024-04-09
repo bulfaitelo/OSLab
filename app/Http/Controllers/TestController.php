@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\OsLabClass\Backup\GetBackupDataInfo;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
+use App\Services\OsService\OsService;
 use Artisan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,11 +18,18 @@ use Yaza\LaravelGoogleDriveStorage\Gdrive;
 
 class TestController extends Controller
 {
+
+    public function __construct(private readonly OsService $osService) {
+
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+
+        dd($this->osService->createOs(1));
         // $emitente = new \App\Models\Configuracao\Sistema\Emitente();
         // dd($emitente->getHtmlEmitente(1));
 

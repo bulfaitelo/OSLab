@@ -10,6 +10,7 @@ use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
+use App\Services\OsService\OsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,9 @@ use Illuminate\Support\Facades\DB;
 class OsController extends Controller
 {
 
-    function __construct()
+    function __construct(
+        private readonly OsService $osService
+    )
     {
         // ACL DE PERMISSÕES
         $this->middleware('permission:os', ['only'=> ['index']]);
@@ -54,34 +57,11 @@ class OsController extends Controller
      */
     public function store(StoreOsRequest $request)
     {
-        // dd($request->input());
-        DB::beginTransaction();
-        try {
 
-            $os = new Os();
-            $os->user_id = Auth::id();
-            $os->cliente_id = $request->cliente_id;
-            $os->tecnico_id = $request->tecnico_id;
-            $os->categoria_id = $request->categoria_id;
-            $os->modelo_id = $request->modelo_id;
-            $os->status_id = $request->status_id;
-            $os->data_entrada = $request->data_entrada;
-            $os->data_saida = $request->data_saida;
-            // $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $request->categoria_id);
-            $os->descricao = $request->descricao;
-            $os->defeito = $request->defeito;
-            $os->observacoes = $request->observacoes;
-            $os->laudo = $request->laudo;
-            $os->serial = $request->serial;
-            $os->save();
+        $os = $this->osService->create($request);
+        return redirect()->route('os.edit', $os->id)
+        ->with('success', 'Os cadastrada com sucesso.');
 
-            DB::commit();
-            return redirect()->route('os.edit', $os->id)
-            ->with('success', 'Os cadastrada com sucesso.');
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            throw $th;
-        }
     }
 
     /**
@@ -130,7 +110,7 @@ class OsController extends Controller
             $os->data_entrada = $request->data_entrada;
             $os->data_saida = $request->data_saida;
             if (isset($request->data_saida)) {
-                $os->prazo_garantia = $this->addDayGarantia($request->data_saida, $request->categoria_id);                
+                $os->prazo_garantia = $this->addDayGarantia($request->data_saida, $request->categoria_id);
             } else {
                 $os->prazo_garantia = null;
             }
