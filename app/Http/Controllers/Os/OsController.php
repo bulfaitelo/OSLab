@@ -20,7 +20,7 @@ class OsController extends Controller
 {
 
     function __construct(
-        private readonly OsService $osService
+        private readonly ?OsService $osService = null
     )
     {
         // ACL DE PERMISSÕES
