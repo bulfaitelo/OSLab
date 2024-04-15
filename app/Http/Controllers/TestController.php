@@ -32,25 +32,31 @@ class TestController extends Controller
     {
 
         // dd($this->osService->createOs(1));
-        Http::fake();
-        $response = Http::post('', [
-            'teste'=> 'rr',
-        ]);
-        dd($response);
+        // Http::fake();
+        // $response = Http::post('', [
+        //     'teste'=> 'rr',
+        // ]);
+        // dd($response);
         $osService = new OsService;
-        $request = new Request;
-        $request->cliente_id = 1;
-        $request->tecnico_id = 1;
-        $request->categoria_id = 1;
-        $request->status_id = 3;
-        $request->data_entrada =  now() ;
-        $request->data_saida = now() ;
+        // $request->request->set(
+            //     'teste', 'valor TESte'
+            // );
+
+            $request = new Request;
+            $request->merge([
+                'cliente_id' => 1,
+                'tecnico_id' => 1,
+                'categoria_id' => 1,
+                'status_id' => 3,
+                'data_entrada' =>  now() ,
+                'data_saida' => now() ,
+            ]);
         // $request->descricao;
         // $request->defeito;
         // $request->observacoes;
         // $request->laudo;
         // $request->serial;
-        dd($request);
+        // dd($request->all());
         dd($osService->create($request));
         // $emitente = new \App\Models\Configuracao\Sistema\Emitente();
         // dd($emitente->getHtmlEmitente(1));
