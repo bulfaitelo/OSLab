@@ -1,7 +1,7 @@
 <table class="table table-sm table-hover text-nowrap">
     <thead>
       <tr>
-        <th style="width: 10px">#</th>
+        <th>Fabricante</th>
         <th>Nome</th>
         <th>Modelos</th>
         <th>Categoria</th>
@@ -13,8 +13,20 @@
     </thead>
     <tbody>
       @foreach ($wikiTable as $item)
-        <tr >
-            <td>{{ $item->id }}</td>
+        <tr>
+            <td>
+                @if (isset($show) && $show === true)
+                    @can('wiki_show')
+                        <a href="{{ route('wiki.show', $item->id) }}">
+                            <b>[{{ $item->fabricante->name }}]</b>
+                        </a>
+                    @else()
+                        <b>[{{ $item->fabricante->name }}]</b>
+                    @endcan
+                @else
+                    <b>[{{ $item->fabricante->name }}]</b>
+                @endif
+            </td>
             <td>
                 @if (isset($show) && $show === true)
                     @can('wiki_show')
