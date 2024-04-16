@@ -34,8 +34,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mb-2 ">
-                                <label for="busca">Nome / Modelo </label>
-                                {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Nome ou Modelo') !!}
+                                <label for="busca">Nome / Modelo / Fabricante </label>
+                                {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Nome Modelo ou Fabricante') !!}
                             </div>
                         </div>
                         <div class="col-md-3">
