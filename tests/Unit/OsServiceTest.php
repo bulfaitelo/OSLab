@@ -38,7 +38,7 @@ class OsServiceTest extends TestCase
     {
         foreach ($this->osRequestData() as $key => $request) {
             $messageKey = 'Looping:' . $key;
-            $os = $this->osService->create($request);
+            $os = $this->osService->store($request);
             $this->assertEquals($request->descricao, $os->descricao, $messageKey);
             $this->assertEquals($request->defeito, $os->defeito, $messageKey);
             $this->assertEquals($request->observacoes, $os->observacoes, $messageKey);
