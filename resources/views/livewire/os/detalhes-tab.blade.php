@@ -253,7 +253,7 @@
                         [ 'para', [ 'ol', 'ul', 'paragraph', ] ],
                         [ 'table', [ 'table' ] ],
                         [ 'insert', ['link', 'picture',]],
-                        [ 'view', [ 'undo', 'redo', 'codeview', 'help' ] ]
+                        [ 'view', [ 'undo', 'redo', 'codeview', 'fullscreen', 'help' ] ]
                     ]
                 });
             });

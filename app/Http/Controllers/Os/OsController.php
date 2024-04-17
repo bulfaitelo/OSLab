@@ -20,7 +20,7 @@ class OsController extends Controller
 {
 
     function __construct(
-        private readonly ?OsService $osService = null
+        private readonly ? OsService $osService = null
     )
     {
         // ACL DE PERMISSÕES
@@ -39,7 +39,7 @@ class OsController extends Controller
      */
     public function index(Request $request)
     {
-        $os = OS::getDataTable($request);
+        $os = $this->osService->getDataTable($request);
         return view('os.index', compact('os', 'request'));
     }
 
@@ -57,11 +57,9 @@ class OsController extends Controller
      */
     public function store(StoreOsRequest $request)
     {
-
-        $os = $this->osService->create($request);
+        $os = $this->osService->store($request);
         return redirect()->route('os.edit', $os->id)
         ->with('success', 'Os cadastrada com sucesso.');
-
     }
 
     /**
@@ -99,35 +97,9 @@ class OsController extends Controller
     public function update(UpdateOsRequest $request, Os $os)
     {
         // dd($request->input());
-        DB::beginTransaction();
-        try {
-            $os->user_id = Auth::id();
-            $os->cliente_id = $request->cliente_id;
-            $os->tecnico_id = $request->tecnico_id;
-            $os->categoria_id = $request->categoria_id;
-            $os->modelo_id = $request->modelo_id;
-            $os->status_id = $request->status_id;
-            $os->data_entrada = $request->data_entrada;
-            $os->data_saida = $request->data_saida;
-            if (isset($request->data_saida)) {
-                $os->prazo_garantia = $this->addDayGarantia($request->data_saida, $request->categoria_id);
-            } else {
-                $os->prazo_garantia = null;
-            }
-            $os->descricao = $request->descricao;
-            $os->defeito = $request->defeito;
-            $os->observacoes = $request->observacoes;
-            $os->laudo = $request->laudo;
-            $os->serial = $request->serial;
-            $os->save();
-
-            DB::commit();
-            return redirect()->route('os.edit', $os->id)
-            ->with('success', 'Os Atualizada com sucesso.');
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            throw $th;
-        }
+        $os = $this->osService->update($request, $os);
+        return redirect()->route('os.edit', $os->id)
+        ->with('success', 'Os Atualizada com sucesso.');
     }
 
     /**
@@ -138,9 +110,9 @@ class OsController extends Controller
         try {
             if($os->fatura_id){
                 return redirect()->route('os.index')
-                ->with('warning', 'Essa OS já está faturada, cancele a fatura antes de exclui-la !');
+                ->with('warning', 'Essa OS já está faturada, cancele a fatura antes de exclui-la!');
             }
-            $os->delete();
+            $this->osService->destroy($os);
             return redirect()->route('os.index')
             ->with('success', 'OS Excluida com sucesso.');
 
