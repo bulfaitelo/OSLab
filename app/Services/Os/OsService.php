@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\OsService;
+namespace App\Services\Os;
 
-use App\Contracts\Services\OsService\OsServiceInterface;
+use App\Contracts\Services\Os\OsServiceInterface;
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;

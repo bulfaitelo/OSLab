@@ -10,7 +10,7 @@ use App\Models\Configuracao\Os\OsCategoria;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
-use App\Services\OsService\OsService;
+use App\Services\Os\OsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

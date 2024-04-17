@@ -37,6 +37,7 @@ class TestController extends Controller
         //     'teste'=> 'rr',
         // ]);
         // dd($response);
+        dd(config('database.connections.sqlite'));
         $osService = new OsService;
         // $request->request->set(
             //     'teste', 'valor TESte'
