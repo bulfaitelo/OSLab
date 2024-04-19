@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Os\OsController;
 use App\Http\OsLabClass\Backup\GetBackupDataInfo;
+use App\Http\Requests\Os\StoreOsRequest;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use App\Services\OsService\OsService;
@@ -11,6 +12,7 @@ use Artisan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 use Spatie\Backup\BackupDestination\BackupDestinationFactory;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
@@ -31,27 +33,46 @@ class TestController extends Controller
     public function index()
     {
 
+
         // dd($this->osService->createOs(1));
         // Http::fake();
         // $response = Http::post('', [
         //     'teste'=> 'rr',
         // ]);
         // dd($response);
-        dd(config('database.connections.sqlite'));
-        $osService = new OsService;
+        // dd(config('database.connections.sqlite'));
+        // $osService = new OsService;
         // $request->request->set(
             //     'teste', 'valor TESte'
             // );
+            $data = [
+                'cliente_id' => 123,
+                'tecnico_id' => 123,
+                'categoria_id' => 1,
+                'status_id' => 3,
+                'data_entrada' =>  now() ,
+                'data_saida' => now() ,
+            ];
 
-            $request = new Request;
+            $request = new StoreOsRequest;
+            $validator = Validator::make($data, $request->rules());
+
+
+
+
+            dd($request->rules(), $validator->messages(),  $validator->failed());
+
+
             $request->merge([
-                'cliente_id' => 1,
+                'cliente_id' => 1233,
                 'tecnico_id' => 1,
                 'categoria_id' => 1,
                 'status_id' => 3,
                 'data_entrada' =>  now() ,
                 'data_saida' => now() ,
             ]);
+            $request->all();
+            dd($request->all());
         // $request->descricao;
         // $request->defeito;
         // $request->observacoes;
