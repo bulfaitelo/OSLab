@@ -1,24 +1,23 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
-// use PHPUnit\Framework\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
 use App\Http\Requests\Os\StoreOsRequest;
 use App\Http\Requests\Os\UpdateOsRequest;
 use App\Models\Cliente\Cliente;
-use Tests\TestCase;
 use App\Models\Os\Os;
-use App\Models\User;
 use App\Services\Os\OsService;
-
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class OsServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     private $osService;
     private $os;
@@ -29,8 +28,8 @@ class OsServiceTest extends TestCase
     public function setUp() : void
     {
         // Preparando Banco de Dados
-        parent::setUp();
-        $this->artisan('migrate --seed');
+        parent::setUp();        
+        $this->artisan('migrate:fresh --seed');
         Cliente::factory()->count(10)->create();
         Auth::loginUsingId(1);
         $this->osService = new OsService;
@@ -71,7 +70,7 @@ class OsServiceTest extends TestCase
         foreach ($this->osRequestCreateData() as $key => $dataRequest) {
             $messageKey = 'Looping:' . $key;
             $request = $this->request->merge($dataRequest);
-            $osCreated = $this->osService->store($request);
+            $osCreated = $this->osService->store($request);            
             $this->assertEquals($request->descricao, $osCreated->descricao, $messageKey);
             $this->assertEquals($request->defeito, $osCreated->defeito, $messageKey);
             $this->assertEquals($request->observacoes, $osCreated->observacoes, $messageKey);
@@ -87,23 +86,23 @@ class OsServiceTest extends TestCase
      * @depends testCreateOs
      * @depends testGetRequestToCreateOs
      */
-    // public function testUpdateOs($osArray)
-    // {
-    //     // dd(Os::find(1));
-    //     foreach ($this->osRequestUpdateData() as $key => $dataRequest) {
-    //         $messageKey = 'Looping:' . $key;
-    //         $request = $this->request->merge($dataRequest);
-    //         // $os = Os::find(1);
-    //         // dd($os);
-    //         $osUpdated = $this->osService->update($request, );
-    //         $this->assertEquals($request->descricao, $osUpdated->descricao, $messageKey);
-    //         $this->assertEquals($request->defeito, $osUpdated->defeito, $messageKey);
-    //         $this->assertEquals($request->observacoes, $osUpdated->observacoes, $messageKey);
-    //         $this->assertEquals($request->laudo, $osUpdated->laudo, $messageKey);
-    //         $this->assertEquals($request->serial, $osUpdated->serial, $messageKey);
-    //     }
+    public function testUpdateOs($osArray)
+    {
+        // dd(Os::find(1));
+        foreach ($this->osRequestUpdateData() as $key => $dataRequest) {
+            $messageKey = 'Looping:' . $key;
+            $request = $this->request->merge($dataRequest);
+            $os = Os::get();
+            dd($os);
+            $osUpdated = $this->osService->update($request, );
+            $this->assertEquals($request->descricao, $osUpdated->descricao, $messageKey);
+            $this->assertEquals($request->defeito, $osUpdated->defeito, $messageKey);
+            $this->assertEquals($request->observacoes, $osUpdated->observacoes, $messageKey);
+            $this->assertEquals($request->laudo, $osUpdated->laudo, $messageKey);
+            $this->assertEquals($request->serial, $osUpdated->serial, $messageKey);
+        }
 
-    // }
+    }
 
 
 
