@@ -9,11 +9,12 @@ use App\Models\Cliente\Cliente;
 use App\Models\User;
 use App\Services\Os\OsService;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class OsServiceCreateTest extends TestCase
 {
 
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     private $osService;
     private $request;
@@ -29,10 +30,8 @@ class OsServiceCreateTest extends TestCase
         $this->user = User::find(1);
     }
 
-    /**
-     * @dataProvider osCreateData
-     */
-    public function testCreateOs($data, $dataExpected)
+    #[DataProvider('osCreateData')]
+    public function testCreateOs(array $data, array $dataExpected)
     {
         $this->actingAs($this->user);
         $this->user->hasPermissionTo('os_create');
