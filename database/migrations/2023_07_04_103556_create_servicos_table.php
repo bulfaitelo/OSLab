@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('descricao')->nullable();
-            $table->unsignedDecimal('valor_servico', 9, 2);
+            $table->Decimal('valor_servico', 9, 2)->unsigned();
             $table->timestamps();
         });
     }
