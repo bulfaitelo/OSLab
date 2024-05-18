@@ -3,19 +3,12 @@
 namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\CreatesApplication;
 use Tests\TestCase;
 
-use App\Http\Requests\Os\StoreOsRequest;
-use App\Http\Requests\Os\UpdateOsRequest;
 use App\Models\Cliente\Cliente;
-use App\Models\Os\Os;
 use App\Models\User;
 use App\Services\Os\OsService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class OsServiceCreateTest extends TestCase
 {
@@ -39,18 +32,36 @@ class OsServiceCreateTest extends TestCase
     /**
      * @dataProvider osCreateData
      */
-    public function testCreateOs($data)
+    public function testCreateOs($data, $dataExpected)
     {
         $this->actingAs($this->user);
         $this->user->hasPermissionTo('os_create');
         $response = $this->post(route('os.store'),  $data);
         $response->assertStatus(302);
         $response->assertSessionHasNoErrors();
-        $this->assertDatabaseHas('os', $data );
+        $this->assertDatabaseHas('os', $dataExpected );
     }
 
+    /**
+     * DadaProvider
+     */
     public static function osCreateData() : array {
         $data['os_001'] = [
+        // Send
+            [
+                'cliente_id' => 10,
+                'tecnico_id' => 1,
+                'categoria_id' => 1,
+                'status_id' => 10,
+                'data_entrada' =>  now()->format('Y-m-d'),
+                'data_saida' => now()->format('Y-m-d'),
+                'descricao' => 'Updataed Descrição',
+                'defeito' => 'Updataed Defeito',
+                'observacoes' => 'Updated Observações',
+                'laudo' => '\n Updated Laudo    ',
+                'serial' => '    Serial--123',
+            ],
+        // Expected
             [
                 'cliente_id' => 10,
                 'tecnico_id' => 1,
@@ -63,9 +74,24 @@ class OsServiceCreateTest extends TestCase
                 'observacoes' => 'Updated Observações',
                 'laudo' => '\n Updated Laudo',
                 'serial' => 'Serial--123',
-            ],
+            ]
         ];
         $data['os_002'] = [
+        // Send
+            [
+                'cliente_id' => 1,
+                'tecnico_id' => 1,
+                'categoria_id' => 1,
+                'status_id' => 1,
+                'data_entrada' =>  now()->format('Y-m-d'),
+                'data_saida' => now()->format('Y-m-d'),
+                'descricao' => '<b>Updataed Descrição3432e!@#$$%$%¨%$</b>',
+                'defeito' => 'Updataed Defeito',
+                'observacoes' => 'Updated Observações',
+                'laudo' => 'Updated Laudo',
+                'serial' => 'Serial--123#!@#@#',
+            ],
+        // Expected
             [
                 'cliente_id' => 1,
                 'tecnico_id' => 1,
@@ -78,7 +104,7 @@ class OsServiceCreateTest extends TestCase
                 'observacoes' => 'Updated Observações',
                 'laudo' => 'Updated Laudo',
                 'serial' => 'Serial--123#!@#@#',
-            ]
+            ],
         ];
         return $data;
     }
