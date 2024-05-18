@@ -1,13 +1,13 @@
 <div>
     {{-- @include('adminlte::partials.form-alert') --}}
     @if (!$os->fatura_id)
-    <form method="POST" wire:submit.prevent="create">
+    <form method="POST" wire:submit="create">
         <div class="row" style="background-color: #f7f7f7; border-radius: 5px 5px 0px 0px" >
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="produto_id">Produto</label>
                     <div wire:ignore >
-                        <select id="os-produto" wire:model="produto_id" placeholder="Selecione um Produto"></select>
+                        <select id="os-produto" wire:model.live="produto_id" placeholder="Selecione um Produto"></select>
                     </div>
                     @error('produto_id') <span class="error">{{ $message }}</span> @enderror
                 </div>
@@ -17,7 +17,7 @@
                     <label for="valor_custo">Custo</label>
                     <input
                         class="form-control decimal"
-                        wire:model.defer="valor_custo"
+                        wire:model.live="valor_custo"
                         type="text"
                         name="busca"
                         id="valor_custo"
@@ -33,7 +33,7 @@
                     <label for="valor_venda">Preço</label>
                     <input
                         class="form-control decimal"
-                        wire:model.defer="valor_venda"
+                        wire:model.live="valor_venda"
                         type="text"
                         name="busca"
                         id="valor_venda"placeholder="Preço de venda"
@@ -48,7 +48,7 @@
                     <label for="produto_quantidade">Quantidade</label>
                     <input
                         class="form-control numero"
-                        wire:model.defer="quantidade"
+                        wire:model.live="quantidade"
                         type="text"
                         name="quantidade"
                         id="produto_quantidade"

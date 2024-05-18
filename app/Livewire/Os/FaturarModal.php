@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Os;
+namespace App\Livewire\Os;
 
 use Livewire\Component;
 
@@ -13,7 +13,7 @@ class FaturarModal extends Component
 
     function loadFaturarModal(){
         $this->valorTotal = $this->os->valorTotal();
-        $this->emit('toggleFaturarModal');
+        $this->dispatch('toggleFaturarModal');
     }
     public function render()
     {

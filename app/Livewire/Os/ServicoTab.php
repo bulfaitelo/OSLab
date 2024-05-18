@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Os;
+namespace App\Livewire\Os;
 
 use App\Models\Os\Os;
 use App\Models\Servico\Servico;
@@ -48,7 +48,7 @@ class ServicoTab extends Component
         $servico = $this->validate();
         if ($this->os->faturada == 1) {
             // Apagando o produto digitado.
-            $this->dispatchBrowserEvent('clear');
+            $this->dispatch('clear');
             flash()->addError('Serviço não pode ser adicionado a uma os Faturada.');
         } else {
             $this->createOsServico($servico);
@@ -58,7 +58,7 @@ class ServicoTab extends Component
             $this->servico_id = null;
 
             // Apagando o serviço digitado.
-            $this->dispatchBrowserEvent('clear');
+            $this->dispatch('clear');
             flasher('Serviço adicionado com sucesso.');
         }
     }
@@ -68,7 +68,7 @@ class ServicoTab extends Component
         try {
             if ($this->os->faturada == 1) {
                 // Apagando o produto digitado.
-                $this->dispatchBrowserEvent('clear');
+                $this->dispatch('clear');
                 flash()->addError('Serviço não pode ser apagado a uma os Faturada.');
             } else {
                 $osServico = $this->os->servicos()->find($id);

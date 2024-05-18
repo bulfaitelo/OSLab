@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Os;
+namespace App\Livewire\Os;
 
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -39,7 +39,7 @@ class AddPagamentoModal extends Component
      */
     function loadAdicionarPagamento(){
         // dd($this->os->contas->where('tipo', 'R'));
-        $this->emit('toggleAddPagamentoModal');
+        $this->dispatch('toggleAddPagamentoModal');
     }
 
     function mount() {

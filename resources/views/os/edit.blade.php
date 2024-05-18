@@ -117,14 +117,14 @@
                     <i class="fas fa-balance-scale"></i>
                     <span class="d-none d-sm-inline">Balancete</span>
                 </a>
-            </li>                
+            </li>
             @endif
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
                 @livewire('os.detalhes-tab', ['os' => $os])
             </div>
-            <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
+            {{-- <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
                 @livewire('os.produto-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
@@ -144,8 +144,8 @@
             @if ($os->fatura_id)
                 <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                     @livewire('os.balancete-tab', ['os' => $os])
-                </div>                
-            @endif
+                </div>
+            @endif --}}
         </div>
     </div>
 </div>
@@ -198,7 +198,7 @@
 {{-- Modal para criação de Pagamento de parcela --}}
 @can('os_receita_pagamento_create')
 <div class="modal fade" id="addPagamentoModal">
-    @livewire('os.add-pagamento-modal', ['os' => $os], key($os->id))
+    {{-- @livewire('os.add-pagamento-modal', ['os' => $os], key($os->id)) --}}
 </div>
 @endcan
 {{-- /Modal para criação de Pagamento de parcela --}}

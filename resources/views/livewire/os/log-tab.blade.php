@@ -24,7 +24,7 @@
                         {!! html()->textarea('observacao', 'dasdkjdasdlksjdlsjld')
                             ->class('form-control mb-2')
                             ->placeholder('Observações (opcional)')
-                            ->attribute('wire:model.defer', 'observacao')
+                            ->attribute('wire:model.live', 'observacao')
                         !!}
                         <button type="submit" class="btn btn-primary  btn-xs">
                             <i class="fas fa-save"></i>
@@ -89,7 +89,7 @@
     </div>
     {{-- @dump($os->getOsLogs()) --}}
     <script>
-        //  document.addEventListener('livewire:load', function () {
+        //  document.addEventListener('livewire:init', function () {
         //      $('#observacoes-log-div').on('show.bs.collapse', function () {
         //          $('#obervacoes-log-icon').removeClass('fa-caret-right').addClass('fa-caret-down');
         //      })
@@ -97,7 +97,7 @@
         //          $('#obervacoes-log-icon').removeClass('fa-caret-down').addClass('fa-caret-right');
         //      })
         // });
-        // document.addEventListener('livewire:load', function () {
+        // document.addEventListener('livewire:init', function () {
         //     $('.observacoes-log-div').on('show.bs.collapse', function () {
         //         $(this).find('.obervacoes-log-icon').removeClass('fa-caret-right').addClass('fa-caret-down');
         //     });

@@ -113,7 +113,7 @@
         </div>
     </div>
     <script>
-        document.addEventListener('livewire:load', function () {
+        document.addEventListener('livewire:init', function () {
             $('#modal-excluir-download').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var name = button.data('name') // Extract info from data-* attributes

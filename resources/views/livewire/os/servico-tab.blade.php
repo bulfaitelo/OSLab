@@ -1,13 +1,13 @@
 <div>
     {{-- @include('adminlte::partials.form-alert') --}}
     @if (!$os->fatura_id)
-    <form method="POST" wire:submit.prevent="create">
+    <form method="POST" wire:submit="create">
         <div class="row" style="background-color: #f7f7f7; border-radius: 5px 5px 0px 0px" >
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="servico_id">Serviço</label>
                     <div wire:ignore >
-                        <select id="os-servico" wire:model="servico_id" placeholder="Selecione um Serviço"></select>
+                        <select id="os-servico" wire:model.live="servico_id" placeholder="Selecione um Serviço"></select>
                     </div>
                     @error('servico_id') <span class="error">{{ $message }}</span> @enderror
                 </div>
@@ -17,7 +17,7 @@
                     <label for="valor_servico">Preço</label>
                     <input
                         class="form-control decimal"
-                        wire:model.defer="valor_servico"
+                        wire:model.live="valor_servico"
                         type="text" name="busca"
                         id="valor_servico"
                         inputmode="numeric"
@@ -32,7 +32,7 @@
                     <label for="servico_quantidade">Quantidade</label>
                     <input
                         class="form-control numero"
-                        wire:model.defer="quantidade"
+                        wire:model.live="quantidade"
                         type="text"
                         name="quantidade"
                         id="servico_quantidade"

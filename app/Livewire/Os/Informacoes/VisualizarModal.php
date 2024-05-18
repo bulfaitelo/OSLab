@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Os\Informacoes;
+namespace App\Livewire\Os\Informacoes;
 
 use App\Models\Os\OsInformacao;
 use Livewire\Component;
@@ -15,9 +15,9 @@ class VisualizarModal extends Component
 
     function loadVisualizarModal($id) {
         $this->item = OsInformacao::findOrFail($id);
-        $this->emit('toggleVisualizarModal');
+        $this->dispatch('toggleVisualizarModal');
         if($this->item->tipo_informacao == 'padrao') {
-            $this->emit('senhaPadrao', $this->item->informacao);
+            $this->dispatch('senhaPadrao', $this->item->informacao);
         }
     }
 

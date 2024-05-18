@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Os;
+namespace App\Livewire\Os;
 
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
@@ -49,7 +49,7 @@ class InformacoesTab extends Component
                 'status'=> 1,
             ]);
             DB::commit();
-            $this->dispatchBrowserEvent('closeModal');
+            $this->dispatch('closeModal');
             $this->anotacao = "";
             flasher('Anotação adicionada com sucesso.');
         } catch (\Throwable $th) {
@@ -90,7 +90,7 @@ class InformacoesTab extends Component
             $this->senha_texto = "";
             $this->tipo_senha = "texto";
 
-            $this->dispatchBrowserEvent('closeModal');
+            $this->dispatch('closeModal');
             flasher('Senha adicionada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -127,7 +127,7 @@ class InformacoesTab extends Component
                 'status'=> 1,
             ]);
             $this->descricao_arquivo = '';
-            $this->dispatchBrowserEvent('closeModal');
+            $this->dispatch('closeModal');
             flasher('Arquivo adicionad com sucesso.');
             DB::commit();
         } catch (\Throwable $th) {

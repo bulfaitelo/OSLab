@@ -86,7 +86,7 @@
         </div>
     </div>
     <script>
-        // document.addEventListener('livewire:load', function () {
+        // document.addEventListener('livewire:init', function () {
         //     window.livewire.on('senhaPadrao', () =>
         //         console.log('senhaPadrao');
         //     );
@@ -96,7 +96,7 @@
     {{-- @if (($item) && ($item->tipo_informacao == 'padrao'))
         <script>
 
-            document.addEventListener('livewire:load', function () {
+            document.addEventListener('livewire:init', function () {
                 alert('teste');
                 var e = document.getElementById('lock_view');
                 var p =  new PatternLock(e, {

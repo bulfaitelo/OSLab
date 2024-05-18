@@ -64,7 +64,7 @@
     <div wire:ignore.self class="modal fade" id="anotacaoModal" tabindex="-1" role="dialog" aria-labelledby="anotacaoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" wire:submit.prevent="anotacaoCreate()">
+                <form method="POST" wire:submit="anotacaoCreate()">
                     <div class="modal-header">
                         <h5 class="modal-title" id="anotacaoModalLabel">Adicionar Anotação</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -75,7 +75,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="anotacao">Anotação</label>
-                                <textarea wire:model.defer="anotacao" type="text" id="anotacao" class="form-control" placeholder="Escreva aqui a anotação"></textarea>
+                                <textarea wire:model.live="anotacao" type="text" id="anotacao" class="form-control" placeholder="Escreva aqui a anotação"></textarea>
                                 @error('anotacao') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -100,7 +100,7 @@
     <div wire:ignore.self class="modal fade" id="senhaModal" tabindex="-1" role="dialog" aria-labelledby="senhaModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" wire:submit.prevent="senhaCreate(senha_padrao)">
+                <form method="POST" wire:submit="senhaCreate(senha_padrao)">
                     <div class="modal-header">
                         <h5 class="modal-title" id="senhaModalLabel">Senha</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,14 +111,14 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="descricao_senha">Descricao</label>
-                                <input type="text" wire:model.defer="descricao_senha" id="descricao_senha" class="form-control" placeholder="Descrição ">
+                                <input type="text" wire:model.live="descricao_senha" id="descricao_senha" class="form-control" placeholder="Descrição ">
                                 @error('descricao_senha') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="tipo_senha">Tipo de senha</label>
-                                <select wire:model.defer="tipo_senha" id="tipo_senha" class="form-control">
+                                <select wire:model.live="tipo_senha" id="tipo_senha" class="form-control">
                                     <option value="texto">Texto</option>
                                     <option value="padrao">Padrão</option>
                                 </select>
@@ -128,7 +128,7 @@
                             <div class="form-group">
                                 <label for="senha_texto">Senha</label>
                                 <div class="input-group mb-3">
-                                    <input id="senha_texto" type="password" wire:model.defer="senha_texto" class="form-control " placeholder="Senha">
+                                    <input id="senha_texto" type="password" wire:model.live="senha_texto" class="form-control " placeholder="Senha">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span id="senha_texto_icone" class="fas fa-lock"></span>
@@ -140,7 +140,7 @@
                         </div>
                         <div class="col-md-12" @if ($tipo_senha == 'texto') style="display: none" @endif  id="padrao">
                             <label for="">Padrão</label>
-                            <input type="hidden" id="senha_padrao" wire:model.defer="senha_padrao">
+                            <input type="hidden" id="senha_padrao" wire:model.live="senha_padrao">
                             <svg class="patternlock" id="lock" viewBox="0 0 100 100" >
                                 <g class="lock-actives"></g>
                                 <g class="lock-lines"></g>
@@ -179,7 +179,7 @@
     <div wire:ignore.self class="modal fade" id="arquivoModal" tabindex="-1" role="dialog" aria-labelledby="arquivoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
-                <form method="POST" wire:submit.prevent="arquivoCreate()">
+                <form method="POST" wire:submit="arquivoCreate()">
                     <div class="modal-header">
                     <h5 class="modal-title" id="arquivoModalLabel">Anexo</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -189,14 +189,14 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="descricao_arquivo">Descricao</label>
-                            <input type="text" wire:model.defer="descricao_arquivo" id="descricao_arquivo" class="form-control" placeholder="Descrição ">
+                            <input type="text" wire:model.live="descricao_arquivo" id="descricao_arquivo" class="form-control" placeholder="Descrição ">
                             @error('descricao_arquivo') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label for="arquivo">Arquivo</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input wire:ignore.self  type="file" wire:model="arquivo" class="custom-file-input" id="arquivo" accept=".zip, .pdf, .jpg, .png, .bmp" >
+                                    <input wire:ignore.self  type="file" wire:model.live="arquivo" class="custom-file-input" id="arquivo" accept=".zip, .pdf, .jpg, .png, .bmp" >
                                     <label class="custom-file-label" for="arquivo"></label>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
     </div>
     <!-- FIM Modal - Compartilhar  -->
 <script>
-    document.addEventListener('livewire:load', function () {
+    document.addEventListener('livewire:init', function () {
         window.livewire.on('toggleVisualizarModal', () => $('#modal-vizualizar').modal('toggle'));
         window.livewire.on('toggleCompartilharModal', () => $('#modal-compartilhar').modal('toggle'));
         window.livewire.on('senhaPadrao', (senha) => {
@@ -301,7 +301,7 @@
 </script>
 <script>
     let senha_padrao ;
-    document.addEventListener('livewire:load', function () {
+    document.addEventListener('livewire:init', function () {
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
@@ -334,7 +334,7 @@
     //         p.setPattern(senha);
     //     }
     // }
-    // document.addEventListener('livewire:load', function () {
+    // document.addEventListener('livewire:init', function () {
     //     prepareFormSenha()
     //     $('#tipo_senha').on("change", function () {
     //         prepareFormSenha()

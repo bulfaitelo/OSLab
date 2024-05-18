@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Configuracao\Backup;
+namespace App\Livewire\Configuracao\Backup;
 
 
 use App\Models\Servico\Servico;
@@ -15,10 +15,10 @@ class Backup extends Component
 
     public $readyToLoad = false;
 
- 
+
 
     public function loadBackups()
-    {        
+    {
         $this->readyToLoad = true;
     }
 
@@ -26,14 +26,14 @@ class Backup extends Component
 
     public function render()
     {
-        return view('livewire.configuracao.backup.backup', [            
+        return view('livewire.configuracao.backup.backup', [
             'backupInfo' => $this->readyToLoad
                 ? $this->getBackupInfo()
-                : [], 
+                : [],
         ]);
     }
 
-    
+
 
     /**
      * Retorna a lista de backup
@@ -41,7 +41,7 @@ class Backup extends Component
      */
     private function getBackupInfo() : array {
 
-        $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));        
+        $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
         $info = [];
         foreach ($statuses as $status) {
             $destination = $status->backupDestination();
@@ -56,7 +56,7 @@ class Backup extends Component
                 'count' => $backups->count(),
                 'storageSpace' => Format::humanReadableSize($destination->usedStorage()),
                 'backups' => [],
-            ];            
+            ];
             foreach ($backups as $backup) {
                 $destInfo['backups'][] = [
                     'name' => explode($destination->backupName().'/', $backup->path())[1],

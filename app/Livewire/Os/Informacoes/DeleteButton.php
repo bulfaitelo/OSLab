@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Os\Informacoes;
+namespace App\Livewire\Os\Informacoes;
 
 use App\Models\Os\Os;
 use Livewire\Component;
@@ -39,9 +39,9 @@ class DeleteButton extends Component
                 $delete = \Storage::disk('public')->delete($informacao->informacao);
             }
             $informacao->delete();
-            $this->dispatchBrowserEvent('closeModal');
+            $this->dispatch('closeModal');
             flasher('Anotação removida com sucesso.');
-            $this->emit('updateInformacoesTable');
+            $this->dispatch('updateInformacoesTable');
         } catch (\Throwable $th) {
             throw $th;
         }

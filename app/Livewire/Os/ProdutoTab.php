@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Os;
+namespace App\Livewire\Os;
 
 
 use App\Models\Produto\Produto;
@@ -57,7 +57,7 @@ class ProdutoTab extends Component
 
         if ($this->os->faturada == 1) {
             // Apagando o produto digitado.
-            $this->dispatchBrowserEvent('clear');
+            $this->dispatch('clear');
             flash()->addError('Produto não pode ser adicionado a uma os Faturada.');
         } else {
 
@@ -67,7 +67,7 @@ class ProdutoTab extends Component
             $this->valor_venda = null;
             $this->produto_id = null;
             // Apagando o produto digitado.
-            $this->dispatchBrowserEvent('clear');
+            $this->dispatch('clear');
             flasher('Produto adicionado com sucesso.');
         }
 
@@ -78,7 +78,7 @@ class ProdutoTab extends Component
         try {
             if ($this->os->faturada == 1) {
                 // Apagando o produto digitado.
-                $this->dispatchBrowserEvent('clear');
+                $this->dispatch('clear');
                 flash()->addError('Produto não pode ser removido a uma os Faturada.');
             } else {
                 $osProduto = $this->os->produtos()->find($id);

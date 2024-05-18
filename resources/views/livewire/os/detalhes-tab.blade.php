@@ -93,7 +93,7 @@
     {!! html()->form()->close() !!}
     <script>
         var tomSelectCliente;
-        document.addEventListener('livewire:load', function () {
+        document.addEventListener('livewire:init', function () {
             $(document).ready(function() {
                 // tom-select Clientes
                 tomSelectCliente = new TomSelect(".cliente",{

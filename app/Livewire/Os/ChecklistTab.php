@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Os;
+namespace App\Livewire\Os;
 
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
