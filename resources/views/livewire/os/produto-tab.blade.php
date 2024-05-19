@@ -112,54 +112,52 @@
             </div>
         </div>
     @endif
-    <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
-    <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
-
-    <script>
-       var tomSelectProduto = new TomSelect("#os-produto",{
-            // allowEmptyOption: true,
-            // create: true,
-            valueField: 'id',
-            labelField: 'name',
-            searchField: 'name',
-            selectOnTab: true,
-            // fetch remote data
-            load: function(query, callback) {
-                var url = route('produto.select') + '?q=' + encodeURIComponent(query);
-                fetch(url)
-                    .then(response => response.json())
-                    .then(json => {
-                        callback(json);
-                    }).catch(()=>{
-                        callback();
-                    });
-
-            },
-            // custom rendering function for options
-            render: {
-                option: function(data, escape) {
-                return '<div>' +
-                        '<span class="title">' + escape(data.name) + '</span>' +
-                        '<span class="url"> <b> Custo: </b> R$ ' + escape(data.valor_custo) + ' | <b> Venda: </b> R$ ' + escape(data.valor_venda) + ' | <b> Estoque: </b> ' + escape(data.estoque) + '</span>' +
-                    '</div>';
-                },
-                item: function(data, escape) {
-                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
-                }
-            },
-        });
-    </script>
-    <script>
-        window.addEventListener('clear', event => {
-            tomSelectProduto.clear();
-            tomSelectProduto.clearOptions();
-        })
-        tomSelectProduto.on('change', function (e) {
-            $('#produto_quantidade').focus();
-        });
-    </script>
 
 </div>
+    <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 
+<script>
+if (!@js($os->fatura_id)) {
+    var tomSelectProduto = new TomSelect("#os-produto",{
+        // allowEmptyOption: true,
+        // create: true,
+        valueField: 'id',
+        labelField: 'name',
+        searchField: 'name',
+        selectOnTab: true,
+        // fetch remote data
+        load: function(query, callback) {
+            var url = route('produto.select') + '?q=' + encodeURIComponent(query);
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    callback(json);
+                }).catch(()=>{
+                    callback();
+                });
+
+        },
+        // custom rendering function for options
+        render: {
+            option: function(data, escape) {
+            return '<div>' +
+                    '<span class="title">' + escape(data.name) + '</span>' +
+                    '<span class="url"> <b> Custo: </b> R$ ' + escape(data.valor_custo) + ' | <b> Venda: </b> R$ ' + escape(data.valor_venda) + ' | <b> Estoque: </b> ' + escape(data.estoque) + '</span>' +
+                '</div>';
+            },
+            item: function(data, escape) {
+                return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+            }
+        },
+    });
+    window.addEventListener('clear', event => {
+        tomSelectProduto.clear();
+        tomSelectProduto.clearOptions();
+    })
+    tomSelectProduto.on('change', function (e) {
+        $('#produto_quantidade').focus();
+    });
+}
+</script>
 
 

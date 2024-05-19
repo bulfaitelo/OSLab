@@ -11,7 +11,6 @@ class DetalhesTab extends Component
 
     public function render()
     {
-
         return view('livewire.os.detalhes-tab', [
             'os' => $this->os
         ]);

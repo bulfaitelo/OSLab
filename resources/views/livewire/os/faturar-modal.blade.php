@@ -91,9 +91,11 @@
             </div>
         {!! html()->form()->close() !!}
     </div>
+
     <script>
         document.addEventListener('livewire:init', function () {
-            window.livewire.on('toggleFaturarModal', () => $('#faturarModal').modal('toggle'));
+            Livewire.on('toggleFaturarModal', () => $('#faturarModal').modal('toggle'));
         });
     </script>
+
 </div>

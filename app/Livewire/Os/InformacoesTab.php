@@ -61,13 +61,14 @@ class InformacoesTab extends Component
     /**
      * Cria uma nova senha (texto ou padrão)
      */
-    public function senhaCreate($senha_padrao) : void {
-        $this->senha_padrao = $senha_padrao;
+    public function senhaCreate() : void {
+        // $this->senha_padrao = $senha_padrao;
         $this->validate([
             'tipo_senha' => 'required',
             // 'senha_texto' => 'required_if:tipo_senha,texto',
             'senha_padrao' => '|min:4|nullable'
         ]);
+        dd($this->senha_texto, $this->senha_padrao);
         DB::beginTransaction();
         try {
 

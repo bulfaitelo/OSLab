@@ -96,53 +96,50 @@
             </div>
         </div>
     @endif
-    {{-- <link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
-    <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script> --}}
 
-    <script>
-       var tomSelectServico = new TomSelect("#os-servico",{
-            // allowEmptyOption: true,
-            // create: true,
-            valueField: 'id',
-            labelField: 'name',
-            searchField: 'name',
-            selectOnTab: true,
-            // fetch remote data
-            load: function(query, callback) {
-                var url = route('servico.select') + '?q=' + encodeURIComponent(query);
-                fetch(url)
-                    .then(response => response.json())
-                    .then(json => {
-                        callback(json);
-                    }).catch(()=>{
-                        callback();
-                    });
 
-            },
-            // custom rendering function for options
-            render: {
-                option: function(data, escape) {
-                return '<div>' +
-                        '<span class="title">' + escape(data.name) + '</span>' +
-                        '<span class="url"> <b> Valor Serviço: </b> R$ ' + escape(data.valor_servico) + ' <b>  </span>' +
-                    '</div>';
-                },
-                item: function(data, escape) {
-                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
-                }
-            },
-        });
-    </script>
-    <script>
-        window.addEventListener('clear', event => {
-            tomSelectServico.clear();
-            tomSelectServico.clearOptions();
-        })
-        tomSelectServico.on('change', function (e) {
-            $('#servico_quantidade').focus();
-        });
-    </script>
 </div>
+<script>
+if (!@js($os->fatura_id)) {
+    var tomSelectServico = new TomSelect("#os-servico",{
+        // allowEmptyOption: true,
+        // create: true,
+        valueField: 'id',
+        labelField: 'name',
+        searchField: 'name',
+        selectOnTab: true,
+        // fetch remote data
+        load: function(query, callback) {
+            var url = route('servico.select') + '?q=' + encodeURIComponent(query);
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    callback(json);
+                }).catch(()=>{
+                    callback();
+                });
 
-
+        },
+        // custom rendering function for options
+        render: {
+            option: function(data, escape) {
+            return '<div>' +
+                    '<span class="title">' + escape(data.name) + '</span>' +
+                    '<span class="url"> <b> Valor Serviço: </b> R$ ' + escape(data.valor_servico) + ' <b>  </span>' +
+                '</div>';
+            },
+            item: function(data, escape) {
+                return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+            }
+        },
+    });
+    window.addEventListener('clear', event => {
+        tomSelectServico.clear();
+        tomSelectServico.clearOptions();
+    })
+    tomSelectServico.on('change', function (e) {
+        $('#servico_quantidade').focus();
+    });
+}
+</script>
 

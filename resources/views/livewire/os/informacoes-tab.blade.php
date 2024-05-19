@@ -39,7 +39,7 @@
                                 <i class="fa-solid fa-download"></i>
                             </button>
                             @endif
-                            <button wire:click="$emitTo('os.informacoes.visualizar-modal', 'open', {{$item->id}} )"  class="btn btn-block btn-default"  title="Visualizar" >
+                            <button wire:click="$dispatchTo('os.informacoes.visualizar-modal', 'open', {id: {{$item->id}}} )"  class="btn btn-block btn-default"  title="Visualizar" >
                                 <i class="fas fa-eye"></i>
                             </button>
                             @livewire('os.informacoes.delete-button', ['os_id' => $item->os_id, 'item_id' => $item->id], key($item->id))
@@ -49,7 +49,7 @@
                                 @else
                                     title="Compartilhar"  class="btn btn-block bg-lightblue"
                                 @endif
-                                wire:click="$emitTo('os.informacoes.compartilhar-modal', 'open', {{$item->id}}, {{$item->os_id}} )"  >
+                                wire:click="$dispatchTo('os.informacoes.compartilhar-modal', 'open', {informacao_id: {{$item->id}}, os_id: {{$item->os_id}}} )"  >
                                 <i class="fa-solid fa-share-from-square"></i>
                             </button>
                         </div>
@@ -75,7 +75,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="anotacao">Anotação</label>
-                                <textarea wire:model.live="anotacao" type="text" id="anotacao" class="form-control" placeholder="Escreva aqui a anotação"></textarea>
+                                <textarea wire:model="anotacao" type="text" id="anotacao" class="form-control" placeholder="Escreva aqui a anotação"></textarea>
                                 @error('anotacao') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -100,7 +100,7 @@
     <div wire:ignore.self class="modal fade" id="senhaModal" tabindex="-1" role="dialog" aria-labelledby="senhaModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" wire:submit="senhaCreate(senha_padrao)">
+                <form method="POST" wire:submit="senhaCreate()">
                     <div class="modal-header">
                         <h5 class="modal-title" id="senhaModalLabel">Senha</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,14 +111,14 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="descricao_senha">Descricao</label>
-                                <input type="text" wire:model.live="descricao_senha" id="descricao_senha" class="form-control" placeholder="Descrição ">
+                                <input type="text" wire:model="descricao_senha" id="descricao_senha" class="form-control" placeholder="Descrição ">
                                 @error('descricao_senha') <span class="error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="tipo_senha">Tipo de senha</label>
-                                <select wire:model.live="tipo_senha" id="tipo_senha" class="form-control">
+                                <select wire:model="tipo_senha" id="tipo_senha" class="form-control">
                                     <option value="texto">Texto</option>
                                     <option value="padrao">Padrão</option>
                                 </select>
@@ -128,7 +128,7 @@
                             <div class="form-group">
                                 <label for="senha_texto">Senha</label>
                                 <div class="input-group mb-3">
-                                    <input id="senha_texto" type="password" wire:model.live="senha_texto" class="form-control " placeholder="Senha">
+                                    <input id="senha_texto" type="password" wire:model="senha_texto" class="form-control " placeholder="Senha">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span id="senha_texto_icone" class="fas fa-lock"></span>
@@ -140,7 +140,7 @@
                         </div>
                         <div class="col-md-12" @if ($tipo_senha == 'texto') style="display: none" @endif  id="padrao">
                             <label for="">Padrão</label>
-                            <input type="hidden" id="senha_padrao" wire:model.live="senha_padrao">
+                            <input style="display:none" id="senha_padrao" wire:model.live="senha_padrao">
                             <svg class="patternlock" id="lock" viewBox="0 0 100 100" >
                                 <g class="lock-actives"></g>
                                 <g class="lock-lines"></g>
@@ -189,14 +189,14 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="descricao_arquivo">Descricao</label>
-                            <input type="text" wire:model.live="descricao_arquivo" id="descricao_arquivo" class="form-control" placeholder="Descrição ">
+                            <input type="text" wire:model="descricao_arquivo" id="descricao_arquivo" class="form-control" placeholder="Descrição ">
                             @error('descricao_arquivo') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label for="arquivo">Arquivo</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input wire:ignore.self  type="file" wire:model.live="arquivo" class="custom-file-input" id="arquivo" accept=".zip, .pdf, .jpg, .png, .bmp" >
+                                    <input wire:ignore.self  type="file" wire:model="arquivo" class="custom-file-input" id="arquivo" accept=".zip, .pdf, .jpg, .png, .bmp" >
                                     <label class="custom-file-label" for="arquivo"></label>
                                 </div>
                             </div>
@@ -233,11 +233,15 @@
         @livewire('os.informacoes.compartilhar-modal')
     </div>
     <!-- FIM Modal - Compartilhar  -->
+</div>
 <script>
-    document.addEventListener('livewire:init', function () {
-        window.livewire.on('toggleVisualizarModal', () => $('#modal-vizualizar').modal('toggle'));
-        window.livewire.on('toggleCompartilharModal', () => $('#modal-compartilhar').modal('toggle'));
-        window.livewire.on('senhaPadrao', (senha) => {
+let senha_padrao;
+document.addEventListener('livewire:init', function () {
+
+        Livewire.on('toggleVisualizarModal', () => $('#modal-vizualizar').modal('toggle'));
+
+        Livewire.on('toggleCompartilharModal', () => $('#modal-compartilhar').modal('toggle'));
+        Livewire.on('senhaPadrao', (senha) => {
             var e = document.getElementById('lock_view');
             var p =  new PatternLock(e, {
             });
@@ -246,14 +250,11 @@
                 p.success();;
             }
         });
-    });
-</script>
-<script>
-    window.addEventListener('closeModal', event => {
-        $('.modal').modal('hide');
-    })
-</script>
-<script>
+
+        Livewire.on('closeModal', () => {
+            $('.modal').modal('hide');
+        });
+
     // Obtém uma referência para o elemento select e a div
     const selectElement = document.getElementById('tipo_senha');
     const divTexto = document.getElementById('texto');
@@ -278,7 +279,7 @@
     const icone = document.querySelector('#senha_texto_icone');
 
     togglePassword.addEventListener('click', function (e) {
-        console.log(togglePassword);
+        // console.log(togglePassword);
         // toggle the type attribute
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
@@ -298,10 +299,8 @@
     //     document.body.removeChild(tempTextArea);
     // }
 
-</script>
-<script>
-    let senha_padrao ;
-    document.addEventListener('livewire:init', function () {
+
+    // document.addEventListener('livewire:init', function () {
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
@@ -314,6 +313,8 @@
                     this.success();
                     $('#salvesenha').removeAttr("disabled", "disabled");
                     senha_padrao = pattern;
+                    $('#senha_padrao').val(pattern);
+                    console.log(pattern);
                 } else {
                     this.error();
                     $('#salvesenha').attr("disabled", "disabled");
@@ -323,9 +324,8 @@
                 }
             }
         });
-    })
-</script>
-<script>
+    // })
+
     // function setPadrao(id, tipo, senha) {
     //     if (tipo == 'padrao') {
     //         var e = document.getElementById('lock_view_'+id);
@@ -351,14 +351,13 @@
 
     //         }
     //     }
-
-
     // });
+});
 </script>
 
-@if(count($errors) > 0)
+{{-- @if(count($errors) > 0)
     @php
         flash()->addError('Por favor verifique o formulário', 'Ocorreu um erro!');
     @endphp
-@endif
-</div>
+@endif --}}
+

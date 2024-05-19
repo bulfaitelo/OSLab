@@ -25,7 +25,7 @@
         @endcan
         @can('os_faturar')
             @if (!$os->fatura_id)
-            <button onclick="Livewire.emit('faturarOs', {{$os->id}})"  type="button" title="Editar" class="btn btn-sm btn-success" >
+            <button onclick="Livewire.dispatch('faturarOs')"  type="button" title="Editar" class="btn btn-sm btn-success" >
                 <i class="fa-solid fa-dollar-sign"></i>
                 <span class="d-none d-sm-inline">Faturar</span>
             </button>
@@ -39,7 +39,7 @@
                 </button>
                 <div class="btn-group btn-group-sm">
                     @can('os_receita_pagamento_create')
-                    <a title="Adicionar Pagamento" class="btn btn-left bg-success" onclick="Livewire.emit('adicionarPagamento', {{$os->id}})"  >
+                    <a onclick="Livewire.dispatch('adicionarPagamento')" title="Adicionar Pagamento" class="btn btn-left bg-success"   >
                         <i class="fa-solid fa-plus"></i>
                         <span class="d-none d-sm-inline">Add. Pagamento</span>
                     </a>
@@ -122,9 +122,9 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
-                @livewire('os.detalhes-tab', ['os' => $os])
+                @livewire('os.detalhes-tab', ['os' => $os], key('detalhes-tab'))
             </div>
-            {{-- <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
+            <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
                 @livewire('os.produto-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
@@ -145,7 +145,7 @@
                 <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                     @livewire('os.balancete-tab', ['os' => $os])
                 </div>
-            @endif --}}
+            @endif
         </div>
     </div>
 </div>
@@ -198,7 +198,7 @@
 {{-- Modal para criação de Pagamento de parcela --}}
 @can('os_receita_pagamento_create')
 <div class="modal fade" id="addPagamentoModal">
-    {{-- @livewire('os.add-pagamento-modal', ['os' => $os], key($os->id)) --}}
+    @livewire('os.add-pagamento-modal', ['os' => $os], key($os->id))
 </div>
 @endcan
 {{-- /Modal para criação de Pagamento de parcela --}}
@@ -208,6 +208,8 @@
 @section('css')
 <link rel="stylesheet" href="{{ url('') }}/vendor/summernote/summernote-bs4.min.css">
 <link rel="stylesheet" href="{{ url('') }}/vendor/patternlock/patternlock.css">
+<link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
+
 <style>
 
     .icon{
@@ -242,7 +244,7 @@
 <script src="{{ url('') }}/vendor/patternlock/patternlock.js"></script>
 <script src="{{ url('') }}/vendor/form-builder/form-render.min.js"></script>
 
-{{-- <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script> --}}
+<script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 <script>
     $('.decimal').mask('#.##0,00', { reverse: true });
     $('.numero').mask('#', { reverse: true });
@@ -273,10 +275,10 @@
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         tabId = e.target.id;
         if(tabId == 'log-tab'){
-            Livewire.emitTo('os.log-tab', 'showLogTab', true );
+            Livewire.dispatchTo('os.log-tab', 'showLogTab', true );
         }
         if(tabId == 'balancete-tab'){
-            Livewire.emitTo('os.balancete-tab', 'showBalanceteTab', true );
+            Livewire.dispatchTo('os.balancete-tab', 'showBalanceteTab', true );
         }
     });
 

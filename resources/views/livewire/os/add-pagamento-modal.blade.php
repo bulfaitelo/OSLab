@@ -1,3 +1,4 @@
+<div>
 @if ($os->fatura_id)
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -116,10 +117,12 @@
         </div>
         {!! html()->form()->close() !!}
     </div>
-    <script>
-        document.addEventListener('livewire:init', function () {
-            window.livewire.on('toggleAddPagamentoModal', () => $('#addPagamentoModal').modal('toggle'));
-        });
-    </script>
+
 </div>
+<script>
+    document.addEventListener('livewire:init', function () {
+        Livewire.on('toggleAddPagamentoModal', () => $('#addPagamentoModal').modal('toggle'));
+    });
+</script>
 @endif
+</div>

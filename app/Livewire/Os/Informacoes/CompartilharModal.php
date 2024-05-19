@@ -39,7 +39,7 @@ class CompartilharModal extends Component
     public function createShareUrl(int $id) : void {
         $informacao = Os::find($this->os_id)->informacoes->find($id);
         $informacao->uuid = \Str::uuid();
-        $informacao->validade_link = Carbon::now()->addMinutes(getConfig('os_link_time_limit'));
+        $informacao->validade_link = Carbon::now()->addMinutes((int) getConfig('os_link_time_limit'));
         $informacao->save();
         $this->dispatch('updateInformacoesTable');
     }
