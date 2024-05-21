@@ -86,11 +86,13 @@
         </div>
     </div>
 </div>
+
 <script>
 document.addEventListener('livewire:init', function () {
-    Livewire.on('senhaPadrao', (senha) => {
+    Livewire.on('senhaPadrao', ({senha}) => {
             var e = document.getElementById('lock_view');
             console.log(e);
+            console.log(senha); //14789
             var p =  new PatternLock(e, {
 
             });

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Os;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class LogTab extends Component
@@ -10,10 +11,13 @@ class LogTab extends Component
     public $os;
     public $showDisplay;
 
-    protected $listeners = ['showLogTab'];
+    // protected $listeners = ['showLogTab'];
 
-    public function showLogTab($display) {
-        $this->showDisplay = $display;
+
+    #[On('showLogTab')]
+    public function showLogTab() {
+
+        $this->showDisplay = true;
     }
     public function render()
     {

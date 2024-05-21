@@ -140,7 +140,7 @@
                         </div>
                         <div class="col-md-12" @if ($tipo_senha == 'texto') style="display: none" @endif  id="padrao">
                             <label for="">Padrão</label>
-                            <input style="hidden" id="senha_padrao" wire:model.live="senha_padrao">
+                            <input type="hidden" id="senha_padrao" wire:model.live="senha_padrao">
                             <svg class="patternlock" id="lock" viewBox="0 0 100 100" >
                                 <g class="lock-actives"></g>
                                 <g class="lock-lines"></g>

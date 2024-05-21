@@ -48,7 +48,7 @@
                     <label for="produto_quantidade">Quantidade</label>
                     <input
                         class="form-control numero"
-                        wire:model.live="quantidade"
+                        wire:model="quantidade"
                         type="text"
                         name="quantidade"
                         id="produto_quantidade"

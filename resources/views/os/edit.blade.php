@@ -275,10 +275,10 @@
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         tabId = e.target.id;
         if(tabId == 'log-tab'){
-            Livewire.dispatchTo('os.log-tab', 'showLogTab', true );
+            Livewire.dispatchTo('os.log-tab', 'showLogTab');
         }
         if(tabId == 'balancete-tab'){
-            Livewire.dispatchTo('os.balancete-tab', 'showBalanceteTab', true );
+            Livewire.dispatchTo('os.balancete-tab', 'showBalanceteTab');
         }
     });
 
