@@ -85,25 +85,21 @@
             </button>
         </div>
     </div>
-    <script>
-        // document.addEventListener('livewire:init', function () {
-        //     window.livewire.on('senhaPadrao', () =>
-        //         console.log('senhaPadrao');
-        //     );
-        // });
-    </script>
-
-    {{-- @if (($item) && ($item->tipo_informacao == 'padrao'))
-        <script>
-
-            document.addEventListener('livewire:init', function () {
-                alert('teste');
-                var e = document.getElementById('lock_view');
-                var p =  new PatternLock(e, {
-                });
-                p.setPattern({{$item->senha}});
-            });
-        </script>
-    @endif --}}
 </div>
+<script>
+document.addEventListener('livewire:init', function () {
+    Livewire.on('senhaPadrao', (senha) => {
+            var e = document.getElementById('lock_view');
+            console.log(e);
+            var p =  new PatternLock(e, {
+
+            });
+
+            if (senha) {
+                p.setPattern(senha);
+                p.success();;
+            }
+        });
+    });
+</script>
 

@@ -68,7 +68,6 @@ class InformacoesTab extends Component
             // 'senha_texto' => 'required_if:tipo_senha,texto',
             'senha_padrao' => '|min:4|nullable'
         ]);
-        dd($this->senha_texto, $this->senha_padrao);
         DB::beginTransaction();
         try {
 

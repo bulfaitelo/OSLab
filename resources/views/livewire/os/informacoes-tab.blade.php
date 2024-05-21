@@ -140,7 +140,7 @@
                         </div>
                         <div class="col-md-12" @if ($tipo_senha == 'texto') style="display: none" @endif  id="padrao">
                             <label for="">Padrão</label>
-                            <input style="display:none" id="senha_padrao" wire:model.live="senha_padrao">
+                            <input style="hidden" id="senha_padrao" wire:model.live="senha_padrao">
                             <svg class="patternlock" id="lock" viewBox="0 0 100 100" >
                                 <g class="lock-actives"></g>
                                 <g class="lock-lines"></g>
@@ -235,21 +235,13 @@
     <!-- FIM Modal - Compartilhar  -->
 </div>
 <script>
-let senha_padrao;
+
 document.addEventListener('livewire:init', function () {
 
         Livewire.on('toggleVisualizarModal', () => $('#modal-vizualizar').modal('toggle'));
 
         Livewire.on('toggleCompartilharModal', () => $('#modal-compartilhar').modal('toggle'));
-        Livewire.on('senhaPadrao', (senha) => {
-            var e = document.getElementById('lock_view');
-            var p =  new PatternLock(e, {
-            });
-            if (senha) {
-                p.setPattern(senha);
-                p.success();;
-            }
-        });
+
 
         Livewire.on('closeModal', () => {
             $('.modal').modal('hide');
@@ -313,8 +305,7 @@ document.addEventListener('livewire:init', function () {
                     this.success();
                     $('#salvesenha').removeAttr("disabled", "disabled");
                     senha_padrao = pattern;
-                    $('#senha_padrao').val(pattern);
-                    console.log(pattern);
+                    @this.senha_padrao = pattern;
                 } else {
                     this.error();
                     $('#salvesenha').attr("disabled", "disabled");
