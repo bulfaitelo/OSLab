@@ -17,7 +17,7 @@
                     <label for="valor_custo">Custo</label>
                     <input
                         class="form-control decimal"
-                        wire:model.live="valor_custo"
+                        wire:model="valor_custo"
                         type="text"
                         name="busca"
                         id="valor_custo"
@@ -33,7 +33,7 @@
                     <label for="valor_venda">Preço</label>
                     <input
                         class="form-control decimal"
-                        wire:model.live="valor_venda"
+                        wire:model="valor_venda"
                         type="text"
                         name="busca"
                         id="valor_venda"placeholder="Preço de venda"

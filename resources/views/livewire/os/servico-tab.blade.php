@@ -17,7 +17,7 @@
                     <label for="valor_servico">Preço</label>
                     <input
                         class="form-control decimal"
-                        wire:model.live="valor_servico"
+                        wire:model="valor_servico"
                         type="text" name="busca"
                         id="valor_servico"
                         inputmode="numeric"
@@ -32,7 +32,7 @@
                     <label for="servico_quantidade">Quantidade</label>
                     <input
                         class="form-control numero"
-                        wire:model.live="quantidade"
+                        wire:model="quantidade"
                         type="text"
                         name="quantidade"
                         id="servico_quantidade"
