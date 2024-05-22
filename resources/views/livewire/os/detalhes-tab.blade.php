@@ -31,7 +31,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="status_id">Status</label>
-                    {!! html()->select('status_id', \App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), $os->status_id)->class('form-control')->placeholder('Selecione') !!}
+                    {!! html()->select('status_id', \App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), $os->status_id)->class('form-control')->placeholder('Selecione')->required() !!}
                 </div>
             </div>
             <div class="col-md-2">
