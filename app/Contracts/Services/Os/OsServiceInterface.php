@@ -13,7 +13,7 @@ interface OsServiceInterface {
      * @param Request $request
      * @param int $itensPorPagina default 100
      */
-    public function getDataTable(Request $request);
+    static public function getDataTable(Request $request);
 
 
     /**

@@ -19,7 +19,7 @@ class OsService implements OsServiceInterface
 
     ) { }
 
-    public function getDataTable(Request $request, int $itensPorPagina = 100) {
+    static public function getDataTable(Request $request, int $itensPorPagina = 100) {
 
         $dataHoje = Carbon::now()->format('Y-d-m');
         $osListagemPadrao = getConfig('os_listagem_padrao');
