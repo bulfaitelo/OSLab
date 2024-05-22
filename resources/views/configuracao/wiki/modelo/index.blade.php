@@ -18,7 +18,7 @@
             </a>
             @can('config_wiki_modelo_create')
             <a href="{{ route('configuracao.wiki.modelo.create') }}">
-                <button type="button"  class="btn btn-sm btn-primary">
+                <button type="button"  class="btn btn-sm btn-oslab">
                     <i class="fa-solid fa-plus"></i>
                     Adicionar Modelo
                 </button>

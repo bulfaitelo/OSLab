@@ -1,6 +1,6 @@
 <div>
     <div class="card-header pl-0">
-        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#anotacaoModal">
+        <button type="button" class="btn btn-sm btn-oslab" data-toggle="modal" data-target="#anotacaoModal">
             <i class="fa-solid fa-plus"></i>
             Anotação
         </button>
@@ -35,7 +35,7 @@
                     <td>
                         <div class="btn-group btn-group-sm float-right">
                             @if ($item->tipo == 3)
-                            <button type="button" class="btn btn-sm btn-primary" wire:click="getFile({{$item->id}})">
+                            <button type="button" class="btn btn-sm btn-oslab" wire:click="getFile({{$item->id}})">
                                 <i class="fa-solid fa-download"></i>
                             </button>
                             @endif
@@ -85,7 +85,7 @@
                             <i class="fa-regular fa-rectangle-xmark"></i>
                             Fechar
                         </button>
-                        <button type="submit" id="salvechecklist" class="btn btn-sm btn-primary">
+                        <button type="submit" id="salvechecklist" class="btn btn-sm btn-oslab">
                             <i class="fas fa-save"></i>
                             Salvar
                         </button>
@@ -164,7 +164,7 @@
                             <i class="fa-regular fa-rectangle-xmark"></i>
                             Fechar
                         </button>
-                        <button type="submit" id="salvesenha" class="btn btn-sm btn-primary">
+                        <button type="submit" id="salvesenha" class="btn btn-sm btn-oslab">
                             <i class="fas fa-save"></i>
                             Salvar
                         </button>
@@ -211,7 +211,7 @@
                             <i class="fa-regular fa-rectangle-xmark"></i>
                             Fechar
                         </button>
-                        <button type="submit" id="salvechecklist" class="btn btn-sm btn-primary">
+                        <button type="submit" id="salvechecklist" class="btn btn-sm btn-oslab">
                             <i class="fas fa-save"></i>
                             Salvar
                         </button>

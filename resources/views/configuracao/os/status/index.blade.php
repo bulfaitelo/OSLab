@@ -18,7 +18,7 @@
             </a>
             @can('config_os_status_create')
             <a href="{{ route('configuracao.os.status.create') }}">
-                <button type="button"  class="btn btn-sm btn-primary">
+                <button type="button"  class="btn btn-sm btn-oslab">
                     <i class="fa-solid fa-plus"></i>
                     Criar Status
                 </button>

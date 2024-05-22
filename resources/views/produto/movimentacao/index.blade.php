@@ -18,7 +18,7 @@
             </a>
             @can('produto_movimentacao_create')
             <a href="{{ route('movimentacao.create', $produto->id) }}">
-                <button type="button"  class="btn btn-sm btn-primary">
+                <button type="button"  class="btn btn-sm btn-oslab">
                     <i class="fa-solid fa-plus"></i>
                     <span class="d-none d-sm-inline">Adicionar Estoque</span>
                 </button>

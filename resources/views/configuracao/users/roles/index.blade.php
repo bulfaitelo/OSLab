@@ -18,7 +18,7 @@
             </a>
             @can('config_roles_create')
                 <a href="{{ route('configuracao.roles.create') }}">
-                    <button type="button"  class="btn btn-sm btn-primary">
+                    <button type="button"  class="btn btn-sm btn-oslab">
                         <i class="fa-solid fa-plus"></i>
                         Criar Perfil
                     </button>

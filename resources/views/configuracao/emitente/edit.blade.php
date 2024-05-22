@@ -162,7 +162,7 @@
           <!-- /.card-body -->
           <div class="card-footer">
             @can('config_emitente_edit')
-                <button type="submit" class="btn btn-sm btn-primary">
+                <button type="submit" class="btn btn-sm btn-oslab">
                     <i class="fas fa-save"></i>
                     Salvar
                 </button>

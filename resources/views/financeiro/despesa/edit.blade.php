@@ -124,7 +124,7 @@
             {{-- Minimal with icon only --}}
             <!-- /.card-body -->
             <div class="card-footer">
-                <button type="button" onclick="$('#form-despesa').submit();" class="btn btn-primary">
+                <button type="button" onclick="$('#form-despesa').submit();" class="btn btn-sm btn-oslab">
                     <i class="fas fa-save"></i>
                     Salvar
                 </button>
@@ -192,11 +192,11 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">
                         <i class="fas fa-times"></i>
                         Fechar
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-sm btn-oslab">
                         <i class="fas fa-save"></i>
                         Salvar
                     </button>
@@ -225,9 +225,15 @@
                 <p><b>Parcela:</b> <span></span></p>
                 </div>
                 <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">
+                    <i class="fa-solid fa-ban"></i>
+                    Fechar
+                </button>
                     {!! html()->form('delete')->open() !!}
-                        <input type="submit" class="btn btn-danger delete-permission" value="Excluir Pagamento">
+                    <button type="submit" class="btn btn-sm btn-danger delete-permission">
+                        <i class="fa-solid fa-trash"></i>
+                        Excluir
+                    </button>
                     {!! html()->form()->close() !!}
                 </div>
             </div>
@@ -295,11 +301,11 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">
                         <i class="fas fa-times"></i>
                         Fechar
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-sm btn-oslab">
                         <i class="fas fa-save"></i>
                         Salvar
                     </button>

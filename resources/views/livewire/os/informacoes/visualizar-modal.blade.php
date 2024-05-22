@@ -69,7 +69,7 @@
                 @endif
                 <div class="col-md-12 mt-3">
                     <div class="form-group">
-                        <button type="button" class="btn btn-sm btn-primary" wire:click="getFile({{$item->id}})">
+                        <button type="button" class="btn btn-sm btn-oslab" wire:click="getFile({{$item->id}})">
                             <i class="fa-solid fa-download"></i>
                             Download
                         </button>

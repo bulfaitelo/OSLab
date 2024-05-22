@@ -18,7 +18,7 @@
                 </a>
                 @can('config_financeiro_forma_pagamento_create')
                 <a href="{{ route('configuracao.financeiro.forma_pagamento.create') }}">
-                    <button type="button"  class="btn btn-sm btn-primary">
+                    <button type="button"  class="btn btn-sm btn-oslab">
                         <i class="fa-solid fa-plus"></i>
                         Adicionar Forma de Pagamento
                     </button>

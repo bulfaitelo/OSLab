@@ -26,14 +26,14 @@
                     @endif
                 </div>
                 @if (!$item->uuid)
-                    <button type="button" wire:click="createShareUrl({{$item->id}})" class="btn btn-sm btn-primary" >
+                    <button type="button" wire:click="createShareUrl({{$item->id}})" class="btn btn-sm btn-oslab" >
                         <i class="fa-solid fa-share-nodes"></i>
                         Gerar URL
                     </button>
                     <br>
                     <i>Esse link terá validade por: {{getConfig('os_link_time_limit')}} minutos</i>
                 @else
-                    <button type="button" wire:click="createShareUrl({{$item->id}})" class="btn btn-sm btn-primary" >
+                    <button type="button" wire:click="createShareUrl({{$item->id}})" class="btn btn-sm btn-oslab" >
                         <i class="fa-solid fa-retweet"></i>
                         Atualizar URL
                     </button>

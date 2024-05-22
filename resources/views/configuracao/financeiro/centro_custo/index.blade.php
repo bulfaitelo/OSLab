@@ -18,7 +18,7 @@
             </a>
             @can('config_financeiro_centro_custo_create')
             <a href="{{ route('configuracao.financeiro.centro_custo.create') }}">
-                <button type="button"  class="btn btn-sm btn-primary">
+                <button type="button"  class="btn btn-sm btn-oslab">
                     <i class="fa-solid fa-plus"></i>
                     Criar Centro de Custo
                 </button>

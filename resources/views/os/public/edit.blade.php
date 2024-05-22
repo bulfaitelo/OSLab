@@ -111,7 +111,7 @@
                                     @endif
                                     <div class="col-md-12 mt-3">
                                         <div class="form-group">
-                                                <a href="{{$informacao->url()}}" target="_blank" class="btn btn-sm btn-primary">
+                                                <a href="{{$informacao->url()}}" target="_blank" class="btn btn-sm btn-oslab">
                                                     <i class="fa-solid fa-download"></i>
                                                     Download
                                                 </a>
@@ -120,7 +120,7 @@
                                 @endif
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-sm btn-primary">
+                                <button type="submit" class="btn btn-sm btn-oslab">
                                     <i class="fas fa-save"></i>
                                     Salvar
                                 </button>

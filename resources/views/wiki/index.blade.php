@@ -18,7 +18,7 @@
                 </a>
                 @can('wiki_create')
                 <a href="{{ route('wiki.create') }}">
-                    <button type="button"  class="btn btn-sm btn-primary">
+                    <button type="button"  class="btn btn-sm btn-oslab">
                         <i class="fa-solid fa-plus"></i>
                         Adicionar Wiki
                     </button>

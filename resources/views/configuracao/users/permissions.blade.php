@@ -79,7 +79,7 @@
 
           </div>
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary">
+            <button type="submit" class="btn btn-sm btn-oslab">
                 <i class="fas fa-save"></i>
                 Salvar
             </button>

@@ -18,7 +18,7 @@
             </a>
             @can('os_create')
             <a href="{{ route('os.create') }}">
-                <button type="button"  class="btn btn-sm bg-primary">
+                <button type="button"  class="btn btn-sm btn-oslab">
                     <i class="fa-solid fa-plus"></i>
                     Adicionar OS
                 </button>

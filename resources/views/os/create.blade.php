@@ -114,7 +114,7 @@
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary">
+            <button type="submit" class="btn btn-sm btn-oslab">
                 <i class="fas fa-save"></i>
                 Salvar
             </button>
@@ -187,7 +187,7 @@
                     return '<div class="no-results">' +
                                 '<p>Cliente não encontrado</p>' +
                                 '<a href="'+ route('cliente.create')+'" target="_blank">' +
-                                    '<button type="button"  class="btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Criar</button>' +
+                                    '<button type="button"  class="btn btn-sm btn-oslab"><i class="fa-solid fa-plus"></i> Criar</button>' +
                                 '</a>' +
                             '</div>';
                 },
@@ -260,12 +260,12 @@
                                 '<p>Modelo não Encontrado</p>' +
                                 @can('wiki_create')
                                 '<a href="'+ route('wiki.create')+'" target="_blank" >' +
-                                    '<button type="button"  class="mr-2 btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Wiki </button>' +
+                                    '<button type="button"  class="mr-2 btn btn-sm btn-oslab"><i class="fa-solid fa-plus"></i> Wiki </button>' +
                                 '</a>' +
                                 @endcan
                                 @can('config_wiki_modelo_create')
                                 '<a href="'+ route('configuracao.wiki.modelo.create')+'" target="_blank" >' +
-                                    '<button type="button"  class=" btn btn-sm btn-primary"><i class="fa-solid fa-plus"></i> Modelo</button>' +
+                                    '<button type="button"  class=" btn btn-sm btn-oslab"><i class="fa-solid fa-plus"></i> Modelo</button>' +
                                 '</a>' +
                                 @endcan
                             '</div>';

@@ -55,12 +55,12 @@
                         {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'), $wiki->categoria_id)->class('form-control')->placeholder('Selecione') !!}
                     </div>
                 </div>
-            </div>                
+            </div>
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary">
+            <button type="submit" class="btn btn-sm btn-oslab">
                 <i class="fas fa-save"></i>
                 Salvar
             </button>
