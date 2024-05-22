@@ -112,13 +112,13 @@
                     @foreach ($receitas as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->name}}</td>
-                        <td>{{ $item->cliente->name}}</td>
-                        <td>{{ $item->centroCusto->name}}</td>
-                        <td>R$ <span class="float-right" >{{ number_format($item->valor, 2, ',', '.')}} </span> </td>
-                        <td>R$ <span class="float-right" >{{ number_format($item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}} </span> </td>
-                        <td>R$ <span class="float-right" >{{ number_format($item->valor - $item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}} </span> </td>
-                        <td>{{ $item->parcelas}}</td>
+                        <td title="{{ $item->name }}">{{ Str::limit($item->name, 50) }}</td>
+                        <td>{{ $item->cliente->name }}</td>
+                        <td>{{ $item->centroCusto->name }}</td>
+                        <td class="text-right" >R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
+                        <td class="text-right" >R$ {{ number_format($item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                        <td class="text-right" >R$ {{ number_format($item->valor - $item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                        <td class="text-center">{{ $item->parcelas}}</td>
                         {{-- <td>{{ $item->getVencimentoDate()}}</td> --}}
                         <td>{{ $item->data_quitacao?->format('d/m/Y') ?? ''}}</td>
                         <td>
@@ -144,16 +144,10 @@
                         <th class="text-right" colspan="4">
                             Totais:
                         </th>
-                        <th>
-                            R$ <span class="float-right" >{{ number_format($receitas->sum('valor'), 2, ',', '.')}} </span>
+                        <th class="text-right">
+                            R$ {{ number_format($receitas->sum('valor'), 2, ',', '.')}}
                         </th>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-
+                        <th colspan="5" ></th>
                     </tr>
                 </tfoot>
             </table>

@@ -13,23 +13,23 @@
         <tr>
             <th>Receita</th>
             @foreach ($mesRelatorio as $receita)
-            <td >R$ <span class="float-right" > {{ number_format($receita->receita, 2, ',', '.') }} </span> </td>
+            <td class="text-right" >R$  {{ number_format($receita->receita, 2, ',', '.') }}  </td>
             @endforeach
-            <th >R$ <span class="float-right" > {{ number_format($mesRelatorio->sum('receita'), 2, ',', '.') }} </span> </th>
+            <th class="text-right" >R$ {{ number_format($mesRelatorio->sum('receita'), 2, ',', '.') }}  </th>
         </tr>
         <tr>
             <th>Despesa</th>
             @foreach ($mesRelatorio as $despesa)
-            <td >R$ <span class="float-right" > {{ number_format($despesa->despesa, 2, ',', '.') }} </span> </td>
+            <td class="text-right" >R$  {{ number_format($despesa->despesa, 2, ',', '.') }}  </td>
             @endforeach
-            <th >R$ <span class="float-right" > {{ number_format($mesRelatorio->sum('despesa'), 2, ',', '.') }} </span> </th>
+            <th class="text-right" >R$ {{ number_format($mesRelatorio->sum('despesa'), 2, ',', '.') }}  </th>
         </tr>
         <tr>
             <th>Saldo</th>
             @foreach ($mesRelatorio as $saldo)
-            <td >R$ <span class="float-right" > {{ number_format($saldo->saldo, 2, ',', '.') }} </span> </td>
+            <td class="text-right" >R$  {{ number_format($saldo->saldo, 2, ',', '.') }}  </td>
             @endforeach
-            <th >R$ <span class="float-right" > {{ number_format($mesRelatorio->sum('saldo'), 2, ',', '.') }} </span> </th>
+            <th class="text-right" >R$ {{ number_format($mesRelatorio->sum('saldo'), 2, ',', '.') }}  </th>
         </tr>
     </tbody>
 
