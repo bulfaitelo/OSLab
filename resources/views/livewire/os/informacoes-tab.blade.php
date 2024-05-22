@@ -223,7 +223,7 @@
     <!-- FIM Modal - ARQUIVO  -->
 
     <!-- Modal - Vizualização  -->
-    <div wire:ignore class="modal fade" id="modal-vizualizar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="modal-vizualizar" tabindex="-1" role="dialog" aria-hidden="true">
         @livewire('os.informacoes.visualizar-modal')
     </div>
     <!-- FIM Modal - Vizualização  -->
@@ -241,6 +241,19 @@ document.addEventListener('livewire:init', function () {
         Livewire.on('toggleVisualizarModal', () => $('#modal-vizualizar').modal('toggle'));
 
         Livewire.on('toggleCompartilharModal', () => $('#modal-compartilhar').modal('toggle'));
+
+        Livewire.on('senhaPadrao', ({senha}) => {
+            Livewire.hook('component.init', ({ component, cleanup }) => {
+                var e = document.getElementById('lock_view');
+                var p =  new PatternLock(e, {});
+                if (senha) {
+                    p.setPattern(senha);
+                    p.success();;
+                }
+            });
+        });
+
+
 
 
         Livewire.on('closeModal', () => {
