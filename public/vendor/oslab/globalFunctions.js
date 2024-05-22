@@ -12,3 +12,6 @@ $('#modal-excluir').on('show.bs.modal', function (event) {
 $('.decimal').mask('#.##0,00', { reverse: true });
 $('.hora').mask('00:00', { reverse: true });
 $('.int').mask('#0', { reverse: true });
+
+// Adicionando * automaticamente quando existe Required em um input
+$("[required]").prev('label').append("<span class='required-span' title='Este campo é obrigatório'>*</span>");

@@ -55,14 +55,14 @@
 }
 
 
-.btn-oslab {    
-    color: #fff;    
-    background-color: #5d52ef;    
+.btn-oslab {
+    color: #fff;
+    background-color: #5d52ef;
     border-color: #4a42d3;
     box-shadow: none;
 }
 
-.btn-oslab:hover {    
+.btn-oslab:hover {
     color: #fff;
     background-color: #423cb6;
     border-color: #282375;
@@ -70,5 +70,14 @@
 }
 
 .card-oslab {
-    border-top: 3px solid #5d52ef;  
+    border-top: 3px solid #5d52ef;
 }
+
+/* define o estilo do * para os campos obrigatórios  */
+.required-span {
+    content: '*';
+    color: #dc3545;
+    margin-left: 3px;
+}
+/* FIM - define o estilo do * para os campos obrigatórios  */
+
