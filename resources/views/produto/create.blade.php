@@ -36,21 +36,21 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="valor_custo">Valor de custo do Produto</label>
+                        <label for="valor_custo">Valor de custo do Produto <span class='required-span' title='Este campo é obrigatório'>*</span></label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_custo')->class('form-control decimal')->placeholder('Valor de custo do Produto')->attributes(['inputmode' => 'numeric']) !!}
+                            {!! html()->text('valor_custo')->class('form-control decimal')->placeholder('Valor de custo do Produto')->attributes(['inputmode' => 'numeric'])->required() !!}
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="valor_venda">Valor de venda do Produto</label>
+                        <label for="valor_venda">Valor de venda do Produto <span class='required-span' title='Este campo é obrigatório'>*</span></label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor_venda')->class('form-control decimal')->placeholder('Valor de venda do Produto')->attributes(['inputmode' => 'numeric']) !!}
+                            {!! html()->text('valor_venda')->class('form-control decimal')->placeholder('Valor de venda do Produto')->attributes(['inputmode' => 'numeric'])->required() !!}
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="estoque">Estoque Inicial</label>
-                            {!! html()->text('estoque')->class('form-control numero')->placeholder('Estoque inicial do produto')->attributes(['inputmode' => 'numeric']) !!}
+                            {!! html()->text('estoque')->class('form-control numero')->placeholder('Estoque inicial do produto')->attributes(['inputmode' => 'numeric'])->required() !!}
                         </div>
                     </div>
                     <div class="col-md-6">
