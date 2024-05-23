@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class OsServiceCreateTest extends TestCase
 {
 
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     private $osService;
     private $request;
@@ -23,7 +23,7 @@ class OsServiceCreateTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $this->artisan('migrate:fresh --seed');
+        $this->artisan('db:seed');
         Cliente::factory()->count(10)->create();
         $this->osService = new OsService;
         $this->request = new Request;
