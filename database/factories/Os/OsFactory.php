@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Os>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Os\Os>
  */
 class OsFactory extends Factory
 {
