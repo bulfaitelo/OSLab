@@ -8,7 +8,7 @@ use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * undocumented class
@@ -16,10 +16,12 @@ use Illuminate\Contracts\Auth\Guard;
 class OsService implements OsServiceInterface
 {
     public function __construct(
-        protected Guard $auth
+
     ) { }
+
     static public function getDataTable(Request $request, int $itensPorPagina = 100) {
-        $dataHoje = Carbon::now()->format('Y-m-d');
+
+        $dataHoje = Carbon::now()->format('Y-d-m');
         $osListagemPadrao = getConfig('os_listagem_padrao');
 
         $queryOs = Os::with(['cliente', 'tecnico', 'categoria', 'status']);
@@ -67,7 +69,7 @@ class OsService implements OsServiceInterface
         DB::beginTransaction();
         try {
             $os = new Os();
-            $os->user_id = $this->auth->id();
+            $os->user_id = Auth::id();
             $os->cliente_id = $request->cliente_id;
             $os->tecnico_id = $request->tecnico_id;
             $os->categoria_id = $request->categoria_id;
@@ -93,7 +95,7 @@ class OsService implements OsServiceInterface
     public function update(Request $request, Os $os) : Os {
         DB::beginTransaction();
         try {
-            $os->user_id = $this->auth->id();
+            $os->user_id = Auth::id();
             $os->cliente_id = $request->cliente_id;
             $os->tecnico_id = $request->tecnico_id;
             $os->categoria_id = $request->categoria_id;
