@@ -37,7 +37,7 @@ class ProdutoTab extends Component
 
 
     public function render()
-    {        
+    {
         $os_produto = $this->os->produtos()->get();
         return view('livewire.os.produto-tab', [
             'os_produto' => $os_produto,
