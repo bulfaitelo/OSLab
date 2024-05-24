@@ -33,15 +33,21 @@ class ServicoTab extends Component
 
     public function render()
     {
+        
+        $os_servico = $this->os->servicos()->get();
+        return view('livewire.os.servico-tab', [
+            'os_servico' => $os_servico
+        ]);
+    }
+
+    /**
+     * Carrega no componente os valores para os campos Valor e quantidade.
+     */
+    public function getServicoData() : void {
         if ($servico = Servico::find($this->servico_id)) {
             $this->valor_servico = $servico->valor_servico;
             $this->quantidade = 1;
         }
-        $os_servico = $this->os->servicos()->get();
-
-        return view('livewire.os.servico-tab', [
-            'os_servico' => $os_servico
-        ]);
     }
 
     public function create(): void {

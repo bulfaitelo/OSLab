@@ -37,17 +37,23 @@ class ProdutoTab extends Component
 
 
     public function render()
-    {
-        if ($produto = Produto::find($this->produto_id)) {
-            $this->valor_custo = $produto->valor_custo;
-            $this->valor_venda = $produto->valor_venda;
-            $this->quantidade = 1;
-        }
+    {        
         $os_produto = $this->os->produtos()->get();
         return view('livewire.os.produto-tab', [
             'os_produto' => $os_produto,
             'os' => $this->os
         ]);
+    }
+
+    /**
+     * Carrega no componente os valores para os campos Custo, Valor e quantidade.
+     */
+    public function getProdutoData() : void {
+        if ($produto = Produto::find($this->produto_id)) {
+            $this->valor_custo = $produto->valor_custo;
+            $this->valor_venda = $produto->valor_venda;
+            $this->quantidade = 1;
+        }
     }
 
 
@@ -60,7 +66,6 @@ class ProdutoTab extends Component
             $this->dispatch('clear');
             flash()->addError('Produto não pode ser adicionado a uma os Faturada.');
         } else {
-
             $this->createOsProduto($produto);
             $this->quantidade = null;
             $this->valor_custo = null;
