@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <label for="servico_id">Serviço</label>
                     <div wire:ignore >
-                        <select id="os-servico" wire:model.live="servico_id" placeholder="Selecione um Serviço"></select>
+                        <select id="os-servico" wire:model="servico_id" wire:change="getServicoData" placeholder="Selecione um Serviço"></select>                        
                     </div>
                     @error('servico_id') <span class="error">{{ $message }}</span> @enderror
                 </div>

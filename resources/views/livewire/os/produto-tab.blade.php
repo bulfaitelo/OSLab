@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <label for="produto_id">Produto</label>
                     <div wire:ignore >
-                        <select id="os-produto" wire:model.change="produto_id" placeholder="Selecione um Produto"></select>
+                        <select id="os-produto" wire:model="produto_id" wire:change="getProdutoData" placeholder="Selecione um Produto"></select>
                     </div>
                     @error('produto_id') <span class="error">{{ $message }}</span> @enderror
                 </div>
@@ -25,7 +25,6 @@
                         inputmode="numeric"
                     >
                     @error('valor_custo') <span class="error">{{ $message }}</span> @enderror
-
                 </div>
             </div>
             <div class="col-md-2">
