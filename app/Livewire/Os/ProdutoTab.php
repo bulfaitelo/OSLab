@@ -75,8 +75,6 @@ class ProdutoTab extends Component
             $this->dispatch('clear');
             flasher('Produto adicionado com sucesso.');
         }
-
-
     }
 
     public function delete($id) {
@@ -86,7 +84,7 @@ class ProdutoTab extends Component
                 $this->dispatch('clear');
                 flash()->addError('Produto não pode ser removido a uma os Faturada.');
             } else {
-                $osProduto = $this->os->produtos()->find($id);
+                $osProduto = $this->os->produtos()->findOrFail($id);
                 $osProduto->delete();
                 flasher('Produto removido com sucesso.');
             }
