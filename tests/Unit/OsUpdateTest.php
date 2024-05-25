@@ -44,9 +44,14 @@ class OsUpdateTest extends TestCase
     #[Depends('testOsUpdate')]
     #[DataProvider('osCreateData')]
     public function testOsStatusLog($data) : void {
+        $os = Os::find($data['id']);
         $this->put(route('os.update', $data['id']),  $data);
-        $statusLogCount = Os::find($data['id'])->statusLogs;
-        $this->assertCount(2, $statusLogCount);
+        $osUpdated = Os::find($data['id']);
+        if($os->status_id == $data['status_id']){
+            $this->assertCount(1, $osUpdated->statusLogs);
+        } else {
+            $this->assertCount(2, $osUpdated->statusLogs);
+        }        
         $statusLogLastId = Os::find($data['id'])->statusLogs()->orderByDesc('id')->first()->status_id;
         $this->assertEquals($data['status_id'], $statusLogLastId);
     }
