@@ -3,7 +3,15 @@
 @section('title', 'Wiki')
 
 @section('content_header')
-    <h1><i class="fa-solid fa-book "></i> Wiki</h1>
+    <h1>
+        <i class="fa-solid fa-book "></i>
+        Wiki
+        {{-- <span class="help_hover h5"
+        data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+        >
+            <i class="fa-regular fa-circle-question"></i>
+        </span> --}}
+    </h1>
 @stop
 
 @section('content')
@@ -91,6 +99,8 @@
 
 @section('js')
 <script>
-    $('.decimal').mask('#.##0,00', { reverse: true });
+    $('.help_hover').popover({
+        trigger: 'hover'
+    });
 </script>
 @stop
