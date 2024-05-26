@@ -33,7 +33,7 @@ class ServicoTab extends Component
 
     public function render()
     {
-        
+
         $os_servico = $this->os->servicos()->get();
         return view('livewire.os.servico-tab', [
             'os_servico' => $os_servico
@@ -52,7 +52,7 @@ class ServicoTab extends Component
 
     public function create(): void {
         $servico = $this->validate();
-        if ($this->os->faturada == 1) {
+        if ($this->os->fatura_id) {
             // Apagando o produto digitado.
             $this->dispatch('clear');
             flash()->addError('Serviço não pode ser adicionado a uma os Faturada.');
@@ -72,7 +72,7 @@ class ServicoTab extends Component
 
     public function delete($id) {
         try {
-            if ($this->os->faturada == 1) {
+            if ($this->os->fatura_id) {
                 // Apagando o produto digitado.
                 $this->dispatch('clear');
                 flash()->addError('Serviço não pode ser apagado a uma os Faturada.');

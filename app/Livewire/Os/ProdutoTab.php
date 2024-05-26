@@ -61,7 +61,7 @@ class ProdutoTab extends Component
     public function create() {
         $produto = $this->validate();
 
-        if ($this->os->faturada == 1) {
+        if ($this->os->fatura_id) {
             // Apagando o produto digitado.
             $this->dispatch('clear');
             flash()->addError('Produto não pode ser adicionado a uma os Faturada.');
@@ -79,7 +79,7 @@ class ProdutoTab extends Component
 
     public function delete($id) {
         try {
-            if ($this->os->faturada == 1) {
+            if ($this->os->fatura_id) {
                 // Apagando o produto digitado.
                 $this->dispatch('clear');
                 flash()->addError('Produto não pode ser removido a uma os Faturada.');
