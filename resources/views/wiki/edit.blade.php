@@ -3,8 +3,12 @@
 @section('title', 'Editar Wiki')
 
 @section('content_header')
-    <h1><i class="fa-solid fa-book "></i> Editar Wiki</h1>
+    <h1 class="d-inline"><i class="fa-solid fa-book "></i> Editar Wiki</h1>
 @stop
+{{-- Texto de ajuda --}}
+@section('content_header_help_content', 'Caso precise alterar algum dado do dispositivo cadastrado, utilize os campos a seguir.')
+{{-- Titulo (Opcional)--}}
+{{-- @section('content_header_help_title', 'titulo') --}}
 
 @section('content')
 
@@ -28,9 +32,9 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="fabricante_id">Fabricante</label>
+                        <label for="fabricante_id">Fabricante <span class="required-span" title="Este campo é obrigatório">*</span></label>
                         <div class="input-group mb-3">
-                            {!! html()->select('fabricante_id', \App\Models\Configuracao\Wiki\Fabricante::orderBy('name')->pluck('name', 'id'),$wiki->fabricante_id)->class('form-control')->placeholder('Selecione') !!}
+                            {!! html()->select('fabricante_id', \App\Models\Configuracao\Wiki\Fabricante::orderBy('name')->pluck('name', 'id'),$wiki->fabricante_id)->class('form-control')->placeholder('Selecione')->required() !!}
                             @can('config_wiki_fabricante_create')
                                 <span class="input-group-append">
                                     <a href="{{ route('configuracao.wiki.fabricante.create') }}" target="_blank" >
@@ -45,14 +49,14 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="name">Nome</label>
-                        {!! html()->text('name', $wiki->name)->class('form-control')->placeholder('Nome do dispositivo')->required() !!}
+                        <label for="name">Nome do Dispositivo</label>
+                        {!! html()->text('name', $wiki->name)->class('form-control')->placeholder('Ex. Galaxy A52, Dell Inspiron 5548. ')->required() !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="categoria_id">Categoria</label>
-                        {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'), $wiki->categoria_id)->class('form-control')->placeholder('Selecione') !!}
+                        {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'), $wiki->categoria_id)->class('form-control')->placeholder('Selecione')->required() !!}
                     </div>
                 </div>
             </div>

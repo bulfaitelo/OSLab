@@ -8,6 +8,10 @@
     <h1><i class="fa-solid fa-book "></i> <b>[{{ $wiki->fabricante->name }}]</b> -  {{ $wiki->name}} </h1>
     <h6>{{ $wiki->modelosTitle() }}</h6>
 @stop
+{{-- Texto de ajuda --}}
+{{-- @section('content_header_help_content', 'Utilize os campos a seguir para cadastrar as informações de um dispositivo. Esses dados auxiliam em novos atendimentos.') --}}
+{{-- Titulo (Opcional)--}}
+{{-- @section('content_header_help_title', 'titulo') --}}
 
 @section('content')
 <div class="row">

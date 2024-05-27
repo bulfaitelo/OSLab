@@ -3,8 +3,12 @@
 @section('title', 'Cadastrar Wiki')
 
 @section('content_header')
-    <h1><i class="fa-solid fa-book "></i> Cadastrar Wiki</h1>
+    <h1 class="d-inline"><i class="fa-solid fa-book "></i> Cadastrar Wiki</h1>
 @stop
+{{-- Texto de ajuda --}}
+@section('content_header_help_content', 'Utilize os campos a seguir para cadastrar as informações de um dispositivo. Esses dados auxiliam em novos atendimentos.')
+{{-- Titulo (Opcional)--}}
+{{-- @section('content_header_help_title', 'titulo') --}}
 
 @section('content')
 
@@ -22,7 +26,6 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-
             <div class="card-body">
                 @include('adminlte::partials.form-alert')
                 {!! html()->form('post', route('wiki.store'))->acceptsFiles()->open() !!}
@@ -30,9 +33,9 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fabricant_id">Fabricante</label>
+                            <label for="fabricante_id">Fabricante <span class="required-span" title="Este campo é obrigatório">*</span></label>
                             <div class="input-group mb-3">
-                                {!! html()->select('fabricante_id', \App\Models\Configuracao\Wiki\Fabricante::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                                {!! html()->select('fabricante_id', \App\Models\Configuracao\Wiki\Fabricante::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
                                 @can('config_wiki_fabricante_create')
                                     <span class="input-group-append">
                                         <a href="{{ route('configuracao.wiki.fabricante.create') }}" target="_blank" >
@@ -47,14 +50,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="name">Nome</label>
-                            {!! html()->text('name')->class('form-control')->placeholder('Nome do dispositivo')->required() !!}
+                            <label for="name">Nome do Dispositivo</label>
+                            {!! html()->text('name')->class('form-control')->placeholder('Ex. Galaxy A52, Dell Inspiron 5548.')->required() !!}
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="modelo">Modelo</label>
-                            {!! html()->text('modelo')->class('form-control')->placeholder('Modelo do Dispositivo')->required() !!}
+                            <label for="modelo">Modelo do Dispositivo</label>
+                            {!! html()->text('modelo')->class('form-control')->placeholder('Ex.: SM-A525M, P39F.')->required() !!}
                         </div>
                     </div>
                 </div>
@@ -62,7 +65,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="categoria_id">Categoria</label>
-                            {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione') !!}
+                            {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
                         </div>
                     </div>
                 </div>

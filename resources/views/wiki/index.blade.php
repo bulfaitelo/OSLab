@@ -9,9 +9,9 @@
     </h1>
 @stop
 {{-- Texto de ajuda --}}
-@section('content_header_help_content', 'texto')
+@section('content_header_help_content', 'Tela de cadastro de Wiki para registrar e organizar informações sobre equipamentos e seus modelos, criando uma base de dados para consultas futuras.')
 {{-- Titulo (Opcional)--}}
-@section('content_header_help_title', 'titulo')
+{{-- @section('content_header_help_title', 'titulo') --}}
 
 @section('content')
 <div class="">
