@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="name">Receita</label>
+                                <label for="name">Despesa</label>
                                 {!! html()->text('name', $despesa->name)->class('form-control')->placeholder('Descrição da despesa')->required() !!}
                             </div>
                         </div>
