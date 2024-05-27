@@ -8,6 +8,11 @@
     <h1>OSLAB - Home</h1>
 @stop
 
+{{-- Texto de ajuda --}}
+@section('content_header_help_content', 'texto')
+{{-- Titulo (Opcional)--}}
+@section('content_header_help_title', 'titulo')
+
 @section('content')
 
 @stop

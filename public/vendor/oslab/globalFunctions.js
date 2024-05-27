@@ -15,3 +15,8 @@ $('.int').mask('#0', { reverse: true });
 
 // Adicionando * automaticamente quando existe Required em um input
 $("[required]").prev('label').append("<span class='required-span' title='Este campo é obrigatório'>*</span>");
+
+// Adicionando poopover
+$('.help_popover').popover({
+    trigger: 'hover'
+});

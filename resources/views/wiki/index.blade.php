@@ -3,16 +3,15 @@
 @section('title', 'Wiki')
 
 @section('content_header')
-    <h1>
+    <h1 class="d-inline">
         <i class="fa-solid fa-book "></i>
         Wiki
-        {{-- <span class="help_hover h5"
-        data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
-        >
-            <i class="fa-regular fa-circle-question"></i>
-        </span> --}}
     </h1>
 @stop
+{{-- Texto de ajuda --}}
+@section('content_header_help_content', 'texto')
+{{-- Titulo (Opcional)--}}
+@section('content_header_help_title', 'titulo')
 
 @section('content')
 <div class="">
@@ -98,9 +97,4 @@
 @stop
 
 @section('js')
-<script>
-    $('.help_hover').popover({
-        trigger: 'hover'
-    });
-</script>
 @stop
