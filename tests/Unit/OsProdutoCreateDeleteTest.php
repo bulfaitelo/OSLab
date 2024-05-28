@@ -64,9 +64,54 @@ class OsProdutoCreateDeleteTest extends TestCase
             ->set('valor_venda', $data['valor_venda'])
             ->call('create')
             ->assertHasNoErrors();
-        $osProduto = $os->produtos()->where('produto_id', $data['produto_id'])->sole();
-        $osProduto->delete();
+        $produto_id = $os->produtos()->where('produto_id', $data['produto_id'])->sole()->id;
+        Livewire::test(ProdutoTab::class, ['os' => $os])
+            ->call('delete', $produto_id)
+            ->assertHasNoErrors();
+        $produtoCount = $os->produtos()->where('produto_id', $data['produto_id'])->count();
+        $this->assertEquals(0, $produtoCount);
         $this->assertDatabaseMissing('os_produtos', $expected);
+    }
+
+    #[Depends('testCreateProduto')]
+    #[DataProvider('osProdutoData')]
+    public function testCreateProdutoFaturado($data) : void {
+        $os = Os::findOrFail($data['os_id']);
+        $os->fatura_id = 1;
+        $os->save();
+        Livewire::test(ProdutoTab::class, ['os' => $os ])
+            ->set('produto_id', $data['produto_id'])
+            ->set('quantidade', $data['quantidade'])
+            ->set('valor_custo', $data['valor_custo'])
+            ->set('valor_venda', $data['valor_venda'])
+            ->call('create')
+            ->assertStatus(200);
+
+        $osProduto = $os->produtos()->where('produto_id', $data['produto_id'])->count();
+        $this->assertEquals(0, $osProduto);
+    }
+
+    #[Depends('testCreateProduto')]
+    #[DataProvider('osProdutoData')]
+    public function testDeleteProdutoFaturado($data, $expected) : void {
+        $os = Os::findOrFail($data['os_id']);
+        Livewire::test(ProdutoTab::class, ['os' => $os ])
+            ->set('produto_id', $data['produto_id'])
+            ->set('quantidade', $data['quantidade'])
+            ->set('valor_custo', $data['valor_custo'])
+            ->set('valor_venda', $data['valor_venda'])
+            ->call('create')
+            ->assertHasNoErrors();
+        $os->fatura_id = 1;
+        $os->save();
+        $produto_id = $os->produtos()->where('produto_id', $data['produto_id'])->sole()->id;
+        Livewire::test(ProdutoTab::class, ['os' => $os])
+            ->call('delete', $produto_id)
+            ->assertHasNoErrors();
+        $produtoCount = $os->produtos()->where('produto_id', $data['produto_id'])->count();
+        $this->assertEquals(1, $produtoCount);
+
+        // $this->assertDatabaseMissing('os_produtos', $expected);
     }
 
     public static function osProdutoData() : array {
@@ -90,25 +135,6 @@ class OsProdutoCreateDeleteTest extends TestCase
         ];
 
         $data['002'] = [
-            // $data
-            [
-                'os_id' => 9,
-                'produto_id' => 9,
-                'quantidade' => 9,
-                'valor_custo' => "90",
-                'valor_venda' => "900",
-            ],
-            // $expected
-            [
-                'os_id' => 9,
-                'produto_id' => 9,
-                'quantidade' => 9,
-                'valor_custo' => "90",
-                'valor_venda' => "900",
-            ],
-        ];
-
-        $data['003'] = [
             // $data
             [
                 'os_id' => 8,

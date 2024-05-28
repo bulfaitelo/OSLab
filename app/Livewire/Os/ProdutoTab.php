@@ -60,7 +60,6 @@ class ProdutoTab extends Component
 
     public function create() {
         $produto = $this->validate();
-
         if ($this->os->fatura_id) {
             // Apagando o produto digitado.
             $this->dispatch('clear');
