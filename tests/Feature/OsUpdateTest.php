@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -51,7 +51,7 @@ class OsUpdateTest extends TestCase
             $this->assertCount(1, $osUpdated->statusLogs);
         } else {
             $this->assertCount(2, $osUpdated->statusLogs);
-        }        
+        }
         $statusLogLastId = Os::find($data['id'])->statusLogs()->orderByDesc('id')->first()->status_id;
         $this->assertEquals($data['status_id'], $statusLogLastId);
     }

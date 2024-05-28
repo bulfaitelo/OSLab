@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use App\Livewire\Os\ProdutoTab;
 use Tests\TestCase;
