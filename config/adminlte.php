@@ -327,7 +327,7 @@ return [
         // ],
         // ['header' => 'account_settings'],
         [
-            'text'    => 'OS',
+            'text'    => 'Ordens de Serviço',
             'icon'    => 'fa-regular fa-rectangle-list',
             'route'   => 'os.index',
             'active'  => ['os*'],
