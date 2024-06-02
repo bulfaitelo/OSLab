@@ -2,6 +2,7 @@
     @if ($showDisplay === true)
     <div class="row">
         <div class="col-md-7">
+            @if(isset($balancete['detalhes']))
             <table class="table table-bordered table-sm">
                 <thead>
                     <tr>
@@ -13,35 +14,36 @@
                 </thead>
                 <tbody>
                     @foreach ($balancete['detalhes'] as $item)
-                        <tr>
-                            <td>
+                            <tr>
+                                <td>
+                                    @if ($item['tipo'] == 'R')
+                                        <span class="badge bg-success">RECEITA</span>
+                                    @else
+                                        <span class="badge bg-danger">DESPESA</span>
+                                    @endif
+                                </td>
+                                <td>{{ $item['centro_custo'] }}</td>
                                 @if ($item['tipo'] == 'R')
-                                    <span class="badge bg-success">RECEITA</span>
+                                    <td class="balancete-credito ">
+                                        R$ <span class="float-right " >{{ number_format($item['valor_previsto'],2,",",".") }}</span>
+                                    </td>
+                                    <td class="balancete-credito ">
+                                        R$ <span class=" float-right " >{{ number_format($item['valor_executado'],2,",",".") }}</span>
+                                    </td>
                                 @else
-                                    <span class="badge bg-danger">DESPESA</span>
+                                    <td class="balancete-debito ">
+                                        R$ <span class="float-right " >-{{ number_format($item['valor_previsto'],2,",",".") }}</span>
+                                    </td>
+                                    <td class="balancete-debito ">
+                                        R$ <span class=" float-right " >-{{ number_format($item['valor_executado'],2,",",".") }}</span>
+                                    </td>
                                 @endif
-                            </td>
-                            <td>{{ $item['centro_custo'] }}</td>
-                            @if ($item['tipo'] == 'R')
-                                <td class="balancete-credito ">
-                                    R$ <span class="float-right " >{{ number_format($item['valor_previsto'],2,",",".") }}</span>
-                                </td>
-                                <td class="balancete-credito ">
-                                    R$ <span class=" float-right " >{{ number_format($item['valor_executado'],2,",",".") }}</span>
-                                </td>
-                            @else
-                                <td class="balancete-debito ">
-                                    R$ <span class="float-right " >-{{ number_format($item['valor_previsto'],2,",",".") }}</span>
-                                </td>
-                                <td class="balancete-debito ">
-                                    R$ <span class=" float-right " >-{{ number_format($item['valor_executado'],2,",",".") }}</span>
-                                </td>
-                            @endif
-                        </tr>
+                            </tr>
                     @endforeach
                 </tbody>
             </table>
-            <table class="table table-bordered table-sm">
+            @endif
+                <table class="table table-bordered table-sm">
                 <thead>
                     <tr>
                         <th colspan="2">Totais </th>
