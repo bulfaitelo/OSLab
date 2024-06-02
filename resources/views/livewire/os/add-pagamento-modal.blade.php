@@ -18,7 +18,7 @@
                         {!! html()->text('pagamento_valor')
                             ->class('form-control decimal')
                             ->placeholder('Valor')
-                            ->attribute('wire:model.live', 'pagamento_valor')
+                            ->attribute('wire:model', 'pagamento_valor')
                             ->disabled($osQuitada)
                             ->attributes(['inputmode' => 'numeric'])
                             ->required()
@@ -32,7 +32,7 @@
                         {!! html()->date('data_pagamento')
                             ->class('form-control')
                             ->placeholder('Data do Pagamento')
-                            ->attribute('wire:model.live', 'data_pagamento')
+                            ->attribute('wire:model', 'data_pagamento')
                             ->disabled($osQuitada)
                             ->required()
                         !!}
@@ -44,7 +44,7 @@
                         <label for="forma_pagamento_id">Forma de pagamento</label>
                         {!! html()->select('forma_pagamento_id', \App\Models\Configuracao\Financeiro\FormaPagamento::orderBy('name')->pluck('name', 'id'))
                             ->class('form-control')
-                            ->attribute('wire:model.live', 'forma_pagamento_id')
+                            ->attribute('wire:model', 'forma_pagamento_id')
                             ->placeholder('Selecione')
                             ->disabled($osQuitada)
                             ->required()
