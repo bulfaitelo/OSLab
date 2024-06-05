@@ -135,6 +135,11 @@ class OsController extends Controller
             ->with('warning', 'Por favor vejas as configurações do sistema.');
         }
 
+        if($os->fatura_id) {
+            return redirect()->route('os.edit', $os->id)
+            ->with('warning', 'Esta Ordem de Serviço já está faturada.');
+        }
+
         DB::beginTransaction();
         try {
             //Gerando despesas Referente a produtos.
