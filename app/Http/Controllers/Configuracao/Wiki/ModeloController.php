@@ -97,6 +97,11 @@ class ModeloController extends Controller
     public function destroy(Modelo $modelo)
     {
         try {
+            $osCount = $modelo->os->count();
+            if($osCount > 0){
+                return redirect()->route('configuracao.wiki.modelo.index')
+                ->with('warning', "Modelo está sendo usado em {$osCount} e não pode ser excluído!");
+            }
             $modelo->delete();
             return redirect()->route('configuracao.wiki.modelo.index')
                 ->with('success', 'Modelo excluído com sucesso.');

@@ -108,11 +108,11 @@ class WikiController extends Controller
             $wiki->fabricante_id = $request->fabricante_id;
             $wiki->categoria_id = $request->categoria_id;
             $wiki->user_id = Auth::id();
-            $wiki->save();           
+            $wiki->save();
             DB::commit();
             return redirect()->route('wiki.index')
-            ->with('success', 'Wiki atualizada com sucesso.'); 
-            
+            ->with('success', 'Wiki atualizada com sucesso.');
+
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -126,6 +126,7 @@ class WikiController extends Controller
     {
         try {
             Storage::deleteDirectory('public/wiki/'.$wiki->id);
+
             $wiki->delete();
             return redirect()->route('wiki.index')
                 ->with('success', 'Wiki excluída com sucesso.');
