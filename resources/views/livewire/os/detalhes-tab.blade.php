@@ -175,7 +175,7 @@
             var tomSelectModelo = new TomSelect(".modelo",{
                 valueField: 'id',
                 labelField: 'name',
-                searchField: ['name', 'wiki'],
+                searchField: ['name', 'wiki', 'fabricante'],
                 selectOnTab: true,
                 placeholder: 'Selecione o Modelo',
                 // fetch remote data
@@ -192,8 +192,8 @@
                 render: {
                     option: function(data, escape) {
                     return '<div>' +
-                            '<span class="title">' + escape(data.name) + '</span>' +
-                            '<span class="url"> <b> ' + escape(data.wiki) + '</b> </span>' +
+                            '<span class="title"><b>' + escape(data.name) + '</b></span>' +
+                            '<span class="url"><b>[' + escape(data.fabricante) + '] </b>' + escape(data.wiki) + '</span>' +
                         '</div>';
                     },
                     item: function(data, escape) {

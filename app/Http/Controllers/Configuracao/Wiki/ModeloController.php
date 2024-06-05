@@ -124,7 +124,11 @@ class ModeloController extends Controller
             $select = Modelo::where('name', 'LIKE', '%'. $request->q . '%');
             $select->orWhereHas('wiki', function (Builder $query) use ($request) {
                 $query->where('name','LIKE', '%'. $request->q . '%');
+                $query->orWhereHas('fabricante', function (Builder $query) use ($request) {
+                    $query->where('name','LIKE', '%'. $request->q . '%');
+                });
             });
+
             $select->orderBy('name');
             $select->limit(10);
             $response = [];
@@ -133,7 +137,8 @@ class ModeloController extends Controller
                 $response[] = [
                     'id' => $value->id,
                     'name' => $value->name,
-                    'wiki'=> $value->wiki->name
+                    'wiki'=> $value->wiki->name,
+                    'fabricante' => $value->wiki->fabricante->name,
 
                 ];
             }
