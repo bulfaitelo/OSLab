@@ -71,13 +71,13 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="celular">Celular </label>
-                        {!! html()->text('celular', $user->celular)->class('form-control cel')->placeholder('Celular') !!}
+                        {!! html()->text('celular', $user->celular)->class('form-control telefone')->placeholder('Celular') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="telefone">Telefone </label>
-                        {!! html()->text('telefone', $user->telefone)->class('form-control tel')->placeholder('Telefone') !!}
+                        {!! html()->text('telefone', $user->telefone)->class('form-control telefone')->placeholder('Telefone') !!}
                     </div>
                 </div>
                 <div class="col-md-4">

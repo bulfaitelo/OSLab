@@ -54,13 +54,13 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="celular">Celular </label>
-                        {!! html()->text('celular')->class('form-control cel')->placeholder('Celular') !!}
+                        {!! html()->text('celular')->class('form-control telefone')->placeholder('Celular') !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="telefone">Telefone </label>
-                        {!! html()->text('telefone')->class('form-control tel')->placeholder('Telefone') !!}
+                        {!! html()->text('telefone')->class('form-control telefone')->placeholder('Telefone') !!}
                     </div>
                 </div>
             </div>

@@ -139,7 +139,6 @@ class ModeloController extends Controller
                     'name' => $value->name,
                     'wiki'=> $value->wiki->name,
                     'fabricante' => $value->wiki->fabricante->name,
-
                 ];
             }
             return response()->json($response, 200);

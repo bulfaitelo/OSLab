@@ -60,13 +60,13 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="celular">Celular </label>
-                        {!! html()->text('celular', $cliente->celular)->class('form-control cel')->placeholder('Celular')->disabled() !!}
+                        {!! html()->text('celular', $cliente->celular)->class('form-control telefone')->placeholder('Celular')->disabled() !!}
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="telefone">Telefone </label>
-                        {!! html()->text('telefone', $cliente->telefone)->class('form-control tel')->placeholder('Telefone')->disabled() !!}
+                        {!! html()->text('telefone', $cliente->telefone)->class('form-control telefone')->placeholder('Telefone')->disabled() !!}
                     </div>
                 </div>
             </div>

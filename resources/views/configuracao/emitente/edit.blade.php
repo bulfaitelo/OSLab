@@ -102,7 +102,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="telefone">Telefone </label>
-                                {!! html()->text('telefone', $emitente->telefone)->class('form-control tel')->placeholder('Telefone') !!}
+                                {!! html()->text('telefone', $emitente->telefone)->class('form-control telefone')->placeholder('Telefone') !!}
                             </div>
                         </div>
                     </div>
@@ -224,14 +224,6 @@
 @stop
 
 @section('js')
-    <script>
-        $(document).ready(function(){
-            $('.cep').mask('00000-000');
-            $('.cel').mask('(00) 0000#-0000');
-            $('.tel').mask('(00) 0000-0000');
-            $('.cnpj').mask('00.000.000/0000-00');
-        });
-    </script>
     <script>
         $('#img-upload').click(function(){
             $('#emitente_file').click();
