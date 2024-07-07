@@ -18,21 +18,24 @@ class DeleteButton extends Component
     /**
      * Exibe botão, para excluir item
      */
-    public function confirmDelete($id) : void {
+    public function confirmDelete($id): void
+    {
         $this->confirmacaoDelete = $id;
     }
 
     /**
      * Cancela exibição do botão de excluir
      */
-    public function cancelDelete() : void {
+    public function cancelDelete(): void
+    {
         $this->confirmacaoDelete = '';
     }
 
     /**
      * Deleta informação e caso exista arquivo o exclui também
      */
-    public function delete($informacao_id) : void {
+    public function delete($informacao_id): void
+    {
         try {
             $informacao = Os::find($this->os_id)->informacoes->find($informacao_id);
             if ($informacao->tipo == 3) { // tipo 3 é arquivo

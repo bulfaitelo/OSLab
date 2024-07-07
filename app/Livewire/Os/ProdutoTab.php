@@ -49,7 +49,8 @@ class ProdutoTab extends Component
     /**
      * Carrega no componente os valores para os campos Custo, Valor e quantidade.
      */
-    public function getProdutoData() : void {
+    public function getProdutoData(): void
+    {
         if ($produto = Produto::find($this->produto_id)) {
             $this->valor_custo = $produto->valor_custo;
             $this->valor_venda = $produto->valor_venda;
@@ -124,7 +125,8 @@ class ProdutoTab extends Component
         }
     }
 
-    // private function updateProdutoQuantidadeEstoque($osProdutoId) : void {
+    // private function updateProdutoQuantidadeEstoque($osProdutoId): void
+    {
     //     try {
     //         $produto = Produto::find($this->produto_id);
     //         $estoque = $produto->estoque;

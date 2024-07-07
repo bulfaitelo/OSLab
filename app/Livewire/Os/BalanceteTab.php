@@ -11,7 +11,6 @@ class BalanceteTab extends Component
     public $os;
     public $showDisplay;
 
-
     #[On('showBalanceteTab')]
     public function showBalanceteTab()
     {
@@ -21,7 +20,7 @@ class BalanceteTab extends Component
     public function render()
     {
         return view('livewire.os.balancete-tab', [
-            'balancete' => $this->os->balancete()
+            'balancete' => $this->os->balancete(),
         ]);
     }
 }

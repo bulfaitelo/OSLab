@@ -35,7 +35,8 @@ class OsProdutoCreateDeleteTest extends TestCase
     }
 
     #[DataProvider('osProdutoData')]
-    public function testCreateProduto(array $data, array $expected) : void {
+    public function testCreateProduto(array $data, array $expected): void
+    {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ProdutoTab::class, ['os' => $os ])
             ->set('produto_id', $data['produto_id'])
@@ -55,7 +56,8 @@ class OsProdutoCreateDeleteTest extends TestCase
 
     #[Depends('testCreateProduto')]
     #[DataProvider('osProdutoData')]
-    public function testDeleteProduto($data, $expected) : void {
+    public function testDeleteProduto($data, $expected): void
+    {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ProdutoTab::class, ['os' => $os ])
             ->set('produto_id', $data['produto_id'])
@@ -75,7 +77,8 @@ class OsProdutoCreateDeleteTest extends TestCase
 
     #[Depends('testCreateProduto')]
     #[DataProvider('osProdutoData')]
-    public function testCreateProdutoFaturado($data) : void {
+    public function testCreateProdutoFaturado($data): void
+    {
         $os = Os::findOrFail($data['os_id']);
         $os->fatura_id = 1;
         $os->save();
@@ -93,7 +96,8 @@ class OsProdutoCreateDeleteTest extends TestCase
 
     #[Depends('testCreateProduto')]
     #[DataProvider('osProdutoData')]
-    public function testDeleteProdutoFaturado($data, $expected) : void {
+    public function testDeleteProdutoFaturado($data, $expected): void
+    {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ProdutoTab::class, ['os' => $os ])
             ->set('produto_id', $data['produto_id'])

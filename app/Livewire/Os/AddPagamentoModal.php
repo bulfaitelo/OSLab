@@ -7,14 +7,14 @@ use Livewire\Component;
 
 class AddPagamentoModal extends Component
 {
-
     public $os;
-    public $pagamento_valor, $data_pagamento, $forma_pagamento_id;
-
+    public $pagamento_valor;
+    public $data_pagamento;
+    public $forma_pagamento_id;
     protected $listeners = ['adicionarPagamento' => 'loadAdicionarPagamento'];
 
     /**
-     * Rules
+     * Rules.
      */
     protected function rules(): array
     {
@@ -22,7 +22,6 @@ class AddPagamentoModal extends Component
             'pagamento_valor' => 'required|numeric|min:0|not_in:0',
             'data_pagamento' => 'required|date',
             'forma_pagamento_id' => 'required|exists:forma_pagamentos,id',
-
         ];
     }
 
@@ -30,21 +29,21 @@ class AddPagamentoModal extends Component
      * Prepare the data for validation.
      */
     protected function prepareForValidation($attributes) {
-        $attributes['pagamento_valor'] = str_replace(',', '.', str_replace('.','', $attributes['pagamento_valor']));
+        $attributes['pagamento_valor'] = str_replace(',', '.', str_replace('.', '', $attributes['pagamento_valor']));
+
         return $attributes;
     }
 
-
     /**
-     * Carrega Model de Adicionar Pagamento
+     * Carrega Model de Adicionar Pagamento.
      */
-    function loadAdicionarPagamento()
+    public function loadAdicionarPagamento()
     {
         // dd($this->os->contas->where('tipo', 'R'));
         $this->dispatch('toggleAddPagamentoModal');
     }
 
-    function mount()
+    public function mount()
     {
         $this->data_pagamento = now()->format('Y-m-d');
     }
@@ -53,28 +52,31 @@ class AddPagamentoModal extends Component
     {
         $conta = $this->os->contas()->where('tipo', 'R')->first();
         $pagamentos = $conta?->pagamentos()->with('formaPagamento')->get();
+
         return view('livewire.os.add-pagamento-modal', [
             'os' => $this->os,
             'osQuitada' => $this->os->osQuitada(),
             'conta' => $conta,
-            'pagamentos' => $pagamentos
+            'pagamentos' => $pagamentos,
         ]);
     }
 
     /**
-     * Método para adicionar pagamento a receita relacionada a Os
+     * Método para adicionar pagamento a receita relacionada a Os.
      */
-    function pagamentoCreate() : void {
+    function pagamentoCreate(): void
+    {
         $pagamentoRequest = $this->validate();
         if ($this->os->osQuitada()) {
             flash()->addError('a OS ja foi Quitada!');
+
             return ;
         }
         $conta = $this->os->contas()->where('tipo', 'R')->first();
         $parcela = $conta->pagamentos()->latest()->first()?->parcela;
         DB::beginTransaction();
         try {
-            $pagamento =  [
+            $pagamento = [
                 'forma_pagamento_id' => $this->forma_pagamento_id,
                 'user_id' => auth()->id(),
                 'valor' => $pagamentoRequest['pagamento_valor'],

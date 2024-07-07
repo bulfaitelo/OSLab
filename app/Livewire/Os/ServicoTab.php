@@ -44,7 +44,8 @@ class ServicoTab extends Component
     /**
      * Carrega no componente os valores para os campos Valor e quantidade.
      */
-    public function getServicoData() : void {
+    public function getServicoData(): void
+    {
         if ($servico = Servico::find($this->servico_id)) {
             $this->valor_servico = $servico->valor_servico;
             $this->quantidade = 1;

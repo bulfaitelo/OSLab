@@ -6,10 +6,8 @@ use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-
 class ChecklistTab extends Component
 {
-
     public $os;
     public $checklistForm;
     public $form ;
@@ -18,22 +16,20 @@ class ChecklistTab extends Component
 
     public function render()
     {
-
         $checklist = $this->os->categoria->checklist;
         // $this->getValuesOsChecklist($os);
+
         return view('livewire.os.checklist-tab', [
             'os' => $this->os,
-            'checklist'=> $checklist,
+            'checklist' => $checklist,
         ]);
     }
-
 
     public function submit($formData): void
     {
         DB::beginTransaction();
         try {
             parse_str($formData, $dataArray);
-
 
             foreach ($dataArray as $key => $value) {
                 $checklistFormData[$key]['name'] = $key;
@@ -50,23 +46,23 @@ class ChecklistTab extends Component
             DB::rollBack();
             throw $th;
         }
-
     }
 
     /**
      * Prepara os dados para serem salvos.
      *
-     * @param string $key nome do campo.
-     * @param string,array  $value valor do campo.
+     * @param  string  $key  nome do campo.
+     * @param  string|array  $value  valor do campo.
      * @return string json tratado.
      */
-    private function prepareDataValue($key, $value)  {
-        if ((strpos($key, 'checkbox-group') !== false) || (strpos($key,'radio-group') !== false)) {
-            if (!in_array('other', $value)) {
+    private function prepareDataValue($key, $value)
+    {
+        if ((strpos($key, 'checkbox-group') !== false) || (strpos($key, 'radio-group') !== false)) {
+            if (! in_array('other', $value)) {
                 unset($value['-other-value']);
             }
         }
+
         return json_encode($value);
     }
-
 }

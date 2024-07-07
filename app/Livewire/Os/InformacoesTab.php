@@ -35,7 +35,8 @@ class InformacoesTab extends Component
     /**
      * Cria uma nova anotação
      */
-    public function anotacaoCreate() : void {
+    public function anotacaoCreate(): void
+    {
 
         $this->validate([
             'anotacao' => 'required|',
@@ -61,7 +62,8 @@ class InformacoesTab extends Component
     /**
      * Cria uma nova senha (texto ou padrão)
      */
-    public function senhaCreate() : void {
+    public function senhaCreate(): void
+    {
         // $this->senha_padrao = $senha_padrao;
         $this->validate([
             'tipo_senha' => 'required',
@@ -110,7 +112,8 @@ class InformacoesTab extends Component
     /**
      * Cria um novo arquivo.
      */
-    public function arquivoCreate() : void {
+    public function arquivoCreate(): void
+    {
         $this->validate([
             'arquivo' => 'required|max:5120|mimes:zip,pdf,jpg,png,jpeg,bmp',
         ]);

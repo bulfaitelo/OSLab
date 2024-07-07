@@ -11,14 +11,15 @@ class FaturarModal extends Component
 
     public $valorTotal;
 
-    function loadFaturarModal()
+    public function loadFaturarModal()
     {
         $this->valorTotal = $this->os->valorTotal();
         $this->dispatch('toggleFaturarModal');
     }
+
     public function render()
     {
-        return view('livewire.os.faturar-modal',[
+        return view('livewire.os.faturar-modal', [
             'os' => $this->os,
             'osValorTotal' => $this->valorTotal,
         ]);
