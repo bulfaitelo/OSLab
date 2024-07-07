@@ -1,3 +1,4 @@
 preset: laravel
-exclude:
-  - "TestController.php"
+finder:
+  exclude:
+    - "TestController.php"
