@@ -3,11 +3,10 @@
 namespace App\Http\OsLabClass\Checklist;
 
 /**
- * Monta um o HTML do checklist
+ * Monta um o HTML do checklist.
  *
  * Ref: https://formbuilder.online/
  */
-
 class CreateHtmlChecklist
 {
     private $checklist;
@@ -18,7 +17,8 @@ class CreateHtmlChecklist
      * @param  object  $checklist  Recebe o modelo de Checklist com base no OS->categoria->checklist
      * @param  object|null  $osChecklist  Recebe o checklist refente a OS
      **/
-    public function __construct($checklist, $osChecklist = null) {
+    public function __construct($checklist, $osChecklist = null)
+    {
         $this->checklist = $checklist;
         $this->osChecklist = $osChecklist;
         $this->setChecklist();
@@ -31,9 +31,10 @@ class CreateHtmlChecklist
      *
      * @return string
      **/
-    public function render() {
+    public function render()
+    {
         foreach ($this->checklist as $opcao) {
-           $this->html .= $this->getHtmlFromOption($opcao);
+            $this->html .= $this->getHtmlFromOption($opcao);
         }
 
         return $this->html;
@@ -43,6 +44,7 @@ class CreateHtmlChecklist
      * Retorna oa html pronto.
      *
      * Retorna o Html para ser concatenado e retornado na blade
+     *
      * @param  object  $option  objeto da opção recebida.
      * @return string Retorna o string do HTML
      */
@@ -60,7 +62,7 @@ class CreateHtmlChecklist
      *
      * cria o HTML do header
      *
-     * @param object $option Recebe o objeto do header
+     * @param  object  $option  Recebe o objeto do header
      * @return string
      **/
     private function header(object $option): string
@@ -73,7 +75,7 @@ class CreateHtmlChecklist
      *
      * cria o HTML do paragraph
      *
-     * @param object $option Recebe o objeto do paragraph
+     * @param  object  $option  Recebe o objeto do paragraph
      * @return string
      **/
     private function paragraph(object $option): string
@@ -86,7 +88,7 @@ class CreateHtmlChecklist
      *
      * cria o HTML do text
      *
-     * @param object $option Recebe o objeto do text
+     * @param  object  $option  Recebe o objeto do text
      * @return string
      **/
     private function text(object $option): string
@@ -120,7 +122,7 @@ class CreateHtmlChecklist
      *
      * cria o HTML do number
      *
-     * @param object $option Recebe o objeto do number
+     * @param  object  $option  Recebe o objeto do number
      * @return string
      **/
     private function number(object $option): string
@@ -156,7 +158,7 @@ class CreateHtmlChecklist
      *
      * cria o HTML do textarea
      *
-     * @param object $option Recebe o objeto do textarea
+     * @param  object  $option  Recebe o objeto do textarea
      * @return string
      **/
     private function textarea(object $option): string
@@ -189,7 +191,7 @@ class CreateHtmlChecklist
      *
      * cria o HTML do select
      *
-     * @param object $option Recebe o objeto do select
+     * @param  object  $option  Recebe o objeto do select
      * @return string
      **/
     private function select(object $option): string
@@ -230,7 +232,7 @@ class CreateHtmlChecklist
      *
      * cria o HTML do checkbox-group
      *
-     * @param object $option Recebe o objeto do checkbox-group
+     * @param  object  $option  Recebe o objeto do checkbox-group
      * @return string
      **/
     private function checkboxGroup(object $option): string
@@ -288,7 +290,7 @@ class CreateHtmlChecklist
      *
      * cria o HTML do radio-group
      *
-     * @param object $option Recebe o objeto do radio-group
+     * @param  object  $option  Recebe o objeto do radio-group
      * @return string
      **/
     private function radioGroup(object $option): string

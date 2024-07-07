@@ -108,8 +108,8 @@ class WikiController extends Controller
             $wiki->categoria_id = $request->categoria_id;
             $wiki->user_id = Auth::id();
             $wiki->save();
-
             DB::commit();
+
             return redirect()->route('wiki.index')
             ->with('success', 'Wiki atualizada com sucesso.');
         } catch (\Throwable $th) {
@@ -144,14 +144,14 @@ class WikiController extends Controller
             $wiki->user_id = Auth::id();
             $wiki->save();
             $response = [
-                'text' =>  'Wiki atualizada com sucesso.'
+                'text' => 'Wiki atualizada com sucesso.',
             ];
 
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {
             $response = [
-                'text' => 'Ouve um erro, recarregue a pagina e tente novamente'
+                'text' => 'Ouve um erro, recarregue a pagina e tente novamente',
             ];
 
             return response()->json($response, 403);
@@ -159,7 +159,7 @@ class WikiController extends Controller
     }
 
     /**
-     * Update Links Wik
+     * Update Links wiki.
      *
      * recebe o link via post para inserir dentro do formulário
      *
@@ -205,7 +205,7 @@ class WikiController extends Controller
     }
 
     /**
-     * Criando arquivo na wiki
+     * Criando arquivo na wiki.
      *
      * @param  Wiki  $wiki  WIki
      * @param  Request  $request
@@ -230,11 +230,11 @@ class WikiController extends Controller
     }
 
     /**
-     * Apagando Arquivos da Wiki
+     * Apagando Arquivos da Wiki.
      *
      * @param  Wiki  $wiki  Wiki Model
      **/
-    public function fileDestroy(Wiki $wiki, WikiFile $file )
+    public function fileDestroy(Wiki $wiki, WikiFile $file)
     {
         try {
             $path = 'public/'.$file->file;
@@ -272,7 +272,7 @@ class WikiController extends Controller
         return $fileUploaded;
     }
 
-     /**
+    /**
      * Cria o nome do arquivo enviado.
      *
      * Cria o nome do arquivo de forma que remova caracteres especiais e adiciona um uuid curto.
@@ -290,7 +290,7 @@ class WikiController extends Controller
     /**
      * Gera letras aleatórias para upload de arquivos.
      *
-     * @param  integer  $length  Tamanho do uuid
+     * @param  int  $length  Tamanho do uuid
      * @return string uuid
      **/
     private function generateRandomLetters($length)
@@ -299,6 +299,7 @@ class WikiController extends Controller
         for ($i = 0; $i < $length; $i++) {
             $random .= chr(rand(ord('a'), ord('z')));
         }
+
         return $random;
     }
 
@@ -319,11 +320,13 @@ class WikiController extends Controller
         // $str = preg_replace('/[,(),;:|!"#$%&/=?~^><ªº-]/', '_', $str);
         $str = preg_replace('/[^a-z0-9]/i', '_', $str);
         $str = preg_replace('/_+/', '_', $str); // ideia do Bacco :)
+
         return $str;
     }
 
     /**
      * Trata o texto e enviar as imagens para a pasta upload.
+     *
      * @param  string  $text
      * @param  int  $id  id
      * @return bool|string $dom HTML
@@ -335,7 +338,7 @@ class WikiController extends Controller
         @$dom->loadHTML($this->utf8_to_iso8859_1($text), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $dom->encoding = 'utf-8';
         $imageFile = $dom->getElementsByTagName('img');
-        $imagePath = "/storage/wiki/".$id."/imgs/";
+        $imagePath = '/storage/wiki/'.$id.'/imgs/';
         $path = public_path().$imagePath;
         $arrayImageUrl = [];
         foreach ($imageFile as $item => $image) {
@@ -352,7 +355,7 @@ class WikiController extends Controller
                 $image->removeAttribute('src');
                 $image->setAttribute('src', $imagePath.$imageName);
                 $arrayImageUrl[] = $imageName;
-            } else{
+            } else {
                 $arrayImageUrl[] = str_replace($imagePath, '', $data);
             }
         }
@@ -364,9 +367,11 @@ class WikiController extends Controller
                 }
             }
         }
+
         return $dom->saveHTML($dom->documentElement);
     }
-    private function utf8_to_iso8859_1(string $string): string {
+    private function utf8_to_iso8859_1(string $string): string
+    {
         $s = (string) $string;
         $len = \strlen($s);
 
