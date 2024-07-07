@@ -26,9 +26,7 @@ class UpdateContaRequest extends FormRequest
             $os_id = $this->route('receita')?->os_id;
         } else {
             $os_id = $this->route('despesa')?->os_id;
-
         }
-
 
         return [
             'name' => 'required',
@@ -56,7 +54,7 @@ class UpdateContaRequest extends FormRequest
     }
 
     public function messages(): array
-     {
+    {
         return [
             'name.required' => 'A despesa é obrigatória!',
         ];
