@@ -148,7 +148,6 @@ class WikiController extends Controller
             ];
 
             return response()->json($response, 200);
-
         } catch (\Throwable $th) {
             $response = [
                 'text' => 'Ouve um erro, recarregue a pagina e tente novamente',
@@ -265,7 +264,7 @@ class WikiController extends Controller
             $fileName.'.'.$request->arquivo_import->getClientOriginalExtension(),
             'public'
         );
-        if (!  $fileUploaded) {
+        if (! $fileUploaded) {
             throw new \Exception('Houve um erro com o upload do arquivo, reveja o tamanho dele ou as configurações do servidor!', 1);
         }
 
@@ -370,6 +369,7 @@ class WikiController extends Controller
 
         return $dom->saveHTML($dom->documentElement);
     }
+
     private function utf8_to_iso8859_1(string $string): string
     {
         $s = (string) $string;

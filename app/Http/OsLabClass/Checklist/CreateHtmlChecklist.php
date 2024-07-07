@@ -95,14 +95,14 @@ class CreateHtmlChecklist
     {
         // dd($option);
         $html = '<div class="form-group">';
-        $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+        $html .= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
-            $html.='<span class="formbuilder-required">*</span>';
+            $html .= '<span class="formbuilder-required">*</span>';
         }
         if (property_exists($option,'description')) {
-            $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+            $html .= '<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<input name="'.$option->name.
+        $html .= '<input name="'.$option->name.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 'type="'.$option->subtype.'"'.
@@ -112,7 +112,8 @@ class CreateHtmlChecklist
                 $this->setTitle($option).
                 $this->setRequired($option).
                 ' >';
-        $html.= '</div>';
+        $html .= '</div>';
+
     return $html;
     }
 
@@ -129,14 +130,14 @@ class CreateHtmlChecklist
     {
         // dd($option);
         $html = '<div class="form-group">';
-        $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+        $html .= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
-            $html.='<span class="formbuilder-required">*</span>';
+            $html .= '<span class="formbuilder-required">*</span>';
         }
         if (property_exists($option,'description')) {
-            $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+            $html .= '<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<input name="'.$option->name.
+        $html .= '<input name="'.$option->name.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 'type="number"'.
@@ -148,7 +149,8 @@ class CreateHtmlChecklist
                 $this->setTitle($option).
                 $this->setRequired($option).
                 ' >';
-        $html.= '</div>';
+        $html .= '</div>';
+
     return $html;
     }
 
@@ -164,14 +166,14 @@ class CreateHtmlChecklist
     private function textarea(object $option): string
     {
         $html = '<div class="form-group">';
-        $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+        $html .= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
-            $html.='<span class="formbuilder-required">*</span>';
+            $html .= '<span class="formbuilder-required">*</span>';
         }
         if (property_exists($option,'description')) {
-            $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+            $html .= '<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<textarea name="'.$option->name.
+        $html .= '<textarea name="'.$option->name.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 'type="'.$option->subtype.'"'.
@@ -181,7 +183,8 @@ class CreateHtmlChecklist
                 $this->setRequired($option).
                 $this->setRows($option).
                 ' >'.$this->setValue($option).'</textarea>';
-        $html.= '</div>';
+        $html .= '</div>';
+
         return $html;
     }
 
@@ -198,14 +201,14 @@ class CreateHtmlChecklist
     {
 
         $html = '<div class="form-group">';
-        $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+        $html .= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
-            $html.='<span class="formbuilder-required">*</span>';
+            $html .= '<span class="formbuilder-required">*</span>';
         }
         if (property_exists($option,'description')) {
-            $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+            $html .= '<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
         }
-        $html.= '<select name="'.$option->name.'[]'.
+        $html .= '<select name="'.$option->name.'[]'.
                 '" id="'.$option->name.'" '.
                 $this->setClass($option).
                 $this->setMaxlength($option).
@@ -215,14 +218,14 @@ class CreateHtmlChecklist
                 $this->setMultiple($option).
                 ' >';
                 foreach ($option->values as $selectValues) {
-                    $html.='<option '.
+                    $html .= '<option '.
                     $this->setSelected($option, $selectValues).
                     'value="'.$selectValues->value.'"  >'.
                     $selectValues->label.
                     '</option>';
                 }
-                $html.='</select>';
-        $html.= '</div>';
+                $html .= '</select>';
+        $html .= '</div>';
 
         return $html;
     }
@@ -239,17 +242,17 @@ class CreateHtmlChecklist
     {
         // dd($option);
         $html = '<div class="form-group">';
-            $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+            $html .= '<label for="'.$option->name.'">'.$option->label.'</label>';
             if ($option->required) {
-                $html.='<span class="formbuilder-required">*</span>';
+                $html .= '<span class="formbuilder-required">*</span>';
             }
             if (property_exists($option,'description')) {
-                $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+                $html .= '<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
             }
-            $html.='<div class="formbuilder-checkbox-group form-group '.$option->name.'" >';
+            $html .= '<div class="formbuilder-checkbox-group form-group '.$option->name.'" >';
                     foreach ($option->values as $key => $radioValues) {
-                        $html.='<div class="formbuilder-checkbox '.$this->setInline($option).'">';
-                            $html.='<input '.
+                        $html .= '<div class="formbuilder-checkbox '.$this->setInline($option).'">';
+                            $html .= '<input '.
                                 // 'wire:model.defer="'.$option->name.'.'.$key.'" '.
                                 'value ="'.$radioValues->value.'"'.
                                 'name="'.$option->name.'[]" '.
@@ -259,11 +262,11 @@ class CreateHtmlChecklist
                                 // $this->setRequired($option).
                                 'aria-required="true"'.
                                 'type="checkbox">';
-                            $html.='<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
-                        $html.='</div>';
+                            $html .= '<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
+                        $html .= '</div>';
                     }
                     if ($option->other == true) {
-                        $html.='<div class="formbuilder-checkbox'.$this->setInline($option).'">'.
+                        $html .= '<div class="formbuilder-checkbox'.$this->setInline($option).'">'.
                             '<input '.
                             // 'wire:model.defer="'.$option->name.'.-other" '.
                             'id="'.$option->name.'-other"'.
@@ -272,15 +275,16 @@ class CreateHtmlChecklist
                             'value = "other"'.
                             'class=" other-option"'.
                             'type="checkbox">';
-                        $html.='<label for="'.$option->name.'-other" >Outro'.
+                        $html .= '<label for="'.$option->name.'-other" >Outro'.
                             '<input '.
                             $this->setCheckedOther($option, true).
                             'name="'.$option->name.'[-other-value]" '.
                             // 'wire:model.defer="'.$option->name.'.-other-value" '.
                             'type="text" id="'.$option->name.'-other-value" class="other-val"></label></div>';
                     }
-            $html.= '</div>'; // checkbox-group
-        $html.= '</div>'; // form-group
+            $html .= '</div>'; // checkbox-group
+        $html .= '</div>'; // form-group
+
         return $html;
 
     }
@@ -297,17 +301,17 @@ class CreateHtmlChecklist
     {
         // dd($option);
         $html = '<div class="formbuilder-radio-group form-group">';
-            $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
+            $html .= '<label for="'.$option->name.'">'.$option->label.'</label>';
             if ($option->required) {
-                $html.='<span class="formbuilder-required">*</span>';
+                $html .= '<span class="formbuilder-required">*</span>';
             }
             if (property_exists($option,'description')) {
-                $html.='<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
+                $html .= '<span class="tooltip-element" tooltip="'.$option->description.'"><i class="fa-solid fa-question"></i></span></label>';
             }
-            $html.='<div class="radio-group" >';
+            $html .= '<div class="radio-group" >';
                     foreach ($option->values as $key => $radioValues) {
-                        $html.='<div class="formbuilder-radio'.$this->setInline($option).'">';
-                            $html.='<input  '.
+                        $html .= '<div class="formbuilder-radio'.$this->setInline($option).'">';
+                            $html .= '<input  '.
                                 // 'wire:model.defer="'.$option->name.'" '.
                                 'value ="'.$radioValues->value.'"'.
                                 'name="'.$option->name.'[]" '.
@@ -317,11 +321,11 @@ class CreateHtmlChecklist
                                 $this->setRequired($option).
                                 // 'aria-required="true"'.
                                 'type="radio">';
-                            $html.='<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
-                        $html.='</div>';
+                            $html .= '<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
+                        $html .= '</div>';
                     }
                     if ($option->other == true) {
-                        $html.='<div class="formbuilder-radio'.$this->setInline($option).'">'.
+                        $html .= '<div class="formbuilder-radio'.$this->setInline($option).'">'.
                             '<input  '.
                             'id="'.$option->name.'-other"'.
                             'name="'.$option->name.'[]" '.
@@ -330,15 +334,15 @@ class CreateHtmlChecklist
                             $this->setCheckedOtherRadio($option).
                             'class=" other-option"'.
                             'type="radio">';
-                        $html.='<label for="'.$option->name.'-other" >Outro'.
+                        $html .= '<label for="'.$option->name.'-other" >Outro'.
                             '<input '.
                             $this->setCheckedOtherRadio($option, true).
                             // 'wire:model.defer="'.$option->name.'.-other-value" '.
                             'name="'.$option->name.'[-other-value]" '.
                             'type="text" id="'.$option->name.'-other-value" class="other-val"></label></div>';
                     }
-            $html.= '</div>'; // checkbox-group
-        $html.= '</div>'; // form-group
+            $html .= '</div>'; // checkbox-group
+        $html .= '</div>'; // form-group
 
         return $html;
     }
