@@ -32,7 +32,7 @@ class StoreOsRequest extends FormRequest
         ];
     }
 
-    public function messages() : array
+    public function messages(): array
     {
        return [
             'cliente_id' => 'Por favor preencha um cliente valido',

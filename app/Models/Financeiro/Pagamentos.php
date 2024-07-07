@@ -72,7 +72,7 @@ class Pagamentos extends Model
      *
      * @return string Dados do modal
      */
-    public function dataModal() : string {
+    public function dataModal(): string {
         return json_encode([
             'id'=> $this->id,
             'parcela' => $this->parcela,

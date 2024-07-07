@@ -282,7 +282,6 @@ class CreateHtmlChecklist
         $html .= '</div>'; // form-group
 
         return $html;
-
     }
 
     /**
@@ -350,7 +349,8 @@ class CreateHtmlChecklist
      * @param  object  $object  objeto da opção selecionado do html
      * @return string|null
      **/
-    private function setChecked(object $object, $option) {
+    private function setChecked(object $object, $option)
+    {
         // dd(json_decode($this->osChecklist->where('name', $object->name)->first()?->value));
         if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
             if (in_array($option->value, $osOption)) {
@@ -396,7 +396,6 @@ class CreateHtmlChecklist
         if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
             if (isset($osOption['-other-value'])) {
                 if (! $value) {
-
                     return ' checked="checked" ';
                 }
 
@@ -416,17 +415,14 @@ class CreateHtmlChecklist
     {
         if ($osOption = json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
             if (in_array($option->value, $osOption)) {
-
                 return ' selected="selected" ';
             }
         } else {
             if ($option->selected == true) {
-
                 return ' selected="selected" ';
             }
         }
     }
-
 
     /**
      * Define e retorna a Value para o HTML.
@@ -625,7 +621,7 @@ class CreateHtmlChecklist
     {
         $str = str_replace('-', '', ucwords($string, '-'));
         if (! $capitalizeFirstCharacter) {
-           $str = lcfirst($str);
+            $str = lcfirst($str);
         }
 
         return $str;

@@ -42,7 +42,7 @@ class UpdateProdutoRequest extends FormRequest
     }
 
 
-    public function messages() : array {
+    public function messages(): array {
         return [
            'name.required' => 'O nome do Produto é obrigatório',
            'name.unique' => 'O nome do Produto já está em uso',

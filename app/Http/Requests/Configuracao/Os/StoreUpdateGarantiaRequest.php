@@ -29,7 +29,7 @@ class StoreUpdateGarantiaRequest extends FormRequest
         ];
     }
 
-    public function messages() : array {
+    public function messages(): array {
         return [
             'name.required' => 'O nome do termo de garantia é obrigatório',
             'prazo_garantia.integer' => 'O prazo de garantia deve ser em dias e apenas números',

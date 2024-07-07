@@ -27,7 +27,7 @@ class StoreUpdateChecklistRequest extends FormRequest
         ];
     }
 
-    public function messages() : array {
+    public function messages(): array {
         return [
             'name.required' => 'O nome do Checklist é obrigatório',
             'categoria_id' => 'O campo categoria é obrigatório',

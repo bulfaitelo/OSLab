@@ -62,7 +62,7 @@ class Cliente extends Model
      *
      * @return string
      **/
-    public function getTipoCliente() : string {
+    public function getTipoCliente(): string {
         if ($this->pessoa_juridica == 1) {
            return 'Pessoa Jurídica';
         }
@@ -75,7 +75,7 @@ class Cliente extends Model
      *
      * @return string
      **/
-    public function titleName() : string {
+    public function titleName(): string {
         $return = str_replace(" ","_",preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($this->name))));
         return $return ;
     }

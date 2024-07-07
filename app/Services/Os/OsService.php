@@ -123,7 +123,7 @@ class OsService implements OsServiceInterface
     }
 
 
-    public function destroy(Os $os) : bool {
+    public function destroy(Os $os): bool {
         try {
             return $os->delete();
         } catch (\Throwable $th) {
@@ -144,7 +144,7 @@ class OsService implements OsServiceInterface
      * @return string|null retorna o dia de vendimento ou null caso nao exista
 
      **/
-    private function addDayGarantia($data_saida, $categoria_id) : string|null {
+    private function addDayGarantia($data_saida, $categoria_id): string|null {
         $prazoEmDias = OsCategoria::find($categoria_id)->garantia?->prazo_garantia;
         if ($prazoEmDias) {
             $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_saida);

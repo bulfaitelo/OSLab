@@ -28,7 +28,7 @@ class StoreUpdateCentroCustoRequest extends FormRequest
         ];
     }
 
-    public function messages() : array {
+    public function messages(): array {
         return [
             'name' => 'O campo Centro de Custo é obrigatório'
         ];

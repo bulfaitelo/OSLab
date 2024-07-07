@@ -73,7 +73,7 @@ class Contas extends Model
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2
      * @return array Categoria
      **/
-    public function getClienteForSelect() : array {
+    public function getClienteForSelect(): array {
         if ($this->cliente_id) {
             return [
                 'id' => $this->cliente_id,

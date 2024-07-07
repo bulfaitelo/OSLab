@@ -39,7 +39,7 @@ class Backup extends Component
      * Retorna a lista de backup
      *
      */
-    private function getBackupInfo() : array {
+    private function getBackupInfo(): array {
 
         $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
         $info = [];
@@ -85,7 +85,7 @@ class Backup extends Component
      * @return string|false retorna o caminho completo ou false caso nao exista
 
     */
-    protected function getFilePAth($disk, $fileName) : string|false {
+    protected function getFilePAth($disk, $fileName): string|false {
 
         $path = 'filesystems.disks.'.$disk.'.root';
         $filePath = config($path).'/'.$fileName;

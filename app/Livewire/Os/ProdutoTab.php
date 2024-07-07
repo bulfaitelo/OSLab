@@ -17,7 +17,7 @@ class ProdutoTab extends Component
     public $produto_id;
 
 
-    protected function rules() : array {
+    protected function rules(): array {
         return [
             'produto_id' => 'required|exists:produtos,id',
             'quantidade' => 'required|numeric|min:0|not_in:0',

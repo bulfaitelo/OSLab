@@ -30,7 +30,7 @@ class OsInformacao extends Model
      *
      * @return string Tipo
      */
-    function getTipo() : string {
+    function getTipo(): string {
         $tipo = [
             1 => 'Anotação',
             2 => 'Senha',
@@ -44,7 +44,7 @@ class OsInformacao extends Model
      *
      * @return string status
      */
-    function getStatus() : string {
+    function getStatus(): string {
         $status = [
             1 => 'Cadastrado',
             2 => 'Expirado',
@@ -73,7 +73,7 @@ class OsInformacao extends Model
         return asset('storage/'.$this->informacao);
     }
 
-    public function urlShare() : string {
+    public function urlShare(): string {
         return route('os.public.edit', $this->uuid);
     }
 }

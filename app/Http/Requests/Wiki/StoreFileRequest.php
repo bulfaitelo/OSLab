@@ -27,7 +27,7 @@ class StoreFileRequest extends FormRequest
     }
 
 
-    public function messages() : array {
+    public function messages(): array {
         return [
            'arquivo_import.required' => 'o arquivo é obrigatório!',
            'arquivo_import.max' => 'o tamanho máximo de envio é de 20Mb!',

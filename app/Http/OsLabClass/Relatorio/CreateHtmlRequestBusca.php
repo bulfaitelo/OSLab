@@ -7,7 +7,8 @@ use Request;
 /**
  * Gera o HTMl do formulário de busca.
  */
-class CreateHtmlRequestBusca {
+class CreateHtmlRequestBusca
+{
     public $request;
 
     public function __construct()
@@ -22,12 +23,12 @@ class CreateHtmlRequestBusca {
 
     private function createRender($request)
     {
-        $return = "";
+        $return = '';
         try {
             if (is_array($request)) {
                 $return .= '<ul>';
                 foreach ($request as $key => $value) {
-                    $return .= "<li><strong>". $this->convertToString($key).'</strong>'.$this->checkType($value)."</li>";
+                    $return .= '<li><strong>'. $this->convertToString($key).'</strong>'.$this->checkType($value).'</li>';
                 }
                 $return .= '</ul>';
             }
@@ -37,7 +38,7 @@ class CreateHtmlRequestBusca {
         return $return;
     }
 
-    private function convertToString ($key, $subArray = false)
+    private function convertToString($key, $subArray = false)
     {
         $ponto = '';
         if (is_integer($key)) {
@@ -45,7 +46,7 @@ class CreateHtmlRequestBusca {
 
             }
         } else {
-            if (!$subArray) {
+            if (! $subArray) {
                 $ponto = ': ';
             }
 
@@ -53,12 +54,11 @@ class CreateHtmlRequestBusca {
         }
     }
 
-    private function checkType ($value)
+    private function checkType($value)
     {
-       if (is_array($value)) {
+        if (is_array($value)) {
             return $this->createRender($value);
-        }
-        else {
+        } else {
             $data = \DateTime::createFromFormat('Y-m-d', $value);
             if ($data && $data->format('Y-m-d') === $value) {
                 return $data->format('d/m/Y');

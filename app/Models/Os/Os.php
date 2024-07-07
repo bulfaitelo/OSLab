@@ -182,7 +182,7 @@ class Os extends Model
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2
      * @return array Categoria
      **/
-    public function getClienteForSelect() : array {
+    public function getClienteForSelect(): array {
         if ($this->cliente_id) {
             return [
                 'id' => $this->cliente_id,
@@ -200,7 +200,7 @@ class Os extends Model
      * Retorna um vetor com o o id e o técnico para ser usado no Select2
      * @return array Categoria
      **/
-    public function getTecnicoForSelect() : array {
+    public function getTecnicoForSelect(): array {
         if ($this->tecnico_id) {
             return [
                 'id' => $this->tecnico_id,
@@ -218,7 +218,7 @@ class Os extends Model
      * Retorna um vetor com o o id e o Modelo para ser usado no Select2
      * @return array Categoria
      **/
-    public function getModeloForSelect() : array {
+    public function getModeloForSelect(): array {
         if ($this->modelo_id) {
             return [
                 'id' => $this->modelo_id,
@@ -235,7 +235,7 @@ class Os extends Model
      *
      * @return string Valor total
      */
-    function valorTotal() : string {
+    function valorTotal(): string {
         return number_format($this->servicos()->sum('valor_servico_total') + $this->produtos()->sum('valor_venda_total'), 2, '.', '');
     }
 
@@ -256,7 +256,7 @@ class Os extends Model
      *
      * @return bool
      **/
-    public function osQuitada() : bool {
+    public function osQuitada(): bool {
         $conta = $this->contas()->find($this->fatura_id);
         if ($conta) {
             $pagamentos = $conta->pagamentos;
@@ -312,7 +312,7 @@ class Os extends Model
      *
      * @return array
      **/
-    public function balancete() : array {
+    public function balancete(): array {
 
         $array_balancete['total_credito_previsto'] = 0;
         $array_balancete['total_debito_previsto'] = 0;

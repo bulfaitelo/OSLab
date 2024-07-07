@@ -45,7 +45,7 @@ class FaturarOsRequest extends FormRequest
         ]);
     }
 
-    public function messages() : array
+    public function messages(): array
     {
        return [
             'valor_recebido'=> 'Por favor preencha o valor recebido, caso houver pagamento',

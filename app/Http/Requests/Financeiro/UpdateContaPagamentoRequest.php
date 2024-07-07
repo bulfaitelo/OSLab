@@ -43,7 +43,7 @@ class UpdateContaPagamentoRequest extends FormRequest
         ]);
     }
 
-    public function messages() : array
+    public function messages(): array
     {
        return [
         'name.required' => 'A despesa é obrigatória!',

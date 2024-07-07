@@ -26,7 +26,7 @@ class UpdateFormaPagamentoRequest extends FormRequest
         ];
     }
 
-    public function messages() : array {
+    public function messages(): array {
         return [
             'name.required' => 'O campo forma de pagamento é obrigatório',
             'name.unique' => 'Essa forma de pagamento já existe',

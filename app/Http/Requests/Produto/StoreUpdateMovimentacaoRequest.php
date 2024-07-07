@@ -38,7 +38,7 @@ class StoreUpdateMovimentacaoRequest extends FormRequest
     }
 
 
-    public function messages() : array {
+    public function messages(): array {
         return [
            'estoque.required' => 'A quantidade de entrada obrigatória',
         ];

@@ -27,7 +27,7 @@ class UpdateFabricanteRequest extends FormRequest
         ];
     }
 
-    public function messages() : array {
+    public function messages(): array {
         return [
             'name.required' => 'O nome de Fabricante é obrigatório',
             'name.unique' => 'Esse Fabricante já foi criado!',

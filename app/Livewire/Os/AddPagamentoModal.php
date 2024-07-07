@@ -16,7 +16,7 @@ class AddPagamentoModal extends Component
     /**
      * Rules
      */
-    protected function rules() : array {
+    protected function rules(): array {
         return [
             'pagamento_valor' => 'required|numeric|min:0|not_in:0',
             'data_pagamento' => 'required|date',
