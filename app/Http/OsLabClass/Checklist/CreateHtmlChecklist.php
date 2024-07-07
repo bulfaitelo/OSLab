@@ -3,90 +3,94 @@
 namespace App\Http\OsLabClass\Checklist;
 
 /**
+ * Monta um o HTML do checklist
  *
- *
+ * Ref: https://formbuilder.online/
  */
 
-class CreateHtmlChecklist {
+class CreateHtmlChecklist
+{
+    private $checklist;
+    private $osChecklist;
+    private $html;
 
-
-    private $checklist, $osChecklist, $html;
-
-/**
- * @param object|null $osChecklist Recebe as do ostas  relacionada a Os
- * @param object|null $checklist Recebe o modelo de Checklist com base no OS->categoria->checklist
- **/
+    /**
+     * @param  object  $checklist  Recebe o modelo de Checklist com base no OS->categoria->checklist
+     * @param  object|null  $osChecklist  Recebe o checklist refente a OS
+     **/
     public function __construct($checklist, $osChecklist = null) {
         $this->checklist = $checklist;
         $this->osChecklist = $osChecklist;
         $this->setChecklist();
-
     }
 
     /**
-     * Cria o HTML do checklist
+     * Cria o HTML do checklist.
      *
      * Cria o HTML do check list para retornar dentro do model OS->getHtmlChecklist()
      *
      * @return string
      **/
     public function render() {
-
         foreach ($this->checklist as $opcao) {
-           $this->html.= $this->getHtmlFromOption($opcao);
-
+           $this->html .= $this->getHtmlFromOption($opcao);
         }
-        return $this->html;
 
+        return $this->html;
     }
 
     /**
-     * Retorna oa html pronto
+     * Retorna oa html pronto.
+     *
      * Retorna o Html para ser concatenado e retornado na blade
-     * @param object $option objeto da opção recebida.
+     * @param  object  $option  objeto da opção recebida.
      * @return string Retorna o string do HTML
      */
-    private function getHtmlFromOption(object $option) : string {
-
+    private function getHtmlFromOption(object $option): string
+    {
         if (method_exists($this, $this->dashToCamelCase($option->type))) {
             return $this->{$this->dashToCamelCase($option->type)}($option);
         }
+
         return '<pre> Não exite '.$option->type.'</pre>';
     }
 
     /**
-     * header
+     * header.
      *
      * cria o HTML do header
      *
      * @param object $option Recebe o objeto do header
      * @return string
      **/
-    private function header(object $option) : string {
+    private function header(object $option): string
+    {
         return '<'.$option->subtype.$this->setClass($option).'>'.$option->label.'</'.$option->subtype.'>';
     }
 
     /**
-     * paragraph
+     * paragraph.
      *
      * cria o HTML do paragraph
      *
      * @param object $option Recebe o objeto do paragraph
      * @return string
      **/
-    private function paragraph(object $option) : string {
+    private function paragraph(object $option): string
+    {
         return '<'.$option->subtype.$this->setClass($option).'>'.$option->label.'</'.$option->subtype.'>';
     }
 
     /**
-     * text
+     * text.
      *
      * cria o HTML do text
      *
      * @param object $option Recebe o objeto do text
      * @return string
      **/
-    private function text(object $option) : string {
+    private function text(object $option): string
+    {
         // dd($option);
         $html = '<div class="form-group">';
         $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
@@ -112,14 +116,15 @@ class CreateHtmlChecklist {
 
 
     /**
-     * number
+     * number.
      *
      * cria o HTML do number
      *
      * @param object $option Recebe o objeto do number
      * @return string
      **/
-    private function number(object $option) : string {
+    private function number(object $option): string
+    {
         // dd($option);
         $html = '<div class="form-group">';
         $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
@@ -147,14 +152,15 @@ class CreateHtmlChecklist {
 
 
     /**
-     * textarea
+     * textarea.
      *
      * cria o HTML do textarea
      *
      * @param object $option Recebe o objeto do textarea
      * @return string
      **/
-    private function textarea(object $option) : string {
+    private function textarea(object $option): string
+    {
         $html = '<div class="form-group">';
         $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
@@ -179,14 +185,15 @@ class CreateHtmlChecklist {
 
 
     /**
-     * select
+     * select.
      *
      * cria o HTML do select
      *
      * @param object $option Recebe o objeto do select
      * @return string
      **/
-    private function select(object $option) : string {
+    private function select(object $option): string
+    {
 
         $html = '<div class="form-group">';
         $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
@@ -214,18 +221,20 @@ class CreateHtmlChecklist {
                 }
                 $html.='</select>';
         $html.= '</div>';
+
         return $html;
     }
 
     /**
-     * checkbox-group
+     * checkbox-group.
      *
      * cria o HTML do checkbox-group
      *
      * @param object $option Recebe o objeto do checkbox-group
      * @return string
      **/
-    private function checkboxGroup(object $option) : string {
+    private function checkboxGroup(object $option): string
+    {
         // dd($option);
         $html = '<div class="form-group">';
             $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
@@ -275,14 +284,15 @@ class CreateHtmlChecklist {
     }
 
     /**
-     * radio-group
+     * radio-group.
      *
      * cria o HTML do radio-group
      *
      * @param object $option Recebe o objeto do radio-group
      * @return string
      **/
-    private function radioGroup(object $option) : string {
+    private function radioGroup(object $option): string
+    {
         // dd($option);
         $html = '<div class="formbuilder-radio-group form-group">';
             $html.= '<label for="'.$option->name.'">'.$option->label.'</label>';
@@ -327,15 +337,15 @@ class CreateHtmlChecklist {
                     }
             $html.= '</div>'; // checkbox-group
         $html.= '</div>'; // form-group
-        return $html;
 
+        return $html;
     }
 
     /**
-     * Define o item selecionado para o HTML
+     * Define o item selecionado para o HTML.
      *
-     * @param object $object objeto do item selecionado do html
-     * @param object $object objeto da opção selecionado do html
+     * @param  object  $object  objeto do item selecionado do html
+     * @param  object  $object  objeto da opção selecionado do html
      * @return string|null
      **/
     private function setChecked(object $object, $option) {
@@ -343,21 +353,23 @@ class CreateHtmlChecklist {
         if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
             if (in_array($option->value, $osOption)) {
                 // dd($option->value, $osOption);
+
                 return ' checked="checked" ';
             }
         }
         else {
             if ($option->selected == true) {
+
                 return ' checked="checked" ';
             }
         }
     }
 
     /**
-     * Define o item selecionado (other) para o HTML
+     * Define o item selecionado (other) para o HTML.
      *
-     * @param object $object objeto do item selecionado do html
-     * @param object $object objeto da opção selecionado do html
+     * @param  object  $object  objeto do item selecionado do html
+     * @param  object  $object  objeto da opção selecionado do html
      * @return string|null
      **/
     private function setCheckedOtherRadio(object $object, $value = false) {
@@ -366,44 +378,49 @@ class CreateHtmlChecklist {
                 if (!$value) {
                     return ' checked="checked" ';
                 }
+
                 return 'value= "'.$osOption['-other-value'].'"';
             }
         }
     }
 
     /**
-     * Define o item selecionado (other) para o HTML
+     * Define o item selecionado (other) para o HTML.
      *
-     * @param object $object objeto do item selecionado do html
-     * @param object $object objeto da opção selecionado do html
+     * @param  object  $object  objeto do item selecionado do html
+     * @param  object  $object  objeto da opção selecionado do html
      * @return string|null
      **/
     private function setCheckedOther(object $object, $value = false) {
         if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
             if (isset($osOption['-other-value'])) {
                 if (!$value) {
+
                     return ' checked="checked" ';
                 }
+
                 return 'value= "'.$osOption['-other-value'].'"';
             }
         }
     }
 
     /**
-     * Define o item selecionado para o HTML
+     * Define o item selecionado para o HTML.
      *
-     * @param object $object objeto do item selecionado do html
-     * @param object $object objeto da opção selecionado do html
+     * @param  object  $object  objeto do item selecionado do html
+     * @param  object  $object  objeto da opção selecionado do html
      * @return string|null
      **/
     private function setSelected(object $object, $option) {
         if ($osOption = json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
             if (in_array($option->value, $osOption)) {
+
                 return ' selected="selected" ';
             }
         }
         else {
             if ($option->selected == true) {
+
                 return ' selected="selected" ';
             }
         }
@@ -411,9 +428,9 @@ class CreateHtmlChecklist {
 
 
     /**
-     * Define e retorna a Value para o HTML
+     * Define e retorna a Value para o HTML.
      *
-     * @param object $object objeto par apegar a Value do html
+     * @param  object  $object  objeto par apegar a Value do html
      * @return string|null
      **/
     private function setValue(object $object) {
@@ -431,136 +448,147 @@ class CreateHtmlChecklist {
 
 
     /**
-     * Define e retorna a inline para o HTML
+     * Define e retorna a inline para o HTML.
      *
-     * @param object $object objeto par apegar a inline do html
+     * @param  object  $object  objeto par apegar a inline do html
      * @return string|null
      **/
     private function setInline(object $object) {
         if (property_exists($object,'inline') && $object->inline == 'true') {
+
             return '-inline';
         }
     }
 
     /**
-     * Define e retorna a multiple para o HTML
+     * Define e retorna a multiple para o HTML.
      *
-     * @param object $object objeto par apegar a multiple do html
+     * @param  object  $object  objeto par apegar a multiple do html
      * @return string|null
      **/
     private function setMultiple(object $object) {
         if (property_exists($object,'multiple') && $object->multiple == 'true') {
+
             return ' multiple="multiple" ';
         }
     }
 
 
     /**
-     * Define e retorna a rows para o HTML
+     * Define e retorna a rows para o HTML.
      *
-     * @param object $object objeto par apegar a rows do html
+     * @param  object  $object  objeto par apegar a rows do html
      * @return string|null
      **/
     private function setRows(object $object) {
         if (property_exists($object,'rows')) {
+
             return ' rows="'.$object->rows.'" ';
         }
     }
 
 
     /**
-     * Define e retorna a step para o HTML
+     * Define e retorna a step para o HTML.
      *
-     * @param object $object objeto par apegar a step do html
+     * @param  object  $object  objeto par apegar a step do html
      * @return string|null
      **/
     private function setStep(object $object) {
         if (property_exists($object,'step')) {
+
             return ' step="'.$object->step.'" ';
         }
     }
 
     /**
-     * Define e retorna a min para o HTML
+     * Define e retorna a min para o HTML.
      *
-     * @param object $object objeto par apegar a min do html
+     * @param  object  $object  objeto par apegar a min do html
      * @return string|null
      **/
     private function setMin(object $object) {
         if (property_exists($object,'min')) {
+
             return ' min="'.$object->min.'" ';
         }
     }
 
     /**
-     * Define e retorna a max para o HTML
+     * Define e retorna a max para o HTML.
      *
-     * @param object $object objeto par apegar a max do html
+     * @param  object  $object  objeto par apegar a max do html
      * @return string|null
      **/
     private function setMax(object $object) {
         if (property_exists($object,'max')) {
+
             return ' max="'.$object->max.'" ';
         }
     }
 
     /**
-     * Define e retorna a required para o HTML
+     * Define e retorna a required para o HTML.
      *
-     * @param object $object objeto par apegar a required do html
+     * @param  object  $object  objeto par apegar a required do html
      * @return string|null
      **/
     private function setRequired(object $object) {
         if (property_exists($object,'required') && $object->required == 'true') {
+
             return ' required="required" ';
         }
     }
 
     /**
-     * Define e retorna a title para o HTML
+     * Define e retorna a title para o HTML.
      *
-     * @param object $object objeto par apegar a title do html
+     * @param  object  $object  objeto par apegar a title do html
      * @return string|null
      **/
     private function setTitle(object $object) {
         if (property_exists($object,'description')) {
+
             return ' title="'.$object->description.'" ';
         }
     }
 
 
     /**
-     * Define e retorna a placeholder para o HTML
+     * Define e retorna a placeholder para o HTML.
      *
-     * @param object $object objeto par apegar a placeholder do html
+     * @param  object  $object  objeto par apegar a placeholder do html
      * @return string|null
      **/
     private function setPlaceholder(object $object) {
         if (property_exists($object,'placeholder')) {
+
             return ' placeholder="'.$object->placeholder.'" ';
         }
     }
 
     /**
-     * Define e retorna a maxlength para o HTML
+     * Define e retorna a maxlength para o HTML.
      *
-     * @param object $object objeto par apegar a maxlength do html
+     * @param  object  $object  objeto par apegar a maxlength do html
      * @return string|null
      **/
     private function setMaxlength(object $object) {
         if (property_exists($object,'maxlength')) {
+
             return ' maxlength="'.$object->maxlength.'" ';
         }
     }
 
     /**
-     * Define e retorna a classe para o HTML
+     * Define e retorna a classe para o HTML.
      *
-     * @param object $object objeto par apegar a classe do html
+     * @param  object  $object  objeto par apegar a classe do html
      * @return string|null
      **/
     private function setClass(object $object) {
         if (property_exists($object,'className')) {
+
             return ' class="'.$object->className.'" ';
         }
     }

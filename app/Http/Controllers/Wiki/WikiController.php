@@ -7,14 +7,14 @@ use App\Http\Requests\Wiki\StoreFileRequest;
 use App\Http\Requests\Wiki\StoreLinkRequest;
 use App\Http\Requests\Wiki\StoreWikiRequest;
 use App\Http\Requests\Wiki\UpdateWikiRequest;
-use App\Models\Wiki\Wiki;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Wiki\File as WikiFile;
 use App\Models\Wiki\Link;
+use App\Models\Wiki\Wiki;
+use File;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use File;
 use Illuminate\Support\Facades\Storage;
 
 class WikiController extends Controller
@@ -33,9 +33,6 @@ class WikiController extends Controller
 
         $this->middleware('permission:wiki_file_create', ['only' => ['fileCreate']]);
         $this->middleware('permission:wiki_file_destroy', ['only' => 'fileDestroy']);
-
-
-
     }
 
     /**
@@ -44,6 +41,7 @@ class WikiController extends Controller
     public function index(Request $request)
     {
         $wikis = Wiki::getDataTable($request);
+
         return view('wiki.index', compact('wikis', 'request'));
     }
 
@@ -73,13 +71,13 @@ class WikiController extends Controller
             $modelo->wiki_id = $wiki->id;
             $modelo->save();
             DB::commit();
+
             return redirect()->route('wiki.show', $wiki->id)
             ->with('success', 'Wiki cadastrada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
-
     }
 
     /**
@@ -110,10 +108,10 @@ class WikiController extends Controller
             $wiki->categoria_id = $request->categoria_id;
             $wiki->user_id = Auth::id();
             $wiki->save();
+
             DB::commit();
             return redirect()->route('wiki.index')
             ->with('success', 'Wiki atualizada com sucesso.');
-
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -127,21 +125,20 @@ class WikiController extends Controller
     {
         try {
             Storage::deleteDirectory('public/wiki/'.$wiki->id);
-
             $wiki->delete();
+
             return redirect()->route('wiki.index')
                 ->with('success', 'Wiki excluída com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-
     /**
      * Update the text Wiki resource in storage.
      */
-    public function textUpdate(Request $request, Wiki $wiki) {
+    public function textUpdate(Request $request, Wiki $wiki)
+    {
         try {
             $wiki->texto = $this->trataImagemEnviada($request->texto, $wiki->id);
             $wiki->user_id = Auth::id();
@@ -149,28 +146,28 @@ class WikiController extends Controller
             $response = [
                 'text' =>  'Wiki atualizada com sucesso.'
             ];
+
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {
             $response = [
-                'text' =>  'Ouve um erro, recarregue a pagina e tente novamente'
+                'text' => 'Ouve um erro, recarregue a pagina e tente novamente'
             ];
+
             return response()->json($response, 403);
         }
     }
 
     /**
-     * Update Links Wiki
+     * Update Links Wik
      *
      * recebe o link via post para inserir dentro do formulário
      *
-     * @param Request $request Request
-     * @param Wiki $wiki Request
-     * @return response
+     * @param  Request  $request  Request
+     * @param  Wiki  $wiki  Request
      **/
     public function linkCreate(StoreLinkRequest $request, Wiki $wiki)
     {
-
         try {
             $links = [
                 new Link([
@@ -181,6 +178,7 @@ class WikiController extends Controller
                 ]),
             ];
             $wiki->links()->saveMany($links);
+
             return redirect()->route('wiki.show', $wiki->id)
                 ->with('success', 'Link cadastrado com sucesso.');
         } catch (\Throwable $th) {
@@ -189,34 +187,28 @@ class WikiController extends Controller
     }
 
     /**
-     * Deletando Links da Wiki
+     * Deletando Links da Wiki.
      *
-     * Undocumented function long description
-     *
-     * @param Wiki $wiki Description
-     * @param Link $Link Description
-     * @return response
+     * @param  Wiki  $wiki  Description
+     * @param  Link  $Link  Description
      **/
     public function linkDestroy(Wiki $wiki, Link $link)
     {
         try {
             $link->delete();
+
             return redirect()->route('wiki.show', $wiki)
                 ->with('success', 'Link excluído com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-
     /**
      * Criando arquivo na wiki
      *
-     *
-     * @param Wiki $wiki WIki
-     * @param Request $request
-     * @return response
+     * @param  Wiki  $wiki  WIki
+     * @param  Request  $request
      **/
     public function fileCreate(Wiki $wiki, StoreFileRequest $request)
     {
@@ -229,6 +221,7 @@ class WikiController extends Controller
             $file->file = $this->storageFile($request, $wiki, $fileName);
             $file->file_name = $fileName;
             $file->save();
+
             return redirect()->route('wiki.show', $wiki->id)
                 ->with('success', 'Arquivo carregado com sucesso.');
         } catch (\Throwable $th) {
@@ -239,9 +232,7 @@ class WikiController extends Controller
     /**
      * Apagando Arquivos da Wiki
      *
-     * @param Wiki $wiki Wiki Model
-     * @return response
-
+     * @param  Wiki  $wiki  Wiki Model
      **/
     public function fileDestroy(Wiki $wiki, WikiFile $file )
     {
@@ -254,62 +245,56 @@ class WikiController extends Controller
 
             return redirect()->route('wiki.show', $wiki)
                 ->with('success', 'Arquivo excluído com sucesso.');
-
-
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-
-
     /**
-     * undocumented function summary
+     * Salvando uma arquivo.
      *
-     * Undocumented function long description
-     *
-     * @param Request $var Description
-     * @param Wiki $var Description
-     * @param Type $var Description
-     * @return String $fileUploaded
+     * @param  Request  $request
+     * @param  Wiki  $wiki
+     * @param  File  $fileName
+     * @return string $fileUploaded
      **/
-    private function storageFile($request, $wiki ,$fileName)
+    private function storageFile($request, $wiki, $fileName)
     {
         $fileUploaded = $request->arquivo_import->storeAs(
-            'wiki/'.$wiki->id. '/files/',
+            'wiki/'.$wiki->id.'/files/',
             $fileName.'.'.$request->arquivo_import->getClientOriginalExtension(),
             'public'
         );
-        if (!$fileUploaded) {
-            throw new \Exception("Houve um erro com o upload do arquivo, reveja o tamanho dele ou as configurações do servidor!", 1);
+        if (!  $fileUploaded) {
+            throw new \Exception('Houve um erro com o upload do arquivo, reveja o tamanho dele ou as configurações do servidor!', 1);
         }
 
         return $fileUploaded;
-
     }
 
-
      /**
-     * Cria o nome do arquivo enviado
+     * Cria o nome do arquivo enviado.
      *
      * Cria o nome do arquivo de forma que remova caracteres especiais e adiciona um uuid curto.
      *
-     * @param File $arquivo
+     * @param  File  $arquivo
      * @return string $fileName
      **/
     private function createFileName($file)
     {
-        $fileName = $this->removeSpecialChars($file->getClientOriginalName()).'_'.$this->generateRandomLetters(7);;
+        $fileName = $this->removeSpecialChars($file->getClientOriginalName()).'_'.$this->generateRandomLetters(7);
+
         return $fileName;
     }
 
     /**
      * Gera letras aleatórias para upload de arquivos.
      *
-     * @param Integer $length Tamanho do uuid
-     * @return String uuid
+     * @param  integer  $length  Tamanho do uuid
+     * @return string uuid
      **/
-    private function generateRandomLetters($length) {
+    private function generateRandomLetters($length)
+    {
         $random = '';
         for ($i = 0; $i < $length; $i++) {
             $random .= chr(rand(ord('a'), ord('z')));
@@ -320,10 +305,11 @@ class WikiController extends Controller
     /**
      * Tratando caracteres par remover possíveis caracteres inválidos.
      *
-     * @param String $str
-     * @return String
+     * @param  string  $str
+     * @return string
      **/
-    private function removeSpecialChars($str) {
+    private function removeSpecialChars($str)
+    {
         $str = preg_replace('/[áàãâä]/ui', 'a', $str);
         $str = preg_replace('/[éèêë]/ui', 'e', $str);
         $str = preg_replace('/[íìîï]/ui', 'i', $str);
@@ -336,53 +322,50 @@ class WikiController extends Controller
         return $str;
     }
 
-
     /**
      * Trata o texto e enviar as imagens para a pasta upload.
-     * @param string $text
-     * @param int $id id
-     * @return object, $dom HTML
-     *
+     * @param  string  $text
+     * @param  int  $id  id
+     * @return bool|string $dom HTML
      */
-    private function trataImagemEnviada($text, $id) {
+    private function trataImagemEnviada($text, $id)
+    {
         // tratando as imagens enviadas.
         $dom = new \DOMDocument();
         @$dom->loadHTML($this->utf8_to_iso8859_1($text), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $dom->encoding = 'utf-8';
         $imageFile = $dom->getElementsByTagName('img');
-        $imagePath = "/storage/wiki/". $id."/imgs/";
+        $imagePath = "/storage/wiki/".$id."/imgs/";
         $path = public_path().$imagePath;
-        $arrayImageUrl = [] ;
+        $arrayImageUrl = [];
         foreach ($imageFile as $item => $image) {
             $data = $image->getAttribute('src');
             if (preg_match('/^data:image/m', $data)) {
-                list($type, $data) = explode(';', $data);
-                list(, $data)      = explode(',', $data);
+                [$type, $data] = explode(';', $data);
+                [, $data] = explode(',', $data);
                 $imgeData = base64_decode($data);
                 $imageName = \Str::uuid().'_'.time().$item.'.png';
-                if (!is_dir($path)) {
+                if (! is_dir($path)) {
                     mkdir($path, 0750, true);
                 }
                 file_put_contents($path.$imageName, $imgeData);
                 $image->removeAttribute('src');
                 $image->setAttribute('src', $imagePath.$imageName);
                 $arrayImageUrl[] = $imageName;
-            }
-            else{
-                $arrayImageUrl[] =  str_replace($imagePath, '', $data);
+            } else{
+                $arrayImageUrl[] = str_replace($imagePath, '', $data);
             }
         }
         // Limpando imagens não usadas.
-        if (File:: isDirectory($path)) {
+        if (File::isDirectory($path)) {
             foreach (File::allFiles($path) as  $file) {
-                if (!in_array($file->getFileName(), $arrayImageUrl)) {
+                if (! in_array($file->getFileName(), $arrayImageUrl)) {
                     unlink($path.$file->getFileName());
                 }
             }
         }
         return $dom->saveHTML($dom->documentElement);
     }
-
     private function utf8_to_iso8859_1(string $string): string {
         $s = (string) $string;
         $len = \strlen($s);
