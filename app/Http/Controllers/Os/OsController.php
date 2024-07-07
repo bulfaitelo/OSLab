@@ -108,7 +108,7 @@ class OsController extends Controller
     public function destroy(Os $os)
     {
         try {
-            if ($os->fatura_id){
+            if ($os->fatura_id) {
                 return redirect()->route('os.index')
                 ->with('warning', 'Essa OS já está faturada, cancele a fatura antes de exclui-la!');
             }
@@ -259,7 +259,7 @@ class OsController extends Controller
                     $os->status_id =  getConfig('default_os_faturar_pagto_quitado');
                 }
             } else {
-                if (!$request->recebido){
+                if (!$request->recebido) {
                     if (getConfig('default_os_faturar') != '') {
                         $os->status_id =  getConfig('default_os_faturar');
                     }
@@ -269,7 +269,7 @@ class OsController extends Controller
                 }
             }
             $os->valor_total = $os->valorTotal();
-            if (!$os->data_saida){
+            if (!$os->data_saida) {
                 $os->data_saida = now();
             }
             $os->fatura_id = $fatura_id;
@@ -299,7 +299,7 @@ class OsController extends Controller
                 $movimentacoes = $movimentacoesModel->get();
                 foreach ($movimentacoes as $movimentacao) {
 
-                    if (($movimentacoes->count() > 1 )){
+                    if (($movimentacoes->count() > 1 )) {
                         $produto->estoque = ($produto->estoque + $movimentacao->estoque_antes);
                         break;
                     }

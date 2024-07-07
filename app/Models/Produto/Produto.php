@@ -81,7 +81,7 @@ class Produto extends Model
         if ($request->busca) {
             $queryProduto->Where('name', 'LIKE', '%' . $request->busca . '%');
         }
-        if ($request->centro_custo_id){
+        if ($request->centro_custo_id) {
             $queryProduto->where('centro_custo_id', $request->centro_custo_id);
         }
         return $queryProduto->paginate($itensPorPagina);

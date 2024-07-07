@@ -134,7 +134,7 @@ class Contas extends Model
         if ($dataInicio and $dataFim) {
             $query->whereBetween('vencimento', [$dataInicio, $dataFim]);
         }
-        if (($ordenacao != null)){
+        if (($ordenacao != null)) {
             $orderArray = [
                 'saldo' => [
                     'colun' => 'saldo',

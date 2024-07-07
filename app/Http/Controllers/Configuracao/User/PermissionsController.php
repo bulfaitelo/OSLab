@@ -107,7 +107,7 @@ class PermissionsController extends Controller
         $permission->name = $request->name;
         $permission->description = $request->description;
         $permission->group_id = $request->group;
-        if ($permission->save()){
+        if ($permission->save()) {
             return redirect()->route('configuracao.permissions.edit', $permission->id)
             ->with('success', 'Permissão atualizada!'); ;
         }

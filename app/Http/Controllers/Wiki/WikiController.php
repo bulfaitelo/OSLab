@@ -354,7 +354,7 @@ class WikiController extends Controller
         $arrayImageUrl = [] ;
         foreach ($imageFile as $item => $image) {
             $data = $image->getAttribute('src');
-            if (preg_match('/^data:image/m', $data)){
+            if (preg_match('/^data:image/m', $data)) {
                 list($type, $data) = explode(';', $data);
                 list(, $data)      = explode(',', $data);
                 $imgeData = base64_decode($data);

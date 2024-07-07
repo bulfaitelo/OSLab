@@ -34,7 +34,7 @@ class UpdateContaRequest extends FormRequest
             'name' => 'required',
             'centro_custo_id' => 'required|exists:centro_custos,id',
             'cliente_id' => [
-                Rule::requiredIf(function () use ($os_id){
+                Rule::requiredIf(function () use ($os_id) {
                     return ($os_id !== null) ? false : true ;
                 }),
                 'exists:clientes,id'

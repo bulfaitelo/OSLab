@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class OsPublicController extends Controller
 {
-    public function edit($uuid){
+    public function edit($uuid) {
         $informacao = OsInformacao::where("uuid",$uuid)->firstOrfail();
         $emitente = Emitente::getHtmlEmitente(1);
 
@@ -26,7 +26,7 @@ class OsPublicController extends Controller
      *
      * @param $uuid Uuid
      **/
-    public function update($uuid, Request $request){
+    public function update($uuid, Request $request) {
         $informacao = OsInformacao::where("uuid",$uuid)->firstOrfail();
         $request->validate([
             'tipo' => 'required|integer',

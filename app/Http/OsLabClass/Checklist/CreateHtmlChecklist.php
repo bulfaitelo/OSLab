@@ -340,14 +340,14 @@ class CreateHtmlChecklist {
      **/
     private function setChecked(object $object, $option) {
         // dd(json_decode($this->osChecklist->where('name', $object->name)->first()?->value));
-        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
-            if (in_array($option->value, $osOption)){
+        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
+            if (in_array($option->value, $osOption)) {
                 // dd($option->value, $osOption);
                 return ' checked="checked" ';
             }
         }
         else {
-            if ($option->selected == true){
+            if ($option->selected == true) {
                 return ' checked="checked" ';
             }
         }
@@ -361,8 +361,8 @@ class CreateHtmlChecklist {
      * @return string|null
      **/
     private function setCheckedOtherRadio(object $object, $value = false) {
-        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
-            if (isset($osOption['-other-value'])){
+        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
+            if (isset($osOption['-other-value'])) {
                 if (!$value) {
                     return ' checked="checked" ';
                 }
@@ -379,8 +379,8 @@ class CreateHtmlChecklist {
      * @return string|null
      **/
     private function setCheckedOther(object $object, $value = false) {
-        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
-            if (isset($osOption['-other-value'])){
+        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
+            if (isset($osOption['-other-value'])) {
                 if (!$value) {
                     return ' checked="checked" ';
                 }
@@ -397,13 +397,13 @@ class CreateHtmlChecklist {
      * @return string|null
      **/
     private function setSelected(object $object, $option) {
-        if ($osOption = json_decode($this->osChecklist->where('name', $object->name)->first()?->value)){
-            if (in_array($option->value, $osOption)){
+        if ($osOption = json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
+            if (in_array($option->value, $osOption)) {
                 return ' selected="selected" ';
             }
         }
         else {
-            if ($option->selected == true){
+            if ($option->selected == true) {
                 return ' selected="selected" ';
             }
         }
@@ -419,7 +419,7 @@ class CreateHtmlChecklist {
     private function setValue(object $object) {
 
         $osValue = $this->osChecklist->where('name', $object->name)->first()?->value;
-        if (property_exists($object,'value') && ($osValue == null) ){
+        if (property_exists($object,'value') && ($osValue == null) ) {
             return $object->value;
         }
         if ($osValue) {

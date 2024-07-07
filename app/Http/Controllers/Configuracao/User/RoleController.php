@@ -105,7 +105,7 @@ class RoleController extends Controller
         ]);
         $role->name = $request->name;
         $role->description = $request->description;
-        if ($role->save()){
+        if ($role->save()) {
             return redirect()->route('configuracao.roles.edit', [$id])->with('success', 'Perfil atualizado!'); ;
         }
     }

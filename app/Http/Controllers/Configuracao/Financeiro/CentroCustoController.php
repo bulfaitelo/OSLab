@@ -51,7 +51,7 @@ class CentroCustoController extends Controller
         $centroCusto->descricao = $request->descricao;
         $centroCusto->receita = $request->receita;
         $centroCusto->despesa = $request->despesa;
-        if ($centroCusto->save()){
+        if ($centroCusto->save()) {
             return redirect()->route('configuracao.financeiro.centro_custo.index')
             ->with('success', 'Centro de criado com sucesso.');
         }
@@ -83,7 +83,7 @@ class CentroCustoController extends Controller
         $centroCusto->descricao = $request->descricao;
         $centroCusto->receita = $request->receita;
         $centroCusto->despesa = $request->despesa;
-        if ($centroCusto->save()){
+        if ($centroCusto->save()) {
             return redirect()->route('configuracao.financeiro.centro_custo.index')
             ->with('success', 'Centro de atualizado com sucesso.');
         }

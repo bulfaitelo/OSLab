@@ -19,12 +19,14 @@ class ClienteController extends Controller
         $this->middleware('permission:cliente_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:cliente_destroy', ['only' => 'destroy']);
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         $clientes = Cliente::getDataTable($request);
+
         return view('cliente.index', compact('clientes', 'request'));
     }
 
@@ -142,7 +144,7 @@ class ClienteController extends Controller
      * @param  Request  $request  Request da variável Busca,
      * @return string json Retorna o json para ser montado.
      **/
-    public function apiClientSelect (Request $request)
+    public function apiClientSelect(Request $request)
     {
         try {
             $select = Cliente::where('name', 'LIKE', '%'.$request->q.'%');

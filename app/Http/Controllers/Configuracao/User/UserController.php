@@ -194,7 +194,7 @@ class UserController extends Controller
         }
         $user->syncRoles(array_map(fn($val)=>(int)$val, $request->role));
 
-        if ($user->save()){
+        if ($user->save()) {
             return redirect()->route('configuracao.users.index', [$user->id])->with('success', 'Permissão atualizada!'); ;
         }
     }

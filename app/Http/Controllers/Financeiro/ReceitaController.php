@@ -34,7 +34,7 @@ class ReceitaController extends Controller
         $dataHoje = Carbon::now()->format('Y-d-m');
         $queryReceita = Contas::query();
         $queryReceita->where('tipo', 'R');
-        if ($request->busca){
+        if ($request->busca) {
             $queryReceita->where(function ($query) use ($request) {
                 $query->whereHas('cliente', function ($query) use ($request) {
                     $query->where('name', 'LIKE', '%' . $request->busca . '%');
@@ -51,7 +51,7 @@ class ReceitaController extends Controller
             ($request->data_final) ? $dataFinal = $request->data_final : $dataFinal = $dataHoje;
             $queryReceita->where(function ($query) use ($dataInicial, $dataFinal) {
                 $query->whereBetween('created_at', [$dataInicial, $dataFinal]);
-                $query->orWhereHas('pagamentos', function ($query) use ($dataInicial, $dataFinal){
+                $query->orWhereHas('pagamentos', function ($query) use ($dataInicial, $dataFinal) {
                     $query->whereBetween('vencimento', [$dataInicial, $dataFinal]);
                 });
                 $query->orWhereBetween('data_quitacao', [$dataInicial, $dataFinal]);
@@ -130,7 +130,7 @@ class ReceitaController extends Controller
                         'data_pagamento' => $data_pagamento,
                         'parcela' => $i,
                     ];
-                    if ($i != $request->parcelas){
+                    if ($i != $request->parcelas) {
                         $vencimento->addMonth();
                     }
                 }
@@ -148,7 +148,7 @@ class ReceitaController extends Controller
                     'data_pagamento' => $request->data_pagamento,
                     'parcela' => 1,
                 ];
-                if ($request->avista_valor >= $request->valor){
+                if ($request->avista_valor >= $request->valor) {
                     $receita->data_quitacao = $request->data_pagamento;
                     $receita->save();
                 }
@@ -192,7 +192,7 @@ class ReceitaController extends Controller
             $receita->user_id = Auth::id();
             $receita->name = $request->name;
             $receita->centro_custo_id = $request->centro_custo_id;
-            if (!$receita->os_id){
+            if (!$receita->os_id) {
                 $receita->cliente_id = $request->cliente_id;
             }
             $receita->observacoes = $request->observacoes;

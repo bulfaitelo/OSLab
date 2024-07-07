@@ -11,7 +11,7 @@ class ShowCliente extends Component
     public $showTab = 'detalhes';
     public function render()
     {
-        if ($this->showTab == 'detalhes'){
+        if ($this->showTab == 'detalhes') {
             return view('livewire.cliente.show-cliente', [
                 'cliente' => $this->cliente,
                 'showTab' => $this->showTab

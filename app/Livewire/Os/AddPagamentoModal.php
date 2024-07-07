@@ -37,7 +37,7 @@ class AddPagamentoModal extends Component
     /**
      * Carrega Model de Adicionar Pagamento
      */
-    function loadAdicionarPagamento(){
+    function loadAdicionarPagamento() {
         // dd($this->os->contas->where('tipo', 'R'));
         $this->dispatch('toggleAddPagamentoModal');
     }

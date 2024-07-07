@@ -98,7 +98,7 @@ class ModeloController extends Controller
     {
         try {
             $osCount = $modelo->os->count();
-            if ($osCount > 0){
+            if ($osCount > 0) {
                 return redirect()->route('configuracao.wiki.modelo.index')
                 ->with('warning', "Modelo está sendo usado em {$osCount} e não pode ser excluído!");
             }

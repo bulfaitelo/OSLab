@@ -28,7 +28,7 @@ class EmitenteController extends Controller
     public function index()
     {
         $emitente = Emitente::find(1);
-        if (!$emitente){
+        if (!$emitente) {
             return redirect()->route('configuracao.emitente.create');
         }
         return  redirect()->route('configuracao.emitente.edit', [$emitente]);
@@ -66,7 +66,7 @@ class EmitenteController extends Controller
             $emitente->cidade = $request->cidade;
             $emitente->uf = $request->uf;
             $emitente->complemento = $request->complemento;
-            if ($request->emitente_file){
+            if ($request->emitente_file) {
                 $emitente->logo_url = $request->emitente_file->storeAs(
                     'emitente/',
                     \Str::uuid().'.'.$request->emitente_file->getClientOriginalExtension(),
@@ -123,7 +123,7 @@ class EmitenteController extends Controller
             $emitente->cidade = $request->cidade;
             $emitente->uf = $request->uf;
             $emitente->complemento = $request->complemento;
-            if ($request->emitente_file){
+            if ($request->emitente_file) {
                 if ($emitente->logo_url) {
                     $imgTemp = $emitente->logo_url;
                     $del = Storage::delete('public/'.$imgTemp);

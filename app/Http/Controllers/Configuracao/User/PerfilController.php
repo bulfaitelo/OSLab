@@ -86,7 +86,7 @@ class PerfilController extends Controller
         if ($request->password) {
             $user->password = $request->password;
         }
-        if ($user->save()){
+        if ($user->save()) {
             return redirect()->route('configuracao.user.perfil.index')->with('success', 'Dados atualizados');
         }
     }

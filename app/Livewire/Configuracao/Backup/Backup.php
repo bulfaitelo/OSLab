@@ -89,7 +89,7 @@ class Backup extends Component
 
         $path = 'filesystems.disks.'.$disk.'.root';
         $filePath = config($path).'/'.$fileName;
-        if (file_exists($filePath)){
+        if (file_exists($filePath)) {
             return $filePath;
         }
         return false;

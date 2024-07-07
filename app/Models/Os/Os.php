@@ -258,7 +258,7 @@ class Os extends Model
      **/
     public function osQuitada() : bool {
         $conta = $this->contas()->find($this->fatura_id);
-        if ($conta){
+        if ($conta) {
             $pagamentos = $conta->pagamentos;
             if ($conta->valor <= $pagamentos->sum('valor')) {
                 return true;
@@ -278,7 +278,7 @@ class Os extends Model
         $log = [];
         $statusLog = $this->statusLogs()->orderByDesc('created_at')->get();
         foreach ($statusLog as $status) {
-            // if (($dateTemp == null) && ($dateTemp != $status['created_at']->format('d/m/Y')) ){
+            // if (($dateTemp == null) && ($dateTemp != $status['created_at']->format('d/m/Y')) ) {
             $log[$status['created_at']->format('Y-m-d')][] = [
                 'log_type' => 'status',
                 'id' => $status->id,
@@ -407,7 +407,7 @@ class Os extends Model
         if ($dataInicio and $dataFim) {
             $query->whereBetween('data_entrada', [$dataInicio, $dataFim]);
         }
-        if ($ordenacao != null){
+        if ($ordenacao != null) {
             $orderArray = [
                 'data' => [
                     'colun' => 'data_entrada',

@@ -27,7 +27,7 @@ class OsService implements OsServiceInterface
         $queryOs = Os::with(['cliente', 'tecnico', 'categoria', 'status']);
 
         if ($request->busca) {
-            $queryOs->where(function ($query) use ($request){
+            $queryOs->where(function ($query) use ($request) {
                 $query->whereHas('cliente', function ($query) use ($request) {
                     $query->where('name', 'LIKE', '%' . $request->busca . '%');
                 });
@@ -56,7 +56,7 @@ class OsService implements OsServiceInterface
             $queryOs->where('status_id', $request->status_id);
         }
         if (!$request->input()) {
-            if ($osListagemPadrao){
+            if ($osListagemPadrao) {
                 $queryOs->whereIn('status_id', $osListagemPadrao);
             }
         }

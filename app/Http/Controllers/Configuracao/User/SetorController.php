@@ -103,7 +103,7 @@ class SetorController extends Controller
             'setor' => 'required',
         ]);
         $setor->name = $request->setor;
-        if ($setor->save()){
+        if ($setor->save()) {
             return redirect()->route('configuracao.user.setor.index')->with('success', 'Setor atualizado com sucesso!'); ;
         }
     }
@@ -116,7 +116,7 @@ class SetorController extends Controller
      */
     public function destroy(Setor $setor)
     {
-        if ($setor->users->count() > 0){
+        if ($setor->users->count() > 0) {
             return redirect()->route('configuracao.user.setor.index')
             ->with('warning', 'Não é possível excluir um setor que existam usuários cadastrados nele!'); ;
         }

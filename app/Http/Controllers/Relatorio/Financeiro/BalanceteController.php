@@ -30,13 +30,13 @@ class BalanceteController extends Controller
                 'tipo_de_agrupamento' => 'required|in:os,mes,centro_de_custo',
                 'ordenacao' => 'required|in:data,nome,saldo',
             ]);
-            if ($validated['tipo_de_agrupamento'] == 'os'){
+            if ($validated['tipo_de_agrupamento'] == 'os') {
                 $osRelatorio = Os::RelatorioBalanceteOs($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
             }
-            if ($validated['tipo_de_agrupamento'] == 'mes'){
+            if ($validated['tipo_de_agrupamento'] == 'mes') {
                 $mesRelatorio = Contas::RelatorioBalanceteMes($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
             }
-            if ($validated['tipo_de_agrupamento'] == 'centro_de_custo'){
+            if ($validated['tipo_de_agrupamento'] == 'centro_de_custo') {
                 $centroCustoRelatorio = Contas::RelatorioBalanceteCentroCusto($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
             }
         }

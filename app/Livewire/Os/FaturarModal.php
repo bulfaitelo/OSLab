@@ -11,7 +11,7 @@ class FaturarModal extends Component
 
     public $valorTotal;
 
-    function loadFaturarModal(){
+    function loadFaturarModal() {
         $this->valorTotal = $this->os->valorTotal();
         $this->dispatch('toggleFaturarModal');
     }

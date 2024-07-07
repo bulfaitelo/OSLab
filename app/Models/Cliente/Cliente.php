@@ -40,7 +40,7 @@ class Cliente extends Model
         $queryCliente->with('os');
 
         if ($request->busca) {
-            $queryCliente->where(function ($query) use ($request){
+            $queryCliente->where(function ($query) use ($request) {
 
                 $query->orWhere('name', 'LIKE', '%' . $request->busca . '%');
                 $query->orWhere('email', 'LIKE', '%' . $request->busca . '%');
@@ -50,7 +50,7 @@ class Cliente extends Model
             });
         }
 
-        if (isset($request->tipo)){
+        if (isset($request->tipo)) {
             $queryCliente->where('pessoa_juridica', '=', $request->tipo );
         }
         $queryCliente->orderBy('name');

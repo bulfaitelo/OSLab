@@ -36,7 +36,7 @@ class DespesaController extends Controller
         $dataHoje = Carbon::now()->format('Y-d-m');
         $queryDespesa = Contas::query();
         $queryDespesa->where('tipo', 'D');
-        if ($request->busca){
+        if ($request->busca) {
             $queryDespesa->where(function ($query) use ($request) {
                 $query->whereHas('cliente', function ($query) use ($request) {
                     $query->where('name', 'LIKE', '%' . $request->busca . '%');
@@ -53,7 +53,7 @@ class DespesaController extends Controller
             ($request->data_final) ? $dataFinal = $request->data_final : $dataFinal = $dataHoje;
             $queryDespesa->where(function ($query) use ($dataInicial, $dataFinal) {
                 $query->whereBetween('created_at', [$dataInicial, $dataFinal]);
-                $query->orWhereHas('pagamentos', function ($query) use ($dataInicial, $dataFinal){
+                $query->orWhereHas('pagamentos', function ($query) use ($dataInicial, $dataFinal) {
                     $query->whereBetween('vencimento', [$dataInicial, $dataFinal]);
                 });
                 $query->orWhereBetween('data_quitacao', [$dataInicial, $dataFinal]);
@@ -133,7 +133,7 @@ class DespesaController extends Controller
                         'data_pagamento' => $data_pagamento,
                         'parcela' => $i,
                     ];
-                    if ($i != $request->parcelas){
+                    if ($i != $request->parcelas) {
                         $vencimento->addMonth();
                     }
                 }
@@ -151,7 +151,7 @@ class DespesaController extends Controller
                     'data_pagamento' => $request->data_pagamento,
                     'parcela' => 1,
                 ];
-                if ($request->avista_valor >= $request->valor){
+                if ($request->avista_valor >= $request->valor) {
                     $despesa->data_quitacao = $request->data_pagamento;
                     $despesa->save();
                 }
@@ -195,7 +195,7 @@ class DespesaController extends Controller
             $despesa->user_id = Auth::id();
             $despesa->name = $request->name;
             $despesa->centro_custo_id = $request->centro_custo_id;
-            if (!$despesa->os_id){
+            if (!$despesa->os_id) {
                 $despesa->cliente_id = $request->cliente_id;
             }
             $despesa->observacoes = $request->observacoes;
