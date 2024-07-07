@@ -248,17 +248,17 @@ class CreateHtmlChecklist
         $html .= '<div class="formbuilder-checkbox-group form-group '.$option->name.'" >';
         foreach ($option->values as $key => $radioValues) {
             $html .= '<div class="formbuilder-checkbox '.$this->setInline($option).'">';
-                $html .= '<input '.
-                    // 'wire:model.defer="'.$option->name.'.'.$key.'" '.
-                    'value ="'.$radioValues->value.'"'.
-                    'name="'.$option->name.'[]" '.
-                    'id="'.$option->name.'-'.$key.'"'.
-                    $this->setClass($option).
-                    $this->setChecked($option, $radioValues).
-                    // $this->setRequired($option).
-                    'aria-required="true"'.
-                    'type="checkbox">';
-                $html .= '<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
+            $html .= '<input '.
+                // 'wire:model.defer="'.$option->name.'.'.$key.'" '.
+                'value ="'.$radioValues->value.'"'.
+                'name="'.$option->name.'[]" '.
+                'id="'.$option->name.'-'.$key.'"'.
+                $this->setClass($option).
+                $this->setChecked($option, $radioValues).
+                // $this->setRequired($option).
+                'aria-required="true"'.
+                'type="checkbox">';
+            $html .= '<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
             $html .= '</div>';
         }
         if ($option->other == true) {
@@ -307,17 +307,17 @@ class CreateHtmlChecklist
         $html .= '<div class="radio-group" >';
         foreach ($option->values as $key => $radioValues) {
             $html .= '<div class="formbuilder-radio'.$this->setInline($option).'">';
-                $html .= '<input  '.
-                    // 'wire:model.defer="'.$option->name.'" '.
-                    'value ="'.$radioValues->value.'"'.
-                    'name="'.$option->name.'[]" '.
-                    'id="'.$option->name.'-'.$key.'"'.
-                    $this->setChecked($option, $radioValues).
-                    $this->setClass($option).
-                    $this->setRequired($option).
-                    // 'aria-required="true"'.
-                    'type="radio">';
-                $html .= '<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
+            $html .= '<input  '.
+                // 'wire:model.defer="'.$option->name.'" '.
+                'value ="'.$radioValues->value.'"'.
+                'name="'.$option->name.'[]" '.
+                'id="'.$option->name.'-'.$key.'"'.
+                $this->setChecked($option, $radioValues).
+                $this->setClass($option).
+                $this->setRequired($option).
+                // 'aria-required="true"'.
+                'type="radio">';
+            $html .= '<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
             $html .= '</div>';
         }
         if ($option->other == true) {
@@ -375,7 +375,7 @@ class CreateHtmlChecklist
     {
         if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
             if (isset($osOption['-other-value'])) {
-                if (!$value) {
+                if (! $value) {
                     return ' checked="checked" ';
                 }
 
@@ -395,7 +395,7 @@ class CreateHtmlChecklist
     {
         if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
             if (isset($osOption['-other-value'])) {
-                if (!$value) {
+                if (! $value) {
 
                     return ' checked="checked" ';
                 }
@@ -437,7 +437,7 @@ class CreateHtmlChecklist
     private function setValue(object $object)
     {
         $osValue = $this->osChecklist->where('name', $object->name)->first()?->value;
-        if (property_exists($object, 'value') && ($osValue == null) ) {
+        if (property_exists($object, 'value') && ($osValue == null)) {
             return $object->value;
         }
         if ($osValue) {
@@ -454,7 +454,6 @@ class CreateHtmlChecklist
     private function setInline(object $object)
     {
         if (property_exists($object, 'inline') && $object->inline == 'true') {
-
             return '-inline';
         }
     }
@@ -468,7 +467,6 @@ class CreateHtmlChecklist
     private function setMultiple(object $object)
     {
         if (property_exists($object, 'multiple') && $object->multiple == 'true') {
-
             return ' multiple="multiple" ';
         }
     }
@@ -482,7 +480,6 @@ class CreateHtmlChecklist
     private function setRows(object $object)
     {
         if (property_exists($object, 'rows')) {
-
             return ' rows="'.$object->rows.'" ';
         }
     }
@@ -496,7 +493,6 @@ class CreateHtmlChecklist
     private function setStep(object $object)
     {
         if (property_exists($object, 'step')) {
-
             return ' step="'.$object->step.'" ';
         }
     }
@@ -510,7 +506,6 @@ class CreateHtmlChecklist
     private function setMin(object $object)
     {
         if (property_exists($object, 'min')) {
-
             return ' min="'.$object->min.'" ';
         }
     }
@@ -524,7 +519,6 @@ class CreateHtmlChecklist
     private function setMax(object $object)
     {
         if (property_exists($object, 'max')) {
-
             return ' max="'.$object->max.'" ';
         }
     }
@@ -538,7 +532,6 @@ class CreateHtmlChecklist
     private function setRequired(object $object)
     {
         if (property_exists($object, 'required') && $object->required == 'true') {
-
             return ' required="required" ';
         }
     }
@@ -552,7 +545,6 @@ class CreateHtmlChecklist
     private function setTitle(object $object)
     {
         if (property_exists($object, 'description')) {
-
             return ' title="'.$object->description.'" ';
         }
     }
@@ -566,7 +558,6 @@ class CreateHtmlChecklist
     private function setPlaceholder(object $object)
     {
         if (property_exists($object, 'placeholder')) {
-
             return ' placeholder="'.$object->placeholder.'" ';
         }
     }
@@ -580,7 +571,6 @@ class CreateHtmlChecklist
     private function setMaxlength(object $object)
     {
         if (property_exists($object, 'maxlength')) {
-
             return ' maxlength="'.$object->maxlength.'" ';
         }
     }
@@ -594,7 +584,6 @@ class CreateHtmlChecklist
     private function setClass(object $object)
     {
         if (property_exists($object, 'className')) {
-
             return ' class="'.$object->className.'" ';
         }
     }
@@ -611,31 +600,34 @@ class CreateHtmlChecklist
         } catch (\Throwable $th) {
             throw $th;
         }
-
     }
 
     /**
-     * verifica se é um json valido ou não
-     * @param string $string jon a ser verificado
+     * verifica se é um json valido ou não.
+     *
+     * @param  string  $string  json a ser verificado
      * @return bool
      */
     private function isJson($string)
     {
         json_decode($string);
+
         return json_last_error() === JSON_ERROR_NONE;
     }
 
     /**
-     * Converte hifen em CamelCase
-     * @param string $string texto par aser convertido
+     * Converte hifen em CamelCase.
+     *
+     * @param  string  $string  texto par aser convertido
      * @return string
      */
     private function dashToCamelCase($string, $capitalizeFirstCharacter = false): string
     {
         $str = str_replace('-', '', ucwords($string, '-'));
-        if (!$capitalizeFirstCharacter) {
+        if (! $capitalizeFirstCharacter) {
            $str = lcfirst($str);
         }
+
         return $str;
     }
 }
