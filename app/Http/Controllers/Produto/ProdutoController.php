@@ -145,7 +145,7 @@ class ProdutoController extends Controller
      * @param  Request  $request  Request da variável Busca,
      * @return string json Retorna o json para ser montado.
      **/
-    public function apiProdutoSelect (Request $request)
+    public function apiProdutoSelect(Request $request)
     {
         try {
             $select = Produto::where('name', 'LIKE', '%'.$request->q.'%');

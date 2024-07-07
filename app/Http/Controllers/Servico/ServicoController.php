@@ -111,8 +111,6 @@ class ServicoController extends Controller
         }
     }
 
-
-
     /**
      * Select Serviço.
      *
@@ -121,7 +119,7 @@ class ServicoController extends Controller
      * @param  Request  $request  Request da variável Busca,
      * @return response, json Retorna o json para ser montado.
      **/
-    public function apiServicoSelect (Request $request)
+    public function apiServicoSelect(Request $request)
     {
         try {
             $select = Servico::where('name', 'LIKE', '%'.$request->q.'%');
@@ -133,7 +131,7 @@ class ServicoController extends Controller
                     'id' => $value->id,
                     'name' => $value->name,
                     'valor_servico' => $value->valor_servico,
-                    'descricao' => $value->descricao
+                    'descricao' => $value->descricao,
                 ];
             }
 

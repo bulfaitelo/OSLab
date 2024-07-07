@@ -298,7 +298,6 @@ class OsController extends Controller
                 $movimentacoesModel = $produto->movimentacao()->where('os_produto_id', $osProduto->id);
                 $movimentacoes = $movimentacoesModel->get();
                 foreach ($movimentacoes as $movimentacao) {
-
                     if ($movimentacoes->count() > 1) {
                         $produto->estoque = ($produto->estoque + $movimentacao->estoque_antes);
                         break;

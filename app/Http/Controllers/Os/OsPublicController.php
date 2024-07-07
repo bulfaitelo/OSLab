@@ -12,10 +12,10 @@ class OsPublicController extends Controller
 {
     public function edit($uuid)
     {
-        $informacao = OsInformacao::where('uuid',$uuid)->firstOrfail();
+        $informacao = OsInformacao::where('uuid', $uuid)->firstOrfail();
         $emitente = Emitente::getHtmlEmitente(1);
 
-        return view('os.public.edit',compact('informacao', 'emitente'));
+        return view('os.public.edit', compact('informacao', 'emitente'));
     }
 
     /**
@@ -25,10 +25,10 @@ class OsPublicController extends Controller
      **/
     public function update($uuid, Request $request)
     {
-        $informacao = OsInformacao::where('uuid',$uuid)->firstOrfail();
+        $informacao = OsInformacao::where('uuid', $uuid)->firstOrfail();
         $request->validate([
             'tipo' => 'required|integer',
-            'informacao'=> 'required',
+            'informacao' => 'required',
         ]);
         // dd($request->input());
         try {
