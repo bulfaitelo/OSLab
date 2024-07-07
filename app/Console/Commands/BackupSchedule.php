@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Configuracao\Sistema\SistemaConfig;
 use Artisan;
 use Illuminate\Console\Command;
-use Spatie\Backup\Exceptions\InvalidCommand;
 
 class BackupSchedule extends Command
 {
@@ -39,17 +37,16 @@ class BackupSchedule extends Command
      * Execute the console command.
      */
     public function handle()
-    {        
-        try {            
-            if (getConfig('backup_local_store')) {                
+    {
+        try {
+            if (getConfig('backup_local_store')) {
                 Artisan::call('backup:run --only-to-disk=local --disable-notifications');
                 Artisan::output();
             }
-            
             if (getConfig('backup_gdrive_store')) {
                 Artisan::call('backup:run --only-to-disk=google --disable-notifications');
-                echo Artisan::output();                           
-            }            
+                echo Artisan::output();
+            }
         } catch (\Throwable $th) {
             throw $th;
         }

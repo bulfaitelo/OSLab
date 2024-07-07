@@ -29,17 +29,16 @@ class ResetInformacaoLinks extends Command
     {
         DB::beginTransaction();
         try {
-            OsInformacao::where('validade_link',  '<', now() )
+            OsInformacao::where('validade_link', '<', now())
                 ->update([
-                    'uuid' => null,
+                    'uuid'          => null,
                     'validade_link' => null,
-                    'status' => 2,
+                    'status'        => 2,
                 ]);
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
-
     }
 }
