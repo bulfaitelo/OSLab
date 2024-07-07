@@ -106,7 +106,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  User $user
+     * @param  User  $user
      */
     public function show(User $user)
     {
@@ -118,7 +118,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  User $user
+     * @param  User  $user
      */
     public function edit(User $user)
     {
@@ -171,7 +171,7 @@ class UserController extends Controller
         if ($request->img_perfil) {
             // Apagando a imagem antiga antes de definir nova
             $tempImage = $user->img_url;
-            if (file_exists(storage_path('app/public/img_perfil/').$tempImage) && $tempImage != null ) {
+            if (file_exists(storage_path('app/public/img_perfil/').$tempImage) && $tempImage != null) {
                 unlink(storage_path('app/public/img_perfil/').$tempImage);
             }
             $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
@@ -193,7 +193,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  User  $users
+     * @param  User  $user
      */
     public function destroy(User $user)
     {
@@ -214,7 +214,7 @@ class UserController extends Controller
     /**
      * Edita as permissões do usuário.
      *
-     * @param  User  $users
+     * @param  User  $user
      */
     public function permissions_edit(User $user)
     {
@@ -236,7 +236,7 @@ class UserController extends Controller
      * Edita as permissões do usuário.
      *
      * @param  Request  $request
-     * @param  User  $users
+     * @param  User  $user
      */
     public function permissions_update(Request $request, User $user)
     {
@@ -251,9 +251,10 @@ class UserController extends Controller
      * Retorna o select com os dados dos usuários via Json.
      *
      * @param  Request  $request  Request da variável Busca,
-     * @return  string  json  Retorna o json para ser montado.
+     * @return string json Retorna o json para ser montado.
      **/
-    public function apiUserSelect (Request $request) {
+    public function apiUserSelect(Request $request)
+    {
         try {
             $select = User::where('name', 'LIKE', '%'.$request->q.'%');
             $select->orderBy('name');

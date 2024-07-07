@@ -27,7 +27,6 @@ class SetorController extends Controller
         $setores = Setor::paginate(50);
 
         return view('configuracao.users.setores.index', compact('setores'));
-
     }
 
     /**
@@ -109,8 +108,7 @@ class SetorController extends Controller
         if ($setor->users->count() > 0) {
             return redirect()->route('configuracao.user.setor.index')
             ->with('warning', 'Não é possível excluir um setor que existam usuários cadastrados nele!');
-        }
-        else{
+        } else {
             if ($setor->delete()) {
                 return redirect()->route('configuracao.user.setor.index')
                 ->with('success', 'Setor Excluído com Sucesso!');

@@ -12,15 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class DespesaPagamentoController extends Controller
 {
-
     public function __construct()
     {
         // ACL DE PERMISSÕES
-
         $this->middleware('permission:financeiro_despesa_pagamento_create', ['only' => ['store']]);
-        $this->middleware('permission:financeiro_despesa_pagamento_edit', ['only' => [ 'update']]);
+        $this->middleware('permission:financeiro_despesa_pagamento_edit', ['only' => ['update']]);
         $this->middleware('permission:financeiro_despesa_pagamento_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -30,11 +27,11 @@ class DespesaPagamentoController extends Controller
     {
         DB::beginTransaction();
         try {
-            $pagamento[] =  [
+            $pagamento[] = [
                 'forma_pagamento_id' => $request->forma_pagamento_id,
                 'user_id' => Auth::id(),
                 'valor' => $request->pagamento_valor,
-                'vencimento' =>  $request->vencimento,
+                'vencimento' => $request->vencimento,
                 'data_pagamento' => $request->data_pagamento,
                 'parcela' => $request->parcela,
             ];
@@ -47,6 +44,7 @@ class DespesaPagamentoController extends Controller
             }
             $despesa->save();
             DB::commit();
+
             return redirect()->route('financeiro.despesa.edit', $despesa)
             ->with('success', 'Pagamento adicionado com sucesso.');
         } catch (\Throwable $th) {
@@ -54,7 +52,6 @@ class DespesaPagamentoController extends Controller
             throw $th;
         }
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -66,25 +63,22 @@ class DespesaPagamentoController extends Controller
         try {
             $pagamento->forma_pagamento_id = $request->forma_pagamento_id;
             $pagamento->user_id = Auth::id();
-            $pagamento->vencimento =  $request->vencimento;
+            $pagamento->vencimento = $request->vencimento;
             $pagamento->parcela = $request->parcela;
             if ($request->pago) {
                 $pagamento->valor = $request->pagamento_valor;
                 $pagamento->data_pagamento = $request->data_pagamento;
-
             } else {
                 $pagamento->valor = null;
                 $pagamento->data_pagamento = null;
-
             }
             $pagamento->save();
-
             if ($request->pago) {
                 if (($despesa->pagamentos->sum('valor') + $request->pagamento_valor) >= $despesa->valor) {
                     $despesa->data_quitacao = $request->data_pagamento;
                 }
             } else {
-                if (($despesa->pagamentos->sum('valor')) >= $despesa->valor) {
+                if ($despesa->pagamentos->sum('valor') >= $despesa->valor) {
                     $despesa->data_quitacao = $request->data_pagamento;
                 } else {
                     $despesa->data_quitacao = null;
@@ -92,13 +86,13 @@ class DespesaPagamentoController extends Controller
             }
             $despesa->save();
             DB::commit();
+
             return redirect()->route('financeiro.despesa.edit', $despesa)
             ->with('success', 'Pagamento editado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
-
     }
 
     /**
@@ -115,9 +109,9 @@ class DespesaPagamentoController extends Controller
             }
             $despesa->save();
             DB::commit();
+
             return redirect()->route('financeiro.despesa.edit', $despesa)
                 ->with('success', 'Pagamento excluído com sucesso.');
-
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

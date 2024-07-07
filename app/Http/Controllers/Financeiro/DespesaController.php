@@ -12,10 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-
 class DespesaController extends Controller
 {
-
     public function __construct()
     {
         // ACL DE PERMISSÕES
@@ -24,9 +22,7 @@ class DespesaController extends Controller
         $this->middleware('permission:financeiro_despesa_show', ['only' => 'show']);
         $this->middleware('permission:financeiro_despesa_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:financeiro_despesa_destroy', ['only' => 'destroy']);
-
     }
-
 
     /**
      * Display a listing of the resource.
@@ -39,16 +35,16 @@ class DespesaController extends Controller
         if ($request->busca) {
             $queryDespesa->where(function ($query) use ($request) {
                 $query->whereHas('cliente', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                    $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 });
-                $query->orWhere('name', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('observacoes', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhere('name', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('observacoes', 'LIKE', '%'.$request->busca.'%');
             });
         }
         if ($request->centro_custo) {
             $queryDespesa->where('centro_custo_id', $request->centro_custo);
         }
-        if (($request->data_inicial) || ($request->data_final)) {
+        if ($request->data_inicial || $request->data_final) {
             ($request->data_inicial) ? $dataInicial = $request->data_inicial : $dataInicial = $dataHoje;
             ($request->data_final) ? $dataFinal = $request->data_final : $dataFinal = $dataHoje;
             $queryDespesa->where(function ($query) use ($dataInicial, $dataFinal) {
@@ -67,7 +63,7 @@ class DespesaController extends Controller
         $queryDespesa->orderBy('id', 'desc');
 
         $despesas = $queryDespesa->paginate(100);
-        return view('financeiro.despesa.index', compact('despesas', 'request', ));
+        return view('financeiro.despesa.index', compact('despesas', 'request'));
     }
 
     /**
@@ -111,7 +107,7 @@ class DespesaController extends Controller
                 $valorParcela = floor($request->valor / $request->parcelas * 100) / 100;
                 $valorResto = $request->valor - ($valorParcela * $request->parcelas);
 
-                for ($i=1; $i <= $request->parcelas ; $i++) {
+                for ($i = 1; $i <= $request->parcelas ; $i++) {
                     if ($i == 1) {
                         $valor = $valorParcela + $valorResto;
                     } else {
@@ -125,11 +121,11 @@ class DespesaController extends Controller
                     }
 
 
-                    $pagamento[] =  [
+                    $pagamento[] = [
                         'forma_pagamento_id' => $request->forma_pagamento_id,
                         'user_id' => Auth::id(),
                         'valor' => $valor,
-                        'vencimento' =>  $vencimento->format('Y-m-d'),
+                        'vencimento' => $vencimento->format('Y-m-d'),
                         'data_pagamento' => $data_pagamento,
                         'parcela' => $i,
                     ];
@@ -143,11 +139,11 @@ class DespesaController extends Controller
                 }
 
             } else {
-               $pagamento[] =  [
+                $pagamento[] = [
                     'forma_pagamento_id' => $request->forma_pagamento_id,
                     'user_id' => Auth::id(),
                     'valor' => $request->avista_valor,
-                    'vencimento' =>  $request->vencimento,
+                    'vencimento' => $request->vencimento,
                     'data_pagamento' => $request->data_pagamento,
                     'parcela' => 1,
                 ];
@@ -158,8 +154,8 @@ class DespesaController extends Controller
 
             }
             $despesa->pagamentos()->createMany($pagamento);
-
             DB::commit();
+
             return redirect()->route('financeiro.despesa.index')
             ->with('success', 'Despesa cadastrada com sucesso.');
 
@@ -217,12 +213,12 @@ class DespesaController extends Controller
     {
         try {
             $despesa->delete();
+
             return redirect()->route('financeiro.despesa.index')
                 ->with('success', 'Despesa excluída com sucesso.');
 
         } catch (\Throwable $th) {
             throw $th;
         }
-
     }
 }

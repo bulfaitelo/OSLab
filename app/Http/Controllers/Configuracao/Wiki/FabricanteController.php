@@ -18,7 +18,6 @@ class FabricanteController extends Controller
         $this->middleware('permission:config_wiki_fabricante_show', ['only' => 'show']);
         $this->middleware('permission:config_wiki_fabricante_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:config_wiki_fabricante_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -27,6 +26,7 @@ class FabricanteController extends Controller
     public function index()
     {
         $fabricantes = Fabricante::paginate(100);
+
         return view('configuracao.wiki.fabricante.index', compact('fabricantes'));
     }
 
@@ -48,6 +48,7 @@ class FabricanteController extends Controller
             $fabricante->name = $request->name;
             $fabricante->descricao = $request->descricao;
             $fabricante->save();
+
             return redirect()->route('configuracao.wiki.fabricante.index')
             ->with('success', 'Fabricante cadastrado com sucesso.');
         } catch (\Throwable $th) {
@@ -61,7 +62,6 @@ class FabricanteController extends Controller
     public function show(Fabricante $fabricante)
     {
         return view('configuracao.wiki.fabricante.show', compact('fabricante'));
-
     }
 
     /**
@@ -81,6 +81,7 @@ class FabricanteController extends Controller
             $fabricante->name = $request->name;
             $fabricante->descricao = $request->descricao;
             $fabricante->save();
+
             return redirect()->route('configuracao.wiki.fabricante.index')
             ->with('success', 'Fabricante atualizado com sucesso.');
         } catch (\Throwable $th) {
@@ -95,6 +96,7 @@ class FabricanteController extends Controller
     {
         try {
             $fabricante->delete();
+
             return redirect()->route('configuracao.wiki.fabricante.index')
                 ->with('success', 'Fabricante excluído com sucesso.');
 

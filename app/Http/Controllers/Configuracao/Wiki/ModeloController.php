@@ -9,7 +9,6 @@ use App\Models\Configuracao\Wiki\Modelo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-
 class ModeloController extends Controller
 {
     public function __construct()
@@ -20,7 +19,6 @@ class ModeloController extends Controller
         $this->middleware('permission:config_wiki_modelo_show', ['only' => 'show']);
         $this->middleware('permission:config_wiki_modelo_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:config_wiki_modelo_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -29,9 +27,8 @@ class ModeloController extends Controller
     public function index()
     {
         $modelos = Modelo::paginate(100);
+
         return view('configuracao.wiki.modelo.index', compact('modelos'));
-
-
     }
 
     /**
@@ -52,6 +49,7 @@ class ModeloController extends Controller
             $modelo->name = \Str::upper($request->name);
             $modelo->wiki_id = $request->wiki_id;
             $modelo->save();
+
             return redirect()->route('configuracao.wiki.modelo.index')
             ->with('success', 'Modelo cadastrado com sucesso.');
         } catch (\Throwable $th) {
@@ -84,6 +82,7 @@ class ModeloController extends Controller
             $modelo->name = \Str::upper($request->name);
             $modelo->wiki_id = $request->wiki_id;
             $modelo->save();
+
             return redirect()->route('configuracao.wiki.modelo.index')
             ->with('success', 'Modelo atualizado com sucesso.');
         } catch (\Throwable $th) {
@@ -103,29 +102,30 @@ class ModeloController extends Controller
                 ->with('warning', "Modelo está sendo usado em {$osCount} e não pode ser excluído!");
             }
             $modelo->delete();
+
             return redirect()->route('configuracao.wiki.modelo.index')
                 ->with('success', 'Modelo excluído com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
     /**
-     * Select Modelo
+     * Select Modelo.
      *
      * Retorna o select com os modelos dos dispositivos relacionado wiki dos usuários via Json.
      *
-     * @param Request $request Request da variável Busca,
+     * @param  Request  $request  Request da variável Busca,
      * @return response, json Retorna o json para ser montado.
      **/
-    public function apiModeloSelect (Request $request) {
+    public function apiModeloSelect (Request $request)
+    {
         try {
-            $select = Modelo::where('name', 'LIKE', '%'. $request->q . '%');
+            $select = Modelo::where('name', 'LIKE', '%'.$request->q.'%');
             $select->orWhereHas('wiki', function (Builder $query) use ($request) {
-                $query->where('name','LIKE', '%'. $request->q . '%');
+                $query->where('name','LIKE', '%'.$request->q.'%');
                 $query->orWhereHas('fabricante', function (Builder $query) use ($request) {
-                    $query->where('name','LIKE', '%'. $request->q . '%');
+                    $query->where('name','LIKE', '%'.$request->q.'%');
                 });
             });
 
@@ -137,12 +137,12 @@ class ModeloController extends Controller
                 $response[] = [
                     'id' => $value->id,
                     'name' => $value->name,
-                    'wiki'=> $value->wiki->name,
+                    'wiki' => $value->wiki->name,
                     'fabricante' => $value->wiki->fabricante->name,
                 ];
             }
-            return response()->json($response, 200);
 
+            return response()->json($response, 200);
         } catch (\Throwable $th) {
             return response()->json($th, 403);
         }
