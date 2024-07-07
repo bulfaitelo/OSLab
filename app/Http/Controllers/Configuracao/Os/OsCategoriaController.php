@@ -29,7 +29,7 @@ class OsCategoriaController extends Controller
         $categoria = OsCategoria::with('garantia')
                 ->with('centroCusto')
                 ->paginate(100);
-        return view ('configuracao.os.categoria.index', compact('categoria'));
+        return view('configuracao.os.categoria.index', compact('categoria'));
     }
 
     /**

@@ -25,7 +25,7 @@ class FormaPagamentoController extends Controller
     public function index()
     {
         $formaPagamentos = FormaPagamento::paginate(100);
-        return view ('configuracao.financeiro.forma_pagamento.index', compact('formaPagamentos'));
+        return view('configuracao.financeiro.forma_pagamento.index', compact('formaPagamentos'));
     }
 
     /**
@@ -33,7 +33,7 @@ class FormaPagamentoController extends Controller
      */
     public function create()
     {
-        return view ('configuracao.financeiro.forma_pagamento.create');
+        return view('configuracao.financeiro.forma_pagamento.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class FormaPagamentoController extends Controller
      */
     public function show(FormaPagamento $formaPagamento)
     {
-        return view ('configuracao.financeiro.forma_pagamento.show', compact('formaPagamento'));
+        return view('configuracao.financeiro.forma_pagamento.show', compact('formaPagamento'));
     }
 
     /**
@@ -66,7 +66,7 @@ class FormaPagamentoController extends Controller
      */
     public function edit(FormaPagamento $formaPagamento)
     {
-        return view ('configuracao.financeiro.forma_pagamento.edit', compact('formaPagamento'));
+        return view('configuracao.financeiro.forma_pagamento.edit', compact('formaPagamento'));
     }
 
     /**

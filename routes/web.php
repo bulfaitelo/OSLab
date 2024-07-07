@@ -51,7 +51,7 @@ Route::get('/', function () {
 });
 
 Route::get('/live-test', function () {
-    return view ('teste');
+    return view('teste');
 })->name('teste');
 
 route::resource('teste', TestController::class);

@@ -29,7 +29,7 @@ class SetorController extends Controller
     public function index()
     {
         $setores = Setor::paginate(50);
-        return view ('configuracao.users.setores.index', compact('setores'));
+        return view('configuracao.users.setores.index', compact('setores'));
 
     }
 
@@ -40,7 +40,7 @@ class SetorController extends Controller
      */
     public function create()
     {
-        return view ('configuracao.users.setores.create');
+        return view('configuracao.users.setores.create');
     }
 
     /**
@@ -87,7 +87,7 @@ class SetorController extends Controller
      */
     public function edit(Setor $setor)
     {
-        return view ('configuracao.users.setores.edit', compact('setor'));
+        return view('configuracao.users.setores.edit', compact('setor'));
     }
 
     /**

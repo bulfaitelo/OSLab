@@ -46,7 +46,7 @@ class OsStatusController extends Controller
     public function index()
     {
         $status = OsStatus::paginate(100);
-        return view ('configuracao.os.status.index', compact('status'));
+        return view('configuracao.os.status.index', compact('status'));
 
     }
 
@@ -56,7 +56,7 @@ class OsStatusController extends Controller
     public function create()
     {
         $cor_array = $this->corArray;
-        return view ('configuracao.os.status.create', compact('cor_array'));
+        return view('configuracao.os.status.create', compact('cor_array'));
     }
 
     /**
@@ -86,7 +86,7 @@ class OsStatusController extends Controller
     public function show(OsStatus $status)
     {
         $cor_array = $this->corArray;
-        return view ('configuracao.os.status.show', compact('status', 'cor_array'));
+        return view('configuracao.os.status.show', compact('status', 'cor_array'));
     }
 
     /**
@@ -95,7 +95,7 @@ class OsStatusController extends Controller
     public function edit(OsStatus $status)
     {
         $cor_array = $this->corArray;
-        return view ('configuracao.os.status.edit', compact('status', 'cor_array'));
+        return view('configuracao.os.status.edit', compact('status', 'cor_array'));
     }
 
     /**

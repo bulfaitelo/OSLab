@@ -25,7 +25,7 @@ class Emitente extends Model
     {
         $emitente = self::where("id", $id)->first();
         $os = Os::where("id", $os_id)->first();
-        return view ('oslab.header', compact ('emitente', 'os'));
+        return view('oslab.header', compact ('emitente', 'os'));
     }
 
 

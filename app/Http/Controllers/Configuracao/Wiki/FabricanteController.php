@@ -59,7 +59,7 @@ class FabricanteController extends Controller
      */
     public function show(Fabricante $fabricante)
     {
-        return view ('configuracao.wiki.fabricante.show', compact('fabricante'));
+        return view('configuracao.wiki.fabricante.show', compact('fabricante'));
 
     }
 
@@ -68,7 +68,7 @@ class FabricanteController extends Controller
      */
     public function edit(Fabricante $fabricante)
     {
-        return view ('configuracao.wiki.fabricante.edit', compact('fabricante'));
+        return view('configuracao.wiki.fabricante.edit', compact('fabricante'));
     }
 
     /**

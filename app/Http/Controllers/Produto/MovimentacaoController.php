@@ -27,7 +27,7 @@ class MovimentacaoController extends Controller
                                  ->paginate(100);
 
 
-        return view ('produto.movimentacao.index', compact('movimentacoes', 'produto'));
+        return view('produto.movimentacao.index', compact('movimentacoes', 'produto'));
     }
 
     /**
@@ -35,7 +35,7 @@ class MovimentacaoController extends Controller
      */
     public function create(Produto $produto)
     {
-        return view ('produto.movimentacao.create', compact('produto'));
+        return view('produto.movimentacao.create', compact('produto'));
     }
 
     /**

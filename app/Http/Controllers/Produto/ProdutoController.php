@@ -79,7 +79,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        return view ('produto.show', compact('produto'));
+        return view('produto.show', compact('produto'));
     }
 
     /**
@@ -87,7 +87,7 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        return view ('produto.edit', compact('produto'));
+        return view('produto.edit', compact('produto'));
     }
 
     /**

@@ -22,7 +22,7 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        return view ('configuracao.perfil.index');
+        return view('configuracao.perfil.index');
     }
 
     // /**
@@ -65,7 +65,7 @@ class PerfilController extends Controller
      */
     public function edit()
     {
-        return view ('configuracao.perfil.edit');
+        return view('configuracao.perfil.edit');
     }
 
     /**

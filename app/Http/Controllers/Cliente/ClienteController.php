@@ -8,7 +8,6 @@ use App\Http\Requests\Cliente\UpdateClienteRequest;
 use App\Models\Cliente\Cliente;
 use Illuminate\Http\Request;
 
-
 class ClienteController extends Controller
 {
     public function __construct()
@@ -19,7 +18,6 @@ class ClienteController extends Controller
         $this->middleware('permission:cliente_show', ['only' => 'show']);
         $this->middleware('permission:cliente_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:cliente_destroy', ['only' => 'destroy']);
-
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +25,7 @@ class ClienteController extends Controller
     public function index(Request $request)
     {
         $clientes = Cliente::getDataTable($request);
-        return view ('cliente.index', compact('clientes', 'request'));
+        return view('cliente.index', compact('clientes', 'request'));
     }
 
     /**
@@ -35,7 +33,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view( 'cliente.create');
+        return view('cliente.create');
     }
 
     /**

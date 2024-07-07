@@ -53,7 +53,7 @@ class OsPublicController extends Controller
     public function updated() {
         $emitente = Emitente::getHtmlEmitente(1);
 
-        return view ('os.public.updated', compact('emitente'));
+        return view('os.public.updated', compact('emitente'));
     }
 
 }
