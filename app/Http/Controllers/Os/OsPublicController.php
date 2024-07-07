@@ -19,7 +19,7 @@ class OsPublicController extends Controller
     }
 
     /**
-     * Atualiza informações da OS com base no hash gerado
+     * Atualiza informações da OS com base no hash gerado.
      *
      * @param  $uuid  Uuid
      **/
