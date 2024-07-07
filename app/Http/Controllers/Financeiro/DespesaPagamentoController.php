@@ -104,7 +104,7 @@ class DespesaPagamentoController extends Controller
         $pagamento = $despesa->pagamentos()->findOrFail($pagamento->id);
         try {
             $pagamento->delete();
-            if (($despesa->pagamentos->sum('valor')) <= $despesa->valor) {
+            if ($despesa->pagamentos->sum('valor') <= $despesa->valor) {
                 $despesa->data_quitacao = null;
             }
             $despesa->save();

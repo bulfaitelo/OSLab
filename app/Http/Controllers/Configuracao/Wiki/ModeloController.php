@@ -118,14 +118,14 @@ class ModeloController extends Controller
      * @param  Request  $request  Request da variável Busca,
      * @return response, json Retorna o json para ser montado.
      **/
-    public function apiModeloSelect (Request $request)
+    public function apiModeloSelect(Request $request)
     {
         try {
             $select = Modelo::where('name', 'LIKE', '%'.$request->q.'%');
             $select->orWhereHas('wiki', function (Builder $query) use ($request) {
-                $query->where('name','LIKE', '%'.$request->q.'%');
+                $query->where('name', 'LIKE', '%'.$request->q.'%');
                 $query->orWhereHas('fabricante', function (Builder $query) use ($request) {
-                    $query->where('name','LIKE', '%'.$request->q.'%');
+                    $query->where('name', 'LIKE', '%'.$request->q.'%');
                 });
             });
 
@@ -133,7 +133,6 @@ class ModeloController extends Controller
             $select->limit(10);
             $response = [];
             foreach ($select->get() as $value) {
-
                 $response[] = [
                     'id' => $value->id,
                     'name' => $value->name,

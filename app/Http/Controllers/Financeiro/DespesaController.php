@@ -107,7 +107,7 @@ class DespesaController extends Controller
                 $valorParcela = floor($request->valor / $request->parcelas * 100) / 100;
                 $valorResto = $request->valor - ($valorParcela * $request->parcelas);
 
-                for ($i = 1; $i <= $request->parcelas ; $i++) {
+                for ($i = 1; $i <= $request->parcelas; $i++) {
                     if ($i == 1) {
                         $valor = $valorParcela + $valorResto;
                     } else {
@@ -119,7 +119,6 @@ class DespesaController extends Controller
                     } else {
                         $data_pagamento = null;
                     }
-
 
                     $pagamento[] = [
                         'forma_pagamento_id' => $request->forma_pagamento_id,
@@ -137,7 +136,6 @@ class DespesaController extends Controller
                     $despesa->data_quitacao = $vencimento->format('Y-m-d');
                     $despesa->save();
                 }
-
             } else {
                 $pagamento[] = [
                     'forma_pagamento_id' => $request->forma_pagamento_id,
@@ -151,7 +149,6 @@ class DespesaController extends Controller
                     $despesa->data_quitacao = $request->data_pagamento;
                     $despesa->save();
                 }
-
             }
             $despesa->pagamentos()->createMany($pagamento);
             DB::commit();
@@ -163,7 +160,6 @@ class DespesaController extends Controller
             DB::rollBack();
             throw $th;
         }
-
     }
 
     /**
@@ -191,7 +187,7 @@ class DespesaController extends Controller
             $despesa->user_id = Auth::id();
             $despesa->name = $request->name;
             $despesa->centro_custo_id = $request->centro_custo_id;
-            if (!$despesa->os_id) {
+            if (! $despesa->os_id) {
                 $despesa->cliente_id = $request->cliente_id;
             }
             $despesa->observacoes = $request->observacoes;
@@ -216,7 +212,6 @@ class DespesaController extends Controller
 
             return redirect()->route('financeiro.despesa.index')
                 ->with('success', 'Despesa excluída com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }

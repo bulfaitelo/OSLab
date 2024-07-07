@@ -99,8 +99,6 @@ class UserController extends Controller
         if ($user->save()) {
             return redirect()->route('configuracao.users.index')->with('success', 'Usuário cadastrado com sucesso!');
         }
-
-
     }
 
     /**
@@ -229,6 +227,7 @@ class UserController extends Controller
             ->distinct()
             ->get();
         // dd($permissions);
+
         return view('configuracao.users.permissions', compact('permissions', 'user', 'roles', 'group', 'groups'));
     }
 

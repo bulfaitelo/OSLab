@@ -101,5 +101,4 @@ class AddPagamentoModal extends Component
             throw $th;
         }
     }
-
 }

@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class ReceitaController extends Controller
 {
-
     public function __construct()
     {
         // ACL DE PERMISSÕES
@@ -22,9 +21,7 @@ class ReceitaController extends Controller
         $this->middleware('permission:financeiro_receita_show', ['only' => 'show']);
         $this->middleware('permission:financeiro_receita_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:financeiro_receita_destroy', ['only' => 'destroy']);
-
     }
-
 
     /**
      * Display a listing of the resource.
@@ -37,16 +34,16 @@ class ReceitaController extends Controller
         if ($request->busca) {
             $queryReceita->where(function ($query) use ($request) {
                 $query->whereHas('cliente', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                    $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 });
-                $query->orWhere('name', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('observacoes', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhere('name', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('observacoes', 'LIKE', '%'.$request->busca.'%');
             });
         }
         if ($request->centro_custo) {
             $queryReceita->where('centro_custo_id', $request->centro_custo);
         }
-        if (($request->data_inicial) || ($request->data_final)) {
+        if ($request->data_inicial || $request->data_final) {
             ($request->data_inicial) ? $dataInicial = $request->data_inicial : $dataInicial = $dataHoje;
             ($request->data_final) ? $dataFinal = $request->data_final : $dataFinal = $dataHoje;
             $queryReceita->where(function ($query) use ($dataInicial, $dataFinal) {
@@ -63,9 +60,9 @@ class ReceitaController extends Controller
             $queryReceita->WhereNull('data_quitacao');
         }
         $queryReceita->orderBy('id', 'desc');
-
         $receitas = $queryReceita->paginate(100);
-        return view('financeiro.receita.index', compact('receitas', 'request', ));
+
+        return view('financeiro.receita.index', compact('receitas', 'request'));
     }
 
     /**
@@ -108,7 +105,7 @@ class ReceitaController extends Controller
                 $valorParcela = floor($request->valor / $request->parcelas * 100) / 100;
                 $valorResto = $request->valor - ($valorParcela * $request->parcelas);
 
-                for ($i=1; $i <= $request->parcelas ; $i++) {
+                for ($i=1; $i <= $request->parcelas; $i++) {
                     if ($i == 1) {
                         $valor = $valorParcela + $valorResto;
                     } else {
@@ -121,12 +118,11 @@ class ReceitaController extends Controller
                         $data_pagamento = null;
                     }
 
-
-                    $pagamento[] =  [
+                    $pagamento[] = [
                         'forma_pagamento_id' => $request->forma_pagamento_id,
                         'user_id' => Auth::id(),
                         'valor' => $valor,
-                        'vencimento' =>  $vencimento->format('Y-m-d'),
+                        'vencimento' => $vencimento->format('Y-m-d'),
                         'data_pagamento' => $data_pagamento,
                         'parcela' => $i,
                     ];
@@ -140,11 +136,11 @@ class ReceitaController extends Controller
                 }
 
             } else {
-               $pagamento[] =  [
+                $pagamento[] = [
                     'forma_pagamento_id' => $request->forma_pagamento_id,
                     'user_id' => Auth::id(),
                     'valor' => $request->avista_valor,
-                    'vencimento' =>  $request->vencimento,
+                    'vencimento' => $request->vencimento,
                     'data_pagamento' => $request->data_pagamento,
                     'parcela' => 1,
                 ];
@@ -152,11 +148,11 @@ class ReceitaController extends Controller
                     $receita->data_quitacao = $request->data_pagamento;
                     $receita->save();
                 }
-
             }
             $receita->pagamentos()->createMany($pagamento);
 
             DB::commit();
+
             return redirect()->route('financeiro.receita.index')
             ->with('success', 'receita cadastrada com sucesso.');
 
@@ -164,7 +160,6 @@ class ReceitaController extends Controller
             DB::rollBack();
             throw $th;
         }
-
     }
 
     /**
@@ -192,7 +187,7 @@ class ReceitaController extends Controller
             $receita->user_id = Auth::id();
             $receita->name = $request->name;
             $receita->centro_custo_id = $request->centro_custo_id;
-            if (!$receita->os_id) {
+            if (! $receita->os_id) {
                 $receita->cliente_id = $request->cliente_id;
             }
             $receita->observacoes = $request->observacoes;
@@ -216,10 +211,8 @@ class ReceitaController extends Controller
             $receita->delete();
             return redirect()->route('financeiro.receita.index')
                 ->with('success', 'receita excluída com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
-
     }
 }

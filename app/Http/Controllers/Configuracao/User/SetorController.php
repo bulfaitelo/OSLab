@@ -114,6 +114,5 @@ class SetorController extends Controller
                 ->with('success', 'Setor Excluído com Sucesso!');
             }
         }
-
     }
 }

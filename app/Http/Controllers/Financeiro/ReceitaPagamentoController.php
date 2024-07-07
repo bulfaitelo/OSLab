@@ -12,15 +12,12 @@ use Illuminate\Support\Facades\DB;
 
 class ReceitaPagamentoController extends Controller
 {
-
     public function __construct()
     {
         // ACL DE PERMISSÕES
-
         $this->middleware('permission:financeiro_receita_pagamento_create', ['only' => ['store']]);
-        $this->middleware('permission:financeiro_receita_pagamento_edit', ['only' => [ 'update']]);
+        $this->middleware('permission:financeiro_receita_pagamento_edit', ['only' => ['update']]);
         $this->middleware('permission:financeiro_receita_pagamento_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -30,11 +27,11 @@ class ReceitaPagamentoController extends Controller
     {
         DB::beginTransaction();
         try {
-            $pagamento[] =  [
+            $pagamento[] = [
                 'forma_pagamento_id' => $request->forma_pagamento_id,
                 'user_id' => Auth::id(),
                 'valor' => $request->pagamento_valor,
-                'vencimento' =>  $request->vencimento,
+                'vencimento' => $request->vencimento,
                 'data_pagamento' => $request->data_pagamento,
                 'parcela' => $request->parcela,
             ];
@@ -47,6 +44,7 @@ class ReceitaPagamentoController extends Controller
             }
             $receita->save();
             DB::commit();
+
             return redirect()->route('financeiro.receita.edit', $receita)
             ->with('success', 'Pagamento adicionado com sucesso.');
         } catch (\Throwable $th) {
@@ -54,7 +52,6 @@ class ReceitaPagamentoController extends Controller
             throw $th;
         }
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -66,7 +63,7 @@ class ReceitaPagamentoController extends Controller
         try {
             $pagamento->forma_pagamento_id = $request->forma_pagamento_id;
             $pagamento->user_id = Auth::id();
-            $pagamento->vencimento =  $request->vencimento;
+            $pagamento->vencimento = $request->vencimento;
             $pagamento->parcela = $request->parcela;
             if ($request->pago) {
                 $pagamento->valor = $request->pagamento_valor;
@@ -90,13 +87,13 @@ class ReceitaPagamentoController extends Controller
             }
             $receita->save();
             DB::commit();
+
             return redirect()->route('financeiro.receita.edit', $receita)
             ->with('success', 'Pagamento editado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
-
     }
 
     /**
@@ -108,7 +105,7 @@ class ReceitaPagamentoController extends Controller
         $pagamento = $receita->pagamentos()->findOrFail($pagamento->id);
         try {
             $pagamento->delete();
-            if (($receita->pagamentos->sum('valor')) <= $receita->valor) {
+            if ($receita->pagamentos->sum('valor') <= $receita->valor) {
                 $receita->data_quitacao = null;
             }
             $receita->save();

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Configuracao\Wiki;
 
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\Configuracao\Wiki\StoreFabricanteRequest;
 use App\Http\Requests\Configuracao\Wiki\UpdateFabricanteRequest;
 use App\Models\Configuracao\Wiki\Fabricante;
@@ -99,7 +98,6 @@ class FabricanteController extends Controller
 
             return redirect()->route('configuracao.wiki.fabricante.index')
                 ->with('success', 'Fabricante excluído com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
