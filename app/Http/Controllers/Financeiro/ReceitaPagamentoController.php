@@ -79,7 +79,7 @@ class ReceitaPagamentoController extends Controller
                     $receita->data_quitacao = $request->data_pagamento;
                 }
             } else {
-                if (($receita->pagamentos->sum('valor')) >= $receita->valor) {
+                if ($receita->pagamentos->sum('valor') >= $receita->valor) {
                     $receita->data_quitacao = $request->data_pagamento;
                 } else {
                     $receita->data_quitacao = null;

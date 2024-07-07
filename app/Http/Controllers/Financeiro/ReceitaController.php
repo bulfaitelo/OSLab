@@ -105,7 +105,7 @@ class ReceitaController extends Controller
                 $valorParcela = floor($request->valor / $request->parcelas * 100) / 100;
                 $valorResto = $request->valor - ($valorParcela * $request->parcelas);
 
-                for ($i=1; $i <= $request->parcelas; $i++) {
+                for ($i = 1; $i <= $request->parcelas; $i++) {
                     if ($i == 1) {
                         $valor = $valorParcela + $valorResto;
                     } else {
@@ -134,7 +134,6 @@ class ReceitaController extends Controller
                     $receita->data_quitacao = $vencimento->format('Y-m-d');
                     $receita->save();
                 }
-
             } else {
                 $pagamento[] = [
                     'forma_pagamento_id' => $request->forma_pagamento_id,
@@ -155,7 +154,6 @@ class ReceitaController extends Controller
 
             return redirect()->route('financeiro.receita.index')
             ->with('success', 'receita cadastrada com sucesso.');
-
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -209,6 +207,7 @@ class ReceitaController extends Controller
     {
         try {
             $receita->delete();
+
             return redirect()->route('financeiro.receita.index')
                 ->with('success', 'receita excluída com sucesso.');
         } catch (\Throwable $th) {

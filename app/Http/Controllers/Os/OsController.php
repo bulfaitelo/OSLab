@@ -13,16 +13,13 @@ use App\Models\Produto\Produto;
 use App\Services\Os\OsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OsController extends Controller
 {
-
     function __construct(
-        private readonly ? OsService $osService = null
-    )
-    {
+        private readonly ?OsService $osService = null
+    ) {
         // ACL DE PERMISSÕES
         $this->middleware('permission:os', ['only' => ['index']]);
         $this->middleware('permission:os_create', ['only' => ['create', 'store']]);
@@ -31,7 +28,6 @@ class OsController extends Controller
         $this->middleware('permission:os_destroy', ['only' => 'destroy']);
         $this->middleware('permission:os_faturar', ['only' => 'faturar']);
         $this->middleware('permission:os_cancelar_faturar', ['only' => 'cancelarFaturamento']);
-
     }
 
     /**
@@ -40,9 +36,9 @@ class OsController extends Controller
     public function index(Request $request)
     {
         $os = $this->osService::getDataTable($request);
+
         return view('os.index', compact('os', 'request'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -58,6 +54,7 @@ class OsController extends Controller
     public function store(StoreOsRequest $request)
     {
         $os = $this->osService->store($request);
+
         return redirect()->route('os.edit', $os->id)
         ->with('success', 'Os cadastrada com sucesso.');
     }
@@ -68,15 +65,17 @@ class OsController extends Controller
     public function show(Os $os)
     {
         $emitente = Emitente::getHtmlEmitente(1, $os->id);
+
         return view('os.show', compact('os', 'emitente'));
     }
 
     /**
-     * Tela de impressão da OS
+     * Tela de impressão da OS.
      */
     public function print(Os $os)
     {
         $emitente = Emitente::getHtmlEmitente(1, $os->id);
+
         return view('os.print', compact('os', 'emitente'));
 
         // $pdf = Pdf::loadView('os.print', compact('os', 'emitente'));
@@ -98,6 +97,7 @@ class OsController extends Controller
     {
         // dd($request->input());
         $os = $this->osService->update($request, $os);
+
         return redirect()->route('os.edit', $os->id)
         ->with('success', 'Os Atualizada com sucesso.');
     }
@@ -113,25 +113,26 @@ class OsController extends Controller
                 ->with('warning', 'Essa OS já está faturada, cancele a fatura antes de exclui-la!');
             }
             $this->osService->destroy($os);
+
             return redirect()->route('os.index')
             ->with('success', 'OS Excluida com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
     /**
-     *  Fatura a OS,
+     *  Fatura a OS.
      *
-     * @param FaturarOsRequest $request
-     * @param OS $os os
+     * @param  FaturarOsRequest  $request
+     * @param  OS  $os  os
      *
      */
-    function faturar(FaturarOsRequest $request, Os $os) {
-
-        if (!getConfig('default_os_faturar_produto_despesa')) {
+    function faturar(FaturarOsRequest $request, Os $os)
+    {
+        if (! getConfig('default_os_faturar_produto_despesa')) {
             return redirect()->route('os.edit', $os->id)
+
             ->with('warning', 'Por favor vejas as configurações do sistema.');
         }
 
@@ -147,8 +148,8 @@ class OsController extends Controller
             foreach ($os->produtos as $osProduto) {
                 // Adicionando despesa,
                 $os->contas()->create([
-                    'tipo'=> 'D',
-                    'name'=> 'OS: #'. $os->id. ', Prod.:'. $osProduto->produto->name. ', Qtd.: '. $osProduto->quantidade,
+                    'tipo' => 'D',
+                    'name' => 'OS: #'.$os->id.', Prod.:'.$osProduto->produto->name.', Qtd.: '.$osProduto->quantidade,
                     'os_id' => $os->id,
                     'user_id' => auth()->id(),
                     'centro_custo_id' => $osProduto->produto->centro_custo_id,
@@ -160,7 +161,7 @@ class OsController extends Controller
                     'forma_pagamento_id' => getConfig('default_os_faturar_produto_despesa'),
                     'user_id' => auth()->id(),
                     'valor' => $osProduto->valor_custo_total,
-                    'vencimento' =>  $request->data_entrada,
+                    'vencimento' => $request->data_entrada,
                     'data_pagamento' => $request->data_entrada,
                     'parcela' => 1,
                 ]);
@@ -172,37 +173,37 @@ class OsController extends Controller
                     $produto->estoque = ($produto->estoque - $osProduto->quantidade);
                     $produto->save();
                     $produto->movimentacao()->create([
-                        'quantidade_movimentada' =>  $osProduto->quantidade,
+                        'quantidade_movimentada' => $osProduto->quantidade,
                         'tipo_movimentacao' => 0,
                         'valor_custo' => $osProduto->valor_custo,
                         'estoque_antes' => ($produto->estoque + $osProduto->quantidade),
                         'estoque_apos' => $produto->estoque,
                         'os_id' => $os->id,
                         'os_produto_id' => $osProduto->id,
-                        'descricao' => 'OS Nº: #'. $os->id,
+                        'descricao' => 'OS Nº: #'.$os->id,
                     ]);
                 // Sem estoque
                 } else {
-                    $entrada = (-1*($produto->estoque - $osProduto->quantidade));
+                    $entrada = (-1 * ($produto->estoque - $osProduto->quantidade));
                     $produto->movimentacao()->create([
-                        'quantidade_movimentada' =>  $entrada,
+                        'quantidade_movimentada' => $entrada,
                         'tipo_movimentacao' => 1,
                         'valor_custo' => $osProduto->valor_custo,
-                        'estoque_antes' => ($produto->estoque),
+                        'estoque_antes' => $produto->estoque,
                         'estoque_apos' => ($produto->estoque + $entrada),
                         'os_id' => $os->id,
                         'os_produto_id' => $osProduto->id,
-                        'descricao' => 'OS Nº: #'. $os->id,
+                        'descricao' => 'OS Nº: #'.$os->id,
                     ]);
                     $produto->movimentacao()->create([
-                        'quantidade_movimentada' =>  $osProduto->quantidade,
+                        'quantidade_movimentada' => $osProduto->quantidade,
                         'tipo_movimentacao' => 0,
                         'valor_custo' => $osProduto->valor_custo,
                         'estoque_antes' => ($produto->estoque + $osProduto->quantidade),
                         'estoque_apos' => $produto->estoque,
                         'os_id' => $os->id,
                         'os_produto_id' => $osProduto->id,
-                        'descricao' => 'OS Nº: #'. $os->id,
+                        'descricao' => 'OS Nº: #'.$os->id,
                     ]);
                     $produto->estoque = 0;
                     $produto->valor_custo = $osProduto->valor_custo;
@@ -220,8 +221,8 @@ class OsController extends Controller
                     $dataQuitacao = null;
                 }
                 $fatura = $os->contas()->create([
-                    'tipo'=> 'R',
-                    'name'=> 'OS Nº: #'. $os->id,
+                    'tipo' => 'R',
+                    'name' => 'OS Nº: #'.$os->id,
                     'os_id' => $os->id,
                     'user_id' => auth()->id(),
                     'centro_custo_id' => $request->centro_custo_id,
@@ -233,7 +234,7 @@ class OsController extends Controller
                     'forma_pagamento_id' => getConfig('default_os_faturar_produto_despesa'),
                     'user_id' => auth()->id(),
                     'valor' => $request->valor_recebido,
-                    'vencimento' =>  $request->data_entrada,
+                    'vencimento' => $request->data_entrada,
                     'data_pagamento' => $request->data_recebimento,
                     'parcela' => 1,
                 ]);
@@ -242,8 +243,8 @@ class OsController extends Controller
             // Sem pagamento
             } else {
                 $fatura = $os->contas()->create([
-                    'tipo'=> 'R',
-                    'name'=> 'OS Nº: #'. $os->id,
+                    'tipo' => 'R',
+                    'name' => 'OS Nº: #'.$os->id,
                     'os_id' => $os->id,
                     'user_id' => auth()->id(),
                     'centro_custo_id' => $request->centro_custo_id,
@@ -254,43 +255,43 @@ class OsController extends Controller
                 $fatura_id = $fatura->id;
             }
 
-            if (isset($dataQuitacao) && !empty($dataQuitacao)) {
+            if (isset($dataQuitacao) && ! empty($dataQuitacao)) {
                 if (getConfig('default_os_faturar_pagto_quitado') != '') {
-                    $os->status_id =  getConfig('default_os_faturar_pagto_quitado');
+                    $os->status_id = getConfig('default_os_faturar_pagto_quitado');
                 }
             } else {
-                if (!$request->recebido) {
+                if (! $request->recebido) {
                     if (getConfig('default_os_faturar') != '') {
-                        $os->status_id =  getConfig('default_os_faturar');
+                        $os->status_id = getConfig('default_os_faturar');
                     }
-                }
-                else if (getConfig('default_os_faturar_pagto_parcial') != '') {
-                    $os->status_id =  getConfig('default_os_faturar_pagto_parcial');
+                } elseif (getConfig('default_os_faturar_pagto_parcial') != '') {
+                    $os->status_id = getConfig('default_os_faturar_pagto_parcial');
                 }
             }
             $os->valor_total = $os->valorTotal();
-            if (!$os->data_saida) {
+            if (! $os->data_saida) {
                 $os->data_saida = now();
             }
             $os->fatura_id = $fatura_id;
             $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $os->categoria_id);
             $os->save();
             DB::commit();
+
             return redirect()->route('os.edit', $os->id)
             ->with('success', 'Os Faturada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
-
     }
 
     /**
-     * Cancela o faturamento da os
+     * Cancela o faturamento da os.
      *
-     * @param OS $os
+     * @param  OS  $os
      */
-    function cancelarFaturamento(Os $os) {
+    function cancelarFaturamento(Os $os)
+    {
         DB::beginTransaction();
         try {
             foreach ($os->produtos as $osProduto) {
@@ -299,11 +300,11 @@ class OsController extends Controller
                 $movimentacoes = $movimentacoesModel->get();
                 foreach ($movimentacoes as $movimentacao) {
 
-                    if (($movimentacoes->count() > 1 )) {
+                    if ($movimentacoes->count() > 1 ) {
                         $produto->estoque = ($produto->estoque + $movimentacao->estoque_antes);
                         break;
                     }
-                    if (($movimentacoes->count() == 1 )) {
+                    if ($movimentacoes->count() == 1 ) {
                         $produto->estoque = ($produto->estoque + $movimentacao->quantidade_movimentada);
                         break;
                     }
@@ -317,6 +318,7 @@ class OsController extends Controller
             $os->save();
             $os->contas()->delete();
             DB::commit();
+
             return redirect()->route('os.edit', $os->id)
             ->with('success', 'Fatura cancelada com sucesso.');
         } catch (\Throwable $th) {
@@ -327,19 +329,22 @@ class OsController extends Controller
 
 
     /**
-     * REtorna o dia de vencimento com base na categoria selecionada
+     * REtorna o dia de vencimento com base na categoria selecionada.
      *
-     * @param string $data_saida Data de saida da os
-     * @param int $categoria_id id da categoria da os para gera os dias de garantia
+     * @param  string  $data_saida  Data de saida da os
+     * @param  int  $categoria_id  id da categoria da os para gera os dias de garantia
      * @return string|null retorna o dia de vendimento ou null caso nao exista
 
      **/
-    private function addDayGarantia($data_saida, $categoria_id) : string|null {
+    private function addDayGarantia($data_saida, $categoria_id): string|null
+    {
         $prazoEmDias = OsCategoria::find($categoria_id)->garantia?->prazo_garantia;
         if ($prazoEmDias) {
             $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_saida);
+
             return $dataGarantia->addDays($prazoEmDias)->format('Y-m-d');
         }
+
         return null;
     }
 }

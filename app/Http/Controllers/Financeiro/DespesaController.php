@@ -61,8 +61,8 @@ class DespesaController extends Controller
             $queryDespesa->WhereNull('data_quitacao');
         }
         $queryDespesa->orderBy('id', 'desc');
-
         $despesas = $queryDespesa->paginate(100);
+
         return view('financeiro.despesa.index', compact('despesas', 'request'));
     }
 
@@ -155,7 +155,6 @@ class DespesaController extends Controller
 
             return redirect()->route('financeiro.despesa.index')
             ->with('success', 'Despesa cadastrada com sucesso.');
-
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
