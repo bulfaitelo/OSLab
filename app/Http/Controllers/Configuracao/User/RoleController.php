@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Configuracao\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Models\Configuracao\User\PermissionsGroup;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-
     public function __construct()
     {
         // ACL DE PERMISSÕES
@@ -22,57 +21,48 @@ class RoleController extends Controller
         $this->middleware('permission:config_roles_destroy', ['only' => 'destroy']);
     }
 
-
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $roles = Role::orderBy('name', 'ASC')
         ->get();
+
         return view('configuracao.users.roles.index', compact('roles'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
         return view('configuracao.users.roles.create');
-
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'name' => 'required|alpha_dash|unique:roles'
         ]);
         $role = Role::create([
             'name' => $request->name,
             'description' => $request->description
-            ]);
+        ]);
         if ($role) {
             return redirect()->route('configuracao.roles.index')->with('success', 'Perfil cadastrado com Sucesso!'); ;
         }
-
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
     {
@@ -83,7 +73,6 @@ class RoleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
     {
@@ -95,12 +84,11 @@ class RoleController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $role = Role::findOrFail($id);
-        $request->validate ([
+        $request->validate([
             'name' => 'required|alpha_dash|unique:permissions,name,'.$role->id,
         ]);
         $role->name = $request->name;
@@ -114,7 +102,6 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
     {
@@ -128,7 +115,6 @@ class RoleController extends Controller
      * update permissions on role;
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function assign(Role $role) {
 
@@ -147,33 +133,24 @@ class RoleController extends Controller
             ->join('permissions_group', 'permissions_group.id', '=', 'permissions.group_id')
             ->distinct()
             ->get();
+
         return view('configuracao.users.roles.assign', compact('role', 'array_permissions', 'permissions', 'group', 'groups'));
     }
-
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function assign_update(Request $request, $id)
     {
         $role = Role::findOrFail($id);
-
-        $request->validate ([
+        $request->validate([
             'assign_id' => 'required|array'
-            ]);
-
-        // dd($request->assign_id);
-
+        ]);
         $role->syncPermissions(array_map(fn($val)=>(int)$val, $request->assign_id));
+
         return redirect()->route('configuracao.roles.assign', [$id])->with('success', 'Permissões Atualizadas!');
-
     }
-
-
-
 }

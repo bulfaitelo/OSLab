@@ -13,7 +13,7 @@ class SistemaConfigController extends Controller
         'd' => 'Diario',
         'w' => 'Semanal',
         'm' => 'Mensal',
-        'y' => 'Anual'
+        'y' => 'Anual',
     ];
 
     public function __construct()
@@ -29,23 +29,16 @@ class SistemaConfigController extends Controller
     public function index()
     {
         $configuracoes = SistemaConfig::get();
+
         return view('configuracao.sistema.index', [
             'configuracoes' => $configuracoes,
             'recorrenciaBackup' => $this->recorrenciaBackup,
         ]);
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(StoreSistemaConfigRequest $request)
     {
         // dd($request->input());

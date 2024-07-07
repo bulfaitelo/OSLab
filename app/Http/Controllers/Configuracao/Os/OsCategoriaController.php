@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OsCategoriaController extends Controller
 {
-
     public function __construct()
     {
         // ACL DE PERMISSÕES
@@ -58,7 +57,6 @@ class OsCategoriaController extends Controller
 
             return redirect()->route('configuracao.os.categoria.index')
             ->with('success', 'Categoria criada com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -109,6 +107,7 @@ class OsCategoriaController extends Controller
     {
         try {
             $categoria->delete();
+
             return redirect()->route('configuracao.os.categoria.index')
                 ->with('success', 'Categoria excluida com sucesso.');
         } catch (\Throwable $th) {

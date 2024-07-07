@@ -20,63 +20,45 @@ class PermissionsController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
         $permissions = ExtendsPermissions::orderBy('name', 'ASC')
         // $permissions = Permission::orderBy('name', 'ASC')
         ->paginate('30');
+
         return view('configuracao.users.roles.permissions.index', compact('permissions'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
         return view('configuracao.users.roles.permissions.create');
-
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'name' => 'required|alpha_dash|unique:permissions',
             'group' => 'required|integer',
         ]);
         $permission = Permission::create([
             'name' => $request->name,
             'description' => $request->description,
-            'group_id' => $request->group
-            ]);
+            'group_id' => $request->group,
+        ]);
         if ($permission) {
             return redirect()->route('configuracao.permissions.index')
-            ->with('success', 'Permissão cadastrada com Sucesso!'); ;
+            ->with('success', 'Permissão cadastrada com Sucesso!');
         }
     }
-
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -94,11 +76,10 @@ class PermissionsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Permission $permission)
     {
-        $request->validate ([
+        $request->validate([
             'name' => 'required|alpha_dash|unique:permissions,name,'.$permission->id,
             'group' => 'required|integer',
         ]);
@@ -107,16 +88,14 @@ class PermissionsController extends Controller
         $permission->group_id = $request->group;
         if ($permission->save()) {
             return redirect()->route('configuracao.permissions.edit', $permission->id)
-            ->with('success', 'Permissão atualizada!'); ;
+            ->with('success', 'Permissão atualizada!');
         }
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Permission $permission)
     {
@@ -125,6 +104,5 @@ class PermissionsController extends Controller
             return redirect()->route('configuracao.permissions.index')
             ->with('success', 'Permissão Excluida com Sucesso!'); ;
         }
-
     }
 }

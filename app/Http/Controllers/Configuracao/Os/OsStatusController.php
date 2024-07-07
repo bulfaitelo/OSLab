@@ -48,7 +48,6 @@ class OsStatusController extends Controller
         $status = OsStatus::paginate(100);
 
         return view('configuracao.os.status.index', compact('status'));
-
     }
 
     /**
