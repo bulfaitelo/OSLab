@@ -42,7 +42,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function ()
+    {
     if (!Auth::guest()) {
 		return redirect('/home');
 	} else {
@@ -50,7 +51,8 @@ Route::get('/', function () {
 	}
 });
 
-Route::get('/live-test', function () {
+Route::get('/live-test', function ()
+    {
     return view('teste');
 })->name('teste');
 
@@ -58,7 +60,8 @@ route::resource('teste', TestController::class);
 
 Auth::routes();
 
-Route::group(['middleware'=> 'auth'], function() {
+Route::group(['middleware'=> 'auth'], function()
+    {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/buscar', [App\Http\Controllers\BuscarController::class, 'index'])->name('buscar');
@@ -70,7 +73,8 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::resource('/produto/{produto}/movimentacao', MovimentacaoController::class);
 
     // Financeiro
-    Route::name('financeiro.')->prefix('financeiro')->group( function () {
+    Route::name('financeiro.')->prefix('financeiro')->group( function ()
+    {
         Route::resource('/despesa', DespesaController::class);
         Route::put('/despesa/{despesa}/pagamento/{pagamento}', [DespesaPagamentoController::class, 'update'])->name('despesa.pagamento.update');
         Route::post('/despesa/{despesa}/pagamento/', [DespesaPagamentoController::class, 'store'])->name('despesa.pagamento.store');
@@ -106,17 +110,21 @@ Route::group(['middleware'=> 'auth'], function() {
 
 
     // Agrupamento de rotas de Relatório
-    Route::name('relatorio.')->prefix('relatorio')->group( function () {
+    Route::name('relatorio.')->prefix('relatorio')->group( function ()
+    {
         // Financeiro
-        Route::name('financeiro.')->prefix('financeiro')->group( function () {
+        Route::name('financeiro.')->prefix('financeiro')->group( function ()
+    {
             Route::get('/balancete', [BalanceteController::class, 'index'])->name('balancete.index');
         });
 
         // // OS
-        // Route::name('os.')->prefix('os')->group( function () {
+        // Route::name('os.')->prefix('os')->group( function ()
+    {
 
         // });
-        // Route::name('wiki.')->prefix('wiki')->group( function () {
+        // Route::name('wiki.')->prefix('wiki')->group( function ()
+    {
 
         // });
 
@@ -124,7 +132,8 @@ Route::group(['middleware'=> 'auth'], function() {
     });
 
     // Agrupamento de rotas de Configuração
-    Route::name('configuracao.')->prefix('configuracoes')->group( function () {
+    Route::name('configuracao.')->prefix('configuracoes')->group( function ()
+    {
         Route::resource('/users', UserController::class);
         Route::resource('/roles', RoleController::class);
         Route::resource('/permissions', PermissionsController::class);
@@ -133,26 +142,30 @@ Route::group(['middleware'=> 'auth'], function() {
         Route::get('/users/permissions/{user}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{user}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
         // Configurações de usuário
-        Route::name('user.')->prefix('user')->group( function () {
+        Route::name('user.')->prefix('user')->group( function ()
+    {
             Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
             Route::get('/perfil/edit', [PerfilController::class, 'edit'])->name('perfil.edit');
             Route::put('/perfil/update', [PerfilController::class, 'update'])->name('perfil.update');
             Route::resource('/setor', SetorController::class);
         });
         // Financeiro
-        Route::name('financeiro.')->prefix('financeiro')->group( function () {
+        Route::name('financeiro.')->prefix('financeiro')->group( function ()
+    {
             Route::resource('/centro_custo', CentroCustoController::class);
             Route::resource('/forma_pagamento', FormaPagamentoController::class);
         });
         // OS
-        Route::name('os.')->prefix('os')->group( function () {
+        Route::name('os.')->prefix('os')->group( function ()
+    {
             Route::resource('/garantia', GarantiaController::class)
                 ->parameters(['garantia' => 'garantia']);
             Route::resource('/categoria', OsCategoriaController::class)
                 ->parameters(['categoria' => 'categoria']);
             Route::resource('/status', OsStatusController::class);
         });
-        Route::name('wiki.')->prefix('wiki')->group( function () {
+        Route::name('wiki.')->prefix('wiki')->group( function ()
+    {
             Route::resource('/fabricante', FabricanteController::class);
             Route::resource('/modelo', ModeloController::class);
         });

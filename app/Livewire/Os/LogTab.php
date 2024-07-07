@@ -15,7 +15,8 @@ class LogTab extends Component
 
 
     #[On('showLogTab')]
-    public function showLogTab() {
+    public function showLogTab()
+    {
 
         $this->showDisplay = true;
     }

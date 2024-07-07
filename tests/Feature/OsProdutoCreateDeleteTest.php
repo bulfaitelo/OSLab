@@ -114,7 +114,8 @@ class OsProdutoCreateDeleteTest extends TestCase
         // $this->assertDatabaseMissing('os_produtos', $expected);
     }
 
-    public static function osProdutoData(): array {
+    public static function osProdutoData(): array
+    {
         $data['001'] = [
             // $data
             [

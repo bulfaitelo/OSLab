@@ -59,7 +59,8 @@ class OsUpdateTest extends TestCase
     /**
      * DadaProvider
      */
-    public static function osCreateData(): array {
+    public static function osCreateData(): array
+    {
         $data['os_001'] = [
             // Send
             [

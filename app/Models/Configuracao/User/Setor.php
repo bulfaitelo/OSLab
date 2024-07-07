@@ -23,7 +23,8 @@ class Setor extends Model
      *
      * @var array
      */
-    public function users() {
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
 

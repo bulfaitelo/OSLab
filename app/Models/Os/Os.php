@@ -170,7 +170,8 @@ class Os extends Model
      * Retorna o Checklist da OS, montado pronto para ser carregado na blade.
      * @return string html
      **/
-    public function getHtmlChecklist() {
+    public function getHtmlChecklist()
+    {
         $html = new CreateHtmlChecklist($this->categoria->checklist, $this->checklist);
         return $html->render();
     }
@@ -182,7 +183,8 @@ class Os extends Model
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2
      * @return array Categoria
      **/
-    public function getClienteForSelect(): array {
+    public function getClienteForSelect(): array
+    {
         if ($this->cliente_id) {
             return [
                 'id' => $this->cliente_id,
@@ -200,7 +202,8 @@ class Os extends Model
      * Retorna um vetor com o o id e o técnico para ser usado no Select2
      * @return array Categoria
      **/
-    public function getTecnicoForSelect(): array {
+    public function getTecnicoForSelect(): array
+    {
         if ($this->tecnico_id) {
             return [
                 'id' => $this->tecnico_id,
@@ -218,7 +221,8 @@ class Os extends Model
      * Retorna um vetor com o o id e o Modelo para ser usado no Select2
      * @return array Categoria
      **/
-    public function getModeloForSelect(): array {
+    public function getModeloForSelect(): array
+    {
         if ($this->modelo_id) {
             return [
                 'id' => $this->modelo_id,
@@ -246,7 +250,8 @@ class Os extends Model
      *
      * @return int|null,
      */
-    function centroCustoPadrao() {
+    function centroCustoPadrao()
+    {
         return $this->categoria->centroCusto?->id;
     }
 
@@ -274,7 +279,8 @@ class Os extends Model
      *
      * @return array
      **/
-    public function getOsLogs() {
+    public function getOsLogs()
+    {
         $log = [];
         $statusLog = $this->statusLogs()->orderByDesc('created_at')->get();
         foreach ($statusLog as $status) {
@@ -312,7 +318,8 @@ class Os extends Model
      *
      * @return array
      **/
-    public function balancete(): array {
+    public function balancete(): array
+    {
 
         $array_balancete['total_credito_previsto'] = 0;
         $array_balancete['total_debito_previsto'] = 0;

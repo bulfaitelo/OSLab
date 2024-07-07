@@ -39,25 +39,29 @@ class Contas extends Model
     /**
      * Relacionamento com os Pagamentos
      */
-    public function pagamentos () {
+    public function pagamentos ()
+    {
         return $this->hasMany(Pagamentos::class, 'conta_id');
     }
 
     /**
      * Relacionamento com o Cliente
      */
-    public function cliente() {
+    public function cliente()
+    {
         return $this->belongsTo(Cliente::class);
     }
 
     /**
      * Relacionamento com o Centro de Custo
      */
-    public function centroCusto() {
+    public function centroCusto()
+    {
         return $this->belongsTo(CentroCusto::class);
     }
 
-    public function getVencimentoDate() {
+    public function getVencimentoDate()
+    {
 
         if ($this->pagamentos->count() > 0) {
             $data = new Carbon($this->pagamentos()->select('vencimento')->first()->vencimento);
@@ -73,7 +77,8 @@ class Contas extends Model
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2
      * @return array Categoria
      **/
-    public function getClienteForSelect(): array {
+    public function getClienteForSelect(): array
+    {
         if ($this->cliente_id) {
             return [
                 'id' => $this->cliente_id,

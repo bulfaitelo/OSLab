@@ -39,7 +39,8 @@ class Backup extends Component
      * Retorna a lista de backup
      *
      */
-    private function getBackupInfo(): array {
+    private function getBackupInfo(): array
+    {
 
         $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
         $info = [];

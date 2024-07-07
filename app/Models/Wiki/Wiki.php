@@ -17,19 +17,23 @@ class Wiki extends Model
     use HasFactory;
 
 
-    public function fabricante() {
+    public function fabricante()
+    {
         return $this->belongsTo(Fabricante::class);
     }
 
-    public function modelos () {
+    public function modelos ()
+    {
         return $this->hasMany(Modelo::class);
     }
 
-    public function links () {
+    public function links ()
+    {
         return $this->hasMany(Link::class);
     }
 
-    public function files () {
+    public function files ()
+    {
         return $this->hasMany(File::class);
     }
 
@@ -43,7 +47,8 @@ class Wiki extends Model
         return $this->belongsTo(OsCategoria::class);
     }
 
-    public function os () {
+    public function os ()
+    {
         return $this->hasManyThrough(
             Os::class,
             Modelo::class,
@@ -91,7 +96,8 @@ class Wiki extends Model
 
 
 
-    public function modelosTitle() {
+    public function modelosTitle()
+    {
         $return = "";
         foreach ($this->modelos as $value) {
             $return.= $value->name.', ';

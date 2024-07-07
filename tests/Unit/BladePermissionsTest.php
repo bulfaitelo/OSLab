@@ -108,7 +108,8 @@ class BladePermissionsTest extends TestCase
      *
      * @return void
      */
-    public function test_blade_permission_vs_database_permission() {
+    public function test_blade_permission_vs_database_permission()
+    {
 
         $erro = false;
         $output_erro = '';

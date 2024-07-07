@@ -107,7 +107,8 @@ class OsServicoCreateDeleteTest extends TestCase
         // $this->assertDatabaseMissing('os_servicos', $expected);
     }
 
-    public static function osServicoData(): array {
+    public static function osServicoData(): array
+    {
         $data['001'] = [
             // $data
             [

@@ -16,7 +16,8 @@ class AddPagamentoModal extends Component
     /**
      * Rules
      */
-    protected function rules(): array {
+    protected function rules(): array
+    {
         return [
             'pagamento_valor' => 'required|numeric|min:0|not_in:0',
             'data_pagamento' => 'required|date',
@@ -37,12 +38,14 @@ class AddPagamentoModal extends Component
     /**
      * Carrega Model de Adicionar Pagamento
      */
-    function loadAdicionarPagamento() {
+    function loadAdicionarPagamento()
+    {
         // dd($this->os->contas->where('tipo', 'R'));
         $this->dispatch('toggleAddPagamentoModal');
     }
 
-    function mount() {
+    function mount()
+    {
         $this->data_pagamento = now()->format('Y-m-d');
     }
 

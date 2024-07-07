@@ -13,7 +13,8 @@ class BalanceteTab extends Component
 
 
     #[On('showBalanceteTab')]
-    public function showBalanceteTab() {
+    public function showBalanceteTab()
+    {
         $this->showDisplay = true;
     }
 

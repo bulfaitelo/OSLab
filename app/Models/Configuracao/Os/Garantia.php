@@ -18,7 +18,8 @@ class Garantia extends Model
      *
      * @var array
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

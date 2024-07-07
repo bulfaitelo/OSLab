@@ -17,7 +17,8 @@ class OsCategoria extends Model
      *
      * @var array
      */
-    public function garantia() {
+    public function garantia()
+    {
         return $this->belongsTo(Garantia::class);
     }
 
@@ -26,7 +27,8 @@ class OsCategoria extends Model
      *
      * @var array
      */
-    public function checklist() {
+    public function checklist()
+    {
         return $this->belongsTo(Checklist::class);
     }
 
@@ -36,7 +38,8 @@ class OsCategoria extends Model
      *
      * @var array
      */
-    public function centroCusto() {
+    public function centroCusto()
+    {
         return $this->belongsTo(CentroCusto::class);
     }
 }

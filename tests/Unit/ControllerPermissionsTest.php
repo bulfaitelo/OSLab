@@ -94,7 +94,8 @@ class ControllerPermissionsTest extends TestCase
      *
      * @return void
      */
-    public function test_check_controller_methods_and_permissions() {
+    public function test_check_controller_methods_and_permissions()
+    {
         $output = "\n\033[1;39mErro de permissão no Controller:\033[0m\n";
         $outputError="";
         $erroCount = 0;
@@ -147,7 +148,8 @@ class ControllerPermissionsTest extends TestCase
      *
      * @return void
      */
-    public function test_check_controller_methods_without_permissions() {
+    public function test_check_controller_methods_without_permissions()
+    {
         $output = "\n\033[1;39mErro de Controllers que não tem permissão definida:\033[0m\n";
         $outputError="";
         $erroCount = 0;
@@ -187,7 +189,8 @@ class ControllerPermissionsTest extends TestCase
      * @return void
      */
 
-     public function test_check_controller_without_methods() {
+     public function test_check_controller_without_methods()
+    {
         $output = "\n\033[1;39mErro de Controller que não tem metodos definidos:\033[0m\n";
         $outputError="";
         $erroCount = 0;

@@ -14,11 +14,13 @@ class Modelo extends Model
     protected $table = 'wiki_models';
 
 
-    public function wiki() {
+    public function wiki()
+    {
         return $this->belongsTo(Wiki::class);
     }
 
-    public function os() {
+    public function os()
+    {
         return $this->hasMany(Os::class);
     }
 }

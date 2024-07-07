@@ -15,7 +15,8 @@ class ServicoTab extends Component
     public $servico_id;
     public $quantidade;
 
-    protected function rules() {
+    protected function rules()
+    {
         return [
             'servico_id' => 'required|exists:servicos,id',
             'quantidade' => 'required|numeric|min:0|not_in:0',
