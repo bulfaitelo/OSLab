@@ -26,7 +26,6 @@ class CentroCustoController extends Controller
         $centroCusto = CentroCusto::paginate(100);
 
         return view('configuracao.financeiro.centro_custo.index', compact('centroCusto'));
-
     }
 
     /**
@@ -79,7 +78,6 @@ class CentroCustoController extends Controller
         $centroCusto->receita = $request->receita;
         $centroCusto->despesa = $request->despesa;
         if ($centroCusto->save()) {
-
             return redirect()->route('configuracao.financeiro.centro_custo.index')
             ->with('success', 'Centro de atualizado com sucesso.');
         }

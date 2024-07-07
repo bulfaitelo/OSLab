@@ -95,6 +95,7 @@ class FormaPagamentoController extends Controller
     {
         try {
             $formaPagamento->delete();
+
             return redirect()->route('configuracao.financeiro.forma_pagamento.index')
                 ->with('success', 'Forma de pagamento excluída com sucesso.');
         } catch (\Throwable $th) {

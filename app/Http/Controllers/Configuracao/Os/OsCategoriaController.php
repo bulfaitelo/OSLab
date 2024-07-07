@@ -18,7 +18,6 @@ class OsCategoriaController extends Controller
         $this->middleware('permission:config_os_categoria_show', ['only' => 'show']);
         $this->middleware('permission:config_os_categoria_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:config_os_categoria_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -29,6 +28,7 @@ class OsCategoriaController extends Controller
         $categoria = OsCategoria::with('garantia')
                 ->with('centroCusto')
                 ->paginate(100);
+
         return view('configuracao.os.categoria.index', compact('categoria'));
     }
 
@@ -37,7 +37,7 @@ class OsCategoriaController extends Controller
      */
     public function create()
     {
-       return view('configuracao.os.categoria.create');
+        return view('configuracao.os.categoria.create');
     }
 
     /**
@@ -55,6 +55,7 @@ class OsCategoriaController extends Controller
             $categoria->checklist_id = $request->checklist_id;
             $categoria->checklist_required = $request->checklist_required;
             $categoria->save();
+
             return redirect()->route('configuracao.os.categoria.index')
             ->with('success', 'Categoria criada com sucesso.');
 
@@ -68,7 +69,7 @@ class OsCategoriaController extends Controller
      */
     public function show(OsCategoria $categoria)
     {
-       return view('configuracao.os.categoria.show', compact('categoria'));
+        return view('configuracao.os.categoria.show', compact('categoria'));
     }
 
     /**
@@ -76,7 +77,7 @@ class OsCategoriaController extends Controller
      */
     public function edit(OsCategoria $categoria)
     {
-       return view('configuracao.os.categoria.edit', compact('categoria'));
+        return view('configuracao.os.categoria.edit', compact('categoria'));
     }
 
     /**
@@ -93,9 +94,9 @@ class OsCategoriaController extends Controller
             $categoria->checklist_id = $request->checklist_id;
             $categoria->checklist_required = $request->checklist_required;
             $categoria->save();
+
             return redirect()->route('configuracao.os.categoria.index')
             ->with('success', 'Categoria atualizada com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -110,7 +111,6 @@ class OsCategoriaController extends Controller
             $categoria->delete();
             return redirect()->route('configuracao.os.categoria.index')
                 ->with('success', 'Categoria excluida com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }

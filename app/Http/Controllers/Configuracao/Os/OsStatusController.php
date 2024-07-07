@@ -9,6 +9,7 @@ use App\Models\Configuracao\Os\OsStatus;
 class OsStatusController extends Controller
 {
     public $corArray;
+
     public function __construct()
     {
         // ACL DE PERMISSÕES
@@ -37,7 +38,6 @@ class OsStatusController extends Controller
             'bg-teal',
             'bg-olive',
         ];
-
     }
 
     /**
@@ -46,6 +46,7 @@ class OsStatusController extends Controller
     public function index()
     {
         $status = OsStatus::paginate(100);
+
         return view('configuracao.os.status.index', compact('status'));
 
     }
@@ -56,6 +57,7 @@ class OsStatusController extends Controller
     public function create()
     {
         $cor_array = $this->corArray;
+
         return view('configuracao.os.status.create', compact('cor_array'));
     }
 
@@ -73,6 +75,7 @@ class OsStatusController extends Controller
             $status->prazo_email = $request->prazo_email;
             $status->ativar_rastreio = $request->ativar_rastreio;
             $status->save();
+
             return redirect()->route('configuracao.os.status.index')
             ->with('success', 'Status criado com sucesso.');
         } catch (\Throwable $th) {
@@ -86,6 +89,7 @@ class OsStatusController extends Controller
     public function show(OsStatus $status)
     {
         $cor_array = $this->corArray;
+
         return view('configuracao.os.status.show', compact('status', 'cor_array'));
     }
 
@@ -95,6 +99,7 @@ class OsStatusController extends Controller
     public function edit(OsStatus $status)
     {
         $cor_array = $this->corArray;
+
         return view('configuracao.os.status.edit', compact('status', 'cor_array'));
     }
 
@@ -111,6 +116,7 @@ class OsStatusController extends Controller
             $status->prazo_email = $request->prazo_email;
             $status->ativar_rastreio = $request->ativar_rastreio;
             $status->save();
+
             return redirect()->route('configuracao.os.status.index')
             ->with('success', 'Status atualizado com sucesso.');
         } catch (\Throwable $th) {
@@ -125,9 +131,9 @@ class OsStatusController extends Controller
     {
         try {
             $status->delete();
+
             return redirect()->route('configuracao.os.status.index')
                 ->with('success', 'Status excluído com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }

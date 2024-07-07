@@ -42,7 +42,6 @@ class GarantiaController extends Controller
      */
     public function store(StoreUpdateGarantiaRequest $request)
     {
-
         try {
             $garantia = new Garantia();
             $garantia->name = $request->name;
@@ -53,7 +52,6 @@ class GarantiaController extends Controller
 
             return redirect()->route('configuracao.os.garantia.index')
             ->with('success', 'Garantia criada com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -89,7 +87,6 @@ class GarantiaController extends Controller
 
             return redirect()->route('configuracao.os.garantia.index')
             ->with('success', 'Garantia atualizada com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -105,7 +102,6 @@ class GarantiaController extends Controller
 
             return redirect()->route('configuracao.os.garantia.index')
                 ->with('success', 'Garantia excluida com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }

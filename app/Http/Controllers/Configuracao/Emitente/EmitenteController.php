@@ -28,7 +28,6 @@ class EmitenteController extends Controller
     {
         $emitente = Emitente::find(1);
         if (! $emitente) {
-
             return redirect()->route('configuracao.emitente.create');
         }
 
@@ -131,7 +130,6 @@ class EmitenteController extends Controller
 
             return redirect()->route('configuracao.emitente.edit', [$emitente])
             ->with('success', 'Emitente atualizado com sucesso.');
-
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
