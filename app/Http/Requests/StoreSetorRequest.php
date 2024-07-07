@@ -22,14 +22,14 @@ class StoreSetorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'setor' => 'required'
+            'setor' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-         'setor.required' => 'O campo Setor é obrigatório'
+            'setor.required' => 'O campo Setor é obrigatório'
         ];
     }
 }

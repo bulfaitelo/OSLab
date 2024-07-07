@@ -50,5 +50,5 @@ class UpdateContaPagamentoRequest extends FormRequest
             'data_pagamento' => 'A data de pagamento é obrigatória',
             'forma_pagamento_id' => 'A forma de pagamento é obrigatória',
         ];
-   }
+    }
 }

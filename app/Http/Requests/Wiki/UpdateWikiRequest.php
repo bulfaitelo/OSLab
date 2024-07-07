@@ -31,10 +31,10 @@ class UpdateWikiRequest extends FormRequest
     public function messages(): array
     {
         return [
-           'fabricante_id' => 'O Fabricante é obrigatório',
-           'name' => 'O nome do dispositivo é obrigatório',
-           'name.unique' => 'O nome do dispositivo já está em uso!',
-           'modelo' => 'O modelo é obrigatório',
+            'fabricante_id' => 'O Fabricante é obrigatório',
+            'name' => 'O nome do dispositivo é obrigatório',
+            'name.unique' => 'O nome do dispositivo já está em uso!',
+            'modelo' => 'O modelo é obrigatório',
         ];
     }
 }

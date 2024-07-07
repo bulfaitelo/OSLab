@@ -14,17 +14,18 @@ class ShowCliente extends Component
         if ($this->showTab == 'detalhes') {
             return view('livewire.cliente.show-cliente', [
                 'cliente' => $this->cliente,
-                'showTab' => $this->showTab
+                'showTab' => $this->showTab,
             ]);
         } else if ($this->showTab == 'os') {
             return view('livewire.cliente.show-cliente-os', [
                 'os' => $this->cliente->os,
-                'showTab' => $this->showTab
+                'showTab' => $this->showTab,
             ]);
         }
     }
 
-    public function tabChange($tab): void {
+    public function tabChange($tab): void
+    {
         $this->showTab = $tab;
     }
 }

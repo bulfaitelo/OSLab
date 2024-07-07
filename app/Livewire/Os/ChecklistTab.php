@@ -28,7 +28,8 @@ class ChecklistTab extends Component
     }
 
 
-    public function submit($formData): void {
+    public function submit($formData): void
+    {
         DB::beginTransaction();
         try {
             parse_str($formData, $dataArray);

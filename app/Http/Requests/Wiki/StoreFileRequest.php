@@ -22,19 +22,16 @@ class StoreFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'arquivo_import' => 'required|file|max:20000|mimes:zip,bin,rar,pdf'
+            'arquivo_import' => 'required|file|max:20000|mimes:zip,bin,rar,pdf',
         ];
     }
-
 
     public function messages(): array
     {
         return [
-           'arquivo_import.required' => 'o arquivo é obrigatório!',
-           'arquivo_import.max' => 'o tamanho máximo de envio é de 20Mb!',
-           'arquivo_import.mimes' => 'os arquivos suportados são: .zip, .bin, .rar, .pdf !',
+            'arquivo_import.required' => 'o arquivo é obrigatório!',
+            'arquivo_import.max' => 'o tamanho máximo de envio é de 20Mb!',
+            'arquivo_import.mimes' => 'os arquivos suportados são: .zip, .bin, .rar, .pdf !',
         ];
     }
-
-
 }

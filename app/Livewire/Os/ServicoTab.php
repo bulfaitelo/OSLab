@@ -51,7 +51,8 @@ class ServicoTab extends Component
         }
     }
 
-    public function create(): void {
+    public function create(): void
+    {
         $servico = $this->validate();
         if ($this->os->fatura_id) {
             // Apagando o produto digitado.

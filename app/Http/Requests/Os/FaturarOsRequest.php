@@ -46,10 +46,10 @@ class FaturarOsRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'valor_recebido'=> 'Por favor preencha o valor recebido, caso houver pagamento',
+            'valor_recebido' => 'Por favor preencha o valor recebido, caso houver pagamento',
             'forma_pagamento_id' => 'Por favor forma de pagamento, caso houver pagamento',
-            'data_recebimento'=> 'Por favor data de recebimento, caso houver pagamento',
+            'data_recebimento' => 'Por favor data de recebimento, caso houver pagamento',
             'centro_custo_id' => 'Por favor selecione um centro de custo',
-       ];
+        ];
     }
 }

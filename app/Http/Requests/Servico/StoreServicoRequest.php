@@ -23,7 +23,7 @@ class StoreServicoRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:servicos',
-            'valor_servico' => 'required|numeric|min:0|not_in:0'
+            'valor_servico' => 'required|numeric|min:0|not_in:0',
         ];
     }
 
@@ -34,7 +34,7 @@ class StoreServicoRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'valor_servico' => str_replace(',', '.', str_replace('.','', $this->valor_servico))
+            'valor_servico' => str_replace(',', '.', str_replace('.', '', $this->valor_servico))
         ]);
     }
 

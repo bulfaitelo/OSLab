@@ -2,27 +2,19 @@
 
 namespace App\Livewire\Configuracao\Backup;
 
-
-use App\Models\Servico\Servico;
 use Livewire\Component;
-use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
-use Spatie\Backup\Helpers\Format;
 use Spatie\Backup\BackupDestination\Backup as SpatieBackup;
-
+use Spatie\Backup\Helpers\Format;
+use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 
 class Backup extends Component
 {
-
     public $readyToLoad = false;
-
-
 
     public function loadBackups()
     {
         $this->readyToLoad = true;
     }
-
-
 
     public function render()
     {
@@ -33,15 +25,11 @@ class Backup extends Component
         ]);
     }
 
-
-
     /**
      * Retorna a lista de backup
-     *
      */
     private function getBackupInfo(): array
     {
-
         $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
         $info = [];
         foreach ($statuses as $status) {
@@ -78,16 +66,15 @@ class Backup extends Component
             : Format::ageInDays($backup->date());
     }
 
-
     /**
      * Retorna o caminho no backup com base no disco e arquivo.
-     * @param string $disk Disco onde está o arquivo
-     * @param string $fileName nome do arquivo
+     * @param  string  $disk  Disco onde está o arquivo
+     * @param  string  $fileName  nome do arquivo
      * @return string|false retorna o caminho completo ou false caso nao exista
 
     */
-    protected function getFilePAth($disk, $fileName): string|false {
-
+    protected function getFilePAth($disk, $fileName): string|false
+    {
         $path = 'filesystems.disks.'.$disk.'.root';
         $filePath = config($path).'/'.$fileName;
         if (file_exists($filePath)) {

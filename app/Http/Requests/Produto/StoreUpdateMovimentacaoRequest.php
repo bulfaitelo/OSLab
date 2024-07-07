@@ -22,26 +22,25 @@ class StoreUpdateMovimentacaoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'estoque'   => 'required|numeric',
+            'estoque' => 'required|numeric',
             'valor_custo' => 'nullable|numeric|min:0|not_in:0',
         ];
     }
 
-        /**
+    /**
      * Prepare the data for validation.
      */
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'valor_custo' => ($this->valor_custo) ? str_replace(',', '.', str_replace('.','', $this->valor_custo)) : null,
+            'valor_custo' => ($this->valor_custo) ? str_replace(',', '.', str_replace('.', '', $this->valor_custo)) : null,
         ]);
     }
-
 
     public function messages(): array
     {
         return [
-           'estoque.required' => 'A quantidade de entrada obrigatória',
+            'estoque.required' => 'A quantidade de entrada obrigatória',
         ];
     }
 }

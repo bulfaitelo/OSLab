@@ -34,7 +34,7 @@ class UpdateOsRequest extends FormRequest
 
     public function messages(): array
     {
-       return [
+        return [
             'cliente_id' => 'Por favor preencha um cliente valido',
             'tecnico_id' => 'Por favor preencha um técnico valido',
             'categoria_id' => 'Por favor preencha uma categoria valida',
@@ -42,6 +42,6 @@ class UpdateOsRequest extends FormRequest
             'status_id' => 'Por favor preencha um status valido',
             'data_entrada' => 'Por favor preencha uma data de entrada valida',
             'data_saida' => 'Por favor preencha uma data de saída valida',
-       ];
+        ];
     }
 }
