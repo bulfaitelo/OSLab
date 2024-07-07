@@ -102,7 +102,7 @@ class PermissionsController extends Controller
         $permission->delete();
         if ($permission) {
             return redirect()->route('configuracao.permissions.index')
-            ->with('success', 'Permissão Excluida com Sucesso!'); ;
+            ->with('success', 'Permissão Excluida com Sucesso!');
         }
     }
 }

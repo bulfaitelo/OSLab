@@ -48,14 +48,14 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|alpha_dash|unique:roles'
+            'name' => 'required|alpha_dash|unique:roles',
         ]);
         $role = Role::create([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
         ]);
         if ($role) {
-            return redirect()->route('configuracao.roles.index')->with('success', 'Perfil cadastrado com Sucesso!'); ;
+            return redirect()->route('configuracao.roles.index')->with('success', 'Perfil cadastrado com Sucesso!');
         }
     }
 
@@ -94,7 +94,7 @@ class RoleController extends Controller
         $role->name = $request->name;
         $role->description = $request->description;
         if ($role->save()) {
-            return redirect()->route('configuracao.roles.edit', [$id])->with('success', 'Perfil atualizado!'); ;
+            return redirect()->route('configuracao.roles.edit', [$id])->with('success', 'Perfil atualizado!');
         }
     }
 
@@ -107,17 +107,17 @@ class RoleController extends Controller
     {
         $role->delete();
         if ($role) {
-            return redirect()->route('configuracao.roles.index')->with('success', 'Perfil Excluído com Sucesso!'); ;
+            return redirect()->route('configuracao.roles.index')->with('success', 'Perfil Excluído com Sucesso!');
         }
     }
 
     /**
-     * update permissions on role;
+     * Update permissions on role.
      *
      * @param  int  $id
      */
-    public function assign(Role $role) {
-
+    public function assign(Role $role)
+    {
         $group = PermissionsGroup::class;
         $permissions = Permission::class;
         $array_temp = $role->permissions;
@@ -125,7 +125,7 @@ class RoleController extends Controller
             $array_permissions[] = $value['id'];
         }
         // Gambi pratica!
-        if (!is_array($array_temp)) {
+        if (! is_array($array_temp)) {
             $array_permissions[] = 0;
         }
         $groups = Permission::select('permissions.group_id', 'permissions_group.name')
@@ -147,9 +147,9 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $request->validate([
-            'assign_id' => 'required|array'
+            'assign_id' => 'required|array',
         ]);
-        $role->syncPermissions(array_map(fn($val)=>(int)$val, $request->assign_id));
+        $role->syncPermissions(array_map(fn ($val) => (int)$val, $request->assign_id));
 
         return redirect()->route('configuracao.roles.assign', [$id])->with('success', 'Permissões Atualizadas!');
     }

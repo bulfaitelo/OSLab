@@ -64,29 +64,4 @@ class SistemaConfigController extends Controller
             throw $th;
         }
     }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(SistemaConfig $sistemaConfig)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    // public function edit(SistemaConfig $sistemaConfig)
-    // {
-    //     //
-    // }
-
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(SistemaConfig $sistemaConfig)
-    // {
-    //     //
-    // }
 }
