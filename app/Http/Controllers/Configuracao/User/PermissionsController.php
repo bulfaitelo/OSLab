@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Configuracao\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Configuracao\User\ExtendsPermissions;
+use App\Models\Configuracao\User\ExtendedPermission;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -23,7 +23,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        $permissions = ExtendsPermissions::orderBy('name', 'ASC')
+        $permissions = ExtendedPermission::orderBy('name', 'ASC')
         // $permissions = Permission::orderBy('name', 'ASC')
         ->paginate('30');
 

@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Permission;
 /**
  * Estendendo a classe permissions, para adicionar novas funções.
  */
-class ExtendsPermissions extends Permission
+class  ExtendedPermission extends Permission
 {
     function group(): BelongsTo {
         return $this->belongsTo(PermissionsGroup::class);
