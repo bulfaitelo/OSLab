@@ -110,21 +110,17 @@ Route::group(['middleware'=> 'auth'], function()
 
 
     // Agrupamento de rotas de Relatório
-    Route::name('relatorio.')->prefix('relatorio')->group( function ()
-    {
+    Route::name('relatorio.')->prefix('relatorio')->group( function () {
         // Financeiro
-        Route::name('financeiro.')->prefix('financeiro')->group( function ()
-    {
+        Route::name('financeiro.')->prefix('financeiro')->group( function () {
             Route::get('/balancete', [BalanceteController::class, 'index'])->name('balancete.index');
         });
 
         // // OS
-        // Route::name('os.')->prefix('os')->group( function ()
-    {
+        // Route::name('os.')->prefix('os')->group( function () {
 
         // });
-        // Route::name('wiki.')->prefix('wiki')->group( function ()
-    {
+        // Route::name('wiki.')->prefix('wiki')->group( function () {
 
         // });
 

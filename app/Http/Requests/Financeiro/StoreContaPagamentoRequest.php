@@ -43,11 +43,11 @@ class StoreContaPagamentoRequest extends FormRequest
 
     public function messages(): array
     {
-       return [
+        return [
             'name.required' => 'A despesa é obrigatória!',
             'pagamento_valor' => 'O valor do pagamento é obrigatório ',
             'data_pagamento' => 'A data de pagamento é obrigatória',
             'forma_pagamento_id' => 'A forma de pagamento é obrigatória',
-       ];
-   }
+        ];
+    }
 }
