@@ -73,12 +73,12 @@ class Wiki extends Model
         $queryWiki->with('fabricante');
         if (isset($request->busca)) {
             $queryWiki->where(function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 $query->orWhereHas('modelos', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                    $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 });
                 $query->orWhereHas('fabricante', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                    $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 });
             });
         }

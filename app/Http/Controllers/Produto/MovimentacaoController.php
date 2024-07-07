@@ -14,7 +14,6 @@ class MovimentacaoController extends Controller
         // ACL DE PERMISSÕES
         $this->middleware('permission:produto_movimentacao', ['only' => 'index']);
         $this->middleware('permission:produto_movimentacao_create', ['only' => ['create', 'store']]);
-
     }
 
     /**
@@ -25,7 +24,6 @@ class MovimentacaoController extends Controller
         $movimentacoes = $produto->movimentacao()
                                  ->orderBy('created_at', 'DESC')
                                  ->paginate(100);
-
 
         return view('produto.movimentacao.index', compact('movimentacoes', 'produto'));
     }
@@ -43,7 +41,6 @@ class MovimentacaoController extends Controller
      */
     public function store(Produto $produto, StoreUpdateMovimentacaoRequest $request)
     {
-
         DB::beginTransaction();
         try {
             $estoqueTemp = $produto->estoque + $request->estoque;
@@ -58,9 +55,10 @@ class MovimentacaoController extends Controller
                     'estoque_antes' => $produto->estoque,
                     'estoque_apos' => $estoqueTemp,
                     'descricao' => $request->descricao,
-                    ]
+                ],
             ]);
             DB::commit();
+
             return redirect()->route('movimentacao.index', $produto)
             ->with('success', 'Estoque Atualizado com sucesso.');
         } catch (\Throwable $th) {

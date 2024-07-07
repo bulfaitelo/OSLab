@@ -18,7 +18,6 @@ class ServicoController extends Controller
         $this->middleware('permission:servico_show', ['only' => 'show']);
         $this->middleware('permission:servico_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:servico_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -27,6 +26,7 @@ class ServicoController extends Controller
     public function index()
     {
         $servicos = Servico::paginate(100);
+
         return view('servico.index', compact('servicos'));
     }
 
@@ -44,7 +44,6 @@ class ServicoController extends Controller
     public function store(StoreServicoRequest $request)
     {
         try {
-
             $servico = new Servico();
             $servico->name = $request->name;
             $servico->descricao = $request->descricao;
@@ -101,12 +100,12 @@ class ServicoController extends Controller
             $servicoCount = $servico->os->count();
             if ($servicoCount > 0) {
                 return redirect()->route('servico.index')
-                ->with('warning', 'O servico não pode ser excluído pois está sendo usado em: '. $servicoCount. ' Os');
+                ->with('warning', 'O servico não pode ser excluído pois está sendo usado em: '.$servicoCount.' Os');
             }
             $servico->delete();
+
             return redirect()->route('servico.index')
                 ->with('success', 'Serviço excluído com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -115,16 +114,17 @@ class ServicoController extends Controller
 
 
     /**
-     * Select Serviço
+     * Select Serviço.
      *
      * Retorna o select com os Serviço s via Json.
      *
-     * @param Request $request Request da variável Busca,
+     * @param  Request  $request  Request da variável Busca,
      * @return response, json Retorna o json para ser montado.
      **/
-    public function apiServicoSelect (Request $request) {
+    public function apiServicoSelect (Request $request)
+    {
         try {
-            $select = Servico::where('name', 'LIKE', '%'. $request->q . '%');
+            $select = Servico::where('name', 'LIKE', '%'.$request->q.'%');
             $select->orderBy('name');
             $select->limit(10);
             $response = [];
@@ -138,7 +138,6 @@ class ServicoController extends Controller
             }
 
             return response()->json($response, 200);
-
         } catch (\Throwable $th) {
             return response()->json($th, 403);
         }

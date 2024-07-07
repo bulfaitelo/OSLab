@@ -42,10 +42,10 @@ class Cliente extends Model
         if ($request->busca) {
             $queryCliente->where(function ($query) use ($request) {
 
-                $query->orWhere('name', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('email', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('celular', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('telefone', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhere('name', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('email', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('celular', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('telefone', 'LIKE', '%'.$request->busca.'%');
 
             });
         }

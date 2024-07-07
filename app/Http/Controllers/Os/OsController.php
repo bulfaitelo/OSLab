@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 
 class OsController extends Controller
 {
-    function __construct(
+    public function __construct(
         private readonly ?OsService $osService = null
     ) {
         // ACL DE PERMISSÕES
@@ -126,9 +126,8 @@ class OsController extends Controller
      *
      * @param  FaturarOsRequest  $request
      * @param  OS  $os  os
-     *
      */
-    function faturar(FaturarOsRequest $request, Os $os)
+    public function faturar(FaturarOsRequest $request, Os $os)
     {
         if (! getConfig('default_os_faturar_produto_despesa')) {
             return redirect()->route('os.edit', $os->id)
@@ -290,7 +289,7 @@ class OsController extends Controller
      *
      * @param  OS  $os
      */
-    function cancelarFaturamento(Os $os)
+    public function cancelarFaturamento(Os $os)
     {
         DB::beginTransaction();
         try {
@@ -300,11 +299,11 @@ class OsController extends Controller
                 $movimentacoes = $movimentacoesModel->get();
                 foreach ($movimentacoes as $movimentacao) {
 
-                    if ($movimentacoes->count() > 1 ) {
+                    if ($movimentacoes->count() > 1) {
                         $produto->estoque = ($produto->estoque + $movimentacao->estoque_antes);
                         break;
                     }
-                    if ($movimentacoes->count() == 1 ) {
+                    if ($movimentacoes->count() == 1) {
                         $produto->estoque = ($produto->estoque + $movimentacao->quantidade_movimentada);
                         break;
                     }
@@ -327,14 +326,12 @@ class OsController extends Controller
         }
     }
 
-
     /**
      * REtorna o dia de vencimento com base na categoria selecionada.
      *
      * @param  string  $data_saida  Data de saida da os
      * @param  int  $categoria_id  id da categoria da os para gera os dias de garantia
      * @return string|null retorna o dia de vendimento ou null caso nao exista
-
      **/
     private function addDayGarantia($data_saida, $categoria_id): string|null
     {

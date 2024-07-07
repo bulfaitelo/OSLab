@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Produto\StoreProdutoRequest;
 use App\Http\Requests\Produto\UpdateProdutoRequest;
 use App\Models\Produto\Produto;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
 {
@@ -19,7 +19,6 @@ class ProdutoController extends Controller
         $this->middleware('permission:produto_show', ['only' => 'show']);
         $this->middleware('permission:produto_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:produto_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -28,6 +27,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $produtos = Produto::getDataTable($request, 100);
+
         return view('produto.index', compact('produtos', 'request'));
     }
 
@@ -59,14 +59,15 @@ class ProdutoController extends Controller
 
             if ($request->estoque > 0) {
                 $produto->movimentacao()->create([
-                        'quantidade_movimentada' => $request->estoque,
-                        'tipo_movimentacao' => 1,
-                        'valor_custo' => $request->valor_custo,
-                        'estoque_antes' => 0,
-                        'estoque_apos' => $request->estoque,
-                    ]);
+                    'quantidade_movimentada' => $request->estoque,
+                    'tipo_movimentacao' => 1,
+                    'valor_custo' => $request->valor_custo,
+                    'estoque_antes' => 0,
+                    'estoque_apos' => $request->estoque,
+                ]);
             }
             DB::commit();
+
             return redirect()->route('produto.index')
             ->with('success', 'Produto cadastrado com sucesso.');
         } catch (\Throwable $th) {
@@ -106,8 +107,8 @@ class ProdutoController extends Controller
             $produto->centro_custo_id = $request->centro_custo_id;
             $produto->modelo_id = $request->modelo_id;
             $produto->save();
-
             DB::commit();
+
             return redirect()->route('produto.index')
             ->with('success', 'Produto atualizado com sucesso.');
         } catch (\Throwable $th) {
@@ -125,9 +126,10 @@ class ProdutoController extends Controller
             $produtoCount = $produto->os->count();
             if ($produtoCount > 0) {
                 return redirect()->route('produto.index')
-                ->with('warning', 'O produto não pode ser excluído pois está sendo usado em: '. $produtoCount. ' Os');
+                ->with('warning', 'O produto não pode ser excluído pois está sendo usado em: '.$produtoCount.' Os');
             }
             $produto->delete();
+
             return redirect()->route('produto.index')
                 ->with('success', 'Produto excluído com sucesso.');
         } catch (\Throwable $th) {
@@ -135,20 +137,18 @@ class ProdutoController extends Controller
         }
     }
 
-
-
-
     /**
-     * Select Produto
+     * Select Produto.
      *
      * Retorna o select com os Produtos via Json.
      *
-     * @param Request $request Request da variável Busca,
-     * @return response, json Retorna o json para ser montado.
+     * @param  Request  $request  Request da variável Busca,
+     * @return string json Retorna o json para ser montado.
      **/
-    public function apiProdutoSelect (Request $request) {
+    public function apiProdutoSelect (Request $request)
+    {
         try {
-            $select = Produto::where('name', 'LIKE', '%'. $request->q . '%');
+            $select = Produto::where('name', 'LIKE', '%'.$request->q.'%');
             $select->orderBy('name');
             $select->limit(10);
             $response = [];
@@ -163,7 +163,6 @@ class ProdutoController extends Controller
             }
 
             return response()->json($response, 200);
-
         } catch (\Throwable $th) {
             return response()->json($th, 403);
         }

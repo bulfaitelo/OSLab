@@ -13,7 +13,6 @@ class BalanceteController extends Controller
     {
         // ACL DE PERMISSÕES
         $this->middleware('permission:relatorio_financeiro_balancete', ['only' => ['index']]);
-
     }
 
     /**
@@ -41,13 +40,12 @@ class BalanceteController extends Controller
                 $centroCustoRelatorio = Contas::RelatorioBalanceteCentroCusto($validated['data_inicio'], $validated['data_fim'], $validated['ordenacao']);
             }
         }
+
         return view('relatorio.financeiro.balancete.index', [
             'request' => $request,
             'osRelatorio' => $osRelatorio,
             'mesRelatorio' => $mesRelatorio,
             'centroCustoRelatorio' => $centroCustoRelatorio,
         ]);
-
     }
-
 }

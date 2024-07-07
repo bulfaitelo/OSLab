@@ -29,7 +29,7 @@ class CreateHtmlRequestBusca {
             if (is_array($request)) {
                 $return.='<ul>';
                 foreach ($request as $key => $value) {
-                    $return.= "<li><strong>". $this->convertToString($key) .'</strong>' . $this->checkType($value) . "</li>";
+                    $return.= "<li><strong>". $this->convertToString($key) .'</strong>'.$this->checkType($value)."</li>";
                 }
                 $return.='</ul>';
             }
@@ -50,7 +50,7 @@ class CreateHtmlRequestBusca {
                 $ponto = ': ';
             }
 
-            return \Str::of($key)->snake()->replace('_', ' ')->title() . $ponto;
+            return \Str::of($key)->snake()->replace('_', ' ')->title().$ponto;
         }
 
     }

@@ -350,8 +350,8 @@ class WikiController extends Controller
         @$dom->loadHTML($this->utf8_to_iso8859_1($text), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $dom->encoding = 'utf-8';
         $imageFile = $dom->getElementsByTagName('img');
-        $imagePath = "/storage/wiki/". $id . "/imgs/";
-        $path = public_path() . $imagePath;
+        $imagePath = "/storage/wiki/". $id."/imgs/";
+        $path = public_path().$imagePath;
         $arrayImageUrl = [] ;
         foreach ($imageFile as $item => $image) {
             $data = $image->getAttribute('src');

@@ -110,6 +110,7 @@ class ReceitaPagamentoController extends Controller
             }
             $receita->save();
             DB::commit();
+
             return redirect()->route('financeiro.receita.edit', $receita)
                 ->with('success', 'Pagamento excluído com sucesso.');
         } catch (\Throwable $th) {

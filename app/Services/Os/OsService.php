@@ -29,14 +29,14 @@ class OsService implements OsServiceInterface
         if ($request->busca) {
             $queryOs->where(function ($query) use ($request) {
                 $query->whereHas('cliente', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                    $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 });
-                $query->orWhere('descricao', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('defeito', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('observacoes', 'LIKE', '%' . $request->busca . '%');
-                $query->orWhere('laudo', 'LIKE', '%' . $request->busca . '%');
+                $query->orWhere('descricao', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('defeito', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('observacoes', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('laudo', 'LIKE', '%'.$request->busca.'%');
                 $query->orWhereHas('modelo', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->busca . '%');
+                    $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 });
             });
         }

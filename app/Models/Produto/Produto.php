@@ -79,7 +79,7 @@ class Produto extends Model
         $queryProduto = self::query();
         $queryProduto->with('centroCusto');
         if ($request->busca) {
-            $queryProduto->Where('name', 'LIKE', '%' . $request->busca . '%');
+            $queryProduto->Where('name', 'LIKE', '%'.$request->busca.'%');
         }
         if ($request->centro_custo_id) {
             $queryProduto->where('centro_custo_id', $request->centro_custo_id);
