@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Configuracao\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Models\Configuracao\User\PermissionsGroup;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
-
+use Intervention\Image\Facades\Image;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -25,26 +24,22 @@ class UserController extends Controller
         $this->middleware('permission:config_user_destroy', ['only' => 'destroy']);
 
         $this->middleware('permission:config_user_permissions_edit', ['only' => ['permissions_edit', 'permissions_update']]);
-
     }
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $users = User::orderBy('name', 'ASC')
                 ->with('setor')
                 ->paginate(50);
+
         return view('configuracao.users.index', compact('users'));
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -55,18 +50,17 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'name' => 'required|',
             'email' => 'required|email|unique:users',
             'setor_id' => 'required|integer',
             'password' => 'nullable|confirmed|min:8',
-            'expire_at'=> 'date|nullable',
+            'expire_at' => 'date|nullable',
             'img_perfil' => 'nullable|image|max:2048',
-            'estado'=> 'nullable|max:2',
+            'estado' => 'nullable|max:2',
         ]);
         if ($request->ativo) {
             $ativo = true;
@@ -90,20 +84,20 @@ class UserController extends Controller
         $user->estado = $request->estado;
         $user->complemento = $request->complemento;
         $user->expire_at = $request->expire_at;
-        $user->syncRoles(array_map(fn($val)=>(int)$val, $request->role));
+        $user->syncRoles(array_map(fn ($val) => (int) $val, $request->role));
 
         if ($request->img_perfil) {
             $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             // Gerar um nome único para a imagem
-            $imageName = Str::uuid() . '.' . $request->img_perfil->getClientOriginalExtension();
+            $imageName = Str::uuid().'.'.$request->img_perfil->getClientOriginalExtension();
             // Salvar a imagem no diretório destinado a imagens de perfil
-            $resizedImage->save(storage_path('app/public/img_perfil/' . $imageName));
+            $resizedImage->save(storage_path('app/public/img_perfil/'.$imageName));
             $user->img_url = $imageName;
         }
         if ($user->save()) {
-            return redirect()->route('configuracao.users.index')->with('success', 'Usuário cadastrado com sucesso!'); ;
+            return redirect()->route('configuracao.users.index')->with('success', 'Usuário cadastrado com sucesso!');
         }
 
 
@@ -112,26 +106,24 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User $user
      */
     public function show(User $user)
     {
         $user->hasRole = $user->hasAnyRole(Role::all());
-        // dd($user->roles);
+
         return view('configuracao.users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User $user
      */
     public function edit(User $user)
     {
         $user->hasRole = $user->hasAnyRole(Role::all());
-        // dd($user->roles);
+
         return view('configuracao.users.edit', compact('user'));
     }
 
@@ -139,21 +131,20 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
      */
     public function update(Request $request, User $user)
     {
         // dd($request->input());
 
-        $request->validate ([
+        $request->validate([
             'name' => 'required|',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'setor_id' => 'required|integer',
             'password' => 'nullable|confirmed|min:8',
-            'expire_at'=> 'date|nullable',
+            'expire_at' => 'date|nullable',
             'img_perfil' => 'nullable|image|max:2048',
-            'estado'=> 'nullable|max:2',
+            'estado' => 'nullable|max:2',
         ]);
         if ($request->ativo) {
             $ativo = true;
@@ -180,30 +171,29 @@ class UserController extends Controller
         if ($request->img_perfil) {
             // Apagando a imagem antiga antes de definir nova
             $tempImage = $user->img_url;
-            if ((file_exists(storage_path('app/public/img_perfil/').$tempImage)) && $tempImage != null ) {
+            if (file_exists(storage_path('app/public/img_perfil/').$tempImage) && $tempImage != null ) {
                 unlink(storage_path('app/public/img_perfil/').$tempImage);
             }
             $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             // Gerar um nome único para a imagem
-            $imageName = Str::uuid() . '.' . $request->img_perfil->getClientOriginalExtension();
+            $imageName = Str::uuid().'.'.$request->img_perfil->getClientOriginalExtension();
             // Salvar a imagem no diretório destinado a imagens de perfil
-            $resizedImage->save(storage_path('app/public/img_perfil/' . $imageName));
+            $resizedImage->save(storage_path('app/public/img_perfil/'.$imageName));
             $user->img_url = $imageName;
         }
-        $user->syncRoles(array_map(fn($val)=>(int)$val, $request->role));
+        $user->syncRoles(array_map(fn ($val) => (int) $val, $request->role));
 
         if ($user->save()) {
-            return redirect()->route('configuracao.users.index', [$user->id])->with('success', 'Permissão atualizada!'); ;
+            return redirect()->route('configuracao.users.index', [$user->id])->with('success', 'Permissão atualizada!');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $users
      */
     public function destroy(User $user)
     {
@@ -213,20 +203,18 @@ class UserController extends Controller
                 ->with('warning', 'o Usuário logado não pode ser excluído!');
             }
             $user->delete();
+
             return redirect()->route('configuracao.users.index')
                 ->with('success', 'Usuário excluído com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-
     /**
+     * Edita as permissões do usuário.
      *
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $users
      */
     public function permissions_edit(User $user)
     {
@@ -244,46 +232,42 @@ class UserController extends Controller
         return view('configuracao.users.permissions', compact('permissions', 'user', 'roles', 'group', 'groups'));
     }
 
-
     /**
+     * Edita as permissões do usuário.
      *
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  User  $users
      */
     public function permissions_update(Request $request, User $user)
     {
-
         $user->syncPermissions($request->assign_id);
-        return redirect()->route('configuracao.users.permissions_edit', [$user->id])->with('success', 'Permissões Atualizadas!'); ;
 
-
+        return redirect()->route('configuracao.users.permissions_edit', [$user->id])->with('success', 'Permissões Atualizadas!');
     }
 
     /**
-     * Select Users
+     * Select Users.
      *
      * Retorna o select com os dados dos usuários via Json.
      *
-     * @param Request $request Request da variável Busca,
-     * @return response, json Retorna o json para ser montado.
+     * @param  Request  $request  Request da variável Busca,
+     * @return  string  json  Retorna o json para ser montado.
      **/
     public function apiUserSelect (Request $request) {
         try {
-            $select = User::where('name', 'LIKE', '%'. $request->q . '%');
+            $select = User::where('name', 'LIKE', '%'.$request->q.'%');
             $select->orderBy('name');
             $select->limit(10);
             $response = [];
             foreach ($select->get() as $value) {
-
                 $response[] = [
                     'id' => $value->id,
                     'name' => $value->name,
                     'os_count' => $value->os->count(),
                 ];
             }
-            return response()->json($response, 200);
 
+            return response()->json($response, 200);
         } catch (\Throwable $th) {
             return response()->json(throw $th, 403);
         }

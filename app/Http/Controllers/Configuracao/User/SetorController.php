@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class SetorController extends Controller
 {
-
     public function __construct()
     {
         // ACL DE PERMISSÕES
@@ -18,25 +17,21 @@ class SetorController extends Controller
         $this->middleware('permission:config_user_setor_create', ['only' => ['create', 'store']]);
         $this->middleware('permission:config_user_setor_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:config_user_setor_destroy', ['only' => 'destroy']);
-
     }
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $setores = Setor::paginate(50);
+
         return view('configuracao.users.setores.index', compact('setores'));
 
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -47,23 +42,21 @@ class SetorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(StoreSetorRequest $request)
     {
-
         DB::beginTransaction();
 
         try {
             $setor = new Setor;
             $setor->name = $request->setor;
             $setor->save();
-
             DB::commit();
 
             return redirect()->route('configuracao.user.setor.index')->with('success', 'Setor cadastrado com sucesso!');
         } catch (\Exception $e) {
             DB::rollBack();
+
             return redirect()->back()->with('error', 'Erro ao cadastrar o setor. Por favor, tente novamente.');
         }
     }
@@ -71,7 +64,7 @@ class SetorController extends Controller
     // /**
     //  * Display the specified resource.
     //  *
-    //  * @param  \App\Models\Configuracao\Setor  $setor
+    //  * @param  \App\Models\Configuracao\User\Setor  $setor
     //  * @return \Illuminate\Http\Response
     //  */
     // public function show(Setor $setor)
@@ -82,8 +75,7 @@ class SetorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Configuracao\Setor  $setor
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Configuracao\User\Setor  $setor
      */
     public function edit(Setor $setor)
     {
@@ -94,8 +86,7 @@ class SetorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Configuracao\Setor  $setor
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Configuracao\User\Setor  $setor
      */
     public function update(Request $request, Setor $setor)
     {
@@ -104,26 +95,25 @@ class SetorController extends Controller
         ]);
         $setor->name = $request->setor;
         if ($setor->save()) {
-            return redirect()->route('configuracao.user.setor.index')->with('success', 'Setor atualizado com sucesso!'); ;
+            return redirect()->route('configuracao.user.setor.index')->with('success', 'Setor atualizado com sucesso!');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Configuracao\Setor  $setor
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Configuracao\User\Setor  $setor
      */
     public function destroy(Setor $setor)
     {
         if ($setor->users->count() > 0) {
             return redirect()->route('configuracao.user.setor.index')
-            ->with('warning', 'Não é possível excluir um setor que existam usuários cadastrados nele!'); ;
+            ->with('warning', 'Não é possível excluir um setor que existam usuários cadastrados nele!');
         }
         else{
             if ($setor->delete()) {
                 return redirect()->route('configuracao.user.setor.index')
-                ->with('success', 'Setor Excluído com Sucesso!'); ;
+                ->with('success', 'Setor Excluído com Sucesso!');
             }
         }
 
