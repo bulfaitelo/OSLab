@@ -26,7 +26,8 @@ class StoreSetorRequest extends FormRequest
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
          'setor.required' => 'O campo Setor é obrigatório'
         ];

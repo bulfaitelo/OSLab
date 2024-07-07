@@ -28,13 +28,14 @@ class CreateHtmlRequestBusca
             if (is_array($request)) {
                 $return .= '<ul>';
                 foreach ($request as $key => $value) {
-                    $return .= '<li><strong>'. $this->convertToString($key).'</strong>'.$this->checkType($value).'</li>';
+                    $return .= '<li><strong>'.$this->convertToString($key).'</strong>'.$this->checkType($value).'</li>';
                 }
                 $return .= '</ul>';
             }
         } catch (\Throwable $th) {
             throw $th;
         }
+
         return $return;
     }
 
@@ -43,7 +44,6 @@ class CreateHtmlRequestBusca
         $ponto = '';
         if (is_integer($key)) {
             if ($key > 0) {
-
             }
         } else {
             if (! $subArray) {

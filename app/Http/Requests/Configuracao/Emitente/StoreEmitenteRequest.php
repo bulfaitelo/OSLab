@@ -27,11 +27,12 @@ class StoreEmitenteRequest extends FormRequest
             'uf'=> 'nullable|max:2',
             'registro' => 'cnpj|nullable',
             'emitente_file' => 'nullable|file|max:2000|mimes:jpeg,jpg,png,bmp',
-            'site_url' => 'nullable|url'
+            'site_url' => 'nullable|url',
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'name.required' => 'O campo Cliente é obrigatório.',
             'registro.cnpj' => 'O CNPJ não é válido.',

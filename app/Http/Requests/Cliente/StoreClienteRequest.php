@@ -25,12 +25,13 @@ class StoreClienteRequest extends FormRequest
             'name' => 'required|',
             'email' => 'nullable|email|unique:clientes',
             'password' => 'nullable|confirmed|min:8',
-            'uf'=> 'nullable|max:2',
+            'uf' => 'nullable|max:2',
             'registro' => 'cpf_ou_cnpj|nullable|unique:clientes',
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'name.required' => 'O campo Cliente é obrigatório.',
             'registro.unique' => 'O CPF ou CNPJ já está em uso.',

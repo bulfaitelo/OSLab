@@ -31,7 +31,8 @@ class UpdateEmitenteRequest extends FormRequest
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'name.required' => 'O campo Cliente é obrigatório.',
             'registro.cnpj' => 'O CNPJ não é válido.',
