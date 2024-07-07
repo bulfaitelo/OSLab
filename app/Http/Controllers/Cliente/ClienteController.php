@@ -11,14 +11,14 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:cliente', ['only'=> ['index', 'apiClientSelect']]);
-        $this->middleware('permission:cliente_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:cliente_show', ['only'=> 'show']);
-        $this->middleware('permission:cliente_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:cliente_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:cliente', ['only' => ['index', 'apiClientSelect']]);
+        $this->middleware('permission:cliente_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:cliente_show', ['only' => 'show']);
+        $this->middleware('permission:cliente_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:cliente_destroy', ['only' => 'destroy']);
 
     }
     /**

@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Storage;
 
 class EmitenteController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_emitente', ['only'=> ['index']]);
-        $this->middleware('permission:config_emitente_create', ['only'=> ['create', 'store']]);
-        // $this->middleware('permission:config_emitente_show', ['only'=> 'show']);
-        $this->middleware('permission:config_emitente_edit', ['only'=> ['edit', 'update']]);
-        // $this->middleware('permission:config_emitente_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_emitente', ['only' => ['index']]);
+        $this->middleware('permission:config_emitente_create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:config_emitente_show', ['only' => 'show']);
+        $this->middleware('permission:config_emitente_edit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:config_emitente_destroy', ['only' => 'destroy']);
 
     }
 

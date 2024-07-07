@@ -9,14 +9,14 @@ use App\Models\Configuracao\Financeiro\FormaPagamento;
 
 class FormaPagamentoController extends Controller
 {
-    function __construct()
+    public function __construct()
         {
             // ACL DE PERMISSÕES
-            $this->middleware('permission:config_financeiro_forma_pagamento', ['only'=> 'index']);
-            $this->middleware('permission:config_financeiro_forma_pagamento_create', ['only'=> ['create', 'store']]);
-            $this->middleware('permission:config_financeiro_forma_pagamento_show', ['only'=> 'show']);
-            $this->middleware('permission:config_financeiro_forma_pagamento_edit', ['only'=> ['edit', 'update']]);
-            $this->middleware('permission:config_financeiro_forma_pagamento_destroy', ['only'=> 'destroy']);
+            $this->middleware('permission:config_financeiro_forma_pagamento', ['only' => 'index']);
+            $this->middleware('permission:config_financeiro_forma_pagamento_create', ['only' => ['create', 'store']]);
+            $this->middleware('permission:config_financeiro_forma_pagamento_show', ['only' => 'show']);
+            $this->middleware('permission:config_financeiro_forma_pagamento_edit', ['only' => ['edit', 'update']]);
+            $this->middleware('permission:config_financeiro_forma_pagamento_destroy', ['only' => 'destroy']);
 
         }
     /**

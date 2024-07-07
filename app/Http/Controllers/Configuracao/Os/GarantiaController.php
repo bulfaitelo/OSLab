@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class GarantiaController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_os_garantia', ['only'=> 'index']);
-        $this->middleware('permission:config_os_garantia_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_os_garantia_show', ['only'=> 'show']);
-        $this->middleware('permission:config_os_garantia_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:config_os_garantia_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_os_garantia', ['only' => 'index']);
+        $this->middleware('permission:config_os_garantia_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_os_garantia_show', ['only' => 'show']);
+        $this->middleware('permission:config_os_garantia_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_os_garantia_destroy', ['only' => 'destroy']);
 
     }
     /**

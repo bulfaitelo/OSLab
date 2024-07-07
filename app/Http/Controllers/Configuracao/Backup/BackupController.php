@@ -14,12 +14,12 @@ class BackupController extends Controller
         'm' => 'Mensal',
         'y' => 'Anual'
     ];
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_backup', ['only'=> 'index']);
-        $this->middleware('permission:config_backup_download', ['only'=> ['download', ]]);
-        $this->middleware('permission:config_backup_destroy', ['only'=> ['destroy', ]]);
+        $this->middleware('permission:config_backup', ['only' => 'index']);
+        $this->middleware('permission:config_backup_download', ['only' => ['download', ]]);
+        $this->middleware('permission:config_backup_destroy', ['only' => ['destroy', ]]);
 
     }
 

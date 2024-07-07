@@ -11,13 +11,13 @@ use App\Models\Configuracao\User\PermissionsGroup;
 
 class PermissionsController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_permissions', ['only'=> 'index']);
-        $this->middleware('permission:config_permissions_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_permissions_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:config_permissions_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_permissions', ['only' => 'index']);
+        $this->middleware('permission:config_permissions_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_permissions_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_permissions_destroy', ['only' => 'destroy']);
 
     }
     /**

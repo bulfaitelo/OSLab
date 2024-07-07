@@ -9,14 +9,14 @@ use App\Models\Configuracao\Os\OsStatus;
 class OsStatusController extends Controller
 {
     public $corArray;
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_os_status', ['only'=> 'index']);
-        $this->middleware('permission:config_os_status_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_os_status_show', ['only'=> 'show']);
-        $this->middleware('permission:config_os_status_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:config_os_status_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_os_status', ['only' => 'index']);
+        $this->middleware('permission:config_os_status_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_os_status_show', ['only' => 'show']);
+        $this->middleware('permission:config_os_status_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_os_status_destroy', ['only' => 'destroy']);
 
         $this->corArray = [
             'bg-primary',

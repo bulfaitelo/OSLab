@@ -10,14 +10,14 @@ use App\Models\Configuracao\Wiki\Fabricante;
 
 class FabricanteController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_wiki_fabricante', ['only'=> 'index']);
-        $this->middleware('permission:config_wiki_fabricante_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_wiki_fabricante_show', ['only'=> 'show']);
-        $this->middleware('permission:config_wiki_fabricante_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:config_wiki_fabricante_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_wiki_fabricante', ['only' => 'index']);
+        $this->middleware('permission:config_wiki_fabricante_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_wiki_fabricante_show', ['only' => 'show']);
+        $this->middleware('permission:config_wiki_fabricante_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_wiki_fabricante_destroy', ['only' => 'destroy']);
 
     }
     /**

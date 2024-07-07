@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\DB;
 class ReceitaPagamentoController extends Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
 
-        $this->middleware('permission:financeiro_receita_pagamento_create', ['only'=> ['store']]);
-        $this->middleware('permission:financeiro_receita_pagamento_edit', ['only'=> [ 'update']]);
-        $this->middleware('permission:financeiro_receita_pagamento_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:financeiro_receita_pagamento_create', ['only' => ['store']]);
+        $this->middleware('permission:financeiro_receita_pagamento_edit', ['only' => [ 'update']]);
+        $this->middleware('permission:financeiro_receita_pagamento_destroy', ['only' => 'destroy']);
 
     }
 

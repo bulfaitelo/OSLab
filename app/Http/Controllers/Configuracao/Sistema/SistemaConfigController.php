@@ -17,11 +17,11 @@ class SistemaConfigController extends Controller
         'm' => 'Mensal',
         'y' => 'Anual'
     ];
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_sistema', ['only'=> 'index']);
-        $this->middleware('permission:config_sistema_edit', ['only'=> ['store', ]]);
+        $this->middleware('permission:config_sistema', ['only' => 'index']);
+        $this->middleware('permission:config_sistema_edit', ['only' => ['store', ]]);
 
     }
 

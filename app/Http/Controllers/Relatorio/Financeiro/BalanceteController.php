@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 class BalanceteController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:relatorio_financeiro_balancete', ['only'=> ['index']]);
+        $this->middleware('permission:relatorio_financeiro_balancete', ['only' => ['index']]);
 
     }
     /**

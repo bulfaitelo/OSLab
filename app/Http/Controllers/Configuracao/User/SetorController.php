@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\DB;
 class SetorController extends Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_user_setor', ['only'=> 'index']);
-        $this->middleware('permission:config_user_setor_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_user_setor_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:config_user_setor_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_user_setor', ['only' => 'index']);
+        $this->middleware('permission:config_user_setor_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_user_setor_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_user_setor_destroy', ['only' => 'destroy']);
 
     }
 

@@ -15,16 +15,16 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_user', ['only'=> ['index', 'apiUserSelect']]);
-        $this->middleware('permission:config_user_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_user_show', ['only'=> 'show']);
-        $this->middleware('permission:config_user_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:config_user_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_user', ['only' => ['index', 'apiUserSelect']]);
+        $this->middleware('permission:config_user_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_user_show', ['only' => 'show']);
+        $this->middleware('permission:config_user_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_user_destroy', ['only' => 'destroy']);
 
-        $this->middleware('permission:config_user_permissions_edit', ['only'=> ['permissions_edit', 'permissions_update']]);
+        $this->middleware('permission:config_user_permissions_edit', ['only' => ['permissions_edit', 'permissions_update']]);
 
     }
 

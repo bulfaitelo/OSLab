@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class MovimentacaoController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:produto_movimentacao', ['only'=> 'index']);
-        $this->middleware('permission:produto_movimentacao_create', ['only'=> ['create', 'store']]);
+        $this->middleware('permission:produto_movimentacao', ['only' => 'index']);
+        $this->middleware('permission:produto_movimentacao_create', ['only' => ['create', 'store']]);
 
     }
 

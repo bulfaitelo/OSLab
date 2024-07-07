@@ -11,15 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class ChecklistController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:checklist', ['only'=> 'index']);
-        $this->middleware('permission:checklist_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:checklist_show', ['only'=> 'show']);
-        $this->middleware('permission:checklist_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:checklist_destroy', ['only'=> 'destroy']);
-
+        $this->middleware('permission:checklist', ['only' => 'index']);
+        $this->middleware('permission:checklist_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:checklist_show', ['only' => 'show']);
+        $this->middleware('permission:checklist_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:checklist_destroy', ['only' => 'destroy']);
     }
 
     /**
@@ -28,6 +27,7 @@ class ChecklistController extends Controller
     public function index()
     {
         $checklists = Checklist::paginate(100);
+
         return view('checklist.index', compact('checklists'));
     }
 
@@ -54,17 +54,14 @@ class ChecklistController extends Controller
             $checklist->checklist = $request->checklist;
             $checklist->save();
             DB::commit();
+
             return redirect()->route('checklist.index')
             ->with('success', 'Checklist cadastrado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
-
         }
     }
-
-
-
 
     /**
      * Display the specified resource.
@@ -96,6 +93,7 @@ class ChecklistController extends Controller
             $checklist->checklist = $request->checklist;
             $checklist->save();
             DB::commit();
+
             return redirect()->route('checklist.index')
             ->with('success', 'Checklist Atualizado com sucesso.');
         } catch (\Throwable $th) {
@@ -121,15 +119,5 @@ class ChecklistController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
-    }
-
-    private function getOpcoes($checklist) : array {
-        foreach (json_decode($checklist) as $key => $value) {
-            $opcoes[$key]['name'] =  (isset($value->name)) ? $value->name : null ;
-            $opcoes[$key]['type'] =  (isset($value->type)) ? $value->type : null ;
-            $opcoes[$key]['user_id'] = auth()->id();
-            $opcoes[$key]['opcao'] = json_encode($value);
-        }
-        return $opcoes;
     }
 }

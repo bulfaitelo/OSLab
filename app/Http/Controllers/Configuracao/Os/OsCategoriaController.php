@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class OsCategoriaController extends Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_os_categoria', ['only'=> 'index']);
-        $this->middleware('permission:config_os_categoria_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_os_categoria_show', ['only'=> 'show']);
-        $this->middleware('permission:config_os_categoria_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:config_os_categoria_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_os_categoria', ['only' => 'index']);
+        $this->middleware('permission:config_os_categoria_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_os_categoria_show', ['only' => 'show']);
+        $this->middleware('permission:config_os_categoria_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_os_categoria_destroy', ['only' => 'destroy']);
 
     }
 

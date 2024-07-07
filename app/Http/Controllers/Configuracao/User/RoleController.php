@@ -11,15 +11,15 @@ use App\Models\Configuracao\User\PermissionsGroup;
 class RoleController extends Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_roles', ['only'=> 'index']);
-        $this->middleware('permission:config_roles_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:config_roles_show', ['only'=> 'show']);
-        $this->middleware('permission:config_roles_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:config_roles_assign', ['only'=> ['assign', 'assign_update']]);
-        $this->middleware('permission:config_roles_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:config_roles', ['only' => 'index']);
+        $this->middleware('permission:config_roles_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_roles_show', ['only' => 'show']);
+        $this->middleware('permission:config_roles_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_roles_assign', ['only' => ['assign', 'assign_update']]);
+        $this->middleware('permission:config_roles_destroy', ['only' => 'destroy']);
     }
 
 

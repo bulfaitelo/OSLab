@@ -24,13 +24,13 @@ class OsController extends Controller
     )
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:os', ['only'=> ['index']]);
-        $this->middleware('permission:os_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:os_show', ['only'=> ['show', 'print']]);
-        $this->middleware('permission:os_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:os_destroy', ['only'=> 'destroy']);
-        $this->middleware('permission:os_faturar', ['only'=> 'faturar']);
-        $this->middleware('permission:os_cancelar_faturar', ['only'=> 'cancelarFaturamento']);
+        $this->middleware('permission:os', ['only' => ['index']]);
+        $this->middleware('permission:os_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:os_show', ['only' => ['show', 'print']]);
+        $this->middleware('permission:os_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:os_destroy', ['only' => 'destroy']);
+        $this->middleware('permission:os_faturar', ['only' => 'faturar']);
+        $this->middleware('permission:os_cancelar_faturar', ['only' => 'cancelarFaturamento']);
 
     }
 

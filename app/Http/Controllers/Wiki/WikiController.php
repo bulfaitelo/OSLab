@@ -19,20 +19,20 @@ use Illuminate\Support\Facades\Storage;
 
 class WikiController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:wiki', ['only'=> 'index']);
-        $this->middleware('permission:wiki_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:wiki_show', ['only'=> 'show']);
-        $this->middleware('permission:wiki_edit', ['only'=> ['edit', 'update', 'textUpdate']]);
-        $this->middleware('permission:wiki_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:wiki', ['only' => 'index']);
+        $this->middleware('permission:wiki_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:wiki_show', ['only' => 'show']);
+        $this->middleware('permission:wiki_edit', ['only' => ['edit', 'update', 'textUpdate']]);
+        $this->middleware('permission:wiki_destroy', ['only' => 'destroy']);
 
-        $this->middleware('permission:wiki_link_create', ['only'=> ['linkCreate']]);
-        $this->middleware('permission:wiki_link_destroy', ['only'=> 'linkDestroy']);
+        $this->middleware('permission:wiki_link_create', ['only' => ['linkCreate']]);
+        $this->middleware('permission:wiki_link_destroy', ['only' => 'linkDestroy']);
 
-        $this->middleware('permission:wiki_file_create', ['only'=> ['fileCreate']]);
-        $this->middleware('permission:wiki_file_destroy', ['only'=> 'fileDestroy']);
+        $this->middleware('permission:wiki_file_create', ['only' => ['fileCreate']]);
+        $this->middleware('permission:wiki_file_destroy', ['only' => 'fileDestroy']);
 
 
 

@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 
 class ServicoController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:servico', ['only'=> ['index', 'apiServicoSelect']]);
-        $this->middleware('permission:servico_create', ['only'=> ['create', 'store']]);
-        $this->middleware('permission:servico_show', ['only'=> 'show']);
-        $this->middleware('permission:servico_edit', ['only'=> ['edit', 'update']]);
-        $this->middleware('permission:servico_destroy', ['only'=> 'destroy']);
+        $this->middleware('permission:servico', ['only' => ['index', 'apiServicoSelect']]);
+        $this->middleware('permission:servico_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:servico_show', ['only' => 'show']);
+        $this->middleware('permission:servico_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:servico_destroy', ['only' => 'destroy']);
 
     }
 

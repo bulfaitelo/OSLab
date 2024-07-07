@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class PerfilController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_perfil', ['only'=> 'index']);
-        $this->middleware('permission:config_perfil_edit', ['only'=> ['edit', 'update']]);
+        $this->middleware('permission:config_perfil', ['only' => 'index']);
+        $this->middleware('permission:config_perfil_edit', ['only' => ['edit', 'update']]);
 
     }
     /**
