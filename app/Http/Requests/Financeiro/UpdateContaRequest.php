@@ -35,31 +35,30 @@ class UpdateContaRequest extends FormRequest
             'centro_custo_id' => 'required|exists:centro_custos,id',
             'cliente_id' => [
                 Rule::requiredIf(function () use ($os_id) {
-                    return ($os_id !== null) ? false : true ;
+                    return ($os_id !== null) ? false : true;
                 }),
-                'exists:clientes,id'
+                'exists:clientes,id',
             ],
             // 'cliente_id' => 'required_without:os_id|exists:clientes,id',
-            'valor'     => 'required|numeric|min:0|not_in:0',
+            'valor' => 'required|numeric|min:0|not_in:0',
             'parcelas' => 'numeric',
-
         ];
     }
 
-        /**
+    /**
      * Prepare the data for validation.
      */
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'valor' => ($this->valor) ? str_replace(',', '.', str_replace('.','', $this->valor)) : null,
+            'valor' => ($this->valor) ? str_replace(',', '.', str_replace('.', '', $this->valor)) : null,
         ]);
     }
 
     public function messages(): array
      {
         return [
-         'name.required' => 'A despesa é obrigatória!'
+            'name.required' => 'A despesa é obrigatória!',
         ];
     }
 }

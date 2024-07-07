@@ -25,13 +25,11 @@ class StoreContaPagamentoRequest extends FormRequest
             'vencimento' => 'date|required',
             'parcela' => 'required|integer',
 
-            'pagamento_valor'     => 'required_if:pago,on|numeric|min:0|not_in:0|nullable',
+            'pagamento_valor' => 'required_if:pago,on|numeric|min:0|not_in:0|nullable',
             'data_pagamento' => 'required_if:pago,on|date|nullable',
             'forma_pagamento_id' => 'required_if:pago,on|exists:forma_pagamentos,id|nullable',
-
         ];
     }
-
 
     /**
      * Prepare the data for validation.
@@ -39,18 +37,17 @@ class StoreContaPagamentoRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'pagamento_valor' => ($this->pagamento_valor) ? str_replace(',', '.', str_replace('.','', $this->pagamento_valor)) : null,
-
+            'pagamento_valor' => ($this->pagamento_valor) ? str_replace(',', '.', str_replace('.', '', $this->pagamento_valor)) : null,
         ]);
     }
 
     public function messages(): array
     {
        return [
-        'name.required' => 'A despesa é obrigatória!',
-        'pagamento_valor' => 'O valor do pagamento é obrigatório ',
-        'data_pagamento' => 'A data de pagamento é obrigatória',
-        'forma_pagamento_id' => 'A forma de pagamento é obrigatória',
+            'name.required' => 'A despesa é obrigatória!',
+            'pagamento_valor' => 'O valor do pagamento é obrigatório ',
+            'data_pagamento' => 'A data de pagamento é obrigatória',
+            'forma_pagamento_id' => 'A forma de pagamento é obrigatória',
        ];
    }
 }

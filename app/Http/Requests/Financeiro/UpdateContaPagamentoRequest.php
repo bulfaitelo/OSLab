@@ -27,12 +27,11 @@ class UpdateContaPagamentoRequest extends FormRequest
             'forma_pagamento_id' => 'required|exists:forma_pagamentos,id',
 
             'data_pagamento' => 'date|nullable',
-            'pagamento_valor'     => 'required_unless:data_pagamento,null|numeric|min:0|not_in:0|nullable',
-
+            'pagamento_valor' => 'required_unless:data_pagamento,null|numeric|min:0|not_in:0|nullable',
         ];
     }
 
-            /**
+    /**
      * Prepare the data for validation.
      */
     protected function prepareForValidation(): void
@@ -46,10 +45,10 @@ class UpdateContaPagamentoRequest extends FormRequest
     public function messages(): array
     {
        return [
-        'name.required' => 'A despesa é obrigatória!',
-        'pagamento_valor' => 'O valor do pagamento é obrigatório ',
-        'data_pagamento' => 'A data de pagamento é obrigatória',
-        'forma_pagamento_id' => 'A forma de pagamento é obrigatória',
+            'name.required' => 'A despesa é obrigatória!',
+            'pagamento_valor' => 'O valor do pagamento é obrigatório ',
+            'data_pagamento' => 'A data de pagamento é obrigatória',
+            'forma_pagamento_id' => 'A forma de pagamento é obrigatória',
        ];
    }
 }

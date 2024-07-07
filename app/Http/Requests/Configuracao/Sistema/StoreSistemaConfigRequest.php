@@ -52,7 +52,7 @@ class StoreSistemaConfigRequest extends FormRequest
     {
         $data = $this->validated()['sistema'];
         foreach ($data as $key => $value) {
-                $data[$key] = json_encode($data[$key]);
+            $data[$key] = json_encode($data[$key]);
         }
         // $data['os_listagem_padrao'] = json_encode($data['os_listagem_padrao']);
         // dd($data);

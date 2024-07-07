@@ -26,17 +26,16 @@ class StoreContaRequest extends FormRequest
             'centro_custo_id' => 'required|exists:centro_custos,id',
             'cliente_id' => 'required_without:os_id|exists:clientes,id',
             'vencimento' => 'date|required',
-            'valor'     => 'required|numeric|min:0|not_in:0',
+            'valor' => 'required|numeric|min:0|not_in:0',
             'forma_pagamento_id' => 'required|exists:forma_pagamentos,id',
 
             'avista_valor' => 'required_with:avista_pago,on|numeric|min:0|not_in:0|nullable',
 
             'parcelas' => 'required_if:parcelado,on|numeric',
 
-            'os_id' => 'nullable|exists:os,id'
+            'os_id' => 'nullable|exists:os,id',
         ];
     }
-
 
     /**
      * Prepare the data for validation.
@@ -44,18 +43,17 @@ class StoreContaRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'valor' => ($this->valor) ? str_replace(',', '.', str_replace('.','', $this->valor)) : null,
-            'avista_valor' => ($this->avista_valor) ? str_replace(',', '.', str_replace('.','', $this->avista_valor)) : null,
-
+            'valor' => ($this->valor) ? str_replace(',', '.', str_replace('.', '', $this->valor)) : null,
+            'avista_valor' => ($this->avista_valor) ? str_replace(',', '.', str_replace('.', '', $this->avista_valor)) : null,
         ]);
     }
 
     public function messages(): array
-     {
+    {
         return [
-         'name.required' => 'A despesa é obrigatória!',
-         'pagamento_id' => 'A forma de pagamento é obrigatória ',
-         'cliente_id' => 'O Cliente / Fornecedor é obrigatório',
+            'name.required' => 'A despesa é obrigatória!',
+            'pagamento_id' => 'A forma de pagamento é obrigatória ',
+            'cliente_id' => 'O Cliente / Fornecedor é obrigatório',
         ];
     }
 }
