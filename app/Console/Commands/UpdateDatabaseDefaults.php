@@ -41,7 +41,7 @@ class UpdateDatabaseDefaults extends Command
         $output = null;
         $retval = null;
         exec('php artisan db:seed --class DatabaseDefaultPermissionsUpdate', $output, $retval);
-        if ($retval == 1){
+        if ($retval == 1) {
             echo "\e[41mOCORREU UM ERRO\e[0m";
         }
         foreach ($output as $row) {

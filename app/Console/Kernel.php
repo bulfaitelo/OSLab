@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:schedule')->dailyAt(getConfig('backup_horario'));
         $schedule->command('backup:clean')->dailyAt('00:00');
     }
-    
+
     /**
      * Register the commands for the application.
      */
