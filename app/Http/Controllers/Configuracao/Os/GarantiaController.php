@@ -17,14 +17,15 @@ class GarantiaController extends Controller
         $this->middleware('permission:config_os_garantia_show', ['only' => 'show']);
         $this->middleware('permission:config_os_garantia_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:config_os_garantia_destroy', ['only' => 'destroy']);
-
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $garantias = Garantia::paginate(100);
+
         return view('configuracao.os.garantia.index', compact('garantias'));
     }
 
@@ -49,13 +50,13 @@ class GarantiaController extends Controller
             $garantia->garantia = $request->garantia;
             $garantia->user_id = Auth::id();
             $garantia->save();
+
             return redirect()->route('configuracao.os.garantia.index')
             ->with('success', 'Garantia criada com sucesso.');
 
         } catch (\Throwable $th) {
             throw $th;
         }
-
     }
 
     /**
@@ -85,6 +86,7 @@ class GarantiaController extends Controller
             $garantia->garantia = $request->garantia;
             $garantia->user_id = Auth::id();
             $garantia->save();
+
             return redirect()->route('configuracao.os.garantia.index')
             ->with('success', 'Garantia atualizada com sucesso.');
 
@@ -100,6 +102,7 @@ class GarantiaController extends Controller
     {
         try {
             $garantia->delete();
+
             return redirect()->route('configuracao.os.garantia.index')
                 ->with('success', 'Garantia excluida com sucesso.');
 

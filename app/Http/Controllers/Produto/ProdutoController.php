@@ -21,6 +21,7 @@ class ProdutoController extends Controller
         $this->middleware('permission:produto_destroy', ['only' => 'destroy']);
 
     }
+
     /**
      * Display a listing of the resource.
      */

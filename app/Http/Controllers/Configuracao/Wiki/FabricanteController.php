@@ -20,6 +20,7 @@ class FabricanteController extends Controller
         $this->middleware('permission:config_wiki_fabricante_destroy', ['only' => 'destroy']);
 
     }
+
     /**
      * Display a listing of the resource.
      */

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Configuracao\Financeiro;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Configuracao\Financeiro\StoreUpdateCentroCustoRequest;
 use App\Models\Configuracao\Financeiro\CentroCusto;
-use Illuminate\Http\Request;
 
 class CentroCustoController extends Controller
 {
@@ -17,8 +16,8 @@ class CentroCustoController extends Controller
         $this->middleware('permission:config_financeiro_centro_custo_show', ['only' => 'show']);
         $this->middleware('permission:config_financeiro_centro_custo_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:config_financeiro_centro_custo_destroy', ['only' => 'destroy']);
-
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +25,7 @@ class CentroCustoController extends Controller
     {
         $centroCusto = CentroCusto::paginate(100);
 
-        return view('configuracao.financeiro.centro_custo.index',compact('centroCusto'));
+        return view('configuracao.financeiro.centro_custo.index', compact('centroCusto'));
 
     }
 
@@ -35,7 +34,6 @@ class CentroCustoController extends Controller
      */
     public function create()
     {
-
         return view('configuracao.financeiro.centro_custo.create');
     }
 
@@ -44,8 +42,6 @@ class CentroCustoController extends Controller
      */
     public function store(StoreUpdateCentroCustoRequest $request)
     {
-
-
         $centroCusto = new CentroCusto();
         $centroCusto->name = $request->name;
         $centroCusto->descricao = $request->descricao;
@@ -55,7 +51,6 @@ class CentroCustoController extends Controller
             return redirect()->route('configuracao.financeiro.centro_custo.index')
             ->with('success', 'Centro de criado com sucesso.');
         }
-
     }
 
     /**
@@ -84,6 +79,7 @@ class CentroCustoController extends Controller
         $centroCusto->receita = $request->receita;
         $centroCusto->despesa = $request->despesa;
         if ($centroCusto->save()) {
+
             return redirect()->route('configuracao.financeiro.centro_custo.index')
             ->with('success', 'Centro de atualizado com sucesso.');
         }
@@ -94,10 +90,10 @@ class CentroCustoController extends Controller
      */
     public function destroy(CentroCusto $centroCusto)
     {
-
         // Tentar excluir o recurso
         try {
             $centroCusto->delete();
+
             return redirect()->route('configuracao.financeiro.centro_custo.index')
                 ->with('success', 'Centro de custo excluído com sucesso.');
         } catch (\Exception $e) {

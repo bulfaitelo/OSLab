@@ -20,6 +20,7 @@ class PermissionsController extends Controller
         $this->middleware('permission:config_permissions_destroy', ['only' => 'destroy']);
 
     }
+
     /**
      * Display a listing of the resource.
      *

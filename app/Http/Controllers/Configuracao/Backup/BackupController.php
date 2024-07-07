@@ -13,6 +13,7 @@ class BackupController extends Controller
         'm' => 'Mensal',
         'y' => 'Anual',
     ];
+
     public function __construct()
     {
         // ACL DE PERMISSÕES
@@ -38,6 +39,7 @@ class BackupController extends Controller
         if (file_exists($request->path)) {
             return response()->download($request->path);
         }
+
         return false;
     }
 
@@ -56,6 +58,7 @@ class BackupController extends Controller
                 throw $th;
             }
         }
+
         return redirect()->route('configuracao.backup.index')
             ->with('danger', 'Houve um erro na exclusão od arquivo');
     }

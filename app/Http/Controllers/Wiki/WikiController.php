@@ -37,13 +37,14 @@ class WikiController extends Controller
 
 
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         $wikis = Wiki::getDataTable($request);
-        return view('wiki.index',compact('wikis', 'request'));
+        return view('wiki.index', compact('wikis', 'request'));
     }
 
     /**

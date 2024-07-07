@@ -19,7 +19,6 @@ class EmitenteController extends Controller
         // $this->middleware('permission:config_emitente_show', ['only' => 'show']);
         $this->middleware('permission:config_emitente_edit', ['only' => ['edit', 'update']]);
         // $this->middleware('permission:config_emitente_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -28,9 +27,11 @@ class EmitenteController extends Controller
     public function index()
     {
         $emitente = Emitente::find(1);
-        if (!$emitente) {
+        if (! $emitente) {
+
             return redirect()->route('configuracao.emitente.create');
         }
+
         return  redirect()->route('configuracao.emitente.edit', [$emitente]);
     }
 
@@ -75,23 +76,14 @@ class EmitenteController extends Controller
             }
             $emitente->save();
             DB::commit();
+
             return redirect()->route('configuracao.emitente.edit', [$emitente])
             ->with('success', 'Emitente cadastrado com sucesso.');
-
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
-
     }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(Emitente $emitente)
-    // {
-    //     //
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -136,6 +128,7 @@ class EmitenteController extends Controller
             }
             $emitente->save();
             DB::commit();
+
             return redirect()->route('configuracao.emitente.edit', [$emitente])
             ->with('success', 'Emitente atualizado com sucesso.');
 

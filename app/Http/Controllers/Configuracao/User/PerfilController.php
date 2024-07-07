@@ -15,6 +15,7 @@ class PerfilController extends Controller
         $this->middleware('permission:config_perfil_edit', ['only' => ['edit', 'update']]);
 
     }
+
     /**
      * Display a listing of the resource.
      *

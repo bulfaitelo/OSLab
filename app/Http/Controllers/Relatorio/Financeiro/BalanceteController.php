@@ -15,6 +15,7 @@ class BalanceteController extends Controller
         $this->middleware('permission:relatorio_financeiro_balancete', ['only' => ['index']]);
 
     }
+
     /**
      * Display a listing of the resource.
      */

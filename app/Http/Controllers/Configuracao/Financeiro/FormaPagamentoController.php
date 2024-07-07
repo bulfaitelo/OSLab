@@ -10,21 +10,22 @@ use App\Models\Configuracao\Financeiro\FormaPagamento;
 class FormaPagamentoController extends Controller
 {
     public function __construct()
-        {
-            // ACL DE PERMISSÕES
-            $this->middleware('permission:config_financeiro_forma_pagamento', ['only' => 'index']);
-            $this->middleware('permission:config_financeiro_forma_pagamento_create', ['only' => ['create', 'store']]);
-            $this->middleware('permission:config_financeiro_forma_pagamento_show', ['only' => 'show']);
-            $this->middleware('permission:config_financeiro_forma_pagamento_edit', ['only' => ['edit', 'update']]);
-            $this->middleware('permission:config_financeiro_forma_pagamento_destroy', ['only' => 'destroy']);
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:config_financeiro_forma_pagamento', ['only' => 'index']);
+        $this->middleware('permission:config_financeiro_forma_pagamento_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_financeiro_forma_pagamento_show', ['only' => 'show']);
+        $this->middleware('permission:config_financeiro_forma_pagamento_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_financeiro_forma_pagamento_destroy', ['only' => 'destroy']);
+    }
 
-        }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $formaPagamentos = FormaPagamento::paginate(100);
+
         return view('configuracao.financeiro.forma_pagamento.index', compact('formaPagamentos'));
     }
 
@@ -46,6 +47,7 @@ class FormaPagamentoController extends Controller
             $formaPagamento->name = $request->name;
             $formaPagamento->descricao = $request->descricao;
             $formaPagamento->save();
+
             return redirect()->route('configuracao.financeiro.forma_pagamento.index')
                 ->with('success', 'Forma de pagamento criada com sucesso.');
         } catch (\Throwable $th) {
@@ -78,6 +80,7 @@ class FormaPagamentoController extends Controller
             $formaPagamento->name = $request->name;
             $formaPagamento->descricao = $request->descricao;
             $formaPagamento->save();
+
             return redirect()->route('configuracao.financeiro.forma_pagamento.index')
                 ->with('success', 'Forma de pagamento atualizada com sucesso.');
         } catch (\Throwable $th) {
@@ -94,7 +97,6 @@ class FormaPagamentoController extends Controller
             $formaPagamento->delete();
             return redirect()->route('configuracao.financeiro.forma_pagamento.index')
                 ->with('success', 'Forma de pagamento excluída com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }
