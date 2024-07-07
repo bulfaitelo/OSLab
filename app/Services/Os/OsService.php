@@ -55,8 +55,8 @@ class OsService implements OsServiceInterface
         if ($request->status_id) {
             $queryOs->where('status_id', $request->status_id);
         }
-        if(!$request->input()) {
-            if($osListagemPadrao){
+        if (!$request->input()) {
+            if ($osListagemPadrao){
                 $queryOs->whereIn('status_id', $osListagemPadrao);
             }
         }
@@ -146,7 +146,7 @@ class OsService implements OsServiceInterface
      **/
     private function addDayGarantia($data_saida, $categoria_id) : string|null {
         $prazoEmDias = OsCategoria::find($categoria_id)->garantia?->prazo_garantia;
-        if($prazoEmDias) {
+        if ($prazoEmDias) {
             $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_saida);
             return $dataGarantia->addDays($prazoEmDias)->format('Y-m-d');
         }

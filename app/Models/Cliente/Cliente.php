@@ -50,7 +50,7 @@ class Cliente extends Model
             });
         }
 
-        if(isset($request->tipo)){
+        if (isset($request->tipo)){
             $queryCliente->where('pessoa_juridica', '=', $request->tipo );
         }
         $queryCliente->orderBy('name');

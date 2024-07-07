@@ -63,7 +63,7 @@ class PermissionsController extends Controller
             'description' => $request->description,
             'group_id' => $request->group
             ]);
-        if($permission) {
+        if ($permission) {
             return redirect()->route('configuracao.permissions.index')
             ->with('success', 'Permissão cadastrada com Sucesso!'); ;
         }
@@ -107,7 +107,7 @@ class PermissionsController extends Controller
         $permission->name = $request->name;
         $permission->description = $request->description;
         $permission->group_id = $request->group;
-        if($permission->save()){
+        if ($permission->save()){
             return redirect()->route('configuracao.permissions.edit', $permission->id)
             ->with('success', 'Permissão atualizada!'); ;
         }
@@ -123,7 +123,7 @@ class PermissionsController extends Controller
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        if($permission) {
+        if ($permission) {
             return redirect()->route('configuracao.permissions.index')
             ->with('success', 'Permissão Excluida com Sucesso!'); ;
         }

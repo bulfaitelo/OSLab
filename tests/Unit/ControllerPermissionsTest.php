@@ -53,7 +53,7 @@ class ControllerPermissionsTest extends TestCase
         ];
 
         foreach ($methods as $value) {
-            if(!in_array($value, $ignoredMethods)) {
+            if (!in_array($value, $ignoredMethods)) {
                 $arrayMethods[] = $value;
             }
         }
@@ -72,16 +72,16 @@ class ControllerPermissionsTest extends TestCase
             }
         }
         $returnArray['class'] = $class::class;
-        if(isset($arrayMethods)){
+        if (isset($arrayMethods)){
             $returnArray['arrayMethods'] = $arrayMethods;
         }
-        if(isset($arrayPermissions)){
+        if (isset($arrayPermissions)){
             $returnArray['arrayPermissions'] = $arrayPermissions;
         }
-        if(isset($arrayNamePermissions)){
+        if (isset($arrayNamePermissions)){
             $returnArray['arrayNamePermissions'] = $arrayNamePermissions;
         }
-        if(isset($returnArray)){
+        if (isset($returnArray)){
             return $returnArray;
         } else {
             return null;
@@ -105,7 +105,7 @@ class ControllerPermissionsTest extends TestCase
             $outputError="";
             $erroCount = 0;
             $controllerInfo = $this->getControllerInfo($classController);
-            if(isset($controllerInfo['arrayPermissions']) and isset($controllerInfo['arrayMethods'])){
+            if (isset($controllerInfo['arrayPermissions']) and isset($controllerInfo['arrayMethods'])){
                 $diffFuncoesPermissions = array_diff($controllerInfo['arrayMethods'], $controllerInfo['arrayPermissions']);
                 if ($diffFuncoesPermissions) {
                     // dump('diffFuncoesPermissions', $diffFuncoesPermissions);
@@ -125,14 +125,14 @@ class ControllerPermissionsTest extends TestCase
                     }
                 }
             }
-            if($erroCount > 0){
+            if ($erroCount > 0){
                 $outputClass = "\033[01;31m".$controllerInfo['class']."\033[0m";
                 $output.=$outputClass.$outputError;
                 $totalErroCount = $totalErroCount + $erroCount;
                 $controllerErroCount+=1;
             }
         }
-        if($totalErroCount > 0) {
+        if ($totalErroCount > 0) {
             $output.="\nControllers Com erro: \033[01;31m{$controllerErroCount}\033[0m de um total de \033[01;34m".count($this->arrayControllers)."\033[0m; ";
             $output.="\nHouveram um total de: \033[01;31m{$totalErroCount} \033[0m erros.\n";
             $erro = true;
@@ -159,21 +159,21 @@ class ControllerPermissionsTest extends TestCase
             $erroCount = 0;
             $controllerInfo = $this->getControllerInfo($classController);
 
-            if(!isset($controllerInfo['arrayPermissions']) and isset($controllerInfo['arrayMethods'])){
+            if (!isset($controllerInfo['arrayPermissions']) and isset($controllerInfo['arrayMethods'])){
                 $outputError.="\nNão foram criadas permissões para esse Controller:\n";
                 foreach ($controllerInfo['arrayMethods'] as $methodsItem) {
                     $outputError.= "Métodos: \033[01;32m{$methodsItem}\033[0m;\n";
                     $erroCount+=1;
                 }
             }
-            if($erroCount > 0){
+            if ($erroCount > 0){
                 $outputClass = "\033[01;31m".$controllerInfo['class']."\033[0m";
                 $output.=$outputClass.$outputError;
                 $totalErroCount = $totalErroCount + $erroCount;
                 $controllerErroCount+=1;
             }
         }
-        if($totalErroCount > 0) {
+        if ($totalErroCount > 0) {
             $output.="\nControllers Com erro: \033[01;31m{$controllerErroCount}\033[0m de um total de \033[01;34m".count($this->arrayControllers)."\033[0m; ";
             $output.="\nHouveram um total de: \033[01;31m{$totalErroCount} \033[0m erros.\n";
             $erro = true;
@@ -199,7 +199,7 @@ class ControllerPermissionsTest extends TestCase
             $erroCount = 0;
             $controllerInfo = $this->getControllerInfo($classController);
 
-            if(isset($controllerInfo['arrayPermissions']) and !isset($controllerInfo['arrayMethods'])){
+            if (isset($controllerInfo['arrayPermissions']) and !isset($controllerInfo['arrayMethods'])){
 
                 $outputError.="\nNão existem métodos criados porem existem permissões criadas:\n";
                 foreach ($controllerInfo['arrayPermissions'] as $permissionsItem) {
@@ -207,14 +207,14 @@ class ControllerPermissionsTest extends TestCase
                     $erroCount+=1;
                 }
             }
-            if($erroCount > 0){
+            if ($erroCount > 0){
                 $outputClass = "\033[01;31m".$controllerInfo['class']."\033[0m";
                 $output.=$outputClass.$outputError;
                 $totalErroCount = $totalErroCount + $erroCount;
                 $controllerErroCount+=1;
             }
         }
-        if($totalErroCount > 0) {
+        if ($totalErroCount > 0) {
             $output.="\nControllers Com erro: \033[01;31m{$controllerErroCount}\033[0m de um total de \033[01;34m".count($this->arrayControllers)."\033[0m; ";
             $output.="\nHouveram um total de: \033[01;31m{$totalErroCount} \033[0m erros.\n";
             $erro = true;

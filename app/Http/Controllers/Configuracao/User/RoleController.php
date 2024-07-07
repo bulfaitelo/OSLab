@@ -62,7 +62,7 @@ class RoleController extends Controller
             'name' => $request->name,
             'description' => $request->description
             ]);
-        if($role) {
+        if ($role) {
             return redirect()->route('configuracao.roles.index')->with('success', 'Perfil cadastrado com Sucesso!'); ;
         }
 
@@ -105,7 +105,7 @@ class RoleController extends Controller
         ]);
         $role->name = $request->name;
         $role->description = $request->description;
-        if($role->save()){
+        if ($role->save()){
             return redirect()->route('configuracao.roles.edit', [$id])->with('success', 'Perfil atualizado!'); ;
         }
     }
@@ -119,7 +119,7 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        if($role) {
+        if ($role) {
             return redirect()->route('configuracao.roles.index')->with('success', 'Perfil Excluído com Sucesso!'); ;
         }
     }

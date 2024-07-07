@@ -98,7 +98,6 @@ class ChecklistController extends Controller
             ->with('success', 'Checklist Atualizado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
-
         }
     }
 
@@ -113,9 +112,9 @@ class ChecklistController extends Controller
                 ->with('warning', 'Checklist está sendo usado em alguma categoria!');
             }
             $checklist->delete();
+
             return redirect()->route('checklist.index')
                 ->with('success', 'Checklist excluído com sucesso.');
-
         } catch (\Throwable $th) {
             throw $th;
         }

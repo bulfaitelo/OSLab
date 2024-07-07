@@ -194,7 +194,7 @@ class UserController extends Controller
         }
         $user->syncRoles(array_map(fn($val)=>(int)$val, $request->role));
 
-        if($user->save()){
+        if ($user->save()){
             return redirect()->route('configuracao.users.index', [$user->id])->with('success', 'Permissão atualizada!'); ;
         }
     }
@@ -208,7 +208,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            if(Auth::id() == $user->id) {
+            if (Auth::id() == $user->id) {
                 return redirect()->route('configuracao.users.index')
                 ->with('warning', 'o Usuário logado não pode ser excluído!');
             }

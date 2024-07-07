@@ -82,7 +82,7 @@ class Wiki extends Model
                 });
             });
         }
-        if($request->categoria_id){
+        if ($request->categoria_id){
             $queryWiki->where('categoria_id', $request->categoria_id);
         }
         return $queryWiki->paginate($itensPorPagina);

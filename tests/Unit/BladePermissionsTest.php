@@ -34,7 +34,7 @@ class BladePermissionsTest extends TestCase
             $file_string = file_get_contents($file_path);
             preg_match_all('/@can( )?\(\'[\w\s]+\'\)/', $file_string, $itens);
 
-            if(!isset($permission_blade)){
+            if (!isset($permission_blade)){
                 $permission_blade = [];
             }
             // dump($file_path, $itens);
@@ -48,7 +48,7 @@ class BladePermissionsTest extends TestCase
 
 
             $permission_count = preg_match_all('/@canany( )?\(\[([\'\w\s,]+)\]\)/', $file_string, $canany_array);
-            if($permission_count > 0){
+            if ($permission_count > 0){
 
                 foreach ($canany_array[2] as $temp_canany) {
                     $canany = $temp_canany;
@@ -81,7 +81,7 @@ class BladePermissionsTest extends TestCase
         preg_match_all('/\'can\'( )+=>( )+([\[])()+[\s\w\',]+\],/', $file_string, $itens);
         foreach ($itens[0] as $permission_temp) {
             foreach (explode("'", explode("'can'", $permission_temp)[1]) as $permission_temp_sub) {
-                if(preg_match('/[\w]+/', $permission_temp_sub)){
+                if (preg_match('/[\w]+/', $permission_temp_sub)){
                     $permission_blade[] = $permission_temp_sub;
                     $permission_blade_path[$permission_temp_sub] = $file;
                 }
@@ -113,7 +113,7 @@ class BladePermissionsTest extends TestCase
         $erro = false;
         $output_erro = '';
         $test = array_diff($this->permission_blade, $this->permission_db);
-        if(count($test) > 0){
+        if (count($test) > 0){
             $erro = true;
             $output_erro = "\nPermissions divergentes da blade com o banco de dados:\n";
             foreach ($test as $key => $value) {
@@ -128,7 +128,7 @@ class BladePermissionsTest extends TestCase
         $erro = false;
         $output_erro = '';
         $test = array_diff($this->permission_db, $this->permission_blade);
-        if(count($test) > 0){
+        if (count($test) > 0){
             $erro = true;
             $output_erro = "\nPermissions criadas e não usadas em nenhuma blade:\n";
             foreach ($test as $key => $value) {

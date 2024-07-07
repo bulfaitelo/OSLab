@@ -12,7 +12,6 @@ class BuscarController extends Controller
 {
     public function index(Request $request)
     {
-
         $rowLimit = 5;
 
         $os = OsService::getDataTable($request, $rowLimit);

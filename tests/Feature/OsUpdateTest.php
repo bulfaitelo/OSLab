@@ -47,7 +47,7 @@ class OsUpdateTest extends TestCase
         $os = Os::find($data['id']);
         $this->put(route('os.update', $data['id']),  $data);
         $osUpdated = Os::find($data['id']);
-        if($os->status_id == $data['status_id']){
+        if ($os->status_id == $data['status_id']){
             $this->assertCount(1, $osUpdated->statusLogs);
         } else {
             $this->assertCount(2, $osUpdated->statusLogs);

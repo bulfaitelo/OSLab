@@ -68,7 +68,7 @@ class ReceitaPagamentoController extends Controller
             $pagamento->user_id = Auth::id();
             $pagamento->vencimento =  $request->vencimento;
             $pagamento->parcela = $request->parcela;
-            if($request->pago) {
+            if ($request->pago) {
                 $pagamento->valor = $request->pagamento_valor;
                 $pagamento->data_pagamento = $request->data_pagamento;
             } else {
@@ -77,7 +77,7 @@ class ReceitaPagamentoController extends Controller
             }
             $pagamento->save();
 
-            if($request->pago) {
+            if ($request->pago) {
                 if (($receita->pagamentos->sum('valor') + $request->pagamento_valor) >= $receita->valor) {
                     $receita->data_quitacao = $request->data_pagamento;
                 }

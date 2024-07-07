@@ -40,7 +40,7 @@ class BackupController extends Controller
      */
     public function download(Request $request)
     {
-        if(file_exists($request->path)){
+        if (file_exists($request->path)){
             return response()->download($request->path);
         }
         return false;
@@ -52,7 +52,7 @@ class BackupController extends Controller
     public function destroy(Request $request)
     {
 
-        if(file_exists($request->path)){
+        if (file_exists($request->path)){
             try {
                 unlink($request->path);
                 return redirect()->route('configuracao.backup.index')
