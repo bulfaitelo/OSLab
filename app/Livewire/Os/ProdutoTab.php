@@ -150,7 +150,7 @@ class ProdutoTab extends Component
     // }
 
     // private function insertSaidaMovimentacaoProduto($estoque, $quantidade, $osProdutoId): void
-    {
+    // {
     //     try {
     //         $produto = Produto::find($this->produto_id);
     //         $produto->movimentacao()->create([
@@ -168,7 +168,7 @@ class ProdutoTab extends Component
     // }
 
     // private function insertEntradaMovimentacaoProduto($quantidade, $osProdutoId): void
-    {
+    // {
     //     try {
     //         $produto = Produto::find($this->produto_id);
     //         $produto->movimentacao()->create([

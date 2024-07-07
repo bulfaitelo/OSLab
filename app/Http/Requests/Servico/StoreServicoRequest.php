@@ -27,14 +27,13 @@ class StoreServicoRequest extends FormRequest
         ];
     }
 
-
     /**
      * Prepare the data for validation.
      */
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'valor_servico' => str_replace(',', '.', str_replace('.', '', $this->valor_servico))
+            'valor_servico' => str_replace(',', '.', str_replace('.', '', $this->valor_servico)),
         ]);
     }
 
@@ -46,5 +45,4 @@ class StoreServicoRequest extends FormRequest
             'name.unique' => 'Esse serviço já foi criado!',
         ];
     }
-
 }

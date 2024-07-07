@@ -26,7 +26,7 @@ class Backup extends Component
     }
 
     /**
-     * Retorna a lista de backup
+     * Retorna a lista de backup.
      */
     private function getBackupInfo(): array
     {
@@ -56,6 +56,7 @@ class Backup extends Component
             }
             $info[] = $destInfo;
         }
+
         return $info;
     }
 
@@ -68,10 +69,10 @@ class Backup extends Component
 
     /**
      * Retorna o caminho no backup com base no disco e arquivo.
+     *
      * @param  string  $disk  Disco onde está o arquivo
      * @param  string  $fileName  nome do arquivo
      * @return string|false retorna o caminho completo ou false caso nao exista
-
     */
     protected function getFilePAth($disk, $fileName): string|false
     {
@@ -80,6 +81,7 @@ class Backup extends Component
         if (file_exists($filePath)) {
             return $filePath;
         }
+
         return false;
     }
 }

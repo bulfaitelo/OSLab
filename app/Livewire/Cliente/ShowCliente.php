@@ -9,6 +9,7 @@ class ShowCliente extends Component
     public $cliente;
 
     public $showTab = 'detalhes';
+
     public function render()
     {
         if ($this->showTab == 'detalhes') {
@@ -16,7 +17,7 @@ class ShowCliente extends Component
                 'cliente' => $this->cliente,
                 'showTab' => $this->showTab,
             ]);
-        } else if ($this->showTab == 'os') {
+        } elseif ($this->showTab == 'os') {
             return view('livewire.cliente.show-cliente-os', [
                 'os' => $this->cliente->os,
                 'showTab' => $this->showTab,

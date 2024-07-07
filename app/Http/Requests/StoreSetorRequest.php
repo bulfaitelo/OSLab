@@ -29,7 +29,7 @@ class StoreSetorRequest extends FormRequest
     public function messages()
     {
         return [
-            'setor.required' => 'O campo Setor é obrigatório'
+            'setor.required' => 'O campo Setor é obrigatório',
         ];
     }
 }
