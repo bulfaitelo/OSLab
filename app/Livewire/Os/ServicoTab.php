@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class ServicoTab extends Component
 {
-
     public $os;
     public $valor_servico;
     public $servico_id;
@@ -27,17 +26,19 @@ class ServicoTab extends Component
     /**
      * Prepare the data for validation.
      */
-    protected function prepareForValidation($attributes) {
-        $attributes['valor_servico'] = str_replace(',', '.', str_replace('.','', $attributes['valor_servico']));
+    protected function prepareForValidation($attributes)
+    {
+        $attributes['valor_servico'] = str_replace(',', '.', str_replace('.', '', $attributes['valor_servico']));
+
         return $attributes;
     }
 
     public function render()
     {
-
         $os_servico = $this->os->servicos()->get();
+
         return view('livewire.os.servico-tab', [
-            'os_servico' => $os_servico
+            'os_servico' => $os_servico,
         ]);
     }
 
@@ -72,8 +73,8 @@ class ServicoTab extends Component
         }
     }
 
-
-    public function delete($id) {
+    public function delete($id)
+    {
         try {
             if ($this->os->fatura_id) {
                 // Apagando o produto digitado.
@@ -89,7 +90,8 @@ class ServicoTab extends Component
         }
     }
 
-    private function createOsServico($servico) : object {
+    private function createOsServico($servico): object
+    {
         DB::beginTransaction();
         try {
             $servico['valor_servico_total'] = $servico['valor_servico'] * $servico['quantidade'];
@@ -98,6 +100,7 @@ class ServicoTab extends Component
                 $servico
             );
             DB::commit();
+
             return $osServico;
         } catch (\Throwable $th) {
             DB::rollback();

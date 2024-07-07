@@ -23,12 +23,13 @@ class OsProduto extends Model
     ];
 
     /**
-     * Retornar o Produto
+     * Retornar o Produto.
      *
      * Retorna o Produto relacionado
+     *
      * @return BelongsTo Produto
      **/
-    public function produto() : BelongsTo
+    public function produto(): BelongsTo
     {
         return $this->belongsTo(Produto::class);
     }
@@ -54,5 +55,4 @@ class OsProduto extends Model
     //         get: fn (string $value) => number_format($value,2,",",".")
     //     );
     // }
-
 }

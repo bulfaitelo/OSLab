@@ -10,7 +10,6 @@ class Movimentacao extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'quantidade_movimentada',
         'tipo_movimentacao',
@@ -24,24 +23,26 @@ class Movimentacao extends Model
     ];
 
     /**
-     * Retornar o valor formatado em BRL
+     * Retornar o valor formatado em BRL.
      *
      * @return Attribute
      **/
-    protected function valorCusto() : Attribute {
+    protected function valorCusto(): Attribute
+    {
         return Attribute::make(
-            get: fn ($value) => ($value) ?  number_format($value,2,",",".") : ''
+            get: fn ($value) => ($value) ? number_format($value, 2, ',', '.') : ''
         );
     }
 
     /**
-     * Retornar o tipo de movimentação em Texto
+     * Retornar o tipo de movimentação em Texto.
      *
      * @return Attribute
      **/
-    protected function tipoMovimentacao() : Attribute {
+    protected function tipoMovimentacao(): Attribute
+    {
         return Attribute::make(
-            get: fn ($value) => ($value == 1) ? "Entrada" : "Saída"
+            get: fn ($value) => ($value == 1) ? 'Entrada' : 'Saída'
         );
     }
 }

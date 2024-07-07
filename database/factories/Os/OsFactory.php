@@ -21,7 +21,6 @@ class OsFactory extends Factory
      */
     protected $model = Os::class;
 
-
     /**
      * Define the model's default state.
      *

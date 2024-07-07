@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Servico\Servico;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsServicos extends Seeder
@@ -51,16 +50,13 @@ class DefaultsServicos extends Seeder
                 'valor_servico' => '230.00',
             ],
 
-
-
-
         ];
 
         foreach ($insert as $key => $value) {
             Servico::updateOrCreate(
                 [
                     'id' => $value['id'],
-                    'name'  => $value['name'],
+                    'name' => $value['name'],
                 ],
                 [
                     'descricao' => $value['descricao'],

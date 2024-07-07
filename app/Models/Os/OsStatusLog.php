@@ -18,16 +18,15 @@ class OsStatusLog extends Model
         'descricao',
     ];
 
-
     /**
-     * Retornar o Status
+     * Retornar o Status.
      *
      * Retorna o Status relacionado
+     *
      * @return BelongsTo Status
      **/
-    public function status() : BelongsTo
+    public function status(): BelongsTo
     {
         return $this->belongsTo(OsStatus::class);
     }
-
 }

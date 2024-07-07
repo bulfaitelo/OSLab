@@ -3,16 +3,15 @@
 namespace Tests\Feature;
 
 use App\Livewire\Os\ServicoTab;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use App\Models\Cliente\Cliente;
 use App\Models\Os\Os;
 use App\Models\User;
 use App\Services\Os\OsService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+use Tests\TestCase;
 
 class OsServicoCreateDeleteTest extends TestCase
 {
@@ -21,7 +20,7 @@ class OsServicoCreateDeleteTest extends TestCase
     private $osService;
     private $user;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -36,7 +35,7 @@ class OsServicoCreateDeleteTest extends TestCase
     public function testCreateServico(array $data, array $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
-        Livewire::test(ServicoTab::class, ['os' => $os ])
+        Livewire::test(ServicoTab::class, ['os' => $os])
             ->set('servico_id', $data['servico_id'])
             ->set('quantidade', $data['quantidade'])
             ->set('valor_servico', $data['valor_servico'])
@@ -47,7 +46,7 @@ class OsServicoCreateDeleteTest extends TestCase
 
         $this->assertDatabaseHas('os_servicos', $expected);
         $osServico = $os->servicos()->where('servico_id', $data['servico_id'])->sole();
-        $this->assertEquals($osServico->valor_servico_total, ($expected['valor_servico'] * $expected['quantidade']));
+        $this->assertEquals($osServico->valor_servico_total, $expected['valor_servico'] * $expected['quantidade']);
     }
 
     #[Depends('testCreateServico')]
@@ -55,7 +54,7 @@ class OsServicoCreateDeleteTest extends TestCase
     public function testDeleteServico($data, $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
-        Livewire::test(ServicoTab::class, ['os' => $os ])
+        Livewire::test(ServicoTab::class, ['os' => $os])
             ->set('servico_id', $data['servico_id'])
             ->set('quantidade', $data['quantidade'])
             ->set('valor_servico', $data['valor_servico'])
@@ -77,7 +76,7 @@ class OsServicoCreateDeleteTest extends TestCase
         $os = Os::findOrFail($data['os_id']);
         $os->fatura_id = 1;
         $os->save();
-        Livewire::test(ServicoTab::class, ['os' => $os ])
+        Livewire::test(ServicoTab::class, ['os' => $os])
             ->set('servico_id', $data['servico_id'])
             ->set('quantidade', $data['quantidade'])
             ->set('valor_servico', $data['valor_servico'])
@@ -93,7 +92,7 @@ class OsServicoCreateDeleteTest extends TestCase
     public function testDeleteServicoFaturado($data, $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
-        Livewire::test(ServicoTab::class, ['os' => $os ])
+        Livewire::test(ServicoTab::class, ['os' => $os])
             ->set('servico_id', $data['servico_id'])
             ->set('quantidade', $data['quantidade'])
             ->set('valor_servico', $data['valor_servico'])
@@ -136,7 +135,7 @@ class OsServicoCreateDeleteTest extends TestCase
                 'os_id' => 8,
                 'servico_id' => 3,
                 'quantidade' => 9,
-                'valor_servico' => "12,45",
+                'valor_servico' => '12,45',
             ],
             // $expected
             [
@@ -146,7 +145,7 @@ class OsServicoCreateDeleteTest extends TestCase
                 'valor_servico' => 12.45,
             ],
         ];
+
         return $data;
     }
-
 }

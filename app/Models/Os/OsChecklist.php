@@ -15,6 +15,4 @@ class OsChecklist extends Model
         'user_id',
         'checklist_id',
     ];
-
-
 }

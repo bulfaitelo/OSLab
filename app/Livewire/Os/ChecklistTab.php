@@ -10,7 +10,7 @@ class ChecklistTab extends Component
 {
     public $os;
     public $checklistForm;
-    public $form ;
+    public $form;
 
     public function render()
     {

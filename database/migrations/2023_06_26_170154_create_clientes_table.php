@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('celular')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('password')->nullable();
-            $table->string('cep',10)->nullable();
+            $table->string('cep', 10)->nullable();
             $table->string('logradouro')->nullable();
             $table->string('numero')->nullable();
             $table->string('complemento')->nullable();

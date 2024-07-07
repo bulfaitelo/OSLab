@@ -10,5 +10,4 @@ class OsStatus extends Model
     use HasFactory;
 
     protected $table = 'os_status';
-
 }

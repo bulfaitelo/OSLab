@@ -35,6 +35,5 @@ class DatabaseDefaultPermissionsUpdate extends Seeder
         $this->call(DefaultsConfigFormaPagamento::class);
         $this->call(DefaultsConfigSistema::class);
         $this->call(DefaultsChecklist::class);
-
     }
 }

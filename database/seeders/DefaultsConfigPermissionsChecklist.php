@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
-
 
 class DefaultsConfigPermissionsChecklist extends Seeder
 {
@@ -14,7 +12,7 @@ class DefaultsConfigPermissionsChecklist extends Seeder
      */
     public function run(): void
     {
-                // permissões
+        // permissões
         $insert = [
             [
                 'description' => 'Acesso a listagem de Checklist',
@@ -48,15 +46,14 @@ class DefaultsConfigPermissionsChecklist extends Seeder
             ],
         ];
 
-
         foreach ($insert as $key => $value) {
             Permission::updateOrCreate(
-            // DB::table('permissions')->updateOrInsert(
-                [   'name' => $value['name'],
-                    'guard_name' => $value['guard_name']
+                // DB::table('permissions')->updateOrInsert(
+                ['name' => $value['name'],
+                    'guard_name' => $value['guard_name'],
                 ],
                 [
-                    'group_id'  => $value['group_id'],
+                    'group_id' => $value['group_id'],
                     'description' => $value['description'],
                 ]
             );

@@ -2,13 +2,13 @@
 
 namespace App\Models\Wiki;
 
+use App\Models\Configuracao\Os\OsCategoria;
+use App\Models\Configuracao\Wiki\Fabricante;
+use App\Models\Configuracao\Wiki\Modelo;
+use App\Models\Os\Os;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Configuracao\Wiki\Modelo;
-use App\Models\Configuracao\Wiki\Fabricante;
-use App\Models\User;
-use App\Models\Configuracao\Os\OsCategoria;
-use App\Models\Os\Os;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 
@@ -16,38 +16,37 @@ class Wiki extends Model
 {
     use HasFactory;
 
-
     public function fabricante()
     {
         return $this->belongsTo(Fabricante::class);
     }
 
-    public function modelos ()
+    public function modelos()
     {
         return $this->hasMany(Modelo::class);
     }
 
-    public function links ()
+    public function links()
     {
         return $this->hasMany(Link::class);
     }
 
-    public function files ()
+    public function files()
     {
         return $this->hasMany(File::class);
     }
 
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function categoria() : BelongsTo
+    public function categoria(): BelongsTo
     {
         return $this->belongsTo(OsCategoria::class);
     }
 
-    public function os ()
+    public function os()
     {
         return $this->hasManyThrough(
             Os::class,
@@ -63,14 +62,14 @@ class Wiki extends Model
         ->with('status');
     }
 
-
     /**
-     * Retorna o objeto pra modelagem da tabela de Produtos
+     * Retorna o objeto pra modelagem da tabela de Produtos.
      *
-     * @param Request $request
-     * @param int $itensPorPagina default 100
+     * @param  Request  $request
+     * @param  int  $itensPorPagina  default 100
      */
-    static public function getDataTable(Request $request, int $itensPorPagina = 100) : object {
+    public static function getDataTable(Request $request, int $itensPorPagina = 100): object
+    {
         $queryWiki = self::query();
         $queryWiki->with('modelos');
         $queryWiki->with('user');
@@ -90,21 +89,17 @@ class Wiki extends Model
         if ($request->categoria_id) {
             $queryWiki->where('categoria_id', $request->categoria_id);
         }
+
         return $queryWiki->paginate($itensPorPagina);
     }
 
-
-
-
     public function modelosTitle()
     {
-        $return = "";
+        $return = '';
         foreach ($this->modelos as $value) {
-            $return.= $value->name.', ';
+            $return .= $value->name.', ';
         }
+
         return rtrim($return, ', ');
     }
-
-
-
 }

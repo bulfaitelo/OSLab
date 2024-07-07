@@ -20,12 +20,13 @@ class OsServico extends Model
     ];
 
     /**
-     * Retornar o Serviço
+     * Retornar o Serviço.
      *
      * Retorna o Serviço relacionado
+     *
      * @return BelongsTo Serviço
      **/
-    public function servico() : BelongsTo
+    public function servico(): BelongsTo
     {
         return $this->belongsTo(Servico::class);
     }

@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-
 use App\Models\Configuracao\Sistema\SistemaConfig;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsConfigSistema extends Seeder
@@ -40,9 +38,6 @@ class DefaultsConfigSistema extends Seeder
                 'value' => '"4"',
             ],
 
-
-
-
             // [
             //     'key' => 'default_os_create_category',
             //     'value' => '',
@@ -59,7 +54,7 @@ class DefaultsConfigSistema extends Seeder
                     'key' => $value['key'],
                 ],
                 [
-                    'value'  => $value['value'],
+                    'value' => $value['value'],
                     // 'descricao'  => $value['descricao'],
                     // 'model'  => $value['model'],
                     // 'group_id'  => $value['group_id'],

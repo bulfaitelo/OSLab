@@ -33,7 +33,7 @@ return new class extends Migration
             $table->dropForeign('fk_os_categorias_checklists');
             $table->dropColumn([
                 'checklist_id',
-                'checklist_required'
+                'checklist_required',
             ]);
         });
 

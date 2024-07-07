@@ -17,7 +17,6 @@ class ClienteFactory extends Factory
      */
     protected $model = Cliente::class;
 
-
     /**
      * Define the model's default state.
      *
@@ -27,7 +26,7 @@ class ClienteFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' =>fake()->unique()->safeEmail(),
+            'email' => fake()->unique()->safeEmail(),
         ];
     }
 }

@@ -5,8 +5,6 @@ namespace App\Models\Os;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use function PHPUnit\Framework\returnSelf;
-
 class OsInformacao extends Model
 {
     use HasFactory;
@@ -22,49 +20,55 @@ class OsInformacao extends Model
     ];
 
     protected $casts = [
-        'validade_link' => 'datetime'
+        'validade_link' => 'datetime',
     ];
 
     /**
-     * Retorna o tipo com base no id
+     * Retorna o tipo com base no id.
      *
      * @return string Tipo
      */
-    function getTipo(): string {
+    public function getTipo(): string
+    {
         $tipo = [
             1 => 'Anotação',
             2 => 'Senha',
             3 => 'Arquivo',
         ];
+
         return $tipo[$this->tipo];
     }
 
     /**
-     * Retorna o status com base no id
+     * Retorna o status com base no id.
      *
      * @return string status
      */
-    function getStatus(): string {
+    public function getStatus(): string
+    {
         $status = [
             1 => 'Cadastrado',
             2 => 'Expirado',
             3 => 'Atualizado pelo Cliente',
         ];
-        return $status[$this->status] ;
+
+        return $status[$this->status];
     }
 
     /**
-     * trata o retorno da descrição
+     * trata o retorno da descrição.
      *
      * @return string Descrição
      */
-    function getDescricao()  {
+    public function getDescricao()
+    {
         if ($this->tipo == 1) {
             return $this->informacao;
         }
-        if (($this->tipo == 3) && (!$this->descricao) ) {
-            return explode('/',$this->informacao)[2];
+        if (($this->tipo == 3) && (! $this->descricao)) {
+            return explode('/', $this->informacao)[2];
         }
+
         return $this->descricao;
     }
 
@@ -73,7 +77,8 @@ class OsInformacao extends Model
         return asset('storage/'.$this->informacao);
     }
 
-    public function urlShare(): string {
+    public function urlShare(): string
+    {
         return route('os.public.edit', $this->uuid);
     }
 }

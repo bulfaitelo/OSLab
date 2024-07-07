@@ -11,9 +11,8 @@ class OsCategoria extends Model
 {
     use HasFactory;
 
-
     /**
-     * Retorna a garantia
+     * Retorna a garantia.
      *
      * @var array
      */
@@ -23,7 +22,7 @@ class OsCategoria extends Model
     }
 
     /**
-     * Retorna a o checklist
+     * Retorna a o checklist.
      *
      * @var array
      */
@@ -32,9 +31,8 @@ class OsCategoria extends Model
         return $this->belongsTo(Checklist::class);
     }
 
-
     /**
-     * Retorna a o centroCusto
+     * Retorna a o centroCusto.
      *
      * @var array
      */

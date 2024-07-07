@@ -2,20 +2,17 @@
 
 namespace App\Livewire\Os;
 
-
 use App\Models\Produto\Produto;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ProdutoTab extends Component
 {
-
     public $os;
     public $valor_custo;
     public $valor_venda;
     public $quantidade;
     public $produto_id;
-
 
     protected function rules(): array
     {
@@ -30,19 +27,21 @@ class ProdutoTab extends Component
     /**
      * Prepare the data for validation.
      */
-    protected function prepareForValidation($attributes) {
-        $attributes['valor_custo'] = str_replace(',', '.', str_replace('.','', $attributes['valor_custo']));
-        $attributes['valor_venda'] = str_replace(',', '.', str_replace('.','', $attributes['valor_venda']));
+    protected function prepareForValidation($attributes)
+    {
+        $attributes['valor_custo'] = str_replace(',', '.', str_replace('.', '', $attributes['valor_custo']));
+        $attributes['valor_venda'] = str_replace(',', '.', str_replace('.', '', $attributes['valor_venda']));
+
         return $attributes;
     }
-
 
     public function render()
     {
         $os_produto = $this->os->produtos()->get();
+
         return view('livewire.os.produto-tab', [
             'os_produto' => $os_produto,
-            'os' => $this->os
+            'os' => $this->os,
         ]);
     }
 
@@ -57,8 +56,6 @@ class ProdutoTab extends Component
             $this->quantidade = 1;
         }
     }
-
-
 
     public function create()
     {
@@ -79,7 +76,8 @@ class ProdutoTab extends Component
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         try {
             if ($this->os->fatura_id) {
                 // Apagando o produto digitado.
@@ -95,9 +93,8 @@ class ProdutoTab extends Component
         }
     }
 
-
-    private function createOsProduto($produto) {
-
+    private function createOsProduto($produto)
+    {
         DB::beginTransaction();
         try {
             $produto['valor_custo_total'] = $produto['valor_custo'] * $produto['quantidade'];
@@ -111,13 +108,14 @@ class ProdutoTab extends Component
                 $osProdutoTemp->valor_venda_total = ($produto['valor_venda_total'] + ($produto['valor_venda_total'] * $osProdutoTemp->quantidade));
                 $osProdutoTemp->increment('quantidade', $produto['quantidade']);
                 $osProdutoReturn = $osProdutoTemp->save();
-            } else{
+            } else {
                 $osProdutoReturn = $osProduto->create(
                     $produto
                 );
             }
             // $this->updateProdutoQuantidadeEstoque();
             DB::commit();
+
             return $osProdutoReturn;
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -144,7 +142,6 @@ class ProdutoTab extends Component
 
     //             # é this por quant, a sobra e gerado uma entrada e depois uma saida do valor total da quantidade
     //         }
-
 
     //     } catch (\Throwable $th) {
     //         throw $th;
@@ -188,7 +185,7 @@ class ProdutoTab extends Component
     //     }
     // }
 
-    private  function getValorCusto()
+    private function getValorCusto()
     {
         return str_replace(',', '.', str_replace('.', '', $this->valor_custo));
     }

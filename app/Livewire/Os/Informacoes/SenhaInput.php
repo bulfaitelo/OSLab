@@ -26,7 +26,8 @@ class SenhaInput extends Component
      * @param  int  $id  id
      * @return void
      **/
-    public function showPass($id) {
+    public function showPass($id)
+    {
         if ($this->checkPass == $id) {
             $this->checkPass = '';
         } else {

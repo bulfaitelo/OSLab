@@ -13,7 +13,6 @@ class Modelo extends Model
 
     protected $table = 'wiki_models';
 
-
     public function wiki()
     {
         return $this->belongsTo(Wiki::class);

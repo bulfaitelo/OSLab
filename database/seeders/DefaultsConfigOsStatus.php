@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Configuracao\Os\OsStatus;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsConfigOsStatus extends Seeder
@@ -120,15 +119,15 @@ class DefaultsConfigOsStatus extends Seeder
             OsStatus::updateOrCreate(
                 [
                     'id' => $value['id'],
-                    'name'  => $value['name'],
+                    'name' => $value['name'],
                 ],
                 [
                     'color' => $value['color'],
                     'descricao' => $value['descricao'],
-                    'email_id' => (isset($value['email_id'] ) == true ? $value['email_id'] : null),
-                    'ativar_rastreio' => (isset($value['ativar_rastreio'] ) == true ? $value['ativar_rastreio'] : null),
-                    'ativar_email' => (isset($value['ativar_email'] ) == true ? $value['ativar_email'] : null),
-                    'prazo_email' => (isset($value['prazo_email'] ) == true ? $value['prazo_email'] : null),
+                    'email_id' => (isset($value['email_id']) == true ? $value['email_id'] : null),
+                    'ativar_rastreio' => (isset($value['ativar_rastreio']) == true ? $value['ativar_rastreio'] : null),
+                    'ativar_email' => (isset($value['ativar_email']) == true ? $value['ativar_email'] : null),
+                    'prazo_email' => (isset($value['prazo_email']) == true ? $value['prazo_email'] : null),
                 ]
             );
         }

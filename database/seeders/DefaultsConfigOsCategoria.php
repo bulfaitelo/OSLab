@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Configuracao\Os\OsCategoria;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsConfigOsCategoria extends Seeder
@@ -65,7 +64,7 @@ class DefaultsConfigOsCategoria extends Seeder
                     'id' => $value['id'],
                 ],
                 [
-                    'name'  => $value['name'],
+                    'name' => $value['name'],
                     'descricao' => $value['descricao'],
                     'garantia_id' => $value['garantia_id'],
                     'user_id' => $value['user_id'],

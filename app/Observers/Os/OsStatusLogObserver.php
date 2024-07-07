@@ -7,17 +7,17 @@ use App\Models\Os\Os;
 class OsStatusLogObserver
 {
     private $statusIdtemp;
+
     /**
      * Handle the Os "created" event.
      */
     public function created(Os $os): void
     {
         $os->statusLogs()->create([
-            'status_id'=> $os->status_id,
-            'user_id'=> $os->user_id,
+            'status_id' => $os->status_id,
+            'user_id' => $os->user_id,
         ]);
     }
-
 
     /**
      * Handle the Os "updated" event.
@@ -26,13 +26,11 @@ class OsStatusLogObserver
     {
         if ($os->getOriginal('status_id') != (int) $os->status_id) {
             $os->statusLogs()->create([
-                'status_id'=> $os->status_id,
-                'user_id'=> $os->user_id,
+                'status_id' => $os->status_id,
+                'user_id' => $os->user_id,
             ]);
         }
     }
-
-
 
     /**
      * Handle the Os "deleted" event.

@@ -41,7 +41,6 @@ return new class extends Migration
             $table->foreign('os_id', 'fk_contas_os')
             ->references('id')->on('os');
         });
-
     }
 
     /**

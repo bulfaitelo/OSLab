@@ -2,23 +2,21 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use App\Models\Cliente\Cliente;
 use App\Models\User;
 use App\Services\Os\OsService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\TestCase;
 
 class OsCreateTest extends TestCase
 {
-
     use RefreshDatabase;
 
     private $osService;
     private $user;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -29,17 +27,17 @@ class OsCreateTest extends TestCase
     }
 
     #[DataProvider('osCreateData')]
-    public function testOsCreate(array $data, array $dataExpected) : void
+    public function testOsCreate(array $data, array $dataExpected): void
     {
         $this->user->hasPermissionTo('os_create');
-        $response = $this->post(route('os.store'),  $data);
+        $response = $this->post(route('os.store'), $data);
         $response->assertStatus(302);
         $response->assertSessionHasNoErrors();
-        $this->assertDatabaseHas('os', $dataExpected );
+        $this->assertDatabaseHas('os', $dataExpected);
     }
 
     /**
-     * DadaProvider
+     * DadaProvider.
      */
     public static function osCreateData(): array
     {
@@ -50,7 +48,7 @@ class OsCreateTest extends TestCase
                 'tecnico_id' => 1,
                 'categoria_id' => 1,
                 'status_id' => 10,
-                'data_entrada' =>  now()->format('Y-m-d'),
+                'data_entrada' => now()->format('Y-m-d'),
                 'data_saida' => now()->format('Y-m-d'),
                 'descricao' => 'Updataed Descrição',
                 'defeito' => 'Updataed Defeito',
@@ -64,14 +62,14 @@ class OsCreateTest extends TestCase
                 'tecnico_id' => 1,
                 'categoria_id' => 1,
                 'status_id' => 10,
-                'data_entrada' =>  now()->format('Y-m-d').' 00:00:00',
+                'data_entrada' => now()->format('Y-m-d').' 00:00:00',
                 'data_saida' => now()->format('Y-m-d').' 00:00:00',
                 'descricao' => 'Updataed Descrição',
                 'defeito' => 'Updataed Defeito',
                 'observacoes' => 'Updated Observações',
                 'laudo' => '\n Updated Laudo',
                 'serial' => 'Serial--123',
-            ]
+            ],
         ];
         $data['os_002'] = [
             // Send
@@ -80,7 +78,7 @@ class OsCreateTest extends TestCase
                 'tecnico_id' => 1,
                 'categoria_id' => 1,
                 'status_id' => 1,
-                'data_entrada' =>  now()->format('Y-m-d'),
+                'data_entrada' => now()->format('Y-m-d'),
                 'data_saida' => now()->format('Y-m-d'),
                 'descricao' => '<b>Updataed Descrição3432e!@#$$%$%¨%$</b>',
                 'defeito' => 'Updataed Defeito',
@@ -94,7 +92,7 @@ class OsCreateTest extends TestCase
                 'tecnico_id' => 1,
                 'categoria_id' => 1,
                 'status_id' => 1,
-                'data_entrada' =>  now()->format('Y-m-d').' 00:00:00',
+                'data_entrada' => now()->format('Y-m-d').' 00:00:00',
                 'data_saida' => now()->format('Y-m-d').' 00:00:00',
                 'descricao' => '<b>Updataed Descrição3432e!@#$$%$%¨%$</b>',
                 'defeito' => 'Updataed Defeito',
@@ -103,6 +101,7 @@ class OsCreateTest extends TestCase
                 'serial' => 'Serial--123#!@#@#',
             ],
         ];
+
         return $data;
     }
 }

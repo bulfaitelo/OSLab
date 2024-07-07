@@ -10,5 +10,4 @@ class PermissionsGroup extends Model
     use HasFactory;
 
     protected $table = 'permissions_group';
-
 }

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Checklist\Checklist;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsChecklist extends Seeder
@@ -17,10 +16,10 @@ class DefaultsChecklist extends Seeder
             [
                 'id' => 1,
                 'name' => 'Checklist Notebook',
-                'categoria_id'=> 2,
-                'user_id'=> 1,
-                'descricao'=> 'Checklist básico de reparo e notebooks',
-                'checklist'=> '[
+                'categoria_id' => 2,
+                'user_id' => 1,
+                'descricao' => 'Checklist básico de reparo e notebooks',
+                'checklist' => '[
                     {
                         "name": "checkbox-group-1694878113667-0",
                         "type": "checkbox-group",
@@ -341,7 +340,6 @@ class DefaultsChecklist extends Seeder
                 ]',
             ],
 
-
         ];
 
         foreach ($insert as $key => $value) {
@@ -351,10 +349,10 @@ class DefaultsChecklist extends Seeder
                     'name' => $value['name'],
                 ],
                 [
-                    'categoria_id'  => $value['categoria_id'],
-                    'user_id'  => $value['user_id'],
-                    'descricao'  => $value['descricao'],
-                    'checklist'  => $value['checklist'],
+                    'categoria_id' => $value['categoria_id'],
+                    'user_id' => $value['user_id'],
+                    'descricao' => $value['descricao'],
+                    'checklist' => $value['checklist'],
 
                 ]
             );
