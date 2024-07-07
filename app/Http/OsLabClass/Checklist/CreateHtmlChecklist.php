@@ -114,9 +114,8 @@ class CreateHtmlChecklist
                 ' >';
         $html .= '</div>';
 
-    return $html;
+        return $html;
     }
-
 
     /**
      * number.
@@ -151,9 +150,8 @@ class CreateHtmlChecklist
                 ' >';
         $html .= '</div>';
 
-    return $html;
+        return $html;
     }
-
 
     /**
      * textarea.
@@ -188,7 +186,6 @@ class CreateHtmlChecklist
         return $html;
     }
 
-
     /**
      * select.
      *
@@ -199,7 +196,6 @@ class CreateHtmlChecklist
      **/
     private function select(object $option): string
     {
-
         $html = '<div class="form-group">';
         $html .= '<label for="'.$option->name.'">'.$option->label.'</label>';
         if ($option->required) {
@@ -440,18 +436,14 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setValue(object $object) {
-
         $osValue = $this->osChecklist->where('name', $object->name)->first()?->value;
-        if (property_exists($object,'value') && ($osValue == null) ) {
+        if (property_exists($object, 'value') && ($osValue == null) ) {
             return $object->value;
         }
         if ($osValue) {
             return json_decode($osValue);
         }
-
-
     }
-
 
     /**
      * Define e retorna a inline para o HTML.
@@ -460,7 +452,7 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setInline(object $object) {
-        if (property_exists($object,'inline') && $object->inline == 'true') {
+        if (property_exists($object, 'inline') && $object->inline == 'true') {
 
             return '-inline';
         }
@@ -473,12 +465,11 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setMultiple(object $object) {
-        if (property_exists($object,'multiple') && $object->multiple == 'true') {
+        if (property_exists($object, 'multiple') && $object->multiple == 'true') {
 
             return ' multiple="multiple" ';
         }
     }
-
 
     /**
      * Define e retorna a rows para o HTML.
@@ -487,12 +478,11 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setRows(object $object) {
-        if (property_exists($object,'rows')) {
+        if (property_exists($object, 'rows')) {
 
             return ' rows="'.$object->rows.'" ';
         }
     }
-
 
     /**
      * Define e retorna a step para o HTML.
@@ -501,7 +491,7 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setStep(object $object) {
-        if (property_exists($object,'step')) {
+        if (property_exists($object, 'step')) {
 
             return ' step="'.$object->step.'" ';
         }
@@ -514,7 +504,7 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setMin(object $object) {
-        if (property_exists($object,'min')) {
+        if (property_exists($object, 'min')) {
 
             return ' min="'.$object->min.'" ';
         }
@@ -527,7 +517,7 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setMax(object $object) {
-        if (property_exists($object,'max')) {
+        if (property_exists($object, 'max')) {
 
             return ' max="'.$object->max.'" ';
         }
@@ -540,7 +530,7 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setRequired(object $object) {
-        if (property_exists($object,'required') && $object->required == 'true') {
+        if (property_exists($object, 'required') && $object->required == 'true') {
 
             return ' required="required" ';
         }
@@ -553,12 +543,11 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setTitle(object $object) {
-        if (property_exists($object,'description')) {
+        if (property_exists($object, 'description')) {
 
             return ' title="'.$object->description.'" ';
         }
     }
-
 
     /**
      * Define e retorna a placeholder para o HTML.
@@ -567,7 +556,7 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setPlaceholder(object $object) {
-        if (property_exists($object,'placeholder')) {
+        if (property_exists($object, 'placeholder')) {
 
             return ' placeholder="'.$object->placeholder.'" ';
         }
@@ -580,7 +569,7 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setMaxlength(object $object) {
-        if (property_exists($object,'maxlength')) {
+        if (property_exists($object, 'maxlength')) {
 
             return ' maxlength="'.$object->maxlength.'" ';
         }
@@ -593,7 +582,7 @@ class CreateHtmlChecklist
      * @return string|null
      **/
     private function setClass(object $object) {
-        if (property_exists($object,'className')) {
+        if (property_exists($object, 'className')) {
 
             return ' class="'.$object->className.'" ';
         }
