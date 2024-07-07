@@ -32,7 +32,7 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.os_listagem_padrao' => 'nullable|exists:os_status,id',
             'sistema.backup_local_store' => 'boolean',
             'sistema.backup_gdrive_store' => 'boolean',
-            // 'sistema.backup_recorrencia' => 'required|in:d,w,m,y',      
+            // 'sistema.backup_recorrencia' => 'required|in:d,w,m,y',
             'sistema.backup_horario' => 'required|date_format:H:i',
         ];
     }
@@ -48,18 +48,16 @@ class StoreSistemaConfigRequest extends FormRequest
         ];
     }
 
-    protected function passedValidation() {
+    protected function passedValidation()
+    {
         $data = $this->validated()['sistema'];
-
-
-
         foreach ($data as $key => $value) {
                 $data[$key] = json_encode($data[$key]);
         }
         // $data['os_listagem_padrao'] = json_encode($data['os_listagem_padrao']);
         // dd($data);
         $this->merge([
-            'sistema' => $data
+            'sistema' => $data,
         ]);
     }
 }

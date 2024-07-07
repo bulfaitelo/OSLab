@@ -28,7 +28,8 @@ class UpdateWikiRequest extends FormRequest
         ];
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
            'fabricante_id' => 'O Fabricante é obrigatório',
            'name' => 'O nome do dispositivo é obrigatório',

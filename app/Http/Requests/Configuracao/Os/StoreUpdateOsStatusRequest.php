@@ -29,12 +29,11 @@ class StoreUpdateOsStatusRequest extends FormRequest
         ];
     }
 
-
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
-           'name.required' => 'O nome do Status é obrigatório',
-           'color.required' => 'Selecione uma das opções de cores a baixo',
-
+            'name.required' => 'O nome do Status é obrigatório',
+            'color.required' => 'Selecione uma das opções de cores a baixo',
         ];
     }
 }

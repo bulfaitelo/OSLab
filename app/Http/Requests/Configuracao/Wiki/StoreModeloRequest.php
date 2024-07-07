@@ -28,7 +28,8 @@ class StoreModeloRequest extends FormRequest
         ];
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'name.required' => 'O nome de Modelo é obrigatório',
             'name.unique' => 'Esse Modelo já foi criado!',

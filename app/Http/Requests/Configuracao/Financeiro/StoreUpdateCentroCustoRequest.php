@@ -22,15 +22,16 @@ class StoreUpdateCentroCustoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=> 'required',
+            'name' => 'required',
             'receita' => 'required_without:despesa|in:1,null',
-            'despesa' => 'required_without:receita|in:1,null'
+            'despesa' => 'required_without:receita|in:1,null',
         ];
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
-            'name' => 'O campo Centro de Custo é obrigatório'
+            'name' => 'O campo Centro de Custo é obrigatório',
         ];
     }
 }

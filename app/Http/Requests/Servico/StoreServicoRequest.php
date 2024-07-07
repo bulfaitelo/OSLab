@@ -38,7 +38,8 @@ class StoreServicoRequest extends FormRequest
         ]);
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'valor_servico' => 'O valor do serviço é invalido',
             'name.required' => 'O nome de Serviço é obrigatório',

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Configuracao\Os;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Psy\CodeCleaner\ReturnTypePass;
 
 class StoreUpdateGarantiaRequest extends FormRequest
 {
@@ -25,15 +24,16 @@ class StoreUpdateGarantiaRequest extends FormRequest
         return [
             'name' => 'required',
             'prazo_garantia' => 'integer|nullable',
-            'garantia' => 'required'
+            'garantia' => 'required',
         ];
     }
 
-    public function messages(): array {
+    public function messages(): array
+    {
         return [
             'name.required' => 'O nome do termo de garantia é obrigatório',
             'prazo_garantia.integer' => 'O prazo de garantia deve ser em dias e apenas números',
-            'garantia.required' => 'O campo de Termo de Garantia deve ser preenchido'
+            'garantia.required' => 'O campo de Termo de Garantia deve ser preenchido',
         ];
     }
 }
