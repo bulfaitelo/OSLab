@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class PerfilController extends Controller
 {
     public function __construct()
@@ -13,13 +14,10 @@ class PerfilController extends Controller
         // ACL DE PERMISSÕES
         $this->middleware('permission:config_perfil', ['only' => 'index']);
         $this->middleware('permission:config_perfil_edit', ['only' => ['edit', 'update']]);
-
     }
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -60,9 +58,6 @@ class PerfilController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit()
     {
@@ -74,11 +69,10 @@ class PerfilController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $request->validate ([
+        $request->validate([
             'name' => 'required|',
             'password' => 'nullable|confirmed|min:8',
         ]);

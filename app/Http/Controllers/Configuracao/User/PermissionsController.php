@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Configuracao\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Configuracao\User\ExtendsPermissions;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use App\Models\Configuracao\User\PermissionsGroup;
-
 
 class PermissionsController extends Controller
 {
@@ -18,7 +16,6 @@ class PermissionsController extends Controller
         $this->middleware('permission:config_permissions_create', ['only' => ['create', 'store']]);
         $this->middleware('permission:config_permissions_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:config_permissions_destroy', ['only' => 'destroy']);
-
     }
 
     /**
@@ -29,10 +26,10 @@ class PermissionsController extends Controller
     public function index()
     {
         //
-        $permissions = Permission::orderBy('name', 'ASC')
+        $permissions = ExtendsPermissions::orderBy('name', 'ASC')
+        // $permissions = Permission::orderBy('name', 'ASC')
         ->paginate('30');
-        $group = PermissionsGroup::class;
-        return view('configuracao.users.roles.permissions.index', compact('permissions', 'group'));
+        return view('configuracao.users.roles.permissions.index', compact('permissions'));
     }
 
     /**

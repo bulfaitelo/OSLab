@@ -3,26 +3,24 @@
 namespace App\Http\Controllers\Configuracao\Sistema;
 
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\Configuracao\Sistema\StoreSistemaConfigRequest;
 use App\Models\Configuracao\Sistema\SistemaConfig;
 use Illuminate\Support\Facades\DB;
 
 class SistemaConfigController extends Controller
 {
-
     private $recorrenciaBackup = [
         'd' => 'Diario',
         'w' => 'Semanal',
         'm' => 'Mensal',
         'y' => 'Anual'
     ];
+
     public function __construct()
     {
         // ACL DE PERMISSÕES
         $this->middleware('permission:config_sistema', ['only' => 'index']);
-        $this->middleware('permission:config_sistema_edit', ['only' => ['store', ]]);
-
+        $this->middleware('permission:config_sistema_edit', ['only' => ['store']]);
     }
 
     /**
@@ -57,14 +55,15 @@ class SistemaConfigController extends Controller
             foreach ($request->sistema as $key => $value) {
                 SistemaConfig::updateOrCreate(
                     [
-                        'key' => $key
+                        'key' => $key,
                     ],
                     [
-                        'value' => $value
+                        'value' => $value,
                     ]
                 );
             }
             DB::commit();
+
             return redirect()->route('configuracao.sistema.index')
             ->with('success', 'Configurações de sistema atualizadas com sucesso!');
         } catch (\Throwable $th) {

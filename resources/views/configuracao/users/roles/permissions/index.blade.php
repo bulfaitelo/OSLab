@@ -43,7 +43,7 @@
                         <td>{{ $permission->id }}</td>
                         <td>{{ $permission->name}}</td>
                         <td>{{ $permission->description}}</td>
-                        <td>{{ @$group::find($permission->group_id)->name}}</td>
+                        <td>{{ @$permission->group->name}}</td>
                         <td>
                             <div class="btn-group btn-group-sm ">
                                 @can('config_permissions_edit')
