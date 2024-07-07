@@ -126,7 +126,7 @@ class ProdutoTab extends Component
     }
 
     // private function updateProdutoQuantidadeEstoque($osProdutoId): void
-    {
+    // {
     //     try {
     //         $produto = Produto::find($this->produto_id);
     //         $estoque = $produto->estoque;

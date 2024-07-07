@@ -10,13 +10,14 @@ class DeleteButton extends Component
     public $confirmacaoDelete;
     public $item_id;
     public $os_id;
+
     public function render()
     {
         return view('livewire.os.informacoes.delete-button');
     }
 
     /**
-     * Exibe botão, para excluir item
+     * Exibe botão, para excluir item.
      */
     public function confirmDelete($id): void
     {
@@ -24,7 +25,7 @@ class DeleteButton extends Component
     }
 
     /**
-     * Cancela exibição do botão de excluir
+     * Cancela exibição do botão de excluir.
      */
     public function cancelDelete(): void
     {
@@ -32,7 +33,7 @@ class DeleteButton extends Component
     }
 
     /**
-     * Deleta informação e caso exista arquivo o exclui também
+     * Deleta informação e caso exista arquivo o exclui também.
      */
     public function delete($informacao_id): void
     {

@@ -12,8 +12,6 @@ class ChecklistTab extends Component
     public $checklistForm;
     public $form ;
 
-
-
     public function render()
     {
         $checklist = $this->os->categoria->checklist;

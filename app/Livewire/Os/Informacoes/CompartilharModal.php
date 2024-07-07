@@ -13,7 +13,8 @@ class CompartilharModal extends Component
     public $informacao_id;
     protected $listeners = ['open' => 'loadCompartilharModal'];
 
-    public function loadCompartilharModal($informacao_id, $os_id) {
+    public function loadCompartilharModal($informacao_id, $os_id)
+    {
         $this->informacao_id = $informacao_id;
         $this->os_id = $os_id;
         $this->dispatch('toggleCompartilharModal');
@@ -22,6 +23,7 @@ class CompartilharModal extends Component
     public function render()
     {
         $this->item = Os::find($this->os_id)?->informacoes->find($this->informacao_id);
+
         return view('livewire.os.informacoes.compartilhar-modal', [
             'item' => $this->item,
         ]);
@@ -43,9 +45,9 @@ class CompartilharModal extends Component
     }
 
     /**
-     * delete a uuid para do item
+     * Delete a uuid para do item.
      *
-     * @param int $id id da informacao
+     * @param  int  $id  id da informacao
      * @return void
      **/
     public function deleteShareUrl(int $id): void
@@ -55,7 +57,5 @@ class CompartilharModal extends Component
         $informacao->validade_link = null;
         $informacao->save();
         $this->dispatch('updateInformacoesTable');
-
-
     }
 }

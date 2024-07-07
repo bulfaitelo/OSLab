@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class BalanceteTab extends Component
 {
-
     public $os;
     public $showDisplay;
 

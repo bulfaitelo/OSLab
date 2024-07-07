@@ -6,7 +6,6 @@ use Livewire\Component;
 
 class SenhaInput extends Component
 {
-
     public $senha;
     public $senha_id;
     public $checkPass;
@@ -14,19 +13,17 @@ class SenhaInput extends Component
 
     public function render()
     {
-        return view('livewire.os.informacoes.senha-input',[
-            'senha'=> $this->senha,
-            'senha_id'=> $this->senha_id,
+        return view('livewire.os.informacoes.senha-input', [
+            'senha' => $this->senha,
+            'senha_id' => $this->senha_id,
             'public' => $this->public,
-            ]);
+        ]);
     }
 
     /**
-     * undocumented function summary
+     * Exibe ou oculta botão.
      *
-     * Undocumented function long description
-     *
-     * @param int $id ID
+     * @param  int  $id  id
      * @return void
      **/
     public function showPass($id) {

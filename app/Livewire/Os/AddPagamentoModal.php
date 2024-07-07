@@ -28,7 +28,8 @@ class AddPagamentoModal extends Component
     /**
      * Prepare the data for validation.
      */
-    protected function prepareForValidation($attributes) {
+    protected function prepareForValidation($attributes)
+    {
         $attributes['pagamento_valor'] = str_replace(',', '.', str_replace('.', '', $attributes['pagamento_valor']));
 
         return $attributes;
@@ -64,13 +65,13 @@ class AddPagamentoModal extends Component
     /**
      * Método para adicionar pagamento a receita relacionada a Os.
      */
-    function pagamentoCreate(): void
+    public function pagamentoCreate(): void
     {
         $pagamentoRequest = $this->validate();
         if ($this->os->osQuitada()) {
             flash()->addError('a OS ja foi Quitada!');
 
-            return ;
+            return;
         }
         $conta = $this->os->contas()->where('tipo', 'R')->first();
         $parcela = $conta->pagamentos()->latest()->first()?->parcela;
@@ -80,9 +81,9 @@ class AddPagamentoModal extends Component
                 'forma_pagamento_id' => $this->forma_pagamento_id,
                 'user_id' => auth()->id(),
                 'valor' => $pagamentoRequest['pagamento_valor'],
-                'vencimento' =>  $pagamentoRequest['data_pagamento'],
+                'vencimento' => $pagamentoRequest['data_pagamento'],
                 'data_pagamento' => $pagamentoRequest['data_pagamento'],
-                'parcela' => ((!$parcela) ? 0 : $parcela) + 1,
+                'parcela' => ((! $parcela) ? 0 : $parcela) + 1,
             ];
             $conta->pagamentos()->create($pagamento);
             if ($conta->parcelas < $conta->pagamentos->count()) {
@@ -91,7 +92,7 @@ class AddPagamentoModal extends Component
             if (($conta->pagamentos->sum('valor') + $pagamentoRequest['pagamento_valor']) >= $conta->valor) {
                 $conta->data_quitacao = $pagamentoRequest['data_pagamento'];
                 if (getConfig('default_os_faturar_pagto_quitado') != '') {
-                    $this->os->status_id =  getConfig('default_os_faturar_pagto_quitado');
+                    $this->os->status_id = getConfig('default_os_faturar_pagto_quitado');
                     $this->os->save();
                 }
             }
