@@ -28,6 +28,7 @@ class ResetInformacaoLinks extends Command
     public function handle()
     {
         DB::beginTransaction();
+
         try {
             OsInformacao::where('validade_link', '<', now())
                 ->update([
@@ -38,6 +39,7 @@ class ResetInformacaoLinks extends Command
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+
             throw $th;
         }
     }

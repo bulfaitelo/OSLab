@@ -21,7 +21,6 @@ class BackupSchedule extends Command
      */
     protected $description = 'Realiza as rotinas de backup respeitando as configurações predefinas';
 
-
     /**
      * Create a new command instance.
      *
@@ -31,7 +30,6 @@ class BackupSchedule extends Command
     {
         parent::__construct();
     }
-
 
     /**
      * Execute the console command.
