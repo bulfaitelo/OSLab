@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 class DefaultsUsers extends Seeder
 {
     /**
-     * Run the database seeds.DefaultUsers
+     * Run the database seeds.DefaultUsers.
      *
      * @return void
      */

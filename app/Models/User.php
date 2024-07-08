@@ -14,7 +14,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
@@ -48,21 +47,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'expire_at' => 'date'
+        'expire_at' => 'date',
     ];
 
     /**
-     * Retorna o setor atribuindo pra o usuário
+     * Retorna o setor atribuindo pra o usuário.
      */
-    public function setor() : BelongsTo {
+    public function setor(): BelongsTo
+    {
         return $this->belongsTo(Setor::class);
     }
 
     /**
-     * Relacionamento com OS
+     * Relacionamento com OS.
      */
-    public function os () : HasMany {
+    public function os(): HasMany
+    {
         return $this->hasMany(Os::class, 'tecnico_id');
     }
-
 }

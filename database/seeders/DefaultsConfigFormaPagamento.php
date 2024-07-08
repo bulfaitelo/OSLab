@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Configuracao\Financeiro\FormaPagamento;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsConfigFormaPagamento extends Seeder
@@ -17,44 +16,44 @@ class DefaultsConfigFormaPagamento extends Seeder
             [
                 'id' => 1,
                 'name' => 'Cartão de Crédito',
-                'descricao' => 'Pagamento realizado através de cartão de crédito.'
+                'descricao' => 'Pagamento realizado através de cartão de crédito.',
             ],
             [
                 'id' => 2,
                 'name' => 'Boleto Bancário',
-                'descricao' => 'Pagamento realizado através de boleto bancário.'
+                'descricao' => 'Pagamento realizado através de boleto bancário.',
             ],
             [
                 'id' => 3,
                 'name' => 'Transferência Bancária',
-                'descricao' => 'Pagamento realizado através de transferência bancária.'
+                'descricao' => 'Pagamento realizado através de transferência bancária.',
             ],
             [
                 'id' => 4,
                 'name' => 'PIX',
-                'descricao' => 'Pagamento realizado através do sistema de pagamentos instantâneos PIX.'
+                'descricao' => 'Pagamento realizado através do sistema de pagamentos instantâneos PIX.',
             ],
             [
                 'id' => 5,
                 'name' => 'Débito Online',
-                'descricao' => 'Pagamento realizado através de débito online, diretamente da conta bancária.'
+                'descricao' => 'Pagamento realizado através de débito online, diretamente da conta bancária.',
             ],
             [
                 'id' => 6,
                 'name' => 'Link de pagamento',
-                'descricao' => 'Link gerado via aplicação para pagamento online.'
-            ]
+                'descricao' => 'Link gerado via aplicação para pagamento online.',
+            ],
 
         ];
 
         foreach ($insert as $key => $value) {
             FormaPagamento::updateOrCreate(
-            // DB::table('permissions')->updateOrInsert(
-                [   'id' => $value['id'],
+                // DB::table('permissions')->updateOrInsert(
+                ['id' => $value['id'],
                 ],
                 [
-                    'name'  => $value['name'],
-                    'descricao'  => $value['descricao'],
+                    'name' => $value['name'],
+                    'descricao' => $value['descricao'],
                 ]
             );
         }

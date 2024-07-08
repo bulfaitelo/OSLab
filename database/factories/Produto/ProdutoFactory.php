@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProdutoFactory extends Factory
 {
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -24,7 +23,6 @@ class ProdutoFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
     public function definition(): array
     {
         return [

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
@@ -13,7 +12,7 @@ class DefaultsConfigPermissionsWiki extends Seeder
      */
     public function run(): void
     {
-                // permissões
+        // permissões
         $insert = [
             [
                 'description' => 'Acesso a Wiki',
@@ -134,19 +133,15 @@ class DefaultsConfigPermissionsWiki extends Seeder
                 'group_id' => 9,
             ],
 
-
-
-
         ];
-
 
         foreach ($insert as $key => $value) {
             Permission::updateOrCreate(
-                [   'name' => $value['name'],
-                    'guard_name' => $value['guard_name']
+                ['name' => $value['name'],
+                    'guard_name' => $value['guard_name'],
                 ],
                 [
-                    'group_id'  => $value['group_id'],
+                    'group_id' => $value['group_id'],
                     'description' => $value['description'],
                 ]
             );

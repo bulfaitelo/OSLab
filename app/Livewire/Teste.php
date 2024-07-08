@@ -7,12 +7,13 @@ use Livewire\Component;
 
 class Teste extends Component
 {
-    public $texto, $descricao;
+    public $texto;
+    public $descricao;
 
     public function render()
     {
-
         $collection = FormaPagamento::get();
+
         return view('livewire.teste', [
             'collection' => $collection,
             'texto' => $this->texto,
@@ -20,13 +21,11 @@ class Teste extends Component
         ]);
     }
 
-    public function addTexto()  {
+    public function addTexto()
+    {
         $formaPagamento = new FormaPagamento();
         $formaPagamento->name = $this->texto;
         $formaPagamento->descricao = $this->descricao;
         $formaPagamento->save();
     }
-
-
-
 }

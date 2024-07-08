@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Configuracao\Financeiro\CentroCusto;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsConfigCentroCusto extends Seeder
@@ -85,7 +84,6 @@ class DefaultsConfigCentroCusto extends Seeder
                 'despesa' => 0,
             ],
 
-
         ];
 
         foreach ($insert as $key => $value) {
@@ -94,7 +92,7 @@ class DefaultsConfigCentroCusto extends Seeder
                     'id' => $value['id'],
                 ],
                 [
-                    'name'  => $value['name'],
+                    'name' => $value['name'],
                     'descricao' => $value['descricao'],
                     'receita' => $value['receita'],
                     'despesa' => $value['despesa'],

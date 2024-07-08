@@ -21,7 +21,6 @@ return new class extends Migration
 
             $table->foreign('user_id', 'fk_pagamentos_users')
             ->references('id')->on('users');
-
         });
     }
 
@@ -34,7 +33,6 @@ return new class extends Migration
             $table->dropForeign('fk_pagamentos_contas');
             $table->dropForeign('fk_pagamentos_forma_pagamentos');
             $table->dropForeign('fk_pagamentos_users');
-
         });
     }
 };

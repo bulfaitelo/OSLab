@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Configuracao\Os\Garantia;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsConfigGarantiaOs extends Seeder
@@ -30,7 +29,7 @@ class DefaultsConfigGarantiaOs extends Seeder
                     'id' => $value['id'],
                 ],
                 [
-                    'name'  => $value['name'],
+                    'name' => $value['name'],
                     'garantia' => $value['garantia'],
                     'prazo_garantia' => $value['prazo_garantia'],
                     'user_id' => $value['user_id'],

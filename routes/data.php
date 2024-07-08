@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Checklist\ChecklistController;
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Configuracao\User\UserController;
 use App\Http\Controllers\Configuracao\Wiki\ModeloController;
@@ -20,12 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-
-Route::group(['middleware'=> 'auth'], function()
-    {
-
+Route::group(['middleware' => 'auth'], function () {
     Route::put('/wiki/text/{wiki}', [WikiController::class, 'textUpdate'])->name('wiki.text.update');
     Route::get('select_clientes', [ClienteController::class, 'apiClientSelect'])->name('cliente.select');
     Route::get('select_users', [UserController::class, 'apiUserSelect'])->name('user.select');

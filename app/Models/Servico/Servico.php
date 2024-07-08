@@ -12,26 +12,27 @@ class Servico extends Model
 {
     use HasFactory;
 
-
-
     /**
-     * Retornar as Os dos Produtos
+     * Retornar as Os dos Produtos.
      *
      * Retorna as Os relacionadas aos produtos.
+     *
      * @return hasMany OS
      **/
-    public function os() : HasMany {
+    public function os(): HasMany
+    {
         return $this->hasMany(OsServico::class);
     }
 
     /**
-     * Retornar o valor formatado em BRL
+     * Retornar o valor formatado em BRL.
      *
      * @return Attribute
      **/
-    protected function valorServico() : Attribute {
+    protected function valorServico(): Attribute
+    {
         return Attribute::make(
-            get: fn (string $value) => number_format($value,2,",",".")
+            get: fn (string $value) => number_format($value, 2, ',', '.')
         );
     }
 }

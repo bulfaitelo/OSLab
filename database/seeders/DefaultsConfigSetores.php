@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Configuracao\User\Setor;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DefaultsConfigSetores extends Seeder
@@ -27,11 +26,11 @@ class DefaultsConfigSetores extends Seeder
 
         foreach ($insert as $key => $value) {
             Setor::updateOrCreate(
-            // DB::table('permissions')->updateOrInsert(
-                [   'id' => $value['id'],
+                // DB::table('permissions')->updateOrInsert(
+                ['id' => $value['id'],
                 ],
                 [
-                    'name'  => $value['name'],
+                    'name' => $value['name'],
                 ]
             );
         }

@@ -17,7 +17,7 @@ class DefaultsConfigRoles extends Seeder
         \DB::table('roles')->insert([
             [
                 // SUPER USER
-                'id'  => 1,
+                'id' => 1,
                 'name' => 'susepro',
                 'guard_name' => 'web',
                 'description' => 'all permissions',
@@ -30,11 +30,10 @@ class DefaultsConfigRoles extends Seeder
         \DB::table('model_has_roles')->insert([
             [
                 // SUPER USER
-                'role_id'  => 1,
+                'role_id' => 1,
                 'model_type' => 'App\Models\User',
                 'model_id' => 1,
             ],
         ]);
-
     }
 }

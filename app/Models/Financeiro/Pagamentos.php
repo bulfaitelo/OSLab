@@ -4,8 +4,6 @@ namespace App\Models\Financeiro;
 
 use App\Models\Configuracao\Financeiro\FormaPagamento;
 use App\Models\User;
-use DateTimeInterface;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,50 +29,51 @@ class Pagamentos extends Model
         'parcela',
     ];
 
-
-
     /**
-     * Retornar a Conta
+     * Retornar a Conta.
      *
      * Retorna a Conta relacionada
+     *
      * @return BelongsTo Conta
      **/
-    public function conta() : BelongsTo
+    public function conta(): BelongsTo
     {
         return $this->belongsTo(Contas::class);
     }
 
     /**
-     * Retornar o Usuário
+     * Retornar o Usuário.
      *
      * Retorna o Usuário relacionado
+     *
      * @return BelongsTo User
      **/
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * Retornar a forma de pagamento
+     * Retornar a forma de pagamento.
      *
      * Retorna a forma de pagamento relacionado
+     *
      * @return BelongsTo FormaPagamento
      **/
-    public function formaPagamento() : BelongsTo
+    public function formaPagamento(): BelongsTo
     {
         return $this->belongsTo(FormaPagamento::class);
     }
 
-
     /**
-     * Retorna um json para exibição do modal
+     * Retorna um json para exibição do modal.
      *
      * @return string Dados do modal
      */
-    public function dataModal(): string {
+    public function dataModal(): string
+    {
         return json_encode([
-            'id'=> $this->id,
+            'id' => $this->id,
             'parcela' => $this->parcela,
             'vencimento' => $this->vencimento?->format('Y-m-d'),
             'data_pagamento' => $this->data_pagamento?->format('Y-m-d'),

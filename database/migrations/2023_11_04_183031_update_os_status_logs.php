@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('user_id', 'fk_os_status_logs_users')
                     ->references('id')->on('users');
 
-            $table->foreign('status_id','fk_os_status_logs_os_status')
+            $table->foreign('status_id', 'fk_os_status_logs_os_status')
                     ->references('id')->on('os_status');
         });
     }

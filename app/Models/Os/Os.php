@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 class Os extends Model
 {
@@ -27,45 +26,49 @@ class Os extends Model
     ];
 
     /**
-     * Retornar o técnico
+     * Retornar o técnico.
      *
      * Retorna o técnico relacionado
+     *
      * @return BelongsTo Técnico
      **/
-    public function tecnico() : BelongsTo
+    public function tecnico(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * Retornar o usuário
+     * Retornar o usuário.
      *
      * Retorna o usuário relacionado
+     *
      * @return BelongsTo Técnico
      **/
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * Retornar o Cliente
+     * Retornar o Cliente.
      *
      * Retorna o Cliente relacionado
+     *
      * @return BelongsTo Cliente
      **/
-    public function cliente() : BelongsTo
+    public function cliente(): BelongsTo
     {
         return $this->belongsTo(Cliente::class);
     }
 
     /**
-     * Retornar o Status
+     * Retornar o Status.
      *
      * Retorna o Status relacionado
+     *
      * @return BelongsTo Status
      **/
-    public function status() : BelongsTo
+    public function status(): BelongsTo
     {
         return $this->belongsTo(OsStatus::class);
     }
@@ -74,9 +77,10 @@ class Os extends Model
      * Retornar o log de alterações da Os.
      *
      * Retorna o log relacionado
+     *
      * @return BelongsTo log
      **/
-    public function statusLogs() : HasMany
+    public function statusLogs(): HasMany
     {
         return $this->hasMany(OsStatusLog::class);
     }
@@ -88,99 +92,104 @@ class Os extends Model
      *
      * @return BelongsTo conta
      **/
-    public function contas() : HasMany
+    public function contas(): HasMany
     {
         return $this->hasMany(Contas::class);
     }
 
-
     /**
-     * Retornar o Status
+     * Retornar o Status.
      *
      * Retorna o Status relacionado
+     *
      * @return BelongsTo Status
      **/
-    public function modelo() : BelongsTo
+    public function modelo(): BelongsTo
     {
         return $this->belongsTo(Modelo::class);
     }
 
     /**
-     * Retornar o Categoria
+     * Retornar o Categoria.
      *
      * Retorna o Categoria relacionado
+     *
      * @return BelongsTo Categoria
      **/
-    public function categoria() : BelongsTo
+    public function categoria(): BelongsTo
     {
         return $this->belongsTo(OsCategoria::class);
     }
 
     /**
-     * Retornar os Produtos da OS
+     * Retornar os Produtos da OS.
      *
      * Retorna os produtos relacionado a os
+     *
      * @return hasMany Produtos
      **/
-    public function produtos() : HasMany
+    public function produtos(): HasMany
     {
         return $this->hasMany(OsProduto::class)
                     ->with('produto');
     }
 
     /**
-     * Retornar os Serviços da OS
+     * Retornar os Serviços da OS.
      *
      * Retorna os serviços relacionado a os
+     *
      * @return hasMany Serviços
      **/
-    public function servicos() : HasMany
+    public function servicos(): HasMany
     {
         return $this->hasMany(OsServico::class)
                     ->with('servico');
     }
 
-
     /**
-     * Retornar as opções respondidas no checklist da OS
+     * Retornar as opções respondidas no checklist da OS.
      *
      * Retorna retornar caso exista o as opções respondidas no checklist
+     *
      * @return hasMany Checklist
      **/
-    public function checklist() : HasMany
+    public function checklist(): HasMany
     {
         return $this->hasMany(OsChecklist::class);
     }
 
     /**
-     * Retornar as informações da OS
+     * Retornar as informações da OS.
      *
      * Retorna retora as informações, Senhas e arquivos relacionado A OS
+     *
      * @return hasMany Checklist
      **/
-    public function informacoes() : HasMany
+    public function informacoes(): HasMany
     {
         return $this->hasMany(OsInformacao::class);
     }
 
-
     /**
-     * Retorna o HTML referente ao Checklist da OS
+     * Retorna o HTML referente ao Checklist da OS.
      *
      * Retorna o Checklist da OS, montado pronto para ser carregado na blade.
+     *
      * @return string html
      **/
     public function getHtmlChecklist()
     {
         $html = new CreateHtmlChecklist($this->categoria->checklist, $this->checklist);
+
         return $html->render();
     }
-
 
     /**
      * Retorna id e nome do Cliente.
      *
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2
+     *
      * @return array Categoria
      **/
     public function getClienteForSelect(): array
@@ -193,13 +202,15 @@ class Os extends Model
                 'os_count' => $this->cliente->os->count(),
             ];
         }
-        return [] ;
+
+        return [];
     }
 
     /**
      * Retorna id e nome do Técnico.
      *
      * Retorna um vetor com o o id e o técnico para ser usado no Select2
+     *
      * @return array Categoria
      **/
     public function getTecnicoForSelect(): array
@@ -211,14 +222,15 @@ class Os extends Model
                 'os_count' => $this->tecnico->os->count(),
             ];
         }
-        return [] ;
 
+        return [];
     }
 
     /**
      * Retorna id e nome do Modelo.
      *
      * Retorna um vetor com o o id e o Modelo para ser usado no Select2
+     *
      * @return array Categoria
      **/
     public function getModeloForSelect(): array
@@ -230,38 +242,39 @@ class Os extends Model
                 'wiki' => $this->modelo->wiki->name,
             ];
         }
-        return [] ;
 
+        return [];
     }
 
     /**
-     * Retorna o valor total da OS
+     * Retorna o valor total da OS.
      *
      * @return string Valor total
      */
-    function valorTotal(): string {
+    public function valorTotal(): string
+    {
         return number_format($this->servicos()->sum('valor_servico_total') + $this->produtos()->sum('valor_venda_total'), 2, '.', '');
     }
 
     /**
-     * Retorna o Centro de custo padrão
+     * Retorna o Centro de custo padrão.
      *
      * Com base na categoria é retornado o centro de custo padrão da OS
      *
      * @return int|null,
      */
-    function centroCustoPadrao()
+    public function centroCustoPadrao()
     {
         return $this->categoria->centroCusto?->id;
     }
-
 
     /**
      * Verifica se a os já foi quitada.
      *
      * @return bool
      **/
-    public function osQuitada(): bool {
+    public function osQuitada(): bool
+    {
         $conta = $this->contas()->find($this->fatura_id);
         if ($conta) {
             $pagamentos = $conta->pagamentos;
@@ -269,11 +282,12 @@ class Os extends Model
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * Retorna logs da os
+     * Retorna logs da os.
      *
      * Retorna um vetor com os logs da Os, que consiste em alteração de status, alterações nas contas.
      *
@@ -309,18 +323,17 @@ class Os extends Model
         }
 
         krsort($log);
+
         return $log;
     }
 
-
     /**
-     * Retorna um vetor com balancete
+     * Retorna um vetor com balancete.
      *
      * @return array
      **/
     public function balancete(): array
     {
-
         $array_balancete['total_credito_previsto'] = 0;
         $array_balancete['total_debito_previsto'] = 0;
         $array_balancete['total_credito_executado'] = 0;
@@ -344,12 +357,11 @@ class Os extends Model
             ];
             if ($value->tipo == 'R') {
                 $receita_count++;
-                $array_balancete['total_credito_previsto']+= $value->previsto;
-                $array_balancete['total_credito_executado']+= $value->valor_executado;
-            }
-            elseif ($value->tipo == 'D') {
-                $array_balancete['total_debito_previsto']+= $value->previsto;
-                $array_balancete['total_debito_executado']+= $value->valor_executado;
+                $array_balancete['total_credito_previsto'] += $value->previsto;
+                $array_balancete['total_credito_executado'] += $value->valor_executado;
+            } elseif ($value->tipo == 'D') {
+                $array_balancete['total_debito_previsto'] += $value->previsto;
+                $array_balancete['total_debito_executado'] += $value->valor_executado;
             }
         }
         if ($receita_count <= 0) {
@@ -357,18 +369,19 @@ class Os extends Model
         }
 
         $array_balancete['saldo'] = ($array_balancete['total_credito_executado'] - $array_balancete['total_debito_executado']);
+
         return $array_balancete;
     }
 
-
     /**
-     * Retorna o relatório de os para balancetes
-     * @param string|null $dataInicio Data de inicio da busca
-     * @param string|null $dataFim Data de fim da busca
-     * @param string|null $ordenacao Ordenação padrão
+     * Retorna o relatório de os para balancetes.
+     *
+     * @param  string|null  $dataInicio  Data de inicio da busca
+     * @param  string|null  $dataFim  Data de fim da busca
+     * @param  string|null  $ordenacao  Ordenação padrão
      */
-    public static function RelatorioBalanceteOs($dataInicio = null, $dataFim = null, $ordenacao = null)  {
-
+    public static function RelatorioBalanceteOs($dataInicio = null, $dataFim = null, $ordenacao = null)
+    {
         $query = Os::query();
         $query->select(DB::raw('
             os.id,
@@ -427,16 +440,13 @@ class Os extends Model
                 'nome' => [
                     'colun' => 'cliente',
                     'order' => 'asc',
-                    ]
+                ],
             ];
 
             $query->orderBy($orderArray[$ordenacao]['colun'], $orderArray[$ordenacao]['order']);
             $query->orderBy('created_at', 'asc');
-
         }
 
         return $query->get();
-
     }
-
 }

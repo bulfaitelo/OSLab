@@ -3,56 +3,51 @@
 namespace Tests\Unit;
 
 // use PHPUnit\Framework\TestCase;
-use Tests\TestCase;
 use File;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Permission;
+use Tests\TestCase;
 
 class BladePermissionsTest extends TestCase
 {
     use RefreshDatabase;
 
-
     private $permission_blade;
     private $permission_db;
     private $permission_blade_path;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         // Preparando Banco de Dados
         parent::setUp();
         $this->artisan('db:seed');
 
-
         // BLADES
         $path = resource_path('views');
         $files = File::allFiles($path);
         foreach ($files as $file) {
-
             $file_path = $file->getPathname();
 
             $file_string = file_get_contents($file_path);
             preg_match_all('/@can( )?\(\'[\w\s]+\'\)/', $file_string, $itens);
 
-            if (!isset($permission_blade)) {
+            if (! isset($permission_blade)) {
                 $permission_blade = [];
             }
             // dump($file_path, $itens);
             foreach ($itens[0] as  $permission_temp) {
-                    $permission_blade[] = explode("'",$permission_temp)[1];
-                    $permission_blade_path[explode("'",$permission_temp)[1]] = $file_path;
+                $permission_blade[] = explode("'", $permission_temp)[1];
+                $permission_blade_path[explode("'", $permission_temp)[1]] = $file_path;
             }
 
             // /@canany( )?\(\[([\'\w\s,]+)\]\)/
             // /@canany( )?\(\[([\'\w\s,]+)\]\)/
 
-
             $permission_count = preg_match_all('/@canany( )?\(\[([\'\w\s,]+)\]\)/', $file_string, $canany_array);
             if ($permission_count > 0) {
-
                 foreach ($canany_array[2] as $temp_canany) {
                     $canany = $temp_canany;
-                    $canany = str_replace("'", "", $canany);
+                    $canany = str_replace("'", '', $canany);
                     $canany = explode(',', $canany);
                     $canany = array_map('trim', $canany);
 
@@ -75,7 +70,6 @@ class BladePermissionsTest extends TestCase
         foreach ($itens[0] as $permission_temp) {
             $permission_blade[] = explode("'", $permission_temp)[3];
             $permission_blade_path[explode("'", $permission_temp)[3]] = $file;
-
         }
 
         preg_match_all('/\'can\'( )+=>( )+([\[])()+[\s\w\',]+\],/', $file_string, $itens);
@@ -98,10 +92,7 @@ class BladePermissionsTest extends TestCase
 
         $permission_db = Permission::pluck('name')->toArray();
         $this->permission_db = $permission_db;
-
-
     }
-
 
     /**
      * A basic unit test example.
@@ -110,7 +101,6 @@ class BladePermissionsTest extends TestCase
      */
     public function test_blade_permission_vs_database_permission()
     {
-
         $erro = false;
         $output_erro = '';
         $test = array_diff($this->permission_blade, $this->permission_db);
@@ -118,10 +108,10 @@ class BladePermissionsTest extends TestCase
             $erro = true;
             $output_erro = "\nPermissions divergentes da blade com o banco de dados:\n";
             foreach ($test as $key => $value) {
-                $output_erro.=$value."\n";
+                $output_erro .= $value."\n";
             }
         }
-        $this->assertNotTrue($erro, $output_erro );
+        $this->assertNotTrue($erro, $output_erro);
     }
 
     public function test_permision_db_not_used_in_blade()
@@ -133,7 +123,7 @@ class BladePermissionsTest extends TestCase
             $erro = true;
             $output_erro = "\nPermissions criadas e não usadas em nenhuma blade:\n";
             foreach ($test as $key => $value) {
-                $output_erro.=$value."\n";
+                $output_erro .= $value."\n";
             }
         }
         $this->assertNotTrue($erro, $output_erro);

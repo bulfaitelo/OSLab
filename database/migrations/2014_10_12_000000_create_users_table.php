@@ -19,9 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('setor_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('rg',14)->nullable();
-            $table->string('cpf',14)->nullable();
-            $table->string('cep',10)->nullable();
+            $table->string('rg', 14)->nullable();
+            $table->string('cpf', 14)->nullable();
+            $table->string('cep', 10)->nullable();
             $table->string('logradouro')->nullable();
             $table->string('numero')->nullable();
             $table->string('complemento')->nullable();

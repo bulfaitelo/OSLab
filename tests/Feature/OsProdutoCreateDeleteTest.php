@@ -3,17 +3,16 @@
 namespace Tests\Feature;
 
 use App\Livewire\Os\ProdutoTab;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use App\Models\Cliente\Cliente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
 use App\Models\User;
 use App\Services\Os\OsService;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+use Tests\TestCase;
 
 class OsProdutoCreateDeleteTest extends TestCase
 {
@@ -22,7 +21,7 @@ class OsProdutoCreateDeleteTest extends TestCase
     private $osService;
     private $user;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -38,7 +37,7 @@ class OsProdutoCreateDeleteTest extends TestCase
     public function testCreateProduto(array $data, array $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
-        Livewire::test(ProdutoTab::class, ['os' => $os ])
+        Livewire::test(ProdutoTab::class, ['os' => $os])
             ->set('produto_id', $data['produto_id'])
             ->set('quantidade', $data['quantidade'])
             ->set('valor_custo', $data['valor_custo'])
@@ -50,8 +49,8 @@ class OsProdutoCreateDeleteTest extends TestCase
 
         $this->assertDatabaseHas('os_produtos', $expected);
         $osProduto = $os->produtos()->where('produto_id', $data['produto_id'])->sole();
-        $this->assertEquals($osProduto->valor_custo_total, ($expected['valor_custo'] * $expected['quantidade']));
-        $this->assertEquals($osProduto->valor_venda_total, ($expected['valor_venda'] * $expected['quantidade']));
+        $this->assertEquals($osProduto->valor_custo_total, $expected['valor_custo'] * $expected['quantidade']);
+        $this->assertEquals($osProduto->valor_venda_total, $expected['valor_venda'] * $expected['quantidade']);
     }
 
     #[Depends('testCreateProduto')]
@@ -59,7 +58,7 @@ class OsProdutoCreateDeleteTest extends TestCase
     public function testDeleteProduto($data, $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
-        Livewire::test(ProdutoTab::class, ['os' => $os ])
+        Livewire::test(ProdutoTab::class, ['os' => $os])
             ->set('produto_id', $data['produto_id'])
             ->set('quantidade', $data['quantidade'])
             ->set('valor_custo', $data['valor_custo'])
@@ -82,7 +81,7 @@ class OsProdutoCreateDeleteTest extends TestCase
         $os = Os::findOrFail($data['os_id']);
         $os->fatura_id = 1;
         $os->save();
-        Livewire::test(ProdutoTab::class, ['os' => $os ])
+        Livewire::test(ProdutoTab::class, ['os' => $os])
             ->set('produto_id', $data['produto_id'])
             ->set('quantidade', $data['quantidade'])
             ->set('valor_custo', $data['valor_custo'])
@@ -99,7 +98,7 @@ class OsProdutoCreateDeleteTest extends TestCase
     public function testDeleteProdutoFaturado($data, $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
-        Livewire::test(ProdutoTab::class, ['os' => $os ])
+        Livewire::test(ProdutoTab::class, ['os' => $os])
             ->set('produto_id', $data['produto_id'])
             ->set('quantidade', $data['quantidade'])
             ->set('valor_custo', $data['valor_custo'])
@@ -145,8 +144,8 @@ class OsProdutoCreateDeleteTest extends TestCase
                 'os_id' => 8,
                 'produto_id' => 3,
                 'quantidade' => 9,
-                'valor_custo' => "90,99",
-                'valor_venda' => "12,45",
+                'valor_custo' => '90,99',
+                'valor_venda' => '12,45',
             ],
             // $expected
             [
@@ -157,7 +156,7 @@ class OsProdutoCreateDeleteTest extends TestCase
                 'valor_venda' => 12.45,
             ],
         ];
+
         return $data;
     }
-
 }

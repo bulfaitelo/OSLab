@@ -10,11 +10,8 @@ class Garantia extends Model
 {
     use HasFactory;
 
-
-
-
     /**
-     * Retorna o nome do usuário
+     * Retorna o nome do usuário.
      *
      * @var array
      */

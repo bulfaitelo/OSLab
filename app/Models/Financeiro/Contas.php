@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Contas extends Model
 {
@@ -26,7 +25,6 @@ class Contas extends Model
         'parcelas',
     ];
 
-
     protected $casts = [
         'data_quitacao' => 'date',
     ];
@@ -37,15 +35,15 @@ class Contas extends Model
     }
 
     /**
-     * Relacionamento com os Pagamentos
+     * Relacionamento com os Pagamentos.
      */
-    public function pagamentos ()
+    public function pagamentos()
     {
         return $this->hasMany(Pagamentos::class, 'conta_id');
     }
 
     /**
-     * Relacionamento com o Cliente
+     * Relacionamento com o Cliente.
      */
     public function cliente()
     {
@@ -53,7 +51,7 @@ class Contas extends Model
     }
 
     /**
-     * Relacionamento com o Centro de Custo
+     * Relacionamento com o Centro de Custo.
      */
     public function centroCusto()
     {
@@ -62,12 +60,11 @@ class Contas extends Model
 
     public function getVencimentoDate()
     {
-
         if ($this->pagamentos->count() > 0) {
             $data = new Carbon($this->pagamentos()->select('vencimento')->first()->vencimento);
+
             return $data->format('d');
         } else {
-
         }
     }
 
@@ -75,6 +72,7 @@ class Contas extends Model
      * Retorna id e nome do Cliente.
      *
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2
+     *
      * @return array Categoria
      **/
     public function getClienteForSelect(): array
@@ -87,17 +85,20 @@ class Contas extends Model
                 'os_count' => $this->cliente->os->count(),
             ];
         }
-        return [] ;
+
+        return [];
     }
 
     /**
-     * Retorna o relatório de contas agrupados por mes  para balancetes
-     * @param string|null $dataInicio Data de inicio da busca
-     * @param string|null $dataFim Data de fim da busca
-     * @param string|null $ordenacao Ordenação padrão
+     * Retorna o relatório de contas agrupados por mes  para balancetes.
+     *
+     * @param  string|null  $dataInicio  Data de inicio da busca
+     * @param  string|null  $dataFim  Data de fim da busca
+     * @param  string|null  $ordenacao  Ordenação padrão
      * @return object|null
      */
-    public static function RelatorioBalanceteMes($dataInicio = null, $dataFim = null, $ordenacao = null) : object|null {
+    public static function RelatorioBalanceteMes($dataInicio = null, $dataFim = null, $ordenacao = null): object|null
+    {
         $query = Pagamentos::query();
         $query->selectRaw('
             YEAR(vencimento) AS ano,
@@ -112,19 +113,20 @@ class Contas extends Model
         if ($dataInicio and $dataFim) {
             $query->whereBetween('vencimento', [$dataInicio, $dataFim]);
         }
+
         return $query->get();
     }
 
-
-
-        /**
-     * Retorna o relatório de contas agrupados por centro de custo para balancetes
-     * @param string|null $dataInicio Data de inicio da busca
-     * @param string|null $dataFim Data de fim da busca
-     * @param string|null $ordenacao Ordenação padrão
+    /**
+     * Retorna o relatório de contas agrupados por centro de custo para balancetes.
+     *
+     * @param  string|null  $dataInicio  Data de inicio da busca
+     * @param  string|null  $dataFim  Data de fim da busca
+     * @param  string|null  $ordenacao  Ordenação padrão
      * @return object|null
      */
-    public static function RelatorioBalanceteCentroCusto($dataInicio = null, $dataFim = null, $ordenacao = null) : object|null {
+    public static function RelatorioBalanceteCentroCusto($dataInicio = null, $dataFim = null, $ordenacao = null): object|null
+    {
         $query = Pagamentos::query();
         $query->selectRaw('
             centro_custos.name as centro_custo,
@@ -139,7 +141,7 @@ class Contas extends Model
         if ($dataInicio and $dataFim) {
             $query->whereBetween('vencimento', [$dataInicio, $dataFim]);
         }
-        if (($ordenacao != null)) {
+        if ($ordenacao != null) {
             $orderArray = [
                 'saldo' => [
                     'colun' => 'saldo',
@@ -152,12 +154,11 @@ class Contas extends Model
                 'data' => [
                     'colun' => 'centro_custo',
                     'order' => 'asc',
-                ]
+                ],
             ];
             $query->orderBy($orderArray[$ordenacao]['colun'], $orderArray[$ordenacao]['order']);
-
         }
+
         return $query->get();
     }
-
 }

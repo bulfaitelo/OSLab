@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Configuracao\User\PermissionsGroup;
-
+use Illuminate\Database\Seeder;
 
 class DefaultsConfigPermissionsGroup extends Seeder
 {
@@ -16,51 +14,51 @@ class DefaultsConfigPermissionsGroup extends Seeder
     {
         $insert = [
 
-            [   'id' => 1,
+            ['id' => 1,
                 'name' => 'Configuração',
             ],
-            [   'id' => 2,
+            ['id' => 2,
                 'name' => 'Relatórios',
             ],
-            [   'id' => 3,
+            ['id' => 3,
                 'name' => 'Ordem Serviço',
             ],
-            [   'id' => 4,
+            ['id' => 4,
                 'name' => 'Perfil',
             ],
-            [   'id' => 5,
+            ['id' => 5,
                 'name' => 'Financeiro',
             ],
-            [   'id' => 6,
+            ['id' => 6,
                 'name' => 'Clientes',
             ],
-            [   'id' => 7,
+            ['id' => 7,
                 'name' => 'Serviços',
             ],
-            [   'id' => 8,
+            ['id' => 8,
                 'name' => 'Serviços',
             ],
-            [   'id' => 9,
+            ['id' => 9,
                 'name' => 'Wiki',
             ],
-            [   'id' => 10,
+            ['id' => 10,
                 'name' => 'Checklist',
             ],
-            [   'id' => 11,
+            ['id' => 11,
                 'name' => 'Sistema',
             ],
-            [   'id' => 12,
+            ['id' => 12,
                 'name' => 'Backup',
             ],
 
         ];
         foreach ($insert as $key => $value) {
             PermissionsGroup::updateOrCreate(
-            // DB::table('permissions')->updateOrInsert(
-                [   'id' => $value['id'],
+                // DB::table('permissions')->updateOrInsert(
+                ['id' => $value['id'],
                 ],
                 [
-                    'name'  => $value['name'],
+                    'name' => $value['name'],
                 ]
             );
         }

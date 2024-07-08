@@ -27,10 +27,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DefaultsConfigRoles::class);
         $this->call(DatabaseDefaultPermissionsUpdate::class);
 
-
         // Factory
         // Cliente::factory()->count(200)->create();
         // Os::factory()->count(200)->create();
-
     }
 }

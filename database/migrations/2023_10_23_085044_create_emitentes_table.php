@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('fantasia')->nullable();
             $table->string('porte')->nullable();
             $table->string('inscricao_estadual')->nullable();
-            $table->string('cep',10)->nullable();
+            $table->string('cep', 10)->nullable();
             $table->string('logradouro')->nullable();
             $table->string('numero')->nullable();
             $table->string('bairro')->nullable();

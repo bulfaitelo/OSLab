@@ -24,7 +24,6 @@ return new class extends Migration
             $table->foreign('user_id', 'fk_os_produtos_users')
                   ->references('id')
                   ->on('users');
-
         });
 
         Schema::table('movimentacaos', function (Blueprint $table) {
