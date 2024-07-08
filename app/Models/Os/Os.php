@@ -392,7 +392,7 @@ class Os extends Model
             valor_total,
             IFNULL(debito, 0) AS debito,
             IFNULL(credito, 0) AS credito,
-            (credito - debito) as saldo
+            (IFNULL(credito, 0) - IFNULL(debito, 0)) as saldo
         '));
         $query->join('clientes', 'os.cliente_id', '=', 'clientes.id');
         $query->join('os_status', 'os.status_id', '=', 'os_status.id');
