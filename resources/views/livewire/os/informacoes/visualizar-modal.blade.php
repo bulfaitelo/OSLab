@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="anotacao">Anotação</label>
-                        <textarea type="text" disabled id="anotacao" class="form-control" placeholder="Escreva aqui a anotação">{{$item->informacao}}</textarea>
+                        <textarea type="text" id="anotacao" class="form-control" placeholder="Escreva aqui a anotação">{{$item->informacao}}</textarea>
                     </div>
                 </div>
             @endif
