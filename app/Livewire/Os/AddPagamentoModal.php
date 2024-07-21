@@ -101,10 +101,23 @@ class AddPagamentoModal extends Component
             $this->data_pagamento = now()->format('Y-m-d');
             $this->forma_pagamento_id = null;
             DB::commit();
-            flasher('Pagamento adicionado com sucesso.');
+            self::disparaMensagemPosPagamento();
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
+        }
+    }
+
+    /**
+     * Função para notificar após pagamento, caso a os esteja finalizada também fecha a modal.
+     */
+    protected function disparaMensagemPosPagamento(): void
+    {
+        if($this->os->osQuitada()){
+            $this->dispatch('toggleAddPagamentoModal');
+            flasher('Pagamento adicionado com sucesso, a Ordem de Serviço foi '.$this->os->status->name.'!');
+        } else {
+            flasher('Pagamento adicionado com sucesso.');
         }
     }
 }
