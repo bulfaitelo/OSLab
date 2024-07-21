@@ -4,8 +4,8 @@ namespace App\Models\Os;
 
 use App\Http\OsLabClass\Checklist\CreateHtmlChecklist;
 use App\Models\Cliente\Cliente;
-use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Os\OsStatus;
+use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Financeiro\Contas;
 use App\Models\User;

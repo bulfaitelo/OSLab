@@ -3,8 +3,8 @@
 namespace Database\Factories\Os;
 
 use App\Models\Cliente\Cliente;
-use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Os\OsStatus;
+use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Os\Os;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
