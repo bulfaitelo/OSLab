@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Configuracao\Os;
+namespace App\Http\Controllers\Configuracao\Parametro;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Configuracao\Os\StoreUpdateOsCategoriaRequest;
-use App\Models\Configuracao\Os\OsCategoria;
+use App\Http\Requests\Configuracao\Parametro\StoreUpdateCategoriaRequest;
+use App\Models\Configuracao\Parametro\Categoria;
 use Illuminate\Support\Facades\Auth;
 
-class OsCategoriaController extends Controller
+class CategoriaController extends Controller
 {
     public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_os_categoria', ['only' => 'index']);
-        $this->middleware('permission:config_os_categoria_create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:config_os_categoria_show', ['only' => 'show']);
-        $this->middleware('permission:config_os_categoria_edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:config_os_categoria_destroy', ['only' => 'destroy']);
+        $this->middleware('permission:config_categoria', ['only' => 'index']);
+        $this->middleware('permission:config_categoria_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_categoria_show', ['only' => 'show']);
+        $this->middleware('permission:config_categoria_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_categoria_destroy', ['only' => 'destroy']);
     }
 
     /**
@@ -24,11 +24,11 @@ class OsCategoriaController extends Controller
      */
     public function index()
     {
-        $categoria = OsCategoria::with('garantia')
+        $categoria = Categoria::with('garantia')
                 ->with('centroCusto')
                 ->paginate(100);
 
-        return view('configuracao.os.categoria.index', compact('categoria'));
+        return view('configuracao.parametro.categoria.index', compact('categoria'));
     }
 
     /**
@@ -36,16 +36,16 @@ class OsCategoriaController extends Controller
      */
     public function create()
     {
-        return view('configuracao.os.categoria.create');
+        return view('configuracao.parametro.categoria.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUpdateOsCategoriaRequest $request)
+    public function store(StoreUpdateCategoriaRequest $request)
     {
         try {
-            $categoria = new OsCategoria();
+            $categoria = new Categoria();
             $categoria->name = $request->name;
             $categoria->descricao = $request->descricao;
             $categoria->user_id = Auth::id();
@@ -55,7 +55,7 @@ class OsCategoriaController extends Controller
             $categoria->checklist_required = $request->checklist_required;
             $categoria->save();
 
-            return redirect()->route('configuracao.os.categoria.index')
+            return redirect()->route('configuracao.parametro.categoria.index')
             ->with('success', 'Categoria criada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
@@ -65,23 +65,23 @@ class OsCategoriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OsCategoria $categoria)
+    public function show(Categoria $categoria)
     {
-        return view('configuracao.os.categoria.show', compact('categoria'));
+        return view('configuracao.parametro.categoria.show', compact('categoria'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OsCategoria $categoria)
+    public function edit(Categoria $categoria)
     {
-        return view('configuracao.os.categoria.edit', compact('categoria'));
+        return view('configuracao.parametro.categoria.edit', compact('categoria'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreUpdateOsCategoriaRequest $request, OsCategoria $categoria)
+    public function update(StoreUpdateCategoriaRequest $request, Categoria $categoria)
     {
         try {
             $categoria->name = $request->name;
@@ -93,7 +93,7 @@ class OsCategoriaController extends Controller
             $categoria->checklist_required = $request->checklist_required;
             $categoria->save();
 
-            return redirect()->route('configuracao.os.categoria.index')
+            return redirect()->route('configuracao.parametro.categoria.index')
             ->with('success', 'Categoria atualizada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
@@ -103,12 +103,12 @@ class OsCategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OsCategoria $categoria)
+    public function destroy(Categoria $categoria)
     {
         try {
             $categoria->delete();
 
-            return redirect()->route('configuracao.os.categoria.index')
+            return redirect()->route('configuracao.parametro.categoria.index')
                 ->with('success', 'Categoria excluida com sucesso.');
         } catch (\Throwable $th) {
             throw $th;

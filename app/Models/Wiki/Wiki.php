@@ -2,7 +2,7 @@
 
 namespace App\Models\Wiki;
 
-use App\Models\Configuracao\Os\OsCategoria;
+use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Os\Os;
@@ -43,7 +43,7 @@ class Wiki extends Model
 
     public function categoria(): BelongsTo
     {
-        return $this->belongsTo(OsCategoria::class);
+        return $this->belongsTo(Categoria::class);
     }
 
     public function os()

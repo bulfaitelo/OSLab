@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Models\Configuracao\Os;
+namespace App\Models\Configuracao\Parametro;
 
 use App\Models\Checklist\Checklist;
 use App\Models\Configuracao\Financeiro\CentroCusto;
+use App\Models\Configuracao\Os\Garantia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OsCategoria extends Model
+class Categoria extends Model
 {
     use HasFactory;
 

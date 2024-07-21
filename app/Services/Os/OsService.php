@@ -3,7 +3,7 @@
 namespace App\Services\Os;
 
 use App\Contracts\Services\Os\OsServiceInterface;
-use App\Models\Configuracao\Os\OsCategoria;
+use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Os\Os;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -147,7 +147,7 @@ class OsService implements OsServiceInterface
      **/
     private function addDayGarantia($data_saida, $categoria_id): string|null
     {
-        $prazoEmDias = OsCategoria::find($categoria_id)->garantia?->prazo_garantia;
+        $prazoEmDias = Categoria::find($categoria_id)->garantia?->prazo_garantia;
         if ($prazoEmDias) {
             $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_saida);
 

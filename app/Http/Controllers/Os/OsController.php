@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Os\FaturarOsRequest;
 use App\Http\Requests\Os\StoreOsRequest;
 use App\Http\Requests\Os\UpdateOsRequest;
-use App\Models\Configuracao\Os\OsCategoria;
+use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
@@ -334,7 +334,7 @@ class OsController extends Controller
      **/
     private function addDayGarantia($data_saida, $categoria_id): string|null
     {
-        $prazoEmDias = OsCategoria::find($categoria_id)->garantia?->prazo_garantia;
+        $prazoEmDias = Categoria::find($categoria_id)->garantia?->prazo_garantia;
         if ($prazoEmDias) {
             $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_saida);
 

@@ -41,7 +41,7 @@
                     <div class="col-md-3">
                         <div class="form-group mb-2 ">
                             <label for="categoria_id">Categoria</label>
-                            {!! html()->select('categoria_id', \App\Models\Configuracao\Os\OsCategoria::orderBy('name')->pluck('name', 'id'), $request->categoria_id)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                            {!! html()->select('categoria_id', \App\Models\Configuracao\Parametro\Categoria::orderBy('name')->pluck('name', 'id'), $request->categoria_id)->class('form-control form-control-sm')->placeholder('Selecione') !!}
                         </div>
                     </div>
                 </div>

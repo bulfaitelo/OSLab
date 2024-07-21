@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Configuracao\Os;
+namespace App\Http\Requests\Configuracao\Parametro;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateOsCategoriaRequest extends FormRequest
+class StoreUpdateCategoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

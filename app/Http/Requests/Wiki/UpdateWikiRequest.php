@@ -24,7 +24,7 @@ class UpdateWikiRequest extends FormRequest
         return [
             'fabricante_id' => 'required|exists:fabricantes,id',
             'name' => 'required|unique:wikis,name,'.$this->wiki->id,
-            'categoria_id' => 'required|exists:os_categorias,id',
+            'categoria_id' => 'required|exists:categorias,id',
         ];
     }
 

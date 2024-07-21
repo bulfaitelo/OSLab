@@ -4,7 +4,7 @@ namespace App\Models\Os;
 
 use App\Http\OsLabClass\Checklist\CreateHtmlChecklist;
 use App\Models\Cliente\Cliente;
-use App\Models\Configuracao\Os\OsCategoria;
+use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Financeiro\Contas;
@@ -118,7 +118,7 @@ class Os extends Model
      **/
     public function categoria(): BelongsTo
     {
-        return $this->belongsTo(OsCategoria::class);
+        return $this->belongsTo(Categoria::class);
     }
 
     /**

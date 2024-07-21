@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('os_categorias', function (Blueprint $table) {
-            $table->foreign('user_id', 'fk_os_categorias_users')
+        Schema::table('categorias', function (Blueprint $table) {
+            $table->foreign('user_id', 'fk_categorias_users')
             ->references('id')->on('users');
-            $table->foreign('garantia_id', 'fk_os_categorias_garantias')
+            $table->foreign('garantia_id', 'fk_categorias_garantias')
             ->references('id')->on('garantias');
         });
     }
@@ -24,9 +24,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('os_categorias', function (Blueprint $table) {
-            $table->dropForeign('fk_os_categorias_users');
-            $table->dropForeign('fk_os_categorias_garantias');
+        Schema::table('categorias', function (Blueprint $table) {
+            $table->dropForeign('fk_categorias_users');
+            $table->dropForeign('fk_categorias_garantias');
         });
     }
 };

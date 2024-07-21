@@ -108,31 +108,31 @@ class DefaultsConfigPermissionsOs extends Seeder
 
             [
                 'description' => 'Acesso a configuração de Categoria de Os',
-                'name' => 'config_os_categoria',
+                'name' => 'config_categoria',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
             [
                 'description' => 'Criar Categoria de Os',
-                'name' => 'config_os_categoria_create',
+                'name' => 'config_categoria_create',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
             [
                 'description' => 'Editar Categoria de Os',
-                'name' => 'config_os_categoria_edit',
+                'name' => 'config_categoria_edit',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
             [
                 'description' => 'Visualizar Categoria de Os',
-                'name' => 'config_os_categoria_show',
+                'name' => 'config_categoria_show',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],
             [
                 'description' => 'Excluir Categoria de Os',
-                'name' => 'config_os_categoria_destroy',
+                'name' => 'config_categoria_destroy',
                 'guard_name' => 'web',
                 'group_id' => 3,
             ],

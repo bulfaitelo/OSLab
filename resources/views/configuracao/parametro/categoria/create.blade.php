@@ -26,7 +26,7 @@
 
           <div class="card-body">
           @include('adminlte::partials.form-alert')
-          {!! html()->form('post', route('configuracao.os.categoria.store'))->open() !!}
+          {!! html()->form('post', route('configuracao.parametro.categoria.store'))->open() !!}
             <div class="form-group">
               <label for="name">Categoria</label>
               {!! html()->text('name')->class('form-control')->placeholder('Categoria')->required() !!}

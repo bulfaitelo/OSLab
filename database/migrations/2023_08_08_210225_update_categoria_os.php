@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('os_categorias', function (Blueprint $table) {
+        Schema::table('categorias', function (Blueprint $table) {
             $table->unsignedBigInteger('checklist_id')->nullable();
             $table->boolean('checklist_required')->nullable()->default(0);
-            $table->foreign('checklist_id', 'fk_os_categorias_checklists')
+            $table->foreign('checklist_id', 'fk_categorias_checklists')
             ->references('id')->on('checklists');
         });
 
@@ -29,8 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('os_categorias', function (Blueprint $table) {
-            $table->dropForeign('fk_os_categorias_checklists');
+        Schema::table('categorias', function (Blueprint $table) {
+            $table->dropForeign('fk_categorias_checklists');
             $table->dropColumn([
                 'checklist_id',
                 'checklist_required',

@@ -16,8 +16,8 @@
                     Voltar
                 </button>
             </a>
-            @can('config_os_categoria_create')
-            <a href="{{ route('configuracao.os.categoria.create') }}">
+            @can('config_categoria_create')
+            <a href="{{ route('configuracao.parametro.categoria.create') }}">
                 <button type="button"  class="btn btn-sm btn-oslab">
                     <i class="fa-solid fa-plus"></i>
                     Criar Categoria
@@ -48,14 +48,14 @@
                     <td>{{ $item->checklist->name ?? '' }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
-                        @can('config_os_categoria_edit')
-                        <a href="{{ route('configuracao.os.categoria.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                        @can('config_categoria_edit')
+                        <a href="{{ route('configuracao.parametro.categoria.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                         @endcan
-                        @can('config_os_categoria_show')
-                            <a href="{{ route('configuracao.os.categoria.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                        @can('config_categoria_show')
+                            <a href="{{ route('configuracao.parametro.categoria.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                         @endcan
-                        @can('config_os_categoria_destroy')
-                            <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('configuracao.os.categoria.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
+                        @can('config_categoria_destroy')
+                            <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('configuracao.parametro.categoria.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
                         @endcan
                         </div>
                     </td>
@@ -76,7 +76,7 @@
     </div>
 
     {{-- Modal Excluir --}}
-    @can('config_os_categoria_destroy')
+    @can('config_categoria_destroy')
         @include('adminlte::partials.modal.modal-excluir')
     @endcan
     {{-- // Modal Excluir --}}

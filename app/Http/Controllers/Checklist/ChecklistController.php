@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Checklist;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Checklist\StoreUpdateChecklistRequest;
 use App\Models\Checklist\Checklist;
-use App\Models\Configuracao\Os\OsCategoria;
+use App\Models\Configuracao\Parametro\Categoria;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -107,7 +107,7 @@ class ChecklistController extends Controller
     public function destroy(Checklist $checklist)
     {
         try {
-            if (OsCategoria::where('checklist_id', $checklist->id)->count() > 0) {
+            if (Categoria::where('checklist_id', $checklist->id)->count() > 0) {
                 return redirect()->route('checklist.index')
                 ->with('warning', 'Checklist está sendo usado em alguma categoria!');
             }

@@ -24,7 +24,7 @@ class UpdateOsRequest extends FormRequest
         return [
             'cliente_id' => 'required|exists:clientes,id',
             'tecnico_id' => 'required|exists:users,id',
-            'categoria_id' => 'required|exists:os_categorias,id',
+            'categoria_id' => 'required|exists:categorias,id',
             'modelo_id' => 'nullable|exists:wiki_models,id',
             'status_id' => 'required|exists:os_status,id',
             'data_entrada' => 'required|date',

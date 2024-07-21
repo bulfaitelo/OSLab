@@ -30,8 +30,8 @@ return new class extends Migration
             $table->foreign('modelo_id', 'fk_os_wiki_models')
             ->references('id')->on('wiki_models');
 
-            $table->foreign('categoria_id', 'fk_os_os_categorias')
-            ->references('id')->on('os_categorias');
+            $table->foreign('categoria_id', 'fk_os_categorias')
+            ->references('id')->on('categorias');
 
             $table->foreign('fatura_id', 'fk_os_contas')
             ->references('id')->on('contas');
@@ -55,7 +55,7 @@ return new class extends Migration
             $table->dropForeign('fk_os_os_status');
             $table->dropForeign('fk_os_garantias');
             $table->dropForeign('fk_os_wiki_models');
-            $table->dropForeign('fk_os_os_categorias');
+            $table->dropForeign('fk_os_categorias');
             $table->dropForeign('fk_os_contas');
         });
 

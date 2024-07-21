@@ -7,8 +7,8 @@ use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Os\GarantiaController;
-use App\Http\Controllers\Configuracao\Os\OsCategoriaController;
 use App\Http\Controllers\Configuracao\Os\OsStatusController;
+use App\Http\Controllers\Configuracao\Parametro\CategoriaController;
 use App\Http\Controllers\Configuracao\Sistema\SistemaConfigController;
 use App\Http\Controllers\Configuracao\User\PerfilController;
 use App\Http\Controllers\Configuracao\User\PermissionsController;
@@ -127,6 +127,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/roles/assign/{role}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
         Route::get('/users/permissions/{user}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{user}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
+
+        // Parametro
+        Route::name('parametro.')->prefix('parametro')->group(function () {
+            Route::resource('/categoria', CategoriaController::class)
+                ->parameters(['categoria' => 'categoria']);
+        });
         // Configurações de usuário
         Route::name('user.')->prefix('user')->group(function () {
             Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
@@ -143,8 +149,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('os.')->prefix('os')->group(function () {
             Route::resource('/garantia', GarantiaController::class)
                 ->parameters(['garantia' => 'garantia']);
-            Route::resource('/categoria', OsCategoriaController::class)
-                ->parameters(['categoria' => 'categoria']);
             Route::resource('/status', OsStatusController::class);
         });
         Route::name('wiki.')->prefix('wiki')->group(function () {

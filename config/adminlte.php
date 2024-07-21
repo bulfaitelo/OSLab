@@ -427,7 +427,7 @@ return [
             'can' => [
                 'config_users', 'config_roles', 'config_user_setor',
                 'config_financeiro_centro_custo',
-                'config_os_garantia', 'config_os_categoria',
+                'config_os_garantia', 'config_categoria',
                 'config_wiki_fabricante', 'config_wiki_modelo',
                 'config_sistema',
                 'config_emitente',
@@ -494,16 +494,9 @@ return [
                     'text' => 'OS',
                     'icon' => 'fas fa-list-alt',
                     'can' => [
-                        'config_os_garantia', 'config_os_categoria', 'config_os_status',
+                        'config_os_garantia', 'config_categoria', 'config_os_status',
                     ],
                     'submenu' => [
-                        [
-                            'text' => 'Categoria de OS',
-                            'icon' => 'fas fa-clipboard-list',
-                            'route' => 'configuracao.os.categoria.index',
-                            'active' => ['configuracoes/os/categoria*'],
-                            'can' => 'config_os_categoria',
-                        ],
                         [
                             'text' => 'Termos de Garantia',
                             'icon' => 'fas fa-shield-alt',
@@ -542,6 +535,13 @@ return [
                             'can' => 'config_wiki_modelo',
                         ],
                     ],
+                ],
+                [
+                    'text' => 'Categoria',
+                    'icon' => 'fas fa-clipboard-list',
+                    'route' => 'configuracao.parametro.categoria.index',
+                    'active' => ['configuracoes/categoria*'],
+                    'can' => 'config_categoria',
                 ],
                 [
                     'text' => 'Sistema',

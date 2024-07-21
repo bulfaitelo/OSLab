@@ -10,7 +10,7 @@ use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Financeiro\FormaPagamento;
 use App\Models\Configuracao\Os\Garantia;
-use App\Models\Configuracao\Os\OsCategoria;
+use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Configuracao\Sistema\SistemaConfig;
@@ -323,29 +323,29 @@ Breadcrumbs::for('configuracao.os.garantia.edit', function (BreadcrumbTrail $tra
 });
 
 // Categoria
-Breadcrumbs::for('configuracao.os.categoria.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('configuracao.parametro.categoria.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Configurações');
-    $trail->push('OS');
-    $trail->push('Categoria', route('configuracao.os.categoria.index'));
+    $trail->push('Parâmetros');
+    $trail->push('Categoria', route('configuracao.parametro.categoria.index'));
 });
 
 // Categoria > Novo Categoria
-Breadcrumbs::for('configuracao.os.categoria.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('configuracao.os.categoria.index');
-    $trail->push('Nova Categoria', route('configuracao.os.categoria.create'));
+Breadcrumbs::for('configuracao.parametro.categoria.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('configuracao.parametro.categoria.index');
+    $trail->push('Nova Categoria', route('configuracao.parametro.categoria.create'));
 });
 
 // Categoria > [Visualização de Categoria]
-Breadcrumbs::for('configuracao.os.categoria.show', function (BreadcrumbTrail $trail, OsCategoria $item) {
-    $trail->parent('configuracao.os.categoria.index');
-    $trail->push($item->name, route('configuracao.os.categoria.show', $item));
+Breadcrumbs::for('configuracao.parametro.categoria.show', function (BreadcrumbTrail $trail, Categoria $item) {
+    $trail->parent('configuracao.parametro.categoria.index');
+    $trail->push($item->name, route('configuracao.parametro.categoria.show', $item));
 });
 
 // Categoria > [Categoria Name] > Editar Categoria
-Breadcrumbs::for('configuracao.os.categoria.edit', function (BreadcrumbTrail $trail, OsCategoria $item) {
-    $trail->parent('configuracao.os.categoria.index');
-    $trail->push('Editar Categoria', route('configuracao.os.categoria.edit', $item));
+Breadcrumbs::for('configuracao.parametro.categoria.edit', function (BreadcrumbTrail $trail, Categoria $item) {
+    $trail->parent('configuracao.parametro.categoria.index');
+    $trail->push('Editar Categoria', route('configuracao.parametro.categoria.edit', $item));
 });
 
 // Fim Configuração OS

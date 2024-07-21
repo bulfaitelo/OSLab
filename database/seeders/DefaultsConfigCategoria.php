@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Configuracao\Os\OsCategoria;
+use App\Models\Configuracao\Parametro\Categoria;
 use Illuminate\Database\Seeder;
 
-class DefaultsConfigOsCategoria extends Seeder
+class DefaultsConfigCategoria extends Seeder
 {
     /**
      * Run the database seeds.
@@ -59,7 +59,7 @@ class DefaultsConfigOsCategoria extends Seeder
         ];
 
         foreach ($insert as $key => $value) {
-            OsCategoria::updateOrCreate(
+            Categoria::updateOrCreate(
                 [
                     'id' => $value['id'],
                 ],
