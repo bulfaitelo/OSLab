@@ -113,7 +113,7 @@ class AddPagamentoModal extends Component
      */
     protected function disparaMensagemPosPagamento(): void
     {
-        if ($this->os->osQuitada()){
+        if ($this->os->osQuitada()) {
             $this->dispatch('toggleAddPagamentoModal');
             flasher('Pagamento adicionado com sucesso, a Ordem de Serviço foi '.$this->os->status->name.'!');
         } else {
