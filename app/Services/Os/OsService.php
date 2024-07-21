@@ -33,6 +33,7 @@ class OsService implements OsServiceInterface
                     $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 });
                 $query->orWhere('descricao', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('id', $request->busca);
                 $query->orWhere('defeito', 'LIKE', '%'.$request->busca.'%');
                 $query->orWhere('observacoes', 'LIKE', '%'.$request->busca.'%');
                 $query->orWhere('laudo', 'LIKE', '%'.$request->busca.'%');
