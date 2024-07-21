@@ -96,7 +96,7 @@
                 <div class="form-group ">
                     <label for="parcelas"> Parcelas </label>
                     <div class="input-group">
-                        {!! html()->text('parcelas', 1)->class('form-control int')->placeholder('Parcelas')->required() !!}
+                        {!! html()->text('parcelas', 1)->class('form-control int')->attributes(['inputmode' => 'numeric'])->placeholder('Parcelas')->required() !!}
                         <div id="data_info" class="input-group-append" data-container="body" data-toggle="popover" data-placement="top" data-content="O valor a ser recebido será automaticamente dividido pelo numero de parcelas, Podendo ser editado posteriormente.">
                             <span class="input-group-text"><i class="fas fa-exclamation-circle"></i></span>
                         </div>

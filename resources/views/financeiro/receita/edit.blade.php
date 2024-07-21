@@ -70,7 +70,7 @@
                             <div class="form-group ">
                                 <label for="parcelas"> Parcelas </label>
                                 <div class="input-group">
-                                    {!! html()->text('parcelas', $receita->parcelas)->class('form-control int')->placeholder('Parcelas')->required() !!}
+                                    {!! html()->text('parcelas', $receita->parcelas)->class('form-control int')->attributes(['inputmode' => 'numeric'])->placeholder('Parcelas')->required() !!}
                                     @can('financeiro_receita_pagamento_create')
                                         <span class="input-group-append">
                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-pagamento">
@@ -151,7 +151,7 @@
                         <div  class="col-md-2">
                             <div class="form-group">
                                 <label for="parcela"> Parcela </label>
-                                {!! html()->text('parcela')->class('form-control int')->placeholder('Parcela')->required() !!}
+                                {!! html()->text('parcela')->class('form-control int')->attributes(['inputmode' => 'numeric'])->placeholder('Parcela')->required() !!}
                             </div>
                         </div>
                         <div class="col-md-4">
