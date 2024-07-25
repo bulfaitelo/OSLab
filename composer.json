@@ -19,6 +19,7 @@
         "php-flasher/flasher-laravel": "^1.15",
         "spatie/laravel-backup": "^8.6",
         "spatie/laravel-html": "^3.2",
+        "spatie/laravel-pdf": "^1.5",
         "spatie/laravel-permission": "^6.00",
         "tightenco/ziggy": "^1.6",
         "yaza/laravel-google-drive-storage": "^3.0"
