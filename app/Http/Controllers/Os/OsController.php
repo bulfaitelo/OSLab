@@ -14,7 +14,8 @@ use App\Services\Os\OsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+// use Barryvdh\DomPDF\Facade\Pdf;
+use Spatie\LaravelPdf\Facades\Pdf;
 class OsController extends Controller
 {
     public function __construct(
@@ -76,10 +77,21 @@ class OsController extends Controller
     {
         $emitente = Emitente::getHtmlEmitente(1, $os->id);
 
-        return view('os.print', compact('os', 'emitente'));
+        // return view('os.print', compact('os', 'emitente'));
+
+        return Pdf::view('os.print', compact('os', 'emitente'))
+        ->format('a4')
+        ->name('OSLab_'.$os->id.'_'.$os->cliente->titleName().'.pdf');
 
         // $pdf = Pdf::loadView('os.print', compact('os', 'emitente'));
-        // return $pdf->download('invoice.pdf');
+        // $pdf->setPaper('a4');
+        // $css = asset('vendor/adminlte/dist/css/adminlte.min.css');
+
+        // return $pdf->stream('invoice.pdf');
+
+
+
+
     }
 
     /**
