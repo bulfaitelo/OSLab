@@ -14,8 +14,8 @@ use App\Services\Os\OsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use Barryvdh\DomPDF\Facade\Pdf;
-use Spatie\LaravelPdf\Facades\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
+// use Spatie\LaravelPdf\Facades\Pdf;
 class OsController extends Controller
 {
     public function __construct(
@@ -76,18 +76,28 @@ class OsController extends Controller
     public function print(Os $os)
     {
         $emitente = Emitente::getHtmlEmitente(1, $os->id);
+        return view('os.print', compact('os', 'emitente'));
+    }
+
+    /**
+     * Tela de impressão da OS em PDF.
+     */
+    public function printPdf(Os $os)
+    {
+        $emitente = Emitente::getHtmlEmitente(1, $os->id);
 
         // return view('os.print', compact('os', 'emitente'));
 
-        return Pdf::view('os.print', compact('os', 'emitente'))
-        ->format('a4')
-        ->name('OSLab_'.$os->id.'_'.$os->cliente->titleName().'.pdf');
+        // return Pdf::view('os.print', compact('os', 'emitente'))
+        // ->format('a4')
+        // ->name();
 
-        // $pdf = Pdf::loadView('os.print', compact('os', 'emitente'));
-        // $pdf->setPaper('a4');
+        $pdf = Pdf::loadView('os.pdf.print', compact('os', 'emitente'));
+        // $pdf->setWarnings(true);
+        $pdf->setPaper('a4');
         // $css = asset('vendor/adminlte/dist/css/adminlte.min.css');
 
-        // return $pdf->stream('invoice.pdf');
+        return $pdf->stream('OSLab_'.$os->id.'_'.$os->cliente->titleName().'.pdf');
 
 
 

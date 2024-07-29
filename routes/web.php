@@ -92,6 +92,8 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('os.despesa.create');
     Route::get('/os/{os}/print', [osController::class, 'print'])
         ->name('os.print');
+        Route::get('/os/{os}/print_pdf', [osController::class, 'printPdf'])
+        ->name('os.print_pdf');
 
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');

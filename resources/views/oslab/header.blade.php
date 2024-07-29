@@ -5,7 +5,6 @@
             <img
                 @if ($emitente->logo_url)
                     src="{{ asset('storage/'.$emitente->logo_url) }}"
-
                 @else
                     src="{{ asset('vendor/oslab/imgs/oslab_logo.svg') }} "
                 @endif
@@ -41,7 +40,7 @@
             <img src="{{ asset('vendor/oslab/imgs/oslab_logo.svg') }} " class="rounded image img-fluid" >
         </div>
         <div class="col-sm-7">
-            <h4 class="mb-0 " ><b> Nome FAntasia </b></h4>
+            <h4 class="mb-0 " ><b> Nome Fantasia </b></h4>
             <h6 class="mt-0 mb-0 ">CNPJ: 00.000.0001-01</h6>
             <p class="mb-0 "  >AV OsLAb, nº: 123, Bairro do Bairro</p>
             <p class="mb-0 "  >Cidade - RJ, CEP: 24000-000</p>
