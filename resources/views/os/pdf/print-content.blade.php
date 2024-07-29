@@ -182,12 +182,12 @@
                     <td class="pt-0 pb-0 pr-1 pl-1 font-weight-bold" colspan="5">
                         <div class="col-md-12 p-0">
                            <div class="row">
-                            <div class="col-md-6">
-                                    TOTAL
-                            </div>
-                            <div class="col-md-6 text-right">
-                                   R$ {{ number_format($os->produtos->sum('valor_venda_total'),2,",",".")}}
-                            </div>
+                                <div class="col-md-12">
+                                        TOTAL
+                                        <span class="float-right">
+                                            R$ {{ number_format($os->produtos->sum('valor_venda_total'),2,",",".")}}
+                                        </span>
+                                </div>
                            </div>
                         </div>
                     </td>
@@ -231,12 +231,12 @@
                     <td class="pt-0 pb-0 pr-1 pl-1 font-weight-bold" colspan="5">
                         <div class="col-md-12 p-0">
                            <div class="row">
-                            <div class="col-md-6">
+                                <div class="col-md-12">
                                     TOTAL
-                            </div>
-                            <div class="col-md-6 text-right">
-                                   R$ {{ number_format($os->servicos->sum('valor_servico_total'),2,",",".")}}
-                            </div>
+                                    <span class="float-right">
+                                        R$ {{ number_format($os->servicos->sum('valor_servico_total'),2,",",".")}}
+                                    </span>
+                                </div>
                            </div>
                         </div>
                     </td>
