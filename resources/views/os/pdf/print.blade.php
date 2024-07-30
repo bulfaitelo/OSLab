@@ -13,15 +13,21 @@
         @yield('title', config('adminlte.title', 'AdminLTE 3'))
         @yield('title_postfix', config('adminlte.title_postfix', ''))
     </title>
+    <!-- Latest compiled and minified CSS -->
+
+<!-- Latest compiled and minified JavaScript -->
+{{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --}}
     {{-- <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> --}}
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+
     <style>
-        @page { margin: 0; }
+        @page { margin: 5; }
     </style>
 
     @yield('css')
 </head>
-<body style="margin: 15px" onload="window.print()">
+<body>
     @yield('os-print-content')
 </body>
     {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>

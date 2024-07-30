@@ -1,6 +1,6 @@
 @section('os-print-content')
     {{-- @dump($os->toArray()) --}}
-    <div class="content " >
+    <div class="content" >
         {!! $emitente !!}
         {{-- Cabesalho, grantia e status --}}
         <table class=" mt-2 mb-2">
@@ -277,15 +277,15 @@
         @endif
         <div class="footer  rounded">
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-xs-2">
                     Data
                     <hr class="-small">
                 </div>
-                <div class="col-sm-5">
+                <div class="col-xs-5">
                     Assinatura Cliente
                     <hr class="-small">
                 </div>
-                <div class="col-sm-5">
+                <div class="col-xs-5">
                     Assinatura Técnico Responsavel
                     <hr class="-small">
                 </div>

@@ -11,10 +11,10 @@ use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
 use App\Services\Os\OsService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Barryvdh\DomPDF\Facade\Pdf;
 // use Spatie\LaravelPdf\Facades\Pdf;
 class OsController extends Controller
 {
@@ -84,9 +84,9 @@ class OsController extends Controller
      */
     public function printPdf(Os $os)
     {
-        $emitente = Emitente::getHtmlEmitente(1, $os->id);
+        $emitente = Emitente::getHtmlEmitente(1, $os->id, true);
 
-        // return view('os.print', compact('os', 'emitente'));
+        // return view('os.pdf.print', compact('os', 'emitente'));
 
         // return Pdf::view('os.print', compact('os', 'emitente'))
         // ->format('a4')
