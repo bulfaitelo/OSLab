@@ -1,7 +1,7 @@
 <div class="">
     @if ($emitente)
-    <div>
-        <div style="float: left; width: 17%;  background-color: #cc6633;">
+    <div style="height: 80px">
+        <div style="float: left; width: 17%;  ">
             <img
                 @if ($emitente->logo_url)
                     src="{{ asset('storage/'.$emitente->logo_url) }}"
@@ -10,14 +10,14 @@
                 @endif
             class="rounded image img-fluid" >
         </div>
-        <div style="float: left; width: 53%;  background-color: #35af96;">
+        <div style="float: left; width: 53%; ">
             <h4 class="mb-0 " ><b>{{ $emitente->fantasia }}</b></h4>
             <h6 class="mt-0 mb-0 ">CNPJ: {{ $emitente->cnpj }}</h6>
             <p class="mb-0 "  >{{ $emitente->logradouro }}, nº: {{ $emitente->numero }}, {{ $emitente->bairro }}</p>
             <p class="mb-0 "  >{{ $emitente->cidade }} - {{ $emitente->uf }}, CEP: {{ $emitente->cep}}</p>
         </div>
-        <div style="float:left; width: 29%;  background-color: #3366cc;">
-            <div style="font-size: 14px;" class="text-right">
+        <div style="float:left; width: 29%;  ">
+            <div style="font-size: 12px;" class="text-right">
                 @if ($emitente->telefone)
                 <p class="mb-0 mt-0" > Contato: {{ $emitente->telefone }} </p>
                 @endif
@@ -36,10 +36,6 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
     {{-- <div class="row">
         <div class="col-sm-2">
             <img

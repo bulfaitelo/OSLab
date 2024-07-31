@@ -88,20 +88,12 @@ class OsController extends Controller
 
         // return view('os.pdf.print', compact('os', 'emitente'));
 
-        // return Pdf::view('os.print', compact('os', 'emitente'))
-        // ->format('a4')
-        // ->name();
-
         $pdf = Pdf::loadView('os.pdf.print', compact('os', 'emitente'));
         // $pdf->setWarnings(true);
         $pdf->setPaper('a4');
         // $css = asset('vendor/adminlte/dist/css/adminlte.min.css');
 
         return $pdf->stream('OSLab_'.$os->id.'_'.$os->cliente->titleName().'.pdf');
-
-
-
-
     }
 
     /**
