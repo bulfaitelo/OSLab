@@ -17,6 +17,7 @@
     </title>
     {{-- <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/oslab/globalCss.css') }}">
 
 
     @yield('css')
@@ -53,8 +54,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
 </head>
-<body style="margin: 15px" >
-{{-- <body style="margin: 15px" onload="window.print()"> --}}
+<body style="margin: 15px; font-family: 'metropolis-regular', 'sans-serif'; "  onload="window.print()" >
     @yield('os-print-content')
 </body>
     {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>

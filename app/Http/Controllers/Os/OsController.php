@@ -15,7 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-// use Spatie\LaravelPdf\Facades\Pdf;
+
 class OsController extends Controller
 {
     public function __construct(
@@ -76,6 +76,7 @@ class OsController extends Controller
     public function print(Os $os)
     {
         $emitente = Emitente::getHtmlEmitente(1, $os->id);
+
         return view('os.screen.print', compact('os', 'emitente'));
     }
 
@@ -85,7 +86,6 @@ class OsController extends Controller
     public function printPdf(Os $os)
     {
         $emitente = Emitente::getHtmlEmitente(1, $os->id, true);
-
         // return view('os.pdf.print', compact('os', 'emitente'));
 
         $pdf = Pdf::loadView('os.pdf.print', compact('os', 'emitente'));

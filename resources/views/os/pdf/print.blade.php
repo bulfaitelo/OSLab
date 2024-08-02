@@ -20,20 +20,26 @@
     {{-- <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}"> --}}
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> --}}
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/oslab/globalCss.css') }}"> --}}
 
     <style>
         @page { margin: 5; }
+        body {
+            font-size: 12px;
+        }
+        h1 {
+            font-family: 'metropolis-regular', 'sans-serif'
+        }
+        b, .bold {
+            font-family: 'metropolis-bold', 'sans-serif' !important;
+            font-weight: bold;
+        }
     </style>
 
     @yield('css')
 </head>
-<body>
+<body style="font-family: 'metropolis-regular', 'sans-serif';">
     @yield('os-print-content')
 </body>
-    {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script> --}}
-
-    @yield('js')
-
 </html>
 

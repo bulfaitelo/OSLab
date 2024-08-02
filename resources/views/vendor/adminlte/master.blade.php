@@ -54,7 +54,7 @@
     @yield('adminlte_css')
 
     {{-- Favicon --}}
-    @if(config('adminlte.use_ico_only'))       
+    @if(config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon-color.png') }}" media="(prefers-color-scheme: light)" />
         <link rel="shortcut icon" href="{{ asset('favicons/favicon-white.png') }}" media="(prefers-color-scheme: dark)" />
     @elseif(config('adminlte.use_full_favicon'))

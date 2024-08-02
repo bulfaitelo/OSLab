@@ -3,29 +3,29 @@
     <div class="content" >
         {!! $emitente !!}
         {{-- Cabesalho, grantia e status --}}
-        <table class=" mt-2 mb-2">
+        <table class=" mt-1 mb-1 table-border-none">
             <thead class="header">
                 <tr>
-                    <th class="pl-1 pt-0 pb-0" >OS Nº: {{ $os->id }}</th>
-                    <th class="pt-0 pb-0" >Status: {{ $os->status->name }}</th>
-                    <th class="pt-0 pb-0" >
+                    <td class="pl-1 pt-0 pb-0" >OS: {{ $os->id }}</td>
+                    <td class="pt-0 pb-0" >Status: {{ $os->status->name }}</td>
+                    <td class="pt-0 pb-0" >
                         @if ($os->prazo_garantia)
                             Venc. Garantia: {{ $os->prazo_garantia?->format('d/m/Y') }}
                         @endif
-                    </th>
-                    <th class="pt-0 pb-0" >Entrada: {{ $os->data_entrada?->format('d/m/Y') }}</th>
-                    <th class="pt-0 pb-0" >
+                    </td>
+                    <td class="pt-0 pb-0" >Entrada: {{ $os->data_entrada?->format('d/m/Y') }}</td>
+                    <td class="pt-0 pb-0" >
                         @if ($os->data_saida)
                             Saída: {{ $os->data_saida?->format('d/m/Y') }}
                         @endif
-                    </th>
+                    </td>
                 </tr>
             </thead>
         </table>
         {{-- FIM - Cabesalho, grantia e status --}}
 
         {{-- Dados do cliente --}}
-        <table class=" mt-2 mb-2 ">
+        <table class=" mt-1 mb-1 ">
             <thead class="header">
                 <tr>
                     <td colspan="4" class="pl-1 pt-0 pb-0" ><b>DADOS DO CLIENTE</b></td>
@@ -77,7 +77,7 @@
         {{-- FIM - Dados do cliente --}}
 
         {{-- Dados do equipamento ou do serviço --}}
-        <table class=" mt-2 mb-2">
+        <table class=" mt-1 mb-1">
             <thead class="header">
                 <tr>
                     <td colspan="4" class=" pl-1 pt-0 pb-0" >
@@ -115,7 +115,7 @@
                 @if ($os->descricao)
                 <tr>
                     <td colspan="4" class="pl-1 " >
-                        <span  class="text-dark" style="font-size: 13px"  ><b>Descrição</b></span><br>
+                        <span  class="text-dark" style="font-size: 10px"  ><b>Descrição</b></span><br>
                         {!! $os->descricao !!}
                     </td>
                 </tr>
@@ -123,7 +123,7 @@
                 @if ($os->defeito)
                 <tr>
                     <td colspan="4" class="pl-1 " >
-                        <span  class="text-dark" style="font-size: 13px"  ><b>Defeito</b></span><br>
+                        <span  class="text-dark" style="font-size: 10px"  ><b>Defeito</b></span><br>
                         {!! $os->defeito !!}
                     </td>
                 </tr>
@@ -131,7 +131,7 @@
                 @if ($os->observacoes)
                 <tr>
                     <td colspan="4" class="pl-1 " >
-                        <span  class="text-dark" style="font-size: 13px"  ><b>Observações</b></span><br>
+                        <span  class="text-dark" style="font-size: 10px"  ><b>Observações</b></span><br>
                         {!! $os->observacoes !!}
                     </td>
                 </tr>
@@ -139,7 +139,7 @@
                 @if ($os->laudo)
                 <tr>
                     <td colspan="4" class="pl-1 " >
-                        <span  class="text-dark" style="font-size: 13px"  ><b>Laudo</b></span><br>
+                        <span  class="text-dark" style="font-size: 10px"  ><b>Laudo</b></span><br>
                         {!! $os->laudo !!}
                     </td>
                 </tr>
@@ -150,17 +150,17 @@
 
         {{-- Produtos --}}
         @if ($os->produtos->count() > 0)
-        <table class=" mt-2 mb-2">
+        <table class=" mt-1 mb-1">
             <thead>
-                <tr>
-                    <th colspan="5" class="pl-1 pt-0 pb-0 header" ><b>PRODUTOS</b></th>
+                <tr class="header">
+                    <td colspan="5" class="pl-1 pt-0 pb-0" ><b>PRODUTOS</b></td>
                 </tr>
                 <tr>
-                    <th class="pt-0 pb-0 pl-1" >ITEM</th>
-                    <th class="pt-0 pb-0 pl-1" >NOME</th>
-                    <th class="pt-0 pb-0 pr-1 text-right" >QTD.</th>
-                    <th class="pt-0 pb-0 pr-1 text-right" >Preço Unit.</th>
-                    <th class="pt-0 pb-0 pr-1 text-right" >SUBTOTAL</th>
+                    <td class="bold pt-0 pb-0 pl-1" >ITEM</td>
+                    <td class="bold pt-0 pb-0 pl-1" >NOME</td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" >QTD.</td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" >Preço Unit.</td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" >SUBTOTAL</td>
                 </tr>
             </thead>
             <tbody>
@@ -179,17 +179,11 @@
             </tbody>
             <tfoot>
                 <tr class="header">
-                    <td class="pt-0 pb-0 pr-1 pl-1 font-weight-bold" colspan="5">
-                        <div class="col-md-12 p-0">
-                           <div class="row">
-                                <div class="col-md-12">
-                                        TOTAL
-                                        <span class="float-right">
-                                            R$ {{ number_format($os->produtos->sum('valor_venda_total'),2,",",".")}}
-                                        </span>
-                                </div>
-                           </div>
-                        </div>
+                    <td class="pt-0 pr-1 pb-0 header" colspan="5">
+                        TOTAL
+                        <span class="float-right">
+                            R$ {{ number_format($os->produtos->sum('valor_venda_total'),2,",",".")}}
+                        </span>
                     </td>
                 </tr>
             </tfoot>
@@ -199,17 +193,17 @@
 
         {{-- SERVIÇOS --}}
         @if ($os->servicos->count() > 0)
-        <table class=" mt-2 mb-2">
+        <table class=" mt-1 mb-1">
             <thead>
                 <tr>
-                    <th colspan="5" class="pl-1 pt-0 pb-0 header" ><b>SERVIÇOS</b></th>
+                    <td colspan="5" class="pl-1 pt-0 pb-0 header" >SERVIÇOS</td>
                 </tr>
                 <tr>
-                    <th class="pt-0 pb-0 pl-1" >ITEM</th>
-                    <th class="pt-0 pb-0 pl-1" >NOME</th>
-                    <th class="pt-0 pb-0 pr-1 text-right" >QTD.</th>
-                    <th class="pt-0 pb-0 pr-1 text-right" >Preço Unit.</th>
-                    <th class="pt-0 pb-0 pr-1 text-right" >SUBTOTAL</th>
+                    <td class="bold pt-0 pb-0 pl-1" >ITEM</td>
+                    <td class="bold pt-0 pb-0 pl-1" >NOME</td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" >QTD.</td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" >Preço Unit.</td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" >SUBTOTAL</td>
                 </tr>
             </thead>
             <tbody>
@@ -228,17 +222,11 @@
             </tbody>
             <tfoot>
                 <tr class="header">
-                    <td class="pt-0 pb-0 pr-1 pl-1 font-weight-bold" colspan="5">
-                        <div class="col-md-12 p-0">
-                           <div class="row">
-                                <div class="col-md-12">
-                                    TOTAL
-                                    <span class="float-right">
-                                        R$ {{ number_format($os->servicos->sum('valor_servico_total'),2,",",".")}}
-                                    </span>
-                                </div>
-                           </div>
-                        </div>
+                    <td class="pt-0 pr-1 pb-0" colspan="5">
+                        TOTAL
+                        <span class="float-right">
+                            R$ {{ number_format($os->servicos->sum('valor_servico_total'),2,",",".")}}
+                        </span>
                     </td>
                 </tr>
             </tfoot>
@@ -246,13 +234,13 @@
         @endif
         {{-- FIM - SERVIÇOS --}}
 
-        <table class=" radius mt-2 mb-2">
+        <table class=" radius mt-1 mb-1">
             <thead>
                 {{-- <tr>
                     <th  class="pt-0 pb-0 header text-right" ><b>DESCONTO: - 123,00</b></th>
                 </tr> --}}
-                <tr>
-                    <th  class="pt-0 pr-1 pb-0 header text-right" ><b>VALOR TOTAL DA OS: {{ number_format($os->valorTotal(),2,",",".") }}</b></th>
+                <tr class="header">
+                    <td  class="pt-0 pr-1 pb-0 text-right" >VALOR TOTAL DA OS: {{ number_format($os->valorTotal(),2,",",".") }}</td>
                 </tr>
             </thead>
 
@@ -260,7 +248,7 @@
 
         @if (strlen(getConfig('os_informacao')) > 5)
 
-        <table class="mt-2 mb-2 table-rounded">
+        <table class="mt-1 mb-1 table-rounded">
             <thead class="header">
                 <tr>
                     <td colspan="4" class="pl-1 pt-0 pb-0" ><b>INFORMAÇÕES</b></td>
@@ -275,23 +263,24 @@
             </tbody>
         </table>
         @endif
-        <div class="footer  rounded">
-            <div class="row">
-                <div class="col-xs-2">
-                    Data
-                    <hr class="-small">
-                </div>
-                <div class="col-xs-5">
-                    Assinatura Cliente
-                    <hr class="-small">
-                </div>
-                <div class="col-xs-5">
-                    Assinatura Técnico Responsavel
-                    <hr class="-small">
-                </div>
-            </div>
-        </div>
-
+        <table class="mt-1 mb-1 table-rounded table-border-none">
+            <tbody>
+                <tr>
+                    <td>
+                        Data
+                        <hr class="-small">
+                    </td>
+                    <td>
+                        Assinatura Cliente
+                        <hr class="-small">
+                    </td>
+                    <td>
+                        Assinatura Técnico Responsavel
+                        <hr class="-small">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 
@@ -301,11 +290,13 @@
     <style>
         .header {
             background-color: #d5d6d7 !important;
+            font-family: 'metropolis-bold', 'sans-serif' !important;
         }
 
         @media print {
             .header {
                 background-color: #d5d6d7 !important;
+                font-family: 'metropolis-bold', 'sans-serif' !important;
             }
         }
 
@@ -313,6 +304,12 @@
             padding: .3rem;
             border: 2px solid rgb(146, 146, 146);
         }
+
+        .table-border-none td {
+            border: none;
+            padding: 5px; /* Ajuste o padding conforme necessário */
+        }
+
         table {
             display: inline-table;
             width: 100%;
@@ -349,12 +346,4 @@
         }
 
     </style>
-@stop
-
-@section('js')
-    <script>
-        // alert('teste');
-        // window.print();
-
-    </script>
 @stop

@@ -33,6 +33,7 @@ class TestController extends Controller
     public function index()
     {
 
+        dd(storage_path('fonts'));
 
         // dd($this->osService->createOs(1));
         // Http::fake();
