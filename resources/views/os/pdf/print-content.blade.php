@@ -76,6 +76,7 @@
         </table>
         {{-- FIM - Dados do cliente --}}
 
+
         {{-- Dados do equipamento ou do serviço --}}
         <table class=" mt-1 mb-1">
             <thead class="header">
@@ -258,6 +259,7 @@
                 <tr>
                     <td colspan="4" class="pl-1 " >
                         {!! getConfig('os_informacao') !!}
+                        @dump(count(preg_split('/\n|\r/',getConfig('os_informacao'))))
                     </td>
                 </tr>
             </tbody>

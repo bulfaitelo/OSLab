@@ -81,3 +81,9 @@
 }
 /* FIM - define o estilo do * para os campos obrigatórios  */
 
+
+/* DOMPDF */
+.page_break {
+    page-break-before: always;
+}
+/* FIM - DOMPDF */

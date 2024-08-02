@@ -27,6 +27,7 @@ class Emitente extends Model
         if ($pdf) {
             return view('oslab.header-pdf', compact('emitente', 'os'));
         }
+
         return view('oslab.header', compact('emitente', 'os'));
     }
 }

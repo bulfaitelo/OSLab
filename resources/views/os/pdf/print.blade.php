@@ -20,7 +20,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}"> --}}
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> --}}
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('vendor/oslab/globalCss.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('vendor/oslab/globalCss.css') }}">
 
     <style>
         @page { margin: 5; }
