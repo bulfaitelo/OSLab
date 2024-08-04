@@ -19,8 +19,9 @@
 {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --}}
     {{-- <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}"> --}}
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> --}}
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('vendor/oslab/globalCss.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/oslab/pdf.css') }}">
 
     <style>
         @page { margin: 5; }
@@ -31,9 +32,9 @@
             font-family: 'metropolis-regular', 'sans-serif'
         }
         b, .bold {
-            font-family: 'metropolis-bold', 'sans-serif' !important;
-            font-weight: bold;
+            font-family: 'metropolis-bold', 'sans-serif' !important;            
         }
+        
     </style>
 
     @yield('css')
