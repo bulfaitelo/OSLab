@@ -89,10 +89,15 @@ class AddPagamentoModal extends Component
             if ($conta->parcelas < $conta->pagamentos->count()) {
                 $conta->parcelas = $conta->parcelas + 1;
             }
-            if (($conta->pagamentos->sum('valor') + $pagamentoRequest['pagamento_valor']) >= $conta->valor) {
+            if ($conta->pagamentos->sum('valor') >= $conta->valor) {
                 $conta->data_quitacao = $pagamentoRequest['data_pagamento'];
                 if (getConfig('default_os_faturar_pagto_quitado') != '') {
                     $this->os->status_id = getConfig('default_os_faturar_pagto_quitado');
+                    $this->os->save();
+                }
+            } else {
+                if (getConfig('default_os_faturar_pagto_parcial') != '') {
+                    $this->os->status_id = getConfig('default_os_faturar_pagto_parcial');
                     $this->os->save();
                 }
             }
