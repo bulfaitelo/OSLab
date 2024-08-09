@@ -35,7 +35,7 @@
 
     </div>
     <div class="card-body pt-2">
-        @include('os.print-content')
+        @include('os.screen.print-content')
         @yield('os-print-content')
     </div>
 </div>
