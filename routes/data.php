@@ -3,6 +3,7 @@
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Configuracao\User\UserController;
 use App\Http\Controllers\Configuracao\Wiki\ModeloController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
 use App\Http\Controllers\Wiki\WikiController;
@@ -26,4 +27,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('select_modelos', [ModeloController::class, 'apiModeloSelect'])->name('modelo.select');
     Route::get('select_produtos', [ProdutoController::class, 'apiProdutoSelect'])->name('produto.select');
     Route::get('select_servicos', [ServicoController::class, 'apiServicoSelect'])->name('servico.select');
+    Route::get('notifications/get', [NotificationsController::class, 'getNotificationsData']);
 });

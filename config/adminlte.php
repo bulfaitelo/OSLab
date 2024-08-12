@@ -281,7 +281,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | Menu Items
-    |--------------------------------------------------------------------------
+    |--------------------------------------------------------------------------ad
     |
     | Here we can modify the sidebar/top navigation of the admin panel.
     |
@@ -309,6 +309,38 @@ return [
             'input_name' => 'busca',
 
         ],
+        // [
+        //     'text' => 'asd',
+        //     'icon' => 'fa-regular fa-star',
+        //     'topnav_right' => true,
+        //     'route' => 'os.index',
+        // ],
+        // [
+        //     'type'         => 'navbar-notification',
+        //     'text' => '',
+        //     'icon' => 'fa-regular fa-bell',
+        //     'topnav_right' => true,
+        //     'route' => 'os.index',
+        //     'label' => 5,
+        // ],
+        [
+            'type'         => 'navbar-notification', // The menu item type => REQUIRED
+            'key'          => 'notifications',
+            'id'           => 'my-notification', // An ID attribute => REQUIRED
+            'icon'         => 'fas fa-bell', // A font awesome icon => REQUIRED
+            'icon_color'   => 'warning', // The initial icon color => OPTIONAL
+            'label'        => 12, // The initial label for the badge => OPTIONAL
+            'label_color'  => 'danger', // The initial badge color => OPTIONAL
+            'url'          => 'notifications/show', // Url for the click event => REQUIRED
+            'dropdown_mode'   => true, // Enable dropdown mode.
+            'dropdown_flabel' => 'All notifications', // The label that will be used for the link to the configured url.
+            'topnav_right' => true, // Or "'topnav' => true" to place on the left => REQUIRED
+            // 'update_cfg' => [
+            //     'url' => 'data/notifications/get', // Url to use for fetch new data => OPTIONAL
+            //     'period' => 10, // The update period for get new data (in seconds) => OPTIONAL
+            // ],
+        ],
+
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
