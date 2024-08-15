@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use JeroenNoten\LaravelAdminLte\AdminLte;
+use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 use Spatie\Backup\BackupDestination\BackupDestinationFactory;
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
@@ -33,8 +35,49 @@ class TestController extends Controller
     public function index()
     {
 
-        dd(storage_path('fonts'));
+        $menu = config('adminlte.menu');
+        function findRoute(array $array, $route) {
+            foreach ($array as $key => $value) {
+                // Se o valor atual é um array, faça uma chamada recursiva
+                if (is_array($value)) {
+                    $result = findRoute($value, $route);
+                    if ($result) {
+                        return $result;
+                    }
+                }
 
+                // Se encontramos a chave "route" com o valor desejado
+                if ($key === 'route' && $value === $route) {
+                    // Retornamos o array completo do mesmo nível
+                    return $array;
+                }
+            }
+
+            return null;
+        }
+
+        $routeToFind = 'relatorio.financeiro.balancete.index';
+        $result = findRoute($menu, $routeToFind);
+        dd($result);
+        if ($result) {
+            print_r($result);
+        } else {
+            echo "Rota não encontrada.";
+        }
+
+
+
+        dd($menu);
+
+        // $search='os.index';
+
+        // $keys = array_keys(array_column($menu, 'route'), $search);
+        // // $key = array_search($search, array_column($menu, 'route'));
+        // // $keys = array_keys(array_combine(array_keys($menu), array_column($menu, 'route')),$search);
+
+        // dd($keys);
+        // financeiro.receita.index
+        // os.index
         // dd($this->osService->createOs(1));
         // Http::fake();
         // $response = Http::post('', [

@@ -23,6 +23,7 @@ use App\Http\Controllers\Financeiro\ReceitaController;
 use App\Http\Controllers\Financeiro\ReceitaPagamentoController;
 use App\Http\Controllers\Os\OsController;
 use App\Http\Controllers\Os\OsPublicController;
+use App\Http\Controllers\OsLab\FavoriteController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Relatorio\Financeiro\BalanceteController;
@@ -168,6 +169,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('backup/download', [BackupController::class, 'download'])->name('backup.download');
         Route::post('backup/destroy', [BackupController::class, 'destroy'])->name('backup.delete');
     });
+
+    Route::get('favorite/{routeName}', [FavoriteController::class, 'favoriteToggle'])->name('favorite.toggle');
 });
 
 // OS >> informações (publica)

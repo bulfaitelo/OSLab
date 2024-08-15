@@ -3,7 +3,7 @@
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Configuracao\User\UserController;
 use App\Http\Controllers\Configuracao\Wiki\ModeloController;
-use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\OsLab\NotificationsController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Servico\ServicoController;
 use App\Http\Controllers\Wiki\WikiController;

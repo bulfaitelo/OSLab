@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
- * undocumented class.
+ * Classe de serviço de OS.
  */
 class OsService implements OsServiceInterface
 {

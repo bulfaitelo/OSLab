@@ -2,9 +2,11 @@
 
 namespace App\Listeners;
 
+use App\Services\OsLab\MenuService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
+use Route;
 
 class AddMenuItemListener
 {
@@ -21,13 +23,35 @@ class AddMenuItemListener
      */
     public function handle(BuildingMenu $event): void
     {
-        // Add some items to the menu...
-        $event->menu->addAfter('notifications', [
-            'text' => \Route::currentRouteName(),
-            'url'  => '',
-            // 'icon' => 'fa-regular fa-star',
-            'icon' => 'fa-solid fa-star',
-            'topnav_right' => true,
-        ]);
+        $this->menuFavoriteToggle($event);
+    }
+
+    /**
+     * undocumented function summary
+     *
+     * Undocumented function long description
+     *
+     * @param  BuildingMenu  $event
+     * @return  void
+     **/
+    public function menuFavoriteToggle($event): void
+    {
+        $menuService = new MenuService();
+        $eligible = $menuService->getRouteData(Route::currentRouteName());
+        $favorited = $menuService->checkRouteIsFavorited(Route::currentRouteName());
+        if ($favorited) {
+            $starIcon = 'fa-solid fa-star';
+        } else {
+            $starIcon = 'fa-regular fa-star';
+        }
+
+        if($eligible){
+            $event->menu->addAfter('notifications', [
+                'text' => '',
+                'topnav_right' => true,
+                'route'  => ['favorite.toggle', [Route::currentRouteName() ]],
+                'icon' => $starIcon,
+            ]);
+        }
     }
 }
