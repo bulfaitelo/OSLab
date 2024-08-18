@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Services\OsLab\FavoriteMenuService;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Route;
 
@@ -27,12 +25,10 @@ class AddMenuItemListener
     }
 
     /**
-     * undocumented function summary
-     *
-     * Undocumented function long description
+     * Alterna ícone da função de favoritar.
      *
      * @param  BuildingMenu  $event
-     * @return  void
+     * @return void
      **/
     public function menuFavoriteToggle($event): void
     {
@@ -45,11 +41,11 @@ class AddMenuItemListener
             $starIcon = 'fa-regular fa-star';
         }
 
-        if($eligible){
+        if ($eligible){
             $event->menu->addAfter('notifications', [
                 'text' => '',
                 'topnav_right' => true,
-                'route'  => ['favorite.toggle', [Route::currentRouteName() ]],
+                'route' => ['favorite.toggle', [Route::currentRouteName() ]],
                 'icon' => $starIcon,
             ]);
         }

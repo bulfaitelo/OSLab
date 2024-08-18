@@ -24,12 +24,13 @@ final class FavoriteMenuService
      * Retorna os dados da rota.
      *
      * @param  string  $routeName  Nome da Rota a ser buscada.
-     * @return  array|null
+     * @return array|null
      **/
     public function getRouteData($routeName)
     {
         $routeNameUpdated = $this->updateRouteName($routeName);
         $menu = config('adminlte.menu');
+
         return self::findRoute($menu, $routeNameUpdated);
     }
 
@@ -70,7 +71,7 @@ final class FavoriteMenuService
     }
 
     /**
-     * Apaga uma rota ja favoritada
+     * Apaga uma rota ja favoritada.
      *
      * @param  string  $routeName  Nome da Rota a ser excluida.
      **/
@@ -98,11 +99,10 @@ final class FavoriteMenuService
      * Busca no array o nome da rota.
      *
      * @param  string  $routeName  Nome da Rota a ser buscada.
-     * @return  array|null
+     * @return array|null
      **/
     private function findRoute(array $array, $routeName)
     {
-
         foreach ($array as $key => $value) {
             // Se o valor atual é um array, faça uma chamada recursiva
             if (is_array($value)) {
@@ -117,6 +117,7 @@ final class FavoriteMenuService
                 return $array;
             }
         }
+
         return null;
     }
 
@@ -125,8 +126,8 @@ final class FavoriteMenuService
      *
      * Troca nome do fim da rota de create, ou etc para index.
      *
-     * @param  string  $routeName Nome da rota a ser tradada.
-     * @return  string|null
+     * @param  string  $routeName  Nome da rota a ser tradada.
+     * @return string|null
      **/
     private function updateRouteName($routeName)
     {
@@ -134,6 +135,7 @@ final class FavoriteMenuService
         if (in_array(end($routeNameArray), $this->availableRoutes)) {
             return str_replace(end($routeNameArray), "index", $routeName);
         }
+
         return null;
     }
 
@@ -144,7 +146,7 @@ final class FavoriteMenuService
      *
      * @param  string  $routeName  Nome da rota a ser tradada.
      * @param  string  $text  Texto a ser atualizado
-     * @return  string|null
+     * @return string|null
      **/
     private function updateTextName($routeName, $text)
     {
@@ -153,6 +155,7 @@ final class FavoriteMenuService
         if (array_key_exists($routeEndName, $this->textMenuConcat)) {
             return $this->textMenuConcat[$routeEndName].$text;
         }
+
         return null;
     }
 }

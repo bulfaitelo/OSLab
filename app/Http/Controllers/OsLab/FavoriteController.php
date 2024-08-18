@@ -7,7 +7,6 @@ use App\Services\OsLab\FavoriteMenuService;
 
 class FavoriteController extends Controller
 {
-
     protected $menuService;
 
     public function __construct(FavoriteMenuService $menuService)
