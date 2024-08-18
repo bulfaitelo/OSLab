@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-
+    @livewire('home.show-user-favorites')
 @stop
 
 @section('css')

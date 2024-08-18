@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Classe de funções de controle de menu.
  */
-final class MenuService
+final class FavoriteMenuService
 {
     private $availableRoutes = [
         'index',
         'create',
+    ];
+
+    private $textMenuConcat = [
+        'index' => '',
+        'create' => 'Criar ',
     ];
 
     /**
@@ -49,6 +54,7 @@ final class MenuService
     public function favoriteRoute($routeName)
     {
         $routeData = $this->getRouteData($routeName);
+        $text = $this->updateTextName($routeName, $routeData['text']);
 
         if (isset($routeData['icon'])) {
             $icon = $routeData['icon'];
@@ -59,6 +65,7 @@ final class MenuService
         $paginaFavorita->user_id = $userId;
         $paginaFavorita->route = $routeName;
         $paginaFavorita->icon = $icon;
+        $paginaFavorita->text = $text;
         $paginaFavorita->save();
     }
 
@@ -72,6 +79,19 @@ final class MenuService
         $userId = Auth::id();
 
         PaginaFavorita::where('user_id', $userId)->where('route', $routeName)->delete();
+    }
+
+    /**
+     * Retornar os itens favoritos do Usuário.
+     *
+     * Retornar um array com os dados
+     * @return array|null
+     **/
+    public function getUserFavoriteData()
+    {
+        $userId = Auth::id();
+
+        return PaginaFavorita::where('user_id', $userId)->get();
     }
 
     /**
@@ -113,6 +133,25 @@ final class MenuService
         $routeNameArray = explode('.', $routeName);
         if (in_array(end($routeNameArray), $this->availableRoutes)) {
             return str_replace(end($routeNameArray), "index", $routeName);
+        }
+        return null;
+    }
+
+    /**
+     * Atualiza o texto com base na rota.
+     *
+     * Concatena um texto para caso a rota seja diferente de um index.
+     *
+     * @param  string  $routeName  Nome da rota a ser tradada.
+     * @param  string  $text  Texto a ser atualizado
+     * @return  string|null
+     **/
+    private function updateTextName($routeName, $text)
+    {
+        $routeEndNameArray = explode('.', $routeName);
+        $routeEndName = end($routeEndNameArray);
+        if (array_key_exists($routeEndName, $this->textMenuConcat)) {
+            return $this->textMenuConcat[$routeEndName].$text;
         }
         return null;
     }

@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Services\OsLab\MenuService;
+use App\Services\OsLab\FavoriteMenuService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
@@ -36,7 +36,7 @@ class AddMenuItemListener
      **/
     public function menuFavoriteToggle($event): void
     {
-        $menuService = new MenuService();
+        $menuService = new FavoriteMenuService();
         $eligible = $menuService->getRouteData(Route::currentRouteName());
         $favorited = $menuService->checkRouteIsFavorited(Route::currentRouteName());
         if ($favorited) {

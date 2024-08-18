@@ -12,7 +12,7 @@ class NotificationsController extends Controller
         // Create array of available colors.
 
         $colors = [
-            'light', 'dark','primary', 'secondary',
+            'light', 'dark', 'primary', 'secondary',
             'info', 'success', 'warning', 'danger'
         ];
 
