@@ -86,6 +86,7 @@ final class FavoriteMenuService
      * Retornar os itens favoritos do Usuário.
      *
      * Retornar um array com os dados
+     * 
      * @return array|null
      **/
     public function getUserFavoriteData()
@@ -133,7 +134,7 @@ final class FavoriteMenuService
     {
         $routeNameArray = explode('.', $routeName);
         if (in_array(end($routeNameArray), $this->availableRoutes)) {
-            return str_replace(end($routeNameArray), "index", $routeName);
+            return str_replace(end($routeNameArray), 'index', $routeName);
         }
 
         return null;

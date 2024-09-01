@@ -324,15 +324,15 @@ return [
         //     'label' => 5,
         // ],
         [
-            'type'         => 'navbar-notification', // The menu item type => REQUIRED
-            'key'          => 'notifications',
-            'id'           => 'my-notification', // An ID attribute => REQUIRED
-            'icon'         => 'fas fa-bell', // A font awesome icon => REQUIRED
-            'icon_color'   => 'warning', // The initial icon color => OPTIONAL
-            'label'        => 12, // The initial label for the badge => OPTIONAL
-            'label_color'  => 'danger', // The initial badge color => OPTIONAL
-            'url'          => 'notifications/show', // Url for the click event => REQUIRED
-            'dropdown_mode'   => true, // Enable dropdown mode.
+            'type' => 'navbar-notification', // The menu item type => REQUIRED
+            'key' => 'notifications',
+            'id' => 'my-notification', // An ID attribute => REQUIRED
+            'icon' => 'fas fa-bell', // A font awesome icon => REQUIRED
+            'icon_color' => 'warning', // The initial icon color => OPTIONAL
+            'label' => 12, // The initial label for the badge => OPTIONAL
+            'label_color' => 'danger', // The initial badge color => OPTIONAL
+            'url' => 'notifications/show', // Url for the click event => REQUIRED
+            'dropdown_mode' => true, // Enable dropdown mode.
             'dropdown_flabel' => 'All notifications', // The label that will be used for the link to the configured url.
             'topnav_right' => true, // Or "'topnav' => true" to place on the left => REQUIRED
             // 'update_cfg' => [

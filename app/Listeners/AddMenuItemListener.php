@@ -41,11 +41,11 @@ class AddMenuItemListener
             $starIcon = 'fa-regular fa-star';
         }
 
-        if ($eligible){
+        if ($eligible) {
             $event->menu->addAfter('notifications', [
                 'text' => '',
                 'topnav_right' => true,
-                'route' => ['favorite.toggle', [Route::currentRouteName() ]],
+                'route' => ['favorite.toggle', [Route::currentRouteName()]],
                 'icon' => $starIcon,
             ]);
         }
