@@ -230,7 +230,7 @@
         var tomSelectModelo = new TomSelect(".modelo",{
             valueField: 'id',
             labelField: 'name',
-            searchField: ['name', 'wiki'],
+            searchField: ['name', 'wiki', 'fabricante'],
             selectOnTab: true,
             placeholder: 'Selecione o Modelo',
             // fetch remote data
@@ -247,14 +247,14 @@
             render: {
                 option: function(data, escape) {
                 return '<div>' +
-                        '<span class="title">' + escape(data.name) + '</span>' +
-                        '<span class="url"> <b> ' + escape(data.wiki) + '</b> </span>' +
+                        '<span class="title"><b>' + escape(data.name) + '</b></span>' +
+                        '<span class="url"><b>[' + escape(data.fabricante) + '] </b>' + escape(data.wiki) + '</span>' +
                     '</div>';
                 },
                 item: function(data, escape) {
                     return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
                 },
-                @canany(['wiki_create', 'config_wiki_modelo_create'])
+                @canany(['wiki_create','config_wiki_modelo_create'])
                 no_results:function(data,escape){
                     return '<div class="no-results">' +
                                 '<p>Modelo não Encontrado</p>' +
@@ -270,7 +270,7 @@
                                 @endcan
                             '</div>';
                 },
-                @endcan
+                @endcanany
             },
         });
 
