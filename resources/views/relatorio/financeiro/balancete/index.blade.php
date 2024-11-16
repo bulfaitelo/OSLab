@@ -42,13 +42,13 @@
                 <div class="col-md-2">
                     <div class="form-group">
                     <label for="data_inicio">Data Início</label>
-                        {!! html()->date('data_inicio', ($request->data_inicio == true) ? $request->data_inicio : Carbon\Carbon::now()->subMonth()->format('d-m-Y') )->class('form-control')->placeholder('Data Início') !!}
+                        {!! html()->date('data_inicio', ($request->data_inicio == true) ? $request->data_inicio : '01-01-'.Carbon\Carbon::now()->format('Y') )->class('form-control')->placeholder('Data Início') !!}
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                     <label for="data_fim" >Data Fim</label>
-                        {!! html()->date('data_fim', ($request->data_fim == true) ? $request->data_fim : Carbon\Carbon::now()->format('d-m-Y'))->class('form-control')->placeholder('Data Fim') !!}
+                        {!! html()->date('data_fim', ($request->data_fim == true) ? $request->data_fim : '31-12-'.Carbon\Carbon::now()->format('Y'))->class('form-control')->placeholder('Data Fim') !!}
                     </div>
                 </div>
                 <div class="col-md-4">
