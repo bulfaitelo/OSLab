@@ -13,7 +13,7 @@ class NotificationsController extends Controller
 
         $colors = [
             'light', 'dark', 'primary', 'secondary',
-            'info', 'success', 'warning', 'danger'
+            'info', 'success', 'warning', 'danger',
         ];
 
         // Create a notifications array of data.
@@ -21,18 +21,18 @@ class NotificationsController extends Controller
         $notifications = [
             [
                 'icon' => 'fas fa-fw fa-envelope',
-                'text' => rand(0, 10) . ' new messages',
-                'time' => rand(0, 10) . ' minutes',
+                'text' => rand(0, 10).' new messages',
+                'time' => rand(0, 10).' minutes',
             ],
             [
                 'icon' => 'fas fa-fw fa-users text-primary',
-                'text' => rand(0, 10) . ' friend requests',
-                'time' => rand(0, 60) . ' minutes',
+                'text' => rand(0, 10).' friend requests',
+                'time' => rand(0, 60).' minutes',
             ],
             [
                 'icon' => 'fas fa-fw fa-file text-danger',
-                'text' => rand(0, 10) . ' new reports',
-                'time' => rand(0, 60) . ' minutes',
+                'text' => rand(0, 10).' new reports',
+                'time' => rand(0, 60).' minutes',
             ],
         ];
 
@@ -59,10 +59,10 @@ class NotificationsController extends Controller
         // Return the new notification data.
 
         return [
-            'label'       => rand(0, 10),
+            'label' => rand(0, 10),
             'label_color' => $colors[rand(0, 7)],
-            'icon_color'  => $colors[rand(0, 7)],
-            'dropdown'    => $dropdownHtml,
+            'icon_color' => $colors[rand(0, 7)],
+            'dropdown' => $dropdownHtml,
         ];
     }
 }
