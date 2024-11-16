@@ -6,7 +6,18 @@
 
 @section('content_header')
     <h1><i class="fa-solid fa-book "></i> <b>[{{ $wiki->fabricante->name }}]</b> -  {{ $wiki->name}} </h1>
-    <h6>{{ $wiki->modelosTitle() }}</h6>
+    <h6>
+        <a href="{{ route('configuracao.wiki.modelo.create', ['wiki_id' => $wiki]) }}" target="_blank" rel="noopener noreferrer">
+            <button
+                type="button"
+                class="btn btn-primary btn-sm pop_info pt-0 pb-0 pr-1 pl-1"
+                title=""
+                data-original-title="Adicionar novo Modelo">
+                <i class="fas fa-plus-square"></i>
+            </button>
+        </a>
+        {{ $wiki->modelosTitle() }}
+    </h6>
 @stop
 {{-- Texto de ajuda --}}
 {{-- @section('content_header_help_content', 'Utilize os campos a seguir para cadastrar as informações de um dispositivo. Esses dados auxiliam em novos atendimentos.') --}}

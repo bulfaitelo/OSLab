@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-
 <div class="row justify-content-md-center">
     <div class="col-md-9 ">
         <!-- general form elements -->
@@ -32,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="wiki_id">Wiki</label>
-                    {!! html()->select('wiki_id', \App\Models\Wiki\Wiki::orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                    {!! html()->select('wiki_id', \App\Models\Wiki\Wiki::orderBy('name')->pluck('name', 'id'), $request->wiki_id)->class('form-control')->placeholder('Selecione')->required() !!}
                 </div>
           </div>
           {{-- Minimal with icon only --}}
