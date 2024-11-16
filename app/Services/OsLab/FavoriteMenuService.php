@@ -86,7 +86,7 @@ final class FavoriteMenuService
      * Retornar os itens favoritos do Usuário.
      *
      * Retornar um array com os dados
-     * 
+     *
      * @return array|null
      **/
     public function getUserFavoriteData()

@@ -10,7 +10,7 @@ class ShowUserFavorites extends Component
     public function render()
     {
         $favoriteMenu = new FavoriteMenuService();
-        
+
         return view('livewire.home.show-user-favorites', [
             'menu' => $favoriteMenu->getUserFavoriteData(),
         ]);
