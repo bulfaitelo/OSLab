@@ -31,6 +31,10 @@ class ReceitaController extends Controller
         $dataHoje = Carbon::now()->format('Y-d-m');
         $queryReceita = Contas::query();
         $queryReceita->where('tipo', 'R');
+        $queryReceita->with([
+            'centroCusto',
+            'cliente',
+        ]);
         if ($request->busca) {
             $queryReceita->where(function ($query) use ($request) {
                 $query->whereHas('cliente', function ($query) use ($request) {

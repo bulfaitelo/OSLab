@@ -32,6 +32,10 @@ class DespesaController extends Controller
         $dataHoje = Carbon::now()->format('Y-d-m');
         $queryDespesa = Contas::query();
         $queryDespesa->where('tipo', 'D');
+        $queryDespesa->with([
+            'centroCusto',
+            'cliente',
+        ]);
         if ($request->busca) {
             $queryDespesa->where(function ($query) use ($request) {
                 $query->whereHas('cliente', function ($query) use ($request) {
