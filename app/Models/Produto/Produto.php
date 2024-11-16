@@ -91,6 +91,7 @@ class Produto extends Model
         if ($request->centro_custo_id) {
             $queryProduto->where('centro_custo_id', $request->centro_custo_id);
         }
+        $queryProduto->orderBy('name');
 
         return $queryProduto->paginate($itensPorPagina);
     }

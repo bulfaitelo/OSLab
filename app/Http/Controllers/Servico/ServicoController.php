@@ -25,7 +25,7 @@ class ServicoController extends Controller
      */
     public function index()
     {
-        $servicos = Servico::paginate(100);
+        $servicos = Servico::orderBy('name')->paginate(100);
 
         return view('servico.index', compact('servicos'));
     }
