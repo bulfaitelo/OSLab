@@ -37,7 +37,7 @@ class Os extends Model
     protected function prazoGarantia(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => ($value && $this->status->garantia === 1) ? Carbon::create($value) : null ,
+            get: fn ($value) => ($value && $this->status->garantia === 1) ? Carbon::create($value) : null,
         );
     }
 
