@@ -127,12 +127,12 @@ class OsServicoCreateDeleteTest extends TestCase
                 'quantidade' => 2,
                 'valor_servico' => 200,
                 'fatura' => [
-                    "descricao" => "Fatura OS Nº: #2",
-                    "centro_custo_id" => 2,
-                    "data_entrada" => now()->format('Y-m-d'),
-                    "valor" => "65000",
-                    "data_recebimento" => now()->format('Y-m-d'),
-                ]
+                    'descricao' => 'Fatura OS Nº: #2',
+                    'centro_custo_id' => 2,
+                    'data_entrada' => now()->format('Y-m-d'),
+                    'valor' => '65000',
+                    'data_recebimento' => now()->format('Y-m-d'),
+                ],
             ],
             // $expected
             [
@@ -151,12 +151,12 @@ class OsServicoCreateDeleteTest extends TestCase
                 'quantidade' => 9,
                 'valor_servico' => '12,45',
                 'fatura' => [
-                    "descricao" => "Fatura OS Nº: #8",
-                    "centro_custo_id" => 2,
-                    "data_entrada" => now()->format('Y-m-d'),
-                    "valor" => "65000",
-                    "data_recebimento" => now()->format('Y-m-d'),
-                ]
+                    'descricao' => 'Fatura OS Nº: #8',
+                    'centro_custo_id' => 2,
+                    'data_entrada' => now()->format('Y-m-d'),
+                    'valor' => '65000',
+                    'data_recebimento' => now()->format('Y-m-d'),
+                ],
             ],
             // $expected
             [
