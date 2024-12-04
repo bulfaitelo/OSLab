@@ -66,7 +66,14 @@ Certifique-se de ter o Composer instalado antes de seguir estas etapas.
     ```
 8. Dependendo do ambiente é só configura um vhost ou proxy reverso. o meu caso usei um container docker, que também usei pra desevolver esse projeto. 
 
+## Usuário e senha padrão
+
+No `migrate  --seed` já é criado um usuário com todas as permissões pra facilitar os testes e o primeiro acesso, segue a baixo:
+
+**User:** admin@oslab.com.br
+
+**Senha:** admin12345
+
 ## Contribuição
 
 Sinta-se à vontade para contribuir para este projeto. Abra uma issue ou envie uma solicitação de pull.
-
