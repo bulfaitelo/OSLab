@@ -34,6 +34,7 @@
                     <th>Status</th>
                     <th>Cor</th>
                     <th>Descrição</th>
+                    <th>Exibe Garantia</th>
                     <th style="width: 40px"></th>
                 </tr>
                 </thead>
@@ -48,6 +49,15 @@
                             <div class="{{$item->color}}" style="width: 70px; height: 25px; border-radius: 3px;" >
                         </div>
                         <td>{{ $item->descricao }}</td>
+                        @if ($item->garantia)
+                        <td>
+                            <span class="badge bg-success">Sim</span>
+                        </td>
+                        @else
+                        <td>
+                            <span class="badge bg-danger">Não</span>
+                        </td>
+                        @endif
                         <td>
                             <div class="btn-group btn-group-sm">
                             @can('config_os_status_edit')

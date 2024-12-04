@@ -9,6 +9,8 @@ use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Financeiro\Contas;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +26,20 @@ class Os extends Model
         'data_saida' => 'date',
         'prazo_garantia' => 'date',
     ];
+
+    /**
+     * Retorna o prazo de Garantia.
+     *
+     * Cria a condição para exibir a garantia em condição com o status da OS
+     *
+     * @return Attribute
+     **/
+    protected function prazoGarantia(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ($value && $this->status->garantia === 1) ? Carbon::create($value) : null ,
+        );
+    }
 
     /**
      * Retornar o técnico.

@@ -48,6 +48,25 @@
                     </div>
                 @endforeach
             </div>
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <label for="garantia">
+                        Exibir Data da Garantia
+                        <i
+                            data-container="body"
+                            data-toggle="popover"
+                            data-placement="right"
+                            data-content="Define se será exibido ou não a data de garantia na impressão ou visualização de OS. "
+                            class="data_info fas fa-exclamation-circle"
+                        >
+                        </i>
+                    </label>
+                    <div class="custom-control custom-switch custom-switch-md custom-switch-md">
+                        {!! html()->checkbox('garantia')->class('custom-control-input') !!}
+                        <label class="custom-control-label" for="ativar_garantia"> </label>
+                    </div>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="garantia_id">Modelo de Email</label>
                 {{-- {!! Form::select('email_id', \App\Models\Configuracao\Os\Garantia::orderBy('name')->pluck('name', 'id'), '', ['id' => 'garantia_id','class' => 'form-control', 'placeholder'=> 'Selecione' ]) !!} --}}
@@ -56,7 +75,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <label for="chek_ativo">Enviar email?</label>
-                    <div class="custom-control custom-switch">
+                    <div class="custom-control custom-switch custom-switch-md">
                         {!! html()->checkbox('ativar_email')->class('custom-control-input') !!}
                         <label class="custom-control-label" for="ativar_email"> </label>
                     </div>
@@ -65,7 +84,7 @@
                     <label for="prazo_email">Prazo para envio</label>
                     <div class="input-group">
                         {!! html()->text('prazo_email')->class('form-control')->placeholder('Prazo D + X') !!}
-                        <div id="data_info" class="input-group-append" data-container="body" data-toggle="popover" data-placement="right" data-content="Define a data de envio, por exemplo: Caso seja o valor 10, após 10 dias da alteração do status será enviado um email.">
+                        <div id="" class="data_info input-group-append" data-container="body" data-toggle="popover" data-placement="right" data-content="Define a data de envio, por exemplo: Caso seja o valor 10, após 10 dias da alteração do status será enviado um email.">
                             <span class="input-group-text"><i class="fas fa-exclamation-circle"></i></span>
                         </div>
                     </div>
@@ -76,7 +95,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <label for="chek_ativo">Rastreio de Objetos</label>
-                    <div class="custom-control custom-switch">
+                    <div class="custom-control custom-switch custom-switch-md">
                         {!! html()->checkbox('ativar_rastreio')->class('custom-control-input') !!}
                         <label class="custom-control-label" for="ativar_rastreio"> </label>
                     </div>
@@ -105,7 +124,7 @@
 
 @section('js')
 <script>
-    $('#data_info').popover({
+    $('.data_info').popover({
     trigger: 'hover'
     });
 </script>

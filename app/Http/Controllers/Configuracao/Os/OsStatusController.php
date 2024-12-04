@@ -73,6 +73,7 @@ class OsStatusController extends Controller
             $status->ativar_email = $request->ativar_email;
             $status->prazo_email = $request->prazo_email;
             $status->ativar_rastreio = $request->ativar_rastreio;
+            $status->garantia = $request->garantia;
             $status->save();
 
             return redirect()->route('configuracao.os.status.index')
@@ -114,6 +115,7 @@ class OsStatusController extends Controller
             $status->ativar_email = $request->ativar_email;
             $status->prazo_email = $request->prazo_email;
             $status->ativar_rastreio = $request->ativar_rastreio;
+            $status->garantia = $request->garantia;
             $status->save();
 
             return redirect()->route('configuracao.os.status.index')

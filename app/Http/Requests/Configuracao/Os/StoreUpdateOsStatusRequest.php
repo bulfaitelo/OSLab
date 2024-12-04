@@ -25,6 +25,7 @@ class StoreUpdateOsStatusRequest extends FormRequest
             'name' => 'required',
             'ativar_rastreio' => 'nullable|in:1,null',
             'ativar_email' => 'nullable|in:1,null',
+            'garantia' => 'nullable|in:1,null',
             'color' => 'required',
         ];
     }
