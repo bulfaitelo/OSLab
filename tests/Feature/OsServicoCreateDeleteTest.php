@@ -73,9 +73,12 @@ class OsServicoCreateDeleteTest extends TestCase
     #[DataProvider('osServicoData')]
     public function testCreateServicoFaturado($data): void
     {
+        $response = $this->put(
+            route('os.faturar', $data['os_id']),
+            $data['fatura']
+        );
+        $response->assertStatus(302);
         $os = Os::findOrFail($data['os_id']);
-        $os->fatura_id = 1;
-        $os->save();
         Livewire::test(ServicoTab::class, ['os' => $os])
             ->set('servico_id', $data['servico_id'])
             ->set('quantidade', $data['quantidade'])
@@ -98,8 +101,12 @@ class OsServicoCreateDeleteTest extends TestCase
             ->set('valor_servico', $data['valor_servico'])
             ->call('create')
             ->assertHasNoErrors();
-        $os->fatura_id = 1;
-        $os->save();
+        $response = $this->put(
+            route('os.faturar', $data['os_id']),
+            $data['fatura']
+        );
+        $response->assertStatus(302);
+        $os = Os::findOrFail($data['os_id']);
         $servico_id = $os->servicos()->where('servico_id', $data['servico_id'])->sole()->id;
         Livewire::test(ServicoTab::class, ['os' => $os])
             ->call('delete', $servico_id)
@@ -119,6 +126,13 @@ class OsServicoCreateDeleteTest extends TestCase
                 'servico_id' => 2,
                 'quantidade' => 2,
                 'valor_servico' => 200,
+                'fatura' => [
+                    "descricao" => "Fatura OS Nº: #2",
+                    "centro_custo_id" => 2,
+                    "data_entrada" => now()->format('Y-m-d'),
+                    "valor" => "65000",
+                    "data_recebimento" => now()->format('Y-m-d'),
+                ]
             ],
             // $expected
             [
@@ -136,6 +150,13 @@ class OsServicoCreateDeleteTest extends TestCase
                 'servico_id' => 3,
                 'quantidade' => 9,
                 'valor_servico' => '12,45',
+                'fatura' => [
+                    "descricao" => "Fatura OS Nº: #8",
+                    "centro_custo_id" => 2,
+                    "data_entrada" => now()->format('Y-m-d'),
+                    "valor" => "65000",
+                    "data_recebimento" => now()->format('Y-m-d'),
+                ]
             ],
             // $expected
             [
