@@ -62,6 +62,10 @@
     box-shadow: none;
 }
 
+.text-oslab {
+    color: #5d52ef;
+}
+
 .btn-oslab:hover {
     color: #fff;
     background-color: #423cb6;
