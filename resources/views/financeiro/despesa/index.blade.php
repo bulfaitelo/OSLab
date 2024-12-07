@@ -127,7 +127,7 @@
                                     <a href="{{ route('financeiro.despesa.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                                 @endcan
                                 @can('financeiro_despesa_show')
-                                    <a href="{{ route('financeiro.despesa.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('financeiro.despesa.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('financeiro_despesa_destroy')
                                     <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('financeiro.despesa.destroy', $item->id)}}" data-target="#modal-excluir" ><i class="fas fa-trash"></i></button>

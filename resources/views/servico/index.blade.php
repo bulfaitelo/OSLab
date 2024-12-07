@@ -48,7 +48,7 @@
                                     <a href="{{ route('servico.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                                 @endcan
                                 @can('servico_show')
-                                    <a href="{{ route('servico.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('servico.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('servico_destroy')
                                     <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('servico.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>

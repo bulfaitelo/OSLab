@@ -61,7 +61,7 @@
                                     <a href="{{ route('configuracao.users.edit', $user->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                                 @endcan
                                 @can('config_users_show')
-                                    <a href="{{ route('configuracao.users.show', $user->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('configuracao.users.show', $user->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('config_users_destroy')
                                     <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$user->name}}" data-url="{{route('configuracao.users.destroy', $user->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>

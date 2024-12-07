@@ -65,7 +65,7 @@
                     @endif
                     @if (isset($show) && $show === true)
                         @can('wiki_show')
-                            <a href="{{ route('wiki.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('wiki.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                         @endcan
                     @endif
                     @if (isset($destroy) && $destroy === true)

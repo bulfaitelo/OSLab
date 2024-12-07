@@ -47,7 +47,7 @@
                         <td>
                             <div class="btn-group btn-group-sm">
                                 @can('checklist_show')
-                                    <a href="{{ route('checklist.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('checklist.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('checklist_edit')
                                     <a href="{{ route('checklist.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>

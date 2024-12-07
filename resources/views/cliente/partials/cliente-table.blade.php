@@ -36,7 +36,7 @@
                     @endif
                     @if (isset($show) && $show === true)
                         @can('cliente_show')
-                            <a href="{{ route('cliente.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('cliente.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                         @endcan
                     @endif
                     @if (isset($destroy) && $destroy === true)

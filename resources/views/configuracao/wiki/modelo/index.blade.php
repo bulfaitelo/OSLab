@@ -48,7 +48,7 @@
                                     <a href="{{ route('configuracao.wiki.modelo.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                                 @endcan
                                 @can('config_wiki_modelo_show')
-                                    <a href="{{ route('configuracao.wiki.modelo.show', $item->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('configuracao.wiki.modelo.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('config_wiki_modelo_destroy')
                                     <button data-url="{{route('configuracao.wiki.modelo.destroy', $item->id)}}" type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>

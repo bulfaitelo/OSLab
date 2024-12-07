@@ -56,7 +56,7 @@
                                 <a href="{{ route('configuracao.roles.edit', $role->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                             @endcan
                             @can('config_roles_show')
-                                <a href="{{ route('configuracao.roles.show', $role->id) }}" title="Editar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('configuracao.roles.show', $role->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                             @endcan
                             @can('config_roles_assign')
                                 <a href="{{ route('configuracao.roles.assign', $role->id) }}" title="Editar permissões" class="btn btn-left btn-success"><i class="fas fa-layer-group"></i></a>
