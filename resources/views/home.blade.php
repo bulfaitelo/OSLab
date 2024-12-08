@@ -65,7 +65,7 @@
         <div class="col-md-6">
             <div class="card custom-border">
                 <div class="card-body"p-3>
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart" height="120px"></canvas>
                 </div>
             </div>
         </div>
@@ -73,15 +73,83 @@
     <div class="row ">
         <div class="col-md-3">
             <div class="card custom-border">
-                <div class="card-body p-3">
-                    <h3>dasdsadasd 3</h3>
+                <div class="card-header pb-0 border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Garantias Encerrando</h3>
+                        <a href="http://oslab.teste/os/create">
+                            <button type="button" class="btn btn-sm btn-oslab">
+                                {{-- <i class="fa-solid fa-plus"></i> --}}
+                                Ver Todas
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-sm">
+                        <thead>
+                          <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Cliente</th>
+                            <th>Vencimento</th>
+                            <th></th>                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>Joãizinho da silva alguma coisa</td>
+                            <td><span class="badge bg-danger">10/10/2024</span></td>
+                            <td>
+                                <a href="#" title="Visualizar" class="btn btn-sm btn-default float-right"><i class="fas fa-eye"></i></a>
+                            </td>
+                          </tr>                         
+                        </tbody>
+                      </table>
+                    
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card custom-border">
+                <div class="card-header pb-0 border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Metas Financeiras</h3>
+                        <a href="http://oslab.teste/os/create">
+                            <button type="button" class="btn btn-sm btn-oslab">
+                                {{-- <i class="fa-solid fa-plus"></i> --}}
+                                Ver Todas
+                            </button>
+                        </a>
+                    </div>
+                </div>
                 <div class="card-body"p-3>
-                    <h3>dasdsadasd 3</h3>
+                    <div class="">
+                        {{-- <p class="text-center">
+                          <strong>Metas Financeiras</strong>
+                        </p> --}}
+    
+                        <div class="progress-group">
+                            Meta Anual
+                            <span class="float-right"><b>R$12.000,00</b>/ R$24.000,00</span>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-primary" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            Meta Mensal
+                            <span class="float-right"><b>R$680,00</b>/ R$2.000,00</span>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-primary" style="width: 30%"></div>
+                            </div>
+                        </div>                            
+                        <div class="progress-group">
+                            Meta de investimentos
+                            <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-danger" style="width: 75%"></div>
+                            </div>
+                        </div>   
+                    </div>
                 </div>
             </div>
         </div>
