@@ -6,17 +6,17 @@
         <table class=" mt-1 mb-1 table-border-none">
             <thead class="header">
                 <tr>
-                    <td class="pl-1 pt-0 pb-0" >OS: {{ $os->id }}</td>
-                    <td class="pt-0 pb-0" >Status: {{ $os->status->name }}</td>
+                    <td class="pl-1 pt-0 pb-0" ><b>OS: {{ $os->id }}</b></td>
+                    <td class="pt-0 pb-0" ><b>Status: {{ $os->status->name }}</b></td>
                     <td class="pt-0 pb-0" >
                         @if ($os->prazo_garantia)
-                            Venc. Garantia: {{ $os->prazo_garantia?->format('d/m/Y') }}
+                            <b>Venc. Garantia: {{ $os->prazo_garantia?->format('d/m/Y') }}</b>
                         @endif
                     </td>
-                    <td class="pt-0 pb-0" >Entrada: {{ $os->data_entrada?->format('d/m/Y') }}</td>
+                    <td class="pt-0 pb-0" ><b>Entrada: {{ $os->data_entrada?->format('d/m/Y') }}</b></td>
                     <td class="pt-0 pb-0" >
                         @if ($os->data_saida)
-                            Saída: {{ $os->data_saida?->format('d/m/Y') }}
+                            <b>Saída: {{ $os->data_saida?->format('d/m/Y') }}</b>
                         @endif
                     </td>
                 </tr>
@@ -76,7 +76,6 @@
         </table>
         {{-- FIM - Dados do cliente --}}
 
-
         {{-- Dados do equipamento ou do serviço --}}
         <table class=" mt-1 mb-1">
             <thead class="header">
@@ -94,19 +93,19 @@
                 <tbody>
                     <tr>
                         <td class="pl-1  pt-0 ">
-                            <span class="text-dark" style="font-size: 13px" ><b>Equipamento</b></span><br>
+                            <span class="text-dark" style="font-size: 11px" ><b>Equipamento</b></span><br>
                             <span>{{ $os->modelo->wiki->name }}</span>
                         </td>
                         <td  class="pl-1  pt-0 " >
-                            <span  class="text-dark" style="font-size: 13px"  ><b>Fabricante</b></span><br>
+                            <span  class="text-dark" style="font-size: 11px"  ><b>Fabricante</b></span><br>
                             <span>{{ $os->modelo->wiki->fabricante->name }}</span>
                         </td>
                         <td  class="pl-1  pt-0 " >
-                            <span  class="text-dark" style="font-size: 13px"  ><b>Modelo</b></span><br>
+                            <span  class="text-dark" style="font-size: 11px"  ><b>Modelo</b></span><br>
                             <span>{{ $os->modelo->name }}</span>
                         </td>
                         <td  class="pl-1  pt-0 " >
-                            <span  class="text-dark" style="font-size: 13px"  ><b>Serial/Imei</b></span><br>
+                            <span  class="text-dark" style="font-size: 11px"  ><b>Serial/Imei</b></span><br>
                             <span>{{ $os->serial }}</span>
                         </td>
                     </tr>
@@ -157,11 +156,11 @@
                     <td colspan="5" class="pl-1 pt-0 pb-0" ><b>PRODUTOS</b></td>
                 </tr>
                 <tr>
-                    <td class="bold pt-0 pb-0 pl-1" >ITEM</td>
-                    <td class="bold pt-0 pb-0 pl-1" >NOME</td>
-                    <td class="bold pt-0 pb-0 pr-1 text-right" >QTD.</td>
-                    <td class="bold pt-0 pb-0 pr-1 text-right" >Preço Unit.</td>
-                    <td class="bold pt-0 pb-0 pr-1 text-right" >SUBTOTAL</td>
+                    <td class="pt-0 pb-0 pl-1" ><b>ITEM</b></td>
+                    <td class="pt-0 pb-0 pl-1" ><b>NOME</b></td>
+                    <td class="pt-0 pb-0 pr-1 text-right" ><b>QTD.</b></td>
+                    <td class="pt-0 pb-0 pr-1 text-right" ><b>Preço Unit.</b></td>
+                    <td class="pt-0 pb-0 pr-1 text-right" ><b>SUBTOTAL</b></td>
                 </tr>
             </thead>
             <tbody>
@@ -181,9 +180,9 @@
             <tfoot>
                 <tr class="header">
                     <td class="pt-0 pr-1 pb-0 header" colspan="5">
-                        TOTAL
+                        <b>TOTAL</b>
                         <span class="float-right">
-                            R$ {{ number_format($os->produtos->sum('valor_venda_total'),2,",",".")}}
+                           <b>R$ {{ number_format($os->produtos->sum('valor_venda_total'),2,",",".")}}</b>
                         </span>
                     </td>
                 </tr>
@@ -200,11 +199,11 @@
                     <td colspan="5" class="pl-1 pt-0 pb-0 header" >SERVIÇOS</td>
                 </tr>
                 <tr>
-                    <td class="bold pt-0 pb-0 pl-1" >ITEM</td>
-                    <td class="bold pt-0 pb-0 pl-1" >NOME</td>
-                    <td class="bold pt-0 pb-0 pr-1 text-right" >QTD.</td>
-                    <td class="bold pt-0 pb-0 pr-1 text-right" >Preço Unit.</td>
-                    <td class="bold pt-0 pb-0 pr-1 text-right" >SUBTOTAL</td>
+                    <td class="bold pt-0 pb-0 pl-1" ><b>ITEM</b></td>
+                    <td class="bold pt-0 pb-0 pl-1" ><b>NOME</b></td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" ><b>QTD.</b></td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" ><b>Preço Unit.</b></td>
+                    <td class="bold pt-0 pb-0 pr-1 text-right" ><b>SUBTOTAL</b></td>
                 </tr>
             </thead>
             <tbody>
@@ -224,9 +223,9 @@
             <tfoot>
                 <tr class="header">
                     <td class="pt-0 pr-1 pb-0" colspan="5">
-                        TOTAL
+                        <b>TOTAL</b>
                         <span class="float-right">
-                            R$ {{ number_format($os->servicos->sum('valor_servico_total'),2,",",".")}}
+                            <b>R$ {{ number_format($os->servicos->sum('valor_servico_total'),2,",",".")}}</b>
                         </span>
                     </td>
                 </tr>
@@ -241,7 +240,7 @@
                     <th  class="pt-0 pb-0 header text-right" ><b>DESCONTO: - 123,00</b></th>
                 </tr> --}}
                 <tr class="header">
-                    <td  class="pt-0 pr-1 pb-0 text-right" >VALOR TOTAL DA OS: {{ number_format($os->valorTotal(),2,",",".") }}</td>
+                    <td  class="pt-0 pr-1 pb-0 text-right" ><b>VALOR TOTAL DA OS: {{ number_format($os->valorTotal(),2,",",".") }}</b></td>
                 </tr>
             </thead>
 
