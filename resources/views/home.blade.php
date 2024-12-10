@@ -55,17 +55,155 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card custom-border">
-                <div class="card-body"p-3>
-                    <h3>dasdsadasd 4</h3>
+                <div class="card-header pb-0 border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Receitas Recebidas</h3>
+                        <a href="http://oslab.teste/os/create">
+                            <button type="button" class="btn btn-sm btn-oslab">
+                                {{-- <i class="fa-solid fa-plus"></i> --}}
+                                Ver Todas
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <canvas id="myChart" height="120px"></canvas>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card custom-border">
-                <div class="card-body"p-3>
-                    <canvas id="myChart" height="120px"></canvas>
+                <div class="card-header pb-0 border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Estatisticas do Sistema</h3>
+                        {{-- <a href="http://oslab.teste/os/create">
+                            <button type="button" class="btn btn-sm btn-oslab">
+                                Ver Todas
+                            </button>
+                        </a> --}}
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    {{-- <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-box">
+                                <span class="info-box-icon btn-oslab"><i class="fa-regular fa-rectangle-list"></i></span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Ordens de Serviços</span>
+                                  <span class="info-box-number">99</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box">
+                                <span class="info-box-icon btn-oslab"><i class="fa-solid fa-users "></i></span>
+
+                                <div class="info-box-content">
+                                  <span class="info-box-text">Clientes</span>
+                                  <span class="info-box-number">60</span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                        </div>
+                    </div> --}}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="small-box btn-oslab">
+                                <div class="inner pt-0 pb-0">
+                                  <h3 class="mb-0">99</h3>
+                                  <span>Ordens de Serviços</span>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa-regular fa-rectangle-list" style="font-size: 50px;"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    Adicionar OS <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small-box btn-oslab">
+                                <div class="inner pt-0 pb-0">
+                                  <h3 class="mb-0">60</h3>
+                                  <span>Clientes</span>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa-regular fa-rectangle-list" style="font-size: 50px;"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    Adicionar Cliente <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="small-box btn-oslab">
+                                <div class="inner">
+                                  <h3>99</h3>
+                                  <span>Ordens de Serviços</span>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa-regular fa-rectangle-list"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    Adicionar OS <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small-box btn-oslab">
+                                <div class="inner">
+                                  <h3>60</h3>
+
+                                  <span>Clientes</span>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa-solid fa-users "></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                  Adicionar Cliente <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="small-box btn-oslab">
+                                <div class="inner">
+                                  <h3>99</h3>
+                                  <span>Ordens de Serviços</span>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa-regular fa-rectangle-list"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    Adicionar OS <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small-box btn-oslab">
+                                <div class="inner">
+                                  <h3>60</h3>
+
+                                  <span>Clientes</span>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa-solid fa-users "></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                  Adicionar Cliente <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -91,7 +229,7 @@
                             <th style="width: 10px">#</th>
                             <th>Cliente</th>
                             <th>Vencimento</th>
-                            <th></th>                            
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -102,10 +240,10 @@
                             <td>
                                 <a href="#" title="Visualizar" class="btn btn-sm btn-default float-right"><i class="fas fa-eye"></i></a>
                             </td>
-                          </tr>                         
+                          </tr>
                         </tbody>
                       </table>
-                    
+
                 </div>
             </div>
         </div>
@@ -122,12 +260,12 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body"p-3>
+                <div class="card-body p-3">
                     <div class="">
                         {{-- <p class="text-center">
                           <strong>Metas Financeiras</strong>
                         </p> --}}
-    
+
                         <div class="progress-group">
                             Meta Anual
                             <span class="float-right"><b>R$12.000,00</b>/ R$24.000,00</span>
@@ -141,21 +279,21 @@
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-primary" style="width: 30%"></div>
                             </div>
-                        </div>                            
+                        </div>
                         <div class="progress-group">
                             Meta de investimentos
                             <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-danger" style="width: 75%"></div>
                             </div>
-                        </div>   
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card custom-border">
-                <div class="card-body"p-3>
+                <div class="card-body p-3">
                     <h3>dasdsadasd 6</h3>
                 </div>
             </div>
