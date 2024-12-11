@@ -410,6 +410,13 @@ return [
                     'active' => ['financeiro/despesa*'],
                     'can' => 'financeiro_despesa',
                 ],
+                [
+                    'text' => 'Metas Financeiras',
+                    'icon' => 'fa-regular fa-chart-bar',
+                    'route' => 'financeiro.despesa.index',
+                    'active' => ['financeiro/despesa*'],
+                    'can' => 'financeiro_despesa',
+                ],
             ],
 
         ],
