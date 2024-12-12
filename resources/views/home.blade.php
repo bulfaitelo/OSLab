@@ -74,8 +74,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body pl-3 pr-3 pb-3 pt-1">
-                    <canvas id="myChart" height="127px"></canvas>
+                <div style="height:350px; " class="card-body pl-3 pr-3 pb-3 pt-1">
+                    <canvas id="myChart" ></canvas>
                 </div>
             </div>
         </div>
@@ -240,6 +240,22 @@
                                     <a href="#" title="Visualizar" class="btn btn-sm btn-default float-right"><i class="fas fa-eye"></i></a>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="pl-3">1</td>
+                                <td class="text-truncate">Joãizinho da silva alguma coisa</td>
+                                <td><span class="badge bg-danger">10/10/2024</span></td>
+                                <td class="pr-3">
+                                    <a href="#" title="Visualizar" class="btn btn-sm btn-default float-right"><i class="fas fa-eye"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pl-3">1</td>
+                                <td class="text-truncate">Joãizinho da silva alguma coisa</td>
+                                <td><span class="badge bg-danger">10/10/2024</span></td>
+                                <td class="pr-3">
+                                    <a href="#" title="Visualizar" class="btn btn-sm btn-default float-right"><i class="fas fa-eye"></i></a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -285,6 +301,27 @@
                                 <div class="progress-bar bg-danger" style="width: 75%"></div>
                             </div>
                         </div>
+                        <div class="progress-group">
+                            Meta de investimentos
+                            <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-danger" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            Meta de investimentos
+                            <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-danger" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            Meta de investimentos
+                            <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-danger" style="width: 75%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -302,8 +339,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body p-3">
-                    <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <div style="height: 285px;" class="card-body p-3">
+                    <canvas id="lineChart"></canvas>
                 </div>
             </div>
         </div>
@@ -338,6 +375,7 @@
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 display: false
@@ -394,6 +432,7 @@
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'left'
