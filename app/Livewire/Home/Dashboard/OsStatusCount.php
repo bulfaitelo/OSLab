@@ -12,7 +12,7 @@ class OsStatusCount extends Component
 
     public function render()
     {
-        if($this->os_status_id) {
+        if ($this->os_status_id) {
             setUserConfig('user_dashborard_status_id', $this->os_status_id);
         }
         $this->os_status_id = getUserConfig('user_dashborard_status_id');
