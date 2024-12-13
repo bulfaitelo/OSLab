@@ -23,12 +23,14 @@ class Balancete extends Component
     ];
 
     public $mes_busca;
+
     public function render()
     {
         if (! $this->mes_busca) {
             $this->mes_busca = now()->format('m');
         }
         $balancete = $this->getSaldo($this->mes_busca);
+
         return view('livewire.home.dashboard.balancete', [
             'meses' => $this->meses,
             'mes_busca' => $this->mes_busca,
