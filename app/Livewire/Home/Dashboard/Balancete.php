@@ -19,13 +19,13 @@ class Balancete extends Component
         9 => 'Setembro',
         10 => 'Outubro',
         11 => 'Novembro',
-        12 => 'Dezembro'
+        12 => 'Dezembro',
     ];
 
     public $mes_busca;
     public function render()
     {
-        if (!$this->mes_busca) {
+        if (! $this->mes_busca) {
             $this->mes_busca = now()->format('m');
         }
         $balancete = $this->getSaldo($this->mes_busca);
