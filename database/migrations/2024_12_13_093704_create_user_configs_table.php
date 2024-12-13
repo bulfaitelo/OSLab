@@ -20,7 +20,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-
         Schema::table('user_configs', function (Blueprint $table) {
             $table->foreign('user_id', 'fk_user_configs_users')
                 ->references('id')->on('users');
