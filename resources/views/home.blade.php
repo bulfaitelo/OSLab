@@ -12,18 +12,7 @@
     @livewire('home.show-user-favorites')
     <div class="row mt-3">
         <div class="col-md-2">
-            <div class="card custom-border">
-                <div class="card-body p-3">
-                    <select class="form-control">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                    </select>
-                    <span class="display-1 text-oslab" ><b>3</b></span>
-                </div>
-            </div>
+            @livewire('home.dashboard.os-status-count')
             <div class="card custom-border">
                 <div class="card-body p-3">
                     <select class="form-control">
