@@ -7,7 +7,7 @@
                     <span class="h5 balancete-credito">Receita</span>
                 </div>
                 <div class="col-6">
-                    <span style="float: right" class="h5 balancete-credito">R$ {{ number_format($balancete->receita, 2, ',', '.') }}</span>
+                    <span style="float: right" class="h5 balancete-credito">R$ {{ (isset($balancete->receita)) ? number_format($balancete->receita, 2, ',', '.') : '0,00' }}</span>
                 </div>
             </div>
             <div class="row">
@@ -15,7 +15,7 @@
                     <span class="balancete-debito h5">Despesa</span>
                 </div>
                 <div class="col-6">
-                    <span style="float: right" class="h5 balancete-debito">R$ {{ number_format($balancete->despesa, 2, ',', '.') }}</span>
+                    <span style="float: right" class="h5 balancete-debito">R$ {{ (isset($balancete->despesa)) ? number_format($balancete->despesa, 2, ',', '.') : '0,00' }}</span>
                 </div>
             </div>
             <hr class="m-0">
@@ -24,8 +24,8 @@
                     <span
                     @class([
                         'h5',
-                        'balancete-debito' => ($balancete->saldo < 0) ? true : false,
-                        'balancete-credito' => ($balancete->saldo > 0) ? true : false,
+                        'balancete-debito' => (isset($balancete->saldo) < 0) ? true : false,
+                        'balancete-credito' => (isset($balancete->saldo) > 0) ? true : false,
                     ])
                     >Saldo</span>
                 </div>
@@ -34,10 +34,10 @@
                     {{-- class="h5" --}}
                     @class([
                         'h5',
-                        'balancete-debito' => ($balancete->saldo < 0) ? true : false,
-                        'balancete-credito' => ($balancete->saldo > 0) ? true : false,
+                        'balancete-debito' => (isset($balancete->saldo) < 0) ? true : false,
+                        'balancete-credito' => (isset($balancete->saldo) > 0) ? true : false,
                     ])
-                    >R$ {{ number_format($balancete->saldo, 2, ',', '.') }}</span>
+                    >R$ {{ (isset($balancete->saldo)) ? number_format($balancete->saldo, 2, ',', '.') : '0,00' }}</span>
                 </div>
             </div>
         </div>
