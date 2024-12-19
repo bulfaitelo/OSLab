@@ -21,7 +21,7 @@ class EstatisticasDoSistema extends Component
         $wikiCount = Wiki::count();
         $checklistCount = Checklist::count();
 
-        return view('livewire.home.dashboard.estatisticas-do-sistema',[
+        return view('livewire.home.dashboard.estatisticas-do-sistema', [
             'osCount' => $osCount,
             'clienteCount' => $clienteCount,
             'produtoCount' => $produtoCount,
