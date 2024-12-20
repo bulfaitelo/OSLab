@@ -203,6 +203,31 @@ Breadcrumbs::for('financeiro.receita.edit', function (BreadcrumbTrail $trail, Co
     $trail->parent('financeiro.receita.index');
     $trail->push('Editar Receita', route('financeiro.receita.edit', $item));
 });
+
+//Metas Contábeis
+Breadcrumbs::for('financeiro.meta_contabil.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Financeiro');
+    $trail->push('Metas Contábeis', route('financeiro.meta_contabil.index'));
+});
+
+// Financeiro > Nova Meta Contábil
+Breadcrumbs::for('financeiro.meta_contabil.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('financeiro.meta_contabil.index');
+    $trail->push('Nova Meta Contábil', route('financeiro.meta_contabil.create'));
+});
+
+// Financeiro > [Visualização de Meta Contábil]
+Breadcrumbs::for('financeiro.meta_contabil.show', function (BreadcrumbTrail $trail, Contas $item) {
+    $trail->parent('financeiro.meta_contabil.index');
+    $trail->push($item->name, route('financeiro.meta_contabil.show', $item));
+});
+
+// Financeiro > [Meta Contábil Name] > Editar Meta Contábil
+Breadcrumbs::for('financeiro.meta_contabil.edit', function (BreadcrumbTrail $trail, Contas $item) {
+    $trail->parent('financeiro.meta_contabil.index');
+    $trail->push('Editar Meta Contábil', route('financeiro.meta_contabil.edit', $item));
+});
 // FIM Financeiro
 
 // Checklist

@@ -19,6 +19,7 @@ use App\Http\Controllers\Configuracao\Wiki\FabricanteController;
 use App\Http\Controllers\Configuracao\Wiki\ModeloController;
 use App\Http\Controllers\Financeiro\DespesaController;
 use App\Http\Controllers\Financeiro\DespesaPagamentoController;
+use App\Http\Controllers\Financeiro\MetaContabilController;
 use App\Http\Controllers\Financeiro\ReceitaController;
 use App\Http\Controllers\Financeiro\ReceitaPagamentoController;
 use App\Http\Controllers\Os\OsController;
@@ -81,6 +82,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/receita/{receita}/pagamento/{pagamento}', [ReceitaPagamentoController::class, 'update'])->name('receita.pagamento.update');
         Route::post('/receita/{receita}/pagamento/', [ReceitaPagamentoController::class, 'store'])->name('receita.pagamento.store');
         Route::delete('/receita/{receita}/pagamento/{pagamento}', [ReceitaPagamentoController::class, 'destroy'])->name('receita.pagamento.destroy');
+
+        Route::resource('/meta_contabil', MetaContabilController::class);
     });
 
     Route::resource('/os', OsController::class)

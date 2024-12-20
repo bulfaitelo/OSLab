@@ -390,7 +390,7 @@ return [
             'text' => 'Financeiro',
             'icon' => 'fa-solid fa-chart-line',
             'can' => [
-                'financeiro_receita', 'financeiro_despesa',
+                'financeiro_receita', 'financeiro_despesa', 'financeiro_meta_contabil',
             ],
             'submenu' => [
                 [
@@ -411,11 +411,11 @@ return [
                     'can' => 'financeiro_despesa',
                 ],
                 [
-                    'text' => 'Metas Financeiras',
+                    'text' => 'Metas Contábeis',
                     'icon' => 'fa-regular fa-chart-bar',
-                    'route' => 'financeiro.despesa.index',
-                    'active' => ['financeiro/despesa*'],
-                    'can' => 'financeiro_despesa',
+                    'route' => 'financeiro.meta_contabil.index',
+                    'active' => ['financeiro/meta_contabil*'],
+                    'can' => 'financeiro_meta_contabil',
                 ],
             ],
 

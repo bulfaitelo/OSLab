@@ -15,7 +15,7 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
         // permissões
         $insert = [
             [
-                'description' => 'Acesso a configuração Centro de custo Financeiro ',
+                'description' => 'Acesso a configuração Centro de custo Financeiro',
                 'name' => 'config_financeiro_centro_custo',
                 'guard_name' => 'web',
                 'group_id' => 5,
@@ -172,6 +172,37 @@ class DefaultsConfigPermissionsFinanceiro extends Seeder
             [
                 'description' => 'Excluir Pagamento Receita',
                 'name' => 'financeiro_receita_pagamento_destroy',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+
+            [
+                'description' => 'Acesso a configuração Meta Contábil',
+                'name' => 'financeiro_meta_contabil',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Criar Meta Contábil',
+                'name' => 'financeiro_meta_contabil_create',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Editar Meta Contábil',
+                'name' => 'financeiro_meta_contabil_edit',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Visualizar Meta Contábil',
+                'name' => 'financeiro_meta_contabil_show',
+                'guard_name' => 'web',
+                'group_id' => 5,
+            ],
+            [
+                'description' => 'Excluir Meta Contábil',
+                'name' => 'financeiro_meta_contabil_destroy',
                 'guard_name' => 'web',
                 'group_id' => 5,
             ],
