@@ -9,7 +9,7 @@ use App\Models\Financeiro\MetaContabil;
 
 class MetaContabilController extends Controller
 {
-    private $intervalo = ['mes' => 'Mensal','ano' => 'Anual'];
+    private $intervalo = ['mes' => 'Mensal', 'ano' => 'Anual'];
     public function __construct()
     {
         // ACL DE PERMISSÕES
