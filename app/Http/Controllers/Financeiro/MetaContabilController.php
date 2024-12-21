@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Financeiro;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Financeiro\StoreMetaContabilRequest;
 use App\Http\Requests\Financeiro\UpdateMetaContabilRequest;
+use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Financeiro\MetaContabil;
 
 class MetaContabilController extends Controller
@@ -36,8 +37,10 @@ class MetaContabilController extends Controller
      */
     public function create()
     {
+        $centroCustoSelect = CentroCusto::getSelectCentroCusto();
         return view('financeiro.meta_contabil.create', [
             'intervalo' => $this->intervalo,
+            'centroCustoSelect' => $centroCustoSelect,
         ]);
     }
 
@@ -46,7 +49,22 @@ class MetaContabilController extends Controller
      */
     public function store(StoreMetaContabilRequest $request)
     {
-        //
+        try {
+            $metaContabil = new MetaContabil();
+            $metaContabil->name = $request->name;
+            $metaContabil->descricao = $request->descricao;
+            $metaContabil->valor = $request->valor;
+            $metaContabil->valor_liquido = $request->valor_liquido;
+            $metaContabil->centro_custo_id = $request->centro_custo_id;
+            $metaContabil->intervalo = $request->intervalo;
+            $metaContabil->exibir_dashboard = $request->exibir_dashboard;
+            $metaContabil->save();
+
+            return redirect()->route('financeiro.meta_contabil.index')
+            ->with('success', 'Meta Contábil cadastrada com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -54,7 +72,13 @@ class MetaContabilController extends Controller
      */
     public function show(MetaContabil $metaContabil)
     {
-        //
+        $centroCustoSelect = CentroCusto::getSelectCentroCusto();
+
+        return view('financeiro.meta_contabil.show', [
+            'metaContabil' => $metaContabil,
+            'intervalo' => $this->intervalo,
+            'centroCustoSelect' => $centroCustoSelect,
+        ]);
     }
 
     /**
@@ -62,7 +86,13 @@ class MetaContabilController extends Controller
      */
     public function edit(MetaContabil $metaContabil)
     {
-        //
+        $centroCustoSelect = CentroCusto::getSelectCentroCusto();
+
+        return view('financeiro.meta_contabil.edit', [
+            'metaContabil' => $metaContabil,
+            'intervalo' => $this->intervalo,
+            'centroCustoSelect' => $centroCustoSelect,
+        ]);
     }
 
     /**
@@ -70,7 +100,21 @@ class MetaContabilController extends Controller
      */
     public function update(UpdateMetaContabilRequest $request, MetaContabil $metaContabil)
     {
-        //
+        try {            
+            $metaContabil->name = $request->name;
+            $metaContabil->descricao = $request->descricao;
+            $metaContabil->valor = $request->valor;
+            $metaContabil->valor_liquido = $request->valor_liquido;
+            $metaContabil->centro_custo_id = $request->centro_custo_id;
+            $metaContabil->intervalo = $request->intervalo;
+            $metaContabil->exibir_dashboard = $request->exibir_dashboard;
+            $metaContabil->save();
+
+            return redirect()->route('financeiro.meta_contabil.index')
+            ->with('success', 'Meta Contábil atualizada com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -78,6 +122,13 @@ class MetaContabilController extends Controller
      */
     public function destroy(MetaContabil $metaContabil)
     {
-        //
-    }
+        try {
+            $metaContabil->delete();
+
+            return redirect()->route('financeiro.meta_contabil.index')
+                ->with('success', 'Meta Contábil excluida com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }    
 }

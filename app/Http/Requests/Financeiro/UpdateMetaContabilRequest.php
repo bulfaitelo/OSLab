@@ -22,7 +22,21 @@ class UpdateMetaContabilRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'valor' => 'required|numeric|min:0|not_in:0',
+            'centro_custo_id' => 'exists:centro_custos,id|nullable',
+            'intervalo' => 'required|in:mes,ano',
         ];
     }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'valor' => ($this->valor) ? str_replace(',', '.', str_replace('.', '', $this->valor)) : null,           
+        ]);
+    }
+
 }

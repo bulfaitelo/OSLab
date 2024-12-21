@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('descricao')->nullable();
             $table->unsignedBigInteger('centro_custo_id')->nullable();
             $table->decimal('valor', 9, 2);
-            $table->boolean('valor_liquido')->default(0);
+            $table->boolean('valor_liquido')->default(0)->nullable();
             $table->string('intervalo');
-            $table->boolean('exibir_dashboard')->default(0);
+            $table->boolean('exibir_dashboard')->default(0)->nullable();
             $table->timestamps();
         });
     }

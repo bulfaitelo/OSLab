@@ -18,6 +18,7 @@ use App\Models\Configuracao\User\Setor;
 use App\Models\Configuracao\Wiki\Fabricante;
 use App\Models\Configuracao\Wiki\Modelo;
 use App\Models\Financeiro\Contas;
+use App\Models\Financeiro\MetaContabil;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
@@ -218,13 +219,13 @@ Breadcrumbs::for('financeiro.meta_contabil.create', function (BreadcrumbTrail $t
 });
 
 // Financeiro > [Visualização de Meta Contábil]
-Breadcrumbs::for('financeiro.meta_contabil.show', function (BreadcrumbTrail $trail, Contas $item) {
+Breadcrumbs::for('financeiro.meta_contabil.show', function (BreadcrumbTrail $trail, MetaContabil $item) {
     $trail->parent('financeiro.meta_contabil.index');
     $trail->push($item->name, route('financeiro.meta_contabil.show', $item));
 });
 
 // Financeiro > [Meta Contábil Name] > Editar Meta Contábil
-Breadcrumbs::for('financeiro.meta_contabil.edit', function (BreadcrumbTrail $trail, Contas $item) {
+Breadcrumbs::for('financeiro.meta_contabil.edit', function (BreadcrumbTrail $trail, MetaContabil $item) {
     $trail->parent('financeiro.meta_contabil.index');
     $trail->push('Editar Meta Contábil', route('financeiro.meta_contabil.edit', $item));
 });
