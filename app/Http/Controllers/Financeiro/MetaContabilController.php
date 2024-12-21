@@ -38,6 +38,7 @@ class MetaContabilController extends Controller
     public function create()
     {
         $centroCustoSelect = CentroCusto::getSelectCentroCusto();
+
         return view('financeiro.meta_contabil.create', [
             'intervalo' => $this->intervalo,
             'centroCustoSelect' => $centroCustoSelect,
@@ -100,7 +101,7 @@ class MetaContabilController extends Controller
      */
     public function update(UpdateMetaContabilRequest $request, MetaContabil $metaContabil)
     {
-        try {            
+        try {
             $metaContabil->name = $request->name;
             $metaContabil->descricao = $request->descricao;
             $metaContabil->valor = $request->valor;
@@ -130,5 +131,5 @@ class MetaContabilController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
-    }    
+    }
 }

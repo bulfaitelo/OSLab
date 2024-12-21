@@ -35,7 +35,7 @@ class StoreMetaContabilRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'valor' => ($this->valor) ? str_replace(',', '.', str_replace('.', '', $this->valor)) : null,           
+            'valor' => ($this->valor) ? str_replace(',', '.', str_replace('.', '', $this->valor)) : null,
         ]);
     }
 }
