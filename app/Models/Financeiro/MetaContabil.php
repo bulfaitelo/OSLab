@@ -29,24 +29,20 @@ class MetaContabil extends Model
     }
 
     /**
-     * Retorna o intervalo para exibição
+     * Retorna o intervalo para exibição.
      *
      * @return Attribute
      **/
     protected function intervalo(): Attribute
     {
         return Attribute::make(
-            get: function (string $value)  {
+            get: function (string $value) {
                 if ($value == 'mes') {
                     return 'Mensal';
-                }
-                elseif ($value == 'ano') {
+                } elseif ($value == 'ano') {
                     return 'Anual';
                 }
             }
         );
     }
-
-
-
 }
