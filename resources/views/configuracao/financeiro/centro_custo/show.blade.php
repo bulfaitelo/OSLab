@@ -37,7 +37,7 @@
               <div class="row">
                   <div class="col-md-3">
                       <div class="form-group">
-                          <div class="custom-control custom-switch custom-switch-on-success">
+                          <div class="custom-control custom-switch custom-switch-on-success custom-switch custom-switch-md">
                               {!! html()->checkbox('receita', $centroCusto->receita)->class('custom-control-input ')->disabled() !!}
                               <label class="custom-control-label" for="receita">Receita</label>
                           </div>
@@ -45,7 +45,7 @@
                   </div>
                   <div class="col-md-3">
                       <div class="form-group">
-                          <div class="custom-control custom-switch custom-switch-on-danger">
+                          <div class="custom-control custom-switch custom-switch-on-danger custom-switch custom-switch-md">
                               {!! html()->checkbox('despesa', $centroCusto->despesa)->class('custom-control-input ')->disabled() !!}
                               <label class="custom-control-label" for="despesa">Despesa</label>
                           </div>
