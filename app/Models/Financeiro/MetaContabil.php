@@ -195,17 +195,17 @@ class MetaContabil extends Model
     /**
      * Retorna o objeto pra modelagem da tabela de Metas Contábeis.
      *
-     * @param  Request  $request
-     * @param  bool  $dashboard default false
+     * @param  Request  $request  default null
+     * @param  bool  $dashboard  default false
      * @param  int  $itensPorPagina  default 100
      */
-    public static function getDataTable(Request $request, bool $dashboard = false, int $itensPorPagina = 100): object
+    public static function getDataTable(Request $request = null, bool $dashboard = false, int $itensPorPagina = 100): object
     {        
         $metaContabil = self::query();
         if ($dashboard) {
             $metaContabil->where('exibir_dashboard', '=', 1);            
         }
-        return $metaContabil->paginate($itensPorPagina);
-        
+
+        return $metaContabil->paginate($itensPorPagina);        
     }
 }

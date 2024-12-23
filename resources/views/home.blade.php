@@ -118,69 +118,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card custom-border">
-                <div class="card-header pb-0 border-0 pr-3 pl-3">
-                    <div class="d-flex justify-content-between">
-                      <h3 class="card-title">Metas Financeiras</h3>
-                        <a href="http://oslab.teste/os/create">
-                            <button type="button" class="btn btn-sm btn-oslab">
-                                {{-- <i class="fa-solid fa-plus"></i> --}}
-                                Ver Todas
-                            </button>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body p-3">
-                    <div class="">
-                        {{-- <p class="text-center">
-                          <strong>Metas Financeiras</strong>
-                        </p> --}}
-
-                        <div class="progress-group">
-                            Meta Anual
-                            <span class="float-right"><b>R$12.000,00</b>/ R$24.000,00</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-primary" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-group">
-                            Meta Mensal
-                            <span class="float-right"><b>R$680,00</b>/ R$2.000,00</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-primary" style="width: 30%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-group">
-                            Meta de investimentos
-                            <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-danger" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-group">
-                            Meta de investimentos
-                            <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-danger" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-group">
-                            Meta de investimentos
-                            <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-danger" style="width: 75%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-group">
-                            Meta de investimentos
-                            <span class="float-right"><b>R$1680,00</b>/ R$6.000,00</span>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-danger" style="width: 75%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @livewire('home.dashboard.meta-contabil')
         </div>
         <div class="col-md-6">
             <div class="card custom-border">

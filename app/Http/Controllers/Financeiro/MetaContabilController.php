@@ -28,7 +28,7 @@ class MetaContabilController extends Controller
      */
     public function index(Request $request)
     {
-        $metaContabil = MetaContabil::getDataTable( request: $request, itensPorPagina: 100);
+        $metaContabil = MetaContabil::getDataTable(request: $request, itensPorPagina: 100);
 
         return view('financeiro.meta_contabil.index', compact('metaContabil'));
     }
