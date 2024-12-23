@@ -96,37 +96,35 @@ class MetaContabil extends Model
             if ($this->meta_liquida) {
                 if ($this->tipo_meta == 'R') {
                     $metaReturn[$key]['executado'] = $value->saldo;
-                    $metaReturn[$key]['porcentagem_executada'] = (int) max(round(($value->saldo / $this->getRawOriginal('valor_meta'))*100), 0);
+                    $metaReturn[$key]['porcentagem_executada'] = (int) max(round(($value->saldo / $this->getRawOriginal('valor_meta')) * 100), 0);
                 } else {
                     $metaReturn[$key]['executado'] = ($value->despesa - $value->receita);
-                    $metaReturn[$key]['porcentagem_executada'] = (int) max(round((($value->despesa - $value->receita) / $this->getRawOriginal('valor_meta'))*100), 0);
+                    $metaReturn[$key]['porcentagem_executada'] = (int) max(round((($value->despesa - $value->receita) / $this->getRawOriginal('valor_meta')) * 100), 0);
                 }
-
             } else {
                 if ($this->tipo_meta == 'R') {
                     $metaReturn[$key]['executado'] = $value->receita;
-                   $metaReturn[$key]['porcentagem_executada'] = (int) max(round(($value->receita / $this->getRawOriginal('valor_meta'))*100), 0);
+                    $metaReturn[$key]['porcentagem_executada'] = (int) max(round(($value->receita / $this->getRawOriginal('valor_meta')) * 100), 0);
                 } else {
                     $metaReturn[$key]['executado'] = $value->despesa;
-                    $metaReturn[$key]['porcentagem_executada'] = (int) max(round(($value->despesa / $this->getRawOriginal('valor_meta'))*100), 0);
+                    $metaReturn[$key]['porcentagem_executada'] = (int) max(round(($value->despesa / $this->getRawOriginal('valor_meta')) * 100), 0);
                 }
             }
         }
 
-        return json_decode(json_encode($metaReturn), FALSE);
+        return json_decode(json_encode($metaReturn), false);
     }
 
-        /**
-     * Retorna a meta estipulada e executada para a meta selecionada.
+    /**
+     * Retorna a meta estipulada e executada para a meta selecionada para o mes e ano corrente.
      *
      * @return
      */
     public function getMetaExecutadaData()
     {
-        $query = Pagamentos::query();
         $ano = now()->format('Y');
         $mes = now()->format('m');
-
+        $query = Pagamentos::query();
 
         if ($this->intervalo == 'Anual') {
             $query->selectRaw('
@@ -171,29 +169,25 @@ class MetaContabil extends Model
             if ($this->meta_liquida) {
                 if ($this->tipo_meta == 'R') {
                     $metaReturn['executado'] = $metaQuery->saldo;
-                    $metaReturn['porcentagem_executada'] = (int) max(round(($metaQuery->saldo / $this->getRawOriginal('valor_meta'))*100), 0);
+                    $metaReturn['porcentagem_executada'] = (int) max(round(($metaQuery->saldo / $this->getRawOriginal('valor_meta')) * 100), 0);
                 } else {
                     $metaReturn['executado'] = ($metaQuery->despesa - $metaQuery->receita);
-                    $metaReturn['porcentagem_executada'] = (int) max(round((($metaQuery->despesa - $metaQuery->receita) / $this->getRawOriginal('valor_meta'))*100), 0);
+                    $metaReturn['porcentagem_executada'] = (int) max(round((($metaQuery->despesa - $metaQuery->receita) / $this->getRawOriginal('valor_meta')) * 100), 0);
                 }
-
             } else {
                 if ($this->tipo_meta == 'R') {
                     $metaReturn['executado'] = $metaQuery->receita;
-                    $metaReturn['porcentagem_executada'] = (int) max(round(($metaQuery->receita / $this->getRawOriginal('valor_meta'))*100), 0);
+                    $metaReturn['porcentagem_executada'] = (int) max(round(($metaQuery->receita / $this->getRawOriginal('valor_meta')) * 100), 0);
                 } else {
                     $metaReturn['executado'] = $metaQuery->despesa;
-                    $metaReturn['porcentagem_executada'] = (int) max(round(($metaQuery->despesa / $this->getRawOriginal('valor_meta'))*100), 0);
+                    $metaReturn['porcentagem_executada'] = (int) max(round(($metaQuery->despesa / $this->getRawOriginal('valor_meta')) * 100), 0);
                 }
             }
-
         } else {
             $metaReturn['executado'] = 0.00;
             $metaReturn['porcentagem_executada'] = 0;
         }
 
-
-        // return $metaQuery;
-        return json_decode(json_encode($metaReturn), FALSE);
+        return json_decode(json_encode($metaReturn), false);
     }
 }
