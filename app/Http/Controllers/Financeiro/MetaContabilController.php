@@ -7,6 +7,7 @@ use App\Http\Requests\Financeiro\StoreMetaContabilRequest;
 use App\Http\Requests\Financeiro\UpdateMetaContabilRequest;
 use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Financeiro\MetaContabil;
+use Illuminate\Http\Request;
 
 class MetaContabilController extends Controller
 {
@@ -25,9 +26,9 @@ class MetaContabilController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $metaContabil = MetaContabil::paginate(20);
+        $metaContabil = MetaContabil::getDataTable( request: $request, itensPorPagina: 100);
 
         return view('financeiro.meta_contabil.index', compact('metaContabil'));
     }

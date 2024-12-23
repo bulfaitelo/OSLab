@@ -97,7 +97,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">
-            {{-- {{$Serviços->appends(['busca' => $busca])->links() }} --}}
+            {{-- {{$metaContabil->appends(['busca' => $busca])->links() }} --}}
             {{ $metaContabil->links() }}
         </div>
     </div>
