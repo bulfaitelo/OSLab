@@ -30,13 +30,14 @@
             <table class="table table-sm table-hover text-nowrap">
                 <thead>
                     <tr>
-                    <th style="width: 10px">#</th>
                     <th>Nome</th>
-                    <th class="text-right">Valor</th>
+                    <th style="width: 110px" class="text-right">Valor Executado</th>
+                    <th style="width: 110px" class="text-right">Valor Previsto</th>
+                    <th style="width: 50px">Tipo de Meta</th>
                     <th style="width: 50px">Liquido</th>
                     <th style="width: 100px">Intervalo</th>
                     <th>Progresso</th>
-                    <th style="width: 45px">%</th>
+                    <th style="width: 45px" class="">%</th>
                     <th style="width: 90px">Dashboard</th>
                     <th style="width: 40px"></th>
                     </tr>
@@ -44,23 +45,35 @@
                 <tbody>
                     @foreach ($metaContabil as $item)
                     <tr>
-                        <td>{{ $item->id }}</td>
                         <td>{{ $item->name}}</td>
-                        <td class="text-right">{{ $item->valor}}</td>
-                        <td class="text-center">                            
-                            @if ($item->valor_liquido == 1)                                                                                    
+                        <td class="text-right">{{ number_format($item->getMetaExecutadaData()->executado, 2, ',', '.') }}</td>
+                        <td class="text-right">{{ $item->valor_meta}}</td>
+                        <td>
+                            <h5>
+                                @if ($item->tipo_meta == 'R')
+                                    <span class="badge bg-success">Receita</span>
+                                @endif
+                                @if ($item->tipo_meta == 'D')
+                                    <span class="badge bg-danger">Despesa</span>
+                                @endif
+                            </h5>
+                        </td>
+                        <td class="text-center">
+                            @if ($item->meta_liquida == 1)
                             <i class="fa-solid fa-check" style="color: #4a42d3;"></i>
                             @endif
                         </td>
-                        <td>{{ $item->intervalo}}</td>       
+                        <td>{{ $item->intervalo}}</td>
                         <td>
                             <div class="progress progress-sm mt-2">
-                                <div class="progress-bar progress-bar-striped btn-oslab" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped btn-oslab" role="progressbar" style="width: {{ $item->getMetaExecutadaData()->porcentagem_executada }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </td>
-                        <td><span class="badge btn-oslab">90%</span></td>                        
-                        <td class="text-center" >                            
-                            @if ($item->exibir_dashboard == 1)                                                                                    
+                        <td class="text-center">
+                            <span class="badge btn-oslab">{{ $item->getMetaExecutadaData()->porcentagem_executada }}%</span>
+                        </td>
+                        <td class="text-center" >
+                            @if ($item->exibir_dashboard == 1)
                             <i class="fa-solid fa-check" style="color: #4a42d3;"></i>
                             @endif
                         </td>

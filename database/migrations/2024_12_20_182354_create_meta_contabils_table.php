@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('descricao')->nullable();
             $table->unsignedBigInteger('centro_custo_id')->nullable();
-            $table->decimal('valor', 9, 2);
-            $table->boolean('valor_liquido')->default(0)->nullable();
+            $table->decimal('valor_meta', 9, 2);
+            $table->char('tipo_meta', 1); // receita ou despesa
+            $table->boolean('meta_liquida')->default(0)->nullable();
             $table->string('intervalo');
             $table->boolean('exibir_dashboard')->default(0)->nullable();
             $table->timestamps();

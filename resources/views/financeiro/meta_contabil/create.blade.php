@@ -36,8 +36,8 @@
                     {!! html()->text('descricao')->class('form-control')->placeholder('descrição da meta (opcional)') !!}
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
-                        <label for="valor">
+                    <div class="col-md-5">
+                        <label for="valor_meta">
                             Valor da Meta
                             <span class="required-span" title="Este campo é obrigatório">*</span>
                         </label>
@@ -45,11 +45,37 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            {!! html()->text('valor')->class('form-control decimal')->placeholder('Valor do serviço')->attributes(['inputmode' => 'numeric'])->required() !!}
+                            {!! html()->text('valor_meta')->class('form-control decimal')->placeholder('Valor da Meta Contábil')->attributes(['inputmode' => 'numeric'])->required() !!}
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label for="valor_liquido">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">
+                                Tipo de Meta
+                                <span
+                                    class="help_popover h5 d-inline"
+                                    data-container="body"
+                                    data-toggle="popover"
+                                    data-placement="bottom"
+                                    data-content="Define o objetivo da meta, se é focada em Receita ou Despesa."
+                                    data-original-title=""
+                                    title=""
+                                >
+                                <i class="fa-regular fa-circle-question"></i>
+                                </span>
+                            </label>
+                            <div class="custom-control custom-radio ">
+                                {!! html()->radio('tipo_meta', '' , 'R')->class('custom-control-input custom-control-input-success')->attribute('id', 'receita') !!}
+                                <label for="receita" class="custom-control-label">Receita</label>
+                            </div>
+                            <div class="custom-control custom-radio ">
+                                {!! html()->radio('tipo_meta', '' , 'D')->class('custom-control-input custom-control-input-danger')->attribute('id', 'despesa') !!}
+                                <label for="despesa" class="custom-control-label">Despesa</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="meta_liquida">
                             Valor Liquido
                             <span
                                 class="help_popover h5 d-inline"
@@ -63,8 +89,8 @@
                             </span>
                         </label>
                         <div class="custom-control custom-switch custom-switch-md">
-                            {!! html()->checkbox('valor_liquido', true)->class('custom-control-input') !!}
-                            <label class="custom-control-label" for="valor_liquido"></label>                            
+                            {!! html()->checkbox('meta_liquida', true)->class('custom-control-input') !!}
+                            <label class="custom-control-label" for="meta_liquida"></label>
                         </div>
                     </div>
                 </div>
@@ -72,7 +98,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="centro_custo_id">Centro de Custo</label>
-                            {!! html()->select('centro_custo_id', $centroCustoSelect)->class('form-control')->placeholder('Selecione o Centro de Custo') !!}
+                            {!! html()->select('centro_custo_id', $centroCustoSelect)->class('form-control')->placeholder('Todos os Centros de Custo') !!}
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -88,7 +114,7 @@
                             <label class="custom-control-label" for="exibir_dashboard"></label>
                         </div>
                     </div>
-                </div>                
+                </div>
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->

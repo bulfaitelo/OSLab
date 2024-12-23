@@ -23,9 +23,10 @@ class StoreMetaContabilRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'valor' => 'required|numeric|min:0|not_in:0',
+            'valor_meta' => 'required|numeric|min:0|not_in:0',
             'centro_custo_id' => 'exists:centro_custos,id|nullable',
             'intervalo' => 'required|in:mes,ano',
+            'tipo_meta' => 'required|in:R,D',
         ];
     }
 
@@ -35,7 +36,7 @@ class StoreMetaContabilRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'valor' => ($this->valor) ? str_replace(',', '.', str_replace('.', '', $this->valor)) : null,
+            'valor_meta' => ($this->valor_meta) ? str_replace(',', '.', str_replace('.', '', $this->valor_meta)) : null,
         ]);
     }
 }

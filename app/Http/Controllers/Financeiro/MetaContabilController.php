@@ -54,8 +54,9 @@ class MetaContabilController extends Controller
             $metaContabil = new MetaContabil();
             $metaContabil->name = $request->name;
             $metaContabil->descricao = $request->descricao;
-            $metaContabil->valor = $request->valor;
-            $metaContabil->valor_liquido = $request->valor_liquido;
+            $metaContabil->valor_meta = $request->valor_meta;
+            $metaContabil->tipo_meta = $request->tipo_meta;
+            $metaContabil->meta_liquida = $request->meta_liquida;
             $metaContabil->centro_custo_id = $request->centro_custo_id;
             $metaContabil->intervalo = $request->intervalo;
             $metaContabil->exibir_dashboard = $request->exibir_dashboard;
@@ -74,6 +75,7 @@ class MetaContabilController extends Controller
     public function show(MetaContabil $metaContabil)
     {
         $centroCustoSelect = CentroCusto::getSelectCentroCusto();
+        // dd($metaContabil->getMetaExecutadaTable());
 
         return view('financeiro.meta_contabil.show', [
             'metaContabil' => $metaContabil,
@@ -104,8 +106,8 @@ class MetaContabilController extends Controller
         try {
             $metaContabil->name = $request->name;
             $metaContabil->descricao = $request->descricao;
-            $metaContabil->valor = $request->valor;
-            $metaContabil->valor_liquido = $request->valor_liquido;
+            $metaContabil->valor_meta = $request->valor_meta;
+            $metaContabil->meta_liquida = $request->meta_liquida;
             $metaContabil->centro_custo_id = $request->centro_custo_id;
             $metaContabil->intervalo = $request->intervalo;
             $metaContabil->exibir_dashboard = $request->exibir_dashboard;
