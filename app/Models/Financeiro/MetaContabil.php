@@ -125,8 +125,8 @@ class MetaContabil extends Model
     {
         $ano = now()->format('Y');
         $mes = now()->format('m');
-        $query = Pagamentos::query();      
-        
+        $query = Pagamentos::query();
+
         if ($this->intervalo == 'Anual') {
             $query->selectRaw('
                 YEAR(vencimento) AS ano
@@ -155,7 +155,7 @@ class MetaContabil extends Model
 
         if ($this->centro_custo_id) {
             $query->where('centro_custo_id', '=', $this->centro_custo_id);
-        }        
+        }
 
         $metaQuery = $query->first();
 
@@ -200,12 +200,12 @@ class MetaContabil extends Model
      * @param  int  $itensPorPagina  default 100
      */
     public static function getDataTable(Request $request = null, bool $dashboard = false, int $itensPorPagina = 100): object
-    {        
+    {
         $metaContabil = self::query();
         if ($dashboard) {
-            $metaContabil->where('exibir_dashboard', '=', 1);            
+            $metaContabil->where('exibir_dashboard', '=', 1);
         }
 
-        return $metaContabil->paginate($itensPorPagina);        
+        return $metaContabil->paginate($itensPorPagina);
     }
 }
