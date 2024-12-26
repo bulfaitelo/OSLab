@@ -46,7 +46,7 @@
                     @foreach ($metaContabil as $item)
                     <tr>
                         <td>{{ $item->name}}</td>
-                        <td class="text-right">{{ number_format($item->getMetaExecutadaData()->executado, 2, ',', '.') }}</td>
+                        <td class="text-right">{{ number_format($item->executado, 2, ',', '.') }}</td>
                         <td class="text-right">{{ $item->valor_meta}}</td>
                         <td>
                             <h5>
@@ -66,11 +66,11 @@
                         <td>{{ $item->intervalo}}</td>
                         <td>
                             <div class="progress progress-sm mt-2">
-                                <div class="progress-bar progress-bar-striped btn-oslab" role="progressbar" style="width: {{ $item->getMetaExecutadaData()->porcentagem_executada }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped btn-oslab" role="progressbar" style="width: {{ $item->porcentagem_executada }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </td>
                         <td class="text-center">
-                            <span class="badge btn-oslab">{{ $item->getMetaExecutadaData()->porcentagem_executada }}%</span>
+                            <span class="badge btn-oslab">{{ $item->porcentagem_executada }}%</span>
                         </td>
                         <td class="text-center" >
                             @if ($item->exibir_dashboard == 1)

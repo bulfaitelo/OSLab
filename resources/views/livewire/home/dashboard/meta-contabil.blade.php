@@ -5,10 +5,10 @@
               <h3 class="card-title">Metas Contábeis</h3>
               @can('financeiro_meta_contabil')
               <a href="{{ route('financeiro.meta_contabil.index') }}">
-                  <button type="button" class="btn btn-sm btn-oslab">                        
+                  <button type="button" class="btn btn-sm btn-oslab">
                       Ver Todas
                   </button>
-              </a>                  
+              </a>
               @endcan
             </div>
         </div>
@@ -17,14 +17,14 @@
                 @forelse ($metaContabil as $item)
                     <div class="progress-group">
                         {{ $item->name }}
-                        <span class="float-right"><b>R${{ number_format($item->getMetaExecutadaData()->executado, 2, ',', '.') }}</b> / R${{ $item->valor_meta }}</span>
+                        <span class="float-right"><b>R$ {{ number_format($item->executado, 2, ',', '.') }}</b> / R$ {{ number_format($item->valor_meta, 2, ',', '.') }}</span>
                         <div class="progress progress-sm">
-                            <div class="progress-bar btn-oslab" style="width: {{ $item->getMetaExecutadaData()->porcentagem_executada }}%"></div>
+                            <div class="progress-bar btn-oslab" style="width: {{ $item->porcentagem_executada }}%"></div>
                         </div>
                     </div>
                 @empty
                     <h3>Sem Metas cadastradas</h3>
-                @endforelse               
+                @endforelse
             </div>
         </div>
     </div>
