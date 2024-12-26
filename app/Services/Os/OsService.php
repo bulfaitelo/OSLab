@@ -20,7 +20,15 @@ class OsService implements OsServiceInterface
     ) {
     }
 
-    public static function getDataTable(Request $request, int $itensPorPagina = 100)
+    /**
+     * Retorna o objeto pra modelagem da tabela de OS.
+     *
+     * @param  Request  $request  default null
+     * @param  int  $itensPorPagina  default 100
+     * @param  string  $colunaOrdenacao  default null
+     * @param  string  $ordenacao  default desc
+     */
+    public static function getDataTable(Request $request, int $itensPorPagina = 100, $colunaOrdenacao = null, $ordenacao = 'desc')
     {
         $dataHoje = Carbon::now()->format('Y-d-m');
         $osListagemPadrao = getConfig('os_listagem_padrao');
@@ -62,7 +70,11 @@ class OsService implements OsServiceInterface
                 $queryOs->whereIn('status_id', $osListagemPadrao);
             }
         }
-        $queryOs->orderBy('id', 'desc');
+        if ($colunaOrdenacao) {
+            $queryOs->orderBy($colunaOrdenacao, $ordenacao);
+        } else {
+            $queryOs->orderBy('id', 'desc');
+        }
 
         return  $queryOs->paginate($itensPorPagina);
     }
