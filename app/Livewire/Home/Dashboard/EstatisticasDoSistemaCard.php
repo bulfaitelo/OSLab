@@ -10,7 +10,7 @@ use App\Models\Servico\Servico;
 use App\Models\Wiki\Wiki;
 use Livewire\Component;
 
-class EstatisticasDoSistema extends Component
+class EstatisticasDoSistemaCard extends Component
 {
     public function render()
     {
@@ -21,7 +21,7 @@ class EstatisticasDoSistema extends Component
         $wikiCount = Wiki::count();
         $checklistCount = Checklist::count();
 
-        return view('livewire.home.dashboard.estatisticas-do-sistema', [
+        return view('livewire.home.dashboard.estatisticas-do-sistema-card', [
             'osCount' => $osCount,
             'clienteCount' => $clienteCount,
             'produtoCount' => $produtoCount,

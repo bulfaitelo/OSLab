@@ -6,7 +6,7 @@ use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Os\Os;
 use Livewire\Component;
 
-class OsStatusCount extends Component
+class OsStatusCountCard extends Component
 {
     public $os_status_id;
 
@@ -21,7 +21,7 @@ class OsStatusCount extends Component
 
         $osCount = Os::where('status_id', $this->os_status_id)->count();
 
-        return view('livewire.home.dashboard.os-status-count', [
+        return view('livewire.home.dashboard.os-status-count-card', [
             'status' => $status,
             'status_selected' => $this->os_status_id,
             'os_count' => $osCount,

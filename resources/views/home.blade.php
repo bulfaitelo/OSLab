@@ -12,8 +12,8 @@
     @livewire('home.show-user-favorites')
     <div class="row mt-3">
         <div class="col-md-2">
-            @livewire('home.dashboard.os-status-count')
-            @livewire('home.dashboard.balancete')
+            @livewire('home.dashboard.os-status-count-card')
+            @livewire('home.dashboard.balancete-card')
         </div>
         <div class="col-md-6">
             <div class="card custom-border">
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            @livewire('home.dashboard.estatisticas-do-sistema')
+            @livewire('home.dashboard.estatisticas-do-sistema-card')
         </div>
     </div>
     <div class="row ">
@@ -89,7 +89,7 @@
 
         </div>
         <div class="col-md-4">
-            @livewire('home.dashboard.meta-contabil')
+            @livewire('home.dashboard.meta-contabil-card')
         </div>
         <div class="col-md-5">
             <div class="card custom-border">

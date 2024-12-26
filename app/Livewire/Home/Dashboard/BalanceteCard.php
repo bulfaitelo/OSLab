@@ -5,7 +5,7 @@ namespace App\Livewire\Home\Dashboard;
 use App\Models\Financeiro\Pagamentos;
 use Livewire\Component;
 
-class Balancete extends Component
+class BalanceteCard extends Component
 {
     private $meses = [
         1 => 'Janeiro',
@@ -31,7 +31,7 @@ class Balancete extends Component
         }
         $balancete = $this->getSaldo($this->mes_busca);
 
-        return view('livewire.home.dashboard.balancete', [
+        return view('livewire.home.dashboard.balancete-card', [
             'meses' => $this->meses,
             'mes_busca' => $this->mes_busca,
             'balancete' => $balancete,
