@@ -3,7 +3,6 @@
 namespace App\Livewire\Home\Dashboard;
 
 use App\Models\Os\Os;
-use App\Services\Os\OsService;
 use Livewire\Component;
 
 class GarantiaCard extends Component
@@ -17,7 +16,7 @@ class GarantiaCard extends Component
         $os->orderBy('prazo_garantia');
         $osReturn = $os->get();
 
-        return view('livewire.home.dashboard.garantia-card',[
+        return view('livewire.home.dashboard.garantia-card', [
             'os' => $osReturn,
         ]);
     }
