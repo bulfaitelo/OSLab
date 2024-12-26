@@ -39,54 +39,7 @@
     </div>
     <div class="row ">
         <div class="col-md-3">
-            <div class="card custom-border">
-                <div class="card-header pb-0 border-0 pr-3 pl-3">
-                    <div class="d-flex justify-content-between">
-                      <h3 class="card-title">Garantias Encerrando</h3>
-                        <a href="http://oslab.teste/os/create">
-                            <button type="button" class="btn btn-sm btn-oslab">
-                                {{-- <i class="fa-solid fa-plus"></i> --}}
-                                Ver Todas
-                            </button>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table table-sm " style="table-layout: fixed;">
-                        <thead>
-                            <tr>
-                                <th class=" pr-3 pl-3"  >#</th>
-                                <th>Cliente</th>
-                                <th style="width: 70px">
-                                    <span title="Vencimento" >Venc.</span>
-                                </th>
-                                <th scope="pr-3" style="width: 65px"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="pl-3" class="text-truncate" >9</td>
-                                <td class="text-truncate">Joãizinho da silva alguma coisa adsdadd</td>
-                                <td><span class="badge bg-danger">10/10/2024</span></td>
-                                <td class="pr-3">
-                                    <a href="#" title="Visualizar" class="btn btn-sm btn-default float-right"><i class="fas fa-eye"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td class="pl-3" >9</td>
-                                <td class="text-truncate">Joãizinho da silva alguma coisa adsdadd</td>
-                                <td><span class="badge bg-danger">10/10/2024</span></td>
-                                <td class="pr-3">
-                                    <a href="#" title="Visualizar" class="btn btn-sm btn-default float-right"><i class="fas fa-eye"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+            @livewire('home.dashboard.garantia-card')
         </div>
         <div class="col-md-4">
             @livewire('home.dashboard.meta-contabil-card')
