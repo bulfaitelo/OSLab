@@ -185,26 +185,26 @@ class MetaContabil extends Model
                 'intervalo',
                 'centro_custo_id',
                 'exibir_dashboard',
-                DB::raw("
+                DB::raw('
                     CASE
                         WHEN (executado / NULLIF(valor_meta, 0)) * 100 < 0 THEN 0
                         ELSE ROUND((executado / NULLIF(valor_meta, 0)) * 100)
                     END AS porcentagem_executada
-                ")
-            )->where(function ($query) use ($dashboard){
+                ')
+            )->where(function ($query) use ($dashboard) {
                 if ($dashboard) {
                     $query->where('exibir_dashboard', '=', 1);
                 }
             });
-            if ($colunaOrdenacao) {
-                $query->orderBy($colunaOrdenacao, $ordenacao);
-            }
-            if ($dashboard) {
-                $query->limit($itensPorPagina);
-                $result = $query->get();
-            } else {
-                $result = $query->paginate($itensPorPagina);
-            }
+        if ($colunaOrdenacao) {
+            $query->orderBy($colunaOrdenacao, $ordenacao);
+        }
+        if ($dashboard) {
+            $query->limit($itensPorPagina);
+            $result = $query->get();
+        } else {
+            $result = $query->paginate($itensPorPagina);
+        }
 
         return $result;
     }
