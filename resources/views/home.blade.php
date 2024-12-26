@@ -16,22 +16,7 @@
             @livewire('home.dashboard.balancete-card')
         </div>
         <div class="col-md-6">
-            <div class="card custom-border">
-                <div class="card-header pb-0 border-0 pr-3 pl-3">
-                    <div class="d-flex justify-content-between">
-                      <h3 class="card-title">Receitas Recebidas</h3>
-                        <a href="http://oslab.teste/os/create">
-                            <button type="button" class="btn btn-sm btn-oslab">
-                                {{-- <i class="fa-solid fa-plus"></i> --}}
-                                Ver Todas
-                            </button>
-                        </a>
-                    </div>
-                </div>
-                <div style="height:350px; " class="card-body pl-3 pr-3 pb-3 pt-1">
-                    <canvas id="myChart" ></canvas>
-                </div>
-            </div>
+            @livewire('home.dashboard.receitas-chart-card')
         </div>
         <div class="col-md-4">
             @livewire('home.dashboard.estatisticas-do-sistema-card')
@@ -76,44 +61,7 @@
 @section('js')
 
 <script>
-    const ctx = document.getElementById('myChart');
 
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['janeiro', 'fevereiro', 'março', 'maio', 'abril', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
-        datasets: [{
-          label: 'Receitas R$',
-          data: [12, -19, 3, 5, 2, 3, 10, 30, 50, 90, 20, 15],
-          borderWidth: 1,
-          borderRadius:10,
-          borderColor: 'rgb(93, 82, 239)',
-          backgroundColor: 'rgb(93, 82, 239)',
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            grid: {
-                display: false
-            }
-          },
-          x: {
-            grid: {
-                display: false
-            }
-          }
-        }
-      }
-    });
 
     const lines = document.getElementById('lineChart');
 
