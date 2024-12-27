@@ -21,9 +21,11 @@ class AtendimentosCategoriaChartCard extends Component
         11 => 'Novembro',
         12 => 'Dezembro',
     ];
+
     public function render()
     {
         $chartData = $this->getOsCategoriaData();
+
         return view('livewire.home.dashboard.atendimentos-categoria-chart-card', [
             'labels' => $chartData['labels'],
             'data' => $chartData['data'],
@@ -33,9 +35,8 @@ class AtendimentosCategoriaChartCard extends Component
     /**
      * Retornar um array com dados para criação do chart.
      *
-     * @return array  Retorna o label e o data
+     * @return array Retorna o label e o data
      */
-
     private function getOsCategoriaData(): array
     {
         $os = Os::query();
@@ -47,7 +48,7 @@ class AtendimentosCategoriaChartCard extends Component
         $os->join('categorias', 'categorias.id', '=', 'os.categoria_id');
         $os->join('os_status', 'os_status.id', '=', 'os.status_id');
         $os->where('os_status.garantia', 1); // forma de garantia que vou contar apenas o que foi finalizado isso é com garantia.
-        $os->whereRaw('YEAR(os.created_at) = '.now()->format('Y') );
+        $os->whereRaw('YEAR(os.created_at) = '.now()->format('Y'));
         $os->groupBy('categoria');
         $os->groupByRaw('MONTH(os.created_at)');
         $os->orderBy('mes');
@@ -59,8 +60,8 @@ class AtendimentosCategoriaChartCard extends Component
             $array[$value->categoria]['label'] = $value->categoria;
             $array[$value->categoria]['data'][] = [
                 'x' => $this->meses[$value->mes],
-                'y' => $value->quantidade
-            ] ;
+                'y' => $value->quantidade,
+            ];
             $array[$value->categoria]['tension'] = 0.4;
             $arrayMes[$value->mes] = $this->meses[$value->mes];
         }
