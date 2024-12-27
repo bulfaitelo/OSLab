@@ -9,7 +9,7 @@ class GarantiaCard extends Component
 {
     public function render()
     {
-        $os = Os::with('cliente');
+        $os = Os::with('cliente', 'status');
         $os->limit(6);
         $os->whereNotNull('prazo_garantia');
         $os->where('prazo_garantia', '>=', now()->format('Y-m-d'));

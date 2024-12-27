@@ -45,16 +45,16 @@ class ReceitasChartCard extends Component
 
         $data = [
             'labels'=> $labels,
-                'datasets'=> [
-                    [
-                        'label' => 'Receitas R$',
-                        'data' => $data,
-                        'borderWidth' => 1,
-                        'borderRadius' => 10,
-                        'borderColor' => 'rgb(93, 82, 239)',
-                        'backgroundColor' => 'rgb(93, 82, 239)',
-                    ]
-                ]
+            'datasets'=> [
+                [
+                    'label' => 'Receitas R$',
+                    'data' => $data,
+                    'borderWidth' => 1,
+                    'borderRadius' => 10,
+                    'borderColor' => 'rgb(93, 82, 239)',
+                    'backgroundColor' => 'rgb(93, 82, 239)',
+                ],
+            ],
         ];
 
         return $data;
