@@ -33,7 +33,6 @@ class ReceitasChartCard extends Component
 
     private function getReceitaData()
     {
-
         $ano = now()->format('Y');
         $dataInicio = $ano.'-01-01';
         $dataFim = $ano.'-12-31';
@@ -44,8 +43,8 @@ class ReceitasChartCard extends Component
         }
 
         $data = [
-            'labels'=> $labels,
-            'datasets'=> [
+            'labels' => $labels,
+            'datasets' => [
                 [
                     'label' => 'Receitas R$',
                     'data' => $data,
