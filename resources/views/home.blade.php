@@ -2,10 +2,10 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Home')
+@section('title', 'OSLab')
 
 @section('content_header')
-    <h1>OSLAB - Home</h1>
+    <h1>OSLab</h1>
 @stop
 
 @section('content')

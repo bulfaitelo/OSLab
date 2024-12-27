@@ -19,7 +19,6 @@
 <script>
 const ctx = document.getElementById('receitasChart');
 document.addEventListener('livewire:init', function () {
-
     new Chart(ctx, {
         type: 'bar',
         data: {!! json_encode($data) !!},
@@ -58,7 +57,5 @@ document.addEventListener('livewire:init', function () {
             }
         }
     });
-
-
 });
 </script>

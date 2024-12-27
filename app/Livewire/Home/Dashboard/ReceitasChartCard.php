@@ -25,12 +25,14 @@ class ReceitasChartCard extends Component
     public function render()
     {
         $data = self::getReceitaData();
+
         return view('livewire.home.dashboard.receitas-chart-card', [
             'data' => $data,
         ]);
     }
 
-    private function getReceitaData() {
+    private function getReceitaData()
+    {
 
         $ano = now()->format('Y');
         $dataInicio = $ano.'-01-01';
@@ -41,18 +43,18 @@ class ReceitasChartCard extends Component
             $data[] = $value->saldo;
         }
 
-       $data = [
-           'labels'=> $labels,
-           'datasets'=> [
-                [
-                    'label'=> 'Receitas R$',
-                    'data'=> $data,
-                    'borderWidth'=> 1,
-                    'borderRadius'=>10,
-                    'borderColor'=> 'rgb(93, 82, 239)',
-                    'backgroundColor'=> 'rgb(93, 82, 239)',
+        $data = [
+            'labels'=> $labels,
+                'datasets'=> [
+                    [
+                        'label' => 'Receitas R$',
+                        'data' => $data,
+                        'borderWidth' => 1,
+                        'borderRadius' => 10,
+                        'borderColor' => 'rgb(93, 82, 239)',
+                        'backgroundColor' => 'rgb(93, 82, 239)',
+                    ]
                 ]
-            ]
         ];
 
         return $data;
