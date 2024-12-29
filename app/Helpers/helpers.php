@@ -56,10 +56,12 @@ if (! function_exists('getUserConfig')) {
     function getUserConfig(string $keyConfig)
     {
         if ($keyConfig) {
+            $userConfig = UserConfig::where('key', $keyConfig)
+            ->where('user_id', Auth::id())
+            ->value('value');
+
             return json_decode(
-                UserConfig::where('key', $keyConfig)
-                ->where('user_id', Auth::id())
-                ->value('value')
+                ($userConfig) ? $userConfig : false
             );
         }
     }
