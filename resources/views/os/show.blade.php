@@ -25,12 +25,16 @@
         </a>
         @endcan
         @can('os_print')
-        <a href="{{ route('os.print', $os) }}" target="_blank">
-            <button type="button" title="Imprimir" class="btn btn-sm bg-navy">
+        <div class="btn-group btn-group-sm">
+            <a class="btn btn-sm bg-navy" title="Imprimir" href="{{ route('os.print', $os) }}" target="_blank" >
                 <i class="fa-solid fa-print"></i>
-                Imprimir
-            </button>
-        </a>
+                <span class="d-none d-sm-inline">Imprimir</span>
+            </a>
+            <a class="btn btn-sm bg-maroon" title="Imprimir em PDF" href="{{ route('os.print_pdf', $os) }}" target="_blank" >
+                <i class="fa-regular fa-file-pdf"></i>
+                <span class="d-none d-sm-inline">PDF</span>
+            </a>
+        </div>
         @endcan
 
     </div>
