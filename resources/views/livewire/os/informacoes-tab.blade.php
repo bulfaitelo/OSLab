@@ -12,6 +12,17 @@
             <i class="fa-solid fa-plus"></i>
             Arquivo
         </button>
+        <button
+            type="button" class="help_popover btn btn-sm btn-default float-right"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="right"
+            data-content="As anotações, senhas e arquivos cadastrados aqui não serão exibidos ao cliente."
+            data-original-title=""
+            title=""
+        >
+            <i class="fa-regular fa-circle-question"></i>
+        </button>
     </div>
     <!-- /.card-header -->
     <div class="card-body table-responsive">
