@@ -71,10 +71,16 @@ class AtendimentosCategoriaChartCard extends Component
         foreach ($arrayMes as $key => $value) {
             $retunrArrayMes[] = $value;
         }
+        if (isset($retunrArray)) {
+            return [
+                'labels' => json_encode($retunrArrayMes),
+                'data' => json_encode($retunrArray),
+            ];
+        }
 
         return [
-            'labels' => json_encode($retunrArrayMes),
-            'data' => json_encode($retunrArray),
+            'labels' => json_encode(false),
+            'data' => json_encode(false),
         ];
     }
 }

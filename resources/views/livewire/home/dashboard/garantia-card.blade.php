@@ -32,10 +32,10 @@
                             <td><span
                                     @class([
                                         'badge',
-                                        'bg-danger' => ($item->prazo_garantia->format('Y-m-d') == now()->format('Y-m-d')) ? true : false,
+                                        'bg-danger' => ($item->prazo_garantia?->format('Y-m-d') == now()->format('Y-m-d')) ? true : false,
                                         'bg-success' => ($item->prazo_garantia > now()) ? true : false,
                                     ])
-                                >{{ $item->prazo_garantia->format('d/m/Y') }}</span></td>
+                                >{{ $item->prazo_garantia?->format('d/m/Y') }}</span></td>
                             <td class="pr-3">
                             @can('os_show')
                                 <a href="{{ route('os.show', $item->id) }}" title="Visualizar" class="btn btn-sm btn-default float-right"><i class="fas fa-eye"></i></a>
