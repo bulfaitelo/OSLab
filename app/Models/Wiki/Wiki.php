@@ -75,6 +75,7 @@ class Wiki extends Model
         $queryWiki->with('user');
         $queryWiki->with('categoria');
         $queryWiki->with('fabricante');
+        $queryWiki->with('os');
         if (isset($request->busca)) {
             $queryWiki->where(function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%'.$request->busca.'%');

@@ -5,6 +5,7 @@
         <th>Nome</th>
         <th>Modelos</th>
         <th>Categoria</th>
+        <th>Qtd. OS</th>
         <th>Criado pelo usuario</th>
         @if ((isset($edit) && $edit === true) || (isset($show) && $show === true) || (isset($destroy) && $destroy === true))
             <th style="width: 40px"></th>
@@ -54,6 +55,7 @@
                 @endif
             </td>
             <td>{{ $item->categoria->name}}</td>
+            <td>{{ $item->os->count() }}</td>
             <td>{{ $item->user->name}}</td>
             @if ((isset($edit) && $edit === true) || (isset($show) && $show === true) || (isset($destroy) && $destroy === true))
             <td>
