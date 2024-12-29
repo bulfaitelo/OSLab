@@ -34,6 +34,7 @@ class ReceitaController extends Controller
         $queryReceita->with([
             'centroCusto',
             'cliente',
+            'pagamentos',
         ]);
         if ($request->busca) {
             $queryReceita->where(function ($query) use ($request) {

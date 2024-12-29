@@ -35,6 +35,7 @@ class DespesaController extends Controller
         $queryDespesa->with([
             'centroCusto',
             'cliente',
+            'pagamentos',
         ]);
         if ($request->busca) {
             $queryDespesa->where(function ($query) use ($request) {

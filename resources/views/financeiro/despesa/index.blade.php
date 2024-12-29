@@ -116,8 +116,8 @@
                         <td>{{ $item->cliente->name }}</td>
                         <td>{{ $item->centroCusto->name }}</td>
                         <td class="text-right" >R$ {{ number_format($item->valor, 2, ',', '.')}}</td>
-                        <td class="text-right" >R$ {{ number_format($item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
-                        <td class="text-right" >R$ {{ number_format($item->valor - $item->pagamentos()->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                        <td class="text-right" >R$ {{ number_format($item->pagamentos->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
+                        <td class="text-right" >R$ {{ number_format($item->valor - $item->pagamentos->whereNotNull('data_pagamento')->sum('valor'), 2, ',', '.')}}</td>
                         <td class="text-center">{{ $item->parcelas}}</td>
                         {{-- <td>{{ $item->getVencimentoDate()}}</td> --}}
                         <td>{{ $item->data_quitacao?->format('d/m/Y') ?? ''}}</td>
