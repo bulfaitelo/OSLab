@@ -170,9 +170,11 @@
         display: block;
         color: #7c7c7c;
     }
-
     .ts-wrapper::after {
         display: none;
+    }
+    .ts-control::after {
+        display: none!important;
     }
 </style>
 @stop
