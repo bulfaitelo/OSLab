@@ -37,25 +37,30 @@ class ReceitasChartCard extends Component
         $dataInicio = $ano.'-01-01';
         $dataFim = $ano.'-12-31';
         $receitas = Contas::RelatorioBalanceteMes($dataInicio, $dataFim);
-        foreach ($receitas as $key => $value) {
-            $labels[] = $this->meses[$value->mes];
-            $data[] = $value->saldo;
+
+        if ($receitas->count() > 0) {
+            foreach ($receitas as $key => $value) {
+                $labels[] = $this->meses[$value->mes];
+                $data[] = $value->saldo;
+            }
+
+            $data = [
+                'labels' => $labels,
+                'datasets' => [
+                    [
+                        'label' => 'Receitas R$',
+                        'data' => $data,
+                        'borderWidth' => 1,
+                        'borderRadius' => 10,
+                        'borderColor' => 'rgb(93, 82, 239)',
+                        'backgroundColor' => 'rgb(93, 82, 239)',
+                    ],
+                ],
+            ];
+
+            return $data;
         }
 
-        $data = [
-            'labels' => $labels,
-            'datasets' => [
-                [
-                    'label' => 'Receitas R$',
-                    'data' => $data,
-                    'borderWidth' => 1,
-                    'borderRadius' => 10,
-                    'borderColor' => 'rgb(93, 82, 239)',
-                    'backgroundColor' => 'rgb(93, 82, 239)',
-                ],
-            ],
-        ];
-
-        return $data;
+        return null;
     }
 }
