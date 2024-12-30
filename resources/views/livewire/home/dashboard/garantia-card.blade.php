@@ -28,7 +28,7 @@
                     @foreach ($os as $item)
                         <tr>
                             <td class="pl-3" >{{ $item->id }}</td>
-                            <td class="text-truncate">{{ $item->cliente->name }}</td>
+                            <td class="text-truncate">{{ $item->name }}</td>
                             <td><span
                                     @class([
                                         'badge',

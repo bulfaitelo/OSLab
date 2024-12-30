@@ -9,7 +9,14 @@ class GarantiaCard extends Component
 {
     public function render()
     {
-        $os = Os::with('cliente', 'status');
+        $os = Os::select([
+            'os.id as id',
+            'clientes.name as name',
+            'os.prazo_garantia as prazo_garantia',
+            'status_id',
+        ]);
+        $os->with('status');
+        $os->join('clientes', 'clientes.id', '=', 'os.cliente_id');
         $os->join('os_status', 'os_status.id', '=', 'os.status_id');
         $os->whereNotNull('prazo_garantia');
         $os->where('os_status.garantia', 1); // forma de garantia que vou contar apenas o que foi finalizado isso é com garantia.
