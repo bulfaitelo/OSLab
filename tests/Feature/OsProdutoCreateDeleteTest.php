@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Livewire\Os\ProdutoTab;
+use App\Livewire\Produto\ProdutoTab;
 use App\Models\Cliente\Cliente;
 use App\Models\Os\Os;
 use App\Models\Produto\Produto;

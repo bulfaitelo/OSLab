@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Livewire\Os\ServicoTab;
+use App\Livewire\Servico\ServicoTab;
 use App\Models\Cliente\Cliente;
 use App\Models\Os\Os;
 use App\Models\User;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Os;
+namespace App\Livewire\Servico;
 
 use App\Models\Os\Os;
 use App\Models\Servico\Servico;
@@ -37,7 +37,7 @@ class ServicoTab extends Component
     {
         $os_servico = $this->os->servicos()->get();
 
-        return view('livewire.os.servico-tab', [
+        return view('livewire.servico.servico-tab', [
             'os_servico' => $os_servico,
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Os;
+namespace App\Livewire\Checklist;
 
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +17,7 @@ class ChecklistTab extends Component
         $checklist = $this->os->categoria->checklist;
         // $this->getValuesOsChecklist($os);
 
-        return view('livewire.os.checklist-tab', [
+        return view('livewire.checklist.checklist-tab', [
             'os' => $this->os,
             'checklist' => $checklist,
         ]);

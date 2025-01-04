@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Os;
+namespace App\Livewire\Produto;
 
 use App\Models\Produto\Produto;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +39,7 @@ class ProdutoTab extends Component
     {
         $os_produto = $this->os->produtos()->get();
 
-        return view('livewire.os.produto-tab', [
+        return view('livewire.produto.produto-tab', [
             'os_produto' => $os_produto,
             'os' => $this->os,
         ]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Os;
+namespace App\Livewire\Financeiro;
 
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -18,7 +18,7 @@ class BalanceteTab extends Component
 
     public function render()
     {
-        return view('livewire.os.balancete-tab', [
+        return view('livewire.financeiro.balancete-tab', [
             'balancete' => $this->os->balancete(),
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Os;
+namespace App\Livewire\Financeiro;
 
 use Livewire\Component;
 
@@ -19,7 +19,7 @@ class FaturarModal extends Component
 
     public function render()
     {
-        return view('livewire.os.faturar-modal', [
+        return view('livewire.financeiro.faturar-modal', [
             'os' => $this->os,
             'osValorTotal' => $this->valorTotal,
         ]);

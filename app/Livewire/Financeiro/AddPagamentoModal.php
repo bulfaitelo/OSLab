@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Os;
+namespace App\Livewire\Financeiro;
 
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -54,7 +54,7 @@ class AddPagamentoModal extends Component
         $conta = $this->os->contas()->where('tipo', 'R')->first();
         $pagamentos = $conta?->pagamentos()->with('formaPagamento')->get();
 
-        return view('livewire.os.add-pagamento-modal', [
+        return view('livewire.financeiro.add-pagamento-modal', [
             'os' => $this->os,
             'osQuitada' => $this->os->osQuitada(),
             'conta' => $conta,

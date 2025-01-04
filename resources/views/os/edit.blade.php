@@ -129,14 +129,14 @@
                 @livewire('os.detalhes-tab', ['os' => $os], key('detalhes-tab'))
             </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                @livewire('os.produto-tab', ['os' => $os])
+                @livewire('produto.produto-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="servicos" role="tabpanel" aria-labelledby="servicos-tab">
-                @livewire('os.servico-tab', ['os' => $os])
+                @livewire('servico.servico-tab', ['os' => $os])
             </div>
             @if ($os->categoria->checklist_id)
             <div class="tab-pane fade" id="checklist" role="tabpanel" aria-labelledby="checklist-tab">
-                @livewire('os.checklist-tab', ['os' => $os])
+                @livewire('checklist.checklist-tab', ['os' => $os])
             </div>
             @endif
             <div class="tab-pane fade" id="informacoes" role="tabpanel" aria-labelledby="informacoes-tab">
@@ -147,7 +147,7 @@
             </div>
             @if ($os->fatura_id)
                 <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
-                    @livewire('os.balancete-tab', ['os' => $os])
+                    @livewire('financeiro.balancete-tab', ['os' => $os])
                 </div>
             @endif
         </div>
@@ -157,7 +157,7 @@
 @can('os_faturar')
 <!-- Modal - FATURA  -->
 <div class="modal fade" id="faturarModal" tabindex="-1" role="dialog" aria-labelledby="faturarModalLabel" aria-hidden="true">
-    @livewire('os.faturar-modal', ['os' => $os], key($os->id))
+    @livewire('financeiro.faturar-modal', ['os' => $os], key($os->id))
 </div>
 <!-- FIM Modal - FATURA  -->
 @endcan
@@ -202,7 +202,7 @@
 {{-- Modal para criação de Pagamento de parcela --}}
 @can('os_receita_pagamento_create')
 <div class="modal fade" id="addPagamentoModal">
-    @livewire('os.add-pagamento-modal', ['os' => $os], key($os->id))
+    @livewire('financeiro.add-pagamento-modal', ['os' => $os], key($os->id))
 </div>
 @endcan
 {{-- /Modal para criação de Pagamento de parcela --}}
