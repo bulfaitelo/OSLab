@@ -9,7 +9,8 @@ use App\Models\Venda\Venda;
 
 class VendaController extends Controller
 {
-    public function __construct() {
+    public function __construct() 
+    {
         // ACL DE PERMISSÕES
         $this->middleware('permission:venda', ['only' => ['index']]);
         $this->middleware('permission:venda_create', ['only' => ['create', 'store']]);
