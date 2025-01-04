@@ -30,6 +30,7 @@ use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Relatorio\Financeiro\BalanceteController;
 use App\Http\Controllers\Servico\ServicoController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Venda\VendaController;
 use App\Http\Controllers\Wiki\WikiController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,6 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/meta_contabil', MetaContabilController::class);
     });
 
+    // Ordem de Serviço
     Route::resource('/os', OsController::class)
         ->parameters(['os' => 'os']);
     Route::put('/os/{os}/faturar', [OsController::class, 'faturar'])
@@ -98,6 +100,9 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('os.print');
     Route::get('/os/{os}/print_pdf', [osController::class, 'printPdf'])
         ->name('os.print_pdf');
+
+    // Vendas
+    Route::resource('/venda', VendaController::class);
 
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');

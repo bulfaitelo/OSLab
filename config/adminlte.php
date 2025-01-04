@@ -366,6 +366,13 @@ return [
             'can' => 'os',
         ],
         [
+            'text' => 'Vendas',
+            'icon' => 'fa-solid fa-store',
+            'route' => 'venda.index',
+            'active' => ['venda*'],
+            'can' => 'venda',
+        ],
+        [
             'text' => 'Clientes',
             'icon' => 'fa-solid fa-users',
             'route' => 'cliente.index',
