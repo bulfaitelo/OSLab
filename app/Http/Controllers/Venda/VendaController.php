@@ -108,5 +108,4 @@ class VendaController extends Controller
     {
         //
     }
-
 }
