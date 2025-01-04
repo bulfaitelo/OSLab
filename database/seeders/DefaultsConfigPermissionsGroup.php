@@ -36,7 +36,7 @@ class DefaultsConfigPermissionsGroup extends Seeder
                 'name' => 'Serviços',
             ],
             ['id' => 8,
-                'name' => 'Serviços',
+                'name' => 'Produtos',
             ],
             ['id' => 9,
                 'name' => 'Wiki',
