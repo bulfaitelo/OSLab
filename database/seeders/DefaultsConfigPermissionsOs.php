@@ -76,37 +76,6 @@ class DefaultsConfigPermissionsOs extends Seeder
             ],
 
             [
-                'description' => 'Acesso a configuração de Garantias',
-                'name' => 'config_os_garantia',
-                'guard_name' => 'web',
-                'group_id' => 3,
-            ],
-            [
-                'description' => 'Criar Garantia',
-                'name' => 'config_os_garantia_create',
-                'guard_name' => 'web',
-                'group_id' => 3,
-            ],
-            [
-                'description' => 'Editar Garantia',
-                'name' => 'config_os_garantia_edit',
-                'guard_name' => 'web',
-                'group_id' => 3,
-            ],
-            [
-                'description' => 'Visualizar Garantia',
-                'name' => 'config_os_garantia_show',
-                'guard_name' => 'web',
-                'group_id' => 3,
-            ],
-            [
-                'description' => 'Excluir Garantia',
-                'name' => 'config_os_garantia_destroy',
-                'guard_name' => 'web',
-                'group_id' => 3,
-            ],
-
-            [
                 'description' => 'Acesso a configuração de Categoria de Os',
                 'name' => 'config_categoria',
                 'guard_name' => 'web',

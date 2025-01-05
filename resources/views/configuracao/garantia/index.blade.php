@@ -16,8 +16,8 @@
                     Voltar
                 </button>
             </a>
-            @can('config_os_garantia_create')
-            <a href="{{ route('configuracao.os.garantia.create') }}">
+            @can('config_garantia_create')
+            <a href="{{ route('configuracao.garantia.create') }}">
                 <button type="button"  class="btn btn-sm btn-oslab">
                     <i class="fa-solid fa-plus"></i>
                     Criar Garantia
@@ -46,14 +46,14 @@
                     <td>{{ $item->user->name }}</td>
                     <td>
                         <div class="btn-group btn-group-sm ">
-                        @can('config_os_garantia_edit')
-                            <a href="{{ route('configuracao.os.garantia.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                        @can('config_garantia_edit')
+                            <a href="{{ route('configuracao.garantia.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                         @endcan
-                        @can('config_os_garantia_show')
-                            <a href="{{ route('configuracao.os.garantia.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                        @can('config_garantia_show')
+                            <a href="{{ route('configuracao.garantia.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                         @endcan
-                        @can('config_os_garantia_destroy')
-                            <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('configuracao.os.garantia.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
+                        @can('config_garantia_destroy')
+                            <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('configuracao.garantia.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
                         @endcan
                         </div>
                     </td>
@@ -77,7 +77,7 @@
     </div>
 
     {{-- Modal Excluir --}}
-    @can('config_os_garantia_destroy')
+    @can('config_garantia_destroy')
         @include('adminlte::partials.modal.modal-excluir')
     @endcan
     {{-- // Modal Excluir --}}

@@ -9,7 +9,7 @@ use App\Models\Checklist\Checklist;
 use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Financeiro\FormaPagamento;
-use App\Models\Configuracao\Os\Garantia;
+use App\Models\Configuracao\Garantia\Garantia;
 use App\Models\Configuracao\Os\OsStatus;
 use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Sistema\Emitente;
@@ -355,29 +355,28 @@ Breadcrumbs::for('configuracao.os.status.edit', function (BreadcrumbTrail $trail
 });
 
 // Termo de Garantia
-Breadcrumbs::for('configuracao.os.garantia.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('configuracao.garantia.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Configurações');
-    $trail->push('OS');
-    $trail->push('Termo de Garantia', route('configuracao.os.garantia.index'));
+    $trail->push('Termos de Garantia', route('configuracao.garantia.index'));
 });
 
 // Termo de Garantia > Novo Termo de Garantia
-Breadcrumbs::for('configuracao.os.garantia.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('configuracao.os.garantia.index');
-    $trail->push('Novo Termo de Garantia', route('configuracao.os.garantia.create'));
+Breadcrumbs::for('configuracao.garantia.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('configuracao.garantia.index');
+    $trail->push('Novo Termo de Garantia', route('configuracao.garantia.create'));
 });
 
 // Termo de Garantia > [Visualização de Termo de Garantia]
-Breadcrumbs::for('configuracao.os.garantia.show', function (BreadcrumbTrail $trail, Garantia $item) {
-    $trail->parent('configuracao.os.garantia.index');
-    $trail->push($item->name, route('configuracao.os.garantia.show', $item));
+Breadcrumbs::for('configuracao.garantia.show', function (BreadcrumbTrail $trail, Garantia $item) {
+    $trail->parent('configuracao.garantia.index');
+    $trail->push($item->name, route('configuracao.garantia.show', $item));
 });
 
 // Termo de Garantia > [Termo de Garantia Name] > Editar Termo de Garantia
-Breadcrumbs::for('configuracao.os.garantia.edit', function (BreadcrumbTrail $trail, Garantia $item) {
-    $trail->parent('configuracao.os.garantia.index');
-    $trail->push('Editar Termo de Garantia', route('configuracao.os.garantia.edit', $item));
+Breadcrumbs::for('configuracao.garantia.edit', function (BreadcrumbTrail $trail, Garantia $item) {
+    $trail->parent('configuracao.garantia.index');
+    $trail->push('Editar Termo de Garantia', route('configuracao.garantia.edit', $item));
 });
 
 // Categoria

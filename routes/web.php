@@ -6,7 +6,7 @@ use App\Http\Controllers\Configuracao\Backup\BackupController;
 use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
-use App\Http\Controllers\Configuracao\Os\GarantiaController;
+use App\Http\Controllers\Configuracao\Garantia\GarantiaController;
 use App\Http\Controllers\Configuracao\Os\OsStatusController;
 use App\Http\Controllers\Configuracao\Parametro\CategoriaController;
 use App\Http\Controllers\Configuracao\Sistema\SistemaConfigController;
@@ -168,14 +168,17 @@ Route::group(['middleware' => 'auth'], function () {
         });
         // OS
         Route::name('os.')->prefix('os')->group(function () {
-            Route::resource('/garantia', GarantiaController::class)
-                ->parameters(['garantia' => 'garantia']);
             Route::resource('/status', OsStatusController::class);
         });
+        // Wiki
         Route::name('wiki.')->prefix('wiki')->group(function () {
             Route::resource('/fabricante', FabricanteController::class);
             Route::resource('/modelo', ModeloController::class);
         });
+        // Garantia
+        Route::resource('/garantia', GarantiaController::class)
+                ->parameters(['garantia' => 'garantia']);
+        // Sistema
         Route::resource('/sistema', SistemaConfigController::class)->only([
             'index', 'store',
         ]);

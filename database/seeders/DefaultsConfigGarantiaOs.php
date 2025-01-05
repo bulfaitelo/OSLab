@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Configuracao\Os\Garantia;
+use App\Models\Configuracao\Garantia\Garantia;
 use Illuminate\Database\Seeder;
 
 class DefaultsConfigGarantiaOs extends Seeder

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Termo de Garantia')
+@section('title', 'Criar Termo de Garantia')
 
 @section('content_header')
-    <h1><i class="fas fa-shield-alt "></i> Editar Termo de Garantia</h1>
+    <h1><i class="fas fa-shield-alt "></i> Criar Termo de Garantia</h1>
 @stop
 
 @section('content')
@@ -26,19 +26,19 @@
 
           <div class="card-body">
             @include('adminlte::partials.form-alert')
-            {!! html()->form('PUT', route('configuracao.os.garantia.update', $garantia->id))->open() !!}
+            {!! html()->form('POST', route('configuracao.garantia.store'))->open() !!}
           <div class="row">
             <div class="col-md-9">
                 <div class="form-group">
                   <label for="name">Nome da Garantia</label>
-                  {!! html()->text('name', $garantia->name)->class('form-control')->placeholder('Nome da Garantia') !!}
+                  {!! html()->text('name')->class('form-control')->placeholder('Nome da Garantia') !!}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="prazo_garantia">Prazo de garantia</label>
                     <div class="input-group mb-3">
-                        {!! html()->text('prazo_garantia', $garantia->prazo_garantia)->class('form-control code')->placeholder('Prazo de garantia') !!}
+                        {!! html()->text('prazo_garantia')->class('form-control code')->placeholder('Prazo de garantia') !!}
                         <div class="input-group-append">
                         <span class="input-group-text">Dias</span>
                         </div>
@@ -48,7 +48,7 @@
           </div>
             <div class="form-group">
                 <label for="garantia">Termo de Garantia</label>
-                {!! html()->textarea('garantia', $garantia->garantia)->class('form-control')->placeholder('Descrição do Garantia') !!}
+                {!! html()->textarea('garantia')->class('form-control')->placeholder('Descrição do Garantia') !!}
             </div>
           </div>
           {{-- Minimal with icon only --}}

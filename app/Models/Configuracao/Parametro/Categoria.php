@@ -4,7 +4,7 @@ namespace App\Models\Configuracao\Parametro;
 
 use App\Models\Checklist\Checklist;
 use App\Models\Configuracao\Financeiro\CentroCusto;
-use App\Models\Configuracao\Os\Garantia;
+use App\Models\Configuracao\Garantia\Garantia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Configuracao\Os;
+namespace App\Models\Configuracao\Garantia;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
