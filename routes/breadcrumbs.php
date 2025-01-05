@@ -23,6 +23,7 @@ use App\Models\Os\Os;
 use App\Models\Produto\Produto;
 use App\Models\Servico\Servico;
 use App\Models\User;
+use App\Models\Venda\Venda;
 use App\Models\Wiki\Wiki;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
@@ -76,8 +77,39 @@ Breadcrumbs::for('os.despesa.create', function (BreadcrumbTrail $trail, Os $item
     $trail->push('#'.$item->id, route('os.edit', $item));
     $trail->push('Nova despesa Os: #'.$item->id);
 });
-
 // FIM Os
+
+// Venda
+Breadcrumbs::for('venda.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Vendas', route('venda.index'));
+});
+
+// Venda > Novo Venda
+Breadcrumbs::for('venda.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('venda.index');
+    $trail->push('Nova Venda', route('venda.create'));
+});
+
+// Venda > [Visualização de Venda]
+Breadcrumbs::for('venda.show', function (BreadcrumbTrail $trail, Venda $item) {
+    $trail->parent('venda.index');
+    $trail->push('#'.$item->id, route('venda.show', $item));
+});
+
+// Venda > [Venda Name] > Editar Venda
+Breadcrumbs::for('venda.edit', function (BreadcrumbTrail $trail, Venda $item) {
+    $trail->parent('venda.index');
+    $trail->push('#'.$item->id, route('venda.edit', $item));
+});
+
+// Venda > [Venda Name] > Editar Venda
+Breadcrumbs::for('venda.despesa.create', function (BreadcrumbTrail $trail, Venda $item) {
+    $trail->parent('venda.index');
+    $trail->push('#'.$item->id, route('venda.edit', $item));
+    $trail->push('Nova despesa Os: #'.$item->id);
+});
+// FIM Venda
 
 // Clientes
 Breadcrumbs::for('cliente.index', function (BreadcrumbTrail $trail) {

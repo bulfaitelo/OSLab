@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Venda\StoreVendaRequest;
 use App\Http\Requests\Venda\UpdateVendaRequest;
 use App\Models\Venda\Venda;
+use App\Services\Venda\VendaService;
+use Illuminate\Http\Request;
 
 class VendaController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(
+        private readonly ?VendaService $vendaService = null
+    ) {
         // ACL DE PERMISSÕES
         $this->middleware('permission:venda', ['only' => ['index']]);
         $this->middleware('permission:venda_create', ['only' => ['create', 'store']]);
@@ -24,9 +27,11 @@ class VendaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        dd('index');
+        $vendas = $this->vendaService::getDataTable($request);
+
+        return view('venda.index', compact('vendas', 'request'));
     }
 
     /**
@@ -34,7 +39,7 @@ class VendaController extends Controller
      */
     public function create()
     {
-        //
+        return view('venda.create');
     }
 
     /**
@@ -42,7 +47,10 @@ class VendaController extends Controller
      */
     public function store(StoreVendaRequest $request)
     {
-        //
+        $venda = $this->vendaService->store($request);
+
+        return redirect()->route('venda.edit', $venda->id)
+                ->with('success', 'Venda cadastrada com sucesso.');
     }
 
     /**
@@ -74,7 +82,7 @@ class VendaController extends Controller
      */
     public function edit(Venda $venda)
     {
-        //
+        return view('venda.edit', compact('venda'));
     }
 
     /**

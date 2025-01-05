@@ -96,13 +96,23 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('os.cancelar-faturar');
     Route::get('os/{os}/despesa/create/', [DespesaController::class, 'create'])
         ->name('os.despesa.create');
-    Route::get('/os/{os}/print', [osController::class, 'print'])
+    Route::get('/os/{os}/print', [OsController::class, 'print'])
         ->name('os.print');
-    Route::get('/os/{os}/print_pdf', [osController::class, 'printPdf'])
+    Route::get('/os/{os}/print_pdf', [OsController::class, 'printPdf'])
         ->name('os.print_pdf');
 
     // Vendas
     Route::resource('/venda', VendaController::class);
+    Route::put('/venda/{venda}/faturar', [OsController::class, 'faturar'])
+        ->name('venda.faturar');
+    Route::delete('/venda/{venda}/cancelar-faturar', [OsController::class, 'cancelarFaturamento'])
+        ->name('venda.cancelar-faturar');
+    Route::get('venda/{venda}/despesa/create/', [DespesaController::class, 'create'])
+        ->name('venda.despesa.create');
+    Route::get('/venda/{venda}/print', [VendaController::class, 'print'])
+        ->name('venda.print');
+    Route::get('/venda/{venda}/print_pdf', [VendaController::class, 'printPdf'])
+        ->name('venda.print_pdf');
 
     Route::resource('/wiki', WikiController::class);
     Route::post('/wiki/link/{wiki}', [WikiController::class, 'linkCreate'])->name('wiki.link.create');

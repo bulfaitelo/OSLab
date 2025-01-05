@@ -21,6 +21,10 @@ class DefaultsConfigSetores extends Seeder
                 'id' => 2,
                 'name' => 'Atendente',
             ],
+            [
+                'id' => 3,
+                'name' => 'Vendedor',
+            ],
 
         ];
 
