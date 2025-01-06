@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('garantias', function (Blueprint $table) {
             $table->boolean('os')->after('prazo_garantia')->default(0)->nullable();
             $table->boolean('venda')->after('os')->default(0)->nullable();
-
         });
     }
 

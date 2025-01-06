@@ -3,7 +3,7 @@
 namespace App\Services\Venda;
 
 use App\Contracts\Services\Venda\VendaServiceInterface;
-use App\Models\Configuracao\Parametro\Categoria;
+use App\Models\Configuracao\Garantia\Garantia;
 use App\Models\Venda\Venda;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -70,6 +70,7 @@ class VendaService implements VendaServiceInterface
             $venda->cliente_id = $request->cliente_id;
             $venda->vendedor_id = $request->vendedor_id;
             $venda->data_saida = $request->data_saida;
+            $venda->termo_garantia_id = $request->termo_garantia_id;
             $venda->descricao = $request->descricao;
             $venda->save();
             DB::commit();
@@ -87,22 +88,15 @@ class VendaService implements VendaServiceInterface
         try {
             $venda->user_id = Auth::id();
             $venda->cliente_id = $request->cliente_id;
-            $venda->tecnico_id = $request->tecnico_id;
-            $venda->categoria_id = $request->categoria_id;
-            $venda->modelo_id = $request->modelo_id;
-            $venda->status_id = $request->status_id;
-            $venda->data_entrada = $request->data_entrada;
+            $venda->vendedor_id = $request->vendedor_id;
             $venda->data_saida = $request->data_saida;
+            $venda->termo_garantia_id = $request->termo_garantia_id;
+            $venda->descricao = $request->descricao;
             if (isset($request->data_saida)) {
-                $venda->prazo_garantia = $this->addDayGarantia($request->data_saida, $request->categoria_id);
+                $venda->prazo_garantia = $this->addDayGarantia($request->data_saida, $request->termo_garantia_id);
             } else {
                 $venda->prazo_garantia = null;
             }
-            $venda->descricao = $request->descricao;
-            $venda->defeito = $request->defeito;
-            $venda->observacoes = $request->observacoes;
-            $venda->laudo = $request->laudo;
-            $venda->serial = $request->serial;
             $venda->save();
             DB::commit();
 
@@ -125,14 +119,14 @@ class VendaService implements VendaServiceInterface
     /**
      * Retorna o dia de vencimento com base na categoria selecionada.
      *
-     * @param  string  $data_saida  Data de saida da os
-     * @param  int  $categoria_id  id da categoria da os para gera os dias de garantia
+     * @param  string  $data_saida  Data de saída da os
+     * @param  int  $termo_garantia_id  id da do termo de garantia
      * @return string|null retorna o dia de vendimento ou null caso nao exista
      *
      **/
-    private function addDayGarantia($data_saida, $categoria_id): string|null
+    private function addDayGarantia($data_saida, $termo_garantia_id): string|null
     {
-        $prazoEmDias = Categoria::find($categoria_id)->garantia?->prazo_garantia;
+        $prazoEmDias = Garantia::find($termo_garantia_id)->prazo_garantia;
         if ($prazoEmDias) {
             $dataGarantia = Carbon::createFromFormat('Y-m-d', $data_saida);
 

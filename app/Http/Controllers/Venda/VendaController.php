@@ -86,6 +86,25 @@ class VendaController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateVendaRequest $request, Venda $venda)
+    {
+        $venda = $this->vendaService->update($request, $venda);
+
+        return redirect()->route('venda.edit', $venda->id)
+        ->with('success', 'Venda Atualizada com sucesso.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Venda $venda)
+    {
+        //
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function faturar(Venda $venda)
@@ -101,19 +120,4 @@ class VendaController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateVendaRequest $request, Venda $venda)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Venda $venda)
-    {
-        //
-    }
 }

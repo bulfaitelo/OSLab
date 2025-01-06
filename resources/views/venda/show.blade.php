@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Dados da Ordem de Serviço')
+@section('title', 'Dados da Venda')
 
 @section('content_header')
-    <h1><i class="fa-regular fa-rectangle-list "></i> Dados da Ordem de Serviço</h1>
+    <h1><i class="fa-solid fa-store "></i> Dados da Venda</h1>
 @stop
 
 @section('content')

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Ordem de Serviço')
+@section('title', 'Editar Venda')
 
 @section('content_header')
-    <h1><i class="fa-regular fa-rectangle-list "></i> Editar Ordem de Serviço</h1>
+    <h1><i class="fa-solid fa-store "></i> Editar Venda</h1>
 @stop
 
 @section('content')
@@ -77,15 +77,15 @@
     <div class="card-body pt-2">
         <ul class="nav nav-tabs" id="os-tabs" role="tablist">
             <li class="nav-item ">
-                <a class="nav-link active" id="#produtos-tab" data-toggle="tab" href="#produtos" role="tab" aria-controls="produtos" aria-selected="true">
-                    <i class="fas fa-box-open "></i>
-                    <span class="d-none d-sm-inline">Produtos</span>
+                <a class="nav-link active" id="detalhes-tab" data-toggle="tab" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="true">
+                    <i class="fa-regular fa-rectangle-list "></i>
+                    <span class="d-none d-sm-inline">Detalhes</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" id="detalhes-tab" data-toggle="tab" href="#detalhes" role="tab" aria-controls="detalhes" aria-selected="false">
-                    <i class="fa-regular fa-rectangle-list "></i>
-                    <span class="d-none d-sm-inline">Detalhes</span>
+                <a class="nav-link " id="#produtos-tab" data-toggle="tab" href="#produtos" role="tab" aria-controls="produtos" aria-selected="false">
+                    <i class="fas fa-box-open "></i>
+                    <span class="d-none d-sm-inline">Produtos</span>
                 </a>
             </li>
             @if ($venda->fatura_id)
@@ -98,11 +98,11 @@
             @endif
         </ul>
         <div class="tab-content">
+            <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
+                @livewire('venda.detalhes-tab', ['venda' => $venda], key('detalhes-tab'))
+            </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
                 {{-- @livewire('produto.produto-tab', ['venda' => $venda]) --}}
-            </div>
-            <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
-                {{-- @livewire('venda.detalhes-tab', ['venda' => $venda], key('detalhes-tab')) --}}
             </div>
             @if ($venda->fatura_id)
                 <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">

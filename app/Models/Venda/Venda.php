@@ -63,4 +63,46 @@ class Venda extends Model
     {
         return $this->hasMany(Contas::class);
     }
+
+    /**
+     * Retorna id e nome do Cliente.
+     *
+     * Retorna um vetor com o o id e o Cliente para ser usado no Select2
+     *
+     * @return array Categoria
+     **/
+    public function getClienteForSelect(): array
+    {
+        if ($this->cliente_id) {
+            return [
+                'id' => $this->cliente_id,
+                'name' => $this->cliente->name,
+                'tipo' => $this->cliente->getTipoCliente(),
+                'os_count' => $this->cliente->os->count(),
+            ];
+        }
+
+        return [];
+    }
+
+    /**
+     * Retorna id e nome do vendedor.
+     *
+     * Retorna um vetor com o o id e o vendedor para ser usado no Select2
+     *
+     * @return array Categoria
+     **/
+    public function getVendedorForSelect(): array
+    {
+        if ($this->tecnico_id) {
+            return [
+                'id' => $this->vendedor_id,
+                'name' => $this->vendedor->name,
+                'os_count' => $this->tecnico->os->count(),
+            ];
+        }
+
+        return [];
+    }
+
 }

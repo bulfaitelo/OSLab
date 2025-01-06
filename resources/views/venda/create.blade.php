@@ -24,43 +24,43 @@
           <!-- form start -->
 
           <div class="card-body">
-            @include('adminlte::partials.form-alert')
-            {!! html()->form('post', route('venda.store'))->acceptsFiles()->open() !!}
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="cliente_id">Cliente</label>
-                        {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
+                @include('adminlte::partials.form-alert')
+                {!! html()->form('post', route('venda.store'))->acceptsFiles()->open() !!}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="cliente_id">Cliente</label>
+                            {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="vendedor_id">Responsável pela venda</label>
-                        {!! html()->select('vendedor_id', [Auth()->id() => Auth()->user()->name], Auth()->id())->class('form-control user')->placeholder('Selecione')->required() !!}
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="vendedor_id">Responsável pela venda</label>
+                            {!! html()->select('vendedor_id', [Auth()->id() => Auth()->user()->name], Auth()->id())->class('form-control user')->placeholder('Selecione')->required() !!}
 
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="data_saida">Data Saída</label>
+                            {!! html()->date('data_saida')->class('form-control') !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="termo_garantia_id">Garantia</label>
+                            {!! html()->select('termo_garantia_id', \App\Models\Configuracao\Garantia\Garantia::where('venda', 1)->orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="data_saida">Data Saída</label>
-                        {!! html()->date('data_saida')->class('form-control') !!}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="descricao">Descrição</label>
+                            {!! html()->textarea('descricao')->class('texto')->placeholder('Status') !!}
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="data_saida">Garantia</label>
-                        {!! html()->date('data_saida')->class('form-control') !!}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="descricao">Descrição</label>
-                        {!! html()->textarea('descricao')->class('texto')->placeholder('Status') !!}
-                    </div>
-                </div>
-            </div>
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->

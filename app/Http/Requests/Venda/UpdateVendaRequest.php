@@ -11,7 +11,7 @@ class UpdateVendaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class UpdateVendaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'cliente_id' => 'required|exists:clientes,id',
+            'vendedor_id' => 'required|exists:users,id',
+            'termo_garantia_id' => 'required|exists:garantias,id',
+            'data_saida' => 'nullable|date',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'cliente_id' => 'Por favor preencha um cliente valido',
+            'vendedor_id' => 'Por favor preencha um técnico valido',
+            'termo_garantia_id' => 'Por favor preencha uma garantia valida',
+            'categoria_id' => 'Por favor preencha uma categoria valida',
+            'data_saida' => 'Por favor preencha uma data de saída valida',
         ];
     }
 }
