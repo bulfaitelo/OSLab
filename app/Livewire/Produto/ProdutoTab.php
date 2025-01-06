@@ -3,12 +3,14 @@
 namespace App\Livewire\Produto;
 
 use App\Models\Produto\Produto;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ProdutoTab extends Component
 {
     public $os;
+    public $venda;
     public $valor_custo;
     public $valor_venda;
     public $quantidade;
@@ -37,11 +39,9 @@ class ProdutoTab extends Component
 
     public function render()
     {
-        $os_produto = $this->os->produtos()->get();
-
         return view('livewire.produto.produto-tab', [
-            'os_produto' => $os_produto,
-            'os' => $this->os,
+            'produto' => $this->modelSelector()->produtos()->get(),
+            'fatura_id' => $this->modelSelector()->fatura_id,
         ]);
     }
 
@@ -60,12 +60,13 @@ class ProdutoTab extends Component
     public function create()
     {
         $produto = $this->validate();
-        if ($this->os->fatura_id) {
+
+        if ($this->modelSelector()->fatura_id) {
             // Apagando o produto digitado.
             $this->dispatch('clear');
-            flash()->addError('Produto não pode ser adicionado a uma os Faturada.');
+            flash()->addError('Produto não pode ser adicionado se Faturado.');
         } else {
-            $this->createOsProduto($produto);
+            $this->createItemProduto($produto);
             $this->quantidade = null;
             $this->valor_custo = null;
             $this->valor_venda = null;
@@ -79,13 +80,13 @@ class ProdutoTab extends Component
     public function delete($id)
     {
         try {
-            if ($this->os->fatura_id) {
+            if ($this->modelSelector()->fatura_id) {
                 // Apagando o produto digitado.
                 $this->dispatch('clear');
-                flash()->addError('Produto não pode ser removido a uma os Faturada.');
+                flash()->addError('Produto não pode ser removido se Faturado.');
             } else {
-                $osProduto = $this->os->produtos()->findOrFail($id);
-                $osProduto->delete();
+                $itemProduto = $this->modelSelector()->produtos()->findOrFail($id);
+                $itemProduto->delete();
                 flasher('Produto removido com sucesso.');
             }
         } catch (\Throwable $th) {
@@ -93,100 +94,48 @@ class ProdutoTab extends Component
         }
     }
 
-    private function createOsProduto($produto)
+    private function createItemProduto($produto)
     {
         DB::beginTransaction();
         try {
             $produto['valor_custo_total'] = $produto['valor_custo'] * $produto['quantidade'];
             $produto['valor_venda_total'] = $produto['valor_venda'] * $produto['quantidade'];
-            $produto['user_id'] = auth()->id();
-            $osProduto = $this->os->produtos();
-            if ($osProdutoTemp = $osProduto->where('produto_id', $produto['produto_id'])->first()) {
-                $osProdutoTemp->valor_custo = $produto['valor_custo'];
-                $osProdutoTemp->valor_venda = $produto['valor_venda'];
-                $osProdutoTemp->valor_custo_total = ($produto['valor_custo_total'] + ($produto['valor_custo_total'] * $osProdutoTemp->quantidade));
-                $osProdutoTemp->valor_venda_total = ($produto['valor_venda_total'] + ($produto['valor_venda_total'] * $osProdutoTemp->quantidade));
-                $osProdutoTemp->increment('quantidade', $produto['quantidade']);
-                $osProdutoReturn = $osProdutoTemp->save();
+            $produto['user_id'] = Auth::id();
+            $itemProduto = $this->modelSelector()->produtos();
+            if ($itemProdutoTemp = $itemProduto->where('produto_id', $produto['produto_id'])->first()) {
+                $itemProdutoTemp->valor_custo = $produto['valor_custo'];
+                $itemProdutoTemp->valor_venda = $produto['valor_venda'];
+                $itemProdutoTemp->valor_custo_total = ($produto['valor_custo_total'] + ($produto['valor_custo_total'] * $itemProdutoTemp->quantidade));
+                $itemProdutoTemp->valor_venda_total = ($produto['valor_venda_total'] + ($produto['valor_venda_total'] * $itemProdutoTemp->quantidade));
+                $itemProdutoTemp->increment('quantidade', $produto['quantidade']);
+                $itemProdutoReturn = $itemProdutoTemp->save();
             } else {
-                $osProdutoReturn = $osProduto->create(
+                $itemProdutoReturn = $itemProduto->create(
                     $produto
                 );
             }
             // $this->updateProdutoQuantidadeEstoque();
             DB::commit();
 
-            return $osProdutoReturn;
+            return $itemProdutoReturn;
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
     }
 
-    // private function updateProdutoQuantidadeEstoque($osProdutoId): void
-    // {
-    //     try {
-    //         $produto = Produto::find($this->produto_id);
-    //         $estoque = $produto->estoque;
-    //         if ($produto->estoque >= $this->quantidade) {
-    //             $produto->estoque = $produto->estoque - $this->quantidade;
-    //             $produto->save();
-    //             $this->insertSaidaMovimentacaoProduto($estoque, $this->quantidade, $osProdutoId);
-
-    //         } else {
-    //             $quantidadeEntrada = $this->quantidade - $produto->estoque;
-    //             $this->insertEntradaMovimentacaoProduto($quantidadeEntrada, $osProdutoId);
-    //             $this->insertSaidaMovimentacaoProduto($this->quantidade, $this->quantidade, $osProdutoId);
-    //             $produto->estoque = 0;
-    //             $produto->save();
-
-    //             # é this por quant, a sobra e gerado uma entrada e depois uma saida do valor total da quantidade
-    //         }
-
-    //     } catch (\Throwable $th) {
-    //         throw $th;
-    //     }
-    // }
-
-    // private function insertSaidaMovimentacaoProduto($estoque, $quantidade, $osProdutoId): void
-    // {
-    //     try {
-    //         $produto = Produto::find($this->produto_id);
-    //         $produto->movimentacao()->create([
-    //             'quantidade_movimentada' => $quantidade,
-    //             'estoque_antes' => $estoque,
-    //             'descricao' =>  'OS: #'. $this->os_id,
-    //             'estoque_apos' => $estoque - $quantidade,
-    //             'valor_custo' => $this->getValorCusto(),
-    //             'os_id' => $this->os_id,
-    //             'os_produto_id' => $osProdutoId,
-    //         ]);
-    //     } catch (\Throwable $th) {
-    //         throw $th;
-    //     }
-    // }
-
-    // private function insertEntradaMovimentacaoProduto($quantidade, $osProdutoId): void
-    // {
-    //     try {
-    //         $produto = Produto::find($this->produto_id);
-    //         $produto->movimentacao()->create([
-    //             'quantidade_movimentada' => $quantidade,
-    //             'tipo_movimentacao' => 1,
-    //             'descricao' =>  'OS: #'. $this->os_id,
-    //             'estoque_antes' => $produto->estoque,
-    //             'estoque_apos' => 0,
-    //             'valor_custo' => $this->getValorCusto(),
-    //             'os_id' => $this->os_id,
-    //             'os_produto_id' => $osProdutoId,
-    //         ]);
-    //     } catch (\Throwable $th) {
-    //         throw $th;
-    //     }
-    // }
-
-    private function getValorCusto()
+    /**
+     * Retorna o modelo com base no que é previamente passado no componente.
+     *
+     * @return mixed
+     */
+    private function modelSelector()
     {
-        return str_replace(',', '.', str_replace('.', '', $this->valor_custo));
+        if($this->os) {
+            return $this->os;
+        }
+        if ($this->venda) {
+            return $this->venda;
+        }
     }
 }

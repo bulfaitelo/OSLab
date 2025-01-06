@@ -65,6 +65,19 @@ class Venda extends Model
     }
 
     /**
+     * Retornar os Produtos da Venda.
+     *
+     * Retorna os produtos relacionado a venda
+     *
+     * @return hasMany Produtos
+     **/
+    public function produtos(): HasMany
+    {
+        return $this->hasMany(VendaProduto::class)
+                    ->with('produto');
+    }
+
+    /**
      * Retorna id e nome do Cliente.
      *
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2
@@ -104,5 +117,4 @@ class Venda extends Model
 
         return [];
     }
-
 }

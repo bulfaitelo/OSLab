@@ -102,7 +102,7 @@
                 @livewire('venda.detalhes-tab', ['venda' => $venda], key('detalhes-tab'))
             </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
-                {{-- @livewire('produto.produto-tab', ['venda' => $venda]) --}}
+                @livewire('produto.produto-tab', ['venda' => $venda])
             </div>
             @if ($venda->fatura_id)
                 <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">

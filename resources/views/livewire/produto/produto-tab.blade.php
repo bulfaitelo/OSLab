@@ -1,6 +1,6 @@
 <div>
     {{-- @include('adminlte::partials.form-alert') --}}
-    @if (!$os->fatura_id)
+    @if (!$fatura_id)
     <form method="POST" wire:submit="create">
         <div class="row" style="background-color: #f7f7f7; border-radius: 5px 5px 0px 0px" >
             <div class="col-md-4">
@@ -68,7 +68,7 @@
         </div>
     </form>
     @endif
-    @if ($os_produto->count() > 0)
+    @if ($produto->count() > 0)
         <div class="row">
             <div class="table-responsive">
                 <table class="table table-sm text-nowrap">
@@ -82,14 +82,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($os_produto as $i => $item)
+                        @foreach ($produto as $i => $item)
                             <tr wire:key="{{ $loop->index }}" >
                                 <td>{{ $item->produto->name }}</td>
                                 <td>{{ $item->quantidade }}</td>
                                 <td>R$ {{ number_format($item->valor_venda,2,",",".") }}</td>
                                 <td>R$ {{ number_format($item->valor_venda_total,2,",",".") }}</td>
                                 <td>
-                                    @if (!$os->fatura_id)
+                                    @if (!$fatura_id)
                                     <a title="Excluir" wire:click="delete({{ $item->id }})" class="btn btn-block btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                     @endif
                                 </td>
@@ -104,7 +104,7 @@
                                     Total:
                                 </b>
                             </td>
-                            <td>R$ {{ number_format($os_produto->sum('valor_venda_total'),2,",",".")  }}</td>
+                            <td>R$ {{ number_format($produto->sum('valor_venda_total'),2,",",".")  }}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -116,7 +116,7 @@
     <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 
 <script>
-if (!@js($os->fatura_id)) {
+if (!@js($fatura_id)) {
     var tomSelectProduto = new TomSelect("#os-produto",{
         // allowEmptyOption: true,
         // create: true,
