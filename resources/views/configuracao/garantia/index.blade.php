@@ -34,6 +34,7 @@
                 <th>Garantia</th>
                 <th>Prazo padrão</th>
                 <th>Criador</th>
+                <th>Usado em </th>
                 <th style="width: 40px"></th>
             </tr>
             </thead>
@@ -44,6 +45,14 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->prazo_garantia }} Dias </td>
                     <td>{{ $item->user->name }}</td>
+                    <td>
+                    @if ($item->os)
+                        <span class="badge btn-oslab">OS</span>
+                    @endif
+                    @if ($item->venda)
+                        <span class="badge bg-success">Venda</span>
+                    @endif
+                    </td>
                     <td>
                         <div class="btn-group btn-group-sm ">
                         @can('config_garantia_edit')

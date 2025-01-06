@@ -47,6 +47,8 @@ class GarantiaController extends Controller
             $garantia->name = $request->name;
             $garantia->prazo_garantia = $request->prazo_garantia;
             $garantia->garantia = $request->garantia;
+            $garantia->os = $request->os;
+            $garantia->venda = $request->venda;
             $garantia->user_id = Auth::id();
             $garantia->save();
 
@@ -82,6 +84,8 @@ class GarantiaController extends Controller
             $garantia->name = $request->name;
             $garantia->prazo_garantia = $request->prazo_garantia;
             $garantia->garantia = $request->garantia;
+            $garantia->os = $request->os;
+            $garantia->venda = $request->venda;
             $garantia->user_id = Auth::id();
             $garantia->save();
 

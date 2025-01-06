@@ -20,38 +20,52 @@
                     </button>
                 </a>
             </div>
-          <!-- /.card-header -->
-          <!-- form start -->
+            <!-- /.card-header -->
+            <!-- form start -->
 
-          <div class="card-body">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="form-group">
-                      <label for="name">Nome da Garantia</label>
-                      {!! html()->text('name', $garantia->name)->class('form-control')->placeholder('Nome da Garantia')->disabled() !!}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                        <label for="name">Nome da Garantia</label>
+                        {!! html()->text('name', $garantia->name)->class('form-control')->placeholder('Nome da Garantia')->disabled() !!}
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="prazo_garantia">Prazo de garantia</label>
-                        <div class="input-group mb-3">
-                            {!! html()->text('prazo_garantia', $garantia->prazo_garantia)->class('form-control code')->placeholder('Prazo de garantia')->disabled() !!}
-                            <div class="input-group-append">
-                            <span class="input-group-text">Dias</span>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="prazo_garantia">Prazo de garantia</label>
+                            <div class="input-group mb-3">
+                                {!! html()->text('prazo_garantia', $garantia->prazo_garantia)->class('form-control code')->placeholder('Prazo de garantia')->disabled() !!}
+                                <div class="input-group-append">
+                                <span class="input-group-text">Dias</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-1">
+                        <label for="os">OS</label>
+                        <div class="custom-control custom-switch custom-switch-md">
+                            {!! html()->checkbox('os', $garantia->os)->class('custom-control-input')->disabled() !!}
+                            <label class="custom-control-label" for="os"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="venda">Venda</label>
+                        <div class="custom-control custom-switch custom-switch-md">
+                            {!! html()->checkbox('venda', $garantia->venda)->class('custom-control-input')->disabled() !!}
+                            <label class="custom-control-label" for="venda"></label>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            <div class="form-group">
-                <label for="garantia">Termo de Garantia</label>
-                {!! $garantia->garantia !!}
+                <div class="form-group">
+                    <label for="garantia">Termo de Garantia</label>
+                    {!! $garantia->garantia !!}
+                </div>
+
+
             </div>
-
-
-          </div>
-          {{-- Minimal with icon only --}}
-          <!-- /.card-body -->
+            {{-- Minimal with icon only --}}
+            <!-- /.card-body -->
 
         </div>
       <!-- /.card -->

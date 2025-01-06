@@ -21,44 +21,58 @@
                 </a>
             </div>
 
-          <!-- /.card-header -->
-          <!-- form start -->
+            <!-- /.card-header -->
+            <!-- form start -->
 
-          <div class="card-body">
-            @include('adminlte::partials.form-alert')
-            {!! html()->form('POST', route('configuracao.garantia.store'))->open() !!}
-          <div class="row">
-            <div class="col-md-9">
-                <div class="form-group">
-                  <label for="name">Nome da Garantia</label>
-                  {!! html()->text('name')->class('form-control')->placeholder('Nome da Garantia') !!}
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="prazo_garantia">Prazo de garantia</label>
-                    <div class="input-group mb-3">
-                        {!! html()->text('prazo_garantia')->class('form-control code')->placeholder('Prazo de garantia') !!}
-                        <div class="input-group-append">
-                        <span class="input-group-text">Dias</span>
+            <div class="card-body">
+                @include('adminlte::partials.form-alert')
+                {!! html()->form('POST', route('configuracao.garantia.store'))->open() !!}
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                        <label for="name">Nome da Garantia</label>
+                        {!! html()->text('name')->class('form-control')->placeholder('Nome da Garantia') !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="prazo_garantia">Prazo de garantia</label>
+                            <div class="input-group mb-3">
+                                {!! html()->text('prazo_garantia')->class('form-control code')->placeholder('Prazo de garantia em dias') !!}
+                                <div class="input-group-append">
+                                <span class="input-group-text">Dias</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="os">OS</label>
+                        <div class="custom-control custom-switch custom-switch-md">
+                            {!! html()->checkbox('os')->class('custom-control-input') !!}
+                            <label class="custom-control-label" for="os"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label for="venda">Venda</label>
+                        <div class="custom-control custom-switch custom-switch-md">
+                            {!! html()->checkbox('venda')->class('custom-control-input') !!}
+                            <label class="custom-control-label" for="venda"></label>
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="garantia">Termo de Garantia</label>
+                    {!! html()->textarea('garantia')->class('form-control')->placeholder('Descrição do Garantia') !!}
+                </div>
             </div>
-          </div>
-            <div class="form-group">
-                <label for="garantia">Termo de Garantia</label>
-                {!! html()->textarea('garantia')->class('form-control')->placeholder('Descrição do Garantia') !!}
+            {{-- Minimal with icon only --}}
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-sm btn-oslab">
+                    <i class="fas fa-save"></i>
+                    Salvar
+                </button>
             </div>
-          </div>
-          {{-- Minimal with icon only --}}
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="submit" class="btn btn-sm btn-oslab">
-                <i class="fas fa-save"></i>
-                Salvar
-            </button>
-          </div>
         </div>
       <!-- /.card -->
       {!! html()->form()->close() !!}
