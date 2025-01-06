@@ -117,4 +117,26 @@ class Venda extends Model
 
         return [];
     }
+
+    /**
+     * Retorna o valor total da Venda.
+     *
+     * @return string Valor total
+     */
+    public function valorTotal(): string
+    {
+        return number_format($this->produtos()->sum('valor_venda_total'), 2, '.', '');
+    }
+
+    /**
+     * Retorna o Centro de custo padrão.
+     *
+     * Com base na categoria é retornado o centro de custo padrão da Venda
+     *
+     * @return int|null,
+     */
+    public function centroCustoPadrao()
+    {
+        return null;
+    }
 }

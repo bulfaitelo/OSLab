@@ -103,9 +103,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Vendas
     Route::resource('/venda', VendaController::class);
-    Route::put('/venda/{venda}/faturar', [OsController::class, 'faturar'])
+    Route::put('/venda/{venda}/faturar', [VendaController::class, 'faturar'])
         ->name('venda.faturar');
-    Route::delete('/venda/{venda}/cancelar-faturar', [OsController::class, 'cancelarFaturamento'])
+    Route::delete('/venda/{venda}/cancelar-faturar', [VendaController::class, 'cancelarFaturamento'])
         ->name('venda.cancelar-faturar');
     Route::get('venda/{venda}/despesa/create/', [DespesaController::class, 'create'])
         ->name('venda.despesa.create');

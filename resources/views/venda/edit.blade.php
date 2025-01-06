@@ -116,7 +116,7 @@
 @can('venda_faturar')
 <!-- Modal - FATURA  -->
 <div class="modal fade" id="faturarModal" tabindex="-1" role="dialog" aria-labelledby="faturarModalLabel" aria-hidden="true">
-    {{-- @livewire('financeiro.faturar-modal', ['venda' => $venda], key($venda->id)) --}}
+    @livewire('financeiro.faturar-modal', ['venda' => $venda], key($venda->id))
 </div>
 <!-- FIM Modal - FATURA  -->
 @endcan

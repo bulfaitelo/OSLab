@@ -1,8 +1,13 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-        {!! html()->form('put', route('os.faturar', $os->id))->open() !!}
+        {!! html()->form('put', route($tipo . '.faturar', $item->id))->open() !!}
             <div class="modal-header">
-                <h5 class="modal-title" id="faturarModalLabel">Faturar OS: #{{ $os->id }}</h5>
+                @if ($tipo === 'os')
+                <h5 class="modal-title" id="faturarModalLabel">Faturar OS: #{{ $item->id }}</h5>
+                @endif
+                @if ($tipo === 'venda')
+                <h5 class="modal-title" id="faturarModalLabel">Faturar Venda: #{{ $item->id }}</h5>
+                @endif
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,13 +17,18 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="descricao">Descrição</label>
-                            {!! html()->text('descricao', 'Fatura OS Nº: #'. $os->id)->class('form-control')->placeholder('Descrição do faturamento')->required() !!}
+                            @if ($tipo === 'os')
+                            {!! html()->text('descricao', 'Fatura OS Nº: #'. $item->id)->class('form-control')->placeholder('Descrição do faturamento')->required() !!}
+                            @endif
+                            @if ($tipo === 'venda')
+                            {!! html()->text('descricao', 'Fatura Venda Nº: #'. $item->id)->class('form-control')->placeholder('Descrição do faturamento')->required() !!}
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="centro_custo_id">Centro de Custo</label>
-                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), $os->centroCustoPadrao())->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
+                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), $item?->centroCustoPadrao())->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
                         </div>
                     </div>
                 </div>
@@ -32,7 +42,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="valor">Valor Total</label>
-                            {!! html()->text('valor', $osValorTotal)->class('form-control decimal')->placeholder('Valor Total')->attributes(['inputmode' => 'numeric'])->required() !!}
+                            {!! html()->text('valor', $itemValorTotal)->class('form-control decimal')->placeholder('Valor Total')->attributes(['inputmode' => 'numeric'])->required() !!}
                         </div>
                     </div>
                     <div class="col-md-4">
