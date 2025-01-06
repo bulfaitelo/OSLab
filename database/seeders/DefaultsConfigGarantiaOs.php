@@ -21,6 +21,7 @@ class DefaultsConfigGarantiaOs extends Seeder
                 'prazo_garantia' => 30,
                 'user_id' => 1,
                 'os' => 1,
+                'venda' => 1,
             ],
         ];
 
@@ -34,7 +35,8 @@ class DefaultsConfigGarantiaOs extends Seeder
                     'garantia' => $value['garantia'],
                     'prazo_garantia' => $value['prazo_garantia'],
                     'user_id' => $value['user_id'],
-
+                    'os' => $value['os'],
+                    'venda' => $value['venda'],
                 ]
             );
         }
