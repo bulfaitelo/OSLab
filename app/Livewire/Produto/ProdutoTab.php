@@ -131,7 +131,7 @@ class ProdutoTab extends Component
      */
     private function modelSelector()
     {
-        if($this->os) {
+        if ($this->os) {
             return $this->os;
         }
         if ($this->venda) {
