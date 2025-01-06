@@ -20,6 +20,7 @@ class DefaultsConfigGarantiaOs extends Seeder
                 'color' => 'bg-warning',
                 'prazo_garantia' => 30,
                 'user_id' => 1,
+                'os' => 1,
             ],
         ];
 

@@ -26,7 +26,7 @@ return new class extends Migration
         Schema::table('garantias', function (Blueprint $table) {
             $table->dropColumn([
                 'os',
-                'venda'
+                'venda',
             ]);
         });
     }
