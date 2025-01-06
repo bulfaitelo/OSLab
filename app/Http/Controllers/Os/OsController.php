@@ -14,6 +14,7 @@ use App\Services\Os\OsService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OsController extends Controller
@@ -164,7 +165,7 @@ class OsController extends Controller
                     'tipo' => 'D',
                     'name' => 'OS: #'.$os->id.', Prod.:'.$osProduto->produto->name.', Qtd.: '.$osProduto->quantidade,
                     'os_id' => $os->id,
-                    'user_id' => auth()->id(),
+                    'user_id' => Auth::id(),
                     'centro_custo_id' => $osProduto->produto->centro_custo_id,
                     'cliente_id' => $os->cliente_id,
                     'valor' => $osProduto->valor_custo_total,
@@ -172,7 +173,7 @@ class OsController extends Controller
                     'parcelas' => 1,
                 ])->pagamentos()->create([
                     'forma_pagamento_id' => getConfig('default_os_faturar_produto_despesa'),
-                    'user_id' => auth()->id(),
+                    'user_id' => Auth::id(),
                     'valor' => $osProduto->valor_custo_total,
                     'vencimento' => $request->data_entrada,
                     'data_pagamento' => $request->data_entrada,
@@ -237,7 +238,7 @@ class OsController extends Controller
                     'tipo' => 'R',
                     'name' => 'OS Nº: #'.$os->id,
                     'os_id' => $os->id,
-                    'user_id' => auth()->id(),
+                    'user_id' => Auth::id(),
                     'centro_custo_id' => $request->centro_custo_id,
                     'cliente_id' => $os->cliente_id,
                     'valor' => $os->valorTotal(),
@@ -245,7 +246,7 @@ class OsController extends Controller
                     'parcelas' => 1,
                 ])->pagamentos()->create([
                     'forma_pagamento_id' => getConfig('default_os_faturar_produto_despesa'),
-                    'user_id' => auth()->id(),
+                    'user_id' => Auth::id(),
                     'valor' => $request->valor_recebido,
                     'vencimento' => $request->data_entrada,
                     'data_pagamento' => $request->data_recebimento,
@@ -259,7 +260,7 @@ class OsController extends Controller
                     'tipo' => 'R',
                     'name' => 'OS Nº: #'.$os->id,
                     'os_id' => $os->id,
-                    'user_id' => auth()->id(),
+                    'user_id' => Auth::id(),
                     'centro_custo_id' => $request->centro_custo_id,
                     'cliente_id' => $os->cliente_id,
                     'valor' => $os->valorTotal(),
