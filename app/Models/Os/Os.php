@@ -403,7 +403,7 @@ class Os extends Model
             os.id,
             os.created_at,
             clientes.name as cliente,
-            os_status.name as status,
+            status.name as status,
             os.data_entrada,
             valor_total,
             IFNULL(debito, 0) AS debito,
@@ -411,7 +411,7 @@ class Os extends Model
             (IFNULL(credito, 0) - IFNULL(debito, 0)) as saldo
         '));
         $query->join('clientes', 'os.cliente_id', '=', 'clientes.id');
-        $query->join('os_status', 'os.status_id', '=', 'os_status.id');
+        $query->join('status', 'os.status_id', '=', 'status.id');
         $query->leftJoin(DB::raw("
             (
                 SELECT

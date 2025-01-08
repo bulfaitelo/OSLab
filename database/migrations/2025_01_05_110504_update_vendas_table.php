@@ -20,6 +20,9 @@ return new class extends Migration
 
             $table->foreign('vendedor_id', 'fk_venda_users_vendedor')
             ->references('id')->on('users');
+
+            $table->foreign('status_id', 'fk_venda_status')
+            ->references('id')->on('status');
         });
 
         Schema::table('contas', function (Blueprint $table) {

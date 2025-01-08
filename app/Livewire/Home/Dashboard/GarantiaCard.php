@@ -17,9 +17,9 @@ class GarantiaCard extends Component
         ]);
         $os->with('status');
         $os->join('clientes', 'clientes.id', '=', 'os.cliente_id');
-        $os->join('os_status', 'os_status.id', '=', 'os.status_id');
+        $os->join('status', 'status.id', '=', 'os.status_id');
         $os->whereNotNull('prazo_garantia');
-        $os->where('os_status.garantia', 1); // forma de garantia que vou contar apenas o que foi finalizado isso é com garantia.
+        $os->where('status.garantia', 1); // forma de garantia que vou contar apenas o que foi finalizado isso é com garantia.
         $os->where('prazo_garantia', '>=', now()->format('Y-m-d'));
         $os->orderBy('prazo_garantia');
         $os->limit(6);

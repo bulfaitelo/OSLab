@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Status')
+@section('title', 'Criar Status')
 
 @section('content_header')
-    <h1><i class="fas fa-wave-square "></i> Editar Status</h1>
+    <h1><i class="fas fa-wave-square "></i> Criar Status</h1>
 @stop
 
 @section('content')
@@ -26,29 +26,27 @@
 
           <div class="card-body">
           @include('adminlte::partials.form-alert')
-          {!! html()->form('PUT', route('configuracao.os.status.update', $status->id))->open() !!}
+          {!! html()->form('POST', route('configuracao.parametro.status.store'))->open() !!}
             <div class="form-group">
               <label for="name">Status</label>
-              {!! html()->text('name', $status->name)->class('form-control')->placeholder('Status')->required() !!}
+              {!! html()->text('name')->class('form-control')->placeholder('Status')->required() !!}
             </div>
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                {!! html()->text('descricao', $status->descricao)->class('form-control')->placeholder('Descrição') !!}
+                {!! html()->text('descricao')->class('form-control')->placeholder('Descrição') !!}
             </div>
             <div class="form-group">
                 <label>Cor</label>
                 <br>
                 @foreach ($cor_array as $cor)
-                <div class="form-check  form-check-inline">
-                    <label for="{{$cor}}">
-                        <span class="right badge {{$cor}}">
-                            <input @if ($cor == $status->color)
-                                checked
-                            @endif type="radio" name="color" style='margin:4px' value="{{$cor}}" id="{{$cor}}">
-                        </span>
-                    </label>
-                </div>
-            @endforeach
+                    <div class="form-check  form-check-inline">
+                        <label for="{{$cor}}" >
+                            <span class="right badge {{$cor}}">
+                                <input id="{{$cor}}" style='margin:4px'  type="radio" name="color" value="{{$cor}}" >
+                            </span>
+                        </label>
+                    </div>
+                @endforeach
             </div>
             <div class="row mb-2">
                 <div class="col-md-12">
@@ -63,9 +61,9 @@
                         >
                         </i>
                     </label>
-                    <div class="custom-control custom-switch custom-switch-md">
-                        {!! html()->checkbox('garantia', $status->garantia)->class('custom-control-input') !!}
-                        <label class="custom-control-label" for="garantia"> </label>
+                    <div class="custom-control custom-switch custom-switch-md custom-switch-md">
+                        {!! html()->checkbox('garantia')->class('custom-control-input') !!}
+                        <label class="custom-control-label" for="ativar_garantia"> </label>
                     </div>
                 </div>
             </div>
@@ -76,16 +74,16 @@
             <h4>Notificações via Email</h4>
             <div class="row">
                 <div class="col-md-2">
-                    <label for="ativar_email">Enviar email?</label>
+                    <label for="chek_ativo">Enviar email?</label>
                     <div class="custom-control custom-switch custom-switch-md">
-                        {!! html()->checkbox('ativar_email', $status->ativar_email)->class('custom-control-input') !!}
+                        {!! html()->checkbox('ativar_email')->class('custom-control-input') !!}
                         <label class="custom-control-label" for="ativar_email"> </label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label for="prazo_email">Prazo para envio</label>
                     <div class="input-group">
-                        {!! html()->text('prazo_email', $status->prazo_email)->class('form-control')->placeholder('Prazo D + X') !!}
+                        {!! html()->text('prazo_email')->class('form-control')->placeholder('Prazo D + X') !!}
                         <div id="" class="data_info input-group-append" data-container="body" data-toggle="popover" data-placement="right" data-content="Define a data de envio, por exemplo: Caso seja o valor 10, após 10 dias da alteração do status será enviado um email.">
                             <span class="input-group-text"><i class="fas fa-exclamation-circle"></i></span>
                         </div>
@@ -95,14 +93,16 @@
             </div>
             <h4>Ativar Campos Personalizados na Os</h4>
             <div class="row">
-                <div class="col-md-4">
-                    <label for="ativar_rastreio">Rastreio de Objetos</label>
+                <div class="col-md-2">
+                    <label for="chek_ativo">Rastreio de Objetos</label>
                     <div class="custom-control custom-switch custom-switch-md">
-                        {!! html()->checkbox('ativar_rastreio', $status->ativar_rastreio)->class('custom-control-input') !!}
+                        {!! html()->checkbox('ativar_rastreio')->class('custom-control-input') !!}
                         <label class="custom-control-label" for="ativar_rastreio"> </label>
                     </div>
                 </div>
+
             </div>
+
           </div>
           {{-- Minimal with icon only --}}
           <!-- /.card-body -->

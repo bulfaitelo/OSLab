@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('os_status_logs', function (Blueprint $table) {
+        Schema::create('status_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('os_id');
             $table->unsignedBigInteger('status_id')->nullable();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('os_status_logs');
+        Schema::dropIfExists('status_logs');
     }
 };

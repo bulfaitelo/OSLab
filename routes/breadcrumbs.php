@@ -327,56 +327,31 @@ Breadcrumbs::for('movimentacao.create', function (BreadcrumbTrail $trail, Produt
 });
 // FIM Produtos
 
-// Configuração OS
-// Status OS
-Breadcrumbs::for('configuracao.os.status.index', function (BreadcrumbTrail $trail) {
+// Configuração > PARÂMETROS
+// Status
+Breadcrumbs::for('configuracao.parametro.status.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Configurações');
-    $trail->push('OS');
-    $trail->push('Status de OS', route('configuracao.os.status.index'));
+    $trail->push('Parâmetros');
+    $trail->push('Status', route('configuracao.parametro.status.index'));
 });
 
-// Status de Os > Novo Status de Os
-Breadcrumbs::for('configuracao.os.status.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('configuracao.os.status.index');
-    $trail->push('Novo Status de Os', route('configuracao.os.status.create'));
+// Status > Novo Status
+Breadcrumbs::for('configuracao.parametro.status.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('configuracao.parametro.status.index');
+    $trail->push('Novo Status', route('configuracao.parametro.status.create'));
 });
 
-// Status de Os > [Visualização de Status de OS]
-Breadcrumbs::for('configuracao.os.status.show', function (BreadcrumbTrail $trail, OsStatus $item) {
-    $trail->parent('configuracao.os.status.index');
-    $trail->push($item->name, route('configuracao.os.status.show', $item));
+// Status > [Visualização de Status]
+Breadcrumbs::for('configuracao.parametro.status.show', function (BreadcrumbTrail $trail, OsStatus $item) {
+    $trail->parent('configuracao.parametro.status.index');
+    $trail->push($item->name, route('configuracao.parametro.status.show', $item));
 });
 
-// Status de Os > [Status de OS Name] > Editar Status de OS
-Breadcrumbs::for('configuracao.os.status.edit', function (BreadcrumbTrail $trail, OsStatus $item) {
-    $trail->parent('configuracao.os.status.index');
-    $trail->push('Editar Status de OS', route('configuracao.os.status.edit', $item));
-});
-
-// Termo de Garantia
-Breadcrumbs::for('configuracao.garantia.index', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
-    $trail->push('Configurações');
-    $trail->push('Termos de Garantia', route('configuracao.garantia.index'));
-});
-
-// Termo de Garantia > Novo Termo de Garantia
-Breadcrumbs::for('configuracao.garantia.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('configuracao.garantia.index');
-    $trail->push('Novo Termo de Garantia', route('configuracao.garantia.create'));
-});
-
-// Termo de Garantia > [Visualização de Termo de Garantia]
-Breadcrumbs::for('configuracao.garantia.show', function (BreadcrumbTrail $trail, Garantia $item) {
-    $trail->parent('configuracao.garantia.index');
-    $trail->push($item->name, route('configuracao.garantia.show', $item));
-});
-
-// Termo de Garantia > [Termo de Garantia Name] > Editar Termo de Garantia
-Breadcrumbs::for('configuracao.garantia.edit', function (BreadcrumbTrail $trail, Garantia $item) {
-    $trail->parent('configuracao.garantia.index');
-    $trail->push('Editar Termo de Garantia', route('configuracao.garantia.edit', $item));
+// Status > [Status Name] > Editar Status
+Breadcrumbs::for('configuracao.parametro.status.edit', function (BreadcrumbTrail $trail, OsStatus $item) {
+    $trail->parent('configuracao.parametro.status.index');
+    $trail->push('Editar Status', route('configuracao.parametro.status.edit', $item));
 });
 
 // Categoria
@@ -403,6 +378,32 @@ Breadcrumbs::for('configuracao.parametro.categoria.show', function (BreadcrumbTr
 Breadcrumbs::for('configuracao.parametro.categoria.edit', function (BreadcrumbTrail $trail, Categoria $item) {
     $trail->parent('configuracao.parametro.categoria.index');
     $trail->push('Editar Categoria', route('configuracao.parametro.categoria.edit', $item));
+});
+// FIM - Configuração > PARÂMETROS
+
+// Termo de Garantia
+Breadcrumbs::for('configuracao.garantia.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Configurações');
+    $trail->push('Termos de Garantia', route('configuracao.garantia.index'));
+});
+
+// Termo de Garantia > Novo Termo de Garantia
+Breadcrumbs::for('configuracao.garantia.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('configuracao.garantia.index');
+    $trail->push('Novo Termo de Garantia', route('configuracao.garantia.create'));
+});
+
+// Termo de Garantia > [Visualização de Termo de Garantia]
+Breadcrumbs::for('configuracao.garantia.show', function (BreadcrumbTrail $trail, Garantia $item) {
+    $trail->parent('configuracao.garantia.index');
+    $trail->push($item->name, route('configuracao.garantia.show', $item));
+});
+
+// Termo de Garantia > [Termo de Garantia Name] > Editar Termo de Garantia
+Breadcrumbs::for('configuracao.garantia.edit', function (BreadcrumbTrail $trail, Garantia $item) {
+    $trail->parent('configuracao.garantia.index');
+    $trail->push('Editar Termo de Garantia', route('configuracao.garantia.edit', $item));
 });
 
 // Fim Configuração OS

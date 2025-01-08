@@ -46,8 +46,8 @@ class AtendimentosCategoriaChartCard extends Component
             count(*) as quantidade
         ');
         $os->join('categorias', 'categorias.id', '=', 'os.categoria_id');
-        $os->join('os_status', 'os_status.id', '=', 'os.status_id');
-        $os->where('os_status.garantia', 1); // forma de garantia que vou contar apenas o que foi finalizado isso é com garantia.
+        $os->join('status', 'status.id', '=', 'os.status_id');
+        $os->where('status.garantia', 1); // forma de garantia que vou contar apenas o que foi finalizado isso é com garantia.
         $os->whereRaw('YEAR(os.created_at) = '.now()->format('Y'));
         $os->groupBy('categoria');
         $os->groupByRaw('MONTH(os.created_at)');

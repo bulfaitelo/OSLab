@@ -13,11 +13,11 @@ class OsStatusController extends Controller
     public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_os_status', ['only' => 'index']);
-        $this->middleware('permission:config_os_status_create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:config_os_status_show', ['only' => 'show']);
-        $this->middleware('permission:config_os_status_edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:config_os_status_destroy', ['only' => 'destroy']);
+        $this->middleware('permission:config_status', ['only' => 'index']);
+        $this->middleware('permission:config_status_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:config_status_show', ['only' => 'show']);
+        $this->middleware('permission:config_status_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:config_status_destroy', ['only' => 'destroy']);
 
         $this->corArray = [
             'bg-primary',
@@ -47,7 +47,7 @@ class OsStatusController extends Controller
     {
         $status = OsStatus::paginate(100);
 
-        return view('configuracao.os.status.index', compact('status'));
+        return view('configuracao.parametro.status.index', compact('status'));
     }
 
     /**
@@ -57,7 +57,7 @@ class OsStatusController extends Controller
     {
         $cor_array = $this->corArray;
 
-        return view('configuracao.os.status.create', compact('cor_array'));
+        return view('configuracao.parametro.status.create', compact('cor_array'));
     }
 
     /**
@@ -76,7 +76,7 @@ class OsStatusController extends Controller
             $status->garantia = $request->garantia;
             $status->save();
 
-            return redirect()->route('configuracao.os.status.index')
+            return redirect()->route('configuracao.parametro.status.index')
             ->with('success', 'Status criado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
@@ -90,7 +90,7 @@ class OsStatusController extends Controller
     {
         $cor_array = $this->corArray;
 
-        return view('configuracao.os.status.show', compact('status', 'cor_array'));
+        return view('configuracao.parametro.status.show', compact('status', 'cor_array'));
     }
 
     /**
@@ -100,7 +100,7 @@ class OsStatusController extends Controller
     {
         $cor_array = $this->corArray;
 
-        return view('configuracao.os.status.edit', compact('status', 'cor_array'));
+        return view('configuracao.parametro.status.edit', compact('status', 'cor_array'));
     }
 
     /**
@@ -118,7 +118,7 @@ class OsStatusController extends Controller
             $status->garantia = $request->garantia;
             $status->save();
 
-            return redirect()->route('configuracao.os.status.index')
+            return redirect()->route('configuracao.parametro.status.index')
             ->with('success', 'Status atualizado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
@@ -133,7 +133,7 @@ class OsStatusController extends Controller
         try {
             $status->delete();
 
-            return redirect()->route('configuracao.os.status.index')
+            return redirect()->route('configuracao.parametro.status.index')
                 ->with('success', 'Status excluído com sucesso.');
         } catch (\Throwable $th) {
             throw $th;

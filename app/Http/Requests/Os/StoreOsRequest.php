@@ -26,7 +26,7 @@ class StoreOsRequest extends FormRequest
             'tecnico_id' => 'required|exists:users,id',
             'categoria_id' => 'required|exists:categorias,id',
             'modelo_id' => 'nullable|exists:wiki_models,id',
-            'status_id' => 'required|exists:os_status,id',
+            'status_id' => 'required|exists:status,id',
             'data_entrada' => 'required|date',
             'data_saida' => 'nullable|date',
         ];

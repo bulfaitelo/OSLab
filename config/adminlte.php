@@ -537,18 +537,25 @@ return [
                     ],
                 ],
                 [
-                    'text' => 'OS',
-                    'icon' => 'fas fa-list-alt',
+                    'text' => 'Parâmetros',
+                    'icon' => 'fa-solid fa-sliders',
                     'can' => [
-                        'config_garantia', 'config_categoria', 'config_os_status',
+                        'config_categoria', 'config_status',
                     ],
                     'submenu' => [
                         [
-                            'text' => 'Status de Os',
+                            'text' => 'Status',
                             'icon' => 'fas fa-wave-square',
-                            'route' => 'configuracao.os.status.index',
-                            'active' => ['configuracoes/os/status*'],
-                            'can' => 'config_os_status',
+                            'route' => 'configuracao.parametro.status.index',
+                            'active' => ['configuracoes/parametro/status*'],
+                            'can' => 'config_status',
+                        ],
+                        [
+                            'text' => 'Categoria',
+                            'icon' => 'fas fa-clipboard-list',
+                            'route' => 'configuracao.parametro.categoria.index',
+                            'active' => ['configuracoes/parametro/categoria*'],
+                            'can' => 'config_categoria',
                         ],
                     ],
                 ],
@@ -581,13 +588,6 @@ return [
                     'route' => 'configuracao.garantia.index',
                     'active' => ['configuracoes/garantia*'],
                     'can' => 'config_garantia',
-                ],
-                [
-                    'text' => 'Categoria',
-                    'icon' => 'fas fa-clipboard-list',
-                    'route' => 'configuracao.parametro.categoria.index',
-                    'active' => ['configuracoes/categoria*'],
-                    'can' => 'config_categoria',
                 ],
                 [
                     'text' => 'Sistema',

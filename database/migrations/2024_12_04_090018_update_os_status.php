@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('os_status', function (Blueprint $table) {
+        Schema::table('status', function (Blueprint $table) {
             $table->boolean('garantia')->nullable()->default(0)->after('prazo_email'); // ativa o campo de rastreio dentro da OS (experimental)
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('os_status', function (Blueprint $table) {
+        Schema::table('status', function (Blueprint $table) {
             $table->dropColumn('garantia');
         });
     }

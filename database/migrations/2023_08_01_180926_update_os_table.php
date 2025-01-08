@@ -22,7 +22,7 @@ return new class extends Migration
             ->references('id')->on('users');
 
             $table->foreign('status_id', 'fk_os_os_status')
-            ->references('id')->on('os_status');
+            ->references('id')->on('status');
 
             $table->foreign('termo_garantia_id', 'fk_os_garantias')
             ->references('id')->on('garantias');

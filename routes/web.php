@@ -149,10 +149,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/users/permissions/{user}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{user}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
 
-        // Parametro
+        // Parâmetros
         Route::name('parametro.')->prefix('parametro')->group(function () {
             Route::resource('/categoria', CategoriaController::class)
                 ->parameters(['categoria' => 'categoria']);
+            Route::resource('/status', OsStatusController::class);
         });
         // Configurações de usuário
         Route::name('user.')->prefix('user')->group(function () {
@@ -166,10 +167,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::resource('/centro_custo', CentroCustoController::class);
             Route::resource('/forma_pagamento', FormaPagamentoController::class);
         });
-        // OS
-        Route::name('os.')->prefix('os')->group(function () {
-            Route::resource('/status', OsStatusController::class);
-        });
+
         // Wiki
         Route::name('wiki.')->prefix('wiki')->group(function () {
             Route::resource('/fabricante', FabricanteController::class);

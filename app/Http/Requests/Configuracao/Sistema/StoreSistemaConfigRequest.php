@@ -22,14 +22,14 @@ class StoreSistemaConfigRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sistema.default_os_create_status' => 'required|exists:os_status,id',
+            'sistema.default_os_create_status' => 'required|exists:status,id',
             'sistema.os_link_time_limit' => 'required|integer',
             'sistema.default_os_faturar_produto_despesa' => 'required|exists:forma_pagamentos,id',
-            'sistema.default_os_faturar' => 'nullable|exists:os_status,id',
-            'sistema.default_os_faturar_pagto_parcial' => 'nullable|exists:os_status,id',
-            'sistema.default_os_faturar_pagto_quitado' => 'nullable|exists:os_status,id',
+            'sistema.default_os_faturar' => 'nullable|exists:status,id',
+            'sistema.default_os_faturar_pagto_parcial' => 'nullable|exists:status,id',
+            'sistema.default_os_faturar_pagto_quitado' => 'nullable|exists:status,id',
             'sistema.os_informacao' => 'nullable|string|max:1000',
-            'sistema.os_listagem_padrao' => 'nullable|exists:os_status,id',
+            'sistema.os_listagem_padrao' => 'nullable|exists:status,id',
             'sistema.backup_local_store' => 'boolean',
             'sistema.backup_gdrive_store' => 'boolean',
             // 'sistema.backup_recorrencia' => 'required|in:d,w,m,y',
