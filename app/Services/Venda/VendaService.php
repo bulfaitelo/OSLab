@@ -273,7 +273,7 @@ class VendaService implements VendaServiceInterface
     /**
      * Cancela uma Venda Faturada.
      *
-     * @param Venda $venda venda
+     * @param  Venda  $venda venda
      * @return Venda
      **/
     public function cancelarFaturamento(Venda $venda): Venda

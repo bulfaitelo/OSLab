@@ -134,7 +134,5 @@ class VendaController extends Controller
 
         return redirect()->route('venda.edit', $venda->id)
             ->with('success', 'Fatura cancelada com sucesso.');
-
-
     }
 }
