@@ -15,34 +15,65 @@ class DefaultsConfigPermissionsParametro extends Seeder
         // permissões
         $insert = [
             [
-                'description' => 'Acesso a configuração de Categoria de Os',
+                'description' => 'Acesso a configuração de Categoria',
                 'name' => 'config_categoria',
                 'guard_name' => 'web',
-                'group_id' => 3,
+                'group_id' => 15,
             ],
             [
-                'description' => 'Criar Categoria de Os',
+                'description' => 'Criar Categoria',
                 'name' => 'config_categoria_create',
                 'guard_name' => 'web',
-                'group_id' => 3,
+                'group_id' => 15,
             ],
             [
-                'description' => 'Editar Categoria de Os',
+                'description' => 'Editar Categoria',
                 'name' => 'config_categoria_edit',
                 'guard_name' => 'web',
-                'group_id' => 3,
+                'group_id' => 15,
             ],
             [
-                'description' => 'Visualizar Categoria de Os',
+                'description' => 'Visualizar Categoria',
                 'name' => 'config_categoria_show',
                 'guard_name' => 'web',
-                'group_id' => 3,
+                'group_id' => 15,
             ],
             [
-                'description' => 'Excluir Categoria de Os',
+                'description' => 'Excluir Categoria',
                 'name' => 'config_categoria_destroy',
                 'guard_name' => 'web',
-                'group_id' => 3,
+                'group_id' => 15,
+            ],
+
+            [
+                'description' => 'Acesso a configuração de Status',
+                'name' => 'config_status',
+                'guard_name' => 'web',
+                'group_id' => 15,
+            ],
+            [
+                'description' => 'Criar Status',
+                'name' => 'config_status_create',
+                'guard_name' => 'web',
+                'group_id' => 15,
+            ],
+            [
+                'description' => 'Editar Status',
+                'name' => 'config_status_edit',
+                'guard_name' => 'web',
+                'group_id' => 15,
+            ],
+            [
+                'description' => 'Visualizar Status',
+                'name' => 'config_status_show',
+                'guard_name' => 'web',
+                'group_id' => 15,
+            ],
+            [
+                'description' => 'Excluir Status',
+                'name' => 'config_status_destroy',
+                'guard_name' => 'web',
+                'group_id' => 15,
             ],
 
         ];
