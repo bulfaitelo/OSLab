@@ -42,6 +42,7 @@
                     <th>Cor</th>
                     <th>Descrição</th>
                     <th>Exibe Garantia</th>
+                    <th>Usado em </th>
                     <th style="width: 40px"></th>
                 </tr>
                 </thead>
@@ -56,15 +57,21 @@
                             <div class="{{$item->color}}" style="width: 70px; height: 25px; border-radius: 3px;" >
                         </div>
                         <td>{{ $item->descricao }}</td>
+                        <td>
                         @if ($item->garantia)
-                        <td>
                             <span class="badge bg-success">Sim</span>
-                        </td>
                         @else
-                        <td>
                             <span class="badge bg-danger">Não</span>
-                        </td>
                         @endif
+                        </td>
+                        <td>
+                            @if ($item->os)
+                                <span class="badge btn-oslab">OS</span>
+                            @endif
+                            @if ($item->venda)
+                                <span class="badge bg-success">Venda</span>
+                            @endif
+                        </td>
                         <td>
                             <div class="btn-group btn-group-sm">
                             @can('config_status_edit')

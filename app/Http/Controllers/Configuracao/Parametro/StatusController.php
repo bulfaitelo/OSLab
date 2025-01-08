@@ -74,6 +74,8 @@ class StatusController extends Controller
             $status->prazo_email = $request->prazo_email;
             $status->ativar_rastreio = $request->ativar_rastreio;
             $status->garantia = $request->garantia;
+            $status->os = $request->os;
+            $status->venda = $request->venda;
             $status->save();
 
             return redirect()->route('configuracao.parametro.status.index')
@@ -116,6 +118,8 @@ class StatusController extends Controller
             $status->prazo_email = $request->prazo_email;
             $status->ativar_rastreio = $request->ativar_rastreio;
             $status->garantia = $request->garantia;
+            $status->os = $request->os;
+            $status->venda = $request->venda;
             $status->save();
 
             return redirect()->route('configuracao.parametro.status.index')
