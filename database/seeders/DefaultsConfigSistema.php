@@ -58,6 +58,10 @@ class DefaultsConfigSistema extends Seeder
                 'key' => 'default_venda_faturar_produto_despesa',
                 'value' => '"4"',
             ],
+            [
+                'key' => 'default_venda_create_garantia',
+                'value' => '"1"',
+            ],
 
             // [
             //     'key' => 'default_os_create_category',

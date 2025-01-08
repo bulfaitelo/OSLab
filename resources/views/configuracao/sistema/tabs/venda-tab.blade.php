@@ -14,6 +14,13 @@
                 <i>Tipo de despesa padrão para os produtos quando for faturada uma nova Venda</i>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="sistema[default_venda_create_garantia]">Garantia Padrão</label>
+                {!! html()->select('sistema[default_venda_create_garantia]', \App\Models\Configuracao\Garantia\Garantia::where('venda', 1)->orderBy('name')->pluck('name', 'id'), getConfig('default_venda_create_garantia'))->class('form-control')->placeholder('Selecione') !!}
+                <i>Garantia que sera carregada por padrão na criação de uma nova Venda </i>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-4">

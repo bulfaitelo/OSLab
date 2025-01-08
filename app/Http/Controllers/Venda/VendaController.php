@@ -1,17 +1,13 @@
 <?php
-
 namespace App\Http\Controllers\Venda;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Venda\FaturarVendaRequest;
 use App\Http\Requests\Venda\StoreVendaRequest;
 use App\Http\Requests\Venda\UpdateVendaRequest;
-use App\Models\Produto\Produto;
 use App\Models\Venda\Venda;
 use App\Services\Venda\VendaService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class VendaController extends Controller
 {
@@ -125,6 +121,7 @@ class VendaController extends Controller
         return redirect()->route('os.edit', $venda->id)
         ->with('success', 'Venda Faturada com sucesso.');
     }
+
     /**
      * Show the form for editing the specified resource.
      */

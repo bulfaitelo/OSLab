@@ -49,7 +49,7 @@
                             GERAL
                         </div>
                         {{-- OS --}}
-                        <div class="tab-pane fade " id="os" role="tabpanel" aria-labelledby="os-tab">
+                        <div class="tab-pane fade  active show" id="os" role="tabpanel" aria-labelledby="os-tab">
                             @include('configuracao.sistema.tabs.os-tab')
                         </div>
                         {{-- Vendas --}}
