@@ -7,8 +7,8 @@ use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Garantia\GarantiaController;
-use App\Http\Controllers\Configuracao\Os\OsStatusController;
 use App\Http\Controllers\Configuracao\Parametro\CategoriaController;
+use App\Http\Controllers\Configuracao\Parametro\StatusController;
 use App\Http\Controllers\Configuracao\Sistema\SistemaConfigController;
 use App\Http\Controllers\Configuracao\User\PerfilController;
 use App\Http\Controllers\Configuracao\User\PermissionsController;
@@ -153,7 +153,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('parametro.')->prefix('parametro')->group(function () {
             Route::resource('/categoria', CategoriaController::class)
                 ->parameters(['categoria' => 'categoria']);
-            Route::resource('/status', OsStatusController::class);
+            Route::resource('/status', StatusController::class);
         });
         // Configurações de usuário
         Route::name('user.')->prefix('user')->group(function () {

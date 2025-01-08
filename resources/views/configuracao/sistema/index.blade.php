@@ -48,7 +48,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="sistema[default_os_create_status]">Status Padrão OS</label>
-                                        {!! html()->select('sistema[default_os_create_status]', App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
+                                        {!! html()->select('sistema[default_os_create_status]', App\Models\Configuracao\Parametro\Status::orderBy('name')->pluck('name', 'id'), getConfig('default_os_create_status'))->class('form-control')->placeholder('Selecione') !!}
                                         <i>Status que sera carregado por padrão na criação de uma nova Os </i>
                                     </div>
                                 </div>
@@ -71,21 +71,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="sistema[default_os_faturar]">Status OS ao Faturar </label>
-                                        {!! html()->select('sistema[default_os_faturar]', App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar'))->class('form-control')->placeholder('Não alterar status') !!}
+                                        {!! html()->select('sistema[default_os_faturar]', App\Models\Configuracao\Parametro\Status::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar'))->class('form-control')->placeholder('Não alterar status') !!}
                                         <i>Quando a Os for faturada ela irá receber esse status se não for recebido nenhum valor</i>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="sistema[default_os_faturar_pagto_parcial]">Status OS Pagto. em Aberto</label>
-                                        {!! html()->select('sistema[default_os_faturar_pagto_parcial]', App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar_pagto_parcial'))->class('form-control')->placeholder('Não alterar status') !!}
+                                        {!! html()->select('sistema[default_os_faturar_pagto_parcial]', App\Models\Configuracao\Parametro\Status::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar_pagto_parcial'))->class('form-control')->placeholder('Não alterar status') !!}
                                         <i>Quando a Os for faturada ela irá receber esse status se o valor do pagamento for menor do que o valor total da Os </i>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="sistema[default_os_faturar_pagto_quitado]">Status OS ao ser Quitada</label>
-                                        {!! html()->select('sistema[default_os_faturar_pagto_quitado]', App\Models\Configuracao\Os\OsStatus::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar_pagto_quitado'))->class('form-control')->placeholder('Não alterar status') !!}
+                                        {!! html()->select('sistema[default_os_faturar_pagto_quitado]', App\Models\Configuracao\Parametro\Status::orderBy('name')->pluck('name', 'id'), getConfig('default_os_faturar_pagto_quitado'))->class('form-control')->placeholder('Não alterar status') !!}
                                         <i>Quando a Os for faturada ela irá receber esse status se o valor do pagamento igual ou maior do que o valor da Os</i>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                         @php
                                             $osListagemPadrao =  getConfig('os_listagem_padrao')
                                         @endphp
-                                        @foreach (App\Models\Configuracao\Os\OsStatus::orderBy('name')->get() as $item)
+                                        @foreach (App\Models\Configuracao\Parametro\Status::orderBy('name')->get() as $item)
                                             <div class="custom-control custom-checkbox">
                                                 <input name="sistema[os_listagem_padrao][]" @checked((is_array($osListagemPadrao)) ? in_array($item->id, $osListagemPadrao) : null) class="custom-control-input" type="checkbox" id="os_list_{{ $item->id }}" value="{{ $item->id }}">
                                                 <label for="os_list_{{ $item->id }}" class="custom-control-label">{{ $item->name }}</label>

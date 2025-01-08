@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Configuracao\Os;
+namespace App\Models\Configuracao\Parametro;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OsStatus extends Model
+class Status extends Model
 {
     use HasFactory;
 
-    protected $table = 'os_status';
+    protected $table = 'status';
 }

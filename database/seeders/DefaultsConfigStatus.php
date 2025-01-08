@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Configuracao\Os\OsStatus;
+use App\Models\Configuracao\Parametro\Status;
 use Illuminate\Database\Seeder;
 
-class DefaultsConfigOsStatus extends Seeder
+class DefaultsConfigStatus extends Seeder
 {
     /**
      * Run the database seeds.
@@ -116,7 +116,7 @@ class DefaultsConfigOsStatus extends Seeder
         ];
 
         foreach ($insert as $key => $value) {
-            OsStatus::updateOrCreate(
+            Status::updateOrCreate(
                 [
                     'id' => $value['id'],
                     'name' => $value['name'],

@@ -3,7 +3,7 @@
 namespace Database\Factories\Os;
 
 use App\Models\Cliente\Cliente;
-use App\Models\Configuracao\Os\OsStatus;
+use App\Models\Configuracao\Parametro\Status;
 use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Os\Os;
 use App\Models\User;
@@ -31,14 +31,14 @@ class OsFactory extends Factory
         return [
             // 'cliente_id' => factory('App\Models\Cliente\Cliente')->create(),
             // 'tecnico_id' => factory('App\Models\User')->create(),
-            // 'status_id' => factory('App\Models\Configuracao\Os\OsStatus')->create(),
+            // 'status_id' => factory('App\Models\Configuracao\Parametro\Status')->create(),
             // 'data_entrada' => now(),
             // 'categoria_id' => factory('App\Models\Configuracao\Parametro\Categoria')->create(),
 
             'cliente_id' => Cliente::all('id')->random(),
             'tecnico_id' => User::all('id')->random(),
             'user_id' => User::all('id')->random(),
-            'status_id' => OsStatus::all('id')->random(),
+            'status_id' => Status::all('id')->random(),
             'data_entrada' => now(),
             'categoria_id' => Categoria::all('id')->random(),
         ];

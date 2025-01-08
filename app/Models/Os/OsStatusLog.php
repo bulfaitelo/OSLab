@@ -2,7 +2,7 @@
 
 namespace App\Models\Os;
 
-use App\Models\Configuracao\Os\OsStatus;
+use App\Models\Configuracao\Parametro\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,6 +27,6 @@ class OsStatusLog extends Model
      **/
     public function status(): BelongsTo
     {
-        return $this->belongsTo(OsStatus::class);
+        return $this->belongsTo(Status::class);
     }
 }

@@ -3,8 +3,15 @@
 @section('title', 'Categoria')
 
 @section('content_header')
-    <h1><i class="fas fa-clipboard-list "></i> Categoria</h1>
+    <h1 class="d-inline">
+        <i class="fas fa-clipboard-list "></i> Categoria
+    </h1>
 @stop
+
+{{-- Texto de ajuda --}}
+@section('content_header_help_content', 'Tela de cadastro de Categoria, usado em Ordem de Serviço e em Vendas.')
+{{-- Titulo (Opcional)--}}
+{{-- @section('content_header_help_title', 'titulo') --}}
 
 @section('content')
 <div class="">

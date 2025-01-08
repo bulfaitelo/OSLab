@@ -10,7 +10,7 @@ use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Financeiro\FormaPagamento;
 use App\Models\Configuracao\Garantia\Garantia;
-use App\Models\Configuracao\Os\OsStatus;
+use App\Models\Configuracao\Parametro\Status;
 use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Configuracao\Sistema\SistemaConfig;
@@ -343,13 +343,13 @@ Breadcrumbs::for('configuracao.parametro.status.create', function (BreadcrumbTra
 });
 
 // Status > [Visualização de Status]
-Breadcrumbs::for('configuracao.parametro.status.show', function (BreadcrumbTrail $trail, OsStatus $item) {
+Breadcrumbs::for('configuracao.parametro.status.show', function (BreadcrumbTrail $trail, Status $item) {
     $trail->parent('configuracao.parametro.status.index');
     $trail->push($item->name, route('configuracao.parametro.status.show', $item));
 });
 
 // Status > [Status Name] > Editar Status
-Breadcrumbs::for('configuracao.parametro.status.edit', function (BreadcrumbTrail $trail, OsStatus $item) {
+Breadcrumbs::for('configuracao.parametro.status.edit', function (BreadcrumbTrail $trail, Status $item) {
     $trail->parent('configuracao.parametro.status.index');
     $trail->push('Editar Status', route('configuracao.parametro.status.edit', $item));
 });

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Configuracao\Os;
+namespace App\Http\Controllers\Configuracao\Parametro;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Configuracao\Os\StoreUpdateOsStatusRequest;
-use App\Models\Configuracao\Os\OsStatus;
+use App\Http\Requests\Configuracao\Parametro\StoreUpdateStatusRequest;
+use App\Models\Configuracao\Parametro\Status;
 
-class OsStatusController extends Controller
+class StatusController extends Controller
 {
     public $corArray;
 
@@ -45,7 +45,7 @@ class OsStatusController extends Controller
      */
     public function index()
     {
-        $status = OsStatus::paginate(100);
+        $status = Status::paginate(100);
 
         return view('configuracao.parametro.status.index', compact('status'));
     }
@@ -63,10 +63,10 @@ class OsStatusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUpdateOsStatusRequest $request)
+    public function store(StoreUpdateStatusRequest $request)
     {
         try {
-            $status = new OsStatus();
+            $status = new Status();
             $status->name = $request->name;
             $status->descricao = $request->descricao;
             $status->color = $request->color;
@@ -86,7 +86,7 @@ class OsStatusController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OsStatus $status)
+    public function show(Status $status)
     {
         $cor_array = $this->corArray;
 
@@ -96,7 +96,7 @@ class OsStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OsStatus $status)
+    public function edit(Status $status)
     {
         $cor_array = $this->corArray;
 
@@ -106,7 +106,7 @@ class OsStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreUpdateOsStatusRequest $request, OsStatus $status)
+    public function update(StoreUpdateStatusRequest $request, Status $status)
     {
         try {
             $status->name = $request->name;
@@ -128,7 +128,7 @@ class OsStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OsStatus $status)
+    public function destroy(Status $status)
     {
         try {
             $status->delete();

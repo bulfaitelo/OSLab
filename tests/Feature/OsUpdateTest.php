@@ -41,7 +41,7 @@ class OsUpdateTest extends TestCase
 
     #[Depends('testOsUpdate')]
     #[DataProvider('osCreateData')]
-    public function testOsStatusLog($data): void
+    public function testStatusLog($data): void
     {
         $os = Os::find($data['id']);
         $this->put(route('os.update', $data['id']), $data);

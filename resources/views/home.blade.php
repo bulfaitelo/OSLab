@@ -12,7 +12,7 @@
     @livewire('home.show-user-favorites')
     <div class="row mt-3">
         <div class="col-md-2">
-            @livewire('home.dashboard.os-status-count-card')
+            @livewire('home.dashboard.status-count-card')
             @livewire('home.dashboard.balancete-card')
         </div>
         <div class="col-md-6">
