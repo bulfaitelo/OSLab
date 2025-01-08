@@ -48,13 +48,13 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="status_id">Status</label>
-                            {!! html()->select('status_id', \App\Models\Configuracao\Parametro\Status::where('os', 1)->orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                            {!! html()->select('status_id', \App\Models\Configuracao\Parametro\Status::where('os', 1)->orderBy('name')->pluck('name', 'id'), getConfig('default_venda_create_status'))->class('form-control')->placeholder('Selecione')->required() !!}
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="termo_garantia_id">Garantia</label>
-                            {!! html()->select('termo_garantia_id', \App\Models\Configuracao\Garantia\Garantia::where('venda', 1)->orderBy('name')->pluck('name', 'id'))->class('form-control')->placeholder('Selecione')->required() !!}
+                            {!! html()->select('termo_garantia_id', \App\Models\Configuracao\Garantia\Garantia::where('venda', 1)->orderBy('name')->pluck('name', 'id'), getConfig('default_venda_create_garantia'))->class('form-control')->placeholder('Selecione')->required() !!}
                         </div>
                     </div>
                 </div>

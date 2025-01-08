@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Venda;
 
 use App\Http\Controllers\Controller;
@@ -118,15 +119,22 @@ class VendaController extends Controller
 
         $this->vendaService->faturar($request, $venda);
 
-        return redirect()->route('os.edit', $venda->id)
+        return redirect()->route('venda.edit', $venda->id)
         ->with('success', 'Venda Faturada com sucesso.');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Cancela o faturamento da venda.
+     *
+     * @param  Venda  $venda
      */
     public function cancelarFaturamento(Venda $venda)
     {
-        //
+        $this->vendaService->cancelarFaturamento($venda);
+
+        return redirect()->route('venda.edit', $venda->id)
+            ->with('success', 'Fatura cancelada com sucesso.');
+
+
     }
 }

@@ -136,7 +136,7 @@ class VendaService implements VendaServiceInterface
                 $venda->contas()->create([
                     'tipo' => 'D',
                     'name' => 'Venda: #'.$venda->id.', Prod.:'.$vendaProduto->produto->name.', Qtd.: '.$vendaProduto->quantidade,
-                    'os_id' => $venda->id,
+                    'venda_id' => $venda->id,
                     'user_id' => Auth::id(),
                     'centro_custo_id' => $vendaProduto->produto->centro_custo_id,
                     'cliente_id' => $venda->cliente_id,
@@ -144,7 +144,7 @@ class VendaService implements VendaServiceInterface
                     'data_quitacao' => $request->data_entrada,
                     'parcelas' => 1,
                 ])->pagamentos()->create([
-                    'forma_pagamento_id' => getConfig('default_os_faturar_produto_despesa'),
+                    'forma_pagamento_id' => getConfig('default_venda_faturar_produto_despesa'),
                     'user_id' => Auth::id(),
                     'valor' => $vendaProduto->valor_custo_total,
                     'vencimento' => $request->data_entrada,
@@ -164,8 +164,8 @@ class VendaService implements VendaServiceInterface
                         'valor_custo' => $vendaProduto->valor_custo,
                         'estoque_antes' => ($produto->estoque + $vendaProduto->quantidade),
                         'estoque_apos' => $produto->estoque,
-                        'os_id' => $venda->id,
-                        'os_produto_id' => $vendaProduto->id,
+                        'venda_id' => $venda->id,
+                        'venda_produto_id' => $vendaProduto->id,
                         'descricao' => 'Venda Nº: #'.$venda->id,
                     ]);
                 // Sem estoque
@@ -177,8 +177,8 @@ class VendaService implements VendaServiceInterface
                         'valor_custo' => $vendaProduto->valor_custo,
                         'estoque_antes' => $produto->estoque,
                         'estoque_apos' => ($produto->estoque + $entrada),
-                        'os_id' => $venda->id,
-                        'os_produto_id' => $vendaProduto->id,
+                        'venda_id' => $venda->id,
+                        'venda_produto_id' => $vendaProduto->id,
                         'descricao' => 'Venda Nº: #'.$venda->id,
                     ]);
                     $produto->movimentacao()->create([
@@ -187,8 +187,8 @@ class VendaService implements VendaServiceInterface
                         'valor_custo' => $vendaProduto->valor_custo,
                         'estoque_antes' => ($produto->estoque + $vendaProduto->quantidade),
                         'estoque_apos' => $produto->estoque,
-                        'os_id' => $venda->id,
-                        'os_produto_id' => $vendaProduto->id,
+                        'venda_id' => $venda->id,
+                        'venda_produto_id' => $vendaProduto->id,
                         'descricao' => 'Venda Nº: #'.$venda->id,
                     ]);
                     $produto->estoque = 0;
@@ -206,10 +206,10 @@ class VendaService implements VendaServiceInterface
                 } else {
                     $dataQuitacao = null;
                 }
-                $fatura = $venda->contas()->create([
+                $conta = $venda->contas()->create([
                     'tipo' => 'R',
                     'name' => 'Venda Nº: #'.$venda->id,
-                    'os_id' => $venda->id,
+                    'venda_id' => $venda->id,
                     'user_id' => Auth::id(),
                     'centro_custo_id' => $request->centro_custo_id,
                     'cliente_id' => $venda->cliente_id,
@@ -217,54 +217,94 @@ class VendaService implements VendaServiceInterface
                     'data_quitacao' => $dataQuitacao,
                     'parcelas' => 1,
                 ])->pagamentos()->create([
-                    'forma_pagamento_id' => getConfig('default_os_faturar_produto_despesa'),
+                    'forma_pagamento_id' => getConfig('default_venda_faturar_produto_despesa'),
                     'user_id' => Auth::id(),
                     'valor' => $request->valor_recebido,
                     'vencimento' => $request->data_entrada,
                     'data_pagamento' => $request->data_recebimento,
                     'parcela' => 1,
                 ]);
-                $fatura_id = $fatura->conta_id;
+                $conta_id = $conta->conta_id;
 
             // Sem pagamento
             } else {
-                $fatura = $venda->contas()->create([
+                $conta = $venda->contas()->create([
                     'tipo' => 'R',
                     'name' => 'Venda Nº: #'.$venda->id,
-                    'os_id' => $venda->id,
+                    'venda_id' => $venda->id,
                     'user_id' => Auth::id(),
                     'centro_custo_id' => $request->centro_custo_id,
                     'cliente_id' => $venda->cliente_id,
                     'valor' => $venda->valorTotal(),
                     'parcelas' => 1,
                 ]);
-                $fatura_id = $fatura->id;
+                $conta_id = $conta->id;
             }
 
             if (isset($dataQuitacao) && ! empty($dataQuitacao)) {
-                if (getConfig('default_os_faturar_pagto_quitado') != '') {
-                    $venda->status_id = getConfig('default_os_faturar_pagto_quitado');
+                if (getConfig('default_venda_faturar_pagto_quitado') != '') {
+                    $venda->status_id = getConfig('default_venda_faturar_pagto_quitado');
                 }
             } else {
                 if (! $request->recebido) {
-                    if (getConfig('default_os_faturar') != '') {
-                        $venda->status_id = getConfig('default_os_faturar');
+                    if (getConfig('default_venda_faturar') != '') {
+                        $venda->status_id = getConfig('default_venda_faturar');
                     }
-                } elseif (getConfig('default_os_faturar_pagto_parcial') != '') {
-                    $venda->status_id = getConfig('default_os_faturar_pagto_parcial');
+                } elseif (getConfig('default_venda_faturar_pagto_parcial') != '') {
+                    $venda->status_id = getConfig('default_venda_faturar_pagto_parcial');
                 }
             }
             $venda->valor_total = $venda->valorTotal();
             if (! $venda->data_saida) {
                 $venda->data_saida = now();
             }
-            $venda->fatura_id = $fatura_id;
+            $venda->conta_id = $conta_id;
             $venda->prazo_garantia = $this->addDayGarantia($request->data_entrada, $venda->termo_garantia_id);
             $venda->save();
             DB::commit();
 
             return $venda;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+    }
 
+    /**
+     * Cancela uma Venda Faturada.
+     *
+     * @param Venda $venda venda
+     * @return Venda
+     **/
+    public function cancelarFaturamento(Venda $venda): Venda
+    {
+        DB::beginTransaction();
+        try {
+            foreach ($venda->produtos as $vendaProduto) {
+                $produto = Produto::find($vendaProduto->produto->id);
+                $movimentacoesModel = $produto->movimentacao()->where('os_produto_id', $vendaProduto->id);
+                $movimentacoes = $movimentacoesModel->get();
+                foreach ($movimentacoes as $movimentacao) {
+                    if ($movimentacoes->count() > 1) {
+                        $produto->estoque = ($produto->estoque + $movimentacao->estoque_antes);
+                        break;
+                    }
+                    if ($movimentacoes->count() == 1) {
+                        $produto->estoque = ($produto->estoque + $movimentacao->quantidade_movimentada);
+                        break;
+                    }
+                }
+                $produto->save();
+                $movimentacoesModel->delete();
+            }
+            $venda->conta_id = null;
+            $venda->valor_total = null;
+            $venda->status_id = getConfig('default_venda_create_status');
+            $venda->save();
+            $venda->contas()->delete();
+            DB::commit();
+
+            return $venda;
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
