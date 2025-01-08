@@ -146,13 +146,12 @@ class OsController extends Controller
     {
         if (! getConfig('default_os_faturar_produto_despesa')) {
             return redirect()->route('os.edit', $os->id)
-
-            ->with('warning', 'Por favor vejas as configurações do sistema.');
+                    ->with('warning', 'Por favor vejas as configurações do sistema.');
         }
 
         if ($os->fatura_id) {
             return redirect()->route('os.edit', $os->id)
-            ->with('warning', 'Esta Ordem de Serviço já está faturada.');
+                    ->with('warning', 'Esta Ordem de Serviço já está faturada.');
         }
 
         DB::beginTransaction();

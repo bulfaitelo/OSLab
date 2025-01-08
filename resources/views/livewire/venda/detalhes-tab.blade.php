@@ -2,13 +2,13 @@
     @include('adminlte::partials.form-alert')
     {!! html()->form('put', route('venda.update', $venda))->acceptsFiles()->open() !!}
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="cliente_id">Cliente</label>
                     {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="vendedor_id">Responsável pela venda</label>
                     {!! html()->select('vendedor_id', [Auth()->id() => Auth()->user()->name], Auth()->id())->class('form-control user')->placeholder('Selecione')->required() !!}
@@ -18,7 +18,13 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="data_saida">Data Saída</label>
-                    {!! html()->date('data_saida')->class('form-control') !!}
+                    {!! html()->date('data_saida', $venda->data_saida)->class('form-control') !!}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="status_id">Status</label>
+                    {!! html()->select('status_id', \App\Models\Configuracao\Parametro\Status::where('os', 1)->orderBy('name')->pluck('name', 'id'), $venda->status_id)->class('form-control')->placeholder('Selecione')->required() !!}
                 </div>
             </div>
             <div class="col-md-2">

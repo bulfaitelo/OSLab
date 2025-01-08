@@ -67,7 +67,7 @@
                     <div class="col-md-3">
                         <div class="form-group mb-2 ">
                             <label for="status">Status</label>
-                            {!! html()->select('status_id', \App\Models\Configuracao\Parametro\Status::orderBy('name')->pluck('name', 'id'), $request->status_id)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                            {!! html()->select('status_id', \App\Models\Configuracao\Parametro\Status::where('os', 1)->orderBy('name')->pluck('name', 'id'), $request->status_id)->class('form-control form-control-sm')->placeholder('Selecione') !!}
                         </div>
                     </div>
                     <div class="col-md-3 d-flex align-items-end">

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Venda;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Venda\FaturarVendaRequest;
 use App\Http\Requests\Venda\StoreVendaRequest;
 use App\Http\Requests\Venda\UpdateVendaRequest;
+use App\Models\Produto\Produto;
 use App\Models\Venda\Venda;
 use App\Services\Venda\VendaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VendaController extends Controller
 {
@@ -104,14 +108,23 @@ class VendaController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function faturar(Venda $venda)
+    public function faturar(FaturarVendaRequest $request, Venda $venda)
     {
-        //
-    }
+        if (! getConfig('default_os_faturar_produto_despesa')) {
+            return redirect()->route('os.edit', $venda->id)
+                    ->with('warning', 'Por favor vejas as configurações do sistema.');
+        }
 
+        if ($venda->fatura_id) {
+            return redirect()->route('os.edit', $venda->id)
+                    ->with('warning', 'Esta Ordem de Serviço já está faturada.');
+        }
+
+        $this->vendaService->faturar($request, $venda);
+
+        return redirect()->route('os.edit', $venda->id)
+        ->with('success', 'Venda Faturada com sucesso.');
+    }
     /**
      * Show the form for editing the specified resource.
      */
