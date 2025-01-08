@@ -143,8 +143,8 @@ class DefaultsConfigStatus extends Seeder
                 ],
                 [
                     'color' => $value['color'],
-                    'os' => $value['venda'],
-                    'venda' => $value['os'],
+                    'os' => $value['os'],
+                    'venda' => $value['venda'],
                     'descricao' => $value['descricao'],
                     'email_id' => (isset($value['email_id']) == true ? $value['email_id'] : null),
                     'ativar_rastreio' => (isset($value['ativar_rastreio']) == true ? $value['ativar_rastreio'] : null),

@@ -38,6 +38,27 @@ class DefaultsConfigSistema extends Seeder
                 'value' => '"4"',
             ],
 
+            [
+                'key' => 'default_venda_create_status',
+                'value' => '"1"',
+            ],
+            [
+                'key' => 'default_venda_faturar',
+                'value' => '"3"',
+            ],
+            [
+                'key' => 'default_venda_faturar_pagto_parcial',
+                'value' => '"10"',
+            ],
+            [
+                'key' => 'default_venda_faturar_pagto_quitado',
+                'value' => '"6"',
+            ],
+            [
+                'key' => 'default_venda_faturar_produto_despesa',
+                'value' => '"4"',
+            ],
+
             // [
             //     'key' => 'default_os_create_category',
             //     'value' => '',

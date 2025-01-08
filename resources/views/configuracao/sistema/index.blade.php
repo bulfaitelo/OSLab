@@ -17,11 +17,17 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="os-tab" data-toggle="pill" href="#os" role="tab" aria-controls="os" aria-selected="false">
                             <i class="fa-regular fa-rectangle-list "></i>
-                            <span class="d-none d-sm-inline">OS</span>
+                            <span class="d-none d-sm-inline">Ordem de Serviço</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="os-tab" data-toggle="pill" href="#backup" role="tab" aria-controls="os" aria-selected="false">
+                        <a class="nav-link" id="os-tab" data-toggle="pill" href="#vendas" role="tab" aria-controls="vendas" aria-selected="false">
+                            <i class="fa-solid fa-store "></i>
+                            <span class="d-none d-sm-inline">Vendas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="os-tab" data-toggle="pill" href="#backup" role="tab" aria-controls="backup" aria-selected="false">
                             <i class="fa-solid fa-server"></i>
                             <span class="d-none d-sm-inline">Backup</span>
                         </a>
@@ -43,8 +49,12 @@
                             GERAL
                         </div>
                         {{-- OS --}}
-                        <div class="tab-pane fade  active show" id="os" role="tabpanel" aria-labelledby="os-tab">
+                        <div class="tab-pane fade " id="os" role="tabpanel" aria-labelledby="os-tab">
                             @include('configuracao.sistema.tabs.os-tab')
+                        </div>
+                        {{-- Vendas --}}
+                        <div class="tab-pane fade  active show" id="vendas" role="tabpanel" aria-labelledby="venda-tab">
+                            @include('configuracao.sistema.tabs.venda-tab')
                         </div>
                         {{-- BACKUP --}}
                         <div class="tab-pane fade" id="backup" role="tabpanel" aria-labelledby="os-tab">
