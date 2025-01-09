@@ -6,12 +6,15 @@ use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Parametro\Status;
 use App\Models\Financeiro\Contas;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Venda extends Model
 {
+    use HasFactory;
+
     protected $casts = [
         'data_saida' => 'date',
         'prazo_garantia' => 'date',
