@@ -8,6 +8,7 @@
         <th>Saída</th>
         <th>Garantia</th>
         <th>Valor</th>
+        <th>Status</th>
         @if ((isset($edit) && $edit === true) || (isset($show) && $show === true) || (isset($destroy) && $destroy === true))
             <th style="width: 40px"></th>
         @endif
@@ -41,6 +42,9 @@
                 R$ <span class="float-right" > {{ number_format($item->valor_total, 2, ',', '.') }} </span>
                 @endif
             </td>
+            <td>
+                <span class="badge {{ $item->status->color }}">{{ $item->status->name }}</span>
+            </td>
 
             @if ((isset($edit) && $edit === true) || (isset($show) && $show === true) || (isset($destroy) && $destroy === true))
                 <td>
@@ -57,7 +61,7 @@
                         @endif
                         @if (isset($destroy) && $destroy === true)
                             @can('venda_destroy')
-                                <button @disabled($item->fatura_id) type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->cliente->name}}" data-url="{{route('venda.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
+                                <button @disabled($item->conta_id) type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->cliente->name}}" data-url="{{route('venda.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
                             @endcan
                         @endif
                     </div>

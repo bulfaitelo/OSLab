@@ -32,6 +32,7 @@ class VendaService implements VendaServiceInterface
     public static function getDataTable(Request $request, int $itensPorPagina = 100, $colunaOrdenacao = null, $ordenacao = 'desc')
     {
         $dataHoje = Carbon::now()->format('Y-d-m');
+        $vendaListagemPadrao = getConfig('venda_listagem_padrao');
 
         $queryVenda = Venda::with(['cliente', 'vendedor']);
 
@@ -52,6 +53,14 @@ class VendaService implements VendaServiceInterface
                 $query->orWhereBetween('data_entrada', [$dataInicial, $dataFinal]);
                 $query->orWhereBetween('data_saida', [$dataInicial, $dataFinal]);
             });
+        }
+        if ($request->status_id) {
+            $queryVenda->where('status_id', $request->status_id);
+        }
+        if (! $request->input()) {
+            if ($vendaListagemPadrao) {
+                $queryVenda->whereIn('status_id', $vendaListagemPadrao);
+            }
         }
         if ($colunaOrdenacao) {
             $queryVenda->orderBy($colunaOrdenacao, $ordenacao);
