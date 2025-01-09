@@ -99,7 +99,11 @@
             ]
         });
     });
+    $('.data_info').popover({
+        trigger: 'hover'
+    });
 </script>
+
 
 @stop
 

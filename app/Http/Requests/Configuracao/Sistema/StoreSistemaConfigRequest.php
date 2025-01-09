@@ -43,6 +43,7 @@ class StoreSistemaConfigRequest extends FormRequest
             'sistema.default_venda_faturar_produto_despesa' => 'nullable|exists:status,id',
             'sistema.venda_listagem_padrao' => 'nullable|exists:status,id',
             'sistema.default_venda_create_garantia' => 'required|exists:garantias,id',
+            'sistema.default_venda_faturar_centro_custo' => 'required|exists:centro_custos,id',
         ];
     }
 
