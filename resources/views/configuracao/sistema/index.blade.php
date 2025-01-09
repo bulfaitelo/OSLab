@@ -53,7 +53,7 @@
                             @include('configuracao.sistema.tabs.os-tab')
                         </div>
                         {{-- Vendas --}}
-                        <div class="tab-pane fade  active show" id="vendas" role="tabpanel" aria-labelledby="venda-tab">
+                        <div class="tab-pane fade" id="vendas" role="tabpanel" aria-labelledby="venda-tab">
                             @include('configuracao.sistema.tabs.venda-tab')
                         </div>
                         {{-- BACKUP --}}
