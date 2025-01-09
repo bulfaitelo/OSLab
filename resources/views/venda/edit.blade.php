@@ -106,7 +106,7 @@
             </div>
             @if ($venda->conta_id)
                 <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
-                    {{-- @livewire('financeiro.balancete-tab', ['os' => $venda]) --}}
+                    @livewire('financeiro.balancete-tab', ['venda' => $venda])
                 </div>
             @endif
         </div>
@@ -243,7 +243,9 @@
             Livewire.dispatchTo('venda.log-tab', 'showLogTab');
         }
         if(tabId == 'balancete-tab'){
-            Livewire.dispatchTo('venda.balancete-tab', 'showBalanceteTab');
+            console.log('balancete');
+
+            Livewire.dispatchTo('financeiro.balancete-tab', 'showBalanceteTab');
         }
     });
 

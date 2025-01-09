@@ -284,11 +284,8 @@
             Livewire.dispatchTo('os.log-tab', 'showLogTab');
         }
         if(tabId == 'balancete-tab'){
-            Livewire.dispatchTo('os.balancete-tab', 'showBalanceteTab');
+            Livewire.dispatchTo('financeiro.balancete-tab', 'showBalanceteTab');
         }
     });
-
-
-
 </script>
 @stop

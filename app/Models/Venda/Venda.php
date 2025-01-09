@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Venda extends Model
 {
@@ -172,5 +173,51 @@ class Venda extends Model
         }
 
         return false;
+    }
+
+    /**
+     * Retorna um vetor com balancete.
+     *
+     * @return array
+     **/
+    public function balancete(): array
+    {
+        $array_balancete['total_credito_previsto'] = 0;
+        $array_balancete['total_debito_previsto'] = 0;
+        $array_balancete['total_credito_executado'] = 0;
+        $array_balancete['total_debito_executado'] = 0;
+        $receita_count = 0;
+
+        $balancete = $this->contas()
+                ->select(DB::raw('tipo, centro_custos.name as centro_custo, sum(DISTINCT contas.valor) as previsto, sum(contas_pagamentos.valor) as valor_executado'))
+                ->join('contas_pagamentos', 'contas_pagamentos.conta_id', 'contas.id')
+                ->join('centro_custos', 'contas.centro_custo_id', 'centro_custos.id')
+                ->groupBy(['centro_custos.name', 'tipo'])
+                ->orderBy('tipo', 'desc')
+                ->get();
+        foreach ($balancete as $key => $value) {
+            $array_balancete['detalhes'][] = [
+                'tipo' => $value->tipo,
+                'centro_custo' => $value->centro_custo,
+                'valor_previsto' => $value->previsto,
+                'valor_executado' => $value->valor_executado,
+
+            ];
+            if ($value->tipo == 'R') {
+                $receita_count++;
+                $array_balancete['total_credito_previsto'] += $value->previsto;
+                $array_balancete['total_credito_executado'] += $value->valor_executado;
+            } elseif ($value->tipo == 'D') {
+                $array_balancete['total_debito_previsto'] += $value->previsto;
+                $array_balancete['total_debito_executado'] += $value->valor_executado;
+            }
+        }
+        if ($receita_count <= 0) {
+            $array_balancete['total_credito_previsto'] = $this->valor_total;
+        }
+
+        $array_balancete['saldo'] = ($array_balancete['total_credito_executado'] - $array_balancete['total_debito_executado']);
+
+        return $array_balancete;
     }
 }

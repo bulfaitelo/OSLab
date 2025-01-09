@@ -8,6 +8,7 @@ use Livewire\Component;
 class BalanceteTab extends Component
 {
     public $os;
+    public $venda;
     public $showDisplay;
 
     #[On('showBalanceteTab')]
@@ -19,7 +20,22 @@ class BalanceteTab extends Component
     public function render()
     {
         return view('livewire.financeiro.balancete-tab', [
-            'balancete' => $this->os->balancete(),
+            'balancete' => $this->modelSelector()->balancete(),
         ]);
+    }
+
+    /**
+     * Retorna o modelo com base no que é previamente passado no componente.
+     *
+     * @return mixed
+     */
+    private function modelSelector()
+    {
+        if ($this->os) {
+            return $this->os;
+        }
+        if ($this->venda) {
+            return $this->venda;
+        }
     }
 }
