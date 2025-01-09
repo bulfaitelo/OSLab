@@ -26,8 +26,7 @@ class Emitente extends Model
         $emitente = self::where('id', $id)->first();
         if ($os_id) {
             $item = Os::where('id', $os_id)->first();
-        }
-        elseif ($venda_id) {
+        } elseif ($venda_id) {
             $item = Venda::where('id', $venda_id)->first();
         } else {
             $item = null;

@@ -81,7 +81,7 @@ class VendaController extends Controller
      */
     public function printPdf(Venda $venda)
     {
-        $emitente = Emitente::getHtmlEmitente(id: 1, venda_id: $venda->id, pdf: true );
+        $emitente = Emitente::getHtmlEmitente(id: 1, venda_id: $venda->id, pdf: true);
         // return view('venda.pdf.print', compact('os', 'emitente'));
 
         $pdf = Pdf::loadView('venda.pdf.print', compact('venda', 'emitente'));
