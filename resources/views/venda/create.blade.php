@@ -48,7 +48,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="status_id">Status</label>
-                            {!! html()->select('status_id', \App\Models\Configuracao\Parametro\Status::where('os', 1)->orderBy('name')->pluck('name', 'id'), getConfig('default_venda_create_status'))->class('form-control')->placeholder('Selecione')->required() !!}
+                            {!! html()->select('status_id', \App\Models\Configuracao\Parametro\Status::where('venda', 1)->orderBy('name')->pluck('name', 'id'), getConfig('default_venda_create_status'))->class('form-control')->placeholder('Selecione')->required() !!}
                         </div>
                     </div>
                     <div class="col-md-2">

@@ -289,9 +289,9 @@ class Os extends Model
      *
      * @return bool
      **/
-    public function osQuitada(): bool
+    public function quitada(): bool
     {
-        $conta = $this->contas()->find($this->fatura_id);
+        $conta = $this->contas()->find($this->conta_id);
         if ($conta) {
             $pagamentos = $conta->pagamentos;
             if ($conta->valor <= $pagamentos->sum('valor')) {

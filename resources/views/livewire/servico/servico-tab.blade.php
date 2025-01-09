@@ -1,13 +1,13 @@
 <div>
     {{-- @include('adminlte::partials.form-alert') --}}
-    @if (!$os->fatura_id)
+    @if (!$os->conta_id)
     <form method="POST" wire:submit="create">
         <div class="row" style="background-color: #f7f7f7; border-radius: 5px 5px 0px 0px" >
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="servico_id">Serviço</label>
                     <div wire:ignore >
-                        <select id="os-servico" wire:model="servico_id" wire:change="getServicoData" placeholder="Selecione um Serviço"></select>                        
+                        <select id="os-servico" wire:model="servico_id" wire:change="getServicoData" placeholder="Selecione um Serviço"></select>
                     </div>
                     @error('servico_id') <span class="error">{{ $message }}</span> @enderror
                 </div>
@@ -74,7 +74,7 @@
                                 <td>R$ {{ number_format($item->valor_servico,2,",",".") }}</td>
                                 <td>R$ {{ number_format($item->valor_servico_total,2,",",".") }}</td>
                                 <td>
-                                    @if (!$os->fatura_id)
+                                    @if (!$os->conta_id)
                                     <a title="Excluir" wire:click="delete({{ $item->id }})" class="btn btn-block btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                     @endif
                                 </td>
@@ -100,7 +100,7 @@
 
 </div>
 <script>
-if (!@js($os->fatura_id)) {
+if (!@js($os->conta_id)) {
     var tomSelectServico = new TomSelect("#os-servico",{
         // allowEmptyOption: true,
         // create: true,

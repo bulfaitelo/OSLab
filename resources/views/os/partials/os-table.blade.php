@@ -63,7 +63,7 @@
                         @endif
                         @if (isset($destroy) && $destroy === true)
                             @can('os_destroy')
-                                <button @disabled($item->fatura_id) type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->cliente->name}}" data-url="{{route('os.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
+                                <button @disabled($item->conta_id) type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->cliente->name}}" data-url="{{route('os.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
                             @endcan
                         @endif
                     </div>

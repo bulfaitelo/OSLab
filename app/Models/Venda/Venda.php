@@ -3,6 +3,7 @@
 namespace App\Models\Venda;
 
 use App\Models\Cliente\Cliente;
+use App\Models\Configuracao\Parametro\Status;
 use App\Models\Financeiro\Contas;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -78,6 +79,18 @@ class Venda extends Model
     }
 
     /**
+     * Retornar o Status.
+     *
+     * Retorna o Status relacionado
+     *
+     * @return BelongsTo Status
+     **/
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    /**
      * Retorna id e nome do Cliente.
      *
      * Retorna um vetor com o o id e o Cliente para ser usado no Select2
@@ -138,5 +151,23 @@ class Venda extends Model
     public function getCentroCustoPadrao()
     {
         return getConfig('default_venda_faturar_centro_custo');
+    }
+
+    /**
+     * Verifica se a os já foi quitada.
+     *
+     * @return bool
+     **/
+    public function quitada(): bool
+    {
+        $conta = $this->contas()->find($this->conta_id);
+        if ($conta) {
+            $pagamentos = $conta->pagamentos;
+            if ($conta->valor <= $pagamentos->sum('valor')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

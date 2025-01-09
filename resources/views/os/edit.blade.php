@@ -24,7 +24,7 @@
         </a>
         @endcan
         @can('os_faturar')
-            @if (!$os->fatura_id)
+            @if (!$os->conta_id)
             <button onclick="Livewire.dispatch('faturarOs')"  type="button" title="Editar" class="btn btn-sm btn-success" >
                 <i class="fa-solid fa-dollar-sign"></i>
                 <span class="d-none d-sm-inline">Faturar</span>
@@ -32,7 +32,7 @@
             @endif
         @endcan
         @can('os_cancelar_faturar')
-            @if ($os->fatura_id)
+            @if ($os->conta_id)
                 <button type="button" title="Editar" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#cancelarFaturarModal">
                     <i class="fa-solid fa-dollar-sign"></i>
                     <span class="d-none d-sm-inline">Cancelar Fatura</span>
@@ -115,7 +115,7 @@
                     <span class="d-none d-sm-inline">Log</span>
                 </a>
             </li>
-            @if ($os->fatura_id)
+            @if ($os->conta_id)
             <li class="nav-item">
                 <a class="nav-link" id="balancete-tab" data-toggle="tab" href="#balancete" role="tab" aria-controls="balancete" aria-selected="false">
                     <i class="fas fa-balance-scale"></i>
@@ -145,7 +145,7 @@
             <div class="tab-pane fade" id="log" role="tabpanel" aria-labelledby="log-tab">
                 @livewire('os.log-tab', ['os' => $os])
             </div>
-            @if ($os->fatura_id)
+            @if ($os->conta_id)
                 <div class="tab-pane fade" id="balancete" role="tabpanel" aria-labelledby="balancete-tab">
                     @livewire('financeiro.balancete-tab', ['os' => $os])
                 </div>

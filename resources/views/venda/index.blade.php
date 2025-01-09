@@ -50,7 +50,13 @@
                             {!! html()->date('data_final', $request->data_final)->class('form-control form-control-sm')->placeholder('Nome da forma de pagamento') !!}
                         </div>
                     </div>
-                    <div class="col-md-3 d-flex align-items-end">
+                    <div class="col-md-2">
+                        <div class="form-group mb-2 ">
+                            <label for="status">Status</label>
+                            {!! html()->select('status_id', \App\Models\Configuracao\Parametro\Status::where('venda', 1)->orderBy('name')->pluck('name', 'id'), $request->status_id)->class('form-control form-control-sm')->placeholder('Selecione') !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
                         <div class="form-group text-right mb-2">
                             <button type="submit"  class="btn bg-lightblue btn-sm">
                                 <i class="fa-solid fa-magnifying-glass"></i>

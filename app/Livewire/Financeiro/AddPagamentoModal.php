@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Financeiro;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class AddPagamentoModal extends Component
 {
     public $os;
+    public $venda;
     public $pagamento_valor;
     public $data_pagamento;
     public $forma_pagamento_id;
@@ -40,7 +42,7 @@ class AddPagamentoModal extends Component
      */
     public function loadAdicionarPagamento()
     {
-        // dd($this->os->contas->where('tipo', 'R'));
+        // dd($this->modelSelector()->contas->where('tipo', 'R'));
         $this->dispatch('toggleAddPagamentoModal');
     }
 
@@ -51,12 +53,12 @@ class AddPagamentoModal extends Component
 
     public function render()
     {
-        $conta = $this->os->contas()->where('tipo', 'R')->first();
+        $conta = $this->modelSelector()->contas()->where('tipo', 'R')->first();
         $pagamentos = $conta?->pagamentos()->with('formaPagamento')->get();
 
         return view('livewire.financeiro.add-pagamento-modal', [
-            'os' => $this->os,
-            'osQuitada' => $this->os->osQuitada(),
+            'item' => $this->modelSelector(),
+            'quitada' => $this->modelSelector()->quitada(),
             'conta' => $conta,
             'pagamentos' => $pagamentos,
         ]);
@@ -68,18 +70,18 @@ class AddPagamentoModal extends Component
     public function pagamentoCreate(): void
     {
         $pagamentoRequest = $this->validate();
-        if ($this->os->osQuitada()) {
+        if ($this->modelSelector()->quitada()) {
             flash()->addError('a OS ja foi Quitada!');
 
             return;
         }
-        $conta = $this->os->contas()->where('tipo', 'R')->first();
+        $conta = $this->modelSelector()->contas()->where('tipo', 'R')->first();
         $parcela = $conta->pagamentos()->latest()->first()?->parcela;
         DB::beginTransaction();
         try {
             $pagamento = [
                 'forma_pagamento_id' => $this->forma_pagamento_id,
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'valor' => $pagamentoRequest['pagamento_valor'],
                 'vencimento' => $pagamentoRequest['data_pagamento'],
                 'data_pagamento' => $pagamentoRequest['data_pagamento'],
@@ -91,14 +93,14 @@ class AddPagamentoModal extends Component
             }
             if ($conta->pagamentos->sum('valor') >= $conta->valor) {
                 $conta->data_quitacao = $pagamentoRequest['data_pagamento'];
-                if (getConfig('default_os_faturar_pagto_quitado') != '') {
-                    $this->os->status_id = getConfig('default_os_faturar_pagto_quitado');
-                    $this->os->save();
+                if (getConfig('default_'.$this->typeSelector().'_faturar_pagto_quitado') != '') {
+                    $this->modelSelector()->status_id = getConfig('default_'.$this->typeSelector().'_faturar_pagto_quitado');
+                    $this->modelSelector()->save();
                 }
             } else {
-                if (getConfig('default_os_faturar_pagto_parcial') != '') {
-                    $this->os->status_id = getConfig('default_os_faturar_pagto_parcial');
-                    $this->os->save();
+                if (getConfig('default_'.$this->typeSelector().'_faturar_pagto_parcial') != '') {
+                    $this->modelSelector()->status_id = getConfig('default_'.$this->typeSelector().'_faturar_pagto_parcial');
+                    $this->modelSelector()->save();
                 }
             }
             $conta->save();
@@ -118,11 +120,48 @@ class AddPagamentoModal extends Component
      */
     protected function disparaMensagemPosPagamento(): void
     {
-        if ($this->os->osQuitada()) {
+        if ($this->modelSelector()->quitada()) {
             $this->dispatch('toggleAddPagamentoModal');
-            flasher('Pagamento adicionado com sucesso, a Ordem de Serviço foi '.$this->os->status->name.'!');
+            if ($this->typeSelector() === 'os') {
+                flasher('Pagamento adicionado com sucesso, a Ordem de Serviço foi '.$this->modelSelector()->status->name.'!');
+            }
+            if ($this->typeSelector() === 'venda') {
+                flasher('Pagamento adicionado com sucesso, a Venda foi '.$this->modelSelector()->status->name.'!');
+            }
         } else {
             flasher('Pagamento adicionado com sucesso.');
+        }
+    }
+
+    /**
+     * Retorna o modelo com base no que é previamente passado no componente.
+     *
+     * @return mixed
+     */
+    private function modelSelector()
+    {
+        if ($this->os) {
+            return $this->os;
+        }
+        if ($this->venda) {
+            return $this->venda;
+        }
+    }
+
+    /**
+     * Retorna o tipo de requisição.
+     *
+     * Se é uma Venda ou uma Os
+     *
+     * @return mixed
+     */
+    private function typeSelector()
+    {
+        if ($this->os) {
+            return 'os';
+        }
+        if ($this->venda) {
+            return 'venda';
         }
     }
 }

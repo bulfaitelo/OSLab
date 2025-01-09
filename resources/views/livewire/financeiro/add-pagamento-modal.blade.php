@@ -1,5 +1,5 @@
 <div>
-@if ($os->fatura_id)
+@if ($item->conta_id)
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
@@ -19,7 +19,7 @@
                             ->class('form-control decimal')
                             ->placeholder('Valor')
                             ->attribute('wire:model', 'pagamento_valor')
-                            ->disabled($osQuitada)
+                            ->disabled($quitada)
                             ->attributes(['inputmode' => 'numeric'])
                             ->required()
                         !!}
@@ -33,7 +33,7 @@
                             ->class('form-control')
                             ->placeholder('Data do Pagamento')
                             ->attribute('wire:model', 'data_pagamento')
-                            ->disabled($osQuitada)
+                            ->disabled($quitada)
                             ->required()
                         !!}
                         @error('data_pagamento') <span class="error">{{ $message }}</span> @enderror
@@ -46,7 +46,7 @@
                             ->class('form-control')
                             ->attribute('wire:model', 'forma_pagamento_id')
                             ->placeholder('Selecione')
-                            ->disabled($osQuitada)
+                            ->disabled($quitada)
                             ->required()
                         !!}
                         @error('forma_pagamento_id') <span class="error">{{ $message }}</span> @enderror
@@ -110,7 +110,7 @@
                 <i class="fas fa-times"></i>
                 Fechar
             </button>
-            <button type="submit" class="btn btn-primary" @disabled($osQuitada)>
+            <button type="submit" class="btn btn-primary" @disabled($quitada)>
                 <i class="fas fa-save"></i>
                 Salvar
             </button>

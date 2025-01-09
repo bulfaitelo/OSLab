@@ -123,7 +123,7 @@ class OsController extends Controller
     public function destroy(Os $os)
     {
         try {
-            if ($os->fatura_id) {
+            if ($os->conta_id) {
                 return redirect()->route('os.index')
                 ->with('warning', 'Essa OS já está faturada, cancele a fatura antes de exclui-la!');
             }
@@ -149,7 +149,7 @@ class OsController extends Controller
                     ->with('warning', 'Por favor vejas as configurações do sistema.');
         }
 
-        if ($os->fatura_id) {
+        if ($os->conta_id) {
             return redirect()->route('os.edit', $os->id)
                     ->with('warning', 'Esta Ordem de Serviço já está faturada.');
         }
@@ -251,7 +251,7 @@ class OsController extends Controller
                     'data_pagamento' => $request->data_recebimento,
                     'parcela' => 1,
                 ]);
-                $fatura_id = $fatura->conta_id;
+                $conta_id = $fatura->conta_id;
 
             // Sem pagamento
             } else {
@@ -265,7 +265,7 @@ class OsController extends Controller
                     'valor' => $os->valorTotal(),
                     'parcelas' => 1,
                 ]);
-                $fatura_id = $fatura->id;
+                $conta_id = $fatura->id;
             }
 
             if (isset($dataQuitacao) && ! empty($dataQuitacao)) {
@@ -285,7 +285,7 @@ class OsController extends Controller
             if (! $os->data_saida) {
                 $os->data_saida = now();
             }
-            $os->fatura_id = $fatura_id;
+            $os->conta_id = $conta_id;
             $os->prazo_garantia = $this->addDayGarantia($request->data_entrada, $os->categoria_id);
             $os->save();
             DB::commit();
@@ -324,7 +324,7 @@ class OsController extends Controller
                 $produto->save();
                 $movimentacoesModel->delete();
             }
-            $os->fatura_id = null;
+            $os->conta_id = null;
             $os->valor_total = null;
             $os->status_id = getConfig('default_os_create_status');
             $os->save();

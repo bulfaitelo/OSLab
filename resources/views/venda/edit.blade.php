@@ -161,7 +161,7 @@
 {{-- Modal para criação de Pagamento de parcela --}}
 @can('venda_receita_pagamento_create')
 <div class="modal fade" id="addPagamentoModal">
-    {{-- @livewire('financeiro.add-pagamento-modal', ['venda' => $venda], key($venda->id)) --}}
+    @livewire('financeiro.add-pagamento-modal', ['venda' => $venda], key($venda->id))
 </div>
 @endcan
 {{-- /Modal para criação de Pagamento de parcela --}}

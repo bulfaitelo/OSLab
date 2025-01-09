@@ -56,7 +56,7 @@ class ServicoTab extends Component
     public function create(): void
     {
         $servico = $this->validate();
-        if ($this->os->fatura_id) {
+        if ($this->os->conta_id) {
             // Apagando o produto digitado.
             $this->dispatch('clear');
             flash()->addError('Serviço não pode ser adicionado a uma os Faturada.');
@@ -76,7 +76,7 @@ class ServicoTab extends Component
     public function delete($id)
     {
         try {
-            if ($this->os->fatura_id) {
+            if ($this->os->conta_id) {
                 // Apagando o produto digitado.
                 $this->dispatch('clear');
                 flash()->addError('Serviço não pode ser apagado a uma os Faturada.');

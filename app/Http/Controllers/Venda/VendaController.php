@@ -112,7 +112,7 @@ class VendaController extends Controller
                     ->with('warning', 'Por favor vejas as configurações do sistema.');
         }
 
-        if ($venda->fatura_id) {
+        if ($venda->conta_id) {
             return redirect()->route('os.edit', $venda->id)
                     ->with('warning', 'Esta Ordem de Serviço já está faturada.');
         }

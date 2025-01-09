@@ -41,7 +41,7 @@ class ProdutoTab extends Component
     {
         return view('livewire.produto.produto-tab', [
             'produto' => $this->modelSelector()->produtos()->get(),
-            'fatura_id' => $this->modelSelector()->fatura_id,
+            'conta_id' => $this->modelSelector()->conta_id,
         ]);
     }
 
@@ -61,7 +61,7 @@ class ProdutoTab extends Component
     {
         $produto = $this->validate();
 
-        if ($this->modelSelector()->fatura_id) {
+        if ($this->modelSelector()->conta_id) {
             // Apagando o produto digitado.
             $this->dispatch('clear');
             flash()->addError('Produto não pode ser adicionado se Faturado.');
@@ -80,7 +80,7 @@ class ProdutoTab extends Component
     public function delete($id)
     {
         try {
-            if ($this->modelSelector()->fatura_id) {
+            if ($this->modelSelector()->conta_id) {
                 // Apagando o produto digitado.
                 $this->dispatch('clear');
                 flash()->addError('Produto não pode ser removido se Faturado.');
