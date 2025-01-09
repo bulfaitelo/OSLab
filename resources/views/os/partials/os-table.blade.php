@@ -72,7 +72,7 @@
         </tr>
         @empty
         <tr>
-            <th>
+            <th colspan="9">
                 <h3>Não existem OS cadastradas</h3>
             </th>
         </tr>

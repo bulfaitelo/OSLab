@@ -70,7 +70,7 @@
         </tr>
         @empty
         <tr>
-            <th>
+            <th colspan="8">
                 <h3>Não existem Vendas cadastradas</h3>
             </th>
         </tr>
