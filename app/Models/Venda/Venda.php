@@ -135,8 +135,8 @@ class Venda extends Model
      *
      * @return int|null,
      */
-    public function centroCustoPadrao()
+    public function getCentroCustoPadrao()
     {
-        return null;
+        return getConfig('default_venda_faturar_centro_custo');
     }
 }

@@ -28,7 +28,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="centro_custo_id">Centro de Custo</label>
-                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), $item?->centroCustoPadrao())->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
+                            {!! html()->select('centro_custo_id', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), $item?->getCentroCustoPadrao())->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
                         </div>
                     </div>
                 </div>

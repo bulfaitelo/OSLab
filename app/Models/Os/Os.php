@@ -279,7 +279,7 @@ class Os extends Model
      *
      * @return int|null,
      */
-    public function centroCustoPadrao()
+    public function getCentroCustoPadrao()
     {
         return $this->categoria->centroCusto?->id;
     }
