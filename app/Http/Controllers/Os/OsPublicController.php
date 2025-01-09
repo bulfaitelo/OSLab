@@ -13,7 +13,7 @@ class OsPublicController extends Controller
     public function edit($uuid)
     {
         $informacao = OsInformacao::where('uuid', $uuid)->firstOrfail();
-        $emitente = Emitente::getHtmlEmitente(1);
+        $emitente = Emitente::getHtmlEmitente(id: 1);
 
         return view('os.public.edit', compact('informacao', 'emitente'));
     }
@@ -47,7 +47,7 @@ class OsPublicController extends Controller
 
     public function updated()
     {
-        $emitente = Emitente::getHtmlEmitente(1);
+        $emitente = Emitente::getHtmlEmitente(id: 1);
 
         return view('os.public.updated', compact('emitente'));
     }

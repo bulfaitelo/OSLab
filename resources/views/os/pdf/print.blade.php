@@ -1,4 +1,4 @@
-@section('title', 'OSLab_'.$os->id.'_'.$os->cliente->titleName())
+@section('title', 'OSLab_OS_'.$os->id.'_'.$os->cliente->titleName())
 @include('os.pdf.print-content')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -32,9 +32,9 @@
             font-family: 'metropolis-regular', 'sans-serif'
         }
         b, .bold {
-            font-family: 'metropolis-bold', 'sans-serif' !important;            
+            font-family: 'metropolis-bold', 'sans-serif' !important;
         }
-        
+
     </style>
 
     @yield('css')

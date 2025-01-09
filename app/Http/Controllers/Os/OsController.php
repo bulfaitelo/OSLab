@@ -66,7 +66,7 @@ class OsController extends Controller
      */
     public function show(Os $os)
     {
-        $emitente = Emitente::getHtmlEmitente(1, $os->id);
+        $emitente = Emitente::getHtmlEmitente(id: 1, os_id: $os->id);
 
         return view('os.show', compact('os', 'emitente'));
     }
@@ -76,7 +76,7 @@ class OsController extends Controller
      */
     public function print(Os $os)
     {
-        $emitente = Emitente::getHtmlEmitente(1, $os->id);
+        $emitente = Emitente::getHtmlEmitente(id: 1, os_id: $os->id);
 
         return view('os.screen.print', compact('os', 'emitente'));
     }
@@ -86,7 +86,7 @@ class OsController extends Controller
      */
     public function printPdf(Os $os)
     {
-        $emitente = Emitente::getHtmlEmitente(1, $os->id, true);
+        $emitente = Emitente::getHtmlEmitente(id: 1, os_id: $os->id, pdf: true);
         // return view('os.pdf.print', compact('os', 'emitente'));
 
         $pdf = Pdf::loadView('os.pdf.print', compact('os', 'emitente'));
@@ -94,7 +94,7 @@ class OsController extends Controller
         $pdf->setPaper('a4');
         // $css = asset('vendor/adminlte/dist/css/adminlte.min.css');
 
-        return $pdf->stream('OSLab_'.$os->id.'_'.$os->cliente->titleName().'.pdf');
+        return $pdf->stream('OSLab_OS_'.$os->id.'_'.$os->cliente->titleName().'.pdf');
     }
 
     /**

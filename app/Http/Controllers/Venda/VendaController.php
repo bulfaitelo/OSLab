@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Venda\FaturarVendaRequest;
 use App\Http\Requests\Venda\StoreVendaRequest;
 use App\Http\Requests\Venda\UpdateVendaRequest;
+use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Venda\Venda;
 use App\Services\Venda\VendaService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
@@ -59,23 +61,35 @@ class VendaController extends Controller
      */
     public function show(Venda $venda)
     {
-        //
+        $emitente = Emitente::getHtmlEmitente(id: 1, venda_id: $venda->id);
+
+        return view('venda.show', compact('venda', 'emitente'));
     }
 
     /**
-     * Display the specified resource.
+     * Tela de impressão da Venda.
      */
     public function print(Venda $venda)
     {
-        //
+        $emitente = Emitente::getHtmlEmitente(id: 1, venda_id: $venda->id);
+
+        return view('venda.screen.print', compact('venda', 'emitente'));
     }
 
     /**
-     * Display the specified resource.
+     * Tela de impressão da OS em PDF.
      */
     public function printPdf(Venda $venda)
     {
-        //
+        $emitente = Emitente::getHtmlEmitente(id: 1, venda_id: $venda->id, pdf: true );
+        // return view('venda.pdf.print', compact('os', 'emitente'));
+
+        $pdf = Pdf::loadView('venda.pdf.print', compact('venda', 'emitente'));
+        // $pdf->setWarnings(true);
+        $pdf->setPaper('a4');
+        // $css = asset('vendor/adminlte/dist/css/adminlte.min.css');
+
+        return $pdf->stream('OSLab_Venda_'.$venda->id.'_'.$venda->cliente->titleName().'.pdf');
     }
 
     /**
@@ -102,18 +116,29 @@ class VendaController extends Controller
      */
     public function destroy(Venda $venda)
     {
-        //
+        try {
+            if ($venda->conta_id) {
+                return redirect()->route('venda.index')
+                ->with('warning', 'Essa Venda já está faturada, cancele a fatura antes de exclui-la!');
+            }
+            $this->vendaService->destroy($venda);
+
+            return redirect()->route('venda.index')
+            ->with('success', 'Venda Excluida com sucesso.');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function faturar(FaturarVendaRequest $request, Venda $venda)
     {
         if (! getConfig('default_os_faturar_produto_despesa')) {
-            return redirect()->route('os.edit', $venda->id)
+            return redirect()->route('venda.edit', $venda->id)
                     ->with('warning', 'Por favor vejas as configurações do sistema.');
         }
 
         if ($venda->conta_id) {
-            return redirect()->route('os.edit', $venda->id)
+            return redirect()->route('venda.edit', $venda->id)
                     ->with('warning', 'Esta Ordem de Serviço já está faturada.');
         }
 

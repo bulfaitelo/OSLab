@@ -1,5 +1,5 @@
-@section('title', 'OSLab_'.$os->id.'_'.$os->cliente->titleName())
-@include('os.screen.print-content')
+@section('title', 'OSLab_'.$venda->id.'_'.$venda->cliente->titleName())
+@include('venda.screen.print-content')
 
 
 <!DOCTYPE html>
@@ -55,7 +55,7 @@
     <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
 </head>
 <body style="margin: 15px; font-family: 'metropolis-regular', 'sans-serif'; "  onload="window.print()" >
-    @yield('os-print-content')
+    @yield('venda-print-content')
 </body>
     {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script> --}}

@@ -17,20 +17,20 @@
             </button>
         </a>
         @can('os_edit')
-        <a href="{{ route('os.edit', $os) }}">
+        <a href="{{ route('venda.edit', $venda) }}">
             <button type="button" title="Editar" class="btn btn-sm btn-info">
                 <i class="fas fa-edit"></i>
                 Editar
             </button>
         </a>
         @endcan
-        @can('os_print')
+        @can('venda_print')
         <div class="btn-group btn-group-sm">
-            <a class="btn btn-sm bg-navy" title="Imprimir" href="{{ route('os.print', $os) }}" target="_blank" >
+            <a class="btn btn-sm bg-navy" title="Imprimir" href="{{ route('venda.print', $venda) }}" target="_blank" >
                 <i class="fa-solid fa-print"></i>
                 <span class="d-none d-sm-inline">Imprimir</span>
             </a>
-            <a class="btn btn-sm bg-maroon" title="Imprimir em PDF" href="{{ route('os.print_pdf', $os) }}" target="_blank" >
+            <a class="btn btn-sm bg-maroon" title="Imprimir em PDF" href="{{ route('venda.print_pdf', $venda) }}" target="_blank" >
                 <i class="fa-regular fa-file-pdf"></i>
                 <span class="d-none d-sm-inline">PDF</span>
             </a>
@@ -39,8 +39,8 @@
 
     </div>
     <div class="card-body pt-2">
-        @include('os.screen.print-content')
-        @yield('os-print-content')
+        @include('venda.screen.print-content')
+        @yield('venda-print-content')
     </div>
 </div>
 

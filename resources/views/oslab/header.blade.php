@@ -27,9 +27,13 @@
                     </a>
                 </p>
             @endif
-            @if ($os)
-                <p class="mb-0 mt-0" > Emissor: {{ $os->user->name }} </p>
-                <p class="mb-0 mt-0" > Técnico: {{ $os->tecnico->name }} </p>
+            @if ($item)
+                <p class="mb-0 mt-0" > Emissor: {{ $item->user->name }} </p>
+                @if ($item->tecnico)
+                    <p class="mb-0 mt-0" > Técnico: {{ $item->tecnico?->name }} </p>
+                @else
+                    <p class="mb-0 mt-0" > Vendedor: {{ $item->vendedor?->name }} </p>
+                @endif
                 <p class="mb-0 mt-0" > Emissão: {{date('d/m/Y')}} </p>
             @endif
         </div>

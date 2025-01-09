@@ -1,5 +1,5 @@
-@section('title', 'OSLab_'.$os->id.'_'.$os->cliente->titleName())
-@include('os.pdf.print-content')
+@section('title', 'OSLab_Venda_'.$venda->id.'_'.$venda->cliente->titleName())
+@include('venda.pdf.print-content')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -32,15 +32,15 @@
             font-family: 'metropolis-regular', 'sans-serif'
         }
         b, .bold {
-            font-family: 'metropolis-bold', 'sans-serif' !important;            
+            font-family: 'metropolis-bold', 'sans-serif' !important;
         }
-        
+
     </style>
 
     @yield('css')
 </head>
 <body style="font-family: 'metropolis-regular', 'sans-serif';">
-    @yield('os-print-content')
+    @yield('venda-print-content')
 </body>
 </html>
 
