@@ -8,10 +8,10 @@ use Str;
 
 /**
  * Classe para tratamento de imagens.
- * 
- * Imagens que são enviadas via Form em Blob a classe remove o blob e armazena o arquivo em um diretório. 
+ *
+ * Imagens que são enviadas via Form em Blob a classe remove o blob e armazena o arquivo em um diretório.
  */
-class ImageProcessor 
+class ImageProcessor
 {
     /**
      * Trata o texto e enviar as imagens para a pasta upload.
@@ -21,7 +21,7 @@ class ImageProcessor
      * @return bool|string $dom HTML
      */
     public function trataImagemEnviada($text, $id)
-    {        
+    {
         // tratando as imagens enviadas.
         $dom = new DOMDocument();
         @$dom->loadHTML($this->utf8_to_iso8859_1($text), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -36,10 +36,10 @@ class ImageProcessor
         foreach ($imageFile as $item => $image) {
             $data = $image->getAttribute('src');
             if (preg_match('/^data:image/m', $data)) {
-                [$type, $data] = explode(';', $data);                
+                [$type, $data] = explode(';', $data);
                 [, $data] = explode(',', $data);
                 $imgeData = base64_decode($data);
-                $imageName = Str::uuid().'_'.time().$item.'.'.$this->getFileExtension($type);                
+                $imageName = Str::uuid().'_'.time().$item.'.'.$this->getFileExtension($type);
                 file_put_contents($path.$imageName, $imgeData);
                 $image->removeAttribute('src');
                 $image->setAttribute('src', $imagePath.$imageName);
