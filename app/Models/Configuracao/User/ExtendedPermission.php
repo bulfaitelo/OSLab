@@ -24,7 +24,6 @@ class ExtendedPermission extends Permission
      **/
     public static function getDataTable(Request $request, $itensPorPagina = 100)
     {
-
         $query = self::with('group');
         if ($request->busca) {
             $query->where('name', 'LIKE', '%'.$request->busca.'%');
