@@ -21,13 +21,11 @@ class PermissionsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = ExtendedPermission::orderBy('name', 'ASC')
-        // $permissions = Permission::orderBy('name', 'ASC')
-        ->paginate('30');
+        $permissions = ExtendedPermission::getDataTable($request);
 
-        return view('configuracao.users.roles.permissions.index', compact('permissions'));
+        return view('configuracao.users.roles.permissions.index', compact('permissions', 'request'));
     }
 
     /**
