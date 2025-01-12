@@ -69,6 +69,7 @@ class MetaContabil extends Model
                 MONTH(vencimento) AS mes
             ');
             $query->groupByRaw('YEAR(vencimento), MONTH(vencimento)');
+            $query->orderByDesc('ano');
             $query->orderByDesc('mes');
         }
 
