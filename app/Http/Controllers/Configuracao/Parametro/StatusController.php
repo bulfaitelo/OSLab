@@ -133,9 +133,9 @@ class StatusController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Status $status)
-    {       
+    {
         try {
-            if (($status->os()->count() > 0 ) || ($status->vendas()->count() > 0 ) || ($status->osStatusLogs()->count() > 0)) {
+            if (($status->os()->count() > 0) || ($status->vendas()->count() > 0) || ($status->osStatusLogs()->count() > 0)) {
                 return redirect()->route('configuracao.parametro.status.index')
                 ->with('warning', 'Esse status está sendo usado em alguma OS ou Venda e não pode ser excluído!');
             }

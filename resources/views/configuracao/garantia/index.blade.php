@@ -34,7 +34,7 @@
                 <th>Garantia</th>
                 <th>Prazo padrão</th>
                 <th>Criador</th>
-                <th>Usado em </th>
+                <th>Habilitado em</th>
                 <th style="width: 40px"></th>
             </tr>
             </thead>

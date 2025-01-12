@@ -42,7 +42,7 @@
                     <th>Cor</th>
                     <th>Descrição</th>
                     <th>Exibe Garantia</th>
-                    <th>Usado em </th>
+                    <th>Habilitado em</th>
                     <th style="width: 40px"></th>
                 </tr>
                 </thead>
