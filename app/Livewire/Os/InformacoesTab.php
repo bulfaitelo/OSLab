@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Os;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -42,7 +43,7 @@ class InformacoesTab extends Component
         DB::beginTransaction();
         try {
             $this->os->informacoes()->create([
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'tipo' => 1,
                 'informacao' => $this->anotacao,
                 'status' => 1,
@@ -76,7 +77,7 @@ class InformacoesTab extends Component
                 $infomacao = $this->senha_padrao;
             }
             $this->os->informacoes()->create([
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'descricao' => $this->descricao_senha,
                 'tipo' => 2,
                 'tipo_informacao' => $this->tipo_senha,
@@ -119,7 +120,7 @@ class InformacoesTab extends Component
         DB::beginTransaction();
         try {
             $this->os->informacoes()->create([
-                'user_id' => auth()->id(),
+                'user_id' => Auth::id(),
                 'descricao' => $this->descricao_arquivo,
                 'tipo' => 3,
                 'tipo_informacao' => $this->arquivo->extension(),

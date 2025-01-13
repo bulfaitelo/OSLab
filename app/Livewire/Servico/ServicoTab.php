@@ -4,6 +4,7 @@ namespace App\Livewire\Servico;
 
 use App\Models\Os\Os;
 use App\Models\Servico\Servico;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -95,7 +96,7 @@ class ServicoTab extends Component
         DB::beginTransaction();
         try {
             $servico['valor_servico_total'] = $servico['valor_servico'] * $servico['quantidade'];
-            $servico['user_id'] = auth()->id();
+            $servico['user_id'] = Auth::id();
             $osServico = $this->os->servicos()->create(
                 $servico
             );

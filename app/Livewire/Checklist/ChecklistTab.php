@@ -3,6 +3,7 @@
 namespace App\Livewire\Checklist;
 
 use App\Models\Os\Os;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -32,7 +33,7 @@ class ChecklistTab extends Component
             foreach ($dataArray as $key => $value) {
                 $checklistFormData[$key]['name'] = $key;
                 $checklistFormData[$key]['value'] = $this->prepareDataValue($key, $value);
-                $checklistFormData[$key]['user_id'] = auth()->id();
+                $checklistFormData[$key]['user_id'] = Auth::id();
                 $checklistFormData[$key]['checklist_id'] = $this->os->categoria->checklist_id;
             }
             // dd($checklistFormData);
