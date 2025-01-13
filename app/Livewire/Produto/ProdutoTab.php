@@ -102,19 +102,10 @@ class ProdutoTab extends Component
             $produto['valor_venda_total'] = $produto['valor_venda'] * $produto['quantidade'];
             $produto['user_id'] = Auth::id();
             $itemProduto = $this->modelSelector()->produtos();
-            if ($itemProdutoTemp = $itemProduto->where('produto_id', $produto['produto_id'])->first()) {
-                $itemProdutoTemp->valor_custo = $produto['valor_custo'];
-                $itemProdutoTemp->valor_venda = $produto['valor_venda'];
-                $itemProdutoTemp->valor_custo_total = ($produto['valor_custo_total'] + ($produto['valor_custo_total'] * $itemProdutoTemp->quantidade));
-                $itemProdutoTemp->valor_venda_total = ($produto['valor_venda_total'] + ($produto['valor_venda_total'] * $itemProdutoTemp->quantidade));
-                $itemProdutoTemp->increment('quantidade', $produto['quantidade']);
-                $itemProdutoReturn = $itemProdutoTemp->save();
-            } else {
-                $itemProdutoReturn = $itemProduto->create(
-                    $produto
-                );
-            }
-            // $this->updateProdutoQuantidadeEstoque();
+            $itemProdutoReturn = $itemProduto->create(
+                $produto
+            );
+
             DB::commit();
 
             return $itemProdutoReturn;
