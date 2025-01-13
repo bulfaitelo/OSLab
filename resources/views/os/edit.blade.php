@@ -96,7 +96,7 @@
             </li>
             @if ($os->categoria->checklist_id)
             <li class="nav-item">
-                <a class="nav-link" id="checklist-tab" data-toggle="tab" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
+                <a class="nav-link  custom-tab-color" id="checklist-tab" data-toggle="tab" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
                     <i class="fa-solid fa-list-check "></i>
                     <span class="d-none d-sm-inline">Checklist</span>
 
@@ -239,7 +239,18 @@
         display: none!important;
     }
 
+    .custom-tab-color {
+        color: #dd4e4e; /* Cor do texto */
+    }
 
+    .custom-tab-color:hover {
+        color: #bd4444; /* Cor do texto */
+    }
+
+    /* Adicionar estilo ao estado ativo, se necessário */
+    .custom-tab-color.active {
+        color: #bd4444 !important;
+    }
 </style>
 @stop
 
