@@ -196,10 +196,10 @@ class Os extends Model
      **/
     public function getHtmlChecklist(): CreateHtmlChecklist|null
     {
-        if ($this->categoria->checklist)
-        {
+        if ($this->categoria->checklist) {
             return new CreateHtmlChecklist($this->categoria->checklist, $this->checklistData);
         }
+
         return null;
     }
 

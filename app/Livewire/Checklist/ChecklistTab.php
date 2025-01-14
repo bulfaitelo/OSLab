@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Checklist;
 
-use App\Http\OsLabClass\Checklist\CreateHtmlChecklist;
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
