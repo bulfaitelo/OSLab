@@ -33,7 +33,7 @@ class StoreUpdateChecklistRequest extends FormRequest
         return [
             'name.required' => 'O nome do Checklist é obrigatório',
             'categoria_id' => 'O campo categoria é obrigatório',
-            'checklist' => 'Houve algum erro atualize a pagina e tente novamente'
+            'checklist' => 'Houve algum erro atualize a pagina e tente novamente',
         ];
     }
 }

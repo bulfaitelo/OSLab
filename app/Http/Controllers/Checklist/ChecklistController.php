@@ -69,6 +69,7 @@ class ChecklistController extends Controller
     public function show(Checklist $checklist)
     {
         dump(json_decode($checklist->checklist));
+
         return view('checklist.show', compact('checklist'));
     }
 

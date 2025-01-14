@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Financeiro;
 
-use Google\Service\Sheets\BooleanRule;
 use Livewire\Component;
 
 class FaturarModal extends Component
@@ -23,7 +22,6 @@ class FaturarModal extends Component
 
     public function render()
     {
-
         if ($this->typeSelector() === 'os') {
             if ($this->checkChecklist()) {
                 return view('livewire.financeiro.faturar-modal', [
@@ -90,7 +88,7 @@ class FaturarModal extends Component
         $checklistRequired = $this->os->categoria->checklist_required;
         $checklistIsDone = $this->os->getHtmlChecklist()?->checklistIsDone();
 
-        if ((($checklistRequired) && ($checklistIsDone)) || ($checklistRequired == false)) {
+        if (($checklistRequired && $checklistIsDone) || ($checklistRequired == false)) {
             return true;
         } else {
             return false;

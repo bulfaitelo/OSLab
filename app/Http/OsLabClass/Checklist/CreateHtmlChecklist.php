@@ -46,7 +46,7 @@ class CreateHtmlChecklist
      * Verifica se os campos obrigatórios já foram preenchidos, retorna True caso sim e false caso não.
      *
      * @return bool
-    **/
+     **/
     public function checklistIsDone(): bool
     {
         if ($this->osChecklistData == null) {
@@ -59,11 +59,11 @@ class CreateHtmlChecklist
 
         $arrayRequired = [];
         foreach ($this->checklist as $opcao) {
-            if((isset($opcao->required)) && ($opcao->required === true))
-            {
+            if ((isset($opcao->required)) && ($opcao->required === true)) {
                 $arrayRequired[] = $opcao->name;
             }
         }
+
         return empty(array_diff($arrayRequired, $arrayData));
     }
 
