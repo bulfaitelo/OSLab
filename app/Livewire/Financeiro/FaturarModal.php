@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Financeiro;
 
+use Google\Service\Sheets\BooleanRule;
 use Livewire\Component;
 
 class FaturarModal extends Component
@@ -22,11 +23,29 @@ class FaturarModal extends Component
 
     public function render()
     {
-        return view('livewire.financeiro.faturar-modal', [
-            'item' => $this->modelSelector(),
-            'itemValorTotal' => $this->valorTotal,
-            'tipo' => $this->typeSelector(),
-        ]);
+
+        if ($this->typeSelector() === 'os') {
+            if ($this->checkChecklist()) {
+                return view('livewire.financeiro.faturar-modal', [
+                    'item' => $this->modelSelector(),
+                    'itemValorTotal' => $this->valorTotal,
+                    'tipo' => $this->typeSelector(),
+                ]);
+            } else {
+                return view('livewire.financeiro.erro-faturar-modal', [
+                    'item' => $this->modelSelector(),
+                    'itemValorTotal' => $this->valorTotal,
+                    'tipo' => $this->typeSelector(),
+                ]);
+            }
+        }
+        if ($this->typeSelector() === 'venda') {
+            return view('livewire.financeiro.faturar-modal', [
+                'item' => $this->modelSelector(),
+                'itemValorTotal' => $this->valorTotal,
+                'tipo' => $this->typeSelector(),
+            ]);
+        }
     }
 
     /**
@@ -58,6 +77,23 @@ class FaturarModal extends Component
         }
         if ($this->venda) {
             return 'venda';
+        }
+    }
+
+    /**
+     * Verifica se o checklist está preenchido e se é obrigatório.
+     *
+     * @return bool true para pode ser faturada, false pendente faturamento.
+     **/
+    private function checkChecklist()
+    {
+        $checklistRequired = $this->os->categoria->checklist_required;
+        $checklistIsDone = $this->os->getHtmlChecklist()?->checklistIsDone();
+
+        if ((($checklistRequired) && ($checklistIsDone)) || ($checklistRequired == false)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

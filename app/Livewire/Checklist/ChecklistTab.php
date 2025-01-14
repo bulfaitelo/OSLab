@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Checklist;
 
+use App\Http\OsLabClass\Checklist\CreateHtmlChecklist;
 use App\Models\Os\Os;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,6 @@ class ChecklistTab extends Component
     public function render()
     {
         $checklist = $this->os->categoria->checklist;
-        // $this->getValuesOsChecklist($os);
 
         return view('livewire.checklist.checklist-tab', [
             'os' => $this->os,
@@ -37,8 +37,8 @@ class ChecklistTab extends Component
                 $checklistFormData[$key]['checklist_id'] = $this->os->categoria->checklist_id;
             }
             // dd($checklistFormData);
-            $this->os->checklist()->delete();
-            $this->os->checklist()->createMany($checklistFormData);
+            $this->os->checklistData()->delete();
+            $this->os->checklistData()->createMany($checklistFormData);
             DB::commit();
             flasher('Checklist atualizado com sucesso.');
         } catch (\Throwable $th) {

@@ -35,6 +35,23 @@ class TestController extends Controller
     public function index()
     {
 
+        $arrayRequired = ['item1', 'item2', 'item3', 'aqweqw', 'asdsd']; // Exemplo de valores requeridos
+        $arrayData = ['item1', 'item3', ]; // Exemplo de valores a serem verificados
+
+        function verificaItens(array $arrayRequired, array $arrayData): bool {
+            // Verifica se todos os elementos de $arrayData estão em $arrayRequired
+            return empty(array_diff($arrayData, $arrayRequired));
+        }
+
+        $resultado = verificaItens($arrayRequired, $arrayData);
+
+        if ($resultado) {
+            echo "Todos os itens de \$arrayData estão em \$arrayRequired.\n";
+        } else {
+            echo "Falta(m) item(s) de \$arrayData em \$arrayRequired.\n";
+        }
+        dd();
+
         $menu = config('adminlte.menu');
         function findRoute(array $array, $route) {
             foreach ($array as $key => $value) {

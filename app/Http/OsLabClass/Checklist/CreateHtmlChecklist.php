@@ -10,17 +10,17 @@ namespace App\Http\OsLabClass\Checklist;
 class CreateHtmlChecklist
 {
     private $checklist;
-    private $osChecklist;
+    private $osChecklistData;
     private $html;
 
     /**
      * @param  object  $checklist  Recebe o modelo de Checklist com base no OS->categoria->checklist
-     * @param  object|null  $osChecklist  Recebe o checklist refente a OS
+     * @param  object|null  $osChecklistData  Recebe os dados do checklist refente a OS
      **/
-    public function __construct($checklist, $osChecklist = null)
+    public function __construct($checklist, $osChecklistData = null)
     {
         $this->checklist = $checklist;
-        $this->osChecklist = $osChecklist;
+        $this->osChecklistData = $osChecklistData;
         $this->setChecklist();
     }
 
@@ -38,6 +38,33 @@ class CreateHtmlChecklist
         }
 
         return $this->html;
+    }
+
+    /**
+     * Checa se o checklist foi preenchido.
+     *
+     * Verifica se os campos obrigatórios já foram preenchidos, retorna True caso sim e false caso não.
+     *
+     * @return bool
+    **/
+    public function checklistIsDone(): bool
+    {
+        if ($this->osChecklistData == null) {
+            return false;
+        }
+        $arrayData = [];
+        foreach ($this->osChecklistData as $data) {
+            $arrayData[] = $data->name;
+        }
+
+        $arrayRequired = [];
+        foreach ($this->checklist as $opcao) {
+            if((isset($opcao->required)) && ($opcao->required === true))
+            {
+                $arrayRequired[] = $opcao->name;
+            }
+        }
+        return empty(array_diff($arrayRequired, $arrayData));
     }
 
     /**
@@ -351,8 +378,8 @@ class CreateHtmlChecklist
      **/
     private function setChecked(object $object, $option)
     {
-        // dd(json_decode($this->osChecklist->where('name', $object->name)->first()?->value));
-        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
+        // dd(json_decode($this->osChecklistData->where('name', $object->name)->first()?->value));
+        if ($osOption = (array) json_decode($this->osChecklistData->where('name', $object->name)->first()?->value)) {
             if (in_array($option->value, $osOption)) {
                 // dd($option->value, $osOption);
                 return ' checked="checked" ';
@@ -373,7 +400,7 @@ class CreateHtmlChecklist
      **/
     private function setCheckedOtherRadio(object $object, $value = false)
     {
-        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
+        if ($osOption = (array) json_decode($this->osChecklistData->where('name', $object->name)->first()?->value)) {
             if (isset($osOption['-other-value'])) {
                 if (! $value) {
                     return ' checked="checked" ';
@@ -393,7 +420,7 @@ class CreateHtmlChecklist
      **/
     private function setCheckedOther(object $object, $value = false)
     {
-        if ($osOption = (array) json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
+        if ($osOption = (array) json_decode($this->osChecklistData->where('name', $object->name)->first()?->value)) {
             if (isset($osOption['-other-value'])) {
                 if (! $value) {
                     return ' checked="checked" ';
@@ -413,7 +440,7 @@ class CreateHtmlChecklist
      **/
     private function setSelected(object $object, $option)
     {
-        if ($osOption = json_decode($this->osChecklist->where('name', $object->name)->first()?->value)) {
+        if ($osOption = json_decode($this->osChecklistData->where('name', $object->name)->first()?->value)) {
             if (in_array($option->value, $osOption)) {
                 return ' selected="selected" ';
             }
@@ -432,7 +459,7 @@ class CreateHtmlChecklist
      **/
     private function setValue(object $object)
     {
-        $osValue = $this->osChecklist->where('name', $object->name)->first()?->value;
+        $osValue = $this->osChecklistData->where('name', $object->name)->first()?->value;
         if (property_exists($object, 'value') && ($osValue == null)) {
             return $object->value;
         }

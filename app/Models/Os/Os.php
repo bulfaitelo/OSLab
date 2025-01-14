@@ -170,7 +170,7 @@ class Os extends Model
      *
      * @return hasMany Checklist
      **/
-    public function checklist(): HasMany
+    public function checklistData(): HasMany
     {
         return $this->hasMany(OsChecklist::class);
     }
@@ -188,17 +188,19 @@ class Os extends Model
     }
 
     /**
-     * Retorna o HTML referente ao Checklist da OS.
+     * Retorna os dados referente ao Checklist da OS.
      *
      * Retorna o Checklist da OS, montado pronto para ser carregado na blade.
      *
-     * @return string html
+     * @return CreateHtmlChecklist|null
      **/
-    public function getHtmlChecklist()
+    public function getHtmlChecklist(): CreateHtmlChecklist|null
     {
-        $html = new CreateHtmlChecklist($this->categoria->checklist, $this->checklist);
-
-        return $html->render();
+        if ($this->categoria->checklist)
+        {
+            return new CreateHtmlChecklist($this->categoria->checklist, $this->checklistData);
+        }
+        return null;
     }
 
     /**

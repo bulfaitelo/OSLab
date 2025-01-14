@@ -68,6 +68,7 @@ class ChecklistController extends Controller
      */
     public function show(Checklist $checklist)
     {
+        dump(json_decode($checklist->checklist));
         return view('checklist.show', compact('checklist'));
     }
 
@@ -91,6 +92,7 @@ class ChecklistController extends Controller
             $checklist->descricao = $request->descricao;
             $checklist->user_id = Auth::id();
             $checklist->checklist = $request->checklist;
+            // $checklist->quantodade_opcoes = count(json_decode($request->checklist));
             $checklist->save();
             DB::commit();
 

@@ -96,10 +96,20 @@
             </li>
             @if ($os->categoria->checklist_id)
             <li class="nav-item">
-                <a class="nav-link  custom-tab-color" id="checklist-tab" data-toggle="tab" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
-                    <i class="fa-solid fa-list-check "></i>
+                <a  @class([
+                        'nav-link',
+                        'custom-tab-color' => !$os->getHtmlChecklist()->checklistIsDone()
+                    ])
+                    id="checklist-tab" data-toggle="tab" href="#checklist" role="tab" aria-controls="checklist" aria-selected="false">
+                    @if (($os->categoria->checklist_required) && (!$os->getHtmlChecklist()->checklistIsDone()))
+                        <i
+                            title="É obrigatório o preenchimento do checklist para faturar Essa os. "
+                            class="fa-solid fa-triangle-exclamation"
+                        ></i>
+                    @else
+                        <i class="fa-solid fa-list-check "></i>
+                    @endif
                     <span class="d-none d-sm-inline">Checklist</span>
-
                 </a>
             </li>
             @endif
