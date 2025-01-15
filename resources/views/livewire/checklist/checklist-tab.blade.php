@@ -4,6 +4,11 @@
         @dump($os->categoria->checklist_required) --}}
         <h2>{{ $checklist->name }}</h2>
         <h4>{{ $checklist->descricao }}</h4>
+        @if ($os->conta_id)
+        <div class="rendered-form">
+            {!! $os->getHtmlChecklist()->render(readOnly: true) !!}
+        </div>
+        @else
         <form method="POST"  wire:submit="submit(new URLSearchParams(new FormData($event.target)).toString())">
             <div class="rendered-form">
                 {!! $os->getHtmlChecklist()->render() !!}
@@ -13,5 +18,6 @@
                 Salvar
             </button>
         </form>
+        @endif
     </div>
 </div>

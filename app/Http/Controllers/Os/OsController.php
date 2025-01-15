@@ -154,6 +154,11 @@ class OsController extends Controller
                     ->with('warning', 'Esta Ordem de Serviço já está faturada.');
         }
 
+        if (! $os->checkChecklist()) {
+            return redirect()->route('os.edit', $os->id)
+                    ->with('warning', 'Por favor preencha o checklist para poder fatura a nota.');
+        }
+
         DB::beginTransaction();
         try {
             //Gerando despesas Referente a produtos.

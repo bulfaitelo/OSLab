@@ -6,7 +6,7 @@
             </h5>
         </div>
         <div class="modal-body">
-
+            <p>O checklist é obrigatório e ele precisa ser preenchido, para poder faturar a os!</p>
         </div>
         <div class="modal-footer">
             <button id="fechar" type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
@@ -14,7 +14,6 @@
                 Fechar
             </button>
         </div>
-
     </div>
 
     <script>

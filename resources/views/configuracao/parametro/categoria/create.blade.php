@@ -58,7 +58,16 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="checklist_required">Obrigatório</label>
+                        <label for="checklist_required">
+                            Obrigatório
+                            <i
+                                data-container="body"
+                                data-toggle="popover"
+                                data-placement="top"
+                                data-content="Torna Obrigatório o preenchimento do checklist para poder faturar uma OS"
+                                class="data_info fas fa-exclamation-circle"
+                            ></i>
+                        </label>
                         <div class="custom-control custom-switch custom-switch-md">
                             <input type="checkbox" name="checklist_required" @checked(old('checklist_required') == 1) value="1" id="checklist_required" class="custom-control-input" onclick="alternaPagoAvista()">
                             <label class="custom-control-label" for="checklist_required"></label>
@@ -86,4 +95,9 @@
 @stop
 
 @section('js')
+<script>
+    $('.data_info').popover({
+        trigger: 'hover'
+    });
+</script>
 @stop

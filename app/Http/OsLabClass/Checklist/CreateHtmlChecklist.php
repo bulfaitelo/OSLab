@@ -12,6 +12,7 @@ class CreateHtmlChecklist
     private $checklist;
     private $osChecklistData;
     private $html;
+    private $readOnly;
 
     /**
      * @param  object  $checklist  Recebe o modelo de Checklist com base no OS->categoria->checklist
@@ -29,10 +30,13 @@ class CreateHtmlChecklist
      *
      * Cria o HTML do check list para retornar dentro do model OS->getHtmlChecklist()
      *
+     * @param  bool  $readOnly  Define se o formulário vai ser apenas de visualização.
      * @return string
      **/
-    public function render()
+    public function render($readOnly = null)
     {
+        $this->readOnly = $readOnly;
+
         foreach ($this->checklist as $opcao) {
             $this->html .= $this->getHtmlFromOption($opcao);
         }
@@ -138,6 +142,7 @@ class CreateHtmlChecklist
                 $this->setPlaceholder($option).
                 $this->setTitle($option).
                 $this->setRequired($option).
+                $this->setReadOnly().
                 ' >';
         $html .= '</div>';
 
@@ -174,6 +179,7 @@ class CreateHtmlChecklist
                 $this->setStep($option).
                 $this->setTitle($option).
                 $this->setRequired($option).
+                $this->setReadOnly().
                 ' >';
         $html .= '</div>';
 
@@ -206,6 +212,7 @@ class CreateHtmlChecklist
                 $this->setPlaceholder($option).
                 $this->setTitle($option).
                 $this->setRequired($option).
+                $this->setReadOnly().
                 $this->setRows($option).
                 ' >'.$this->setValue($option).'</textarea>';
         $html .= '</div>';
@@ -238,6 +245,7 @@ class CreateHtmlChecklist
                 $this->setPlaceholder($option).
                 $this->setTitle($option).
                 $this->setRequired($option).
+                $this->setReadOnly().
                 $this->setMultiple($option).
                 ' >';
         foreach ($option->values as $selectValues) {
@@ -283,6 +291,7 @@ class CreateHtmlChecklist
                 $this->setClass($option).
                 $this->setChecked($option, $radioValues).
                 // $this->setRequired($option).
+                $this->setReadOnly().
                 'aria-required="true"'.
                 'type="checkbox">';
             $html .= '<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
@@ -294,6 +303,7 @@ class CreateHtmlChecklist
                 // 'wire:model.defer="'.$option->name.'.-other" '.
                 'id="'.$option->name.'-other"'.
                 $this->setCheckedOther($option).
+                $this->setReadOnly().
                 'name="'.$option->name.'[]" '.
                 'value = "other"'.
                 'class=" other-option"'.
@@ -341,6 +351,7 @@ class CreateHtmlChecklist
                 $this->setChecked($option, $radioValues).
                 $this->setClass($option).
                 $this->setRequired($option).
+                $this->setReadOnly().
                 // 'aria-required="true"'.
                 'type="radio">';
             $html .= '<label for="'.$option->name.'-'.$key.'"'.'> '.$radioValues->label.'</label>';
@@ -354,6 +365,7 @@ class CreateHtmlChecklist
                 'value = "other"'.
                 // $this->setClass($option).
                 $this->setCheckedOtherRadio($option).
+                $this->setReadOnly().
                 'class=" other-option"'.
                 'type="radio">';
             $html .= '<label for="'.$option->name.'-other" >Outro'.
@@ -608,6 +620,18 @@ class CreateHtmlChecklist
     {
         if (property_exists($object, 'className')) {
             return ' class="'.$object->className.'" ';
+        }
+    }
+
+    /**
+     * Define se o campo vai ser apenas de Leitura.
+     *
+     * @return string|null
+     **/
+    public function setReadOnly()
+    {
+        if ($this->readOnly === true) {
+            return ' disabled ';
         }
     }
 

@@ -9,7 +9,7 @@
                 <h5 class="modal-title" id="faturarModalLabel">Faturar Venda: #{{ $item->id }}</h5>
                 @endif
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">

@@ -176,6 +176,23 @@ class Os extends Model
     }
 
     /**
+     * Verifica se o checklist está preenchido e se é obrigatório.
+     *
+     * @return bool true para pode ser faturada, false checklist para faturamento.
+     **/
+    public function checkChecklist()
+    {
+        $checklistRequired = $this->categoria->checklist_required;
+        $checklistIsDone = $this->getHtmlChecklist()?->checklistIsDone();
+
+        if (($checklistRequired && $checklistIsDone) || ($checklistRequired == false)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Retornar as informações da OS.
      *
      * Retorna retora as informações, Senhas e arquivos relacionado A OS
