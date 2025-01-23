@@ -37,7 +37,10 @@ document.addEventListener('livewire:init', function () {
                 y: {
                     beginAtZero: false,
                     grid: {
-                        display: false
+                        display: false,
+                    },
+                    ticks: {
+                        precision: 0
                     }
                 },
                 x: {
