@@ -27,7 +27,8 @@ class BalanceteCard extends Component
     public function render()
     {
         if (! $this->mes_busca) {
-            $this->mes_busca = now()->format('m');
+            $this->mes_busca = now()->format('n');
+
         }
         $balancete = $this->getSaldo($this->mes_busca);
 
