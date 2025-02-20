@@ -30,6 +30,7 @@ return [
                     base_path('storage/app/').env('APP_NAME'),
                     base_path('storage/framework'),
                     base_path('storage/debugbar'),
+                    base_path('storage/fonts'),
                     base_path('vendor'),
                     base_path('node_modules'),
                 ],

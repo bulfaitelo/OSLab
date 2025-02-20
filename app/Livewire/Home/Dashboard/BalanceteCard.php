@@ -28,7 +28,6 @@ class BalanceteCard extends Component
     {
         if (! $this->mes_busca) {
             $this->mes_busca = now()->format('n');
-
         }
         $balancete = $this->getSaldo($this->mes_busca);
 
