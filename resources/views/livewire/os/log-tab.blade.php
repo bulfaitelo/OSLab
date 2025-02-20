@@ -74,9 +74,6 @@
         @endforeach
 
         @endforeach
-        <div class="time-label">
-            <span class="bg-lightblue">{{ $os->created_at->format('d/m/Y') }}</span>
-        </div>
         <div>
             <i class="fas fa-plus bg-lightblue"></i>
             <div class="timeline-item">
