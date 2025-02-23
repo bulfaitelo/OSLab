@@ -707,6 +707,6 @@ Breadcrumbs::for('configuracao.backup.index', function (BreadcrumbTrail $trail) 
 Breadcrumbs::for('relatorio.financeiro.balancete.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Relatórios');
-    $trail->push('Backup', route('relatorio.financeiro.balancete.index'));
+    $trail->push('Balancete', route('relatorio.financeiro.balancete.index'));
 });
 // Felatório
