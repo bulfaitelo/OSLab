@@ -84,12 +84,12 @@ class Pagamentos extends Model
     }
 
     /**
-     * Retorna os dados para o relatório de Despesas. 
+     * Retorna os dados para o relatório de Despesas.
      *
-     * @param  Request  $request request
+     * @param  Request  $request  request
      * @return object|null
      **/
-    static public function RelatorioDespesas(Request $request):object|null
+    public static function RelatorioDespesas(Request $request): object|null
     {
         $query = self::query();
         $query->selectRaw('  
@@ -119,7 +119,7 @@ class Pagamentos extends Model
         }
 
         if ($request->data_inicio and $request->data_fim) {
-            $column = ($request->tipo_data == 'pagamento') ? 'data_pagamento' : 'vencimento' ;            
+            $column = ($request->tipo_data == 'pagamento') ? 'data_pagamento' : 'vencimento';
             $query->whereBetween($column, [$request->data_inicio, $request->data_fim]);
         }
         if ($request->centro_custo) {
@@ -129,6 +129,7 @@ class Pagamentos extends Model
             $query->where('contas.centro_custo_id', $request->forma_pagamento_id);
         }
         $query->where('contas.tipo', 'D');
+
         return $query->get();
     }
 }

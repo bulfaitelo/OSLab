@@ -20,7 +20,7 @@ class DespesaController extends Controller
     public function index(Request $request)
     {
         $relatorio = null;
-        if ($request->input()) {            
+        if ($request->input()) {
             $validated = $request->validate([
                 'centro_custo_id' => 'nullable|exists:centro_custos,id',
                 'tipo_data' => 'required|in:pagamento,vencimento',
@@ -31,10 +31,10 @@ class DespesaController extends Controller
             ]);
             $relatorio = Pagamentos::RelatorioDespesas($request);
         }
+
         return view('relatorio.financeiro.despesa.index', [
             'request' => $request,
             'relatorio' => $relatorio,
         ]);
     }
-
 }
