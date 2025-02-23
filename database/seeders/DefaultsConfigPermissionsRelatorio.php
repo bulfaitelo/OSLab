@@ -20,6 +20,12 @@ class DefaultsConfigPermissionsRelatorio extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 2,
             ],
+            [
+                'description' => 'Acesso ao Relatório Despesa Financeira',
+                'name' => 'relatorio_financeiro_despesa',
+                'guard_name' => 'web',
+                'group_id' => 2,
+            ],
         ];
 
         foreach ($insert as $key => $value) {

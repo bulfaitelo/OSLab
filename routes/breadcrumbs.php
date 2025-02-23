@@ -709,4 +709,10 @@ Breadcrumbs::for('relatorio.financeiro.balancete.index', function (BreadcrumbTra
     $trail->push('Relatórios');
     $trail->push('Balancete', route('relatorio.financeiro.balancete.index'));
 });
-// Felatório
+// Financeiro Despesa
+Breadcrumbs::for('relatorio.financeiro.despesa.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Relatórios');
+    $trail->push('Despesa', route('relatorio.financeiro.despesa.index'));
+});
+// Relatório

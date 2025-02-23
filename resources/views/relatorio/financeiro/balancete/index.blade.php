@@ -2,10 +2,10 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Balancete')
+@section('title', 'Relatório Balancete')
 
 @section('content_header')
-    <h1><i class="fas fa-balance-scale "></i> Balancete</h1>
+    <h1><i class="fas fa-balance-scale "></i> Relatório Balancete</h1>
 @stop
 
 @section('content')
