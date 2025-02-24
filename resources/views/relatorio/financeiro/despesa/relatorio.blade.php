@@ -24,7 +24,7 @@
             <td class="text-right" >R$ {{ number_format($item->valor, 2, ',', '.') }} </td>
             <td>{{ $item->forma_pagamento }}</td>
             <td>{{ $item->vencimento->format('d/m/Y') }} </td>
-            <td>{{ $item->data_pagamento->format('d/m/Y') }} </td>
+            <td>{{ $item->data_pagamento?->format('d/m/Y') }} </td>
             <td>{{ $item->usuario }}</td>
             <td class="d-print-none">
                 @can('financeiro_despesa_show')
