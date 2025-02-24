@@ -92,12 +92,13 @@ class Pagamentos extends Model
     public static function RelatorioDespesas(Request $request): object|null
     {
         $query = self::query();
-        $query->selectRaw('  
-            contas.id as id,          
+        $query->selectRaw('
+            contas.id as id,
             contas.name as descricao,
             clientes.name as cliente,
             centro_custos.name as centro_custo,
             contas_pagamentos.parcela as parcela,
+            contas.parcelas as total_parcela,
             contas_pagamentos.valor as valor,
             forma_pagamentos.name as forma_pagamento,
             contas_pagamentos.vencimento as vencimento,

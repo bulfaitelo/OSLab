@@ -39,7 +39,7 @@
             </div>
             @include('adminlte::partials.form-alert')
             <div class="row d-print-none">
-                
+
                     <div class="col-md-9">
                         <div class="form-group">
                             <label for="busca">Cliente / Fornecedor / Despesa / Observação </label>
@@ -63,7 +63,7 @@
                         <div class="form-check form-check-inline">
                             {!! html()->radio('tipo_data', ($request->tipo_data == 'vencimento') ? $request->tipo_data : '', 'vencimento')->class('form-check-input ')->attribute('id', 'radio_vencimento') !!}
                             <label class="form-check-label" for="radio_vencimento">Vencimento</label>
-                        </div>                    
+                        </div>
                     </div>
                 <div class="col-md-2">
                     <div class="form-group">
@@ -76,7 +76,7 @@
                     <label for="data_fim" >Data Fim</label>
                         {!! html()->date('data_fim', ($request->data_fim == true) ? $request->data_fim : now()->endOfMonth()->format('d-m-Y') )->class('form-control  form-control-sm')->placeholder('Data Fim') !!}
                     </div>
-                </div>                
+                </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="forma_pagamento_id">Forma de pagamento</label>
@@ -89,13 +89,13 @@
                     {!! html()->select('ordenacao', ['data' => 'Data', 'nome' => 'Nome', 'saldo' => 'Saldo'], ($request->ordenacao == true) ? $request->ordenacao : '' )->class('form-control  form-control-sm') !!}
                     </div>
                 </div> --}}
-            </div>            
+            </div>
             <div class=" table-responsive">
-                
+
                 @if ($relatorio)
                     <hr>
                     @include('relatorio.financeiro.despesa.relatorio')
-                @endif                
+                @endif
             </div>
         </div>
         <div class="card-footer">
@@ -109,7 +109,15 @@
 @stop
 
 @section('css')
-
+{{-- <head>
+    <style>
+        @media print {
+            @page {
+                size: landscape;
+            }
+        }
+    </style>
+</head> --}}
 @stop
 
 @section('js')
