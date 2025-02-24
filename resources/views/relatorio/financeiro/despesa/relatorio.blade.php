@@ -11,6 +11,7 @@
             <th>Vencimento</th>
             <th>Data de Pagto.</th>
             <th>Usuário</th>
+            <th class="d-print-none" ></th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,12 @@
             <td>{{ $item->vencimento->format('d/m/Y') }} </td>
             <td>{{ $item->data_pagamento->format('d/m/Y') }} </td>
             <td>{{ $item->usuario }}</td>
+            <td class="d-print-none">
+                @can('financeiro_despesa_show')
+                    <a href="{{ route('financeiro.despesa.show', $item->id) }}" title="Visualizar" target="_blank" class="btn btn-left btn-default btn-sm"><i class="fas fa-eye"></i></a>
+                @endcan
+
+            </td>
             {{-- <td>{{ $item->data_entrada->format('d/m/Y') }}</td> --}}
 
         </tr>
@@ -34,7 +41,7 @@
         <tr>
             <th colspan="4">TOTAL</th>
             <th class="text-right" >R$ {{ number_format($relatorio->sum('valor'), 2, ',', '.')}}  </th>
-            <th colspan="4"></th>
+            <th colspan="5"></th>
 
             {{-- <th class="text-right" >R$ {{ number_format($relatorio->sum('credito'), 2, ',', '.')}}  </th>
             <th class="text-right" >R$ {{ number_format($relatorio->sum('debito'), 2, ',', '.')}}  </th>

@@ -5,7 +5,7 @@
 @section('title', 'Relatório Despesas')
 
 @section('content_header')
-    <h1><i class="fas fa-balance-scale "></i> Relatório Despesas</h1>
+    <h1><i class="fa-solid fa-money-bill"></i> Relatório Despesas</h1>
 @stop
 
 @section('content')
