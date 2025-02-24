@@ -2,10 +2,10 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Relatório Despesas')
+@section('title', 'Relatório Receita / Despesas')
 
 @section('content_header')
-<h1><i class="fa-solid fa-money-bill"></i> Relatório Despesas</h1>
+<h1><i class="fa-solid fa-money-bill"></i> Relatório Receita / Despesas</h1>
 @stop
 
 @section('content')
@@ -39,14 +39,10 @@
             </div>
             @include('adminlte::partials.form-alert')
             <div class="row d-print-none">
-                {{-- <div class="col-md-2">
-                    <label>Tipo</label>
-                    <select name="tipo" class="form-control form-control-sm">
-                        <option value="">Todos</option>
-                        <option value="despesa">Despesas</option>
-                        <option value="receita">Receitas</option>
-                    </select>
-                </div> --}}
+                <div class="col-md-2">
+                    <label>Financeiro</label>
+                    {{ html()->select('financeiro', ['despesa' => 'Despesas', 'receita' => 'Receitas'], $request->financeiro)->class('form-control form-control-sm')->placeholder('Receitas / Despesas') }}
+                </div>
                 <div class="col-md-7">
                     <div class="form-group">
                         <label for="busca">Cliente / Fornecedor / Despesa / Observação </label>

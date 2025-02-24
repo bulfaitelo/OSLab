@@ -21,8 +21,8 @@ class DefaultsConfigPermissionsRelatorio extends Seeder
                 'group_id' => 2,
             ],
             [
-                'description' => 'Acesso ao Relatório Despesa Financeira',
-                'name' => 'relatorio_financeiro_despesa',
+                'description' => 'Acesso ao Relatório Receita e Despesa Financeira',
+                'name' => 'relatorio_financeiro_receita_despesa',
                 'guard_name' => 'web',
                 'group_id' => 2,
             ],

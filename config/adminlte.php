@@ -445,14 +445,14 @@ return [
             'text' => 'Relatórios',
             'icon' => 'fa-regular fa-file-lines',
             'can' => [
-                'relatorio_financeiro_balancete', 'relatorio_financeiro_despesa',
+                'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa',
             ],
             'submenu' => [
                 [
                     'text' => 'Financeiro',
                     'icon' => 'fa-solid fa-chart-line',
                     'can' => [
-                        'relatorio_financeiro_balancete', 'relatorio_financeiro_despesa',
+                        'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa',
                     ],
                     'submenu' => [
                         [
@@ -463,12 +463,11 @@ return [
                             'can' => 'relatorio_financeiro_balancete',
                         ],
                         [
-                            'text' => 'Despesas',
+                            'text' => 'Receitas / Despesas',
                             'icon' => 'fa-solid fa-money-bill',
-                            'icon_color' => 'danger',
                             'route' => 'relatorio.financeiro.despesa.index',
                             'active' => ['relatorio/financeiro/despesa*'],
-                            'can' => 'relatorio_financeiro_despesa',
+                            'can' => 'relatorio_financeiro_receita_despesa',
                         ],
                     ],
                 ],

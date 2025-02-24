@@ -87,13 +87,14 @@ class Pagamentos extends Model
      * Retorna os dados para o relatório de Despesas.
      *
      * @param  Request  $request  request
-     * @return object|null
+     * @return array|null
      **/
-    public static function RelatorioDespesas(Request $request): object|null
+    public static function RelatorioDespesasReceita(Request $request): array|null
     {
         $query = self::query();
         $query->selectRaw('
             contas.id as id,
+            contas.tipo as tipo,
             contas.name as descricao,
             clientes.name as cliente,
             centro_custos.name as centro_custo,
@@ -129,8 +130,23 @@ class Pagamentos extends Model
         if ($request->forma_pagamento_id) {
             $query->where('contas.centro_custo_id', $request->forma_pagamento_id);
         }
-        $query->where('contas.tipo', 'D');
+        $query->orderByDesc('tipo');
 
-        return $query->get();
+        if ($request->financeiro) {
+            $tipo = ($request->financeiro == 'receita') ? 'R' : 'D';
+            $query->where('contas.tipo', $tipo);
+        }
+
+        $temp = $query->get();
+
+        if ($temp->count() > 0) {
+            foreach ($temp as $key => $value) {
+                $return[$value->tipo][] = $value;
+            }
+
+            return $return;
+        }
+
+       return null;
     }
 }
