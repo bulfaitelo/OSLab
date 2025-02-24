@@ -43,7 +43,7 @@
                     <label>Financeiro</label>
                     {{ html()->select('financeiro', ['despesa' => 'Despesas', 'receita' => 'Receitas'], $request->financeiro)->class('form-control form-control-sm')->placeholder('Receitas / Despesas') }}
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label for="busca">Cliente / Fornecedor / Despesa / Observação </label>
                         {!! html()->text('busca', $request->busca)->class('form-control form-control-sm')->placeholder('Buscar por Cliente, Fornecedor, Despesa ou Observação') !!}
