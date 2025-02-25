@@ -83,7 +83,5 @@ class FaturarModal extends Component
             'item' => $this->modelSelector(),
             'tipo' => $this->typeSelector(),
         ]);
-
     }
-
 }
