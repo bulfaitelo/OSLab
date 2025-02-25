@@ -71,7 +71,7 @@ class FaturarModal extends Component
 
     private function returnView()
     {
-        if ($this->valorTotal > 0 ) {
+        if ($this->valorTotal > 0) {
             return view('livewire.financeiro.faturar-modal', [
                 'item' => $this->modelSelector(),
                 'itemValorTotal' => $this->valorTotal,

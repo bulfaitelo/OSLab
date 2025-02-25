@@ -129,7 +129,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active show" id="detalhes" role="tabpanel" aria-labelledby="detalhes-tab">
-                @livewire('os.detalhes-tab', ['os' => $os], key('detalhes-tab'))
+                @livewire('os.detalhes-tab', ['os' => $os])
             </div>
             <div class="tab-pane fade " id="produtos" role="tabpanel" aria-labelledby="produtos-tab">
                 @livewire('produto.produto-tab', ['os' => $os])
