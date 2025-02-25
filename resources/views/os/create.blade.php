@@ -256,7 +256,7 @@
                     '</div>';
                 },
                 item: function(data, escape) {
-                    return '<div title="' + escape(data.id) + '">' + escape(data.name) + '</div>';
+                    return '<div title="' + escape(data.id) + '"> <b>' + escape(data.name) + '</b>, ' + escape(data.wiki) + '</div>';
                 },
                 @canany(['wiki_create','config_wiki_modelo_create'])
                 no_results:function(data,escape){
