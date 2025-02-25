@@ -24,24 +24,16 @@ class FaturarModal extends Component
     {
         if ($this->typeSelector() === 'os') {
             if ($this->modelSelector()->checkChecklist()) {
-                return view('livewire.financeiro.faturar-modal', [
-                    'item' => $this->modelSelector(),
-                    'itemValorTotal' => $this->valorTotal,
-                    'tipo' => $this->typeSelector(),
-                ]);
+                return $this->returnView();
             } else {
-                return view('livewire.financeiro.erro-faturar-modal', [
+                return view('livewire.financeiro.erro-checklist-faturar-modal', [
                     'item' => $this->modelSelector(),
                     'tipo' => $this->typeSelector(),
                 ]);
             }
         }
         if ($this->typeSelector() === 'venda') {
-            return view('livewire.financeiro.faturar-modal', [
-                'item' => $this->modelSelector(),
-                'itemValorTotal' => $this->valorTotal,
-                'tipo' => $this->typeSelector(),
-            ]);
+            return $this->returnView();
         }
     }
 
@@ -76,4 +68,22 @@ class FaturarModal extends Component
             return 'venda';
         }
     }
+
+    private function returnView()
+    {
+        if ($this->valorTotal > 0 ) {
+            return view('livewire.financeiro.faturar-modal', [
+                'item' => $this->modelSelector(),
+                'itemValorTotal' => $this->valorTotal,
+                'tipo' => $this->typeSelector(),
+            ]);
+        }
+
+        return view('livewire.financeiro.erro-valor-faturar-modal', [
+            'item' => $this->modelSelector(),
+            'tipo' => $this->typeSelector(),
+        ]);
+
+    }
+
 }
