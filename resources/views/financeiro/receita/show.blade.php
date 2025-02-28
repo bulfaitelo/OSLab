@@ -19,6 +19,14 @@
                         Voltar
                     </button>
                 </a>
+                @can('financeiro_receita_edit')
+                <a href="{{ route('financeiro.receita.edit', $receita) }}">
+                    <button type="button" title="Editar" class="btn btn-sm btn-info">
+                        <i class="fas fa-edit"></i>
+                        Editar
+                    </button>
+                </a>
+                @endcan
             </div>
           <!-- /.card-header -->
           <!-- form start -->
@@ -117,6 +125,11 @@
 
 <link href="{{ url('') }}/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
 <link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
+<style>
+    .receita {
+        border-top: 3px solid #12cd37;        
+    }
+</style>
 @stop
 
 @section('js')

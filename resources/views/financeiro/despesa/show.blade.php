@@ -19,6 +19,14 @@
                         Voltar
                     </button>
                 </a>
+                @can('financeiro_despesa_edit')
+                <a href="{{ route('financeiro.despesa.edit', $despesa) }}">
+                    <button type="button" title="Editar" class="btn btn-sm btn-info">
+                        <i class="fas fa-edit"></i>
+                        Editar
+                    </button>
+                </a>
+                @endcan
             </div>
           <!-- /.card-header -->
           <!-- form start -->

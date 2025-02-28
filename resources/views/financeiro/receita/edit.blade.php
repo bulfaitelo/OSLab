@@ -19,6 +19,14 @@
                         Voltar
                     </button>
                 </a>
+                @can('financeiro_receita_show')
+                <a href="{{ route('financeiro.receita.show', $receita) }}">
+                    <button type="button" title="Editar" class="btn btn-sm btn-default">
+                        <i class="fas fa-eye"></i>
+                        <span class="d-none d-sm-inline">Visualizar</span>
+                    </button>
+                </a>
+                @endcan
             </div>
             <!-- /.card-header -->
             <!-- form start -->
