@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Contas extends Model
 {
@@ -159,6 +160,50 @@ class Contas extends Model
             $query->orderBy($orderArray[$ordenacao]['colun'], $orderArray[$ordenacao]['order']);
         }
 
+        return $query->get();
+    }
+
+    /**
+     * Retorna o relatório de contas em Aberto.
+     *
+     * @param  Request  $request  request
+     * @return object|null
+     */
+    public static function RelatorioContasAbertas(Request $request): object|null
+    {
+        $query = self::query();
+        $query->selectRaw('
+            contas.id,
+            contas.tipo,
+            contas.name, 
+            contas.os_id,
+            contas.venda_id,
+            clientes.name as cliente,
+            contas.valor,
+            COALESCE(SUM(contas_pagamentos.valor), 0) AS valor_pago,
+            (contas.valor - COALESCE(SUM(contas_pagamentos.valor), 0)) AS debito
+        ');
+        if ($request->busca) {
+            $query->where(function ($query) use ($request) {
+                $query->where('clientes.name', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('contas.name', 'LIKE', '%'.$request->busca.'%');
+                $query->orWhere('contas.observacoes', 'LIKE', '%'.$request->busca.'%');
+            });
+        }
+        if ($request->financeiro) {
+            $tipo = ($request->financeiro == 'receita') ? 'R' : 'D';
+            $query->where('contas.tipo', $tipo);
+        }
+        if ($request->centro_custo) {
+            $query->where('contas.centro_custo_id', $request->centro_custo);
+        }
+        $query->leftJoin('contas_pagamentos', 'contas_pagamentos.conta_id', '=', 'contas.id');
+        $query->join('clientes', 'contas.cliente_id', '=', 'clientes.id');
+        $query->groupBy('contas.id', 'contas.tipo', 'contas.name', 'contas.os_id', 'contas.venda_id', 'contas.cliente_id', 'contas.valor');
+        $query->having('debito', '>', 0);
+        if ($request->data_inicio and $request->data_fim) {
+            $query->whereBetween('contas.created_at', [$request->data_inicio, $request->data_fim]);
+        }        
         return $query->get();
     }
 }

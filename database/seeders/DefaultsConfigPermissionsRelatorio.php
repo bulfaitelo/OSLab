@@ -26,6 +26,12 @@ class DefaultsConfigPermissionsRelatorio extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 2,
             ],
+            [
+                'description' => 'Acesso ao Relatório Financeiro de Contas Em aberto',
+                'name' => 'relatorio_financeiro_conta_aberta',
+                'guard_name' => 'web',
+                'group_id' => 2,
+            ],
         ];
 
         foreach ($insert as $key => $value) {

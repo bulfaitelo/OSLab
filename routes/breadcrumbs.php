@@ -715,4 +715,10 @@ Breadcrumbs::for('relatorio.financeiro.despesa.index', function (BreadcrumbTrail
     $trail->push('Relatórios');
     $trail->push('Despesa', route('relatorio.financeiro.despesa.index'));
 });
+// Financeiro Contas em Aberto 
+Breadcrumbs::for('relatorio.financeiro.conta_aberta.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Relatórios');
+    $trail->push('Contas em Aberto', route('relatorio.financeiro.conta_aberta.index'));
+});
 // Relatório

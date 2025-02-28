@@ -28,6 +28,7 @@ use App\Http\Controllers\OsLab\FavoriteController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Relatorio\Financeiro\BalanceteController;
+use App\Http\Controllers\Relatorio\Financeiro\ContaAbertaController;
 use App\Http\Controllers\Relatorio\Financeiro\ReceitaDespesaController;
 use App\Http\Controllers\Servico\ServicoController;
 use App\Http\Controllers\TestController;
@@ -130,6 +131,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('financeiro.')->prefix('financeiro')->group(function () {
             Route::get('/balancete', [BalanceteController::class, 'index'])->name('balancete.index');
             Route::get('/despesa', [ReceitaDespesaController::class, 'index'])->name('despesa.index');
+            Route::get('/conta_aberta', [ContaAbertaController::class, 'index'])->name('conta_aberta.index');
         });
 
         // // OS

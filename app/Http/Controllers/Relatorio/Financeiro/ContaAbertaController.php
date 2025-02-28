@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Relatorio\Financeiro;
 
 use App\Http\Controllers\Controller;
-use App\Models\Financeiro\Pagamentos;
+use App\Models\Financeiro\Contas;
 use Illuminate\Http\Request;
 
-class ReceitaDespesaController extends Controller
+class ContaAbertaController extends Controller
 {
     public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:relatorio_financeiro_receita_despesa', ['only' => ['index']]);
+        $this->middleware('permission:relatorio_financeiro_conta_aberta', ['only' => ['index']]);
     }
 
     /**
@@ -20,20 +20,18 @@ class ReceitaDespesaController extends Controller
     public function index(Request $request)
     {
         $relatorio = null;
-        if ($request->input()) {
+        if ($request->input()) {            
             $request->validate([
                 'financeiro' => 'nullable|in:receita,despesa',
-                'centro_custo_id' => 'nullable|exists:centro_custos,id',
-                'tipo_data' => 'required|in:pagamento,vencimento',
+                'centro_custo_id' => 'nullable|exists:centro_custos,id',                
                 'data_inicio' => 'nullable|date',
-                'data_fim' => 'nullable|date|after_or_equal:data_inicio',
-                'forma_pagamento_id' => 'nullable|exists:forma_pagamentos,id',
+                'data_fim' => 'nullable|date|after_or_equal:data_inicio',                
                 // 'ordenacao' => 'required|in:data,nome,saldo',
             ]);
-            $relatorio = Pagamentos::RelatorioDespesasReceita($request);
+            $relatorio = Contas::RelatorioContasAbertas($request);            
         }
 
-        return view('relatorio.financeiro.despesa.index', [
+        return view('relatorio.financeiro.conta_aberta.index', [
             'request' => $request,
             'relatorio' => $relatorio,
         ]);
