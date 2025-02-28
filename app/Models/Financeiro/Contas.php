@@ -203,7 +203,8 @@ class Contas extends Model
         $query->having('debito', '>', 0);
         if ($request->data_inicio and $request->data_fim) {
             $query->whereBetween('contas.created_at', [$request->data_inicio, $request->data_fim]);
-        }        
+        }
+
         return $query->get();
     }
 }

@@ -445,14 +445,14 @@ return [
             'text' => 'Relatórios',
             'icon' => 'fa-regular fa-file-lines',
             'can' => [
-                'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta'
+                'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta',
             ],
             'submenu' => [
                 [
                     'text' => 'Financeiro',
                     'icon' => 'fa-solid fa-chart-line',
                     'can' => [
-                        'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta', 
+                        'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta',
                     ],
                     'submenu' => [
                         [
