@@ -20,15 +20,15 @@ class ContaAbertaController extends Controller
     public function index(Request $request)
     {
         $relatorio = null;
-        if ($request->input()) {            
+        if ($request->input()) {
             $request->validate([
                 'financeiro' => 'nullable|in:receita,despesa',
-                'centro_custo_id' => 'nullable|exists:centro_custos,id',                
+                'centro_custo_id' => 'nullable|exists:centro_custos,id',
                 'data_inicio' => 'nullable|date',
-                'data_fim' => 'nullable|date|after_or_equal:data_inicio',                
+                'data_fim' => 'nullable|date|after_or_equal:data_inicio',
                 // 'ordenacao' => 'required|in:data,nome,saldo',
             ]);
-            $relatorio = Contas::RelatorioContasAbertas($request);            
+            $relatorio = Contas::RelatorioContasAbertas($request);
         }
 
         return view('relatorio.financeiro.conta_aberta.index', [
