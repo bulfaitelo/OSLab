@@ -92,7 +92,6 @@ class Cliente extends Model
      *
      * @return string|null
      **/
-
     public function hasPendingDebits(): ?string
     {
         $results = $this->getPendingDebits();
@@ -119,11 +118,11 @@ class Cliente extends Model
         );
 
         return 'Este usuário está com pendências financeiras: '
-            . collect([$osString, $vendaString])->filter()->implode(' - ') . '.';
+            .collect([$osString, $vendaString])->filter()->implode(' - ').'.';
     }
 
     /**
-     * Consulta as pendências financeiras do usuário
+     * Consulta as pendências financeiras do usuário.
      */
     private function getPendingDebits()
     {
@@ -143,7 +142,7 @@ class Cliente extends Model
     }
 
     /**
-     * Formata os itens pendentes como links ou texto simples
+     * Formata os itens pendentes como links ou texto simples.
      */
     private function formatPendingItems($items, bool $canShow, string $routeName, string $label): ?string
     {
@@ -151,7 +150,7 @@ class Cliente extends Model
             return null;
         }
 
-        $formattedItems = $items->map(fn($id) => $canShow
+        $formattedItems = $items->map(fn ($id) => $canShow
             ? '<a href="'.route($routeName, $id).'" target="_blank"><b>#'.$id.'</b></a>'
             : '<b>#'.$id.'</b>'
         )->implode(', ');
