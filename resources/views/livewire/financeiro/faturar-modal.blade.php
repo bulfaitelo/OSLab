@@ -13,6 +13,15 @@
                 </button>
             </div>
             <div class="modal-body">
+                @if ($debitosPendentes)
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <i class="icon fas fa-exclamation-triangle" style="width: 7px"></i> {!! $debitosPendentes !!}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                @endif
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">

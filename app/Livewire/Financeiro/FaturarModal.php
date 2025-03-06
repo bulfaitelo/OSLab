@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Financeiro;
 
+use App\Models\Cliente\Cliente;
 use Livewire\Component;
 
 class FaturarModal extends Component
@@ -76,6 +77,7 @@ class FaturarModal extends Component
                 'item' => $this->modelSelector(),
                 'itemValorTotal' => $this->valorTotal,
                 'tipo' => $this->typeSelector(),
+                'debitosPendentes' => Cliente::find($this->modelSelector()->cliente_id)->hasPendingDebits(),
             ]);
         }
 
