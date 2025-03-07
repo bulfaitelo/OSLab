@@ -77,3 +77,7 @@ No `migrate  --seed` já é criado um usuário com todas as permissões pra faci
 ## Contribuição
 
 Sinta-se à vontade para contribuir para este projeto. Abra uma issue ou envie uma solicitação de pull.
+
+## Licença  
+Este projeto é distribuído sob a **OSLab License v1.0**, que permite o uso e modificação do código, mas **proíbe sua comercialização direta**.  
+Para mais detalhes, consulte o arquivo [https://github.com/bulfaitelo/OSLab/blob/main/LICENSE](LICENSE).  
