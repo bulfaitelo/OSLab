@@ -32,6 +32,12 @@ class DefaultsConfigPermissionsRelatorio extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 2,
             ],
+            [
+                'description' => 'Acesso ao relatório de Logs do sistema',
+                'name' => 'relatorio_sistema_log',
+                'guard_name' => 'web',
+                'group_id' => 2,
+            ],
         ];
 
         foreach ($insert as $key => $value) {

@@ -446,6 +446,7 @@ return [
             'icon' => 'fa-regular fa-file-lines',
             'can' => [
                 'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta',
+                'relatorio_sistema_log',
             ],
             'submenu' => [
                 [
@@ -475,6 +476,22 @@ return [
                             'route' => 'relatorio.financeiro.conta_aberta.index',
                             'active' => ['relatorio/financeiro/conta_aberta*'],
                             'can' => 'relatorio_financeiro_conta_aberta',
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'Sistema',
+                    'icon' => 'fa-solid fa-sitemap',
+                    'can' => [
+                        'relatorio_sistema_log',
+                    ],
+                    'submenu' => [
+                        [
+                            'text' => 'Logs',
+                            'icon' => 'fas fa-balance-scale',
+                            'url' => 'relatorio/log-viewer',
+                            'target' => '_blank',
+                            'can' => 'relatorio_sistema_log',
                         ],
                     ],
                 ],

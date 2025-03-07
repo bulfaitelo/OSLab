@@ -17,6 +17,7 @@
         "laravel/ui": "^4.2",
         "laravellegends/pt-br-validator": "^11.0",
         "livewire/livewire": "^3.4",
+        "opcodesio/log-viewer": "^3.15",
         "php-flasher/flasher-laravel": "^1.15",
         "spatie/laravel-backup": "^8.6",
         "spatie/laravel-html": "^3.2",
