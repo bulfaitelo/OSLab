@@ -44,14 +44,14 @@ class ServicoController extends Controller
     public function store(StoreServicoRequest $request)
     {
         try {
-            $servico = new Servico();
+            $servico = new Servico;
             $servico->name = $request->name;
             $servico->descricao = $request->descricao;
             $servico->valor_servico = $request->valor_servico;
             $servico->save();
 
             return redirect()->route('servico.index')
-            ->with('success', 'Serviço cadastrado com sucesso.');
+                ->with('success', 'Serviço cadastrado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -85,7 +85,7 @@ class ServicoController extends Controller
             $servico->save();
 
             return redirect()->route('servico.index')
-            ->with('success', 'Serviço Atualizado com sucesso.');
+                ->with('success', 'Serviço Atualizado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -100,7 +100,7 @@ class ServicoController extends Controller
             $servicoCount = $servico->os->count();
             if ($servicoCount > 0) {
                 return redirect()->route('servico.index')
-                ->with('warning', 'O servico não pode ser excluído pois está sendo usado em: '.$servicoCount.' Os');
+                    ->with('warning', 'O servico não pode ser excluído pois está sendo usado em: '.$servicoCount.' Os');
             }
             $servico->delete();
 
