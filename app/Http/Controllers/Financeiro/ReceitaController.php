@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Financeiro\StoreContaRequest;
 use App\Http\Requests\Financeiro\UpdateContaRequest;
 use App\Models\Financeiro\Contas;
+use App\Models\Os\Os;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,8 +89,8 @@ class ReceitaController extends Controller
             if ($request->os_id) {
                 $os = Os::findOrFail($request->os_id);
             }
-            $receita = new Contas();
-            $receita->tipo = 'R'; //Receita
+            $receita = new Contas;
+            $receita->tipo = 'R'; // Receita
             $receita->user_id = Auth::id();
             $receita->name = $request->name;
             $receita->centro_custo_id = $request->centro_custo_id;
@@ -158,7 +159,7 @@ class ReceitaController extends Controller
             DB::commit();
 
             return redirect()->route('financeiro.receita.index')
-            ->with('success', 'receita cadastrada com sucesso.');
+                ->with('success', 'receita cadastrada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -199,7 +200,7 @@ class ReceitaController extends Controller
             $receita->save();
 
             return redirect()->route('financeiro.receita.index')
-            ->with('success', 'receita Atualizada com sucesso.');
+                ->with('success', 'receita Atualizada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -213,7 +214,7 @@ class ReceitaController extends Controller
         try {
             if ($receita->os_id || $receita->venda_id) {
                 return redirect()->route('financeiro.receita.index')
-                ->with('warning', 'Não é possível excluir essa Receita, pois esta vinculada a uma OS ou Venda!');
+                    ->with('warning', 'Não é possível excluir essa Receita, pois esta vinculada a uma OS ou Venda!');
             }
             $receita->delete();
 
