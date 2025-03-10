@@ -1,4 +1,4 @@
-name: Laravel
+name: OSLab Laravel Application Test
 
 on:
   push:

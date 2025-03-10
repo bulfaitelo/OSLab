@@ -1,13 +1,14 @@
 name: Deploy OSLab
 
-on:
-  push:
-    branches:
-      - main
 
+on:
+  workflow_run:
+    workflows: ["OSLab Laravel Application Test"]
+    types:
+      - completed
 jobs:
   deploy:
-    runs-on: self-hosted  # Usa o runner que configuramos no servidor
+    runs-on: self-hosted
 
     steps:
       - name: Checar repositório
