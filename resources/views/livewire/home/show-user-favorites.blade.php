@@ -4,7 +4,7 @@
         <div class="row">
         @foreach ($menu as $item)
             {{-- @dump($item) --}}
-            <div class="col">
+            <div class="col pl-0 pr-0">
                 <a href="{{ route($item->route) }}">
                     <button type="button" class="btn btn-primary">
                         <i class="{{ $item->icon }}"></i>
