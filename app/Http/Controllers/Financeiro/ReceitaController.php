@@ -17,7 +17,7 @@ class ReceitaController extends Controller
     public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:financeiro_receita', ['only' => 'index']);
+        $this->middleware('permission:financeiro_receita', ['only' => 'inde']);
         $this->middleware('permission:financeiro_receita_create', ['only' => ['create', 'store']]);
         $this->middleware('permission:financeiro_receita_show', ['only' => 'show']);
         $this->middleware('permission:financeiro_receita_edit', ['only' => ['edit', 'update']]);
