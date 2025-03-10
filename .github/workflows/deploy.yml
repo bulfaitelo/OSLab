@@ -1,0 +1,22 @@
+name: Deploy OSLab
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Usa o runner que configuramos no servidor
+
+    steps:
+      - name: Checar repositório
+        uses: actions/checkout@v4
+
+      - name: Atualizar código no local de produção
+        run: |
+          cd /var/Docker/Docker_Dev_Web/www/oslab
+          git pull origin main
+          sudo docker compose exec app composer install --no-interaction
+          sudo docker compose exec app php oslab/artisan migrate
+          sudo docker compose exec app php oslab/artisan db:update-defaults
