@@ -69,6 +69,7 @@
                 </a>
             </div>
         @endcan
+        @if ($os->modelo_id)
         <div class="btn-group btn-group-sm  float-right ">
             <a
                 class="help_popover btn bg-lightblue btn-sm d-none d-sm-inline"
@@ -84,14 +85,13 @@
                         {{ $os->modelo->wiki->name }}</b></span>
             </a>
             @can('wiki_show')
-                @if ($os->modelo_id)
-                    <a target="_blank" href="{{route('wiki.show', $os->modelo->wiki->id)}}" class="btn bg-primary btn-sm">
-                        <i class="fa-solid fa-book"></i>
-                        <span class="d-none d-sm-inline">Wiki</span>
-                    </a>
-                @endif
+                <a target="_blank" href="{{route('wiki.show', $os->modelo->wiki->id)}}" class="btn bg-primary btn-sm">
+                    <i class="fa-solid fa-book"></i>
+                    <span class="d-none d-sm-inline">Wiki</span>
+                </a>
             @endcan
         </div>
+        @endif
     </div>
     <div class="card-body pt-2">
         <ul class="nav nav-tabs" id="os-tabs" role="tablist">
