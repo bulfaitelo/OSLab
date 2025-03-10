@@ -19,4 +19,4 @@ jobs:
           git pull origin main
           sudo docker compose exec app composer install --no-interaction
           sudo docker compose exec app php oslab/artisan migrate
-          sudo docker compose exec app php oslab/artisan db:update-defaults
+          sudo docker compose exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate
