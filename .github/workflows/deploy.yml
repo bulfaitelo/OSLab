@@ -20,7 +20,7 @@ jobs:
 
       - name: Rodar Composer dentro do diretório Oslab
         run: |
-          sudo docker compose exec app sh -c "cd /var/www/oslab && composer install --no-interaction"
+          sudo docker compose exec app composer install -d oslab
 
       - name: Rodar Artisan Migrate
         run: |
