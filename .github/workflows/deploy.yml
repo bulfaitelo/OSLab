@@ -20,12 +20,12 @@ jobs:
 
       - name: Rodar Composer dentro do diretório Oslab
         run: |
-          sudo docker compose exec app composer install -d oslab
+          sudo docker exec app composer install -d oslab
 
       - name: Rodar Artisan Migrate
         run: |
-          sudo docker compose exec app php oslab/artisan migrate
+          sudo docker exec app php oslab/artisan migrate
 
       - name: Rodar Artisan db:update-defaults (chamando direto na classe)
         run: |
-          sudo docker compose exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate
+          sudo docker exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate
