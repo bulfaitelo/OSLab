@@ -13,10 +13,19 @@ jobs:
       - name: Checar repositório
         uses: actions/checkout@v4
 
-      - name: Atualizar código no local de produção
+      - name: Git Pull no Servidor
         run: |
           cd /var/Docker/Docker_Dev_Web/www/oslab
           git pull origin main
-          sudo docker compose exec app composer install --no-interaction
+
+      - name: Rodar Composer dentro do diretório Oslab
+        run: |
+          sudo docker compose exec app sh -c "cd /var/www/oslab && composer install --no-interaction"
+
+      - name: Rodar Artisan Migrate
+        run: |
           sudo docker compose exec app php oslab/artisan migrate
+
+      - name: Rodar Artisan db:update-defaults (chamando direto na classe)
+        run: |
           sudo docker compose exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate
