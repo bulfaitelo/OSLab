@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checar repositório
