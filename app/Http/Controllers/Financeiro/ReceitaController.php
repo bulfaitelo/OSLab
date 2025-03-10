@@ -211,6 +211,10 @@ class ReceitaController extends Controller
     public function destroy(Contas $receita)
     {
         try {
+            if ($receita->os_id || $receita->venda_id) {
+                return redirect()->route('financeiro.receita.index')
+                ->with('warning', 'Não é possível excluir essa Receita, pois esta vinculada a uma OS ou Venda!');
+            }
             $receita->delete();
 
             return redirect()->route('financeiro.receita.index')

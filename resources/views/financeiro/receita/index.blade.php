@@ -130,7 +130,7 @@
                                     <a href="{{ route('financeiro.receita.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('financeiro_receita_destroy')
-                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('financeiro.receita.destroy', $item->id)}}" data-target="#modal-excluir" ><i class="fas fa-trash"></i></button>
+                                    <button @disabled($item->venda_id) @disabled($item->os_id)  type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('financeiro.receita.destroy', $item->id)}}" data-target="#modal-excluir" ><i class="fas fa-trash"></i></button>
                                 @endcan
                             </div>
                         <!-- /.modal -->
