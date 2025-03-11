@@ -18,8 +18,7 @@ class VendaService implements VendaServiceInterface
 {
     public function __construct(
 
-    ) {
-    }
+    ) {}
 
     /**
      * Retorna o objeto pra modelagem da tabela de Venda.
@@ -68,14 +67,14 @@ class VendaService implements VendaServiceInterface
             $queryVenda->orderBy('id', 'desc');
         }
 
-        return  $queryVenda->paginate($itensPorPagina);
+        return $queryVenda->paginate($itensPorPagina);
     }
 
     public function store(Request $request): Venda
     {
         DB::beginTransaction();
         try {
-            $venda = new Venda();
+            $venda = new Venda;
             $venda->user_id = Auth::id();
             $venda->cliente_id = $request->cliente_id;
             $venda->vendedor_id = $request->vendedor_id;
@@ -131,15 +130,14 @@ class VendaService implements VendaServiceInterface
     /**
      *  Fatura a Venda.
      *
-     * @param  Request  $request
      * @param  Venda  $venda  venda
      */
     public function faturar(Request $request, Venda $venda): Venda
     {
         DB::beginTransaction();
         try {
-            //Gerando despesas Referente a produtos.
-            //Gerando atualizações de estoque .
+            // Gerando despesas Referente a produtos.
+            // Gerando atualizações de estoque .
             foreach ($venda->produtos as $vendaProduto) {
                 // Adicionando despesa,
                 $venda->contas()->create([
@@ -177,7 +175,7 @@ class VendaService implements VendaServiceInterface
                         'venda_produto_id' => $vendaProduto->id,
                         'descricao' => 'Venda Nº: #'.$venda->id,
                     ]);
-                // Sem estoque
+                    // Sem estoque
                 } else {
                     $entrada = (-1 * ($produto->estoque - $vendaProduto->quantidade));
                     $produto->movimentacao()->create([
@@ -235,7 +233,7 @@ class VendaService implements VendaServiceInterface
                 ]);
                 $conta_id = $conta->conta_id;
 
-            // Sem pagamento
+                // Sem pagamento
             } else {
                 $conta = $venda->contas()->create([
                     'tipo' => 'R',
@@ -283,7 +281,6 @@ class VendaService implements VendaServiceInterface
      * Cancela uma Venda Faturada.
      *
      * @param  Venda  $venda  venda
-     * @return Venda
      **/
     public function cancelarFaturamento(Venda $venda): Venda
     {
@@ -328,7 +325,7 @@ class VendaService implements VendaServiceInterface
      * @return string|null retorna o dia de vendimento ou null caso nao exista
      *
      **/
-    private function addDayGarantia($data_saida, $termo_garantia_id): string|null
+    private function addDayGarantia($data_saida, $termo_garantia_id): ?string
     {
         $prazoEmDias = Garantia::find($termo_garantia_id)->prazo_garantia;
         if ($prazoEmDias) {

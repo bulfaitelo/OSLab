@@ -62,7 +62,7 @@ final class FavoriteMenuService
         }
         $userId = Auth::id();
 
-        $paginaFavorita = new PaginaFavorita();
+        $paginaFavorita = new PaginaFavorita;
         $paginaFavorita->user_id = $userId;
         $paginaFavorita->route = $routeName;
         $paginaFavorita->icon = $icon;
@@ -87,7 +87,6 @@ final class FavoriteMenuService
      *
      * Retornar um array com os dados
      *
-     * @return array|null
      **/
     public function getUserFavoriteData()
     {

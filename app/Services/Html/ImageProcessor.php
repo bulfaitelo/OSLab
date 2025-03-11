@@ -23,7 +23,7 @@ class ImageProcessor
     public function trataImagemEnviada($text, $id)
     {
         // tratando as imagens enviadas.
-        $dom = new DOMDocument();
+        $dom = new DOMDocument;
         @$dom->loadHTML($this->utf8_to_iso8859_1($text), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $dom->encoding = 'utf-8';
         $imageFile = $dom->getElementsByTagName('img');
@@ -50,7 +50,7 @@ class ImageProcessor
         }
         // Limpando imagens não usadas.
         if (File::isDirectory($path)) {
-            foreach (File::allFiles($path) as  $file) {
+            foreach (File::allFiles($path) as $file) {
                 if (! in_array($file->getFileName(), $arrayImageUrl)) {
                     unlink($path.$file->getFileName());
                 }
@@ -96,7 +96,6 @@ class ImageProcessor
      * retorna a extensão do arquivo, com base em seu metadado
      *
      * @param  string  $fileData  metadata
-     * @return string
      **/
     private function getFileExtension(string $fileData): string
     {

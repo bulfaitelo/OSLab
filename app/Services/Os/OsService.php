@@ -17,8 +17,7 @@ class OsService implements OsServiceInterface
 {
     public function __construct(
 
-    ) {
-    }
+    ) {}
 
     /**
      * Retorna o objeto pra modelagem da tabela de OS.
@@ -76,14 +75,14 @@ class OsService implements OsServiceInterface
             $queryOs->orderBy('id', 'desc');
         }
 
-        return  $queryOs->paginate($itensPorPagina);
+        return $queryOs->paginate($itensPorPagina);
     }
 
     public function store(Request $request): Os
     {
         DB::beginTransaction();
         try {
-            $os = new Os();
+            $os = new Os;
             $os->user_id = Auth::id();
             $os->cliente_id = $request->cliente_id;
             $os->tecnico_id = $request->tecnico_id;
@@ -157,7 +156,7 @@ class OsService implements OsServiceInterface
      * @return string|null retorna o dia de vendimento ou null caso nao exista
      *
      **/
-    private function addDayGarantia($data_saida, $categoria_id): string|null
+    private function addDayGarantia($data_saida, $categoria_id): ?string
     {
         $prazoEmDias = Categoria::find($categoria_id)->garantia?->prazo_garantia;
         if ($prazoEmDias) {
