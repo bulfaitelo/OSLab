@@ -35,6 +35,9 @@ class TestController extends Controller
     public function index()
     {
 
+        ds(Os::get());
+
+        dd('stop');
         $arrayRequired = ['item1', 'item2', 'item3', 'aqweqw', 'asdsd']; // Exemplo de valores requeridos
         $arrayData = ['item1', 'item3', ]; // Exemplo de valores a serem verificados
 
