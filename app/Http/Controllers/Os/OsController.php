@@ -256,7 +256,6 @@ class OsController extends Controller
                     'parcela' => 1,
                 ]);
                 $conta_id = $fatura->conta_id;
-
             } else {
                 // Sem pagamento
                 $fatura = $os->contas()->create([
