@@ -18,7 +18,8 @@ class VendaService implements VendaServiceInterface
 {
     public function __construct(
 
-    ) {}
+    ) {
+    }
 
     /**
      * Retorna o objeto pra modelagem da tabela de Venda.

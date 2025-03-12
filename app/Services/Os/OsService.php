@@ -17,7 +17,8 @@ class OsService implements OsServiceInterface
 {
     public function __construct(
 
-    ) {}
+    ) {
+    }
 
     /**
      * Retorna o objeto pra modelagem da tabela de OS.
