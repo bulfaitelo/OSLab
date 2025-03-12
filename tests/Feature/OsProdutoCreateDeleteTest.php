@@ -19,9 +19,10 @@ class OsProdutoCreateDeleteTest extends TestCase
     use RefreshDatabase;
 
     private $osService;
+
     private $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -34,7 +35,7 @@ class OsProdutoCreateDeleteTest extends TestCase
     }
 
     #[DataProvider('osProdutoData')]
-    public function testCreateProduto(array $data, array $expected): void
+    public function test_create_produto(array $data, array $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ProdutoTab::class, ['os' => $os])
@@ -53,9 +54,9 @@ class OsProdutoCreateDeleteTest extends TestCase
         $this->assertEquals($osProduto->valor_venda_total, $expected['valor_venda'] * $expected['quantidade']);
     }
 
-    #[Depends('testCreateProduto')]
+    #[Depends('test_create_produto')]
     #[DataProvider('osProdutoData')]
-    public function testDeleteProduto($data, $expected): void
+    public function test_delete_produto($data, $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ProdutoTab::class, ['os' => $os])
@@ -74,9 +75,9 @@ class OsProdutoCreateDeleteTest extends TestCase
         $this->assertDatabaseMissing('os_produtos', $expected);
     }
 
-    #[Depends('testCreateProduto')]
+    #[Depends('test_create_produto')]
     #[DataProvider('osProdutoData')]
-    public function testCreateProdutoFaturado($data): void
+    public function test_create_produto_faturado($data): void
     {
         $response = $this->put(
             route('os.faturar', $data['os_id']),
@@ -96,9 +97,9 @@ class OsProdutoCreateDeleteTest extends TestCase
         $this->assertEquals(0, $osProduto);
     }
 
-    #[Depends('testCreateProduto')]
+    #[Depends('test_create_produto')]
     #[DataProvider('osProdutoData')]
-    public function testDeleteProdutoFaturado($data, $expected): void
+    public function test_delete_produto_faturado($data, $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ProdutoTab::class, ['os' => $os])

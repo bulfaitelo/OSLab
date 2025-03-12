@@ -11,7 +11,9 @@ use Tests\TestCase;
 class LaravelPermissionTest extends TestCase
 {
     use RefreshDatabase;
+
     protected $user;
+
     protected $role;
 
     protected function setUp(): void
@@ -215,12 +217,10 @@ class LaravelPermissionTest extends TestCase
 
     /**
      * Cria um usuário para realização dos testes.
-     *
-     * @return void
      */
     private function createUser(): void
     {
-        $user = new User();
+        $user = new User;
         $user->id = '1';
         $user->ativo = '1';
         $user->name = 'test';
@@ -231,18 +231,16 @@ class LaravelPermissionTest extends TestCase
 
     /**
      * Cria um perfil para realização dos testes.
-     *
-     * @return void
      */
     private function createRole(): void
     {
-        $role = new Role();
+        $role = new Role;
         $role->id = '1';
         $role->name = 'role_test_1';
         $role->guard_name = 'web';
         $role->save();
 
-        $role = new Role();
+        $role = new Role;
         $role->id = '2';
         $role->name = 'role_test_2';
         $role->guard_name = 'web';
@@ -251,18 +249,16 @@ class LaravelPermissionTest extends TestCase
 
     /**
      * Cria uma permissão para realização dos testes.
-     *
-     * @return void
      */
     private function createPermission(): void
     {
-        $role = new Permission();
+        $role = new Permission;
         $role->id = '1';
         $role->name = 'permission_test_1';
         $role->guard_name = 'web';
         $role->save();
 
-        $role = new Permission();
+        $role = new Permission;
         $role->id = '2';
         $role->name = 'permission_test_2';
         $role->guard_name = 'web';

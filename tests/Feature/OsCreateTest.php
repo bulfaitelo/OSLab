@@ -14,9 +14,10 @@ class OsCreateTest extends TestCase
     use RefreshDatabase;
 
     private $osService;
+
     private $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -27,7 +28,7 @@ class OsCreateTest extends TestCase
     }
 
     #[DataProvider('osCreateData')]
-    public function testOsCreate(array $data, array $dataExpected): void
+    public function test_os_create(array $data, array $dataExpected): void
     {
         $this->user->hasPermissionTo('os_create');
         $response = $this->post(route('os.store'), $data);

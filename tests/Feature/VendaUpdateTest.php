@@ -15,9 +15,10 @@ class VendaUpdateTest extends TestCase
     use RefreshDatabase;
 
     private $vendaService;
+
     private $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -29,7 +30,7 @@ class VendaUpdateTest extends TestCase
     }
 
     #[DataProvider('vendaCreateData')]
-    public function testVendaUpdate(array $data, array $dataExpected): void
+    public function test_venda_update(array $data, array $dataExpected): void
     {
         $this->user->hasPermissionTo('venda_edit');
         $response = $this->put(route('venda.update', $data['id']), $data);
@@ -38,7 +39,7 @@ class VendaUpdateTest extends TestCase
         $this->assertDatabaseHas('vendas', $dataExpected);
     }
 
-    // #[Depends('testVendaUpdate')]
+    // #[Depends('test_venda_update')]
     // #[DataProvider('vendaCreateData')]
     // public function testStatusLog($data): void
     // {

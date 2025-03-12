@@ -19,7 +19,7 @@ class ImageProcessorTest extends TestCase
      */
     public function test_text_with_image(): void
     {
-        $processor = new ImageProcessor();
+        $processor = new ImageProcessor;
         $html = '<p>Hello <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAAd0lEQVR4nOzQMQ2AQBQEUSA0JEigRwwS6FGCL8SQE3HdaZhki1/MCNi87Hr1ewr1tT01taSGsskiySLJIskiySLJIskiySLJIskiySIVZc3v8ae2zmdLTRV9SxZJFkkWSRZJFkkWSRZJFkkWSRZJFqkoawQAAP///zkFzqqxtdwAAAAASUVORK5CYII="/> World</p>';
 
         $result = $processor->trataImagemEnviada($html, $this->fileId);
@@ -34,7 +34,7 @@ class ImageProcessorTest extends TestCase
      */
     public function test_text_with_multiple_images(): void
     {
-        $processor = new ImageProcessor();
+        $processor = new ImageProcessor;
         $html = '<p>Hello 
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAAd0lEQVR4nOzQMQ2AQBQEUSA0JEigRwwS6FGCL8SQE3HdaZhki1/MCNi87Hr1ewr1tT01taSGsskiySLJIskiySLJIskiySLJIskiySIVZc3v8ae2zmdLTRV9SxZJFkkWSRZJFkkWSRZJFkkWSRZJFqkoawQAAP///zkFzqqxtdwAAAAASUVORK5CYII="/>
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAAd0lEQVR4nOzQMQ2AQBQEUSA09PihwQ8yqDBChxgEXH8iTsMkW/xiRsDmZdetPVOo4/1TU0tqKJsskiySLJIskiySLJIskiySLJIskixSUda8X19qq99naqroW7JIskiySLJIskiySLJIskiySLJIskhFWSMAAP//vfwGhlh6/TEAAAAASUVORK5CYII="/>                
@@ -51,7 +51,7 @@ class ImageProcessorTest extends TestCase
      */
     public function test_text_update_with_multiple_images(): void
     {
-        $processor = new ImageProcessor();
+        $processor = new ImageProcessor;
         $html = 'Hello World 
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAAd0lEQVR4nOzQMQ2AQBQEUSA0JEigRwwS6FGCL8SQE3HdaZhki1/MCNi87Hr1ewr1tT01taSGsskiySLJIskiySLJIskiySLJIskiySIVZc3v8ae2zmdLTRV9SxZJFkkWSRZJFkkWSRZJFkkWSRZJFqkoawQAAP///zkFzqqxtdwAAAAASUVORK5CYII="/>
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAAd0lEQVR4nOzQMQ2AQBQEUSA09PihwQ8yqDBChxgEXH8iTsMkW/xiRsDmZdetPVOo4/1TU0tqKJsskiySLJIskiySLJIskiySLJIskixSUda8X19qq99naqroW7JIskiySLJIskiySLJIskiySLJIskhFWSMAAP//vfwGhlh6/TEAAAAASUVORK5CYII="/>                
@@ -74,7 +74,7 @@ class ImageProcessorTest extends TestCase
      */
     public function test_text_without_image(): void
     {
-        $processor = new ImageProcessor();
+        $processor = new ImageProcessor;
         $html = '<p>Hello World</p>';
         $processor->trataImagemEnviada($html, $this->fileId);
 
@@ -83,8 +83,6 @@ class ImageProcessorTest extends TestCase
 
     /**
      * Conta os arquivos do diretório de teste.
-     *
-     * @return int
      */
     private function countFile(): int
     {
@@ -98,7 +96,6 @@ class ImageProcessorTest extends TestCase
     /**
      * Retorna o diretório para o teste.
      *
-     * @return string
      **/
     public function publicPath(): string
     {

@@ -16,9 +16,10 @@ class OsUpdateTest extends TestCase
     use RefreshDatabase;
 
     private $osService;
+
     private $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -30,7 +31,7 @@ class OsUpdateTest extends TestCase
     }
 
     #[DataProvider('osCreateData')]
-    public function testOsUpdate(array $data, array $dataExpected): void
+    public function test_os_update(array $data, array $dataExpected): void
     {
         $this->user->hasPermissionTo('os_edit');
         $response = $this->put(route('os.update', $data['id']), $data);
@@ -39,9 +40,9 @@ class OsUpdateTest extends TestCase
         $this->assertDatabaseHas('os', $dataExpected);
     }
 
-    #[Depends('testOsUpdate')]
+    #[Depends('test_os_update')]
     #[DataProvider('osCreateData')]
-    public function testStatusLog($data): void
+    public function test_status_log($data): void
     {
         $os = Os::find($data['id']);
         $this->put(route('os.update', $data['id']), $data);

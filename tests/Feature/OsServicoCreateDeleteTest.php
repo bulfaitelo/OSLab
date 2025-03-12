@@ -18,9 +18,10 @@ class OsServicoCreateDeleteTest extends TestCase
     use RefreshDatabase;
 
     private $osService;
+
     private $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -32,7 +33,7 @@ class OsServicoCreateDeleteTest extends TestCase
     }
 
     #[DataProvider('osServicoData')]
-    public function testCreateServico(array $data, array $expected): void
+    public function test_create_servico(array $data, array $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ServicoTab::class, ['os' => $os])
@@ -49,9 +50,9 @@ class OsServicoCreateDeleteTest extends TestCase
         $this->assertEquals($osServico->valor_servico_total, $expected['valor_servico'] * $expected['quantidade']);
     }
 
-    #[Depends('testCreateServico')]
+    #[Depends('test_create_servico')]
     #[DataProvider('osServicoData')]
-    public function testDeleteServico($data, $expected): void
+    public function test_delete_servico($data, $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ServicoTab::class, ['os' => $os])
@@ -69,9 +70,9 @@ class OsServicoCreateDeleteTest extends TestCase
         $this->assertDatabaseMissing('os_servicos', $expected);
     }
 
-    #[Depends('testCreateServico')]
+    #[Depends('test_create_servico')]
     #[DataProvider('osServicoData')]
-    public function testCreateServicoFaturado($data): void
+    public function test_create_servico_faturado($data): void
     {
         $response = $this->put(
             route('os.faturar', $data['os_id']),
@@ -90,9 +91,9 @@ class OsServicoCreateDeleteTest extends TestCase
         $this->assertEquals(0, $osServico);
     }
 
-    #[Depends('testCreateServico')]
+    #[Depends('test_create_servico')]
     #[DataProvider('osServicoData')]
-    public function testDeleteServicoFaturado($data, $expected): void
+    public function test_delete_servico_faturado($data, $expected): void
     {
         $os = Os::findOrFail($data['os_id']);
         Livewire::test(ServicoTab::class, ['os' => $os])

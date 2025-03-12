@@ -10,7 +10,7 @@ class ControllerPermissionsTest extends TestCase
 {
     private $arrayControllers;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $path = app_path('Http/Controllers');

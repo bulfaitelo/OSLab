@@ -14,9 +14,10 @@ class VendaCreateTest extends TestCase
     use RefreshDatabase;
 
     private $vendaService;
+
     private $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->artisan('db:seed');
@@ -27,7 +28,7 @@ class VendaCreateTest extends TestCase
     }
 
     #[DataProvider('vendaCreateData')]
-    public function testVendaCreate(array $data, array $dataExpected): void
+    public function test_venda_create(array $data, array $dataExpected): void
     {
         $this->user->hasPermissionTo('venda_create');
         $response = $this->post(route('venda.store'), $data);

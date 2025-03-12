@@ -13,10 +13,12 @@ class BladePermissionsTest extends TestCase
     use RefreshDatabase;
 
     private $permission_blade;
+
     private $permission_db;
+
     private $permission_blade_path;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         // Preparando Banco de Dados
         parent::setUp();
@@ -35,7 +37,7 @@ class BladePermissionsTest extends TestCase
                 $permission_blade = [];
             }
             // dump($file_path, $itens);
-            foreach ($itens[0] as  $permission_temp) {
+            foreach ($itens[0] as $permission_temp) {
                 $permission_blade[] = explode("'", $permission_temp)[1];
                 $permission_blade_path[explode("'", $permission_temp)[1]] = $file_path;
             }
