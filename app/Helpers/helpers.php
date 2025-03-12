@@ -57,8 +57,8 @@ if (! function_exists('getUserConfig')) {
     {
         if ($keyConfig) {
             $userConfig = UserConfig::where('key', $keyConfig)
-            ->where('user_id', Auth::id())
-            ->value('value');
+                ->where('user_id', Auth::id())
+                ->value('value');
 
             return json_decode(
                 ($userConfig) ? $userConfig : false
