@@ -58,7 +58,7 @@ class OsController extends Controller
         $os = $this->osService->store($request);
 
         return redirect()->route('os.edit', $os->id)
-        ->with('success', 'Os cadastrada com sucesso.');
+            ->with('success', 'Os cadastrada com sucesso.');
     }
 
     /**
@@ -114,7 +114,7 @@ class OsController extends Controller
         $os = $this->osService->update($request, $os);
 
         return redirect()->route('os.edit', $os->id)
-        ->with('success', 'Os Atualizada com sucesso.');
+            ->with('success', 'Os Atualizada com sucesso.');
     }
 
     /**
@@ -125,12 +125,12 @@ class OsController extends Controller
         try {
             if ($os->conta_id) {
                 return redirect()->route('os.index')
-                ->with('warning', 'Essa OS já está faturada, cancele a fatura antes de exclui-la!');
+                    ->with('warning', 'Essa OS já está faturada, cancele a fatura antes de exclui-la!');
             }
             $this->osService->destroy($os);
 
             return redirect()->route('os.index')
-            ->with('success', 'OS Excluida com sucesso.');
+                ->with('success', 'OS Excluida com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -139,30 +139,29 @@ class OsController extends Controller
     /**
      *  Fatura a OS.
      *
-     * @param  FaturarOsRequest  $request
      * @param  OS  $os  os
      */
     public function faturar(FaturarOsRequest $request, Os $os)
     {
         if (! getConfig('default_os_faturar_produto_despesa')) {
             return redirect()->route('os.edit', $os->id)
-                    ->with('warning', 'Por favor vejas as configurações do sistema.');
+                ->with('warning', 'Por favor vejas as configurações do sistema.');
         }
 
         if ($os->conta_id) {
             return redirect()->route('os.edit', $os->id)
-                    ->with('warning', 'Esta Ordem de Serviço já está faturada.');
+                ->with('warning', 'Esta Ordem de Serviço já está faturada.');
         }
 
         if (! $os->checkChecklist()) {
             return redirect()->route('os.edit', $os->id)
-                    ->with('warning', 'Por favor preencha o checklist para poder fatura a nota.');
+                ->with('warning', 'Por favor preencha o checklist para poder fatura a nota.');
         }
 
         DB::beginTransaction();
         try {
-            //Gerando despesas Referente a produtos.
-            //Gerando atualizações de estoque .
+            // Gerando despesas Referente a produtos.
+            // Gerando atualizações de estoque .
             foreach ($os->produtos as $osProduto) {
                 // Adicionando despesa,
                 $os->contas()->create([
@@ -200,7 +199,7 @@ class OsController extends Controller
                         'os_produto_id' => $osProduto->id,
                         'descricao' => 'OS Nº: #'.$os->id,
                     ]);
-                // Sem estoque
+                    // Sem estoque
                 } else {
                     $entrada = (-1 * ($produto->estoque - $osProduto->quantidade));
                     $produto->movimentacao()->create([
@@ -258,7 +257,7 @@ class OsController extends Controller
                 ]);
                 $conta_id = $fatura->conta_id;
 
-            // Sem pagamento
+                // Sem pagamento
             } else {
                 $fatura = $os->contas()->create([
                     'tipo' => 'R',
@@ -296,7 +295,7 @@ class OsController extends Controller
             DB::commit();
 
             return redirect()->route('os.edit', $os->id)
-            ->with('success', 'Os Faturada com sucesso.');
+                ->with('success', 'Os Faturada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -305,8 +304,6 @@ class OsController extends Controller
 
     /**
      * Cancela o faturamento da os.
-     *
-     * @param  OS  $os
      */
     public function cancelarFaturamento(Os $os)
     {
@@ -337,7 +334,7 @@ class OsController extends Controller
             DB::commit();
 
             return redirect()->route('os.edit', $os->id)
-            ->with('success', 'Fatura cancelada com sucesso.');
+                ->with('success', 'Fatura cancelada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -351,7 +348,7 @@ class OsController extends Controller
      * @param  int  $categoria_id  id da categoria da os para gera os dias de garantia
      * @return string|null retorna o dia de vendimento ou null caso nao exista
      **/
-    private function addDayGarantia($data_saida, $categoria_id): string|null
+    private function addDayGarantia($data_saida, $categoria_id): ?string
     {
         $prazoEmDias = Categoria::find($categoria_id)->garantia?->prazo_garantia;
         if ($prazoEmDias) {

@@ -175,8 +175,8 @@ class VendaService implements VendaServiceInterface
                         'venda_produto_id' => $vendaProduto->id,
                         'descricao' => 'Venda Nº: #'.$venda->id,
                     ]);
-                    // Sem estoque
                 } else {
+                    // Sem estoque
                     $entrada = (-1 * ($produto->estoque - $vendaProduto->quantidade));
                     $produto->movimentacao()->create([
                         'quantidade_movimentada' => $entrada,
@@ -232,9 +232,8 @@ class VendaService implements VendaServiceInterface
                     'parcela' => 1,
                 ]);
                 $conta_id = $conta->conta_id;
-
-                // Sem pagamento
             } else {
+                // Sem pagamento
                 $conta = $venda->contas()->create([
                     'tipo' => 'R',
                     'name' => 'Venda Nº: #'.$venda->id,
