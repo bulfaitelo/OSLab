@@ -54,7 +54,6 @@ class Produto extends Model
     /**
      * Retornar o valor formatado em BRL.
      *
-     * @return Attribute
      **/
     protected function valorCusto(): Attribute
     {
@@ -66,7 +65,6 @@ class Produto extends Model
     /**
      * Retornar o valor formatado em BRL.
      *
-     * @return Attribute
      **/
     protected function valorVenda(): Attribute
     {
@@ -78,7 +76,6 @@ class Produto extends Model
     /**
      * Retorna o objeto pra modelagem da tabela de Produtos.
      *
-     * @param  Request  $request
      * @param  int  $itensPorPagina  default 100
      */
     public static function getDataTable(Request $request, int $itensPorPagina = 100): object

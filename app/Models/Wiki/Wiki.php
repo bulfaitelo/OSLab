@@ -56,16 +56,15 @@ class Wiki extends Model
             'id', // Chave local de Modelos
             'id' // Chave Local de Os
         )
-        ->with('cliente')
-        ->with('tecnico')
-        ->with('categoria')
-        ->with('status');
+            ->with('cliente')
+            ->with('tecnico')
+            ->with('categoria')
+            ->with('status');
     }
 
     /**
      * Retorna o objeto pra modelagem da tabela de Produtos.
      *
-     * @param  Request  $request
      * @param  int  $itensPorPagina  default 100
      */
     public static function getDataTable(Request $request, int $itensPorPagina = 100): object

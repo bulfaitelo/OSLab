@@ -19,7 +19,6 @@ class ExtendedPermission extends Permission
     /**
      * Retorna os dados da tabela de Permissions.
      *
-     * @param  Request  $request
      * @param  int  $itensPorPagina  Define a quantidade de itens por pagina, valor padrão 100
      **/
     public static function getDataTable(Request $request, $itensPorPagina = 100)

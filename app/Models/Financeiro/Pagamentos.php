@@ -87,9 +87,8 @@ class Pagamentos extends Model
      * Retorna os dados para o relatório de Despesas.
      *
      * @param  Request  $request  request
-     * @return array|null
      **/
-    public static function RelatorioDespesasReceita(Request $request): array|null
+    public static function RelatorioDespesasReceita(Request $request): ?array
     {
         $query = self::query();
         $query->selectRaw('

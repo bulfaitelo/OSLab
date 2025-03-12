@@ -21,7 +21,6 @@ class MetaContabil extends Model
     /**
      * Retornar o valor formatado em BRL.
      *
-     * @return Attribute
      **/
     protected function valorMeta(): Attribute
     {
@@ -33,7 +32,6 @@ class MetaContabil extends Model
     /**
      * Retorna o intervalo para exibição.
      *
-     * @return Attribute
      **/
     protected function intervalo(): Attribute
     {
@@ -50,8 +48,6 @@ class MetaContabil extends Model
 
     /**
      * Retorna a meta estipulada e executada para a meta selecionada.
-     *
-     * @return
      */
     public function getMetaExecutadaTable()
     {
@@ -88,7 +84,7 @@ class MetaContabil extends Model
 
         $metaQuery = $query->get();
 
-        foreach ($metaQuery  as $key => $value) {
+        foreach ($metaQuery as $key => $value) {
             // dd($metaQuery);
             $metaReturn[$key]['ano'] = $value->ano;
             $metaReturn[$key]['mes'] = $value->mes;
@@ -127,7 +123,7 @@ class MetaContabil extends Model
      * @param  string  $colunaOrdenacao  default null
      * @param  string  $ordenacao  default asc
      */
-    public static function getDataTable(Request $request = null, bool $dashboard = false, int $itensPorPagina = 100, $colunaOrdenacao = null, $ordenacao = 'asc'): object
+    public static function getDataTable(?Request $request = null, bool $dashboard = false, int $itensPorPagina = 100, $colunaOrdenacao = null, $ordenacao = 'asc'): object
     {
         $calculos = DB::table('meta_contabils as mc')
             ->select(

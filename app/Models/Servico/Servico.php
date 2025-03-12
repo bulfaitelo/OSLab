@@ -27,7 +27,6 @@ class Servico extends Model
     /**
      * Retornar o valor formatado em BRL.
      *
-     * @return Attribute
      **/
     protected function valorServico(): Attribute
     {

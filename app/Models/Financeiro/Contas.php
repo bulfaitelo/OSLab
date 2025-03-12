@@ -96,9 +96,8 @@ class Contas extends Model
      * @param  string|null  $dataInicio  Data de inicio da busca
      * @param  string|null  $dataFim  Data de fim da busca
      * @param  string|null  $ordenacao  Ordenação padrão
-     * @return object|null
      */
-    public static function RelatorioBalanceteMes($dataInicio = null, $dataFim = null, $ordenacao = null): object|null
+    public static function RelatorioBalanceteMes($dataInicio = null, $dataFim = null, $ordenacao = null): ?object
     {
         $query = Pagamentos::query();
         $query->selectRaw('
@@ -124,9 +123,8 @@ class Contas extends Model
      * @param  string|null  $dataInicio  Data de inicio da busca
      * @param  string|null  $dataFim  Data de fim da busca
      * @param  string|null  $ordenacao  Ordenação padrão
-     * @return object|null
      */
-    public static function RelatorioBalanceteCentroCusto($dataInicio = null, $dataFim = null, $ordenacao = null): object|null
+    public static function RelatorioBalanceteCentroCusto($dataInicio = null, $dataFim = null, $ordenacao = null): ?object
     {
         $query = Pagamentos::query();
         $query->selectRaw('
@@ -167,9 +165,8 @@ class Contas extends Model
      * Retorna o relatório de contas em Aberto.
      *
      * @param  Request  $request  request
-     * @return object|null
      */
-    public static function RelatorioContasAbertas(Request $request): object|null
+    public static function RelatorioContasAbertas(Request $request): ?object
     {
         $query = self::query();
         $query->selectRaw('

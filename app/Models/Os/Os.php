@@ -32,7 +32,6 @@ class Os extends Model
      *
      * Cria a condição para exibir a garantia em condição com o status da OS
      *
-     * @return Attribute
      **/
     protected function prazoGarantia(): Attribute
     {
@@ -147,7 +146,7 @@ class Os extends Model
     public function produtos(): HasMany
     {
         return $this->hasMany(OsProduto::class)
-                    ->with('produto');
+            ->with('produto');
     }
 
     /**
@@ -160,7 +159,7 @@ class Os extends Model
     public function servicos(): HasMany
     {
         return $this->hasMany(OsServico::class)
-                    ->with('servico');
+            ->with('servico');
     }
 
     /**
@@ -209,9 +208,8 @@ class Os extends Model
      *
      * Retorna o Checklist da OS, montado pronto para ser carregado na blade.
      *
-     * @return CreateHtmlChecklist|null
      **/
-    public function getHtmlChecklist(): CreateHtmlChecklist|null
+    public function getHtmlChecklist(): ?CreateHtmlChecklist
     {
         if ($this->categoria->checklist) {
             return new CreateHtmlChecklist($this->categoria->checklist, $this->checklistData);
@@ -306,7 +304,6 @@ class Os extends Model
     /**
      * Verifica se a os já foi quitada.
      *
-     * @return bool
      **/
     public function quitada(): bool
     {
@@ -344,7 +341,7 @@ class Os extends Model
             ];
         }
         foreach ($this->contas as $conta) {
-            foreach ($conta->pagamentos()->orderByDesc('data_pagamento')->get()  as $pagamento) {
+            foreach ($conta->pagamentos()->orderByDesc('data_pagamento')->get() as $pagamento) {
                 $log[$pagamento->data_pagamento->format('Y-m-d')][] = [
                     'log_type' => 'conta',
                     'conta_tipo' => $conta->tipo,
@@ -365,7 +362,6 @@ class Os extends Model
     /**
      * Retorna um vetor com balancete.
      *
-     * @return array
      **/
     public function balancete(): array
     {
@@ -376,12 +372,12 @@ class Os extends Model
         $receita_count = 0;
 
         $balancete = $this->contas()
-                ->select(DB::raw('tipo, centro_custos.name as centro_custo, sum(DISTINCT contas.valor) as previsto, sum(contas_pagamentos.valor) as valor_executado'))
-                ->join('contas_pagamentos', 'contas_pagamentos.conta_id', 'contas.id')
-                ->join('centro_custos', 'contas.centro_custo_id', 'centro_custos.id')
-                ->groupBy(['centro_custos.name', 'tipo'])
-                ->orderBy('tipo', 'desc')
-                ->get();
+            ->select(DB::raw('tipo, centro_custos.name as centro_custo, sum(DISTINCT contas.valor) as previsto, sum(contas_pagamentos.valor) as valor_executado'))
+            ->join('contas_pagamentos', 'contas_pagamentos.conta_id', 'contas.id')
+            ->join('centro_custos', 'contas.centro_custo_id', 'centro_custos.id')
+            ->groupBy(['centro_custos.name', 'tipo'])
+            ->orderBy('tipo', 'desc')
+            ->get();
         foreach ($balancete as $key => $value) {
             $array_balancete['detalhes'][] = [
                 'tipo' => $value->tipo,

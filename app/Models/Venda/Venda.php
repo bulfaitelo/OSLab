@@ -79,7 +79,7 @@ class Venda extends Model
     public function produtos(): HasMany
     {
         return $this->hasMany(VendaProduto::class)
-                    ->with('produto');
+            ->with('produto');
     }
 
     /**
@@ -160,7 +160,6 @@ class Venda extends Model
     /**
      * Verifica se a os já foi quitada.
      *
-     * @return bool
      **/
     public function quitada(): bool
     {
@@ -178,7 +177,6 @@ class Venda extends Model
     /**
      * Retorna um vetor com balancete.
      *
-     * @return array
      **/
     public function balancete(): array
     {
@@ -189,12 +187,12 @@ class Venda extends Model
         $receita_count = 0;
 
         $balancete = $this->contas()
-                ->select(DB::raw('tipo, centro_custos.name as centro_custo, sum(DISTINCT contas.valor) as previsto, sum(contas_pagamentos.valor) as valor_executado'))
-                ->join('contas_pagamentos', 'contas_pagamentos.conta_id', 'contas.id')
-                ->join('centro_custos', 'contas.centro_custo_id', 'centro_custos.id')
-                ->groupBy(['centro_custos.name', 'tipo'])
-                ->orderBy('tipo', 'desc')
-                ->get();
+            ->select(DB::raw('tipo, centro_custos.name as centro_custo, sum(DISTINCT contas.valor) as previsto, sum(contas_pagamentos.valor) as valor_executado'))
+            ->join('contas_pagamentos', 'contas_pagamentos.conta_id', 'contas.id')
+            ->join('centro_custos', 'contas.centro_custo_id', 'centro_custos.id')
+            ->groupBy(['centro_custos.name', 'tipo'])
+            ->orderBy('tipo', 'desc')
+            ->get();
         foreach ($balancete as $key => $value) {
             $array_balancete['detalhes'][] = [
                 'tipo' => $value->tipo,

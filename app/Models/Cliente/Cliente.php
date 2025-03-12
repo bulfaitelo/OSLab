@@ -34,7 +34,6 @@ class Cliente extends Model
     /**
      * Retorna o objeto pra modelagem da tabela de Clientes.
      *
-     * @param  Request  $request
      * @param  int  $itensPorPagina  default 100
      */
     public static function getDataTable(Request $request, int $itensPorPagina = 100): object
@@ -62,7 +61,6 @@ class Cliente extends Model
     /**
      * Retornar o tipo de cliente.
      *
-     * @return string
      **/
     public function getTipoCliente(): string
     {
@@ -76,7 +74,6 @@ class Cliente extends Model
     /**
      * Retorna o nome do Cliente separados por underline e sem acentuação.
      *
-     * @return string
      **/
     public function titleName(): string
     {
@@ -90,7 +87,6 @@ class Cliente extends Model
      *
      * Os dados podem ser tanto de Ordem de Serviço quanto de Vendas.
      *
-     * @return string|null
      **/
     public function hasPendingDebits(): ?string
     {

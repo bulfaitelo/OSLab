@@ -18,7 +18,6 @@ class Status extends Model
     /**
      * Relacionamento com OS.
      *
-     * @return HasMany
      **/
     public function os(): HasMany
     {
@@ -28,7 +27,6 @@ class Status extends Model
     /**
      * Relacionamento com Vendas.
      *
-     * @return HasMany
      **/
     public function vendas(): HasMany
     {
@@ -38,7 +36,6 @@ class Status extends Model
     /**
      * Relacionamento com Status Log de OS.
      *
-     * @return HasMany
      **/
     public function osStatusLogs(): HasMany
     {

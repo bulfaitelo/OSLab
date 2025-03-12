@@ -25,7 +25,6 @@ class Movimentacao extends Model
     /**
      * Retornar o valor formatado em BRL.
      *
-     * @return Attribute
      **/
     protected function valorCusto(): Attribute
     {
@@ -37,7 +36,6 @@ class Movimentacao extends Model
     /**
      * Retornar o tipo de movimentação em Texto.
      *
-     * @return Attribute
      **/
     protected function tipoMovimentacao(): Attribute
     {
