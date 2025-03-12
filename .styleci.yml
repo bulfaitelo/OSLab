@@ -1,4 +1,6 @@
 preset: laravel
+disabled:
+  - braces
 finder:
   not-name:
     - "TestController.php"

@@ -199,8 +199,8 @@ class OsController extends Controller
                         'os_produto_id' => $osProduto->id,
                         'descricao' => 'OS Nº: #'.$os->id,
                     ]);
-                    // Sem estoque
                 } else {
+                    // Sem estoque
                     $entrada = (-1 * ($produto->estoque - $osProduto->quantidade));
                     $produto->movimentacao()->create([
                         'quantidade_movimentada' => $entrada,
@@ -257,8 +257,8 @@ class OsController extends Controller
                 ]);
                 $conta_id = $fatura->conta_id;
 
-                // Sem pagamento
             } else {
+                // Sem pagamento
                 $fatura = $os->contas()->create([
                     'tipo' => 'R',
                     'name' => 'OS Nº: #'.$os->id,
