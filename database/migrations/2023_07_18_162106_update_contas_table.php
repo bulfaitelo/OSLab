@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::table('contas', function (Blueprint $table) {
             $table->foreign('user_id', 'fk_contas_users')
-            ->references('id')->on('users');
+                ->references('id')->on('users');
 
             $table->foreign('centro_custo_id', 'fk_contas_centro_custos')
-            ->references('id')->on('centro_custos');
+                ->references('id')->on('centro_custos');
 
             $table->foreign('cliente_id', 'fk_contas_clientes')
-            ->references('id')->on('clientes');
+                ->references('id')->on('clientes');
         });
     }
 

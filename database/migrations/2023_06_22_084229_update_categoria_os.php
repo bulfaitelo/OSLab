@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::table('categorias', function (Blueprint $table) {
             $table->foreign('user_id', 'fk_categorias_users')
-            ->references('id')->on('users');
+                ->references('id')->on('users');
             $table->foreign('garantia_id', 'fk_categorias_garantias')
-            ->references('id')->on('garantias');
+                ->references('id')->on('garantias');
         });
     }
 

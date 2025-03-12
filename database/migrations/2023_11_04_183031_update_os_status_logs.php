@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::table('os_status_logs', function (Blueprint $table) {
             $table->foreign('os_id', 'fk_os_status_logs_os')
-                    ->references('id')->on('os')
-                    ->cascadeOnDelete();
+                ->references('id')->on('os')
+                ->cascadeOnDelete();
 
             $table->foreign('user_id', 'fk_os_status_logs_users')
-                    ->references('id')->on('users');
+                ->references('id')->on('users');
 
             $table->foreign('status_id', 'fk_os_status_logs_os_status')
-                    ->references('id')->on('status');
+                ->references('id')->on('status');
         });
     }
 

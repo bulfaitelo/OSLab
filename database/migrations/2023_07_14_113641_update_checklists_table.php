@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::table('checklists', function (Blueprint $table) {
             $table->foreign('categoria_id', 'fk_checklists_categorias')
-            ->references('id')->on('categorias');
+                ->references('id')->on('categorias');
 
             $table->foreign('user_id', 'fk_checklists_users')
-            ->references('id')->on('users');
+                ->references('id')->on('users');
         });
     }
 

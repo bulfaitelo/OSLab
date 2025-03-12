@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('meta_contabils', function (Blueprint $table) {
             $table->foreign('centro_custo_id', 'fk_meta_contabils_centro_custos')
-            ->references('id')->on('centro_custos');
+                ->references('id')->on('centro_custos');
         });
     }
 

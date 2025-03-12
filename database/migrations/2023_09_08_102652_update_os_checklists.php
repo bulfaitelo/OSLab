@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::table('os_checklists', function (Blueprint $table) {
             $table->foreign('os_id', 'fk_os_checklists_os')
-                    ->references('id')->on('os')
-                    ->cascadeOnDelete();
+                ->references('id')->on('os')
+                ->cascadeOnDelete();
 
             $table->foreign('user_id', 'fk_os_checklists_users')
-                    ->references('id')->on('users');
+                ->references('id')->on('users');
 
             $table->foreign('checklist_id', 'fk_os_checklists_checklists')
-                    ->references('id')->on('checklists')
-                    ->cascadeOnDelete();
+                ->references('id')->on('checklists')
+                ->cascadeOnDelete();
         });
     }
 

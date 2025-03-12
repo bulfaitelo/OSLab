@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('route')->index();
             $table->string('text')->nullable();
             $table->foreign('user_id', 'fk_pagina_favoritas_users')
-                    ->references('id')
-                    ->on('users')
-                    ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->string('icon')->nullable();
             $table->timestamps();
         });

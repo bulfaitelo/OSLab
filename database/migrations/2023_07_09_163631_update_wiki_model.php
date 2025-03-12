@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('wiki_models', function (Blueprint $table) {
             $table->foreign('wiki_id', 'fk_wiki_models_wikis')
-            ->references('id')->on('wikis')
-            ->onDelete('cascade');
+                ->references('id')->on('wikis')
+                ->onDelete('cascade');
         });
     }
 

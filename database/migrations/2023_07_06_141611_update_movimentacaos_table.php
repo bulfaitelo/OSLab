@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('movimentacaos', function (Blueprint $table) {
             $table->foreign('produto_id', 'fk_movimentacaos_produtos')
-            ->references('id')->on('produtos')
-            ->onDelete('cascade');
+                ->references('id')->on('produtos')
+                ->onDelete('cascade');
         });
     }
 

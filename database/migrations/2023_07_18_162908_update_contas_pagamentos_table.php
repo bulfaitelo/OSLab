@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::table('contas_pagamentos', function (Blueprint $table) {
             $table->foreign('conta_id', 'fk_pagamentos_contas')
-            ->references('id')->on('contas')
-            ->onDelete('cascade');
+                ->references('id')->on('contas')
+                ->onDelete('cascade');
 
             $table->foreign('forma_pagamento_id', 'fk_pagamentos_forma_pagamentos')
-            ->references('id')->on('forma_pagamentos');
+                ->references('id')->on('forma_pagamentos');
 
             $table->foreign('user_id', 'fk_pagamentos_users')
-            ->references('id')->on('users');
+                ->references('id')->on('users');
         });
     }
 

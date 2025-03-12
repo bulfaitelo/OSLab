@@ -13,21 +13,21 @@ return new class extends Migration
     {
         Schema::table('vendas', function (Blueprint $table) {
             $table->foreign('user_id', 'fk_venda_users')
-            ->references('id')->on('users');
+                ->references('id')->on('users');
 
             $table->foreign('cliente_id', 'fk_venda_clientes')
-            ->references('id')->on('clientes');
+                ->references('id')->on('clientes');
 
             $table->foreign('vendedor_id', 'fk_venda_users_vendedor')
-            ->references('id')->on('users');
+                ->references('id')->on('users');
 
             $table->foreign('status_id', 'fk_venda_status')
-            ->references('id')->on('status');
+                ->references('id')->on('status');
         });
 
         Schema::table('contas', function (Blueprint $table) {
             $table->foreign('venda_id', 'fk_contas_vendas')
-            ->references('id')->on('vendas');
+                ->references('id')->on('vendas');
         });
     }
 

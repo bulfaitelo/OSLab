@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::table('wiki_links', function (Blueprint $table) {
             $table->foreign('wiki_id', 'fk_links_wikis')
-            ->references('id')->on('wikis')
-            ->onDelete('cascade');
+                ->references('id')->on('wikis')
+                ->onDelete('cascade');
 
             $table->foreign('user_id', 'fk_links_users')
-            ->references('id')->on('users')
-            ->onDelete('cascade');
+                ->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

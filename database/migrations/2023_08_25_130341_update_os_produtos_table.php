@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::table('os_produtos', function (Blueprint $table) {
             $table->foreign('os_id', 'fk_os_produtos_os')
-                  ->references('id')
-                  ->on('os')
-                  ->cascadeOnDelete();
+                ->references('id')
+                ->on('os')
+                ->cascadeOnDelete();
 
             $table->foreign('produto_id', 'fk_os_produtos_produtos')
-                  ->references('id')
-                  ->on('produtos');
+                ->references('id')
+                ->on('produtos');
 
             $table->foreign('user_id', 'fk_os_produtos_users')
-                  ->references('id')
-                  ->on('users');
+                ->references('id')
+                ->on('users');
         });
 
         Schema::table('movimentacaos', function (Blueprint $table) {
             $table->foreign('os_produto_id', 'fk_movimentacaos_os_produtos')
-            ->references('id')->on('os_produtos');
+                ->references('id')->on('os_produtos');
         });
     }
 

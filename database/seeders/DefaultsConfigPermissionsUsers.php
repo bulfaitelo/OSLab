@@ -134,28 +134,28 @@ class DefaultsConfigPermissionsUsers extends Seeder
                 'description' => ' Excluir Perfil',
             ],
             [
-                //Acesso ao módulo de configurações de Setores
+                // Acesso ao módulo de configurações de Setores
                 'name' => 'config_user_setor',
                 'guard_name' => 'web',
                 'group_id' => 1,
                 'description' => 'Acesso ao módulo de configurações de Setores',
             ],
             [
-                //botão Editar no módulo de configurações de Setores
+                // botão Editar no módulo de configurações de Setores
                 'name' => 'config_user_setor_edit',
                 'guard_name' => 'web',
                 'group_id' => 1,
                 'description' => 'botão Editar no módulo de configurações de Setores',
             ],
             [
-                //botão Criar no módulo de configurações de Setores
+                // botão Criar no módulo de configurações de Setores
                 'name' => 'config_user_setor_create',
                 'guard_name' => 'web',
                 'group_id' => 1,
                 'description' => 'botão Criar no módulo de configurações de Setores',
             ],
             [
-                //botão Excluir no módulo de configurações de Setores
+                // botão Excluir no módulo de configurações de Setores
                 'name' => 'config_user_setor_destroy',
                 'guard_name' => 'web',
                 'group_id' => 1,

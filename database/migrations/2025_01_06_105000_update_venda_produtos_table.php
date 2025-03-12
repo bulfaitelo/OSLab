@@ -13,25 +13,25 @@ return new class extends Migration
     {
         Schema::table('venda_produtos', function (Blueprint $table) {
             $table->foreign('venda_id', 'fk_venda_produtos_venda')
-                  ->references('id')
-                  ->on('vendas')
-                  ->cascadeOnDelete();
+                ->references('id')
+                ->on('vendas')
+                ->cascadeOnDelete();
 
             $table->foreign('produto_id', 'fk_venda_produtos_produtos')
-                  ->references('id')
-                  ->on('produtos');
+                ->references('id')
+                ->on('produtos');
 
             $table->foreign('user_id', 'fk_venda_produtos_users')
-                  ->references('id')
-                  ->on('users');
+                ->references('id')
+                ->on('users');
         });
 
         Schema::table('movimentacaos', function (Blueprint $table) {
             $table->foreign('venda_produto_id', 'fk_movimentacaos_venda_produtos')
-            ->references('id')->on('venda_produtos');
+                ->references('id')->on('venda_produtos');
 
             $table->foreign('venda_id', 'fk_movimentacaos_venda')
-            ->references('id')->on('vendas');
+                ->references('id')->on('vendas');
         });
     }
 

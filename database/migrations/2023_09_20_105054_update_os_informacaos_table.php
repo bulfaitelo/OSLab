@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::table('os_informacaos', function (Blueprint $table) {
             $table->foreign('os_id', 'fk_os_informacaos_os')
-                    ->references('id')->on('os')
-                    ->cascadeOnDelete();
+                ->references('id')->on('os')
+                ->cascadeOnDelete();
 
             $table->foreign('user_id', 'fk_os_informacaos_users')
-                    ->references('id')->on('users');
+                ->references('id')->on('users');
         });
     }
 

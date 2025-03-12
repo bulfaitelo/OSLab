@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('permissions', function (Blueprint $table) {
             $table->foreign('group_id', 'fk_permissions_permissions_group')
-            ->references('id')->on('permissions_group');
+                ->references('id')->on('permissions_group');
         });
     }
 

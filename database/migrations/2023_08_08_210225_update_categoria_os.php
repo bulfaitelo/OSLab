@@ -15,12 +15,12 @@ return new class extends Migration
             $table->unsignedBigInteger('checklist_id')->nullable();
             $table->boolean('checklist_required')->nullable()->default(0);
             $table->foreign('checklist_id', 'fk_categorias_checklists')
-            ->references('id')->on('checklists');
+                ->references('id')->on('checklists');
         });
 
         Schema::table('movimentacaos', function (Blueprint $table) {
             $table->foreign('os_id', 'fk_movimentacaos_os')
-            ->references('id')->on('os');
+                ->references('id')->on('os');
         });
     }
 
