@@ -42,7 +42,7 @@ class CreateHtmlRequestBusca
     private function convertToString($key, $subArray = false)
     {
         $ponto = '';
-        if (is_integer($key)) {
+        if (is_int($key)) {
             if ($key > 0) {
             }
         } else {

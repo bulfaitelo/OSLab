@@ -10,8 +10,11 @@ namespace App\Http\OsLabClass\Checklist;
 class CreateHtmlChecklist
 {
     private $checklist;
+
     private $osChecklistData;
+
     private $html;
+
     private $readOnly;
 
     /**
@@ -49,7 +52,6 @@ class CreateHtmlChecklist
      *
      * Verifica se os campos obrigatórios já foram preenchidos, retorna True caso sim e false caso não.
      *
-     * @return bool
      **/
     public function checklistIsDone(): bool
     {
@@ -94,7 +96,6 @@ class CreateHtmlChecklist
      * cria o HTML do header
      *
      * @param  object  $option  Recebe o objeto do header
-     * @return string
      **/
     private function header(object $option): string
     {
@@ -107,7 +108,6 @@ class CreateHtmlChecklist
      * cria o HTML do paragraph
      *
      * @param  object  $option  Recebe o objeto do paragraph
-     * @return string
      **/
     private function paragraph(object $option): string
     {
@@ -120,7 +120,6 @@ class CreateHtmlChecklist
      * cria o HTML do text
      *
      * @param  object  $option  Recebe o objeto do text
-     * @return string
      **/
     private function text(object $option): string
     {
@@ -155,7 +154,6 @@ class CreateHtmlChecklist
      * cria o HTML do number
      *
      * @param  object  $option  Recebe o objeto do number
-     * @return string
      **/
     private function number(object $option): string
     {
@@ -192,7 +190,6 @@ class CreateHtmlChecklist
      * cria o HTML do textarea
      *
      * @param  object  $option  Recebe o objeto do textarea
-     * @return string
      **/
     private function textarea(object $option): string
     {
@@ -226,7 +223,6 @@ class CreateHtmlChecklist
      * cria o HTML do select
      *
      * @param  object  $option  Recebe o objeto do select
-     * @return string
      **/
     private function select(object $option): string
     {
@@ -267,7 +263,6 @@ class CreateHtmlChecklist
      * cria o HTML do checkbox-group
      *
      * @param  object  $option  Recebe o objeto do checkbox-group
-     * @return string
      **/
     private function checkboxGroup(object $option): string
     {
@@ -327,7 +322,6 @@ class CreateHtmlChecklist
      * cria o HTML do radio-group
      *
      * @param  object  $option  Recebe o objeto do radio-group
-     * @return string
      **/
     private function radioGroup(object $option): string
     {
@@ -666,7 +660,6 @@ class CreateHtmlChecklist
      * Converte hifen em CamelCase.
      *
      * @param  string  $string  texto par aser convertido
-     * @return string
      */
     private function dashToCamelCase($string, $capitalizeFirstCharacter = false): string
     {
