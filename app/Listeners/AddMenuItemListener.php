@@ -28,11 +28,10 @@ class AddMenuItemListener
      * Alterna ícone da função de favoritar.
      *
      * @param  BuildingMenu  $event
-     * @return void
      **/
     public function menuFavoriteToggle($event): void
     {
-        $menuService = new FavoriteMenuService();
+        $menuService = new FavoriteMenuService;
         $eligible = $menuService->getRouteData(Route::currentRouteName());
         $favorited = $menuService->checkRouteIsFavorited(Route::currentRouteName());
         if ($favorited) {
