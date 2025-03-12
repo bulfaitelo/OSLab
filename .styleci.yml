@@ -1,6 +1,5 @@
 preset: laravel
 enabled:
-  - phpdoc_trim # Evita espaços desnecessários em PHPDoc
   - no_empty_statement # Garante que blocos vazios fiquem corretamente formatados
 finder:
   not-name:
