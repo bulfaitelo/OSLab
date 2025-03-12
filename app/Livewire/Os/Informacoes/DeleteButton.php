@@ -8,7 +8,9 @@ use Livewire\Component;
 class DeleteButton extends Component
 {
     public $confirmacaoDelete;
+
     public $item_id;
+
     public $os_id;
 
     public function render()

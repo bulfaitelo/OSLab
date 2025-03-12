@@ -8,6 +8,7 @@ use Livewire\Component;
 class Teste extends Component
 {
     public $texto;
+
     public $descricao;
 
     public function render()
@@ -23,7 +24,7 @@ class Teste extends Component
 
     public function addTexto()
     {
-        $formaPagamento = new FormaPagamento();
+        $formaPagamento = new FormaPagamento;
         $formaPagamento->name = $this->texto;
         $formaPagamento->descricao = $this->descricao;
         $formaPagamento->save();

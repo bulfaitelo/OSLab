@@ -9,8 +9,11 @@ use Livewire\Component;
 class CompartilharModal extends Component
 {
     public $item;
+
     public $os_id;
+
     public $informacao_id;
+
     protected $listeners = ['open' => 'loadCompartilharModal'];
 
     public function loadCompartilharModal($informacao_id, $os_id)
@@ -33,7 +36,6 @@ class CompartilharModal extends Component
      * Cria a uuid para compartilhar item.
      *
      * @param  int  $id  id da informacao
-     * @return void
      **/
     public function createShareUrl(int $id): void
     {
@@ -48,7 +50,6 @@ class CompartilharModal extends Component
      * Delete a uuid para do item.
      *
      * @param  int  $id  id da informacao
-     * @return void
      **/
     public function deleteShareUrl(int $id): void
     {

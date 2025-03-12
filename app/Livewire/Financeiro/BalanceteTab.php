@@ -8,7 +8,9 @@ use Livewire\Component;
 class BalanceteTab extends Component
 {
     public $os;
+
     public $venda;
+
     public $showDisplay;
 
     #[On('showBalanceteTab')]

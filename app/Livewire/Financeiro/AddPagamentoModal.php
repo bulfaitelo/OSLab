@@ -9,10 +9,15 @@ use Livewire\Component;
 class AddPagamentoModal extends Component
 {
     public $os;
+
     public $venda;
+
     public $pagamento_valor;
+
     public $data_pagamento;
+
     public $forma_pagamento_id;
+
     protected $listeners = ['adicionarPagamento' => 'loadAdicionarPagamento'];
 
     /**

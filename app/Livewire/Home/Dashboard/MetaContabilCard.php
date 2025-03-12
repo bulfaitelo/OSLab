@@ -9,7 +9,7 @@ class MetaContabilCard extends Component
 {
     public function render()
     {
-        $metaContabil = MetaContabilModel::getDataTable(dashboard:true, itensPorPagina:6, colunaOrdenacao: 'porcentagem_executada', ordenacao:'desc');
+        $metaContabil = MetaContabilModel::getDataTable(dashboard: true, itensPorPagina: 6, colunaOrdenacao: 'porcentagem_executada', ordenacao: 'desc');
 
         return view('livewire.home.dashboard.meta-contabil-card', [
             'metaContabil' => $metaContabil,

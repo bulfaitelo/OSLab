@@ -11,8 +11,11 @@ use Livewire\Component;
 class ServicoTab extends Component
 {
     public $os;
+
     public $valor_servico;
+
     public $servico_id;
+
     public $quantidade;
 
     protected function rules()

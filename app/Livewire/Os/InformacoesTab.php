@@ -14,13 +14,21 @@ class InformacoesTab extends Component
     protected $listeners = ['updateInformacoesTable' => '$refresh'];
 
     public $anotacao;
+
     public $posts;
+
     public $os;
+
     public $descricao_senha;
+
     public $tipo_senha = 'texto';
+
     public $senha_texto;
+
     public $senha_padrao;
+
     public $arquivo;
+
     public $descricao_arquivo;
 
     public function render()
@@ -143,9 +151,9 @@ class InformacoesTab extends Component
     public function getFile($id)
     {
         $arquivo = $this->os
-                    ->informacoes
-                    ->where('tipo', 3)
-                    ->find($id);
+            ->informacoes
+            ->where('tipo', 3)
+            ->find($id);
 
         return \Storage::disk('public')->download($arquivo->informacao);
     }
@@ -155,7 +163,6 @@ class InformacoesTab extends Component
      *
      * Cria o nome do arquivo de forma que remova caracteres especiais e adiciona um uuid curto.
      *
-     * @param  $arquivo
      * @return string $fileName
      **/
     private function createFileName($arquivo)

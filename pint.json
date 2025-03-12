@@ -3,6 +3,11 @@
     "preset": "laravel",
     "rules": {
         "single_line_empty_body": false
-    }
+    },
+    "notName": [
+
+        "TestController.php"
+
+    ]
 
 }

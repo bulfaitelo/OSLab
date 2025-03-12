@@ -60,7 +60,7 @@ class Backup extends Component
         return $info;
     }
 
-    protected function getFormattedBackupDate(SpatieBackup $backup = null)
+    protected function getFormattedBackupDate(?SpatieBackup $backup = null)
     {
         return is_null($backup)
             ? 'No backups present'

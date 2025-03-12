@@ -10,10 +10,15 @@ use Livewire\Component;
 class ProdutoTab extends Component
 {
     public $os;
+
     public $venda;
+
     public $valor_custo;
+
     public $valor_venda;
+
     public $quantidade;
+
     public $produto_id;
 
     protected function rules(): array

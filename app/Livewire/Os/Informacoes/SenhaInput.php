@@ -7,8 +7,11 @@ use Livewire\Component;
 class SenhaInput extends Component
 {
     public $senha;
+
     public $senha_id;
+
     public $checkPass;
+
     public $public = false;
 
     public function render()

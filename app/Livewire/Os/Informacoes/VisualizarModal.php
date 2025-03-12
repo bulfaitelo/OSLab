@@ -16,7 +16,7 @@ class VisualizarModal extends Component
         $this->item = OsInformacao::findOrFail($id);
         $this->dispatch('toggleVisualizarModal');
         if ($this->item->tipo_informacao == 'padrao') {
-            $this->dispatch('senhaPadrao', senha:$this->item->informacao);
+            $this->dispatch('senhaPadrao', senha: $this->item->informacao);
         }
     }
 

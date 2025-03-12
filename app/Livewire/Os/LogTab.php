@@ -8,6 +8,7 @@ use Livewire\Component;
 class LogTab extends Component
 {
     public $os;
+
     public $showDisplay;
 
     // protected $listeners = ['showLogTab'];

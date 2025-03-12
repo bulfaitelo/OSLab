@@ -10,7 +10,9 @@ use Livewire\Component;
 class ChecklistTab extends Component
 {
     public $os;
+
     public $checklistForm;
+
     public $form;
 
     public function render()

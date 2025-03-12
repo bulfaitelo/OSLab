@@ -42,9 +42,8 @@ class BalanceteCard extends Component
      * Retorna o a receita, despesa e saldo do ano vigente e mes selecionado.
      *
      * @param  string  $mes_busca  Mes da busca.
-     * @return object|null
      */
-    private function getSaldo($mes_busca): object|null
+    private function getSaldo($mes_busca): ?object
     {
         $ano = now()->format('Y');
         $query = Pagamentos::query();
