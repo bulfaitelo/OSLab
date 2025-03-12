@@ -22,8 +22,8 @@ class MovimentacaoController extends Controller
     public function index(Produto $produto)
     {
         $movimentacoes = $produto->movimentacao()
-                                 ->orderBy('created_at', 'DESC')
-                                 ->paginate(100);
+            ->orderBy('created_at', 'DESC')
+            ->paginate(100);
 
         return view('produto.movimentacao.index', compact('movimentacoes', 'produto'));
     }
@@ -60,7 +60,7 @@ class MovimentacaoController extends Controller
             DB::commit();
 
             return redirect()->route('movimentacao.index', $produto)
-            ->with('success', 'Estoque Atualizado com sucesso.');
+                ->with('success', 'Estoque Atualizado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

@@ -44,7 +44,7 @@ class ClienteController extends Controller
     public function store(StoreClienteRequest $request)
     {
         try {
-            $cliente = new Cliente();
+            $cliente = new Cliente;
             $cliente->registro = $request->registro;
             if (strlen($request->registro) > 14) { // definido que é um CNPJ
                 $cliente->pessoa_juridica = 1;
@@ -64,7 +64,7 @@ class ClienteController extends Controller
             $cliente->save();
 
             return redirect()->route('cliente.index')
-            ->with('success', 'Cliente cadastrado com sucesso.');
+                ->with('success', 'Cliente cadastrado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -111,7 +111,7 @@ class ClienteController extends Controller
             $cliente->save();
 
             return redirect()->route('cliente.index')
-            ->with('success', 'Cliente atualizado com sucesso.');
+                ->with('success', 'Cliente atualizado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -125,7 +125,7 @@ class ClienteController extends Controller
         try {
             if ($cliente->os->count() > 0) {
                 return redirect()->route('cliente.index')
-                ->with('warning', 'Existem OS cadastradas para esse cliente!');
+                    ->with('warning', 'Existem OS cadastradas para esse cliente!');
             }
             $cliente->delete();
 

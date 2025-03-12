@@ -46,7 +46,7 @@ class ChecklistController extends Controller
     {
         DB::beginTransaction();
         try {
-            $checklist = new Checklist();
+            $checklist = new Checklist;
             $checklist->name = $request->checklist_name;
             $checklist->categoria_id = $request->categoria_id;
             $checklist->descricao = $request->descricao;
@@ -56,7 +56,7 @@ class ChecklistController extends Controller
             DB::commit();
 
             return redirect()->route('checklist.index')
-            ->with('success', 'Checklist cadastrado com sucesso.');
+                ->with('success', 'Checklist cadastrado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -96,7 +96,7 @@ class ChecklistController extends Controller
             DB::commit();
 
             return redirect()->route('checklist.index')
-            ->with('success', 'Checklist Atualizado com sucesso.');
+                ->with('success', 'Checklist Atualizado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -110,7 +110,7 @@ class ChecklistController extends Controller
         try {
             if (Categoria::where('checklist_id', $checklist->id)->count() > 0) {
                 return redirect()->route('checklist.index')
-                ->with('warning', 'Checklist está sendo usado em alguma categoria!');
+                    ->with('warning', 'Checklist está sendo usado em alguma categoria!');
             }
             $checklist->delete();
 

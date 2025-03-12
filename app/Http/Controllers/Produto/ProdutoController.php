@@ -46,7 +46,7 @@ class ProdutoController extends Controller
     {
         DB::beginTransaction();
         try {
-            $produto = new Produto();
+            $produto = new Produto;
             $produto->name = $request->name;
             $produto->descricao = $request->descricao;
             $produto->valor_custo = $request->valor_custo;
@@ -69,7 +69,7 @@ class ProdutoController extends Controller
             DB::commit();
 
             return redirect()->route('produto.index')
-            ->with('success', 'Produto cadastrado com sucesso.');
+                ->with('success', 'Produto cadastrado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -110,7 +110,7 @@ class ProdutoController extends Controller
             DB::commit();
 
             return redirect()->route('produto.index')
-            ->with('success', 'Produto atualizado com sucesso.');
+                ->with('success', 'Produto atualizado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -126,7 +126,7 @@ class ProdutoController extends Controller
             $produtoCount = $produto->os->count();
             if ($produtoCount > 0) {
                 return redirect()->route('produto.index')
-                ->with('warning', 'O produto não pode ser excluído pois está sendo usado em: '.$produtoCount.' Os');
+                    ->with('warning', 'O produto não pode ser excluído pois está sendo usado em: '.$produtoCount.' Os');
             }
             $produto->delete();
 

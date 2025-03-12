@@ -39,7 +39,7 @@ class OsPublicController extends Controller
             $informacao->save();
 
             return redirect()->route('os.public.updated')
-            ->with('success', 'Os Atualizada com sucesso.');
+                ->with('success', 'Os Atualizada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }

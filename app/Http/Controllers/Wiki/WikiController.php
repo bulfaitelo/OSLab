@@ -59,8 +59,8 @@ class WikiController extends Controller
      */
     public function store(StoreWikiRequest $request)
     {
-        $wiki = new Wiki();
-        $modelo = new Modelo();
+        $wiki = new Wiki;
+        $modelo = new Modelo;
         DB::beginTransaction();
         try {
             $wiki->name = $request->name;
@@ -74,7 +74,7 @@ class WikiController extends Controller
             DB::commit();
 
             return redirect()->route('wiki.show', $wiki->id)
-            ->with('success', 'Wiki cadastrada com sucesso.');
+                ->with('success', 'Wiki cadastrada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -112,7 +112,7 @@ class WikiController extends Controller
             DB::commit();
 
             return redirect()->route('wiki.index')
-            ->with('success', 'Wiki atualizada com sucesso.');
+                ->with('success', 'Wiki atualizada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -141,7 +141,7 @@ class WikiController extends Controller
     public function textUpdate(Request $request, Wiki $wiki)
     {
         try {
-            $processor = new ImageProcessor();
+            $processor = new ImageProcessor;
             $processedHtml = $processor->trataImagemEnviada($request->texto, $wiki->id);
             $wiki->texto = $processedHtml;
             $wiki->user_id = Auth::id();
@@ -216,7 +216,7 @@ class WikiController extends Controller
     {
         try {
             $fileName = $this->createFileName($request->arquivo_import);
-            $file = new WikiFile();
+            $file = new WikiFile;
             $file->name = $request->name_file;
             $file->wiki_id = $wiki->id;
             $file->user_id = Auth::id();

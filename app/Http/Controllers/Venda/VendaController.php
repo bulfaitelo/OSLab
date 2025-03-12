@@ -53,7 +53,7 @@ class VendaController extends Controller
         $venda = $this->vendaService->store($request);
 
         return redirect()->route('venda.edit', $venda->id)
-                ->with('success', 'Venda cadastrada com sucesso.');
+            ->with('success', 'Venda cadastrada com sucesso.');
     }
 
     /**
@@ -108,7 +108,7 @@ class VendaController extends Controller
         $venda = $this->vendaService->update($request, $venda);
 
         return redirect()->route('venda.edit', $venda->id)
-        ->with('success', 'Venda Atualizada com sucesso.');
+            ->with('success', 'Venda Atualizada com sucesso.');
     }
 
     /**
@@ -119,12 +119,12 @@ class VendaController extends Controller
         try {
             if ($venda->conta_id) {
                 return redirect()->route('venda.index')
-                ->with('warning', 'Essa Venda já está faturada, cancele a fatura antes de exclui-la!');
+                    ->with('warning', 'Essa Venda já está faturada, cancele a fatura antes de exclui-la!');
             }
             $this->vendaService->destroy($venda);
 
             return redirect()->route('venda.index')
-            ->with('success', 'Venda Excluida com sucesso.');
+                ->with('success', 'Venda Excluida com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -134,24 +134,22 @@ class VendaController extends Controller
     {
         if (! getConfig('default_os_faturar_produto_despesa')) {
             return redirect()->route('venda.edit', $venda->id)
-                    ->with('warning', 'Por favor vejas as configurações do sistema.');
+                ->with('warning', 'Por favor vejas as configurações do sistema.');
         }
 
         if ($venda->conta_id) {
             return redirect()->route('venda.edit', $venda->id)
-                    ->with('warning', 'Esta Ordem de Serviço já está faturada.');
+                ->with('warning', 'Esta Ordem de Serviço já está faturada.');
         }
 
         $this->vendaService->faturar($request, $venda);
 
         return redirect()->route('venda.edit', $venda->id)
-        ->with('success', 'Venda Faturada com sucesso.');
+            ->with('success', 'Venda Faturada com sucesso.');
     }
 
     /**
      * Cancela o faturamento da venda.
-     *
-     * @param  Venda  $venda
      */
     public function cancelarFaturamento(Venda $venda)
     {
