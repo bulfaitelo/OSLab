@@ -1,6 +1,4 @@
-preset: laravel
-enabled:
-  - no_empty_statement # Garante que blocos vazios fiquem corretamente formatados
+preset: psr12
 finder:
   not-name:
     - "TestController.php"
