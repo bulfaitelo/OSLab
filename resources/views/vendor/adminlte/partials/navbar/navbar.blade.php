@@ -1,4 +1,7 @@
-<nav class="main-header navbar
+<nav class="main-header navbar  navbar
+    @if (env('DEV_ENVIRONMENT') == 'true')
+        dev-background
+    @endif
     {{ config('adminlte.classes_topnav_nav', 'navbar-expand') }}
     {{ config('adminlte.classes_topnav', 'navbar-white navbar-light') }}">
 

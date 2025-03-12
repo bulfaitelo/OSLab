@@ -16,13 +16,13 @@
 @section('classes_body'){{ ($auth_type ?? 'login') . '-page' }}@stop
 
 @section('body')
-    <div class="{{ $auth_type ?? 'login' }}-box">   
+    <div class="{{ $auth_type ?? 'login' }}-box">
 
         {{-- Logo --}}
         <div class="{{ $auth_type ?? 'login' }}-logo">
             <a href="{{ $dashboard_url }}">
 
-                {{-- Logo Image --}}                
+                {{-- Logo Image --}}
                 @if (config('adminlte.auth_logo.enabled', false))
                     <img width="100%" height="100%" src="{{ asset(config('adminlte.auth_logo.img.path')) }}"
                          alt="{{ config('adminlte.auth_logo.img.alt') }}"
@@ -37,7 +37,7 @@
                          @endif>
                     {{-- Logo Label --}}
                     {!! config('adminlte.auth_logo.logo', '<b>Admin</b>LTE') !!}
-                        
+
                 @else
                     <img src="{{ asset(config('adminlte.logo_img')) }}"
                          alt="{{ config('adminlte.logo_img_alt') }}" height="50">
@@ -50,7 +50,12 @@
         </div>
 
         {{-- Card Box --}}
-        <div class="card {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}">
+        <div class="card
+            {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}
+             @if (env('DEV_ENVIRONMENT') == 'true')
+                dev-background
+            @endif
+        ">
 
             {{-- Card Header --}}
             @hasSection('auth_header')
