@@ -10,7 +10,6 @@ interface OsServiceInterface
     /**
      * Retorna o objeto pra modelagem da tabela de OS.
      *
-     * @param  Request  $request
      * @param  int  $itensPorPagina  default 100
      */
     public static function getDataTable(Request $request);
@@ -18,7 +17,6 @@ interface OsServiceInterface
     /**
      * Armazena uma nova OS e retorna o objeto da mesma.
      *
-     * @param  Request  $request
      * @return Os;
      */
     public function store(Request $request): Os;
@@ -26,8 +24,6 @@ interface OsServiceInterface
     /**
      * Atualiza uma OS e retorna o objeto da mesma.
      *
-     * @param  Request  $request
-     * @param  Os  $os
      * @return Os;
      */
     public function update(Request $request, Os $os): Os;
@@ -35,7 +31,6 @@ interface OsServiceInterface
     /**
      * Exclui uma OS e retora os dados da mesma.
      *
-     * @param  Os  $os
      * @return bool True para excluído com sucesso;
      */
     public function destroy(Os $os): bool;

@@ -43,7 +43,7 @@ class UpdateDatabaseDefaults extends Command
             echo "\e[41mOCORREU UM ERRO\e[0m";
         }
         foreach ($output as $row) {
-            echo  "$row\n";
+            echo "$row\n";
         }
     }
 }
