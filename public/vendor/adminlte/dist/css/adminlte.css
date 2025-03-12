@@ -13,6 +13,7 @@
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
+  --oslab: #5d52ef;
   --purple: #6f42c1;
   --pink: #e83e8c;
   --red: #dc3545;
@@ -10622,6 +10623,7 @@ a.text-dark:hover, a.text-dark:focus {
   --maroon: #ed6c9b;
   --blue: #3f6791;
   --indigo: #6610f2;
+  --oslab: #5d52ef;
   --purple: #6f42c1;
   --pink: #e83e8c;
   --red: #e74c3c;
@@ -13117,6 +13119,17 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 .sidebar-dark-indigo .nav-sidebar.nav-legacy > .nav-item > .nav-link.active,
 .sidebar-light-indigo .nav-sidebar.nav-legacy > .nav-item > .nav-link.active {
   border-color: #6610f2;
+}
+
+.sidebar-dark-oslab .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-oslab .nav-sidebar > .nav-item > .nav-link.active {
+  background-color: #5d52ef;
+  color: #fff;
+}
+
+.sidebar-dark-oslab .nav-sidebar.nav-legacy > .nav-item > .nav-link.active,
+.sidebar-light-oslab .nav-sidebar.nav-legacy > .nav-item > .nav-link.active {
+  border-color: #5d52ef;
 }
 
 .sidebar-dark-purple .nav-sidebar > .nav-item > .nav-link.active,
