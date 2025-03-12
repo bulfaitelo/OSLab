@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/despesa/{despesa}/pagamento/{pagamento}', [DespesaPagamentoController::class, 'destroy'])->name('despesa.pagamento.destroy');
 
         Route::resource('/receita', ReceitaController::class)
-                ->parameters(['receita' => 'receita']);
+            ->parameters(['receita' => 'receita']);
         Route::put('/receita/{receita}/pagamento/{pagamento}', [ReceitaPagamentoController::class, 'update'])->name('receita.pagamento.update');
         Route::post('/receita/{receita}/pagamento/', [ReceitaPagamentoController::class, 'store'])->name('receita.pagamento.store');
         Route::delete('/receita/{receita}/pagamento/{pagamento}', [ReceitaPagamentoController::class, 'destroy'])->name('receita.pagamento.destroy');
@@ -179,7 +179,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
         // Garantia
         Route::resource('/garantia', GarantiaController::class)
-                ->parameters(['garantia' => 'garantia']);
+            ->parameters(['garantia' => 'garantia']);
         // Sistema
         Route::resource('/sistema', SistemaConfigController::class)->only([
             'index', 'store',

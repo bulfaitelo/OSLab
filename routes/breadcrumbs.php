@@ -237,7 +237,7 @@ Breadcrumbs::for('financeiro.receita.edit', function (BreadcrumbTrail $trail, Co
     $trail->push('Editar Receita', route('financeiro.receita.edit', $item));
 });
 
-//Metas Contábeis
+// Metas Contábeis
 Breadcrumbs::for('financeiro.meta_contabil.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Financeiro');
