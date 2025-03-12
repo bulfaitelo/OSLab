@@ -52,7 +52,7 @@ class MetaContabilController extends Controller
     public function store(StoreMetaContabilRequest $request)
     {
         try {
-            $metaContabil = new MetaContabil();
+            $metaContabil = new MetaContabil;
             $metaContabil->name = $request->name;
             $metaContabil->descricao = $request->descricao;
             $metaContabil->valor_meta = $request->valor_meta;
@@ -64,7 +64,7 @@ class MetaContabilController extends Controller
             $metaContabil->save();
 
             return redirect()->route('financeiro.meta_contabil.index')
-            ->with('success', 'Meta Contábil cadastrada com sucesso.');
+                ->with('success', 'Meta Contábil cadastrada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -115,7 +115,7 @@ class MetaContabilController extends Controller
             $metaContabil->save();
 
             return redirect()->route('financeiro.meta_contabil.index')
-            ->with('success', 'Meta Contábil atualizada com sucesso.');
+                ->with('success', 'Meta Contábil atualizada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }

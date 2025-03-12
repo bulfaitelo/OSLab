@@ -46,7 +46,7 @@ class ReceitaPagamentoController extends Controller
             DB::commit();
 
             return redirect()->route('financeiro.receita.edit', $receita)
-            ->with('success', 'Pagamento adicionado com sucesso.');
+                ->with('success', 'Pagamento adicionado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -89,7 +89,7 @@ class ReceitaPagamentoController extends Controller
             DB::commit();
 
             return redirect()->route('financeiro.receita.edit', $receita)
-            ->with('success', 'Pagamento editado com sucesso.');
+                ->with('success', 'Pagamento editado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

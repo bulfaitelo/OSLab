@@ -90,8 +90,8 @@ class DespesaController extends Controller
             if ($request->os_id) {
                 $os = Os::findOrFail($request->os_id);
             }
-            $despesa = new Contas();
-            $despesa->tipo = 'D'; //despesa
+            $despesa = new Contas;
+            $despesa->tipo = 'D'; // despesa
             $despesa->user_id = Auth::id();
             $despesa->name = $request->name;
             $despesa->centro_custo_id = $request->centro_custo_id;
@@ -159,7 +159,7 @@ class DespesaController extends Controller
             DB::commit();
 
             return redirect()->route('financeiro.despesa.index')
-            ->with('success', 'Despesa cadastrada com sucesso.');
+                ->with('success', 'Despesa cadastrada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -200,7 +200,7 @@ class DespesaController extends Controller
             $despesa->save();
 
             return redirect()->route('financeiro.despesa.index')
-            ->with('success', 'Despesa Atualizada com sucesso.');
+                ->with('success', 'Despesa Atualizada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
