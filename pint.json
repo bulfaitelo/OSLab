@@ -1,5 +1,10 @@
 {
 
-    "preset": "laravel"
+    "preset": "laravel",
+    "rules": {
+        "braces": {
+            "position_after_functions_and_oop_constructs": "next"
+        }
+    }
 
 }

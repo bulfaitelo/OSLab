@@ -1,6 +1,6 @@
 preset: laravel
-disabled:
-  - braces
+enabled:
+  - single_line_empty_body
 finder:
   not-name:
     - "TestController.php"
