@@ -1,6 +1,7 @@
 preset: laravel
 enabled:
-  - single_line_empty_body
+  - phpdoc_trim # Evita espaços desnecessários em PHPDoc
+  - no_empty_statement # Garante que blocos vazios fiquem corretamente formatados
 finder:
   not-name:
     - "TestController.php"
