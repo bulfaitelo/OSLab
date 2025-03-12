@@ -25,8 +25,8 @@ class CategoriaController extends Controller
     public function index()
     {
         $categoria = Categoria::with('garantia')
-                ->with('centroCusto')
-                ->paginate(100);
+            ->with('centroCusto')
+            ->paginate(100);
 
         return view('configuracao.parametro.categoria.index', compact('categoria'));
     }
@@ -45,7 +45,7 @@ class CategoriaController extends Controller
     public function store(StoreUpdateCategoriaRequest $request)
     {
         try {
-            $categoria = new Categoria();
+            $categoria = new Categoria;
             $categoria->name = $request->name;
             $categoria->descricao = $request->descricao;
             $categoria->user_id = Auth::id();
@@ -56,7 +56,7 @@ class CategoriaController extends Controller
             $categoria->save();
 
             return redirect()->route('configuracao.parametro.categoria.index')
-            ->with('success', 'Categoria criada com sucesso.');
+                ->with('success', 'Categoria criada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -94,7 +94,7 @@ class CategoriaController extends Controller
             $categoria->save();
 
             return redirect()->route('configuracao.parametro.categoria.index')
-            ->with('success', 'Categoria atualizada com sucesso.');
+                ->with('success', 'Categoria atualizada com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -38,8 +38,6 @@ class PermissionsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
      */
     public function store(Request $request)
     {
@@ -54,7 +52,7 @@ class PermissionsController extends Controller
         ]);
         if ($permission) {
             return redirect()->route('configuracao.permissions.index')
-            ->with('success', 'Permissão cadastrada com Sucesso!');
+                ->with('success', 'Permissão cadastrada com Sucesso!');
         }
     }
 
@@ -72,7 +70,6 @@ class PermissionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      */
     public function update(Request $request, Permission $permission)
@@ -86,7 +83,7 @@ class PermissionsController extends Controller
         $permission->group_id = $request->group;
         if ($permission->save()) {
             return redirect()->route('configuracao.permissions.edit', $permission->id)
-            ->with('success', 'Permissão atualizada!');
+                ->with('success', 'Permissão atualizada!');
         }
     }
 
@@ -100,7 +97,7 @@ class PermissionsController extends Controller
         $permission->delete();
         if ($permission) {
             return redirect()->route('configuracao.permissions.index')
-            ->with('success', 'Permissão Excluida com Sucesso!');
+                ->with('success', 'Permissão Excluida com Sucesso!');
         }
     }
 }

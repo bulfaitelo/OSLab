@@ -58,7 +58,7 @@ class SistemaConfigController extends Controller
             DB::commit();
 
             return redirect()->route('configuracao.sistema.index')
-            ->with('success', 'Configurações de sistema atualizadas com sucesso!');
+                ->with('success', 'Configurações de sistema atualizadas com sucesso!');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

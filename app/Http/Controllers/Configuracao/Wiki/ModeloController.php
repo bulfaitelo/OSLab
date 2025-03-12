@@ -45,13 +45,13 @@ class ModeloController extends Controller
     public function store(StoreModeloRequest $request)
     {
         try {
-            $modelo = new Modelo();
+            $modelo = new Modelo;
             $modelo->name = \Str::upper($request->name);
             $modelo->wiki_id = $request->wiki_id;
             $modelo->save();
 
             return redirect()->route('configuracao.wiki.modelo.index')
-            ->with('success', 'Modelo cadastrado com sucesso.');
+                ->with('success', 'Modelo cadastrado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -84,7 +84,7 @@ class ModeloController extends Controller
             $modelo->save();
 
             return redirect()->route('configuracao.wiki.modelo.index')
-            ->with('success', 'Modelo atualizado com sucesso.');
+                ->with('success', 'Modelo atualizado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -99,7 +99,7 @@ class ModeloController extends Controller
             $osCount = $modelo->os->count();
             if ($osCount > 0) {
                 return redirect()->route('configuracao.wiki.modelo.index')
-                ->with('warning', "Modelo está sendo usado em {$osCount} e não pode ser excluído!");
+                    ->with('warning', "Modelo está sendo usado em {$osCount} e não pode ser excluído!");
             }
             $modelo->delete();
 

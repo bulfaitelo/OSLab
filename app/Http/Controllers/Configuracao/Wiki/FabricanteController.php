@@ -43,13 +43,13 @@ class FabricanteController extends Controller
     public function store(StoreFabricanteRequest $request)
     {
         try {
-            $fabricante = new Fabricante();
+            $fabricante = new Fabricante;
             $fabricante->name = $request->name;
             $fabricante->descricao = $request->descricao;
             $fabricante->save();
 
             return redirect()->route('configuracao.wiki.fabricante.index')
-            ->with('success', 'Fabricante cadastrado com sucesso.');
+                ->with('success', 'Fabricante cadastrado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -82,7 +82,7 @@ class FabricanteController extends Controller
             $fabricante->save();
 
             return redirect()->route('configuracao.wiki.fabricante.index')
-            ->with('success', 'Fabricante atualizado com sucesso.');
+                ->with('success', 'Fabricante atualizado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }

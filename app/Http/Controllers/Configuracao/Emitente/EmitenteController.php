@@ -31,7 +31,7 @@ class EmitenteController extends Controller
             return redirect()->route('configuracao.emitente.create');
         }
 
-        return  redirect()->route('configuracao.emitente.edit', [$emitente]);
+        return redirect()->route('configuracao.emitente.edit', [$emitente]);
     }
 
     /**
@@ -49,7 +49,7 @@ class EmitenteController extends Controller
     {
         DB::beginTransaction();
         try {
-            $emitente = new Emitente();
+            $emitente = new Emitente;
             $emitente->id = 1;
             $emitente->cnpj = $request->registro;
             $emitente->name = $request->name;
@@ -77,7 +77,7 @@ class EmitenteController extends Controller
             DB::commit();
 
             return redirect()->route('configuracao.emitente.edit', [$emitente])
-            ->with('success', 'Emitente cadastrado com sucesso.');
+                ->with('success', 'Emitente cadastrado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -129,7 +129,7 @@ class EmitenteController extends Controller
             DB::commit();
 
             return redirect()->route('configuracao.emitente.edit', [$emitente])
-            ->with('success', 'Emitente atualizado com sucesso.');
+                ->with('success', 'Emitente atualizado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

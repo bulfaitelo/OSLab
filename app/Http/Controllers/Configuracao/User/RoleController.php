@@ -27,7 +27,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::orderBy('name', 'ASC')
-        ->get();
+            ->get();
 
         return view('configuracao.users.roles.index', compact('roles'));
     }
@@ -42,8 +42,6 @@ class RoleController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
      */
     public function store(Request $request)
     {
@@ -82,7 +80,6 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      */
     public function update(Request $request, $id)
@@ -140,7 +137,6 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      */
     public function assign_update(Request $request, $id)

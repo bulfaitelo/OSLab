@@ -30,7 +30,6 @@ class PermissionsGroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -63,7 +62,6 @@ class PermissionsGroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\PermissionsGroup  $permissionsGroup
      * @return \Illuminate\Http\Response
      */

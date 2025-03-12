@@ -53,7 +53,7 @@ class BackupController extends Controller
                 unlink($request->path);
 
                 return redirect()->route('configuracao.backup.index')
-                ->with('success', 'Backup Excluído com sucesso.');
+                    ->with('success', 'Backup Excluído com sucesso.');
             } catch (\Throwable $th) {
                 throw $th;
             }

@@ -41,14 +41,14 @@ class CentroCustoController extends Controller
      */
     public function store(StoreUpdateCentroCustoRequest $request)
     {
-        $centroCusto = new CentroCusto();
+        $centroCusto = new CentroCusto;
         $centroCusto->name = $request->name;
         $centroCusto->descricao = $request->descricao;
         $centroCusto->receita = $request->receita;
         $centroCusto->despesa = $request->despesa;
         if ($centroCusto->save()) {
             return redirect()->route('configuracao.financeiro.centro_custo.index')
-            ->with('success', 'Centro de criado com sucesso.');
+                ->with('success', 'Centro de criado com sucesso.');
         }
     }
 
@@ -79,7 +79,7 @@ class CentroCustoController extends Controller
         $centroCusto->despesa = $request->despesa;
         if ($centroCusto->save()) {
             return redirect()->route('configuracao.financeiro.centro_custo.index')
-            ->with('success', 'Centro de atualizado com sucesso.');
+                ->with('success', 'Centro de atualizado com sucesso.');
         }
     }
 

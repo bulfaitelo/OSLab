@@ -66,7 +66,7 @@ class StatusController extends Controller
     public function store(StoreUpdateStatusRequest $request)
     {
         try {
-            $status = new Status();
+            $status = new Status;
             $status->name = $request->name;
             $status->descricao = $request->descricao;
             $status->color = $request->color;
@@ -79,7 +79,7 @@ class StatusController extends Controller
             $status->save();
 
             return redirect()->route('configuracao.parametro.status.index')
-            ->with('success', 'Status criado com sucesso.');
+                ->with('success', 'Status criado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -123,7 +123,7 @@ class StatusController extends Controller
             $status->save();
 
             return redirect()->route('configuracao.parametro.status.index')
-            ->with('success', 'Status atualizado com sucesso.');
+                ->with('success', 'Status atualizado com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -137,7 +137,7 @@ class StatusController extends Controller
         try {
             if (($status->os()->count() > 0) || ($status->vendas()->count() > 0) || ($status->osStatusLogs()->count() > 0)) {
                 return redirect()->route('configuracao.parametro.status.index')
-                ->with('warning', 'Esse status está sendo usado em alguma OS ou Venda e não pode ser excluído!');
+                    ->with('warning', 'Esse status está sendo usado em alguma OS ou Venda e não pode ser excluído!');
             }
             $status->delete();
 

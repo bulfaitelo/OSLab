@@ -73,8 +73,6 @@ class SetorController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Configuracao\User\Setor  $setor
      */
     public function edit(Setor $setor)
     {
@@ -83,9 +81,6 @@ class SetorController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Configuracao\User\Setor  $setor
      */
     public function update(Request $request, Setor $setor)
     {
@@ -100,18 +95,16 @@ class SetorController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Configuracao\User\Setor  $setor
      */
     public function destroy(Setor $setor)
     {
         if ($setor->users->count() > 0) {
             return redirect()->route('configuracao.user.setor.index')
-            ->with('warning', 'Não é possível excluir um setor que existam usuários cadastrados nele!');
+                ->with('warning', 'Não é possível excluir um setor que existam usuários cadastrados nele!');
         } else {
             if ($setor->delete()) {
                 return redirect()->route('configuracao.user.setor.index')
-                ->with('success', 'Setor Excluído com Sucesso!');
+                    ->with('success', 'Setor Excluído com Sucesso!');
             }
         }
     }

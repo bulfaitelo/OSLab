@@ -32,8 +32,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('name', 'ASC')
-                ->with('setor')
-                ->paginate(50);
+            ->with('setor')
+            ->paginate(50);
 
         return view('configuracao.users.index', compact('users'));
     }
@@ -48,8 +48,6 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
      */
     public function store(Request $request)
     {
@@ -103,8 +101,6 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  User  $user
      */
     public function show(User $user)
     {
@@ -115,8 +111,6 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  User  $user
      */
     public function edit(User $user)
     {
@@ -127,9 +121,6 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  User  $user
      */
     public function update(Request $request, User $user)
     {
@@ -190,15 +181,13 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  User  $user
      */
     public function destroy(User $user)
     {
         try {
             if (Auth::id() == $user->id) {
                 return redirect()->route('configuracao.users.index')
-                ->with('warning', 'o Usuário logado não pode ser excluído!');
+                    ->with('warning', 'o Usuário logado não pode ser excluído!');
             }
             $user->delete();
 
@@ -211,8 +200,6 @@ class UserController extends Controller
 
     /**
      * Edita as permissões do usuário.
-     *
-     * @param  User  $user
      */
     public function permissions_edit(User $user)
     {
@@ -233,9 +220,6 @@ class UserController extends Controller
 
     /**
      * Edita as permissões do usuário.
-     *
-     * @param  Request  $request
-     * @param  User  $user
      */
     public function permissions_update(Request $request, User $user)
     {
