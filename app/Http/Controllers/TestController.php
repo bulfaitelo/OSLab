@@ -34,7 +34,7 @@ class TestController extends Controller
      */
     public function index()
     {
-
+        error('asdasd');
         ds(Os::get());
 
         dd('stop');
