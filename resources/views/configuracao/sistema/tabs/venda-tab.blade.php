@@ -58,7 +58,7 @@
                         class="data_info fas fa-exclamation-circle"
                     ></i>
                 </label>
-                {!! html()->select('sistema[default_venda_faturar_centro_custo]', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), getConfig('default_venda_faturar_centro_custo'))->class('form-control')->placeholder('Selecione o Centro de Custo')->required() !!}
+                {!! html()->select('sistema[default_venda_faturar_centro_custo]', \App\Models\Configuracao\Financeiro\CentroCusto::orderBy('name')->where('receita', '1')->pluck('name', 'id'), getConfig('default_venda_faturar_centro_custo'))->class('form-control')->placeholder('Selecione o Centro de Custo') !!}
             </div>
         </div>
     </div>
