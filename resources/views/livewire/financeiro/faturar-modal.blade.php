@@ -114,7 +114,31 @@
     <script>
         document.addEventListener('livewire:init', function () {
             Livewire.on('toggleFaturarModal', () => $('#faturarModal').modal('toggle'));
+
+            $('#observacoes-div').on('show.bs.collapse', function () {
+                $('#obervacoes-icon').removeClass('rotate-back').addClass('rotate');
+            });
+
+            $('#observacoes-div').on('hidden.bs.collapse', function () {
+                $('#obervacoes-icon').removeClass('rotate').addClass('rotate-back');
+            });
+
+            $('#recebido').on('change', function () {
+                if (this.checked) {
+                    $('#recebido-div').css('display', '');
+                    $('#data_recebimento').attr("required", "required");
+                    $('#forma_pagamento_id').attr("required", "required");
+                    $('#valor_recebido').attr("required", "required");
+
+                } else {
+                    $('#recebido-div').css('display', 'none');
+                    $('#data_recebimento').removeAttr("required");
+                    $('#forma_pagamento_id').removeAttr("required");
+                    $('#valor_recebido').removeAttr("required");
+                }
+            });
         });
+
     </script>
 
 </div>

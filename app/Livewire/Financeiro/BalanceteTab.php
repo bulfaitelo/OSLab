@@ -33,11 +33,6 @@ class BalanceteTab extends Component
      */
     private function modelSelector()
     {
-        if ($this->os) {
-            return $this->os;
-        }
-        if ($this->venda) {
-            return $this->venda;
-        }
+        return $this->os ?: $this->venda ?: null;
     }
 }

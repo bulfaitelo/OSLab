@@ -198,6 +198,15 @@
         display: none!important;
     }
 
+    .rotate {
+        transition: transform 0.3s ease-in-out;
+        transform: rotate(90deg);
+    }
+
+    .rotate-back {
+        transition: transform 0.3s ease-in-out;
+        transform: rotate(0deg);
+    }
 
 </style>
 @stop
@@ -211,31 +220,8 @@
 
 <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 <script>
-    $('.decimal').mask('#.##0,00', { reverse: true });
+
     $('.numero').mask('#', { reverse: true });
-
-    $('#observacoes-div').on('show.bs.collapse', function () {
-        $('#obervacoes-icon').removeClass('fa-caret-right').addClass('fa-caret-down');
-    })
-    $('#observacoes-div').on('hidden.bs.collapse', function () {
-        $('#obervacoes-icon').removeClass('fa-caret-down').addClass('fa-caret-right');
-    })
-
-    $('#recebido').on('change', function () {
-        if (this.checked) {
-            $('#recebido-div').css('display', '');
-            $('#data_recebimento').attr("required","required");
-            $('#forma_pagamento_id').attr("required","required");
-            $('#valor_recebido').attr("required","required");
-
-        } else {
-            $('#recebido-div').css('display', 'none');
-            $('#data_recebimento').removeAttr("required");
-            $('#forma_pagamento_id').removeAttr("required");
-            $('#valor_recebido').removeAttr("required");
-        }
-    });
-
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         tabId = e.target.id;
@@ -243,13 +229,9 @@
             Livewire.dispatchTo('venda.log-tab', 'showLogTab');
         }
         if(tabId == 'balancete-tab'){
-            console.log('balancete');
-
             Livewire.dispatchTo('financeiro.balancete-tab', 'showBalanceteTab');
         }
     });
-
-
 
 </script>
 @stop
