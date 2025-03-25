@@ -72,18 +72,32 @@ class FaturarModal extends Component
 
     private function returnView()
     {
+        $model = $this->modelSelector();
+        $type = $this->typeSelector();
+
+        if (! $model) {
+            return view('livewire.financeiro.erro-valor-faturar-modal', [
+                'item' => null,
+                'tipo' => null,
+            ]);
+        }
+
+        $this->valorTotal = $model->valorTotal(); // Certifique-se de que isso não está retornando null
+
         if ($this->valorTotal > 0) {
+            $cliente = Cliente::find($model->cliente_id);
+
             return view('livewire.financeiro.faturar-modal', [
-                'item' => $this->modelSelector(),
+                'item' => $model,
                 'itemValorTotal' => $this->valorTotal,
-                'tipo' => $this->typeSelector(),
-                'debitosPendentes' => Cliente::find($this->modelSelector()->cliente_id)->hasPendingDebits(),
+                'tipo' => $type,
+                'debitosPendentes' => $cliente ? $cliente->hasPendingDebits() : false,
             ]);
         }
 
         return view('livewire.financeiro.erro-valor-faturar-modal', [
-            'item' => $this->modelSelector(),
-            'tipo' => $this->typeSelector(),
+            'item' => $model,
+            'tipo' => $type,
         ]);
     }
 }

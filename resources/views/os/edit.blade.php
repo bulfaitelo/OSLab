@@ -183,16 +183,15 @@
 </div>
 
 @can('os_faturar')
-    <!-- Modal - FATURA  -->
-    <div class="modal fade" id="faturarModal" tabindex="-1" role="dialog" aria-labelledby="faturarModalLabel"
-        aria-hidden="true">
+    {{-- Modal - FATURA --}}
+    <div class="modal fade" id="faturarModal" >
         @livewire('financeiro.faturar-modal', ['os' => $os], key($os->id))
     </div>
-    <!-- FIM Modal - FATURA  -->
+    {{-- FIM Modal - FATURA --}}
 @endcan
 
 @can('os_cancelar_faturar')
-    <!-- Modal - CANCELAR FATURA  -->
+    {{-- Modal - CANCELAR FATURA --}}
     <div class="modal fade" id="cancelarFaturarModal" tabindex="-1" role="dialog"
         aria-labelledby="cancelarfaturarModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -226,7 +225,7 @@
             </div>
         </div>
     </div>
-    <!-- FIM Modal - CANCELAR FATURA  -->
+    {{-- FIM Modal - CANCELAR FATURA --}}
 @endcan
 
 
@@ -298,7 +297,7 @@
 
 <script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
 <script>
-    $('.decimal').mask('#.##0,00', { reverse: true });
+
     $('.numero').mask('#', { reverse: true });
 
     $('#observacoes-div').on('show.bs.collapse', function () {
