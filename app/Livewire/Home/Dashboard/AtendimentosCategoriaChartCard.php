@@ -42,15 +42,15 @@ class AtendimentosCategoriaChartCard extends Component
         $os = Os::query();
         $os->selectRaw('
             categorias.name as categoria,
-            MONTH(os.created_at) as mes,
+            MONTH(os.data_saida) as mes,
             count(*) as quantidade
         ');
         $os->join('categorias', 'categorias.id', '=', 'os.categoria_id');
         $os->join('status', 'status.id', '=', 'os.status_id');
         $os->where('status.garantia', 1); // forma de garantia que vou contar apenas o que foi finalizado isso é com garantia.
-        $os->whereRaw('YEAR(os.created_at) = '.now()->format('Y'));
+        $os->whereRaw('YEAR(os.data_saida) = '.now()->format('Y'));
         $os->groupBy('categoria');
-        $os->groupByRaw('MONTH(os.created_at)');
+        $os->groupByRaw('MONTH(os.data_saida)');
         $os->orderBy('mes');
         $os->orderBy('categoria');
 
