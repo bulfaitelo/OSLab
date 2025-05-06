@@ -68,7 +68,7 @@
                         </div>
                         @can('servico_create')
                         <a href="{{ route('servico.create') }}" class="small-box-footer">
-                            Adicionar OS <i class="fas fa-arrow-circle-right"></i>
+                            Adicionar Serviço <i class="fas fa-arrow-circle-right"></i>
                         </a>
                         @endcan
                     </div>
@@ -102,7 +102,7 @@
                         </div>
                         @can('checklist_create')
                         <a href="{{ route('checklist.create') }}" class="small-box-footer">
-                            Adicionar checklist <i class="fas fa-arrow-circle-right"></i>
+                            Adicionar Checklist <i class="fas fa-arrow-circle-right"></i>
                         </a>
                         @endcan
                     </div>
