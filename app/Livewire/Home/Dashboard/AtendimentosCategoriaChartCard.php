@@ -42,45 +42,61 @@ class AtendimentosCategoriaChartCard extends Component
         $os = Os::query();
         $os->selectRaw('
             categorias.name as categoria,
-            MONTH(os.data_saida) as mes,
+            MONTH(os.created_at) as mes,
             count(*) as quantidade
         ');
         $os->join('categorias', 'categorias.id', '=', 'os.categoria_id');
         $os->join('status', 'status.id', '=', 'os.status_id');
-        $os->where('status.garantia', 1); // forma de garantia que vou contar apenas o que foi finalizado isso é com garantia.
-        $os->whereRaw('YEAR(os.data_saida) = '.now()->format('Y'));
+        $os->where('status.garantia', 1); // somente finalizados com garantia
+        $os->whereYear('os.created_at', now()->year);
         $os->groupBy('categoria');
-        $os->groupByRaw('MONTH(os.data_saida)');
+        $os->groupByRaw('MONTH(os.created_at)');
         $os->orderBy('mes');
         $os->orderBy('categoria');
 
-        $array = [];
-        $arrayMes = [];
-        foreach ($os->get() as $key => $value) {
-            $array[$value->categoria]['label'] = $value->categoria;
-            $array[$value->categoria]['data'][] = [
-                'x' => $this->meses[$value->mes],
-                'y' => $value->quantidade,
-            ];
-            $array[$value->categoria]['tension'] = 0.4;
-            $arrayMes[$value->mes] = $this->meses[$value->mes];
+        $dadosBrutos = $os->get();
+
+        // Descobrir os meses únicos com dados
+        $mesesComDados = [];
+
+        foreach ($dadosBrutos as $row) {
+            $mes = (int) $row->mes;
+            $mesesComDados[$mes] = $this->meses[$mes];
         }
-        foreach ($array as $key => $value) {
-            $retunrArray[] = $value;
+
+        ksort($mesesComDados); // Garante ordem cronológica
+        $labels = array_values($mesesComDados); // Apenas nomes dos meses com dados
+
+        // Montar os dados das categorias
+        $dataPorCategoria = [];
+
+        foreach ($dadosBrutos as $row) {
+            $categoria = $row->categoria;
+            $mes = (int) $row->mes;
+
+            if (! isset($dataPorCategoria[$categoria])) {
+                // Inicializa apenas os meses com dados como null
+                $dataPorCategoria[$categoria] = array_fill_keys(array_keys($mesesComDados), null);
+            }
+
+            $dataPorCategoria[$categoria][$mes] = (int) $row->quantidade;
         }
-        foreach ($arrayMes as $key => $value) {
-            $retunrArrayMes[] = $value;
-        }
-        if (isset($retunrArray)) {
-            return [
-                'labels' => json_encode($retunrArrayMes),
-                'data' => json_encode($retunrArray),
+
+        // Montar datasets no formato esperado
+        $datasets = [];
+
+        foreach ($dataPorCategoria as $categoria => $valoresPorMes) {
+            $datasets[] = [
+                'label' => $categoria,
+                'data' => array_values($valoresPorMes), // Em ordem dos labels
+                'tension' => 0.4,
+                'spanGaps' => true,
             ];
         }
 
         return [
-            'labels' => json_encode(false),
-            'data' => json_encode(false),
+            'labels' => json_encode($labels),
+            'data' => json_encode($datasets),
         ];
     }
 }

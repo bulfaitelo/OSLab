@@ -23,15 +23,19 @@ document.addEventListener('livewire:init', function () {
         type: 'line',
         data: {
             labels: {!! $labels !!},
-            datasets: {!! $data !!}
+            datasets: {!! $data !!},            
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: false,            
             plugins: {
                 legend: {
                     position: 'left'
                 }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: true
             },
             scales: {
                 y: {
