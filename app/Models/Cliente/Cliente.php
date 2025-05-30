@@ -28,7 +28,13 @@ class Cliente extends Model
      */
     public function os(): HasMany
     {
-        return $this->hasMany(Os::class);
+        return $this->hasMany(related: Os::class)
+            ->with([
+                'categoria',
+                'status',
+                'cliente',
+                'tecnico',
+            ]);
     }
 
     /**
