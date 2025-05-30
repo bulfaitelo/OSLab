@@ -124,6 +124,7 @@ if (!@js($conta_id)) {
         labelField: 'name',
         searchField: 'name',
         selectOnTab: true,
+        sortField:[{field:'$order'},{field:'$score'}],
         // fetch remote data
         load: function(query, callback) {
             var url = route('produto.select') + '?q=' + encodeURIComponent(query);
