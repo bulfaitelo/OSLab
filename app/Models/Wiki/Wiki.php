@@ -70,14 +70,14 @@ class Wiki extends Model
     public static function getDataTable(Request $request, int $itensPorPagina = 100): object
     {
         $queryWiki = self::query();
-        $queryWiki->with('modelos');
-        $queryWiki->with('user');
-        $queryWiki->with('categoria');
-        $queryWiki->with('fabricante');
-        $queryWiki->with('os');
+
+        $queryWiki->leftJoin('fabricantes', 'wikis.fabricante_id', '=', 'fabricantes.id')
+            ->select('wikis.*')
+            ->with(['modelos', 'user', 'categoria', 'fabricante', 'os']);
+
         if (isset($request->busca)) {
             $queryWiki->where(function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%'.$request->busca.'%');
+                $query->where('wikis.name', 'LIKE', '%'.$request->busca.'%');
                 $query->orWhereHas('modelos', function ($query) use ($request) {
                     $query->where('name', 'LIKE', '%'.$request->busca.'%');
                 });
@@ -89,6 +89,7 @@ class Wiki extends Model
         if ($request->categoria_id) {
             $queryWiki->where('categoria_id', $request->categoria_id);
         }
+        $queryWiki->orderBy('fabricantes.name')->orderBy('wikis.name');
 
         return $queryWiki->paginate($itensPorPagina);
     }
