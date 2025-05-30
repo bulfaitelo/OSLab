@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Financeiro;
 
+use App\Models\Configuracao\Parametro\Status;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -128,10 +129,10 @@ class AddPagamentoModal extends Component
         if ($this->modelSelector()->quitada()) {
             $this->dispatch('toggleAddPagamentoModal');
             if ($this->typeSelector() === 'os') {
-                flasher('Pagamento adicionado com sucesso, a Ordem de Serviço foi '.$this->modelSelector()->status->name.'!');
+                flasher('Pagamento adicionado com sucesso, o status da Ordem de Serviço foi alterado para '.Status::find($this->modelSelector()->status_id)->name.'!');
             }
             if ($this->typeSelector() === 'venda') {
-                flasher('Pagamento adicionado com sucesso, a Venda foi '.$this->modelSelector()->status->name.'!');
+                flasher('Pagamento adicionado com sucesso, o status da Venda foi alterado para '.Status::find($this->modelSelector()->status_id)->name.'!');
             }
         } else {
             flasher('Pagamento adicionado com sucesso.');
