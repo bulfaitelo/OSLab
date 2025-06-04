@@ -189,6 +189,7 @@
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
+            selectOnTab: true,
             // fetch remote data
             load: function(query, callback) {
                 var url = route('cliente.select') + '?q=' + encodeURIComponent(query);
@@ -225,6 +226,9 @@
         // selecionando os dados do cliente
         tomSelectCliente.addOption(@js($os?->getClienteForSelect()));
         tomSelectCliente.addItem(@js($os?->cliente_id));
+        tomSelectCliente.on('change', function (){
+            $('#valor').focus();
+        });
 
     });
 </script>
