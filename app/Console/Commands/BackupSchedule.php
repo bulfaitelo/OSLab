@@ -41,7 +41,7 @@ class BackupSchedule extends Command
                 Artisan::call('backup:run --only-to-disk=local --disable-notifications');
                 Artisan::output();
             }
-            if (getConfig('backup_gdrive_store')) {
+            if (getConfig('backup_gdrive_store') && in_array('google', explode(',', env('BACKUP_DIRECTORY')))) {
                 Artisan::call('backup:run --only-to-disk=google --disable-notifications');
                 echo Artisan::output();
             }
