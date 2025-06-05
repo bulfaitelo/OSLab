@@ -31,11 +31,11 @@
                     </button>
                 </a>
                 @endcan
-                <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseWiki" aria-expanded="false" aria-controls="collapseWiki">
+                <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseFiltros" aria-expanded="false" aria-controls="collapseFiltros">
                     <i class="fa-solid fa-filter"></i>
                     Filtros
                 </button>
-                <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseWiki">
+                <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseFiltros">
                     <hr>
                     {{ html()->form('get', route('wiki.index'))->open() }}
                     <div class="row">

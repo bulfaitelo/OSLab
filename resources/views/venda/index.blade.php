@@ -24,11 +24,11 @@
                 </button>
             </a>
             @endcan
-            <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseOs" aria-expanded="false" aria-controls="collapseOs">
+            <button class="btn btn-sm bg-lightblue float-right" type="button" data-toggle="collapse" data-target="#collapseFiltros" aria-expanded="false" aria-controls="collapseFiltros">
                 <i class="fa-solid fa-filter"></i>
                 Filtros
             </button>
-            <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseOs">
+            <div class="collapse @if (count($request->all()) > 0) show @endif" id="collapseFiltros">
                 <hr>
                 {{ html()->form('get', route('venda.index'))->open() }}
                 <div class="row">

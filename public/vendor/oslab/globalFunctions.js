@@ -33,3 +33,8 @@ $("[required]").prev('label').append("<span class='required-span' title='Este ca
 $('.help_popover').popover({
     trigger: 'hover'
 });
+
+// Adicionando auto Focus para os campos de busca.
+$('#collapseFiltros').on('shown.bs.collapse', function () {
+    $('#busca').trigger('focus');
+});
