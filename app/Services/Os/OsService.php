@@ -30,7 +30,7 @@ class OsService implements OsServiceInterface
      */
     public static function getDataTable(Request $request, int $itensPorPagina = 100, $colunaOrdenacao = null, $ordenacao = 'desc')
     {
-        $dataHoje = Carbon::now()->format('Y-d-m');
+        $dataHoje = Carbon::now()->format('Y-m-d');
         $osListagemPadrao = getConfig('os_listagem_padrao');
 
         $queryOs = Os::with(['cliente', 'tecnico', 'categoria', 'status']);
