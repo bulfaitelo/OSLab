@@ -50,33 +50,55 @@ class OsService implements OsServiceInterface
                 });
             });
         }
+
         if ($request->categoria_id) {
             $queryOs->where('categoria_id', $request->categoria_id);
         }
+
         if ($request->data_inicial || $request->data_final) {
-            ($request->data_inicial) ? $dataInicial = $request->data_inicial : $dataInicial = $dataHoje;
-            ($request->data_final) ? $dataFinal = $request->data_final : $dataFinal = $dataHoje;
+            $dataInicial = $request->data_inicial ?: $dataHoje;
+            $dataFinal = $request->data_final ?: $dataHoje;
+
             $queryOs->where(function ($query) use ($dataInicial, $dataFinal) {
                 $query->whereBetween('created_at', [$dataInicial, $dataFinal]);
                 $query->orWhereBetween('data_entrada', [$dataInicial, $dataFinal]);
                 $query->orWhereBetween('data_saida', [$dataInicial, $dataFinal]);
             });
         }
+
         if ($request->status_id) {
             $queryOs->where('status_id', $request->status_id);
         }
-        if (! $request->input()) {
-            if ($osListagemPadrao) {
-                $queryOs->whereIn('status_id', $osListagemPadrao);
-            }
+
+        if (! $request->input() && $osListagemPadrao) {
+            $queryOs->whereIn('status_id', $osListagemPadrao);
         }
+
         if ($colunaOrdenacao) {
             $queryOs->orderBy($colunaOrdenacao, $ordenacao);
         } else {
             $queryOs->orderBy('id', 'desc');
         }
 
-        return $queryOs->paginate($itensPorPagina);
+        // Aqui a paginação é feita e armazenada
+        $ordensPaginadas = $queryOs->paginate($itensPorPagina);
+
+        // Modifica apenas os itens da página atual
+        $ordensPaginadas->getCollection()->transform(function ($ordem) use ($request) {
+            if (! $request->busca) {
+                return $ordem;
+            }
+
+            foreach (['descricao', 'defeito', 'observacoes', 'laudo'] as $campo) {
+                if (! empty($ordem->$campo) && stripos($ordem->$campo, $request->busca) !== false) {
+                    $ordem->{'snippet_'.$campo} = self::gerarSnippet($ordem->$campo, $request->busca, 80);
+                }
+            }
+
+            return $ordem;
+        });
+
+        return $ordensPaginadas;
     }
 
     public function store(Request $request): Os
@@ -167,5 +189,39 @@ class OsService implements OsServiceInterface
         }
 
         return null;
+    }
+
+    /**
+     * Gerar o Snippet com o texto ja tratado.
+     *
+     * @param  string  $texto  Texto base para ser buscado
+     * @param  string  $busca  Busca a ser realizada
+     * @param  int  $contexto  Quantidade de letras antes e depois do retorno
+     * @return string retorna o texto pronto para ser exibido
+     *
+     **/
+    protected static function gerarSnippet($texto, $busca, $contexto = 50)
+    {
+        $textoLimpo = strip_tags($texto);
+        $busca = trim($busca);
+        $pos = stripos($textoLimpo, $busca);
+
+        if ($pos === false) {
+            return null;
+        }
+
+        $inicio = max($pos - $contexto, 0);
+        $fim = min($pos + strlen($busca) + $contexto, strlen($textoLimpo));
+
+        $prefixo = ($inicio > 0) ? '... ' : '';
+        $sufixo = ($fim < strlen($textoLimpo)) ? ' ...' : '';
+
+        $snippet = substr($textoLimpo, $inicio, $fim - $inicio);
+
+        // Destaque do termo buscado
+        $pattern = '/'.preg_quote($busca, '/').'/i';
+        $snippet = preg_replace($pattern, '<mark>$0</mark>', $snippet);
+
+        return $prefixo.$snippet.$sufixo;
     }
 }
