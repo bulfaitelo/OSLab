@@ -31,7 +31,7 @@ class VendaService implements VendaServiceInterface
      */
     public static function getDataTable(Request $request, int $itensPorPagina = 100, $colunaOrdenacao = null, $ordenacao = 'desc')
     {
-        $dataHoje = Carbon::now()->format('Y-d-m');
+        $dataHoje = Carbon::now()->format('Y-m-d');
         $vendaListagemPadrao = getConfig('venda_listagem_padrao');
 
         $queryVenda = Venda::with(['cliente', 'vendedor']);

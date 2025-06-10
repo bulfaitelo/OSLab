@@ -29,7 +29,7 @@ class ReceitaController extends Controller
      */
     public function index(Request $request)
     {
-        $dataHoje = Carbon::now()->format('Y-d-m');
+        $dataHoje = Carbon::now()->format('Y-m-d');
         $queryReceita = Contas::query();
         $queryReceita->where('tipo', 'R');
         $queryReceita->with([
