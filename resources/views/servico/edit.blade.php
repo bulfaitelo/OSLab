@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="descricao">Descrição do servico</label>
-                    {!! html()->text('descricao', $servico->descricao)->class('form-control')->placeholder('descrição do serviço (opcional)') !!}
+                    {!! html()->text('descricao', $servico->descricao)->class('form-control')->placeholder('Descrição do serviço (opcional)') !!}
                 </div>
 
 

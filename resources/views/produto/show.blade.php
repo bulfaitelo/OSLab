@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group">
                     <label for="descricao">Descrição do produto</label>
-                    {!! html()->text('descricao', $produto->descricao)->class('form-control')->placeholder('descrição do Produto (opcional)')->disabled() !!}
+                    {!! html()->text('descricao', $produto->descricao)->class('form-control')->placeholder('Descrição do Produto (opcional)')->disabled() !!}
                 </div>
                 <div class="row">
                     <div class="col-md-6">
