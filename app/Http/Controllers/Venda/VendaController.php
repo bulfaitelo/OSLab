@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 class VendaController extends Controller
 {
     public function __construct(
-        private readonly ?VendaService $vendaService = null
+        private readonly VendaService $vendaService
     ) {
         // ACL DE PERMISSÕES
         $this->middleware('permission:venda', ['only' => ['index']]);

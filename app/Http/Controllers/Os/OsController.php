@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 class OsController extends Controller
 {
     public function __construct(
-        private readonly ?OsService $osService = null
+        private readonly OsService $osService
     ) {
         // ACL DE PERMISSÕES
         $this->middleware('permission:os', ['only' => ['index']]);
@@ -38,7 +38,7 @@ class OsController extends Controller
     public function index(Request $request)
     {
         $os = $this->osService::getDataTable($request);
-        ds($os);
+        // ds($os);
 
         return view('os.index', compact('os', 'request'));
     }

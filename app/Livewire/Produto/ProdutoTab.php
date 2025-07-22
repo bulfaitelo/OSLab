@@ -78,7 +78,7 @@ class ProdutoTab extends Component
             $this->produto_id = null;
             // Apagando o produto digitado.
             $this->dispatch('clear');
-            flasher('Produto adicionado com sucesso.');
+            flash('Produto adicionado com sucesso.');
         }
     }
 
@@ -92,7 +92,7 @@ class ProdutoTab extends Component
             } else {
                 $itemProduto = $this->modelSelector()->produtos()->findOrFail($id);
                 $itemProduto->delete();
-                flasher('Produto removido com sucesso.');
+                flash('Produto removido com sucesso.');
             }
         } catch (\Throwable $th) {
             throw $th;

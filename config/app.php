@@ -174,7 +174,7 @@ return [
         Spatie\Html\HtmlServiceProvider::class,
 
         // Image Intervention.io
-        Intervention\Image\ImageServiceProvider::class,
+        // Intervention\Image\ImageServiceProvider::class,
 
     ])->toArray(),
 

@@ -344,7 +344,9 @@
     <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
     <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
     {{-- summernote --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.js"></script>
+    {{-- <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@2.1.5/dist/flasher.min.js"></script> --}}
+
     <script>
         $('.pop_info').popover({
         trigger: 'hover'

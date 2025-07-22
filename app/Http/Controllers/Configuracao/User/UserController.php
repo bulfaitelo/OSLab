@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -85,7 +85,7 @@ class UserController extends Controller
         $user->syncRoles(array_map(fn ($val) => (int) $val, $request->role));
 
         if ($request->img_perfil) {
-            $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
+            $resizedImage = Image::read($request->img_perfil)->scale(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             // Gerar um nome único para a imagem
@@ -163,7 +163,7 @@ class UserController extends Controller
             if (file_exists(storage_path('app/public/img_perfil/').$tempImage) && $tempImage != null) {
                 unlink(storage_path('app/public/img_perfil/').$tempImage);
             }
-            $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
+            $resizedImage = Image::read($request->img_perfil)->scale(500, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
             // Gerar um nome único para a imagem

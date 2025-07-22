@@ -42,7 +42,7 @@ class ControllerPermissionsTest extends TestCase
 
     private function getControllerInfo($classController)
     {
-        $class = new $classController;
+        $class = app()->make($classController);
         // verificando as funções que existem
         $methods = get_class_methods($class);
         // dd($methods);

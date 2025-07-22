@@ -73,7 +73,7 @@ class ServicoTab extends Component
 
             // Apagando o serviço digitado.
             $this->dispatch('clear');
-            flasher('Serviço adicionado com sucesso.');
+            flash('Serviço adicionado com sucesso.');
         }
     }
 
@@ -87,7 +87,7 @@ class ServicoTab extends Component
             } else {
                 $osServico = $this->os->servicos()->find($id);
                 $osServico->delete();
-                flasher('Serviço removido com sucesso.');
+                flash('Serviço removido com sucesso.');
             }
         } catch (\Throwable $th) {
             throw $th;

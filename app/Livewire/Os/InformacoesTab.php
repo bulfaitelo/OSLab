@@ -59,7 +59,7 @@ class InformacoesTab extends Component
             DB::commit();
             $this->dispatch('closeModal');
             $this->anotacao = '';
-            flasher('Anotação adicionada com sucesso.');
+            flash('Anotação adicionada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -98,7 +98,7 @@ class InformacoesTab extends Component
             $this->tipo_senha = 'texto';
 
             $this->dispatch('closeModal');
-            flasher('Senha adicionada com sucesso.');
+            flash('Senha adicionada com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
@@ -137,7 +137,7 @@ class InformacoesTab extends Component
             ]);
             $this->descricao_arquivo = '';
             $this->dispatch('closeModal');
-            flasher('Arquivo adicionad com sucesso.');
+            flash('Arquivo adicionad com sucesso.');
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
