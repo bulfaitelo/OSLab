@@ -32,6 +32,9 @@
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
                     <h3 class="card-title"><b>Wiki</b></h3>
+                    <div id="notification-container" style="position: fixed; top: 80px; right: 20px; z-index: 9999; width: 350px;">
+
+                    </div>
                     @can('wiki_edit')
                     {{-- <a href="{{ route('wiki.edit', $wiki->id) }}" title="Editar" >
                         <button type="button" class="btn btn-primary btn-sm">
@@ -344,8 +347,7 @@
     <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
     <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
     {{-- summernote --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.3.2/dist/flasher.min.js"></script>
-    {{-- <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@2.1.5/dist/flasher.min.js"></script> --}}
+    <script src="/vendor/flasher/flasher.min.js"></script>
 
     <script>
         $('.pop_info').popover({
@@ -359,6 +361,7 @@
             bsCustomFileInput.init();
         });
     </script>
+
 @stop
 @section('footer')
 

@@ -146,12 +146,17 @@ class WikiController extends Controller
             $wiki->texto = $processedHtml;
             $wiki->user_id = Auth::id();
             $wiki->save();
-            $response = [
-                'text' => 'Wiki atualizada com sucesso.',
-            ];
 
-            return response()->json($response, 200);
+            // 1. Cria a notificação
+            flash()->success('Wiki atualizada com sucesso!');
+
+            // 2. Retorna os DADOS da notificação em formato JSON
+            return response()->json([
+                'flash' => flash()->render('json'),
+            ]);
+
         } catch (\Throwable $th) {
+            ds($th);
             $response = [
                 'text' => 'Ouve um erro, recarregue a pagina e tente novamente',
             ];
