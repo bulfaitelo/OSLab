@@ -154,7 +154,6 @@ class WikiController extends Controller
             return response()->json([
                 'flash' => flash()->render('json'),
             ]);
-
         } catch (\Throwable $th) {
             ds($th);
             $response = [
