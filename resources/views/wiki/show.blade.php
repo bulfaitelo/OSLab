@@ -32,9 +32,6 @@
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
                     <h3 class="card-title"><b>Wiki</b></h3>
-                    <div id="notification-container" style="position: fixed; top: 80px; right: 20px; z-index: 9999; width: 350px;">
-
-                    </div>
                     @can('wiki_edit')
                     {{-- <a href="{{ route('wiki.edit', $wiki->id) }}" title="Editar" >
                         <button type="button" class="btn btn-primary btn-sm">
@@ -334,7 +331,7 @@
             table-layout: fixed
         }
     </style>
-
+    <link href="/vendor/flasher/flasher.min.css?id=7a96e40c68626198d5128ad2fb5d77e0" rel="stylesheet" type="text/css">
 @stop
 @section('js')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -347,7 +344,7 @@
     <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
     <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
     {{-- summernote --}}
-    <script src="/vendor/flasher/flasher.min.js"></script>
+
 
     <script>
         $('.pop_info').popover({
@@ -355,7 +352,9 @@
         });
     </script>
     <script src="{{ url('') }}/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script defer src="/vendor/flasher/flasher.min.js"></script>
     <script src="{{ asset('src/js/wiki.js') }}"></script>
+    {{-- <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script> --}}
     <script>
         $(function () {
             bsCustomFileInput.init();
