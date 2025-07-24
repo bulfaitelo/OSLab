@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -82,12 +82,12 @@ class UserController extends Controller
         $user->estado = $request->estado;
         $user->complemento = $request->complemento;
         $user->expire_at = $request->expire_at;
-        $user->syncRoles(array_map(fn ($val) => (int) $val, $request->role));
+        if ($request->role) {
+            $user->syncRoles(array_map(fn ($val) => (int) $val, $request->role));
+        }
 
         if ($request->img_perfil) {
-            $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            $resizedImage = Image::read($request->img_perfil)->scale(500, null);
             // Gerar um nome único para a imagem
             $imageName = Str::uuid().'.'.$request->img_perfil->getClientOriginalExtension();
             // Salvar a imagem no diretório destinado a imagens de perfil
@@ -163,9 +163,7 @@ class UserController extends Controller
             if (file_exists(storage_path('app/public/img_perfil/').$tempImage) && $tempImage != null) {
                 unlink(storage_path('app/public/img_perfil/').$tempImage);
             }
-            $resizedImage = Image::make($request->img_perfil)->resize(500, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            $resizedImage = Image::read($request->img_perfil)->scale(500, null);
             // Gerar um nome único para a imagem
             $imageName = Str::uuid().'.'.$request->img_perfil->getClientOriginalExtension();
             // Salvar a imagem no diretório destinado a imagens de perfil

@@ -41,7 +41,7 @@ class ChecklistTab extends Component
             $this->os->checklistData()->delete();
             $this->os->checklistData()->createMany($checklistFormData);
             DB::commit();
-            flasher('Checklist atualizado com sucesso.');
+            flash('Checklist atualizado com sucesso.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

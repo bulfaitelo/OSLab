@@ -28,6 +28,10 @@ jobs:
         run: |
           sudo docker exec app php oslab/artisan migrate
 
+      - name: Limpando cache de configuração
+        run: |
+          sudo docker exec app php oslab/artisan optimize:clear
+
       - name: Rodar Artisan db:update-defaults (chamando direto na classe)
         run: |
           sudo docker exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate

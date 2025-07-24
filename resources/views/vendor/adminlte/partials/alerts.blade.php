@@ -1,6 +1,6 @@
 @if(count($errors) > 0)
 @php
-    flash()->addError('Por favor verifique o formulário', 'Ocorreu um erro!');
+    flash()->error(message: 'Por favor verifique o formulário', title: 'Ocorreu um erro!');
 @endphp
     <script>
         $(document).ready(function(){

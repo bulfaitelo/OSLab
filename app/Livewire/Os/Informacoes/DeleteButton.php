@@ -46,7 +46,7 @@ class DeleteButton extends Component
             }
             $informacao->delete();
             $this->dispatch('closeModal');
-            flasher('Anotação removida com sucesso.');
+            flash('Anotação removida com sucesso.');
             $this->dispatch('updateInformacoesTable');
         } catch (\Throwable $th) {
             throw $th;

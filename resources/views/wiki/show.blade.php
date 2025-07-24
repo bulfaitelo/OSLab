@@ -331,7 +331,7 @@
             table-layout: fixed
         }
     </style>
-
+    <link href="/vendor/flasher/flasher.min.css?id=7a96e40c68626198d5128ad2fb5d77e0" rel="stylesheet" type="text/css">
 @stop
 @section('js')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -344,19 +344,23 @@
     <script src="{{ url('') }}/vendor/summernote/summernote-bs4.min.js"></script>
     <script src="{{ url('') }}/vendor/summernote/lang/summernote-pt-BR.js"></script>
     {{-- summernote --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
+
+
     <script>
         $('.pop_info').popover({
         trigger: 'hover'
         });
     </script>
     <script src="{{ url('') }}/vendor/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script defer src="/vendor/flasher/flasher.min.js"></script>
     <script src="{{ asset('src/js/wiki.js') }}"></script>
+    {{-- <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script> --}}
     <script>
         $(function () {
             bsCustomFileInput.init();
         });
     </script>
+
 @stop
 @section('footer')
 

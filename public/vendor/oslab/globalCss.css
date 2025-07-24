@@ -99,3 +99,10 @@
     background-blend-mode: lighten;
     background-size: contain;
 }
+.fl-wrapper {
+    z-index: 9999 !important;
+}
+
+.fl-wrapper[data-position^="top-"] {
+  top: 3.5em !important;
+}

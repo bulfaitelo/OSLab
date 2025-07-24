@@ -77,7 +77,7 @@ class AddPagamentoModal extends Component
     {
         $pagamentoRequest = $this->validate();
         if ($this->modelSelector()->quitada()) {
-            flash()->addError('a OS ja foi Quitada!');
+            flash()->error('a OS ja foi Quitada!');
 
             return;
         }
@@ -129,13 +129,13 @@ class AddPagamentoModal extends Component
         if ($this->modelSelector()->quitada()) {
             $this->dispatch('toggleAddPagamentoModal');
             if ($this->typeSelector() === 'os') {
-                flasher('Pagamento adicionado com sucesso, o status da Ordem de Serviço foi alterado para '.Status::find($this->modelSelector()->status_id)->name.'!');
+                flash('Pagamento adicionado com sucesso, o status da Ordem de Serviço foi alterado para '.Status::find($this->modelSelector()->status_id)->name.'!');
             }
             if ($this->typeSelector() === 'venda') {
-                flasher('Pagamento adicionado com sucesso, o status da Venda foi alterado para '.Status::find($this->modelSelector()->status_id)->name.'!');
+                flash('Pagamento adicionado com sucesso, o status da Venda foi alterado para '.Status::find($this->modelSelector()->status_id)->name.'!');
             }
         } else {
-            flasher('Pagamento adicionado com sucesso.');
+            flash('Pagamento adicionado com sucesso.');
         }
     }
 
