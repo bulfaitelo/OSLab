@@ -282,7 +282,6 @@ return [
     'laravel_css_path' => 'css/app.css',
     'laravel_js_path' => 'js/app.js',
 
-
     /*
     |--------------------------------------------------------------------------
     | Menu Items

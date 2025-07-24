@@ -77,7 +77,7 @@ class AddPagamentoModal extends Component
     {
         $pagamentoRequest = $this->validate();
         if ($this->modelSelector()->quitada()) {
-            flash()->addError('a OS ja foi Quitada!');
+            flash()->error('a OS ja foi Quitada!');
 
             return;
         }

@@ -69,7 +69,7 @@ class ProdutoTab extends Component
         if ($this->modelSelector()->conta_id) {
             // Apagando o produto digitado.
             $this->dispatch('clear');
-            flash()->addError('Produto não pode ser adicionado se Faturado.');
+            flash()->error('Produto não pode ser adicionado se Faturado.');
         } else {
             $this->createItemProduto($produto);
             $this->quantidade = null;
@@ -88,7 +88,7 @@ class ProdutoTab extends Component
             if ($this->modelSelector()->conta_id) {
                 // Apagando o produto digitado.
                 $this->dispatch('clear');
-                flash()->addError('Produto não pode ser removido se Faturado.');
+                flash()->error('Produto não pode ser removido se Faturado.');
             } else {
                 $itemProduto = $this->modelSelector()->produtos()->findOrFail($id);
                 $itemProduto->delete();

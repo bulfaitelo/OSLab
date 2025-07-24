@@ -369,10 +369,3 @@ document.addEventListener('livewire:init', function () {
     // });
 });
 </script>
-
-{{-- @if(count($errors) > 0)
-    @php
-        flash()->addError('Por favor verifique o formulário', 'Ocorreu um erro!');
-    @endphp
-@endif --}}
-

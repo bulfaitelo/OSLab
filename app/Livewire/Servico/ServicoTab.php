@@ -63,7 +63,7 @@ class ServicoTab extends Component
         if ($this->os->conta_id) {
             // Apagando o produto digitado.
             $this->dispatch('clear');
-            flash()->addError('Serviço não pode ser adicionado a uma os Faturada.');
+            flash()->error('Serviço não pode ser adicionado a uma os Faturada.');
         } else {
             $this->createOsServico($servico);
 
@@ -83,7 +83,7 @@ class ServicoTab extends Component
             if ($this->os->conta_id) {
                 // Apagando o produto digitado.
                 $this->dispatch('clear');
-                flash()->addError('Serviço não pode ser apagado a uma os Faturada.');
+                flash()->error('Serviço não pode ser apagado a uma os Faturada.');
             } else {
                 $osServico = $this->os->servicos()->find($id);
                 $osServico->delete();
