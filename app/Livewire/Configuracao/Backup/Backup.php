@@ -4,6 +4,7 @@ namespace App\Livewire\Configuracao\Backup;
 
 use Livewire\Component;
 use Spatie\Backup\BackupDestination\Backup as SpatieBackup;
+use Spatie\Backup\Config\MonitoredBackupsConfig;
 use Spatie\Backup\Helpers\Format;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 
@@ -30,7 +31,10 @@ class Backup extends Component
      */
     private function getBackupInfo(): array
     {
-        $statuses = BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'));
+        // $statuses = BackupDestinationStatusFactory::createForMonitorConfig(new MonitoredBackupsConfig(config('backup.monitor_backups')));
+        $statuses = BackupDestinationStatusFactory::createForMonitorConfig(
+            MonitoredBackupsConfig::fromArray(config('backup.monitor_backups'))
+        );
         $info = [];
         foreach ($statuses as $status) {
             $destination = $status->backupDestination();
