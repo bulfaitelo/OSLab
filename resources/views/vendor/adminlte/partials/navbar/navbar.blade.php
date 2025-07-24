@@ -1,3 +1,5 @@
+@inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
+
 <nav class="main-header navbar  navbar
     @if (env('DEV_ENVIRONMENT') == 'true')
         dev-background
