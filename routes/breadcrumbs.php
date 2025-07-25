@@ -10,6 +10,7 @@ use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Financeiro\FormaPagamento;
 use App\Models\Configuracao\Garantia\Garantia;
+use App\Models\Configuracao\Notificacao\Notificacao;
 use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Parametro\Status;
 use App\Models\Configuracao\Sistema\Emitente;
@@ -406,6 +407,8 @@ Breadcrumbs::for('configuracao.garantia.edit', function (BreadcrumbTrail $trail,
     $trail->push('Editar Termo de Garantia', route('configuracao.garantia.edit', $item));
 });
 
+
+
 // Fim Configuração OS
 
 // Configuração FINANCEIRO
@@ -701,6 +704,33 @@ Breadcrumbs::for('configuracao.backup.index', function (BreadcrumbTrail $trail) 
     $trail->push('Backup', route('configuracao.backup.index'));
 });
 // Fim Configuração Backup
+
+// Configuração Notificação
+// Notificação
+Breadcrumbs::for('configuracao.notificacao.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Configurações');
+    $trail->push('Notificações', route('configuracao.sistema.index'));
+});
+
+// Notificação > Novo Notificação
+Breadcrumbs::for('configuracao.notificacao.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('configuracao.notificacao.index');
+    $trail->push('Nova Notificação', route('configuracao.notificacao.create'));
+});
+
+// Notificação > [Visualização de Notificação]
+Breadcrumbs::for('configuracao.notificacao.show', function (BreadcrumbTrail $trail, Notificacao $item) {
+    $trail->parent('configuracao.notificacao.index');
+    $trail->push(Str::limit($item->name, 20), route('configuracao.notificacao.show', $item));
+});
+
+// Notificação > [Notificação Name] > Editar Notificação
+Breadcrumbs::for('configuracao.notificacao.edit', function (BreadcrumbTrail $trail, Notificacao $item) {
+    $trail->parent('configuracao.notificacao.index');
+    $trail->push('Editar Notificação', route('configuracao.notificacao.edit', $item));
+});
+// Fim Configuração Notificação
 
 // Relatório
 // Financeiro Balancete

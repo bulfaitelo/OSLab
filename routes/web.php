@@ -7,6 +7,7 @@ use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Garantia\GarantiaController;
+use App\Http\Controllers\Configuracao\Notificacao\NotificacaoController;
 use App\Http\Controllers\Configuracao\Parametro\CategoriaController;
 use App\Http\Controllers\Configuracao\Parametro\StatusController;
 use App\Http\Controllers\Configuracao\Sistema\SistemaConfigController;
@@ -152,6 +153,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/roles/assign/{role}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
         Route::get('/users/permissions/{user}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{user}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
+        Route::resource('/notificacao', NotificacaoController::class);
 
         // Parâmetros
         Route::name('parametro.')->prefix('parametro')->group(function () {
