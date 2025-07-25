@@ -67,7 +67,7 @@
         </div>
     </div>
     {{-- Modal Excluir --}}
-    @can('produto_destroy')
+    @can('servico_destroy')
         @include('adminlte::partials.modal.modal-excluir')
     @endcan
     {{-- // Modal Excluir --}}
