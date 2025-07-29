@@ -20,7 +20,7 @@
                 <a href="{{ route('configuracao.notificacao.create') }}">
                     <button type="button"  class="btn btn-sm btn-oslab">
                         <i class="fa-solid fa-plus"></i>
-                        Adicionar Serviço
+                        Adicionar Notificação
                     </button>
                 </a>
                 @endcan

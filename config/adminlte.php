@@ -449,7 +449,7 @@ return [
             'text' => 'Notificações',
             'icon' => 'fa-solid fa-bell',
             'route' => 'configuracao.notificacao.index',
-            'active' => ['notificacao*'],
+            'active' => ['configuracoes/notificacao*'],
             'can' => 'config_notificacao',
         ],
         [
