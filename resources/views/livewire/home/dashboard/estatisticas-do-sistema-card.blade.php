@@ -30,7 +30,7 @@
                           <span>Clientes</span>
                         </div>
                         <div class="icon">
-                          <i class="fa-regular fa-rectangle-list" style="font-size: 50px;"></i>
+                          <i class="fa-solid fa-users " style="font-size: 50px;"></i>
                         </div>
                         @can('cliente_create')
                         <a href="{{ route('cliente.create') }}" class="small-box-footer">
@@ -48,7 +48,7 @@
                           <span>Produtos</span>
                         </div>
                         <div class="icon">
-                          <i class="fa-regular fa-rectangle-list" style="font-size: 50px;"></i>
+                          <i class="fas fa-box-open" style="font-size: 50px;"></i>
                         </div>
                         @can('produto_create')
                         <a href="{{ route('produto.create') }}" class="small-box-footer">
@@ -64,7 +64,7 @@
                           <span>Serviços</span>
                         </div>
                         <div class="icon">
-                          <i class="fa-regular fa-rectangle-list" style="font-size: 50px;"></i>
+                          <i class="fas fa-hand-holding-usd" style="font-size: 50px;"></i>
                         </div>
                         @can('servico_create')
                         <a href="{{ route('servico.create') }}" class="small-box-footer">
@@ -82,7 +82,7 @@
                           <span>Wiki</span>
                         </div>
                         <div class="icon">
-                          <i class="fa-regular fa-rectangle-list" style="font-size: 50px;"></i>
+                          <i class="fa-solid fa-book " style="font-size: 50px;"></i>
                         </div>
                         @can('wiki_create')
                         <a href="{{ route('wiki.create') }}" class="small-box-footer">
@@ -98,7 +98,7 @@
                           <span>Checklists</span>
                         </div>
                         <div class="icon">
-                          <i class="fa-regular fa-rectangle-list" style="font-size: 50px;"></i>
+                          <i class="fa-solid fa-list-check " style="font-size: 50px;"></i>
                         </div>
                         @can('checklist_create')
                         <a href="{{ route('checklist.create') }}" class="small-box-footer">
