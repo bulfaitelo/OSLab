@@ -79,11 +79,10 @@
             </td>
             @endif
         </tr>
-
         @if ($item->snippet_texto)
         <tr>
-            <td colspan="10" class="pl-1 border-top-0">
-                <div class="mb-0 text-truncate" style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <td colspan="10" class="pl-1 border-top-0" style="max-width: 0;">
+                <div class="mb-0 text-truncate" style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;width: 100%;">
                     <span class="text-dark" style="font-size: 13px"><b>Wiki</b></span>: {!! $item->snippet_texto !!}
                 </div>
             </td>

@@ -103,7 +103,7 @@ class Wiki extends Model
 
             foreach (['texto'] as $campo) {
                 if (! empty($ordem->$campo) && stripos($ordem->$campo, $request->busca) !== false) {
-                    $ordem->{'snippet_'.$campo} = self::gerarSnippet($ordem->$campo, $request->busca, 120);
+                    $ordem->{'snippet_'.$campo} = self::gerarSnippet($ordem->$campo, $request->busca, 200);
                 }
             }
 

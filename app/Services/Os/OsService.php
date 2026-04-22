@@ -91,7 +91,7 @@ class OsService implements OsServiceInterface
 
             foreach (['descricao', 'defeito', 'observacoes', 'laudo'] as $campo) {
                 if (! empty($ordem->$campo) && stripos($ordem->$campo, $request->busca) !== false) {
-                    $ordem->{'snippet_'.$campo} = self::gerarSnippet($ordem->$campo, $request->busca, 80);
+                    $ordem->{'snippet_'.$campo} = self::gerarSnippet($ordem->$campo, $request->busca, 200);
                 }
             }
 

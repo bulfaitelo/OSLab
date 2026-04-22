@@ -71,7 +71,7 @@
         </tr>
         @if ($item->snippet_descricao || $item->snippet_defeito || $item->snippet_observacoes || $item->snippet_laudo)
         <tr>
-            <td colspan="10" class="pl-1 border-top-0">
+            <td colspan="10" class="pl-1 border-top-0" style="max-width: 0;">
                 @if ($item->snippet_descricao)
                 <div class="mb-0 text-truncate" style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                     <span class="text-dark" style="font-size: 13px"><b>Descrição</b></span>: {!! $item->snippet_descricao !!}
