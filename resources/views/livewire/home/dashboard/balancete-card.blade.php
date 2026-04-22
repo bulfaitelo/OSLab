@@ -13,20 +13,6 @@
 
 {{-- Elemento RAIZ único exigido pelo Livewire --}}
 <div class="balancete-container">
-    @once
-    <style>
-        .balancete-container {
-            container-type: inline-size;
-        }
-        .texto-curto { display: none !important; }
-        .texto-longo { display: inline-block !important; }
-
-        @container (max-width: 240px) {
-            .texto-longo { display: none !important; }
-            .texto-curto { display: inline-block !important; }
-        }
-    </style>
-    @endonce
     <div class="card custom-border">
         <div class="card-body p-3">
             {!! html()->select('mes', $meses, $mes_busca)->class('form-control mb-3')->attribute('wire:model.live', 'mes_busca') !!}
@@ -76,5 +62,19 @@
             </div>
         </div>
     </div>
+    @once
+    <style>
+        .balancete-container {
+            container-type: inline-size;
+        }
+        .texto-curto { display: none !important; }
+        .texto-longo { display: inline-block !important; }
+
+        @@container (max-width: 240px) {
+            .texto-longo { display: none !important; }
+            .texto-curto { display: inline-block !important; }
+        }
+    </style>
+    @endonce
 </div>
 
