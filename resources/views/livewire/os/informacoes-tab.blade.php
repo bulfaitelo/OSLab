@@ -137,6 +137,11 @@
                         </div>
                         <div class="col-md-12"  @if ($tipo_senha == 'padrao') style="display: none" @endif id="texto">
                             <div class="form-group">
+                                <label for="usuario_senha">Usuário</label>
+                                <input type="text" wire:model="usuario_senha" id="usuario_senha" class="form-control" placeholder="Usuário ">
+                                @error('usuario_senha') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="senha_texto">Senha</label>
                                 <div class="input-group mb-3">
                                     <input id="senha_texto" type="password" wire:model="senha_texto" class="form-control " placeholder="Senha">

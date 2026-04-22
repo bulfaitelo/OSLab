@@ -19,6 +19,8 @@ class InformacoesTab extends Component
 
     public $os;
 
+    public $usuario_senha;
+
     public $descricao_senha;
 
     public $tipo_senha = 'texto';
@@ -87,6 +89,7 @@ class InformacoesTab extends Component
             $this->os->informacoes()->create([
                 'user_id' => Auth::id(),
                 'descricao' => $this->descricao_senha,
+                'usuario' => $this->usuario_senha,
                 'tipo' => 2,
                 'tipo_informacao' => $this->tipo_senha,
                 'informacao' => $infomacao,

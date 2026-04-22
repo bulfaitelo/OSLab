@@ -33,6 +33,7 @@ class OsPublicController extends Controller
         // dd($request->input());
         try {
             $informacao->informacao = $request->informacao;
+            $informacao->usuario = $request->usuario;
             $informacao->descricao = $request->descricao;
             $informacao->uuid = null;
             $informacao->status = 3;

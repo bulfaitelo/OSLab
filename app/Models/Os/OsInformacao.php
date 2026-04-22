@@ -16,7 +16,7 @@ class OsInformacao extends Model
         'tipo_informacao',
         'informacao',
         'status',
-
+        'usuario'
     ];
 
     protected $casts = [
