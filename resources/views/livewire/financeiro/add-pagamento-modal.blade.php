@@ -68,9 +68,9 @@
                     <tbody>
                         @forelse ($pagamentos as $pagamento)
                             <tr>
-                                <td> {{ $pagamento->data_pagamento->format('d/m/Y') }} </td>
-                                <td> {{ $pagamento->formaPagamento->name }} </td>
-                                <td>R$ {{ number_format($pagamento->valor, 2, ',', '.') }}</td>
+                                <td> {{ $pagamento->data_pagamento?->format('d/m/Y') ?? 'Pendente' }} </td>
+                                <td> {{ $pagamento->formaPagamento?->name ?? 'Não definida' }} </td>
+                                <td>R$ {{ number_format($pagamento->valor ?? 0, 2, ',', '.') }} </td>
                             </tr>
                         @empty
                         <tr>
