@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($wikiTable as $item)
+      @forelse ($wikiTable as $item)
         <tr>
             <td>
                 @if (isset($show) && $show === true)
@@ -80,6 +80,21 @@
             @endif
         </tr>
 
-      @endforeach
+        @if ($item->snippet_texto)
+        <tr>
+            <td colspan="10" class="pl-1 border-top-0">
+                <div class="mb-0 text-truncate" style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <span class="text-dark" style="font-size: 13px"><b>Wiki</b></span>: {!! $item->snippet_texto !!}
+                </div>
+            </td>
+        </tr>
+        @endif
+        @empty
+        <tr>
+            <th colspan="9">
+                <h3>Não existem Wikis cadastradas</h3>
+            </th>
+        </tr>
+        @endforelse
     </tbody>
   </table>
