@@ -297,6 +297,12 @@
     });
 
     $(document).ready(function() {
+        let formAlterado = false;
+
+        $('form').on('input change', function() {
+            formAlterado = true;
+        });
+
         $('.texto').summernote({
             lang: 'pt-BR',
             height: 300,
@@ -309,8 +315,24 @@
                 [ 'para', [ 'ol', 'ul', 'paragraph', ] ],
                 [ 'table', [ 'table' ] ],
                 [ 'insert', ['link', 'picture',]],
-                [ 'view', [ 'undo', 'redo', 'codeview', 'help' ] ]
-            ]
+                [ 'view', [ 'undo', 'redo', 'codeview', 'fullscreen', 'help' ] ]
+            ],
+            callbacks: {
+                // Isso detecta quando o usuário digita algo dentro do editor Summernote
+                onChange: function(contents, $editable) {
+                    formAlterado = true;
+                }
+            }
+        });
+        window.addEventListener('beforeunload', function (e) {
+            if (formAlterado) {
+                // Cancela o evento padrão e define o returnValue (exigência dos navegadores modernos)
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+        $('form').on('submit', function() {
+            formAlterado = false;
         });
     });
 </script>
