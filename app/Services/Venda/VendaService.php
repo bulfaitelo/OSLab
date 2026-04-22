@@ -34,7 +34,7 @@ class VendaService implements VendaServiceInterface
         $dataHoje = Carbon::now()->format('Y-m-d');
         $vendaListagemPadrao = getConfig('venda_listagem_padrao');
 
-        $queryVenda = Venda::with(['cliente', 'vendedor']);
+        $queryVenda = Venda::with(['cliente', 'vendedor', 'status']);
 
         if ($request->busca) {
             $queryVenda->where(function ($query) use ($request) {
