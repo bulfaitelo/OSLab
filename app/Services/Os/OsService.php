@@ -33,7 +33,7 @@ class OsService implements OsServiceInterface
         $dataHoje = Carbon::now()->format('Y-m-d');
         $osListagemPadrao = getConfig('os_listagem_padrao');
 
-        $queryOs = Os::with(['cliente', 'tecnico', 'categoria', 'status']);
+        $queryOs = Os::with(['cliente', 'tecnico', 'categoria', 'status', 'informacoes']);
 
         if ($request->busca) {
             $queryOs->where(function ($query) use ($request) {
