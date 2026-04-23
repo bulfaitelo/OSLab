@@ -24,11 +24,11 @@
                 {{-- Container flex para manter os ícones alinhados e pequenos --}}
                 <div class="d-inline-flex ml-1 text-muted" style="font-size: 0.85em; gap: 4px;">
                     {{-- Verifica se tem anotação (tipo 2) --}}
-                    @if($item->informacoes->contains('tipo', 2))
+                    @if($item->informacoes->contains('tipo', 1))
                         <i class="fas fa-sticky-note text-oslab" data-toggle="tooltip" title="Possui Anotação"></i>
                     @endif
                     {{-- Verifica se tem senha (tipo 1) --}}
-                    @if($item->informacoes->contains('tipo', 1))
+                    @if($item->informacoes->contains('tipo', 2))
                         <i class="fas fa-lock text-success" data-toggle="tooltip" title="Possui Senha cadastrada"></i>
                     @endif
                     {{-- Verifica se tem arquivo (tipo 3) --}}
