@@ -13,16 +13,8 @@
         @yield('title', config('adminlte.title', 'AdminLTE 3'))
         @yield('title_postfix', config('adminlte.title_postfix', ''))
     </title>
-    <!-- Latest compiled and minified CSS -->
-
-<!-- Latest compiled and minified JavaScript -->
-{{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('vendor/oslab/globalCss.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/oslab/pdf.css') }}">
-
+    <link rel="stylesheet" href="{{ public_path('vendor/oslab/globalCss.css') }}">
+    <link rel="stylesheet" href="{{ public_path('vendor/oslab/pdf.css') }}">
     <style>
         @page { margin: 5; }
         body {

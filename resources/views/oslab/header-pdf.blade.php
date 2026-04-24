@@ -4,9 +4,9 @@
         <div style="float: left; width: 17%; padding-right: 5px  ">
             <img
                 @if ($emitente->logo_url)
-                    src="{{ asset('storage/'.$emitente->logo_url) }}"
+                    src="{{ public_path('storage/'.$emitente->logo_url) }}"
                 @else
-                    src="{{ asset('vendor/oslab/imgs/oslab_logo.svg') }} "
+                    src="{{ public_path('vendor/oslab/imgs/oslab_logo.svg') }} "
                 @endif
             class="rounded image img-fluid" >
         </div>
@@ -44,9 +44,9 @@
         <div class="col-sm-2">
             <img
                 @if ($emitente->logo_url)
-                    src="{{ asset('storage/'.$emitente->logo_url) }}"
+                    src="{{ public_path('storage/'.$emitente->logo_url) }}"
                 @else
-                    src="{{ asset('vendor/oslab/imgs/oslab_logo.svg') }} "
+                    src="{{ public_path('vendor/oslab/imgs/oslab_logo.svg') }} "
                 @endif
             class="rounded image img-fluid" >
         </div>
@@ -77,7 +77,7 @@
     @else
     <div class="row">
         <div class="col-sm-2">
-            <img src="{{ asset('vendor/oslab/imgs/oslab_logo.svg') }} " class="rounded image img-fluid" >
+            <img src="{{ public_path('vendor/oslab/imgs/oslab_logo.svg') }} " class="rounded image img-fluid" >
         </div>
         <div class="col-sm-7">
             <h4 class="mb-0 " ><b> Nome Fantasia </b></h4>
