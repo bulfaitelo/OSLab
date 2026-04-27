@@ -45,7 +45,7 @@ class EmitenteFactory extends Factory
     }
 
     /**
-     * Indica que o emitente é a empresa principal (ID = 1)
+     * Indica que o emitente é a empresa principal (ID = 1).
      */
     public function principal(): static
     {
