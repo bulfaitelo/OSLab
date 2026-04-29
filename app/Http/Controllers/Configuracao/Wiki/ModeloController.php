@@ -14,7 +14,7 @@ class ModeloController extends Controller
     public function __construct()
     {
         // ACL DE PERMISSÕES
-        $this->middleware('permission:config_wiki_modelo', ['only' => ['index', 'apiModeloSelect']]);
+        $this->middleware('permission:config_wiki_modelo', ['only' => ['index', 'apiModeloSelect', 'getCategoriaByModelo']]);
         $this->middleware('permission:config_wiki_modelo_create', ['only' => ['create', 'store']]);
         $this->middleware('permission:config_wiki_modelo_show', ['only' => 'show']);
         $this->middleware('permission:config_wiki_modelo_edit', ['only' => ['edit', 'update']]);
