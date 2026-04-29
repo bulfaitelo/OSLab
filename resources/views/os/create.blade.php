@@ -279,15 +279,29 @@
         });
 
         tomSelectCliente.on('change', function (){
-            $('#categoria_id').focus();
+            tomSelectModelo.focus();
         });
 
         tomSelectModelo.on('change', function () {
+            // Carrega a categoria quando o modelo é alterado
+            const modeloId = tomSelectModelo.getValue();
+            if (modeloId) {
+                const url = route('modelo.categoria', modeloId);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.id) {
+                            document.getElementById('categoria_id').value = data.id;
+                            $('#categoria_id').trigger('change');
+                        }
+                    })
+                    .catch(error => console.error('Erro ao carregar categoria:', error));
+            }
             $('#status_id').focus();
         });
 
         tomSelectUser.on('change', function () {
-            $('#categoria_id').focus();
+            tomSelectModelo.focus();
 
         });
 

@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('select_clientes', [ClienteController::class, 'apiClientSelect'])->name('cliente.select');
     Route::get('select_users', [UserController::class, 'apiUserSelect'])->name('user.select');
     Route::get('select_modelos', [ModeloController::class, 'apiModeloSelect'])->name('modelo.select');
+    Route::get('modelo/{modelo}/categoria', [ModeloController::class, 'getCategoriaByModelo'])->name('modelo.categoria');
     Route::get('select_produtos', [ProdutoController::class, 'apiProdutoSelect'])->name('produto.select');
     Route::get('select_servicos', [ServicoController::class, 'apiServicoSelect'])->name('servico.select');
     Route::get('notifications/get', [NotificationsController::class, 'getNotificationsData']);

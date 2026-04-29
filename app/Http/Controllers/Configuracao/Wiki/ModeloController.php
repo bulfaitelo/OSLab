@@ -146,4 +146,25 @@ class ModeloController extends Controller
             return response()->json($th, 403);
         }
     }
+
+    /**
+     * Get Categoria by Modelo.
+     *
+     * Retorna a categoria associada ao modelo selecionado.
+     *
+     * @return response, json Retorna a categoria do modelo
+     **/
+    public function getCategoriaByModelo(Modelo $modelo)
+    {
+        try {
+            $categoria = $modelo->wiki->categoria;
+
+            return response()->json([
+                'id' => $categoria->id,
+                'name' => $categoria->name,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Categoria não encontrada'], 404);
+        }
+    }
 }
