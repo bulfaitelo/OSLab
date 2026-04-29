@@ -254,8 +254,10 @@
 
         $(document).ready(function() {
             let formAlterado = false;
+            const camposPrincipais = 'input[name="cliente_id"], input[name="tecnico_id"], input[name="categoria_id"], input[name="modelo_id"], input[name="status_id"], input[name="data_entrada"], input[name="data_saida"], input[name="serial"], textarea.texto';
 
-            $('form').on('input change', function() {
+            // Detecta mudanças apenas nos campos principais da OS, não em elementos adicionados dinamicamente
+            $(document).on('input change', camposPrincipais, function() {
                 formAlterado = true;
             });
 
