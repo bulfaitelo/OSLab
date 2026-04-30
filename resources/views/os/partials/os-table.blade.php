@@ -1,37 +1,33 @@
 <table class="table table-sm table-hover text-nowrap">
     <thead>
         <tr>
-        <th style="width: 10px">#</th>
-        <th>Cliente</th>
-        <th>Técnico</th>
-        <th>Entrada</th>
-        <th>Saída</th>
-        <th>Garantia</th>
-        <th>Valor</th>
-        <th>Categoria</th>
-        <th>Status</th>
-        @if ((isset($edit) && $edit === true) || (isset($show) && $show === true) || (isset($destroy) && $destroy === true))
-            <th style="width: 40px"></th>
-        @endif
+            <th style="width: 10px">#</th>
+            <th>Cliente</th>
+            <th>Técnico</th>
+            <th>Entrada</th>
+            <th>Saída</th>
+            <th>Garantia</th>
+            <th>Valor</th>
+            <th>Categoria</th>
+            <th>Status</th>
+            @if ((isset($edit) && $edit === true) || (isset($show) && $show === true) || (isset($destroy) && $destroy === true))
+                {{-- Adicionada a classe coluna-acoes-fixa aqui --}}
+                <th class="coluna-acoes-fixa" style="width: 40px"></th>
+            @endif
         </tr>
     </thead>
     <tbody>
-
         @forelse ($osTable as $item)
         <tr>
             <td>
                 {{ $item->id }}
-                {{-- Container flex para manter os ícones alinhados e pequenos --}}
                 <div class="d-inline-flex ml-1 text-muted" style="font-size: 0.85em; gap: 4px;">
-                    {{-- Verifica se tem anotação (tipo 2) --}}
                     @if($item->informacoes->contains('tipo', 1))
                         <i class="fas fa-sticky-note text-oslab" data-toggle="tooltip" title="Possui Anotação"></i>
                     @endif
-                    {{-- Verifica se tem senha (tipo 1) --}}
                     @if($item->informacoes->contains('tipo', 2))
                         <i class="fas fa-lock text-success" data-toggle="tooltip" title="Possui Senha cadastrada"></i>
                     @endif
-                    {{-- Verifica se tem arquivo (tipo 3) --}}
                     @if($item->informacoes->contains('tipo', 3))
                         <i class="fas fa-paperclip text-info" data-toggle="tooltip" title="Possui Arquivo anexo"></i>
                     @endif
@@ -51,7 +47,6 @@
                 title="Garantia Vencida"
                 @endif
             >
-
                 {{ $item->prazo_garantia?->format('d/m/Y') }}
             </td>
             <td>
@@ -64,8 +59,10 @@
             <td>
                 <span class="badge {{ $item->status->color }}">{{ $item->status->name }}</span>
             </td>
+
             @if ((isset($edit) && $edit === true) || (isset($show) && $show === true) || (isset($destroy) && $destroy === true))
-                <td>
+                {{-- Adicionada a classe coluna-acoes-fixa aqui também --}}
+                <td class="coluna-acoes-fixa">
                     <div class="btn-group btn-group-sm">
                         @if (isset($edit) && $edit === true)
                             @can('os_edit')
@@ -77,6 +74,7 @@
                                 <a href="{{ route('os.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                             @endcan
                         @endif
+                        @livewire('os.copy-to-whatsapp-button', ['os' => $item, 'iconOnly' => true], key('whatsapp-' . $item->id))
                         @if (isset($destroy) && $destroy === true)
                             @can('os_destroy')
                                 <button @disabled($item->conta_id) type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->cliente->name}}" data-url="{{route('os.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
@@ -86,6 +84,7 @@
                 </td>
             @endif
         </tr>
+
         @if ($item->snippet_descricao || $item->snippet_defeito || $item->snippet_observacoes || $item->snippet_laudo)
         <tr>
             <td colspan="10" class="pl-1 border-top-0" style="max-width: 0;">
@@ -112,6 +111,7 @@
             </td>
         </tr>
         @endif
+
         @empty
         <tr>
             <th colspan="9">
