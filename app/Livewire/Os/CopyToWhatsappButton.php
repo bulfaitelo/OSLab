@@ -28,10 +28,10 @@ class CopyToWhatsappButton extends Component
     {
         $text = '';
 
-        if(Emitente::first()->fantasia){
-            $text.="*" . Emitente::first()->fantasia."*\n";
+        if (Emitente::first()->fantasia) {
+            $text .= '*'.Emitente::first()->fantasia."*\n";
         } else {
-            $text.="*" . Emitente::first()->name."*\n";
+            $text .= '*'.Emitente::first()->name."*\n";
         }
         // Número da OS
         $text .= '*OS #'.str_pad($this->os->id, 5, '0', STR_PAD_LEFT)."*\n";
