@@ -22,7 +22,7 @@ class CopyToWhatsappButton extends Component
     }
 
     /**
-     * Gera o texto formatado para copiar para WhatsApp
+     * Gera o texto formatado para copiar para WhatsApp.
      */
     public function getWhatsappText(): string
     {
@@ -133,7 +133,7 @@ class CopyToWhatsappButton extends Component
     }
 
     /**
-     * Action para copiar o texto para a área de transferência via JS
+     * Action para copiar o texto para a área de transferência via JS.
      */
     public function copyToClipboard()
     {
