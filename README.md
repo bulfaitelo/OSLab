@@ -1,5 +1,5 @@
 [![OSLab](https://raw.githubusercontent.com/bulfaitelo/oslab/main/public/vendor/oslab/imgs/oslab_logo_marca.png)]()
-[![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?longCache=true&style=flat-square)]()
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?longCache=true&style=flat-square)]()
 [![Issues](https://img.shields.io/github/issues/bulfaitelo/oslab.svg?longCache=true&style=flat-square)](https://github.com/bulfaitelo/OSLab/issues)
 [![GitHub branch check runs](https://img.shields.io/github/check-runs/bulfaitelo/OSLab/main?logo=github-actions&logoColor=white&style=flat-square)](https://github.com/bulfaitelo/oslab/actions)
 [![StyleCI](https://github.styleci.io/repos/642922269/shield?branch=main)](https://github.styleci.io/repos/642922269)
