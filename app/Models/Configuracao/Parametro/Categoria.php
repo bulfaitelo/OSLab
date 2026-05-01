@@ -13,6 +13,24 @@ class Categoria extends Model
     use HasFactory;
 
     /**
+     * Os atributos que são atribuíveis em massa.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'descricao',
+        'defeito',
+        'observacao',
+        'laudo',
+        'user_id',
+        'garantia_id',
+        'centro_custo_id',
+        'checklist_id',
+        'checklist_required',
+    ];
+
+    /**
      * Retorna a garantia.
      *
      * @var array

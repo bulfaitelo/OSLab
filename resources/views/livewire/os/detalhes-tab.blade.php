@@ -248,6 +248,31 @@
             });
 
             $('#categoria_id').on('change', function () {
+                const categoriaId = $(this).val();
+
+                // Carrega os dados da categoria (defeito, observacao, laudo) se os campos estiverem vazios
+                if (categoriaId) {
+                    const url = route('configuracao.parametro.categoria.dados', categoriaId);
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Só preenche se o campo estiver vazio
+                            if (data.descricao && $('#descricao').summernote('isEmpty')) {
+                                $('#descricao').summernote('code', data.descricao);
+                            }
+                            if (data.defeito && $('#defeito').summernote('isEmpty')) {
+                                $('#defeito').summernote('code', data.defeito);
+                            }
+                            if (data.observacao && $('#observacoes').summernote('isEmpty')) {
+                                $('#observacoes').summernote('code', data.observacao);
+                            }
+                            if (data.laudo && $('#laudo').summernote('isEmpty')) {
+                                $('#laudo').summernote('code', data.laudo);
+                            }
+                        })
+                        .catch(error => console.error('Erro ao carregar dados da categoria:', error));
+                }
+
                 tomSelectModelo.focus()
             });
         });

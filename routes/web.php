@@ -157,6 +157,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('parametro.')->prefix('parametro')->group(function () {
             Route::resource('/categoria', CategoriaController::class)
                 ->parameters(['categoria' => 'categoria']);
+            Route::get('/categoria/{categoria}/dados', [CategoriaController::class, 'getDadosCategoria'])
+                ->name('categoria.dados');
             Route::resource('/status', StatusController::class);
         });
         // Configurações de usuário
