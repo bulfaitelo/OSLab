@@ -29,7 +29,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('categorias', function (Blueprint $table) {
-
             // Remove os campos criados
             $table->dropColumn([
                 'descricao',
@@ -39,7 +38,6 @@ return new class extends Migration
             ]);
             // Retorna o nome do campo para o original
             $table->renameColumn('descricao_categoria', 'descricao');
-
         });
     }
 };
