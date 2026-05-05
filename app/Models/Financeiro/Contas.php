@@ -9,10 +9,12 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Contas extends Model
+class Contas extends Model implements Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'tipo',
@@ -172,7 +174,7 @@ class Contas extends Model
         $query->selectRaw('
             contas.id,
             contas.tipo,
-            contas.name, 
+            contas.name,
             contas.os_id,
             contas.venda_id,
             clientes.name as cliente,

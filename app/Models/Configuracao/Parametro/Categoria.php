@@ -7,10 +7,12 @@ use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Garantia\Garantia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Categoria extends Model
+class Categoria extends Model implements Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * Os atributos que são atribuíveis em massa.
