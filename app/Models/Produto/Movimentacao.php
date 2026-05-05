@@ -5,12 +5,10 @@ namespace App\Models\Produto;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use OwenIt\Auditing\Contracts\Auditable;
 
-class Movimentacao extends Model implements Auditable
+class Movimentacao extends Model
 {
     use HasFactory;
-    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'quantidade_movimentada',
