@@ -30,6 +30,7 @@ use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Relatorio\Financeiro\BalanceteController;
 use App\Http\Controllers\Relatorio\Financeiro\ContaAbertaController;
 use App\Http\Controllers\Relatorio\Financeiro\ReceitaDespesaController;
+use App\Http\Controllers\Relatorio\Sistema\AuditoriaController;
 use App\Http\Controllers\Servico\ServicoController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Venda\VendaController;
@@ -132,6 +133,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/balancete', [BalanceteController::class, 'index'])->name('balancete.index');
             Route::get('/despesa', [ReceitaDespesaController::class, 'index'])->name('despesa.index');
             Route::get('/conta_aberta', [ContaAbertaController::class, 'index'])->name('conta_aberta.index');
+        });
+
+        // Sistema
+        Route::name('sistema.')->prefix('sistema')->group(function () {
+            Route::get('/auditoria', [AuditoriaController::class, 'index'])->name('auditoria.index');
+            Route::get('/auditoria/{auditoria}', [AuditoriaController::class, 'show'])->name('auditoria.show');
         });
 
         // // OS

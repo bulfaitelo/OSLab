@@ -450,7 +450,7 @@ return [
             'icon' => 'fa-regular fa-file-lines',
             'can' => [
                 'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta',
-                'relatorio_sistema_log',
+                'relatorio_sistema_log', 'relatorio_sistema_auditoria',
             ],
             'submenu' => [
                 [
@@ -488,6 +488,7 @@ return [
                     'icon' => 'fa-solid fa-sitemap',
                     'can' => [
                         'relatorio_sistema_log',
+                        'relatorio_sistema_auditoria',
                     ],
                     'submenu' => [
                         [
@@ -496,6 +497,13 @@ return [
                             'url' => 'relatorio/log-viewer',
                             'target' => '_blank',
                             'can' => 'relatorio_sistema_log',
+                        ],
+                        [
+                            'text' => 'Auditoria',
+                            'icon' => 'fas fa-history',
+                            'route' => 'relatorio.sistema.auditoria.index',
+                            'active' => ['relatorio/sistema/auditoria*'],
+                            'can' => 'relatorio_sistema_auditoria',
                         ],
                     ],
                 ],

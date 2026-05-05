@@ -7,9 +7,12 @@ use DB;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MetaContabil extends Model
+class MetaContabil extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     /**
      * Relacionamento com o Centro de Custo.
      */

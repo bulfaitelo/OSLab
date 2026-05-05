@@ -19,6 +19,14 @@
                         Voltar
                     </button>
                 </a>
+                @can('relatorio_sistema_auditoria')
+                <a href="{{ route('relatorio.sistema.auditoria.index', ['auditable_type' => get_class($metaContabil), 'auditable_id' => $metaContabil->id]) }}">
+                    <button type="button" title="Ver Auditoria" class="btn btn-sm bg-lightblue">
+                        <i class="fas fa-history"></i>
+                        <span class="d-none d-sm-inline">Auditoria</span>
+                    </button>
+                </a>
+                @endcan
             </div>
             <!-- /.card-header -->
             <!-- form start -->

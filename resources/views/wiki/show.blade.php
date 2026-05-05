@@ -32,22 +32,32 @@
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
                     <h3 class="card-title"><b>Wiki</b></h3>
-                    @can('wiki_edit')
-                    {{-- <a href="{{ route('wiki.edit', $wiki->id) }}" title="Editar" >
-                        <button type="button" class="btn btn-primary btn-sm">
+                    <div>
+                        @can('relatorio_sistema_auditoria')
+                        <a href="{{ route('relatorio.sistema.auditoria.index', ['auditable_type' => get_class($wiki), 'auditable_id' => $wiki->id]) }}">
+                            <button type="button" title="Ver Auditoria" class="btn btn-sm bg-lightblue" style="margin-right: 5px;">
+                                <i class="fas fa-history"></i>
+                                <span class="d-none d-sm-inline">Auditoria</span>
+                            </button>
+                        </a>
+                        @endcan
+                        @can('wiki_edit')
+                        {{-- <a href="{{ route('wiki.edit', $wiki->id) }}" title="Editar" >
+                            <button type="button" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                                Editar
+                            </button>
+                        </a> --}}
+                        <button id="edit_wiki" class="btn btn-primary btn-sm" onclick="editWiki()" type="button">
                             <i class="fas fa-edit"></i>
                             Editar
                         </button>
-                    </a> --}}
-                    <button id="edit_wiki" class="btn btn-primary btn-sm" onclick="editWiki()" type="button">
-                        <i class="fas fa-edit"></i>
-                        Editar
-                    </button>
-                    <button style="display: none" id="save_wiki" class="btn btn-primary btn-sm" onclick="saveWiki()" type="button">
-                        <i class="fas fa-save"></i>
-                        Salvar
-                    </button>
-                    @endcan
+                        <button style="display: none" id="save_wiki" class="btn btn-primary btn-sm" onclick="saveWiki()" type="button">
+                            <i class="fas fa-save"></i>
+                            Salvar
+                        </button>
+                        @endcan
+                    </div>
                 </div>
             </div>
             <div class="card-body">
