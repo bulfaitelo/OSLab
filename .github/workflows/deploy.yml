@@ -1,11 +1,11 @@
 name: Deploy OSLab
 
-
 on:
   workflow_run:
     workflows: ["OSLab Laravel Application Test"]
     types:
       - completed
+
 jobs:
   deploy:
     runs-on: self-hosted
@@ -22,20 +22,25 @@ jobs:
 
       - name: Gerar e Injetar Versão no .env
         run: |
-          # Lê a base do arquivo version.env
-          BASE=$(grep -E "^BASE_VERSION=" version.env | cut -d '=' -f2 | tr -d '\r')
+          # Define o caminho real do projeto no servidor
+          PROJECT_PATH="/var/Docker/Docker_Dev_Web/www/oslab"
 
-          # Dados para a versão visual
+          # Lê a base do arquivo version.env recém atualizado
+          BASE=$(grep -E "^BASE_VERSION=" $PROJECT_PATH/version.env | cut -d '=' -f2 | tr -d '\r')
+
+          # Dados para a versão visual e URL
           BRANCH=${{ github.ref_name }}
           SHORT_HASH=$(echo ${{ github.sha }} | cut -c1-7)
-
-          # Dados para a URL do GitHub
           FULL_HASH=${{ github.sha }}
-          REPO=${{ github.repository }} # Retorna repositório no formato "owner/repo"
+          REPO=${{ github.repository }}
 
-          # Salva no .env
-          echo "APP_VERSION=${BASE}-${BRANCH}-${SHORT_HASH}" >> .env
-          echo "APP_VERSION_URL=https://github.com/${REPO}/commit/${FULL_HASH}" >> .env
+          # Remove as linhas das versões antigas do .env de produção para não duplicar
+          sed -i '/^APP_VERSION=/d' $PROJECT_PATH/.env
+          sed -i '/^APP_VERSION_URL=/d' $PROJECT_PATH/.env
+
+          # Salva a nova versão no .env real do servidor
+          echo "APP_VERSION=${BASE}-${BRANCH}-${SHORT_HASH}" >> $PROJECT_PATH/.env
+          echo "APP_VERSION_URL=https://github.com/${REPO}/commit/${FULL_HASH}" >> $PROJECT_PATH/.env
 
       - name: Rodar Composer dentro do diretório Oslab
         run: |
@@ -45,10 +50,10 @@ jobs:
         run: |
           sudo docker exec app php oslab/artisan migrate
 
-      - name: Limpando cache de configuração
-        run: |
-          sudo docker exec app php oslab/artisan optimize:clear
-
       - name: Rodar Artisan db:update-defaults (chamando direto na classe)
         run: |
           sudo docker exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate
+
+      - name: Limpando cache de configuração (Agora lendo o .env novo)
+        run: |
+          sudo docker exec app php oslab/artisan optimize:clear
