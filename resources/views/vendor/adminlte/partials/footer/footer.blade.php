@@ -5,7 +5,10 @@
         @yield('footer')
         @if(config('version.show'))
             <div class="text-muted text-sm">
-                Versão {{ config('version.number') }}
+                <a href="{{ config('version.url') }}" target="_blank" rel="noopener noreferrer"
+                    class="text-decoration-none">
+                    {{ config('version.number') }}
+                </a>
             </div>
         @endif
     </div>

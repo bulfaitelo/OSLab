@@ -35,3 +35,20 @@ jobs:
       - name: Rodar Artisan db:update-defaults (chamando direto na classe)
         run: |
           sudo docker exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate
+
+      - name: Gerar e Injetar Versão no .env
+        run: |
+          # Lê a base do arquivo version.env
+          BASE=$(grep -E "^BASE_VERSION=" version.env | cut -d '=' -f2 | tr -d '\r')
+
+          # Dados para a versão visual
+          BRANCH=${{ github.ref_name }}
+          SHORT_HASH=$(echo ${{ github.sha }} | cut -c1-7)
+
+          # Dados para a URL do GitHub
+          FULL_HASH=${{ github.sha }}
+          REPO=${{ github.repository }} # Retorna repositório no formato "owner/repo"
+
+          # Salva no .env
+          echo "APP_VERSION=${BASE}-${BRANCH}-${SHORT_HASH}" >> .env
+          echo "APP_VERSION_URL=https://github.com/${REPO}/commit/${FULL_HASH}" >> .env

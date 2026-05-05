@@ -1,30 +1,49 @@
 <?php
 
-// 1. Lógica para buscar a versão do seu arquivo gerado
-$versionPath = base_path('version.env');
-$appVersion = 'v0.1-dev'; // Versão de fallback
+$appVersion = env('APP_VERSION');
+$appVersionUrl = env('APP_VERSION_URL');
 
-if (file_exists($versionPath)) {
-    $envContent = file_get_contents($versionPath);
-    if (preg_match('/^APP_VERSION=(.*)$/m', $envContent, $matches)) {
-        $appVersion = trim($matches[1]);
+// Se não existir (Ambiente Local)
+if (!$appVersion) {
+    $baseVersion = 'v0.1';
+    $versionPath = base_path('version.env');
+
+    if (file_exists($versionPath)) {
+        $envContent = file_get_contents($versionPath);
+        if (preg_match('/^BASE_VERSION=(.*)$/m', $envContent, $matches)) {
+            $baseVersion = trim($matches[1]);
+        }
+    }
+
+    $branch = 'dev';
+    $fullHash = '';
+
+    if (is_dir(base_path('.git'))) {
+        $gitBranch = trim(@exec('git rev-parse --abbrev-ref HEAD 2>/dev/null'));
+        if (!empty($gitBranch)) {
+            $branch = $gitBranch;
+        }
+
+        // Pega o Hash completo para o link local funcionar
+        $gitFullHash = trim(@exec('git rev-parse HEAD 2>/dev/null'));
+        if (!empty($gitFullHash)) {
+            $fullHash = $gitFullHash;
+        }
+    }
+
+    $appVersion = "{$baseVersion}-{$branch}";
+
+    // Substitua "bulfaitelo/OSLab" pelo nome real do seu repositório no GitHub
+    $repoPath = env('GITHUB_REPO', 'bulfaitelo/OSLab');
+    if($branch !== 'dev') {
+        $appVersionUrl = "https://github.com/{$repoPath}/commit/{$fullHash}";
+        } else {
+        $appVersionUrl = "https://github.com/{$repoPath}/commits";
     }
 }
 
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Exibir Versão
-    |--------------------------------------------------------------------------
-    | Define se a versão do sistema deve ficar visível para os usuários.
-    | O padrão é 'true', mas pode ser sobrescrito no arquivo .env
-    */
     'show' => env('SHOW_VERSION', true),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Número da Versão
-    |--------------------------------------------------------------------------
-    */
     'number' => $appVersion,
+    'url' => $appVersionUrl,
 ];
