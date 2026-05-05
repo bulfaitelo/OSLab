@@ -20,22 +20,6 @@ jobs:
           cd /var/Docker/Docker_Dev_Web/www/oslab
           git pull origin main
 
-      - name: Rodar Composer dentro do diretório Oslab
-        run: |
-          sudo docker exec app composer install -d oslab
-
-      - name: Rodar Artisan Migrate
-        run: |
-          sudo docker exec app php oslab/artisan migrate
-
-      - name: Limpando cache de configuração
-        run: |
-          sudo docker exec app php oslab/artisan optimize:clear
-
-      - name: Rodar Artisan db:update-defaults (chamando direto na classe)
-        run: |
-          sudo docker exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate
-
       - name: Gerar e Injetar Versão no .env
         run: |
           # Lê a base do arquivo version.env
@@ -52,3 +36,19 @@ jobs:
           # Salva no .env
           echo "APP_VERSION=${BASE}-${BRANCH}-${SHORT_HASH}" >> .env
           echo "APP_VERSION_URL=https://github.com/${REPO}/commit/${FULL_HASH}" >> .env
+
+      - name: Rodar Composer dentro do diretório Oslab
+        run: |
+          sudo docker exec app composer install -d oslab
+
+      - name: Rodar Artisan Migrate
+        run: |
+          sudo docker exec app php oslab/artisan migrate
+
+      - name: Limpando cache de configuração
+        run: |
+          sudo docker exec app php oslab/artisan optimize:clear
+
+      - name: Rodar Artisan db:update-defaults (chamando direto na classe)
+        run: |
+          sudo docker exec app php oslab/artisan db:seed --class DatabaseDefaultPermissionsUpdate
