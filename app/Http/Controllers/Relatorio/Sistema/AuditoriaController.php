@@ -61,6 +61,10 @@ class AuditoriaController extends Controller
             ->pluck('auditable_type')
             ->toArray();
 
+        $modelos = collect($modelos)
+            ->mapWithKeys(fn ($type) => [$type => class_basename($type)])
+            ->all();
+
         // Obter lista de usuários
         $usuarios = \App\Models\User::orderBy('name')->pluck('name', 'id');
 
