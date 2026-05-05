@@ -19,6 +19,14 @@
                         <span class="d-none d-sm-inline">Voltar</span>
                     </button>
                 </a>
+                @can('relatorio_sistema_auditoria')
+                <a href="{{ route('relatorio.sistema.auditoria.index', ['auditable_type' => get_class($produto), 'auditable_id' => $produto->id]) }}">
+                    <button type="button" title="Ver Auditoria" class="btn btn-sm bg-lightblue">
+                        <i class="fas fa-history"></i>
+                        <span class="d-none d-sm-inline">Auditoria</span>
+                    </button>
+                </a>
+                @endcan
                 @can('produto_edit')
                 <a href="{{ route('produto.edit', $produto) }}">
                     <button type="button" title="Editar" class="btn btn-sm btn-info">

@@ -37,6 +37,11 @@ class AuditoriaController extends Controller
             $auditorias->where('user_id', $request->user_id);
         }
 
+        // Filtro por ID do registro auditado
+        if ($request->filled('auditable_id')) {
+            $auditorias->where('auditable_id', $request->auditable_id);
+        }
+
         // Filtro por data
         if ($request->filled('data_inicio')) {
             $auditorias->whereDate('created_at', '>=', $request->data_inicio);

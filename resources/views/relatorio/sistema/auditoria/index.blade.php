@@ -28,6 +28,14 @@
             <i class="fa-solid fa-magnifying-glass"></i>
             Buscar
         </button>
+        @if (count($request->all()) > 0)
+        <a href="{{ route('relatorio.sistema.auditoria.index') }}">
+            <button type="button"  class="btn bg-gray btn-sm">
+                <i class="fa-solid fa-xmark"></i>
+                Limpar
+            </button>
+        </a>
+        @endif
     </div>
 
     <div class="card-body">
@@ -38,6 +46,12 @@
         @include('adminlte::partials.form-alert')
 
         <div class="row d-print-none">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="auditable_id">ID do Registro</label>
+                    {!! html()->number('auditable_id', $request->auditable_id)->class('form-control')->placeholder('ID do Registro') !!}
+                </div>
+            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="data_inicio">Data Início</label>
@@ -51,14 +65,12 @@
                     {!! html()->date('data_fim', ($request->data_fim == true) ? $request->data_fim : null)->class('form-control')->placeholder('Data Fim') !!}
                 </div>
             </div>
-
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="auditable_type">Modelo</label>
                     {!! html()->select('auditable_type', ['' => '-- Selecione --'] + array_combine($modelos, $modelos), $request->auditable_type)->class('form-control')->placeholder('Modelo') !!}
                 </div>
             </div>
-
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="event">Tipo de Evento</label>
@@ -73,25 +85,25 @@
                 </div>
             </div>
         </div>
-
         <div class="table-responsive">
             <table class="table table-sm table-hover text-nowrap">
                 <thead >
                     <tr>
-                        <th>Data/Hora</th>
-                        <th>Usuário</th>
+                        <th style="width: 10px">#</th>
                         <th>Modelo</th>
-                        <th>ID do Registro</th>
+                        <th>Usuário</th>
                         <th>Evento</th>
-                        <th>Detalhes</th>
+                        <th class="text-right pr-3">Data/Hora</th>
+                        <th style="width: 30px"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($auditorias as $auditoria)
                         <tr>
+                            <td>{{ $auditoria->auditable_id }}</td>
                             <td>
-                                <span title="{{ $auditoria->created_at }}">
-                                    {{ $auditoria->created_at->format('d/m/Y H:i:s') }}
+                                <span class="badge badge-primary">
+                                    {{ class_basename($auditoria->auditable_type) }}
                                 </span>
                             </td>
                             <td>
@@ -102,12 +114,6 @@
                                 @endif
                             </td>
                             <td>
-                                <span class="badge badge-primary">
-                                    {{ class_basename($auditoria->auditable_type) }}
-                                </span>
-                            </td>
-                            <td>{{ $auditoria->auditable_id }}</td>
-                            <td>
                                 @if($auditoria->event === 'created')
                                     <span class="badge badge-success">{{ ucfirst($auditoria->event) }}</span>
                                 @elseif($auditoria->event === 'updated')
@@ -117,6 +123,11 @@
                                 @else
                                     <span class="badge badge-secondary">{{ ucfirst($auditoria->event) }}</span>
                                 @endif
+                            </td>
+                            <td class="text-right pr-3">
+                                <span title="{{ $auditoria->created_at }}">
+                                    {{ $auditoria->created_at->format('d/m/Y H:i:s') }}
+                                </span>
                             </td>
                             <td>
                                 <a href="{{ route('relatorio.sistema.auditoria.show', $auditoria->id) }}" class="btn btn-sm btn-default d-print-none" title="Ver Detalhes">

@@ -7,6 +7,14 @@
 @stop
 
 @section('content')
+<div class="mb-3">
+    @can('relatorio_sistema_auditoria')
+    <a href="{{ route('relatorio.sistema.auditoria.index', ['auditable_type' => get_class($cliente), 'auditable_id' => $cliente->id]) }}" class="btn btn-sm bg-lightblue">
+        <i class="fas fa-history"></i>
+        Auditoria
+    </a>
+    @endcan
+</div>
 @livewire('cliente.show-cliente', ['cliente' => $cliente], key('detalhes-tab'))
 @stop
 
