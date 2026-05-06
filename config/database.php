@@ -61,6 +61,10 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+            // Adicione este bloco no final do array da conexão:
+            'dump' => [
+               'add_extra_option' => '--skip-ssl',
+            ],
         ],
 
         'pgsql' => [
