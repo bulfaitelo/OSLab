@@ -5,10 +5,10 @@
                 <!-- general form elements -->
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ url()->previous() }}">
-                            <button type="button"  class="btn btn-sm btn-default">
+                        <a href="{{ url()->previous() }}" title="Voltar">
+                            <button type="button" class="btn btn-sm btn-default">
                                 <i class="fa-solid fa-chevron-left"></i>
-                                Voltar
+                                <span class="d-none d-sm-inline">Voltar</span>
                             </button>
                         </a>
                     </div>

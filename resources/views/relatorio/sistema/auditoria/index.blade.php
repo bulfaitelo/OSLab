@@ -10,10 +10,10 @@
 <div class="card">
     {!! html()->form('get', route('relatorio.sistema.auditoria.index'))->open() !!}
     <div class="card-header">
-        <a href="{{ url()->previous() }}">
+        <a href="{{ url()->previous() }}" title="Voltar">
             <button type="button" class="btn btn-sm btn-default d-print-none">
                 <i class="fa-solid fa-chevron-left"></i>
-                Voltar
+                <span class="d-none d-sm-inline">Voltar</span>
             </button>
         </a>
         @if (Request::all())

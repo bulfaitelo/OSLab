@@ -9,10 +9,10 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <a href="{{ route('relatorio.sistema.auditoria.index') }}">
+        <a href="{{ route('relatorio.sistema.auditoria.index') }}" title="Voltar">
             <button type="button" class="btn btn-sm btn-default d-print-none">
                 <i class="fa-solid fa-chevron-left"></i>
-                Voltar
+                <span class="d-none d-sm-inline">Voltar</span>
             </button>
         </a>
         <a onclick="window.print();return false;" class="d-print-none">

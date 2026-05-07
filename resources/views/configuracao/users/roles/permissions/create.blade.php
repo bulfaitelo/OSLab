@@ -13,10 +13,10 @@
         <!-- general form elements -->
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('configuracao.permissions.index') }}">
-                    <button type="button"  class="btn btn-sm btn-default">
+                <a href="{{ route('configuracao.permissions.index') }}" title="Voltar">
+                    <button type="button" class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
+                        <span class="d-none d-sm-inline">Voltar</span>
                     </button>
                 </a>
             </div>

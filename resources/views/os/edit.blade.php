@@ -10,7 +10,7 @@
 <div class="card card-oslab card-outline">
     <div class="card-header border-0 pb-0">
         <a href="{{ url()->previous() }}">
-            <button type="button" class="btn btn-sm btn-default">
+            <button type="button" title="Voltar" class="btn btn-sm btn-default">
                 <i class="fa-solid fa-chevron-left"></i>
                 <span class="d-none d-sm-inline">Voltar</span>
             </button>

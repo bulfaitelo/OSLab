@@ -63,7 +63,7 @@ return [
             ]) : [],
             // Adicione este bloco no final do array da conexão:
             'dump' => [
-               'add_extra_option' => '--skip-ssl',
+                'add_extra_option' => '--skip-ssl',
             ],
         ],
 
