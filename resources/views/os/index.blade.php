@@ -9,7 +9,7 @@
 @section('content')
 <div class="">
     <div class="card">
-        <div class="card-header card-outline card-primary pb-2 ">
+        <div class="card-header card-outline card-oslab pb-2 ">
             <a href="{{ url()->previous() }}">
                 <button type="button"  class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
