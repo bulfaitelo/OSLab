@@ -83,8 +83,8 @@ class CopyToWhatsappButton extends Component
         }
 
         // Valor Total
-        if ($this->os->valor_total) {
-            $totalFormatado = number_format($this->os->valor_total, 2, ',', '.');
+        if ($this->os->valorTotal()) {
+            $totalFormatado = number_format($this->os->valorTotal(), 2, ',', '.');
             $text .= "\n*Total: R$ ".$totalFormatado."*\n";
         }
 
