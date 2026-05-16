@@ -303,16 +303,16 @@ return [
             'can' => 'config_perfil',
             'topnav_user' => true,
         ],
-        // Navbar items:
-        [
-            'type' => 'navbar-search',
-            'text' => 'Buscar',
-            'topnav_right' => true,
-            'url' => 'buscar',
-            'method' => 'GET',
-            'input_name' => 'busca',
+        // // Navbar items:
+        // [
+        //     'type' => 'navbar-search',
+        //     'text' => 'Buscar',
+        //     'topnav_right' => true,
+        //     'url' => 'buscar',
+        //     'method' => 'GET',
+        //     'input_name' => 'busca',
 
-        ],
+        // ],
         // [
         //     'text' => 'asd',
         //     'icon' => 'fa-regular fa-star',

@@ -137,6 +137,57 @@
         @endswitch
     @endif
 
+    <script>
+        (function () {
+            var buscarRoute = "{{ route('buscar') }}";
+            var $sidebarSearch = $("[data-widget='sidebar-search']");
+            var $searchInput = $sidebarSearch.find('.form-control');
+            var $searchButton = $sidebarSearch.find('.btn');
+            var $searchResults = $('.sidebar-search-results');
+
+            function getSearchResults() {
+                return $searchResults.find('.list-group-item[href!="#"]');
+            }
+
+            function redirectToBuscar() {
+                var value = $.trim($searchInput.val());
+
+                if (!value) {
+                    return;
+                }
+
+                if (getSearchResults().length === 0) {
+                    window.location.href = buscarRoute + '?busca=' + encodeURIComponent(value);
+                }
+            }
+
+            $searchInput.on('keydown', function (event) {
+                if (event.keyCode !== 13) {
+                    return;
+                }
+
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                setTimeout(redirectToBuscar, 120);
+            });
+
+            $searchButton.on('click', function (event) {
+                var value = $.trim($searchInput.val());
+
+                if (!value) {
+                    return;
+                }
+
+                if (getSearchResults().length === 0) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    window.location.href = buscarRoute + '?busca=' + encodeURIComponent(value);
+                }
+            });
+        })();
+    </script>
+
     {{-- Extra Configured Plugins Scripts --}}
     @include('adminlte::plugins', ['type' => 'js'])
 
