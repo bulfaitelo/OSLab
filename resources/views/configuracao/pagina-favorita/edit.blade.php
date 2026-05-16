@@ -8,9 +8,8 @@
             <h1>Editar Página Favorita</h1>
         </div>
         <div class="col-sm-6 text-right">
-            <a href="{{ route('configuracao.pagina-favorita.index') }}" class="btn btn-sm btn-secondary">
-                <i class="fas fa-arrow-left"></i> Voltar
-            </a>
+            {!! html()->a(route('configuracao.pagina-favorita.index'), 'Voltar')
+                ->class('btn btn-sm btn-secondary') !!}
         </div>
     </div>
 @stop
@@ -21,14 +20,17 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Informações da Página Favorita</h3>
-                </div>                
-                <form action="{{ route('configuracao.pagina-favorita.update', $favorita->id) }}" method="POST">
+                </div>
+
+                {!! html()->form('put', route('configuracao.pagina-favorita.update', ['pagina_favorita' => $favorita->id]))->open() !!}
                     @csrf
-                    @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
                             <label for="text">Rótulo do Botão</label>
-                            <input type="text" class="form-control @error('text') is-invalid @enderror" id="text" name="text" value="{{ old('text', $favorita->text) }}" required>
+                            {!! html()->text('text', old('text', $favorita->text))
+                                ->class('form-control' . ($errors->has('text') ? ' is-invalid' : ''))
+                                ->id('text')
+                                ->required() !!}
                             @error('text')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -36,13 +38,10 @@
 
                         <div class="form-group">
                             <label for="color">Cor do Botão</label>
-                            <select class="form-control @error('color') is-invalid @enderror" id="color" name="color" required>
-                                @foreach ($colors as $colorClass => $colorLabel)
-                                    <option value="{{ $colorClass }}" {{ old('color', $favorita->color) === $colorClass ? 'selected' : '' }}>
-                                        {{ $colorLabel }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            {!! html()->select('color', $colors, old('color', $favorita->color))
+                                ->class('form-control' . ($errors->has('color') ? ' is-invalid' : ''))
+                                ->id('color')
+                                ->required() !!}
                             @error('color')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -51,9 +50,10 @@
                         <div class="form-group">
                             <label>Visualização do Botão</label>
                             <div class="mt-2">
-                                <button type="button" id="preview-button" class="btn {{ $favorita->color }}">
-                                    {{ $favorita->text }}
-                                </button>
+                                {!! html()->button($favorita->text)
+                                    ->type('button')
+                                    ->id('preview-button')
+                                    ->class('btn ' . $favorita->color) !!}
                             </div>
                         </div>
 
@@ -67,11 +67,11 @@
                     </div>
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Salvar Alterações
-                        </button>
+                        {!! html()->button('Salvar Alterações', 0)
+                            ->type('submit')
+                            ->class('btn btn-primary') !!}
                     </div>
-                </form>
+                {!! html()->form()->close() !!}
             </div>
         </div>
 
@@ -83,9 +83,9 @@
                 <div class="card-body">
                     @foreach ($colors as $colorClass => $colorLabel)
                         <div class="mb-2">
-                            <button type="button" class="btn btn-sm {{ $colorClass }}">
-                                {{ $colorLabel }}
-                            </button>
+                            {!! html()->button($colorLabel)
+                                ->type('button')
+                                ->class('btn btn-sm ' . $colorClass) !!}
                         </div>
                     @endforeach
                 </div>
