@@ -6,7 +6,7 @@
             {{-- @dump($item) --}}
             <div class="col pl-0 pr-0">
                 <a href="{{ route($item->route) }}">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn {{ $item->color }}">
                         <i class="{{ $item->icon }}"></i>
                         <span class="d-none d-sm-inline">{{ $item->text }}</span>
                     </button>

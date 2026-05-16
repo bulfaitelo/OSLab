@@ -647,6 +647,12 @@ return [
                     'can' => 'config_emitente',
                 ],
                 [
+                    'text' => 'Páginas Favoritas',
+                    'icon' => 'fas fa-star',
+                    'route' => 'configuracao.pagina-favorita.index',
+                    'active' => ['configuracoes/pagina-favorita*'],
+                ],
+                [
                     'text' => 'Backup',
                     'icon' => 'fa-solid fa-server',
                     'route' => 'configuracao.backup.index',

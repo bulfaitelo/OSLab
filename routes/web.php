@@ -7,6 +7,7 @@ use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Garantia\GarantiaController;
+use App\Http\Controllers\Configuracao\PaginaFavoritaController;
 use App\Http\Controllers\Configuracao\Parametro\CategoriaController;
 use App\Http\Controllers\Configuracao\Parametro\StatusController;
 use App\Http\Controllers\Configuracao\Sistema\SistemaConfigController;
@@ -200,6 +201,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('backup', [BackupController::class, 'index'])->name('backup.index');
         Route::post('backup/download', [BackupController::class, 'download'])->name('backup.download');
         Route::post('backup/destroy', [BackupController::class, 'destroy'])->name('backup.delete');
+        // Páginas Favoritas
+        Route::resource('pagina-favorita', PaginaFavoritaController::class)
+            ->parameters(['pagina-favorita' => 'pagina_favorita']);
+        Route::post('pagina-favorita/update-order', [PaginaFavoritaController::class, 'updateOrder'])->name('pagina-favorita.update-order');
     });
 
     Route::get('favorite/{routeName}', [FavoriteController::class, 'favoriteToggle'])->name('favorite.toggle');
