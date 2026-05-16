@@ -520,6 +520,7 @@ return [
                 'config_wiki_fabricante', 'config_wiki_modelo',
                 'config_sistema',
                 'config_emitente',
+                'config_pagina_favorita',
 
             ],
             'submenu' => [
@@ -645,6 +646,13 @@ return [
                     'route' => 'configuracao.emitente.index',
                     'active' => ['configuracoes/emitente*'],
                     'can' => 'config_emitente',
+                ],
+                [
+                    'text' => 'Páginas Favoritas',
+                    'icon' => 'fas fa-star',
+                    'route' => 'configuracao.pagina-favorita.index',
+                    'active' => ['configuracoes/pagina-favorita*'],
+                    'can' => 'config_pagina_favorita',
                 ],
                 [
                     'text' => 'Backup',
