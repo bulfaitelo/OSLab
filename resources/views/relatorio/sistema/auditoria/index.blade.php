@@ -68,7 +68,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="auditable_type">Modelo</label>
-                    {!! html()->select('auditable_type', ['' => '-- Selecione --'] + $modelos, $request->auditable_type)->class('form-control')->placeholder('Modelo') !!}
+                    {!! html()->select('auditable_type', ['' => '-- Selecione --'] + $modelos, $request->auditable_type)->class('form-control') !!}
                 </div>
             </div>
             <div class="col-md-2">
