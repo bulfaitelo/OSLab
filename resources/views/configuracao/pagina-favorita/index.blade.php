@@ -42,14 +42,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="{{ route('configuracao.pagina-favorita.edit', ['pagina_favorita' => $favorita->id]) }}" class="btn btn-info" title="Editar">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-excluir" data-name="{{ $favorita->text }}" data-url="{{ route('configuracao.pagina-favorita.destroy', ['pagina_favorita' => $favorita->id]) }}" title="Excluir">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
+                                    @can('config_pagina_favorita')
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ route('configuracao.pagina-favorita.edit', ['pagina_favorita' => $favorita->id]) }}" class="btn btn-info" title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-excluir" data-name="{{ $favorita->text }}" data-url="{{ route('configuracao.pagina-favorita.destroy', ['pagina_favorita' => $favorita->id]) }}" title="Excluir">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    @endcan
                                 </div>
                             @endforeach
                         </div>

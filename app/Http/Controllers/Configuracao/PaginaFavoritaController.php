@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PaginaFavoritaController extends Controller
 {
+    public function __construct()
+    {
+        // ACL DE PERMISSÕES
+        $this->middleware('permission:config_pagina_favorita', ['only' => ['index', 'update', 'destroy', 'updateOrder', 'edit']]);
+    }
+
     /**
      * Display a listing of the resource.
      */

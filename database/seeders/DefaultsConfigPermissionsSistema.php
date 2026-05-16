@@ -26,6 +26,12 @@ class DefaultsConfigPermissionsSistema extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 11,
             ],
+            [
+                'description' => 'Acesso às páginas favoritas',
+                'name' => 'config_pagina_favorita',
+                'guard_name' => 'web',
+                'group_id' => 11,
+            ],
 
         ];
 
