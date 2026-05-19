@@ -407,8 +407,6 @@ Breadcrumbs::for('configuracao.garantia.edit', function (BreadcrumbTrail $trail,
     $trail->push('Editar Termo de Garantia', route('configuracao.garantia.edit', $item));
 });
 
-
-
 // Fim Configuração OS
 
 // Configuração FINANCEIRO
