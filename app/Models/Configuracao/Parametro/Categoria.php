@@ -7,10 +7,30 @@ use App\Models\Configuracao\Financeiro\CentroCusto;
 use App\Models\Configuracao\Garantia\Garantia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Categoria extends Model
+class Categoria extends Model implements Auditable
 {
     use HasFactory;
+    use \OwenIt\Auditing\Auditable;
+
+    /**
+     * Os atributos que são atribuíveis em massa.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'descricao',
+        'defeito',
+        'observacao',
+        'laudo',
+        'user_id',
+        'garantia_id',
+        'centro_custo_id',
+        'checklist_id',
+        'checklist_required',
+    ];
 
     /**
      * Retorna a garantia.

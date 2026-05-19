@@ -67,6 +67,8 @@ final class FavoriteMenuService
         $paginaFavorita->route = $routeName;
         $paginaFavorita->icon = $icon;
         $paginaFavorita->text = $text;
+        $paginaFavorita->color = 'btn-primary';
+        $paginaFavorita->order = PaginaFavorita::where('user_id', $userId)->max('order') + 1;
         $paginaFavorita->save();
     }
 
@@ -92,7 +94,7 @@ final class FavoriteMenuService
     {
         $userId = Auth::id();
 
-        return PaginaFavorita::where('user_id', $userId)->get();
+        return PaginaFavorita::where('user_id', $userId)->orderBy('order')->get();
     }
 
     /**

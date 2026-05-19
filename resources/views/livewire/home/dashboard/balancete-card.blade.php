@@ -1,44 +1,80 @@
-<div>
+@php
+    $formatarResumido = function($valor) {
+        $valor = $valor ?? 0;
+        if (abs($valor) >= 1000000) return number_format($valor / 1000000, 1, ',', '.') . 'M';
+        if (abs($valor) >= 1000) return number_format($valor / 1000, 1, ',', '.') . 'k';
+        return number_format($valor, 2, ',', '.');
+    };
+
+    $formatarCompleto = function($valor) {
+        return number_format($valor ?? 0, 2, ',', '.');
+    };
+@endphp
+
+{{-- Elemento RAIZ único exigido pelo Livewire --}}
+<div class="balancete-container">
     <div class="card custom-border">
         <div class="card-body p-3">
-            {!! html()->select('mes', $meses, $mes_busca)->class('form-control')->attribute('wire:model.live', 'mes_busca') !!}
-            <div class="row  mt-3">
-                <div class="col-6" >
-                    <span class="h5 balancete-credito text-nowrap">Receita</span>
-                </div>
-                <div class="col-6">
-                    <span style="float: right" class="h5 balancete-credito text-nowrap">R$ {{ (isset($balancete->receita)) ? number_format($balancete->receita, 2, ',', '.') : '0,00' }}</span>
-                </div>
+            {!! html()->select('mes', $meses, $mes_busca)->class('form-control mb-3')->attribute('wire:model.live', 'mes_busca') !!}
+
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="h5 mb-0 balancete-credito" title="Receita">
+                    <span class="texto-longo">Receita</span>
+                    <span class="texto-curto">R</span>
+                </span>
+                <span class="h5 mb-0 balancete-credito text-nowrap">
+                    <span class="texto-longo">R$ {{ $formatarCompleto($balancete?->receita) }}</span>
+                    <span class="texto-curto">R$ {{ $formatarResumido($balancete?->receita) }}</span>
+                </span>
             </div>
-            <div class="row">
-                <div class="col-6" >
-                    <span class="balancete-debito h5 text-nowrap">Despesa</span>
-                </div>
-                <div class="col-6">
-                    <span style="float: right" class="h5 balancete-debito text-nowrap">R$ {{ (isset($balancete->despesa)) ? number_format($balancete->despesa, 2, ',', '.') : '0,00' }}</span>
-                </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="h5 mb-0 balancete-debito" title="Despesa">
+                    <span class="texto-longo">Despesa</span>
+                    <span class="texto-curto">D</span>
+                </span>
+                <span class="h5 mb-0 balancete-debito text-nowrap">
+                    <span class="texto-longo">R$ {{ $formatarCompleto($balancete?->despesa) }}</span>
+                    <span class="texto-curto">R$ {{ $formatarResumido($balancete?->despesa) }}</span>
+                </span>
             </div>
-            <hr class="m-0">
-            <div class="row">
-                <div class="col-6" >
-                    <span
-                    @class([
-                        'h5 text-nowrap',
-                        'balancete-debito' => (isset($balancete->saldo) && $balancete->saldo < 0) ? true : false,
-                        'balancete-credito' => (isset($balancete->saldo) && $balancete->saldo > 0) ? true : false,
-                    ])
-                    >Saldo</span>
-                </div>
-                <div class="col-6">
-                    <span style="float: right"
-                    @class([
-                        'h5 text-nowrap ',
-                        'balancete-debito' => (isset($balancete->saldo) && $balancete->saldo < 0) ? true : false,
-                        'balancete-credito' => (isset($balancete->saldo) && $balancete->saldo > 0) ? true : false,
-                    ])
-                    >R$ {{ (isset($balancete->saldo)) ? number_format($balancete->saldo, 2, ',', '.') : '0,00' }}</span>
-                </div>
+
+            <hr class="m-0 mb-2">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <span @class([
+                    'h5 mb-0',
+                    'balancete-debito' => ($balancete?->saldo ?? 0) < 0,
+                    'balancete-credito' => ($balancete?->saldo ?? 0) >= 0,
+                ]) title="Saldo">
+                    <span class="texto-longo">Saldo</span>
+                    <span class="texto-curto">S</span>
+                </span>
+
+                <span @class([
+                    'h5 mb-0 text-nowrap',
+                    'balancete-debito' => ($balancete?->saldo ?? 0) < 0,
+                    'balancete-credito' => ($balancete?->saldo ?? 0) >= 0,
+                ])>
+                    <span class="texto-longo">R$ {{ $formatarCompleto($balancete?->saldo) }}</span>
+                    <span class="texto-curto">R$ {{ $formatarResumido($balancete?->saldo) }}</span>
+                </span>
             </div>
         </div>
     </div>
+    @once
+    <style>
+        .balancete-container {
+            container-type: inline-size;
+        }
+        .texto-curto { display: none !important; }
+        .texto-longo { display: inline-block !important; }
+
+        @@container (max-width: 240px) {
+            .texto-longo { display: none !important; }
+            .texto-curto { display: inline-block !important; }
+        }
+    </style>
+    @endonce
 </div>
+

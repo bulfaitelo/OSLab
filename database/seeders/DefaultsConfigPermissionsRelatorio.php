@@ -38,6 +38,12 @@ class DefaultsConfigPermissionsRelatorio extends Seeder
                 'guard_name' => 'web',
                 'group_id' => 2,
             ],
+            [
+                'description' => 'Acesso ao Relatório de Auditoria do Sistema',
+                'name' => 'relatorio_sistema_auditoria',
+                'guard_name' => 'web',
+                'group_id' => 2,
+            ],
         ];
 
         foreach ($insert as $key => $value) {

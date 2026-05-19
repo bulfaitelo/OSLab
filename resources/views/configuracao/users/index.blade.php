@@ -11,10 +11,10 @@
     <div class="card">
         <div class="card-header">
             <div class="row"></div>
-            <a href="{{ route('configuracao.roles.index') }}">
-                    <button type="button"  class="btn btn-sm btn-default">
+            <a href="{{ route('configuracao.roles.index') }}" title="Voltar">
+                    <button type="button" class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
+                        <span class="d-none d-sm-inline">Voltar</span>
                     </button>
             </a>
             @can('config_users_create')

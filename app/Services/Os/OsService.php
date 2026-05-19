@@ -33,7 +33,7 @@ class OsService implements OsServiceInterface
         $dataHoje = Carbon::now()->format('Y-m-d');
         $osListagemPadrao = getConfig('os_listagem_padrao');
 
-        $queryOs = Os::with(['cliente', 'tecnico', 'categoria', 'status']);
+        $queryOs = Os::with(['cliente', 'tecnico', 'categoria', 'status', 'informacoes']);
 
         if ($request->busca) {
             $queryOs->where(function ($query) use ($request) {
@@ -91,7 +91,7 @@ class OsService implements OsServiceInterface
 
             foreach (['descricao', 'defeito', 'observacoes', 'laudo'] as $campo) {
                 if (! empty($ordem->$campo) && stripos($ordem->$campo, $request->busca) !== false) {
-                    $ordem->{'snippet_'.$campo} = self::gerarSnippet($ordem->$campo, $request->busca, 80);
+                    $ordem->{'snippet_'.$campo} = self::gerarSnippet($ordem->$campo, $request->busca, 200);
                 }
             }
 

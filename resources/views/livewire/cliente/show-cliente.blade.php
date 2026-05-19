@@ -1,12 +1,18 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <a href="{{ url()->previous() }}">
-                <button type="button"  class="btn btn-sm btn-default">
+            <a href="{{ url()->previous() }}" title="Voltar">
+                <button type="button" class="btn btn-sm btn-default">
                     <i class="fa-solid fa-chevron-left"></i>
-                    Voltar
+                    <span class="d-none d-sm-inline">Voltar</span>
                 </button>
             </a>
+            @can('relatorio_sistema_auditoria')
+            <a href="{{ route('relatorio.sistema.auditoria.index', ['auditable_type' => get_class($cliente), 'auditable_id' => $cliente->id]) }}" class="btn btn-sm bg-lightblue">
+                <i class="fas fa-history"></i>
+                Auditoria
+            </a>
+            @endcan
             <div class="btn-group btn-group-sm">
                 <a  title="Detalhes" wire:click.prevent="tabChange('detalhes')"
                 class="btn btn-left

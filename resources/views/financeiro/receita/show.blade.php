@@ -14,11 +14,19 @@
         <div class="card">
             <div class="card-header receita">
                 <a href="{{ url()->previous() }}">
-                    <button type="button"  class="btn btn-sm btn-default">
+                    <button type="button" title="Voltar" class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
+                        <span class="d-none d-sm-inline">Voltar</span>
                     </button>
                 </a>
+                @can('relatorio_sistema_auditoria')
+                <a href="{{ route('relatorio.sistema.auditoria.index', ['auditable_type' => get_class($receita), 'auditable_id' => $receita->id]) }}">
+                    <button type="button" title="Ver Auditoria" class="btn btn-sm bg-lightblue">
+                        <i class="fas fa-history"></i>
+                        <span class="d-none d-sm-inline">Auditoria</span>
+                    </button>
+                </a>
+                @endcan
                 @can('financeiro_receita_edit')
                 <a href="{{ route('financeiro.receita.edit', $receita) }}">
                     <button type="button" title="Editar" class="btn btn-sm btn-info">
@@ -127,7 +135,7 @@
 <link href="{{ url('') }}/vendor/select2/dist/css/select2-bootstrap4.min.css" rel="stylesheet" />
 <style>
     .receita {
-        border-top: 3px solid #12cd37;        
+        border-top: 3px solid #12cd37;
     }
 </style>
 @stop

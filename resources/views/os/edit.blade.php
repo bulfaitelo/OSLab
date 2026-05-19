@@ -7,10 +7,10 @@
 @stop
 
 @section('content')
-<div class="card card-primary card-outline">
+<div class="card card-oslab card-outline">
     <div class="card-header border-0 pb-0">
         <a href="{{ url()->previous() }}">
-            <button type="button" class="btn btn-sm btn-default">
+            <button type="button" title="Voltar" class="btn btn-sm btn-default">
                 <i class="fa-solid fa-chevron-left"></i>
                 <span class="d-none d-sm-inline">Voltar</span>
             </button>
@@ -69,29 +69,32 @@
                 </a>
             </div>
         @endcan
-        @if ($os->modelo_id)
-        <div class="btn-group btn-group-sm  float-right ">
-            <a
-                class="help_popover btn bg-lightblue btn-sm d-none d-sm-inline"
-                onclick="copyToClipboard('{{ $os->modelo->wiki->fabricante->name }} {{ $os->modelo->wiki->name }} {{ $os->modelo->name }}')"
-                target="#"
-                data-container="body"
-                data-toggle="popover"
-                data-placement="right"
-                data-content="Clique e copie para área de transferência"
-                data-original-title=""
-            >
-                <span class="d-none d-sm-inline"><b>[ {{ $os->modelo->wiki->fabricante->name }} ]
-                        {{ $os->modelo->wiki->name }}</b></span>
-            </a>
-            @can('wiki_show')
-                <a target="_blank" href="{{route('wiki.show', $os->modelo->wiki->id)}}" class="btn bg-primary btn-sm">
-                    <i class="fa-solid fa-book"></i>
-                    <span class="d-none d-sm-inline">Wiki</span>
+        <div class="float-right">
+            @livewire('os.copy-to-whatsapp-button', ['os' => $os])
+            @if ($os->modelo_id)
+            <div class="btn-group btn-group-sm">
+                <a
+                    class="help_popover btn bg-lightblue btn-sm d-none d-sm-inline"
+                    onclick="copyToClipboard('{{ $os->modelo->wiki->fabricante->name }} {{ $os->modelo->wiki->name }} {{ $os->modelo->name }}')"
+                    target="#"
+                    data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-content="Clique e copie para área de transferência"
+                    data-original-title=""
+                >
+                    <span class="d-none d-sm-inline"><b>[ {{ $os->modelo->wiki->fabricante->name }} ]
+                            {{ $os->modelo->wiki->name }}</b></span>
                 </a>
-            @endcan
+                @can('wiki_show')
+                    <a target="_blank" href="{{route('wiki.show', $os->modelo->wiki->id)}}" class="btn bg-primary btn-sm">
+                        <i class="fa-solid fa-book"></i>
+                        <span class="d-none d-sm-inline">Wiki</span>
+                    </a>
+                @endcan
+            </div>
+            @endif
         </div>
-        @endif
     </div>
     <div class="card-body pt-2">
         <ul class="nav nav-tabs" id="os-tabs" role="tablist">

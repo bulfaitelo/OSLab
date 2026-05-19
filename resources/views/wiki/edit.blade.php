@@ -18,9 +18,9 @@
         <div class="card">
             <div class="card-header">
                 <a href="{{ url()->previous() }}">
-                    <button type="button"  class="btn btn-sm btn-default">
-                        <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
+                    <button type="button\" title=\"Voltar\" class=\"btn btn-sm btn-default\">
+                        <i class=\"fa-solid fa-chevron-left\"></i>
+                        <span class=\"d-none d-sm-inline\">Voltar</span>
                     </button>
               </a>
             </div>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="fabricante_id">Fabricante <span class="required-span" title="Este campo é obrigatório">*</span></label>
                         <div class="input-group mb-3">
-                            {!! html()->select('fabricante_id', \App\Models\Configuracao\Wiki\Fabricante::orderBy('name')->pluck('name', 'id'),$wiki->fabricante_id)->class('form-control')->placeholder('Selecione')->required() !!}
+                            {!! html()->select('fabricante_id', \App\Models\Configuracao\Wiki\Fabricante::orderBy('name')->pluck('name', 'id'),$wiki->fabricante_id)->class('form-control')->id('fabricante_id')->placeholder('Selecione')->required() !!}
                             @can('config_wiki_fabricante_create')
                                 <span class="input-group-append">
                                     <a href="{{ route('configuracao.wiki.fabricante.create') }}" target="_blank" >
@@ -50,7 +50,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="name">Nome do Dispositivo</label>
-                        {!! html()->text('name', $wiki->name)->class('form-control')->placeholder('Ex. Galaxy A52, Dell Inspiron 5548. ')->required() !!}
+                        {!! html()->text('name', $wiki->name)->class('form-control')->id('name')->placeholder('Ex. Galaxy A52, Dell Inspiron 5548. ')->required() !!}
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -77,7 +77,54 @@
 @stop
 
 @section('css')
+<link href="{{ url('') }}/vendor/tom-select/tom-select.bootstrap4.min.css" rel="stylesheet" />
+<style>
+    .ts-wrapper .option .title {
+        display: block;
+    }
+    .ts-wrapper .option .url {
+        font-size: 15px;
+        display: block;
+        color: #7c7c7c;
+    }
+    .ts-wrapper::after {
+        display: none;
+    }
+    .ts-control::after {
+        display: none!important;
+    }
+</style>
 @stop
 
 @section('js')
+<script src="{{ url('') }}/vendor/tom-select/tom-select.complete.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // tom-select Fabricante
+        var tomSelectFabricante = new TomSelect("#fabricante_id",{
+            valueField: 'value',
+            labelField: 'text',
+            searchField: 'text',
+            selectOnTab: true,
+            placeholder: 'Selecione o Fabricante',
+            create: false,
+            maxOptions: null,
+            onChange: function(value) {
+                if (value) {
+                    $('#name').focus();
+                }
+            },
+            render: {
+                option: function(data, escape) {
+                    return '<div>' +
+                        '<span class="title">' + escape(data.text) + '</span>' +
+                    '</div>';
+                },
+                item: function(data, escape) {
+                    return '<div>' + escape(data.text) + '</div>';
+                }
+            }
+        });
+    });
+</script>
 @stop

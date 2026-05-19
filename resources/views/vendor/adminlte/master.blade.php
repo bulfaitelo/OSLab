@@ -138,6 +138,103 @@
         @endswitch
     @endif
 
+    <script>
+        (function () {
+            var buscarRoute = "{{ route('buscar') }}";
+            var $sidebarSearch = $("[data-widget='sidebar-search']");
+            var $searchInput = $sidebarSearch.find('.form-control');
+            var $searchButton = $sidebarSearch.find('.btn');
+            var $searchIcon = $sidebarSearch.find('.btn i');
+            var notFoundText = $sidebarSearch.data('not-found-text') || 'Buscar em todo o Sistema?';
+
+            function $searchResults() {
+                return $('.sidebar-search-results');
+            }
+
+            function getSearchResults() {
+                return $searchResults().find('.list-group-item').filter(function () {
+                    var href = $(this).attr('href');
+                    return href && href !== '#';
+                });
+            }
+
+            function getNotFoundItem() {
+                return $searchResults().find('.list-group-item[href="#"]').filter(function () {
+                    return $.trim($(this).text()) === notFoundText;
+                });
+            }
+
+            function redirectToBuscar() {
+                var value = $.trim($searchInput.val());
+
+                if (!value) {
+                    return;
+                }
+
+                window.location.href = buscarRoute + '?busca=' + encodeURIComponent(value);
+            }
+
+            function updateSidebarSearchAppearance() {
+                var $notFoundItem = getNotFoundItem();
+
+                if ($notFoundItem.length) {
+                    $notFoundItem.html('<div class="search-title">' + notFoundText + '</div>');
+                    $searchIcon.removeClass('fa-times').addClass('fa-search');
+                } else {
+                    $searchIcon.removeClass('fa-search').addClass('fa-times');
+                }
+            }
+
+            function scheduleUpdate() {
+                setTimeout(updateSidebarSearchAppearance, 200);
+            }
+
+            $searchInput.on('keyup', function () {
+                scheduleUpdate();
+            });
+
+            $searchInput.on('keydown', function (event) {
+                if (event.keyCode !== 13) {
+                    return;
+                }
+
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                scheduleUpdate();
+                setTimeout(function () {
+                    if (getSearchResults().length === 0) {
+                        redirectToBuscar();
+                    }
+                }, 220);
+            });
+
+            $searchButton.on('click', function (event) {
+                var value = $.trim($searchInput.val());
+
+                if (!value) {
+                    return;
+                }
+
+                if (getSearchResults().length === 0) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    redirectToBuscar();
+                }
+            });
+
+            $(document).on('click', '.sidebar-search-results .list-group-item[href="#"]', function (event) {
+                if ($.trim($(this).text()) === notFoundText) {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                    redirectToBuscar();
+                }
+            });
+
+            $(window).on('load', scheduleUpdate);
+        })();
+    </script>
+
     {{-- Extra Configured Plugins Scripts --}}
     @include('adminlte::plugins', ['type' => 'js'])
 

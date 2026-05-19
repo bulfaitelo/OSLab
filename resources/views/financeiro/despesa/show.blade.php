@@ -14,11 +14,19 @@
         <div class="card">
             <div class="card-header despesa">
                 <a href="{{ url()->previous() }}">
-                    <button type="button"  class="btn btn-sm btn-default">
+                    <button type="button" title="Voltar" class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
+                        <span class="d-none d-sm-inline">Voltar</span>
                     </button>
                 </a>
+                @can('relatorio_sistema_auditoria')
+                <a href="{{ route('relatorio.sistema.auditoria.index', ['auditable_type' => get_class($despesa), 'auditable_id' => $despesa->id]) }}">
+                    <button type="button" title="Ver Auditoria" class="btn btn-sm bg-lightblue">
+                        <i class="fas fa-history"></i>
+                        <span class="d-none d-sm-inline">Auditoria</span>
+                    </button>
+                </a>
+                @endcan
                 @can('financeiro_despesa_edit')
                 <a href="{{ route('financeiro.despesa.edit', $despesa) }}">
                     <button type="button" title="Editar" class="btn btn-sm btn-info">

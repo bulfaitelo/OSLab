@@ -1,7 +1,7 @@
 <li>
 
     <div class="form-inline my-2">
-        <div class="input-group" data-widget="sidebar-search" data-arrow-sign="&raquo;">
+        <div class="input-group" data-widget="sidebar-search" data-arrow-sign="&raquo;" data-not-found-text="Buscar em todo o Sistema?">
 
             {{-- Search input --}}
             <input class="form-control form-control-sidebar" type="search"

@@ -28,6 +28,7 @@ use App\Models\Venda\Venda;
 use App\Models\Wiki\Wiki;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
+use OwenIt\Auditing\Models\Audit;
 use Spatie\Permission\Models\Permission;
 // This import is also not required, and you could replace `BreadcrumbTrail $trail`
 //  with `$trail`. This is nice for IDE type checking and completion.
@@ -735,18 +736,40 @@ Breadcrumbs::for('configuracao.notificacao.edit', function (BreadcrumbTrail $tra
 Breadcrumbs::for('relatorio.financeiro.balancete.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Relatórios');
+    $trail->push('Financeiro');
     $trail->push('Balancete', route('relatorio.financeiro.balancete.index'));
 });
 // Financeiro Despesa
 Breadcrumbs::for('relatorio.financeiro.despesa.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Relatórios');
+    $trail->push('Financeiro');
     $trail->push('Despesa', route('relatorio.financeiro.despesa.index'));
 });
 // Financeiro Contas em Aberto
 Breadcrumbs::for('relatorio.financeiro.conta_aberta.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Relatórios');
+    $trail->push('Financeiro');
     $trail->push('Contas em Aberto', route('relatorio.financeiro.conta_aberta.index'));
 });
+Breadcrumbs::for('relatorio.sistema.auditoria.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Relatórios');
+    $trail->push('Sistema');
+    $trail->push('Auditoria', route('relatorio.sistema.auditoria.index'));
+});
+
+Breadcrumbs::for('relatorio.sistema.auditoria.show', function (BreadcrumbTrail $trail, Audit $item) {
+    $trail->parent('home');
+    $trail->push('Relatórios');
+    $trail->push('Sistema');
+    $trail->push(Str::limit($item->id), route('relatorio.sistema.auditoria.show', $item));
+});
+
+// // Sistema > [Visualização de Sistema]
+// Breadcrumbs::for('configuracao.sistema.show', function (BreadcrumbTrail $trail, SistemaConfig $item) {
+//     $trail->parent('configuracao.sistema.index');
+//     $trail->push(Str::limit($item->name, 20), route('configuracao.sistema.show', $item));
+// });
 // Relatório

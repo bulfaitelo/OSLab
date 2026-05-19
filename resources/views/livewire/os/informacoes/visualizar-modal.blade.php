@@ -31,6 +31,10 @@
                 </div>
                 <div class="col-md-12"  @if ($item->tipo_informacao == 'padrao') style="display: none" @endif >
                     <div class="form-group">
+                        <label for="usuario_senha">Usuário</label>
+                        <input type="text" value="{{$item->usuario}}" disabled id="usuario_senha" class="form-control" placeholder="Usuário">
+                    </div>
+                    <div class="form-group">
                         <label for="senha_texto">Senha</label>
                         @livewire('os.informacoes.senha-input', ['senha' => $item->informacao, 'senha_id' => $item->id], key($item->id))
                     </div>

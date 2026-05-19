@@ -303,16 +303,16 @@ return [
             'can' => 'config_perfil',
             'topnav_user' => true,
         ],
-        // Navbar items:
-        [
-            'type' => 'navbar-search',
-            'text' => 'Buscar',
-            'topnav_right' => true,
-            'url' => 'buscar',
-            'method' => 'GET',
-            'input_name' => 'busca',
+        // // Navbar items:
+        // [
+        //     'type' => 'navbar-search',
+        //     'text' => 'Buscar',
+        //     'topnav_right' => true,
+        //     'url' => 'buscar',
+        //     'method' => 'GET',
+        //     'input_name' => 'busca',
 
-        ],
+        // ],
         // [
         //     'text' => 'asd',
         //     'icon' => 'fa-regular fa-star',
@@ -457,7 +457,7 @@ return [
             'icon' => 'fa-regular fa-file-lines',
             'can' => [
                 'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta',
-                'relatorio_sistema_log',
+                'relatorio_sistema_log', 'relatorio_sistema_auditoria',
             ],
             'submenu' => [
                 [
@@ -495,6 +495,7 @@ return [
                     'icon' => 'fa-solid fa-sitemap',
                     'can' => [
                         'relatorio_sistema_log',
+                        'relatorio_sistema_auditoria',
                     ],
                     'submenu' => [
                         [
@@ -503,6 +504,13 @@ return [
                             'url' => 'relatorio/log-viewer',
                             'target' => '_blank',
                             'can' => 'relatorio_sistema_log',
+                        ],
+                        [
+                            'text' => 'Auditoria',
+                            'icon' => 'fas fa-history',
+                            'route' => 'relatorio.sistema.auditoria.index',
+                            'active' => ['relatorio/sistema/auditoria*'],
+                            'can' => 'relatorio_sistema_auditoria',
                         ],
                     ],
                 ],
@@ -519,6 +527,7 @@ return [
                 'config_wiki_fabricante', 'config_wiki_modelo',
                 'config_sistema',
                 'config_emitente',
+                'config_pagina_favorita',
 
             ],
             'submenu' => [
@@ -644,6 +653,13 @@ return [
                     'route' => 'configuracao.emitente.index',
                     'active' => ['configuracoes/emitente*'],
                     'can' => 'config_emitente',
+                ],
+                [
+                    'text' => 'Páginas Favoritas',
+                    'icon' => 'fas fa-star',
+                    'route' => 'configuracao.pagina-favorita.index',
+                    'active' => ['configuracoes/pagina-favorita*'],
+                    'can' => 'config_pagina_favorita',
                 ],
                 [
                     'text' => 'Backup',

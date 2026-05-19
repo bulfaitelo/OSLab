@@ -176,6 +176,9 @@ return [
         // Image Intervention.io
         // Intervention\Image\ImageServiceProvider::class,
 
+        // Laravel Auditing
+        OwenIt\Auditing\AuditingServiceProvider::class,
+
     ])->toArray(),
 
     /*

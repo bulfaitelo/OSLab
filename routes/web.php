@@ -7,7 +7,7 @@ use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Garantia\GarantiaController;
-use App\Http\Controllers\Configuracao\Notificacao\NotificacaoController;
+use App\Http\Controllers\Configuracao\PaginaFavoritaController;
 use App\Http\Controllers\Configuracao\Parametro\CategoriaController;
 use App\Http\Controllers\Configuracao\Parametro\StatusController;
 use App\Http\Controllers\Configuracao\Sistema\SistemaConfigController;
@@ -31,6 +31,7 @@ use App\Http\Controllers\Produto\ProdutoController;
 use App\Http\Controllers\Relatorio\Financeiro\BalanceteController;
 use App\Http\Controllers\Relatorio\Financeiro\ContaAbertaController;
 use App\Http\Controllers\Relatorio\Financeiro\ReceitaDespesaController;
+use App\Http\Controllers\Relatorio\Sistema\AuditoriaController;
 use App\Http\Controllers\Servico\ServicoController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Venda\VendaController;
@@ -135,6 +136,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/conta_aberta', [ContaAbertaController::class, 'index'])->name('conta_aberta.index');
         });
 
+        // Sistema
+        Route::name('sistema.')->prefix('sistema')->group(function () {
+            Route::get('/auditoria', [AuditoriaController::class, 'index'])->name('auditoria.index');
+            Route::get('/auditoria/{auditoria}', [AuditoriaController::class, 'show'])->name('auditoria.show');
+        });
+
         // // OS
         // Route::name('os.')->prefix('os')->group( function () {
 
@@ -159,6 +166,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::name('parametro.')->prefix('parametro')->group(function () {
             Route::resource('/categoria', CategoriaController::class)
                 ->parameters(['categoria' => 'categoria']);
+            Route::get('/categoria/{categoria}/dados', [CategoriaController::class, 'getDadosCategoria'])
+                ->name('categoria.dados');
             Route::resource('/status', StatusController::class);
         });
         // Configurações de usuário
@@ -193,6 +202,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('backup', [BackupController::class, 'index'])->name('backup.index');
         Route::post('backup/download', [BackupController::class, 'download'])->name('backup.download');
         Route::post('backup/destroy', [BackupController::class, 'destroy'])->name('backup.delete');
+        // Páginas Favoritas
+        Route::resource('pagina-favorita', PaginaFavoritaController::class)
+            ->parameters(['pagina-favorita' => 'pagina_favorita']);
+        Route::post('pagina-favorita/update-order', [PaginaFavoritaController::class, 'updateOrder'])->name('pagina-favorita.update-order');
     });
 
     Route::get('favorite/{routeName}', [FavoriteController::class, 'favoriteToggle'])->name('favorite.toggle');

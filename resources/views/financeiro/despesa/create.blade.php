@@ -14,9 +14,9 @@
         <div class="card">
             <div class="card-header despesa">
                 <a href="{{ url()->previous() }}">
-                    <button type="button"  class="btn btn-sm btn-default">
+                    <button type="button" title="Voltar" class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
-                        Voltar
+                        <span class="d-none d-sm-inline">Voltar</span>
                     </button>
                 </a>
                 @isset($os->id)

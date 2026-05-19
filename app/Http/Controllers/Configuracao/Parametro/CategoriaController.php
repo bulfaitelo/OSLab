@@ -14,7 +14,7 @@ class CategoriaController extends Controller
         // ACL DE PERMISSÕES
         $this->middleware('permission:config_categoria', ['only' => 'index']);
         $this->middleware('permission:config_categoria_create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:config_categoria_show', ['only' => 'show']);
+        $this->middleware('permission:config_categoria_show', ['only' => ['show', 'getDadosCategoria']]);
         $this->middleware('permission:config_categoria_edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:config_categoria_destroy', ['only' => 'destroy']);
     }
@@ -47,7 +47,11 @@ class CategoriaController extends Controller
         try {
             $categoria = new Categoria;
             $categoria->name = $request->name;
+            $categoria->descricao_categoria = $request->descricao_categoria;
             $categoria->descricao = $request->descricao;
+            $categoria->defeito = $request->defeito;
+            $categoria->observacao = $request->observacao;
+            $categoria->laudo = $request->laudo;
             $categoria->user_id = Auth::id();
             $categoria->garantia_id = $request->garantia_id;
             $categoria->centro_custo_id = $request->centro_custo_id;
@@ -85,7 +89,11 @@ class CategoriaController extends Controller
     {
         try {
             $categoria->name = $request->name;
+            $categoria->descricao_categoria = $request->descricao_categoria;
             $categoria->descricao = $request->descricao;
+            $categoria->defeito = $request->defeito;
+            $categoria->observacao = $request->observacao;
+            $categoria->laudo = $request->laudo;
             $categoria->user_id = Auth::id();
             $categoria->garantia_id = $request->garantia_id;
             $categoria->centro_custo_id = $request->centro_custo_id;
@@ -112,6 +120,23 @@ class CategoriaController extends Controller
                 ->with('success', 'Categoria excluida com sucesso.');
         } catch (\Throwable $th) {
             throw $th;
+        }
+    }
+
+    /**
+     * Retorna os dados da categoria em formato JSON.
+     */
+    public function getDadosCategoria(Categoria $categoria)
+    {
+        try {
+            return response()->json([
+                'descricao' => $categoria->descricao,
+                'defeito' => $categoria->defeito,
+                'observacao' => $categoria->observacao,
+                'laudo' => $categoria->laudo,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Dados não encontrados'], 404);
         }
     }
 }
