@@ -446,13 +446,6 @@ return [
             'can' => 'wiki',
         ],
         [
-            'text' => 'Notificações',
-            'icon' => 'fa-solid fa-bell',
-            'route' => 'configuracao.notificacao.index',
-            'active' => ['configuracoes/notificacao*'],
-            'can' => 'config_notificacao',
-        ],
-        [
             'text' => 'Relatórios',
             'icon' => 'fa-regular fa-file-lines',
             'can' => [

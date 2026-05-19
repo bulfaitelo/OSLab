@@ -160,7 +160,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/roles/assign/{role}', [RoleController::class, 'assign_update'])->name('roles.assign.update');
         Route::get('/users/permissions/{user}', [UserController::class, 'permissions_edit'])->name('users.permissions_edit');
         Route::put('/users/permissions/{user}', [UserController::class, 'permissions_update'])->name('users.permissions.update');
-        Route::resource('/notificacao', NotificacaoController::class);
 
         // Parâmetros
         Route::name('parametro.')->prefix('parametro')->group(function () {
