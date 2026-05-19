@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Serviços')
+@section('title', 'Notificações')
 
 @section('content_header')
-    <h1><i class="fas fa-hand-holding-usd "></i> Serviços</h1>
+    <h1><i class="fa-solid fa-bell"></i> Notificações</h1>
 @stop
 
 @section('content')
@@ -11,16 +11,16 @@
     <div class="card">
         <div class="card-header">
                 <a href="{{ url()->previous() }}">
-                    <button type="button" title="Voltar" class="btn btn-sm btn-default">
+                    <button type="button"  class="btn btn-sm btn-default">
                         <i class="fa-solid fa-chevron-left"></i>
-                        <span class="d-none d-sm-inline">Voltar</span>
+                        Voltar
                     </button>
                 </a>
-                @can('servico_create')
-                <a href="{{ route('servico.create') }}">
+                @can('config_notificacao_create')
+                <a href="{{ route('configuracao.notificacao.create') }}">
                     <button type="button"  class="btn btn-sm btn-oslab">
                         <i class="fa-solid fa-plus"></i>
-                        Adicionar Serviço
+                        Adicionar Notificação
                     </button>
                 </a>
                 @endcan
@@ -37,21 +37,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($servicos as $item)
+                    @foreach ($notificacao as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->name}}</td>
-                        <td>{{ $item->valor_servico}}</td>
+                        <td>{{ $item->valor_config_notificacao}}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                @can('servico_edit')
-                                    <a href="{{ route('servico.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
+                                @can('config_notificacao_edit')
+                                    <a href="{{ route('configuracao.notificacao.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>
                                 @endcan
-                                @can('servico_show')
-                                    <a href="{{ route('servico.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
+                                @can('config_notificacao_show')
+                                    <a href="{{ route('configuracao.notificacao.show', $item->id) }}" title="Visualizar" class="btn btn-left btn-default"><i class="fas fa-eye"></i></a>
                                 @endcan
-                                @can('servico_destroy')
-                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('servico.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
+                                @can('config_notificacao_destroy')
+                                    <button type="button" class="btn btn-block btn-danger" data-toggle="modal" data-name="{{$item->name}}" data-url="{{route('configuracao.notificacao.destroy', $item->id)}}" data-target="#modal-excluir"><i class="fas fa-trash"></i></button>
                                 @endcan
                             </div>
                         </td>
@@ -62,12 +62,12 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">
-            {{-- {{$Serviços->appends(['busca' => $busca])->links() }} --}}
-            {{ $servicos->links() }}
+            {{-- {{$Notificações->appends(['busca' => $busca])->links() }} --}}
+            {{ $notificacao->links() }}
         </div>
     </div>
     {{-- Modal Excluir --}}
-    @can('servico_destroy')
+    @can('produto_destroy')
         @include('adminlte::partials.modal.modal-excluir')
     @endcan
     {{-- // Modal Excluir --}}

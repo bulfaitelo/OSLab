@@ -1,0 +1,34 @@
+#chat{
+  background-image: url('./whatsapp-background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 300px;
+  height: auto;
+}
+
+#chat .message{
+  background-color: #E4FFCB;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.btn-whatsapp{
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: .2s;
+  text-decoration: none;
+}
+
+.btn-whatsapp:hover {
+  background-color: #2d8532;
+  color: #fff;
+}
+
+.bloco-dinamico {
+    display: none;
+}

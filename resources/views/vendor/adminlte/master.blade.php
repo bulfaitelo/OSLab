@@ -134,6 +134,7 @@
                 <script src="{{ asset('vendor/jquery-mask/jquery.mask.min.js') }}"></script>
                 <script src="{{ asset('vendor/chartjs/chart.min.js') }}"></script>
                 <script src="{{ asset('vendor/oslab/globalFunctions.js') }}"></script>
+                <script src="{{ asset('vendor/oslab/components.js') }}"></script>
         @endswitch
     @endif
 
