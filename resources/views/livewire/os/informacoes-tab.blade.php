@@ -138,13 +138,13 @@
                         <div class="col-md-12"  @if ($tipo_senha == 'padrao') style="display: none" @endif id="texto">
                             <div class="form-group">
                                 <label for="usuario_senha">Usuário</label>
-                                <input type="text" wire:model="usuario_senha" id="usuario_senha" class="form-control" placeholder="Usuário ">
+                                <input type="text" wire:model="usuario_senha" id="usuario_senha" class="form-control" placeholder="Usuário" autocomplete="off">
                                 @error('usuario_senha') <span class="error">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
                                 <label for="senha_texto">Senha</label>
                                 <div class="input-group mb-3">
-                                    <input id="senha_texto" type="password" wire:model="senha_texto" class="form-control " placeholder="Senha">
+                                    <input id="senha_texto" type="password" wire:model="senha_texto" class="form-control " placeholder="Senha" autocomplete="new-password">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <span id="senha_texto_icone" class="fas fa-lock"></span>

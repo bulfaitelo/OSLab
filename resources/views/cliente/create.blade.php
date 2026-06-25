@@ -48,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                       <label for="email">Email</label>
-                      {!! html()->email('email')->class('form-control')->placeholder('Email') !!}
+                      {!! html()->email('email')->class('form-control')->placeholder('Email')->autocomplete('off') !!}
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -68,13 +68,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="password">Senha </label>
-                        {!! html()->password('password')->class('form-control')->placeholder('Senha')  !!}
+                        {!! html()->password('password')->class('form-control')->placeholder('Senha')->autocomplete('new-password') !!}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="password_confirmation">Repita a Senha</label>
-                        {!! html()->password('password_confirmation')->class('form-control')->placeholder('Repita a Senha')  !!}
+                        {!! html()->password('password_confirmation')->class('form-control')->placeholder('Repita a Senha')->autocomplete('new-password') !!}
                     </div>
                 </div>
             </div>
