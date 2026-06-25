@@ -7,6 +7,7 @@ use App\Http\Controllers\Configuracao\Emitente\EmitenteController;
 use App\Http\Controllers\Configuracao\Financeiro\CentroCustoController;
 use App\Http\Controllers\Configuracao\Financeiro\FormaPagamentoController;
 use App\Http\Controllers\Configuracao\Garantia\GarantiaController;
+use App\Http\Controllers\Configuracao\Notificacao\NotificacaoController;
 use App\Http\Controllers\Configuracao\PaginaFavoritaController;
 use App\Http\Controllers\Configuracao\Parametro\CategoriaController;
 use App\Http\Controllers\Configuracao\Parametro\StatusController;
