@@ -26,10 +26,10 @@
                         <i class="fas fa-sticky-note text-oslab" data-toggle="tooltip" title="Possui Anotação"></i>
                     @endif
                     @if($item->informacoes->contains('tipo', 2))
-                        <i class="fas fa-lock text-success" data-toggle="tooltip" title="Possui Senha cadastrada"></i>
+                        <i class="fas fa-lock text-success" data-toggle="tooltip" title="Possui Senha Cadastrada"></i>
                     @endif
                     @if($item->informacoes->contains('tipo', 3))
-                        <i class="fas fa-paperclip text-info" data-toggle="tooltip" title="Possui Arquivo anexo"></i>
+                        <i class="fas fa-paperclip text-info" data-toggle="tooltip" title="Possui Arquivo Anexo"></i>
                     @endif
                 </div>
             </td>
