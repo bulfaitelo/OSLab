@@ -33,6 +33,12 @@ class DefaultsConfigPermissionsRelatorio extends Seeder
                 'group_id' => 2,
             ],
             [
+                'description' => 'Acesso ao Relatório Financeiro de Declaração MEI',
+                'name' => 'relatorio_financeiro_declaracao_mei',
+                'guard_name' => 'web',
+                'group_id' => 2,
+            ],
+            [
                 'description' => 'Acesso ao relatório de Logs do sistema',
                 'name' => 'relatorio_sistema_log',
                 'guard_name' => 'web',

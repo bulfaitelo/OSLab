@@ -28,6 +28,7 @@ use App\Http\Controllers\Os\OsPublicController;
 use App\Http\Controllers\OsLab\FavoriteController;
 use App\Http\Controllers\Produto\MovimentacaoController;
 use App\Http\Controllers\Produto\ProdutoController;
+use App\Http\Controllers\Reports\MeiPdfController;
 use App\Http\Controllers\Relatorio\Financeiro\BalanceteController;
 use App\Http\Controllers\Relatorio\Financeiro\ContaAbertaController;
 use App\Http\Controllers\Relatorio\Financeiro\ReceitaDespesaController;
@@ -134,6 +135,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/balancete', [BalanceteController::class, 'index'])->name('balancete.index');
             Route::get('/despesa', [ReceitaDespesaController::class, 'index'])->name('despesa.index');
             Route::get('/conta_aberta', [ContaAbertaController::class, 'index'])->name('conta_aberta.index');
+            Route::get('/declaracao_mei', [MeiPdfController::class, 'index'])
+                ->name('declaracao_mei.index');
+            Route::get('/declaracao_mei/pdf', MeiPdfController::class)
+                ->name('declaracao_mei.pdf');
         });
 
         // Sistema

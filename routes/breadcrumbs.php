@@ -725,6 +725,12 @@ Breadcrumbs::for('relatorio.financeiro.conta_aberta.index', function (Breadcrumb
     $trail->push('Financeiro');
     $trail->push('Contas em Aberto', route('relatorio.financeiro.conta_aberta.index'));
 });
+Breadcrumbs::for('relatorio.financeiro.declaracao_mei.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Relatórios');
+    $trail->push('Financeiro');
+    $trail->push('Declaração MEI', route('relatorio.financeiro.declaracao_mei.index'));
+});
 Breadcrumbs::for('relatorio.sistema.auditoria.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Relatórios');

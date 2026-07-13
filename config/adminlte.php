@@ -450,6 +450,7 @@ return [
             'icon' => 'fa-regular fa-file-lines',
             'can' => [
                 'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta',
+                'relatorio_financeiro_declaracao_mei',
                 'relatorio_sistema_log', 'relatorio_sistema_auditoria',
             ],
             'submenu' => [
@@ -458,6 +459,7 @@ return [
                     'icon' => 'fa-solid fa-chart-line',
                     'can' => [
                         'relatorio_financeiro_balancete', 'relatorio_financeiro_receita_despesa', 'relatorio_financeiro_conta_aberta',
+                        'relatorio_financeiro_declaracao_mei',
                     ],
                     'submenu' => [
                         [
@@ -480,6 +482,13 @@ return [
                             'route' => 'relatorio.financeiro.conta_aberta.index',
                             'active' => ['relatorio/financeiro/conta_aberta*'],
                             'can' => 'relatorio_financeiro_conta_aberta',
+                        ],
+                        [
+                            'text' => 'Declaração MEI',
+                            'icon' => 'fa-regular fa-file-lines',
+                            'route' => 'relatorio.financeiro.declaracao_mei.index',
+                            'active' => ['relatorio/financeiro/declaracao_mei*'],
+                            'can' => 'relatorio_financeiro_declaracao_mei',
                         ],
                     ],
                 ],
