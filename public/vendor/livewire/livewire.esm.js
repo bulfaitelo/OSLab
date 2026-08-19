@@ -8082,15 +8082,17 @@ function diff(left, right, diffs = {}, path = "") {
   let leftKeys = Object.keys(left);
   let rightKeys = Object.keys(right);
   if (isObject(left) && leftKeys.length === rightKeys.length && leftKeys.some((key, i) => key !== rightKeys[i])) {
-    diffs[path] = right;
-    return diffs;
+    if (path !== "") {
+      diffs[path] = right;
+      return diffs;
+    }
   }
   Object.entries(right).forEach(([key, value]) => {
     diffs = { ...diffs, ...diff(left[key], right[key], diffs, path === "" ? key : `${path}.${key}`) };
     leftKeys = leftKeys.filter((i) => i !== key);
   });
   leftKeys.forEach((key) => {
-    diffs[`${path}.${key}`] = "__rm__";
+    diffs[path === "" ? key : `${path}.${key}`] = "__rm__";
   });
   return diffs;
 }
@@ -8662,7 +8664,7 @@ var Commit = class {
         this.component.mergeNewSnapshot(snapshot, effects, updates);
         this.component.processEffects(this.component.effects);
       });
-      if (effects["returns"]) {
+      if (Object.prototype.hasOwnProperty.call(effects, "returns") && effects["returns"]) {
         let returns = effects["returns"];
         let returnHandlerStack = this.calls.map(({ handleReturn }) => handleReturn);
         returnHandlerStack.forEach((handleReturn, index) => {
@@ -8855,6 +8857,8 @@ async function sendRequest(pool) {
   }
   if (response.redirected) {
     window.location.href = response.url;
+    finishProfile({ content, failed: false });
+    return;
   }
   if (contentIsFromDump(content)) {
     let dump;
@@ -9150,11 +9154,14 @@ var Component = class {
   inscribeSnapshotAndEffectsOnElement() {
     let el = this.el;
     el.setAttribute("wire:snapshot", this.snapshotEncoded);
-    let effects = this.originalEffects.listeners ? { listeners: this.originalEffects.listeners } : {};
-    if (this.originalEffects.url) {
+    let effects = {};
+    if (Object.prototype.hasOwnProperty.call(this.originalEffects, "listeners") && this.originalEffects.listeners) {
+      effects.listeners = this.originalEffects.listeners;
+    }
+    if (Object.prototype.hasOwnProperty.call(this.originalEffects, "url") && this.originalEffects.url) {
       effects.url = this.originalEffects.url;
     }
-    if (this.originalEffects.scripts) {
+    if (Object.prototype.hasOwnProperty.call(this.originalEffects, "scripts") && this.originalEffects.scripts) {
       effects.scripts = this.originalEffects.scripts;
     }
     el.setAttribute("wire:effects", JSON.stringify(effects));
@@ -9677,6 +9684,12 @@ function extractDestinationFromLink(linkEl) {
 function createUrlObjectFromString(urlString) {
   return urlString !== null && new URL(urlString, document.baseURI);
 }
+function isSameOrigin(destination) {
+  return !!destination && destination.origin === window.location.origin;
+}
+function visitNatively(destination) {
+  window.location.href = destination.href;
+}
 function getUriStringFromUrlObject(urlObject) {
   return urlObject.pathname + urlObject.search + urlObject.hash;
 }
@@ -10175,7 +10188,7 @@ function navigate_default(Alpine24) {
     let preserveScroll = modifiers.includes("preserve-scroll");
     shouldPrefetchOnHover && whenThisLinkIsHoveredFor(el, 60, () => {
       let destination = extractDestinationFromLink(el);
-      if (!destination)
+      if (!isSameOrigin(destination))
         return;
       prefetchHtml(destination, (html, finalDestination) => {
         storeThePrefetchedHtmlForWhenALinkIsClicked(html, destination, finalDestination);
@@ -10185,7 +10198,7 @@ function navigate_default(Alpine24) {
       let destination = extractDestinationFromLink(el);
       if (!destination)
         return;
-      prefetchHtml(destination, (html, finalDestination) => {
+      isSameOrigin(destination) && prefetchHtml(destination, (html, finalDestination) => {
         storeThePrefetchedHtmlForWhenALinkIsClicked(html, destination, finalDestination);
       });
       whenItIsReleased(() => {
@@ -10201,8 +10214,12 @@ function navigate_default(Alpine24) {
     });
   });
   function navigateTo(destination, { preserveScroll = false, shouldPushToHistoryState = true }) {
+    if (!isSameOrigin(destination))
+      return visitNatively(destination);
     showProgressBar && showAndStartProgressBar();
     fetchHtmlOrUsePrefetchedHtml(destination, (html, finalDestination) => {
+      if (!isSameOrigin(finalDestination))
+        return visitNatively(finalDestination);
       let swapCallbacks = [];
       fireEventForOtherLibrariesToHookInto("alpine:navigating", {
         onSwap: (callback) => swapCallbacks.push(callback)
@@ -10528,10 +10545,12 @@ function fromQueryString(search, queryKey) {
     return {};
   let insertDotNotatedValueIntoData = (key, value, data2) => {
     let [first2, second, ...rest] = key.split(".");
+    if (first2 === "__proto__" || first2 === "constructor" || first2 === "prototype")
+      return;
     if (!second)
       return data2[key] = value;
-    if (data2[first2] === void 0) {
-      data2[first2] = isNaN(second) ? {} : [];
+    if (!Object.prototype.hasOwnProperty.call(data2, first2)) {
+      data2[first2] = isNaN(second) ? /* @__PURE__ */ Object.create(null) : [];
     }
     insertDotNotatedValueIntoData([second, ...rest].join("."), value, data2[first2]);
   };
@@ -10640,7 +10659,11 @@ var import_alpinejs22 = __toESM(require_module_cjs());
 
 // js/features/supportListeners.js
 on("effect", ({ component, effects }) => {
-  registerListeners(component, effects.listeners || []);
+  let listeners2 = [];
+  if (Object.prototype.hasOwnProperty.call(effects, "listeners") && effects.listeners) {
+    listeners2 = effects.listeners;
+  }
+  registerListeners(component, listeners2);
 });
 function registerListeners(component, listeners2) {
   listeners2.forEach((name) => {
@@ -10687,7 +10710,10 @@ on("component.init", ({ component }) => {
   }
 });
 on("effect", ({ component, effects }) => {
-  let scripts = effects.scripts;
+  let scripts;
+  if (Object.prototype.hasOwnProperty.call(effects, "scripts")) {
+    scripts = effects.scripts;
+  }
   if (scripts) {
     Object.entries(scripts).forEach(([key, content]) => {
       onlyIfScriptHasntBeenRunAlreadyForThisComponent(component, key, () => {
@@ -10727,7 +10753,8 @@ async function onlyIfAssetsHaventBeenLoadedAlreadyOnThisPage(key, callback) {
 async function addAssetsToHeadTagOfPage(rawHtml) {
   let newDocument = new DOMParser().parseFromString(rawHtml, "text/html");
   let newHead = document.adoptNode(newDocument.head);
-  for (let child of newHead.children) {
+  let children = [...newHead.children];
+  for (let child of children) {
     try {
       await runAssetSynchronously(child);
     } catch (error2) {
@@ -10771,8 +10798,14 @@ import_alpinejs8.default.magic("js", (el) => {
   return component.$wire.js;
 });
 on("effect", ({ component, effects }) => {
-  let js = effects.js;
-  let xjs = effects.xjs;
+  let js;
+  let xjs;
+  if (Object.prototype.hasOwnProperty.call(effects, "js")) {
+    js = effects.js;
+  }
+  if (Object.prototype.hasOwnProperty.call(effects, "xjs")) {
+    xjs = effects.xjs;
+  }
   if (js) {
     Object.entries(js).forEach(([method, body]) => {
       overrideMethod(component, method, () => {
@@ -10886,7 +10919,10 @@ function isComponentRootEl(el) {
 
 // js/features/supportMorphDom.js
 on("effect", ({ component, effects }) => {
-  let html = effects.html;
+  let html;
+  if (Object.prototype.hasOwnProperty.call(effects, "html")) {
+    html = effects.html;
+  }
   if (!html)
     return;
   queueMicrotask(() => {
@@ -10901,7 +10937,11 @@ on("effect", ({ component, effects }) => {
   queueMicrotask(() => {
     queueMicrotask(() => {
       queueMicrotask(() => {
-        dispatchEvents(component, effects.dispatches || []);
+        let dispatches = [];
+        if (Object.prototype.hasOwnProperty.call(effects, "dispatches") && effects.dispatches) {
+          dispatches = effects.dispatches;
+        }
+        dispatchEvents(component, dispatches);
       });
     });
   });
@@ -11054,7 +11094,10 @@ function getDeepChildren(component, callback) {
 // js/features/supportFileDownloads.js
 on("commit", ({ succeed }) => {
   succeed(({ effects }) => {
-    let download = effects.download;
+    let download;
+    if (Object.prototype.hasOwnProperty.call(effects, "download")) {
+      download = effects.download;
+    }
     if (!download)
       return;
     let urlObject = window.webkitURL || window.URL;
@@ -11116,7 +11159,10 @@ on("commit.pooling", ({ commits }) => {
 // js/features/supportQueryString.js
 var import_alpinejs11 = __toESM(require_module_cjs());
 on("effect", ({ component, effects, cleanup }) => {
-  let queryString = effects["url"];
+  let queryString;
+  if (Object.prototype.hasOwnProperty.call(effects, "url")) {
+    queryString = effects["url"];
+  }
   if (!queryString)
     return;
   Object.entries(queryString).forEach(([key, value]) => {
@@ -11172,7 +11218,10 @@ on("request", ({ options }) => {
   }
 });
 on("effect", ({ component, effects }) => {
-  let listeners2 = effects.listeners || [];
+  let listeners2 = [];
+  if (Object.prototype.hasOwnProperty.call(effects, "listeners") && effects.listeners) {
+    listeners2 = effects.listeners;
+  }
   listeners2.forEach((event) => {
     if (event.startsWith("echo")) {
       if (typeof window.Echo === "undefined") {
@@ -11253,7 +11302,10 @@ function forwardEvent(name, original) {
   }
 }
 function shouldRedirectUsingNavigateOr(effects, url, or) {
-  let forceNavigate = effects.redirectUsingNavigate;
+  let forceNavigate;
+  if (Object.prototype.hasOwnProperty.call(effects, "redirectUsingNavigate")) {
+    forceNavigate = effects.redirectUsingNavigate;
+  }
   if (forceNavigate) {
     Alpine.navigate(url);
   } else {
@@ -11270,7 +11322,7 @@ function shouldHideProgressBar() {
 
 // js/features/supportRedirects.js
 on("effect", ({ effects }) => {
-  if (!effects["redirect"])
+  if (!Object.prototype.hasOwnProperty.call(effects, "redirect") || !effects["redirect"])
     return;
   let url = effects["redirect"];
   shouldRedirectUsingNavigateOr(effects, url, () => {
@@ -11833,7 +11885,8 @@ directive("model", ({ el, directive: directive2, component, cleanup }) => {
 function getModifierTail(modifiers) {
   modifiers = modifiers.filter((i) => ![
     "lazy",
-    "defer"
+    "defer",
+    "blur"
   ].includes(i));
   if (modifiers.length === 0)
     return "";
