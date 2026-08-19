@@ -30,7 +30,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cliente_id">Cliente</label>
-                        {!! html()->select('cliente_id')->class('form-control cliente')->placeholder('Selecione')->required() !!}
+                        {!! html()->select('cliente_id', $cliente ? [$cliente->id => $cliente->name] : [], $cliente->id ?? null)->class('form-control cliente')->placeholder('Selecione')->required() !!}
                     </div>
                 </div>
                 <div class="col-md-4">

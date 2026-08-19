@@ -6,14 +6,14 @@ use App\Models\Configuracao\Sistema\Emitente;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Configuracao\Sistema\Emitente>
+ * @extends Factory<Emitente>
  */
 class EmitenteFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string<\App\Models\Configuracao\Sistema\Emitente>
+     * @var class-string<Emitente>
      */
     protected $model = Emitente::class;
 

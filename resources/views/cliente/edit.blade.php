@@ -19,6 +19,14 @@
                         <span class="d-none d-sm-inline">Voltar</span>
                     </button>
               </a>
+              @can('os_create')
+                <a href="{{ route('os.create', ['cliente_id' => $cliente->id]) }}">
+                    <button type="button" class="btn btn-sm btn-oslab">
+                        <i class="fa-regular fa-rectangle-list"></i>
+                        Criar OS
+                    </button>
+                </a>
+              @endcan
             </div>
           <!-- /.card-header -->
           <!-- form start -->

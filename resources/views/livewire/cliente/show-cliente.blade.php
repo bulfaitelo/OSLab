@@ -13,6 +13,14 @@
                 Auditoria
             </a>
             @endcan
+            @can('os_create')
+            <a href="{{ route('os.create', ['cliente_id' => $cliente->id]) }}">
+                <button type="button" class="btn btn-sm btn-oslab">
+                    <i class="fa-regular fa-rectangle-list"></i>
+                    Criar OS
+                </button>
+            </a>
+            @endcan
             <div class="btn-group btn-group-sm">
                 <a  title="Detalhes" wire:click.prevent="tabChange('detalhes')"
                 class="btn btn-left

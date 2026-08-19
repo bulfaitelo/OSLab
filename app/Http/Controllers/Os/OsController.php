@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Os\FaturarOsRequest;
 use App\Http\Requests\Os\StoreOsRequest;
 use App\Http\Requests\Os\UpdateOsRequest;
+use App\Models\Cliente\Cliente;
 use App\Models\Configuracao\Parametro\Categoria;
 use App\Models\Configuracao\Sistema\Emitente;
 use App\Models\Os\Os;
@@ -46,9 +47,15 @@ class OsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('os.create');
+        $cliente = null;
+
+        if ($request->filled('cliente_id')) {
+            $cliente = Cliente::find($request->query('cliente_id'));
+        }
+
+        return view('os.create', compact('cliente'));
     }
 
     /**
@@ -139,7 +146,7 @@ class OsController extends Controller
     /**
      *  Fatura a OS.
      *
-     * @param  OS  $os  os
+     * @param  Os  $os  os
      */
     public function faturar(FaturarOsRequest $request, Os $os)
     {

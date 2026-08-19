@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Configuracao\User;
 use App\Http\Controllers\Controller;
 use App\Models\Configuracao\User\ExtendedPermission;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
@@ -60,7 +61,7 @@ class PermissionsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Permission $permission)
     {

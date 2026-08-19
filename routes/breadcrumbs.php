@@ -131,7 +131,7 @@ Breadcrumbs::for('cliente.show', function (BreadcrumbTrail $trail, Cliente $item
 });
 
 // Clientes > [cliente Name] > Editar Cliente
-Breadcrumbs::for('cliente.edit', function (BreadcrumbTrail $trail, cliente $item) {
+Breadcrumbs::for('cliente.edit', function (BreadcrumbTrail $trail, Cliente $item) {
     $trail->parent('cliente.index');
     $trail->push('Editar Cliente', route('cliente.edit', $item));
 });

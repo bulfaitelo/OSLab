@@ -29,6 +29,9 @@
             <td>{{ $item->os->count() }}</td>
             <td>
                 <div class="btn-group btn-group-sm">
+                    @can('os_create')
+                        <a href="{{ route('os.create', ['cliente_id' => $item->id]) }}" title="Criar OS" class="btn btn-left btn-oslab"><i class="fa-regular fa-rectangle-list"></i></a>
+                    @endcan
                     @if (isset($edit) && $edit === true)
                         @can('cliente_edit')
                             <a href="{{ route('cliente.edit', $item->id) }}" title="Editar" class="btn btn-left btn-info"><i class="fas fa-edit"></i></a>

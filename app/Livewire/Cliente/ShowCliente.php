@@ -19,6 +19,7 @@ class ShowCliente extends Component
             ]);
         } elseif ($this->showTab == 'os') {
             return view('livewire.cliente.show-cliente-os', [
+                'cliente' => $this->cliente,
                 'os' => $this->cliente->os,
                 'showTab' => $this->showTab,
             ]);

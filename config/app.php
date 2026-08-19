@@ -1,7 +1,15 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\AuthServiceProvider;
+use App\Providers\EventServiceProvider;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Intervention\Image\Facades\Image;
+use OwenIt\Auditing\AuditingServiceProvider;
+use Spatie\Html\HtmlServiceProvider;
+use Spatie\Permission\PermissionServiceProvider;
 
 return [
 
@@ -163,21 +171,21 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
+        AppServiceProvider::class,
+        AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        EventServiceProvider::class,
+        RouteServiceProvider::class,
         // Spatie Laravel Permissions
-        Spatie\Permission\PermissionServiceProvider::class,
+        PermissionServiceProvider::class,
         // Spatie Laravel Html
-        Spatie\Html\HtmlServiceProvider::class,
+        HtmlServiceProvider::class,
 
         // Image Intervention.io
         // Intervention\Image\ImageServiceProvider::class,
 
         // Laravel Auditing
-        OwenIt\Auditing\AuditingServiceProvider::class,
+        AuditingServiceProvider::class,
 
     ])->toArray(),
 
@@ -194,7 +202,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'Image' => Intervention\Image\Facades\Image::class,
+        'Image' => Image::class,
     ])->toArray(),
 
 ];

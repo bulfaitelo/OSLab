@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuscarController;
 use App\Http\Controllers\Checklist\ChecklistController;
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Configuracao\Backup\BackupController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Financeiro\DespesaPagamentoController;
 use App\Http\Controllers\Financeiro\MetaContabilController;
 use App\Http\Controllers\Financeiro\ReceitaController;
 use App\Http\Controllers\Financeiro\ReceitaPagamentoController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Os\OsController;
 use App\Http\Controllers\Os\OsPublicController;
 use App\Http\Controllers\OsLab\FavoriteController;
@@ -62,13 +64,13 @@ Route::get('/live-test', function () {
     return view('teste');
 })->name('teste');
 
-route::resource('teste', TestController::class);
+Route::resource('teste', TestController::class);
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/buscar', [App\Http\Controllers\BuscarController::class, 'index'])->name('buscar');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/buscar', [BuscarController::class, 'index'])->name('buscar');
 
     Route::resource('/cliente', ClienteController::class);
     Route::resource('/servico', ServicoController::class);

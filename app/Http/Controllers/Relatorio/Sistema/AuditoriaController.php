@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Relatorio\Sistema;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use OwenIt\Auditing\Models\Audit;
 
@@ -66,7 +67,7 @@ class AuditoriaController extends Controller
             ->all();
 
         // Obter lista de usuários
-        $usuarios = \App\Models\User::orderBy('name')->pluck('name', 'id');
+        $usuarios = User::orderBy('name')->pluck('name', 'id');
 
         return view('relatorio.sistema.auditoria.index', [
             'auditorias' => $auditorias,

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 use Tests\TestCase;
 
 class LaravelPermissionTest extends TestCase
@@ -21,7 +22,7 @@ class LaravelPermissionTest extends TestCase
         // first include all the normal setUp operations
         parent::setUp();
         // now de-register all the roles and permissions by clearing the permission cache
-        $this->app->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+        $this->app->make(PermissionRegistrar::class)->forgetCachedPermissions();
 
         $this->createUser();
         $this->createRole();
