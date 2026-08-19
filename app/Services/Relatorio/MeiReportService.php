@@ -180,14 +180,14 @@ final class MeiReportService
     private function yearExpression(string $column): string
     {
         return $this->isSqlite()
-            ? "CAST(strftime('%Y', ".$column.") AS INTEGER)"
+            ? "CAST(strftime('%Y', ".$column.') AS INTEGER)'
             : 'YEAR('.$column.')';
     }
 
     private function monthExpression(string $column): string
     {
         return $this->isSqlite()
-            ? "CAST(strftime('%m', ".$column.") AS INTEGER)"
+            ? "CAST(strftime('%m', ".$column.') AS INTEGER)'
             : 'MONTH('.$column.')';
     }
 

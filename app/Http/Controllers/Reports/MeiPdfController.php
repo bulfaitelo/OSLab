@@ -18,8 +18,9 @@ class MeiPdfController extends Controller
         $this->middleware('permission:relatorio_financeiro_declaracao_mei', ['only' => ['index', '__invoke']]);
     }
 
-    public function index(){
-        return view ('relatorio.financeiro.declaracao_mei.index');
+    public function index()
+    {
+        return view('relatorio.financeiro.declaracao_mei.index');
     }
 
     public function __invoke(Request $request): Response
