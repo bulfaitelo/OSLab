@@ -1,0 +1,19 @@
+{
+  "name": "OSLab",
+  "dockerComposeFile": ["../../../docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/var/www/OSLab",
+  "remoteUser": "app",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "github.copilot",
+        "github.copilot-chat",
+        "bmewburn.vscode-intelephense-client"
+      ]
+    }
+  }
+}
