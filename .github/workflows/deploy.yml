@@ -17,13 +17,13 @@ jobs:
 
       - name: Git Pull no Servidor
         run: |
-          cd /var/Docker/Docker_Dev_Web/www/oslab
+          cd /var/Docker/DevCore-PHP/www/oslab
           git pull origin main
 
       - name: Gerar e Injetar Versão no .env
         run: |
           # Define o caminho real do projeto no servidor
-          PROJECT_PATH="/var/Docker/Docker_Dev_Web/www/oslab"
+          PROJECT_PATH="/var/Docker/DevCore-PHP/www/oslab"
 
           # Lê a base do arquivo version.env recém atualizado
           BASE=$(grep -E "^BASE_VERSION=" $PROJECT_PATH/version.env | cut -d '=' -f2 | tr -d '\r')
