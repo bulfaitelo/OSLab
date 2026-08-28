@@ -139,6 +139,10 @@
                     @endforeach
                 </tbody>
                 <tfoot>
+                    @php
+                        $totalValorPago = $despesas->sum(fn ($item) => $item->pagamentos->whereNotNull('data_pagamento')->sum('valor'));
+                        $totalValorPendente = $despesas->sum('valor') - $totalValorPago;
+                    @endphp
                     <tr>
                         <th class="text-right" colspan="4">
                             Totais:
@@ -146,7 +150,13 @@
                         <th class="text-right">
                             R$ {{ number_format($despesas->sum('valor'), 2, ',', '.')}}
                         </th>
-                        <th colspan="5" ></th>
+                        <th class="text-right">
+                            R$ {{ number_format($totalValorPago, 2, ',', '.')}}
+                        </th>
+                        <th class="text-right">
+                            R$ {{ number_format($totalValorPendente, 2, ',', '.')}}
+                        </th>
+                        <th colspan="3" ></th>
                     </tr>
                 </tfoot>
             </table>
