@@ -48,7 +48,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <div class="card-body">
+        <div class="card-body pt-2 table-responsive">
             @include('os.partials.os-table', [
                 'osTable' => $os,
                 'edit' => true,
