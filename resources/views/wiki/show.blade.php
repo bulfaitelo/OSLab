@@ -340,6 +340,10 @@
         .lateral_table {
             table-layout: fixed
         }
+        .texto_wiki img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
     <link href="/vendor/flasher/flasher.min.css?id=7a96e40c68626198d5128ad2fb5d77e0" rel="stylesheet" type="text/css">
 @stop
