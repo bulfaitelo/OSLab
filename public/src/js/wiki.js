@@ -45,6 +45,12 @@ function saveWiki() {
     // Remova as linhas daqui para que não executem imediatamente
 };
 
+// Lightbox das imagens da wiki (delegado, pois o conteúdo é renderizado dinamicamente)
+$(document).on('click', '.texto_wiki img', function () {
+    $('#wiki-image-preview').attr('src', $(this).attr('src'));
+    $('#modal-wiki-image').modal('show');
+});
+
 
 
 

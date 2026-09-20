@@ -317,6 +317,20 @@
 
 </div>
 <div class="row">
+    {{-- Lightbox de imagens da wiki --}}
+    <div class="modal fade" id="modal-wiki-image" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content bg-transparent border-0">
+                <button type="button" class="close text-white position-absolute" style="right: 15px; top: 0; z-index: 1; opacity: 1; text-shadow: 0 0 5px #000;" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body text-center p-0">
+                    <img id="wiki-image-preview" src="" class="img-fluid" style="max-height: 85vh;" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Fim - Lightbox de imagens da wiki --}}
     <div class="col-md-12">
         <div class="card">
             <div class="card-header border-0">
@@ -343,6 +357,7 @@
         .texto_wiki img {
             max-width: 100%;
             height: auto;
+            cursor: zoom-in;
         }
     </style>
     <link href="/vendor/flasher/flasher.min.css?id=7a96e40c68626198d5128ad2fb5d77e0" rel="stylesheet" type="text/css">
