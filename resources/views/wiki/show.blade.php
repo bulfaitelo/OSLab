@@ -324,8 +324,8 @@
                 <button type="button" class="close text-white position-absolute" style="right: 15px; top: 0; z-index: 1; opacity: 1; text-shadow: 0 0 5px #000;" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <div class="modal-body text-center p-0">
-                    <img id="wiki-image-preview" src="" class="img-fluid" style="max-height: 85vh;" alt="">
+                <div class="modal-body text-center p-0" id="wiki-image-zoom-container" style="overflow: hidden; touch-action: none;">
+                    <img id="wiki-image-preview" src="" class="img-fluid" style="max-height: 85vh; user-select: none; pointer-events: none; will-change: transform;" alt="">
                 </div>
             </div>
         </div>
